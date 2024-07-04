@@ -114,7 +114,7 @@ const PanelOfArbitrators = () => {
        <div className='mx-auto w-[85vw]'>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter members..."
+          placeholder="Search by Name"
           value={(table.getColumn("col2")?.getFilterValue() ?? "")}
           onChange={(event) =>
             table.getColumn("col2")?.setFilterValue(event.target.value)
@@ -148,9 +148,9 @@ const PanelOfArbitrators = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md ">
       <Table>
-          <TableHeader>
+          <TableHeader className="border-y">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -179,7 +179,7 @@ const PanelOfArbitrators = () => {
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="border border-gray-300 px-4 py-2"
+                      className=" px-4 py-2"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
