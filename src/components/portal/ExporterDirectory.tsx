@@ -1,6 +1,6 @@
 import * as React from "react"
 import { MagnifyingGlass, CheckCircle, ChatCircle, Users, X } from "@phosphor-icons/react"
-import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardHeader, CardContent, CardFooter, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"

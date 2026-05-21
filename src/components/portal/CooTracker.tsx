@@ -140,7 +140,7 @@ export default function CooTracker() {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Attesting Authority Officer</p>
-                    <p className="font-heading font-bold text-primary text-xs mt-1">✒️ {coStatus.officer}</p>
+                    <p className="font-heading font-bold text-primary text-xs mt-1">✒️ {cooStatus.officer}</p>
                   </div>
                 </div>
 
