@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Sun, Moon } from "@phosphor-icons/react";
+import { Sun, Moon, User } from "@phosphor-icons/react";
 import { AuthDialog } from "@/components/auth-dialogs";
 import { menuConfig } from "./menu-config";
 import MegaMenu from "./MegaMenu";
@@ -82,7 +82,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
             "border-b border-black/[0.06] dark:border-white/[0.06]",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[52px] max-w-7xl items-center justify-center px-4 md:px-6">
+          <div className="mx-auto flex min-h-[86px] max-w-7xl items-center justify-center px-4 md:px-6 py-3">
 
             {/* Centered brand group */}
             <a
@@ -90,26 +90,10 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
               onClick={handleClose}
               className="flex items-center gap-2 group"
             >
-
-              {/* Left English Logo */}
-              <img
-                src="/left_logo.png"
-                alt="Asian Exporters' Chamber Of Commerce and Industry"
-                className="h-[22px] w-auto object-contain"
-              />
-
-              {/* Center Main Logo */}
               <img
                 src="/aecci-logo.png"
                 alt="AECCI Logo"
-                className="h-[42px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-              />
-
-              {/* Right Hindi Logo */}
-              <img
-                src="/right_logo.png"
-                alt="एशियन एक्सपोर्टर्स चैंबर ऑफ कॉमर्स एंड इंडस्ट्री"
-                className="h-[22px] w-auto object-contain"
+                className="h-[80px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </a>
           </div>
@@ -128,22 +112,39 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
               : "",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[64px] md:h-[42px] max-w-7xl items-center justify-between px-4 md:px-6">
+          <div className="mx-auto flex h-[64px] md:h-[42px] max-w-7xl items-center justify-between px-4 md:px-6 relative">
 
             {/* ───────────────────────────────────────── */}
-            {/* Mobile Single Logo */}
+            {/* Mobile Left: Hamburger */}
             {/* ───────────────────────────────────────── */}
-            <a
-              href="#hero"
-              onClick={handleClose}
-              className="flex md:hidden items-center group shrink-0"
-            >
-              <img
-                src="/aecci-logo.png"
-                alt="AECCI"
-                className="h-[42px] w-auto object-contain"
+            <div className="flex md:hidden items-center w-1/3">
+              <MobileMenu theme={theme} setTheme={setTheme} />
+            </div>
+
+            {/* ───────────────────────────────────────── */}
+            {/* Mobile Center: Logo */}
+            {/* ───────────────────────────────────────── */}
+            <div className="flex md:hidden items-center justify-center w-1/3">
+              <a href="#hero" onClick={handleClose} className="group flex items-center justify-center">
+                <img
+                  src="/aecci-logoonly.png"
+                  alt="AECCI"
+                  className="h-[36px] w-auto object-contain"
+                />
+              </a>
+            </div>
+
+            {/* ───────────────────────────────────────── */}
+            {/* Mobile Right: User Icon */}
+            {/* ───────────────────────────────────────── */}
+            <div className="flex md:hidden items-center justify-end w-1/3">
+              <AuthDialog
+                triggerText={<User className="size-5" />}
+                defaultTab="login"
+                variant="ghost"
+                className="flex size-9 items-center justify-center rounded-full bg-muted/40 border border-border p-0 text-foreground hover:text-primary transition-all duration-200"
               />
-            </a>
+            </div>
 
             {/* ───────────────────────────────────────── */}
             {/* Desktop Navigation */}
@@ -178,7 +179,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
             {/* ───────────────────────────────────────── */}
             {/* Right Actions */}
             {/* ───────────────────────────────────────── */}
-            <div className="flex items-center gap-2.5">
+            <div className="hidden md:flex items-center gap-2.5">
 
               {/* Theme Toggle */}
               <button
@@ -186,7 +187,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
                   setTheme(theme === "dark" ? "light" : "dark")
                 }
                 className={[
-                  "hidden sm:flex size-8 items-center justify-center rounded-full",
+                  "flex size-8 items-center justify-center rounded-full",
                   "cursor-pointer text-foreground transition-all duration-200",
                   "hover:bg-foreground/5",
                   isAnyOpen
@@ -205,7 +206,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
               {/* Auth Buttons */}
               <div
                 className={[
-                  "hidden sm:flex items-center gap-2 transition-opacity duration-200",
+                  "flex items-center gap-2 transition-opacity duration-200",
                   isAnyOpen ? "opacity-40" : "opacity-100",
                 ].join(" ")}
               >
@@ -223,12 +224,6 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
                   className="h-8 cursor-pointer rounded-full bg-primary px-4 text-[12px] font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
                 />
               </div>
-
-              {/* Mobile Menu */}
-              <MobileMenu
-                theme={theme}
-                setTheme={setTheme}
-              />
             </div>
           </div>
         </div>
@@ -239,7 +234,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
         <AnimatePresence>
           {activeSectionConfig && (
             <div
-              className="absolute left-0 right-0 top-[64px] md:top-[94px] z-50"
+              className="absolute left-0 right-0 top-full z-50"
               onMouseEnter={handleDropdownMouseEnter}
               onMouseLeave={handleMouseLeave}
             >

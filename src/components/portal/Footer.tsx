@@ -78,7 +78,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-3 flex flex-col items-start">
 
-            <img src="/aecci-logo.png" alt="AECCI" className="h-16 w-auto object-contain" />
+            <img src="/arccilogoWithText.png" alt="AECCI" className="h-16 w-auto object-contain" />
 
             <h3 className="mt-4 text-[16px] font-extrabold uppercase tracking-tight text-[#0f5132] dark:text-primary">
               Come Grow With Us!

@@ -8,7 +8,7 @@ import { User, Lock, Envelope, IdentificationCard, ShieldCheck } from "@phosphor
 import { toast } from "sonner"
 
 interface AuthDialogProps {
-  triggerText: string
+  triggerText: React.ReactNode
   defaultTab?: "login" | "register"
   className?: string
   variant?: "default" | "outline" | "secondary" | "ghost" | "destructive" | "link"

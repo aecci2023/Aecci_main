@@ -17,7 +17,7 @@ export default function MobileMenu({ theme, setTheme }: MobileMenuProps) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <button
-          className="flex size-9 items-center justify-center rounded-full bg-muted/40 border border-border text-foreground md:hidden hover:text-primary transition-all duration-200 cursor-pointer"
+          className={`flex size-9 items-center justify-center rounded-full bg-muted/40 border border-border text-foreground md:hidden hover:text-primary transition-all duration-200 cursor-pointer ${open ? "opacity-0 pointer-events-none" : "opacity-100"}`}
           aria-label="Open Navigation Menu"
         >
           <List className="size-5" />
@@ -25,15 +25,13 @@ export default function MobileMenu({ theme, setTheme }: MobileMenuProps) {
       </SheetTrigger>
 
       <SheetContent
-        side="right"
-        className="w-full sm:max-w-md bg-background/95 dark:bg-background/98 backdrop-blur-2xl border-l border-border/40 p-0 flex flex-col justify-between"
+        side="left"
+        className="w-full sm:max-w-md bg-background/95 dark:bg-background/98 backdrop-blur-2xl border-r border-border/40 p-0 flex flex-col justify-between"
       >
         <div className="flex-1 overflow-y-auto px-6 py-8 space-y-6">
           <SheetHeader className="p-0 text-left mb-6 border-b border-border/20 pb-4">
             <SheetTitle className="text-xl font-bold flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-tr from-primary to-primary/80 shadow-md">
-                <span className="font-heading font-black text-sm text-white">A</span>
-              </div>
+              <img src="/aecci-logoonly.png" alt="AECCI Logo" className="h-[36px] w-auto object-contain" />
               <div className="flex flex-col">
                 <span className="font-heading font-extrabold text-md leading-none tracking-tight">AECCI</span>
                 <span className="text-[8px] font-semibold text-primary uppercase tracking-widest leading-none mt-0.5">Asian Exporters</span>
