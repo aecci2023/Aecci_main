@@ -3,15 +3,22 @@ import { MagnifyingGlass, Download } from "@phosphor-icons/react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
+import { motion } from "framer-motion"
 
 export default function TradeNotices() {
   const [noticesSearch, setNoticesSearch] = React.useState("")
 
   return (
-    <section id="notices" className="py-24 border-t border-border bg-card/5">
+    <section id="notices" className="py-24 border-t border-border bg-card/5 overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
         
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 text-left"
+        >
           <div>
             <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">Official Communications</span>
             <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground">Latest Regulatory Trade Notices</h2>
@@ -29,10 +36,16 @@ export default function TradeNotices() {
               className="bg-card border-border text-foreground focus-visible:ring-primary focus-visible:ring-offset-0 placeholder:text-muted-foreground/45 pl-9 text-xs h-9 rounded-lg"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Accordion List */}
-        <div className="space-y-4 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          className="space-y-4 max-w-4xl mx-auto"
+        >
           <Accordion type="single" collapsible className="w-full space-y-3">
             {[
               {
@@ -82,7 +95,7 @@ export default function TradeNotices() {
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
+        </motion.div>
 
       </div>
     </section>

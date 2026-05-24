@@ -4,6 +4,7 @@ import { Card, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { motion } from "framer-motion"
 
 export default function CooTracker() {
   const [cooQuery, setCooQuery] = React.useState("")
@@ -66,11 +67,17 @@ export default function CooTracker() {
   }
 
   return (
-    <section id="coo-tracker" className="py-24 border-y border-border">
+    <section id="coo-tracker" className="py-24 border-y border-border overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         {/* Left Text segment */}
-        <div className="lg:col-span-5 text-left">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="lg:col-span-5 text-left"
+        >
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">Digital Authentication</span>
           <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground mb-6">Real-Time e-Platform COO Tracker</h2>
           <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
@@ -101,10 +108,16 @@ export default function CooTracker() {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Verification Card */}
-        <div className="lg:col-span-7">
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          className="lg:col-span-7"
+        >
           <Card className="border-border bg-card/65 backdrop-blur-xl shadow-2xl p-6 md:p-8">
             <CardTitle className="text-lg font-heading font-bold text-foreground mb-4 text-left flex items-center gap-2">
               <FileText className="size-5 text-primary" /> Certificate Registry Query
@@ -190,7 +203,7 @@ export default function CooTracker() {
             )}
 
           </Card>
-        </div>
+        </motion.div>
 
       </div>
     </section>

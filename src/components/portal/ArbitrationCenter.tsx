@@ -1,14 +1,21 @@
 import { CheckCircle } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { motion } from "framer-motion"
 
 export default function ArbitrationCenter() {
   return (
-    <section className="py-24 border-t border-border">
+    <section className="py-24 border-t border-border overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 bg-card/5 border border-border p-8 md:p-12 rounded-3xl backdrop-blur-md">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          <div className="text-left space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-left space-y-6"
+          >
             <div className="flex items-center gap-3">
               <div className="w-14 h-14 bg-gradient-to-tr from-primary to-primary/70 rounded-2xl flex items-center justify-center text-white font-heading font-black shadow-lg">
                 ICCA
@@ -42,9 +49,15 @@ export default function ArbitrationCenter() {
                 Download Arbitration Rules
               </Button>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="relative"
+          >
             <div className="rounded-2xl overflow-hidden border border-border shadow-2xl relative group">
               <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500" />
               <img 
@@ -53,7 +66,7 @@ export default function ArbitrationCenter() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw3ZKHB7wKWVWJDIJLucprwiJrN894AhxvqKYoNa00-ayhi18DOfkQLy5RKl5hGyCn6m8C_RV9NQLn4fPyCzA2xWYrut3L7PuDNPXTn_7rrwWw7ceptOpY-R11B7pOGX9Dh4SH1wsDHdBpSE8VyIozUdZmEoV1ryu52oC0sL9xPyKV_K-sfNXZHCw-o8qQemcQuSoV7n3nIwOEXJIPAcbRUnGnehUBjjHaTCn2whyad6VtRaGLdlWKGcYVI6v2ht_Qvei_--XvH8ld"
               />
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

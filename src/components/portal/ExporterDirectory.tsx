@@ -4,6 +4,7 @@ import { Card, CardHeader, CardContent, CardFooter, CardDescription } from "@/co
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { motion } from "framer-motion"
 
 interface Exporter {
   id: string
@@ -112,21 +113,33 @@ export default function ExporterDirectory() {
   }
 
   return (
-    <section id="b2b-forum" className="py-24 bg-card/5">
+    <section id="b2b-forum" className="py-24 bg-card/5 overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
         
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-16"
+        >
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">Trade Connections</span>
           <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground">Verified Exporter Directory</h2>
           <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/60 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl mx-auto">
             Securely match, contact, and negotiate trade deals with verified corporate members certified by the AECCI regulatory board.
           </p>
-        </div>
+        </motion.div>
 
         <div className="space-y-6">
           {/* Category Selectors & Search bar */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-card/65 border border-border p-4 rounded-xl backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-card/65 border border-border p-4 rounded-xl backdrop-blur-md"
+          >
             <div className="flex flex-wrap gap-2 justify-center">
               {[
                 { value: "all", label: "All Categories" },
@@ -162,13 +175,29 @@ export default function ExporterDirectory() {
                 className="bg-muted/20 border-border text-foreground focus-visible:ring-primary focus-visible:ring-offset-0 placeholder:text-muted-foreground/45 pl-9 text-xs h-10 rounded-lg"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Exporter Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1 }
+              }
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {filteredExporters.map((exp) => (
-              <Card key={exp.id} className="border-border bg-card/75 backdrop-blur-xl shadow-xl flex flex-col justify-between hover:border-primary/30 hover:shadow-2xl transition-all duration-300">
-                <CardHeader className="p-6 pb-2 text-left">
+              <motion.div key={exp.id} variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+              }} className="h-full">
+                <Card className="h-full border-border bg-card/75 backdrop-blur-xl shadow-xl flex flex-col justify-between hover:border-primary/30 hover:shadow-2xl transition-all duration-300">
+                  <CardHeader className="p-6 pb-2 text-left">
                   <div className="flex justify-between items-start gap-4">
                     {/* Logo Initials */}
                     <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-muted/50 to-muted/80 text-foreground font-heading font-black text-sm border border-border">
@@ -228,7 +257,8 @@ export default function ExporterDirectory() {
                     <ChatCircle className="size-4" /> Message
                   </Button>
                 </CardFooter>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
 
             {filteredExporters.length === 0 && (
@@ -238,7 +268,7 @@ export default function ExporterDirectory() {
                 <p className="text-xs max-w-sm mx-auto mt-2">Adjust your category filter or clean your search text queries to find associated exporters.</p>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
 
         {/* RFQ Sheet/Dialog Simulation overlay */}
