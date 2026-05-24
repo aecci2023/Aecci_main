@@ -23,42 +23,42 @@ export interface MegaMenuSection {
 export const menuConfig: MegaMenuSection[] = [
   {
     title: "About Us",
-    href: "#about",
+    href: "/about/about-chamber",
     hasDropdown: true,
     featured: [
       {
         title: "About Chamber",
-        href: "#about-chamber",
+        href: "/about/about-chamber",
         description: "Pioneering trade facilitation and industry advocacy since 2005.",
         badge: "Overview",
       },
       {
         title: "Our History",
-        href: "#our-history",
+        href: "/about/our-history",
         description: "A legacy of growth, enabling global trade pathways for Indian exporters.",
         badge: "Legacy",
       },
       {
         title: "Chairman Message",
-        href: "#chairman-message",
+        href: "/about/chairman-message",
         description: "Leadership vision driving technological innovation and seamless exports.",
       },
       {
         title: "Chamber Policy",
-        href: "#chamber-policy",
+        href: "/about/chamber-policy",
         description: "Unwavering commitment to ethical, progressive, and efficient commerce.",
       },
       {
         title: "Office Bearers",
-        href: "#office-bearers",
+        href: "/about/office-bearers",
         description: "Distinguished board of directors and executive administrative staff.",
       },
     ],
     quickLinks: [
-      { title: "Roles & Responsibility", href: "#roles" },
-      { title: "Strategic Partners", href: "#partners" },
-      { title: "Chamber Dynamics", href: "#dynamics" },
-      { title: "Job Opportunities", href: "#careers" },
+      { title: "Roles & Responsibility", href: "/about/roles-responsibility" },
+      { title: "Strategic Partners", href: "/about/strategic-partners" },
+      { title: "Chamber Dynamics", href: "/about/chamber-dynamics" },
+      { title: "Job Opportunities", href: "/about/jobs-opportunities" },
     ],
     resources: [
       { title: "Media Kit", href: "#media-kit", description: "Official assets and logos" },
