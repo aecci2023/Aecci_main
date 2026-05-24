@@ -73,7 +73,6 @@ export const menuConfig: MegaMenuSection[] = [
       {
         title: "The Wings",
         href: "/services/the-wings",
-        href: "/about-tac",
         description: "Specialized departments driving targeted growth and compliance.",
         badge: "Departments",
       },
