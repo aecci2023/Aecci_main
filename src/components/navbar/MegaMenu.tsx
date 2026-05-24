@@ -54,6 +54,8 @@ export default function MegaMenu({
               )}
               <a
                 href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 onClick={onClose}
                 className="group/link flex items-start gap-1 no-underline"
               >
@@ -82,6 +84,8 @@ export default function MegaMenu({
               <a
                 key={idx}
                 href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 onClick={onClose}
                 className="group/q flex items-center gap-1 py-[7px] text-[13px] font-[350] text-foreground/60
                            hover:text-foreground transition-colors duration-150 no-underline"
@@ -105,6 +109,8 @@ export default function MegaMenu({
               <a
                 key={idx}
                 href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 onClick={onClose}
                 className="group/r block no-underline"
               >
