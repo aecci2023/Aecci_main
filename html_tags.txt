@@ -1,0 +1,2566 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<link rel="pingback" href="https://www.aecci.org.in/xmlrpc.php" />
+<title>
+</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel="alternate" type="application/rss+xml" title="Asian Exporters&#039; Chamber of Commerce And Industry &raquo; Feed" href="https://www.aecci.org.in/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Asian Exporters&#039; Chamber of Commerce And Industry &raquo; Comments Feed" href="https://www.aecci.org.in/comments/feed/" />
+<script type="text/javascript">
+</script>
+<link rel='stylesheet' id='formidable-css' href='https://www.aecci.org.in/wp-content/plugins/formidable/css/formidableforms.css?ver=512813' type='text/css' media='all' />
+<link rel='stylesheet' id='bae-main-css' href='https://www.aecci.org.in/wp-content/plugins/document-embedder-addons-for-elementor/admin/assets/css/main.css?ver=4fd0f5bc13853fae144764d9c4a67c2c' type='text/css' media='all' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.aecci.org.in/wp-includes/css/dist/block-library/style.min.css?ver=4fd0f5bc13853fae144764d9c4a67c2c' type='text/css' media='all' />
+<style id='depicter-slider-style-inline-css' type='text/css'>
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+</style>
+<link rel='stylesheet' id='contact-form-7-css' href='https://www.aecci.org.in/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.7.6' type='text/css' media='all' />
+<link rel='stylesheet' id='depicter-front-pre-css' href='https://www.aecci.org.in/wp-content/plugins/depicter/resources/styles/player/depicter-pre.css?ver=1721036265' type='text/css' media='all' />
+<link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" id='depicter--front-common-css' href='https://www.aecci.org.in/wp-content/plugins/depicter/resources/styles/player/depicter.css?ver=1721036265' type='text/css' media='all' />
+<link rel='stylesheet' id='foogallery-core-css' href='https://www.aecci.org.in/wp-content/plugins/foogallery-123/extensions/default-templates/shared/css/foogallery.min.css?ver=1.10.3' type='text/css' media='all' />
+<link rel='stylesheet' id='rs-plugin-settings-css' href='https://www.aecci.org.in/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=6.2.23' type='text/css' media='all' />
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+</style>
+<link rel='stylesheet' id='tickerstyle-css' href='https://www.aecci.org.in/wp-content/plugins/t4b-news-ticker/assets/css/ticker-style.css?ver=1.2.9' type='text/css' media='all' />
+<link rel='stylesheet' id='tss-css' href='https://www.aecci.org.in/wp-content/plugins/testimonial-slider-and-showcase/assets/css/wptestimonial.css?ver=1779642948' type='text/css' media='all' />
+<link rel='stylesheet' id='cmplz-general-css' href='https://www.aecci.org.in/wp-content/plugins/complianz-gdpr/assets/css/cookieblocker.min.css?ver=6.4.0' type='text/css' media='all' />
+<link rel='stylesheet' id='hfe-style-css' href='https://www.aecci.org.in/wp-content/plugins/header-footer-elementor/assets/css/header-footer-elementor.css?ver=1.6.15' type='text/css' media='all' />
+<link rel='stylesheet' id='elementor-icons-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.23.0' type='text/css' media='all' />
+<link rel='stylesheet' id='elementor-frontend-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.16.6' type='text/css' media='all' />
+<style id='elementor-frontend-inline-css' type='text/css'>
+</style>
+<link rel='stylesheet' id='swiper-css' href='https://www.aecci.org.in/wp-content/plugins/testimonial-slider-and-showcase/assets/vendor/swiper/swiper.min.css?ver=1779642948' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-5-all-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.min.css?ver=3.16.6' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-4-shim-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.min.css?ver=3.16.6' type='text/css' media='all' />
+<link rel='stylesheet' id='hfe-widgets-style-css' href='https://www.aecci.org.in/wp-content/plugins/header-footer-elementor/inc/widgets-css/frontend.css?ver=1.6.15' type='text/css' media='all' />
+<link rel='stylesheet' id='hello-elementor-css' href='https://www.aecci.org.in/wp-content/themes/hello-elementor/style.min.css?ver=2.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aecci.org.in/wp-content/themes/hello-elementor/theme.min.css?ver=2.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='dflip-style-css' href='https://www.aecci.org.in/wp-content/plugins/3d-flipbook-dflip-lite/assets/css/dflip.min.css?ver=2.2.54' type='text/css' media='all' />
+<link rel='stylesheet' id='wpr-text-animations-css-css' href='https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/css/lib/animations/text-animations.min.css?ver=1.7.1014' type='text/css' media='all' />
+<link rel='stylesheet' id='wpr-addons-css-css' href='https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/css/frontend.min.css?ver=1.7.1014' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRaleway%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CPoppins%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='elementor-icons-shared-0-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3' type='text/css' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-brands-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min.css?ver=5.15.3' type='text/css' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-regular-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/font-awesome/css/regular.min.css?ver=5.15.3' type='text/css' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-solid-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3' type='text/css' media='all' />
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link rel="stylesheet" type="text/css" href="https://www.aecci.org.in/wp-content/plugins/smart-slider-3/Public/SmartSlider3/Application/Frontend/Assets/dist/smartslider.min.css?ver=4e06d1a7" media="all">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?display=swap&amp;family=Squada+One%3A300%2C400%7CMontserrat%3A300%2C400%7CArimo%3A300%2C400%7CRoboto%3A300%2C400%7COswald%3A300%2C400%7CPlayfair+Display%3A300%2C400%7CLato%3A300%2C400%7CCabin%3A300%2C400" media="all">
+<style data-related="n2-ss-10">
+</style>
+<script type="text/javascript" data-cfasync="false" src="https://www.aecci.org.in/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js">
+</script>
+<script type="text/javascript" data-cfasync="false" src="https://www.aecci.org.in/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.2.23" id="tp-tools-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.2.23" id="revmin-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.16.6" id="font-awesome-4-shim-js">
+</script>
+<link rel="https://api.w.org/" href="https://www.aecci.org.in/wp-json/" />
+<link rel="alternate" type="application/json" href="https://www.aecci.org.in/wp-json/wp/v2/pages/2" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.aecci.org.in/xmlrpc.php?rsd" />
+<link rel="canonical" href="https://www.aecci.org.in/" />
+<link rel="alternate" type="application/json+oembed" href="https://www.aecci.org.in/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.aecci.org.in%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.aecci.org.in/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.aecci.org.in%2F&#038;format=xml" />
+<script>
+</script>
+<script type="text/javascript">
+</script>
+<style>
+</style>
+<meta name="generator" content="Elementor 3.16.6; features: e_dom_optimization, e_optimized_assets_loading, additional_custom_breakpoints; settings: css_print_method-internal, google_font-enabled, font_display-auto">
+<meta name="generator" content="Powered by Slider Revolution 6.2.23 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<link rel="icon" href="https://www.aecci.org.in/wp-content/uploads/2022/12/downloadaecci-150x150.png" sizes="32x32" />
+<link rel="icon" href="https://www.aecci.org.in/wp-content/uploads/2022/12/downloadaecci.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.aecci.org.in/wp-content/uploads/2022/12/downloadaecci.png" />
+<meta name="msapplication-TileImage" content="https://www.aecci.org.in/wp-content/uploads/2022/12/downloadaecci.png" />
+<script type="text/javascript">
+</script>
+<style id="wpr_lightbox_styles">
+</style>
+<script>
+</script>
+<script src="https://www.aecci.org.in/wp-content/plugins/smart-slider-3/Public/SmartSlider3/Application/Frontend/Assets/dist/n2.min.js?ver=4e06d1a7" defer async>
+</script>
+<script src="https://www.aecci.org.in/wp-content/plugins/smart-slider-3/Public/SmartSlider3/Application/Frontend/Assets/dist/smartslider-frontend.min.js?ver=4e06d1a7" defer async>
+</script>
+<script src="https://www.aecci.org.in/wp-content/plugins/smart-slider-3/Public/SmartSlider3/Slider/SliderType/Simple/Assets/dist/ss-simple.min.js?ver=4e06d1a7" defer async>
+</script>
+<script src="https://www.aecci.org.in/wp-content/plugins/smart-slider-3/Public/SmartSlider3/Slider/SliderType/Simple/Assets/dist/smartslider-backgroundanimation.min.js?ver=4e06d1a7" defer async>
+</script>
+<script src="https://www.aecci.org.in/wp-content/plugins/smart-slider-3/Public/SmartSlider3/Widget/Arrow/ArrowImage/Assets/dist/w-arrow-image.min.js?ver=4e06d1a7" defer async>
+</script>
+<script src="https://www.aecci.org.in/wp-content/plugins/smart-slider-3/Public/SmartSlider3/Widget/Bullet/Assets/dist/w-bullet.min.js?ver=4e06d1a7" defer async>
+</script>
+<script>
+</script>
+</head>
+<body data-rsssl=1 data-cmplz=1 class="home page-template-default page page-id-2 ehf-header ehf-footer ehf-template-hello-elementor ehf-stylesheet-hello-elementor elementor-default elementor-kit-6 elementor-page elementor-page-2">
+<div id="page" class="hfeed site">
+<header id="masthead" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
+<p class="main-title bhf-hidden" itemprop="headline">
+<a href="https://www.aecci.org.in" title="Asian Exporters&#039; Chamber of Commerce And Industry" rel="home">
+</a>
+</p>
+<div data-elementor-type="wp-post" data-elementor-id="5" class="elementor elementor-5">
+<section class="elementor-section elementor-top-section elementor-element elementor-element-2654b0f elementor-section-full_width elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="2654b0f" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ec278ad" data-id="ec278ad" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-2ea4ff0 elementor-widget__width-initial elementor-widget elementor-widget-image" data-id="2ea4ff0" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/">
+<img width="614" height="59" src="https://www.aecci.org.in/wp-content/uploads/2020/10/english_text_png.png" class="attachment-full size-full wp-image-31735" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2020/10/english_text_png.png 614w, https://www.aecci.org.in/wp-content/uploads/2020/10/english_text_png-300x29.png 300w" sizes="(max-width: 614px) 100vw, 614px" />
+</a>
+</div>
+</div>
+<div class="elementor-element elementor-element-87cef71 elementor-widget__width-initial elementor-widget elementor-widget-image" data-id="87cef71" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/">
+<img src="https://www.aecci.org.in/wp-content/uploads/2020/10/AECCI-24.png" title="AECCI (24)" alt="AECCI (24)" loading="lazy" />
+</a>
+</div>
+</div>
+<div class="elementor-element elementor-element-645e281 elementor-widget__width-initial elementor-widget elementor-widget-image" data-id="645e281" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/">
+<img width="578" height="57" src="https://www.aecci.org.in/wp-content/uploads/2020/10/marathi_text_new-1-1.png" class="attachment-large size-large wp-image-31977" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2020/10/marathi_text_new-1-1.png 578w, https://www.aecci.org.in/wp-content/uploads/2020/10/marathi_text_new-1-1-300x30.png 300w" sizes="(max-width: 578px) 100vw, 578px" />
+</a>
+</div>
+</div>
+<div class="elementor-element elementor-element-d0f1302 elementor-widget-mobile__width-inherit elementor-widget__width-initial elementor-hidden-tablet elementor-hidden-mobile elementor-view-default elementor-widget elementor-widget-icon" data-id="d0f1302" data-element_type="widget" data-widget_type="icon.default">
+<div class="elementor-widget-container">
+<div class="elementor-icon-wrapper">
+<a class="elementor-icon" href="https://e-platform.aecci.org.in/login" target="_blank">
+<i aria-hidden="true" class="fas fa-user-circle">
+</i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<header class="elementor-section elementor-top-section elementor-element elementor-element-e92a4ee elementor-section-full_width navbar elementor-section-content-middle elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="e92a4ee" data-element_type="section" id="nav" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-no">
+<header class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-36286b3" data-id="36286b3" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-4299a2f hfe-nav-menu__align-center elementor-widget-tablet__width-initial elementor-widget-mobile__width-initial hfe-submenu-animation-slide_up hfe-link-redirect-self_link hfe-submenu-icon-arrow hfe-nav-menu__breakpoint-tablet elementor-widget elementor-widget-navigation-menu" data-id="4299a2f" data-element_type="widget" data-settings="{&quot;padding_vertical_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:18,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:5,&quot;sizes&quot;:[]},&quot;width_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:128,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;distance_from_menu&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:3,&quot;sizes&quot;:[]},&quot;menu_space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:9,&quot;sizes&quot;:[]},&quot;toggle_size_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:25,&quot;sizes&quot;:[]},&quot;toggle_border_width_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:0,&quot;sizes&quot;:[]},&quot;toggle_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:0,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:16,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:13,&quot;sizes&quot;:[]},&quot;menu_space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:0,&quot;sizes&quot;:[]},&quot;menu_row_space_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:0,&quot;sizes&quot;:[]},&quot;toggle_size_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:16,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_row_space&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_row_space_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;dropdown_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;width_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;width_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="navigation-menu.default">
+<div class="elementor-widget-container">
+<div class="hfe-nav-menu hfe-layout-horizontal hfe-nav-menu-layout horizontal hfe-pointer__underline hfe-animation__grow" data-layout="horizontal">
+<div role="button" class="hfe-nav-menu__toggle elementor-clickable">
+<span class="screen-reader-text">
+</span>
+<div class="hfe-nav-menu-icon">
+<i aria-hidden="true"  class="fas fa-align-justify">
+</i>
+</div>
+</div>
+<nav class="hfe-nav-menu__layout-horizontal hfe-nav-menu__submenu-arrow" data-toggle-icon="&lt;i aria-hidden=&quot;true&quot; tabindex=&quot;0&quot; class=&quot;fas fa-align-justify&quot;&gt;&lt;/i&gt;" data-close-icon="&lt;i aria-hidden=&quot;true&quot; tabindex=&quot;0&quot; class=&quot;far fa-window-close&quot;&gt;&lt;/i&gt;" data-full-width="yes">
+<ul id="menu-1-4299a2f" class="hfe-nav-menu">
+<li id="menu-item-7026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/about/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-7027" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/about-chamber/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12030" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/our-history/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-7029" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/chairman-message/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-7031" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/chamber-policy/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-34470" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/office-bearers-3/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-7032" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/roles-responsibility/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-28832" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/strategic-partners/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12034" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/chamber-dynamics/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12035" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/jobs-opportunities/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12547" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/our-services/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12550" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/our-services/the-wings/" class = "hfe-sub-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-1'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12562" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/the-wings/exports-wing/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-40928" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-legal-wing/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12551" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/the-wings/hr-support-wing/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12554" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/the-wings/professional-wing/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12611" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/the-wings/business-advice-wing/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12558" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/the-wings/women-wing/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12612" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/the-wings/event-and-seminar-wing/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12555" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/our-services/entrepreneur-hub/" class = "hfe-sub-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-1'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12560" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/entrepreneur-hub/startup-india/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12561" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/entrepreneur-hub/investment-india/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12559" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/entrepreneur-hub/make-in-india/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12556" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/our-services/b2b-connect/" class = "hfe-sub-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-1'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12564" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/b2b-connect/consultations/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12563" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/b2b-connect/business-matches/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12566" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/b2b-connect/market-studies/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-40121" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/b2b-about/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12548" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/our-services/membership/" class = "hfe-sub-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-1'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-40126" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/patron-members/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-13866" class="menu-item menu-item-type-custom menu-item-object-custom hfe-creative-menu">
+<a href="https://www.aecci.org.in/membership-and-its-benefits/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-14009" class="menu-item menu-item-type-custom menu-item-object-custom hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/membership/guidelines-and-form" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12568" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/membership/enrollment-offers/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12569" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/membership/visa-recommendations-letter/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-34084" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/aecci-affiliate-program/" class = "hfe-sub-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-1'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-34062" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/meet-our-wings-experts/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-34061" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/join-our-affiliate-network/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-12557" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/aecci-arbitrationcenter/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-14289" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/why-aecci/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-14286" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/schedule-fees/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-30475" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/rules-and-policies-2/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-36630" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-iac-model-clause/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-14288" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-iac-faq/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-14611" class="menu-item menu-item-type-custom menu-item-object-custom hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-iac-panel/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12570" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/ways-means/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/ways-means/aecci-research-and-information-2/" class = "hfe-sub-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-1'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12576" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/aecci-research-and-information-2/the-economic-analysis/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12565" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/aecci-research-and-information-2/business-opportunities-brief/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12577" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/aecci-research-and-information-2/indian-economic-report/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12578" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/aecci-research-and-information-2/operational-guides/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12572" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/india-innovation-index/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12574" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/aecci-annual-report/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12575" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/commercial-directory/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12573" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/export-promotion-council/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12579" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/media/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12584" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/media/e-newsletters/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12580" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/media/media-center/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12585" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-viewpoints/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12581" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/media/gallery/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12583" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/media/publications/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/events/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-31681" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/upcoming-events/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12652" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/events/past-events/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-46058" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-iac-virtual-b2b-forum/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-13790" class="menu-item menu-item-type-custom menu-item-object-custom hfe-creative-menu">
+<a href="https://www.aecci.org.in/events/sponsorship-2/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12589" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/advertise-with-us/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-34113" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/international-collaboration/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-16419" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/world-conference/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12590" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/e-platform/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12592" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/e-platform/e-platform-information/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12614" class="menu-item menu-item-type-custom menu-item-object-custom hfe-creative-menu">
+<a href="https://e-platform.aecci.org.in/login" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-38426" class="menu-item menu-item-type-custom menu-item-object-custom hfe-creative-menu">
+<a href="https://e-platform.aecci.org.in/request-trial-version" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12593" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/e-platform/formalities-guidelines/" class = "hfe-sub-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-1'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12600" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/e-platform/formalities-guidelines/information-for-e-services/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12599" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/e-platform/formalities-guidelines/indemnity-bond-format/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12598" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/e-platform/formalities-guidelines/coo-format/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12596" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/e-platform/formalities-guidelines/attestation-fees-information/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12597" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/e-platform/formalities-guidelines/authorized-chamber-card/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-13192" class="menu-item menu-item-type-custom menu-item-object-custom hfe-creative-menu">
+<a href="https://e-platform.aecci.org.in/e-co-verification" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12610" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/trade-assistant-centre/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12604" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/about-tac/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12601" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/tac-process/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-37280" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/trade-assistant-centre/tac-location2/tac-locations/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+<li id="menu-item-12606" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children parent hfe-has-submenu hfe-creative-menu">
+<div class="hfe-has-submenu-container">
+<a href="https://www.aecci.org.in/contact-us/" class = "hfe-menu-item">
+<span class='hfe-menu-toggle sub-arrow hfe-menu-child-0'>
+<i class='fa'>
+</i>
+</span>
+</a>
+</div>
+<ul class="sub-menu">
+<li id="menu-item-12607" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/contact-us/aecci-head-office/" class = "hfe-sub-menu-item">
+</a>
+</li>
+<li id="menu-item-12608" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu">
+<a href="https://www.aecci.org.in/contact-us/aecci-international-hub/" class = "hfe-sub-menu-item">
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-ef1aacd elementor-widget-mobile__width-initial elementor-widget__width-initial elementor-hidden-desktop elementor-view-default elementor-widget elementor-widget-icon" data-id="ef1aacd" data-element_type="widget" id="userAccountHeader" data-widget_type="icon.default">
+<div class="elementor-widget-container">
+<div class="elementor-icon-wrapper">
+<a class="elementor-icon" href="https://e-platform.aecci.org.in/login" target="_blank">
+<i aria-hidden="true" class="fas fa-user-circle">
+</i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+</div>
+</header>
+</div>
+</header>
+<main class="site-main post-2 page type-page status-publish hentry" role="main">
+<div class="page-content">
+<div data-elementor-type="wp-page" data-elementor-id="2" class="elementor elementor-2">
+<section class="elementor-section elementor-top-section elementor-element elementor-element-160961e elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="160961e" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-53dba51" data-id="53dba51" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-547a026 elementor-widget elementor-widget-shortcode" data-id="547a026" data-element_type="widget" data-widget_type="shortcode.default">
+<div class="elementor-widget-container">
+<div class="elementor-shortcode">
+<div class="n2_clear">
+<ss3-force-full-width data-overflow-x="body" data-horizontal-selector="body">
+<div class="n2-section-smartslider fitvidsignore ss33 n2_clear" data-ssid="10">
+<div id="n2-ss-10-align" class="n2-ss-align">
+<div class="n2-padding">
+<div id="n2-ss-10" data-creator="Smart Slider 3" data-responsive="fullwidth" class="n2-ss-slider n2-ow n2-has-hover n2notransition  ">
+<div class="n2-ss-slider-wrapper-inside">
+<div class="n2-ss-slider-1 n2_ss__touch_element n2-ow">
+<div class="n2-ss-slider-2 n2-ow">
+<div class="n2-ss-background-animation n2-ow">
+</div>
+<div class="n2-ss-slider-3 n2-ow">
+<div class="n2-ss-slide-backgrounds n2-ow-all">
+<div class="n2-ss-slide-background" data-public-id="1" data-mode="fill">
+<div class="n2-ss-slide-background-image" data-blur="0" data-opacity="44" data-x="44" data-y="54" data-alt="" data-title="" style="opacity:0.44;--ss-o-pos-x:44%;--ss-o-pos-y:54%">
+<picture class="skip-lazy" data-skip-lazy="1">
+<img decoding="async" src="https://www.aecci.org.in/wp-content/uploads/2026/05/banner-scaled.jpg" alt="" title="" loading="lazy" class="skip-lazy" data-skip-lazy="1">
+</picture>
+</div>
+<div data-color="RGBA(0,0,0,1)" style="background-color: RGBA(0,0,0,1);" class="n2-ss-slide-background-color">
+</div>
+</div>
+<div class="n2-ss-slide-background" data-public-id="2" data-mode="fill">
+<div class="n2-ss-slide-background-image" data-blur="0" data-opacity="70" data-x="51" data-y="71" data-alt="" data-title="" style="opacity:0.7;--ss-o-pos-x:51%;--ss-o-pos-y:71%">
+<picture class="skip-lazy" data-skip-lazy="1">
+<img decoding="async" src="//www.aecci.org.in/wp-content/uploads/2024/03/aerial-view-cargo-ship-cargo-container-harbor-1-scaled.jpg" alt="" title="" loading="lazy" class="skip-lazy" data-skip-lazy="1">
+</picture>
+</div>
+<div data-color="RGBA(0,0,0,1)" style="background-color: RGBA(0,0,0,1);" class="n2-ss-slide-background-color">
+</div>
+</div>
+<div class="n2-ss-slide-background" data-public-id="3" data-mode="fill">
+<div class="n2-ss-slide-background-image" data-blur="0" data-opacity="100" data-x="44" data-y="54" data-alt="" data-title="" style="--ss-o-pos-x:44%;--ss-o-pos-y:54%">
+<picture class="skip-lazy" data-skip-lazy="1">
+<img decoding="async" src="//www.aecci.org.in/wp-content/uploads/2025/02/Your-paragraph-text-3.png" alt="" title="" loading="lazy" class="skip-lazy" data-skip-lazy="1">
+</picture>
+</div>
+<div data-color="RGBA(0,0,0,1)" style="background-color: RGBA(0,0,0,1);" class="n2-ss-slide-background-color">
+</div>
+</div>
+</div>
+<div class="n2-ss-slider-4 n2-ow">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" data-related-device="desktopPortrait" class="n2-ow n2-ss-preserve-size n2-ss-preserve-size--slider n2-ss-slide-limiter">
+</svg>
+<div data-first="1" data-slide-duration="0" data-id="93" data-slide-public-id="1" data-title="AECCI Webinar" class="n2-ss-slide n2-ow  n2-ss-slide-93">
+<div role="note" class="n2-ss-slide--focus" tabindex="-1">
+</div>
+<div class="n2-ss-layers-container n2-ss-slide-limiter n2-ow">
+<div class="n2-ss-layer n2-ow n-uc-tKzzjwo4vLN7" data-sstype="slide" data-pm="default">
+<div class="n2-ss-layer n2-ow n-uc-cHsDfohSGuaM" data-pm="default" data-sstype="content" data-hasbackground="0">
+<div class="n2-ss-section-main-content n2-ss-layer-with-background n2-ss-layer-content n2-ow n-uc-cHsDfohSGuaM-inner">
+<div class="n2-ss-layer n2-ow n2-ss-layer--block n2-ss-has-self-align n-uc-1ERW6Qe6Iupm" data-pm="normal" data-sstype="row">
+<div class="n2-ss-layer-row n2-ss-layer-with-background n-uc-1ERW6Qe6Iupm-inner">
+<div class="n2-ss-layer-row-inner ">
+<div class="n2-ss-layer n2-ow n-uc-YQQ9nnz2IP5x" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-YQQ9nnz2IP5x-inner">
+<div class="n2-ss-layer n2-ow n-uc-2bxvuNUtOJBA" data-pm="normal" data-sstype="layer">
+<h1 id="n2-ss-10item1" class="n2-font-c2dbef2c1f9dfa2b1dee66d0116d2eb5-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+</h1>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-v2YfXMoyREJb" data-pm="normal" data-sstype="layer">
+<div id="n2-ss-10item2" class="n2-font-b782d04e19595d1ca9283513f07424cd-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-DJHQgLIynrb1" data-pm="normal" data-sstype="layer">
+<div id="n2-ss-10item3" class="n2-font-51c5f6d1c111d6c82abe7d371caea97e-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+<br>
+<br>
+<br>
+<br>
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n2-ss-layer--block n2-ss-has-self-align n-uc-TfzI40DiR8QP" data-pm="normal" data-sstype="row">
+<div class="n2-ss-layer-row n2-ss-layer-with-background n-uc-TfzI40DiR8QP-inner">
+<div class="n2-ss-layer-row-inner ">
+<div class="n2-ss-layer n2-ow n-uc-IiS1WPpFRQf0" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-IiS1WPpFRQf0-inner">
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-151e6854ea665" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-151e6854ea665-inner">
+<div class="n2-ss-layer n2-ow n-uc-18bc4ead7a94c n2-ss-layer--auto" data-pm="normal" data-sstype="layer">
+<div class="n2-ss-button-container n2-ss-item-content n2-ow n2-font-d55c44a578e663d2ecf90b721a6aa980-link  n2-ss-nowrap n2-ss-button-container--non-full-width">
+<a class="n2-style-abcfc664a720dede4c7bfc852eef2517-heading  n2-ow " href="https://www.aecci.org.in/b2b-about/">
+<div>
+<div>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-8TgXKVUMmcUM" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-8TgXKVUMmcUM-inner">
+<div class="n2-ss-layer n2-ow n-uc-7pw1BXBOjyJn n2-ss-layer--auto" data-pm="normal" data-sstype="layer">
+<div class="n2-ss-button-container n2-ss-item-content n2-ow n2-font-020d6320b1aa7f971ff3bc7d088f6864-link  n2-ss-nowrap n2-ss-button-container--non-full-width">
+<a class="n2-style-abcfc664a720dede4c7bfc852eef2517-heading  n2-ow " target="_blank" href="https://e-platform.aecci.org.in/b2b-event-booking">
+<div>
+<div>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div data-slide-duration="0" data-id="87" data-slide-public-id="2" data-title="Services" class="n2-ss-slide n2-ow  n2-ss-slide-87">
+<div role="note" class="n2-ss-slide--focus" tabindex="-1">
+</div>
+<div class="n2-ss-layers-container n2-ss-slide-limiter n2-ow">
+<div class="n2-ss-layer n2-ow n-uc-IYSf3yUrpuXs" data-sstype="slide" data-pm="default">
+<div class="n2-ss-layer n2-ow n-uc-rRp4LuJFVedJ" data-pm="default" data-sstype="content" data-hasbackground="0">
+<div class="n2-ss-section-main-content n2-ss-layer-with-background n2-ss-layer-content n2-ow n-uc-rRp4LuJFVedJ-inner">
+<div class="n2-ss-layer n2-ow n-uc-7RVOz3t5fEL2" data-pm="normal" data-sstype="layer">
+<div id="n2-ss-10item6" class="n2-font-ce6e836e9ed2481b5686e1029eca3482-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-J2Vj7b5i98CL" data-pm="normal" data-sstype="layer">
+<div id="n2-ss-10item7" class="n2-font-f50f6f9965625847940db9084356295d-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+<br>
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-YKoeqc1eQMOW" data-pm="normal" data-sstype="layer">
+<div id="n2-ss-10item8" class="n2-font-27648031ca1e7e7dd79c69dd21a7c487-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+<br>
+<br>
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-QPws9Ip68hk8 n2-ss-layer--auto" data-pm="normal" data-sstype="layer">
+<div class="n2-ss-button-container n2-ss-item-content n2-ow n2-font-cf27a5bfa74f46477895610b1af3e2a4-link  n2-ss-nowrap n2-ss-button-container--non-full-width">
+<a class="n2-style-256954f3076fcea69b0680f3dba9ea23-heading  n2-ow " href="https://www.aecci.org.in/our-services/">
+<div>
+<div>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div data-slide-duration="0" data-id="94" data-slide-public-id="3" data-title="AECCI Webinar" class="n2-ss-slide n2-ow  n2-ss-slide-94">
+<div role="note" class="n2-ss-slide--focus" tabindex="-1">
+</div>
+<div class="n2-ss-layers-container n2-ss-slide-limiter n2-ow">
+<div class="n2-ss-layer n2-ow n-uc-ZtSWBDoVew4x" data-sstype="slide" data-pm="default">
+<div class="n2-ss-layer n2-ow n-uc-bp6h4JuOY5Zb" data-pm="default" data-sstype="content" data-hasbackground="0">
+<div class="n2-ss-section-main-content n2-ss-layer-with-background n2-ss-layer-content n2-ow n-uc-bp6h4JuOY5Zb-inner">
+<div class="n2-ss-layer n2-ow n2-ss-layer--block n2-ss-has-self-align n-uc-j9r9hINFvSlY" data-pm="normal" data-sstype="row">
+<div class="n2-ss-layer-row n2-ss-layer-with-background n-uc-j9r9hINFvSlY-inner">
+<div class="n2-ss-layer-row-inner ">
+<div class="n2-ss-layer n2-ow n-uc-PV4DOcVPl0cu" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-PV4DOcVPl0cu-inner">
+<div class="n2-ss-layer n2-ow n-uc-serbBn1LAdXO" data-pm="normal" data-sstype="layer">
+<div class=" n2-ss-item-image-content n2-ss-item-content n2-ow-all">
+<img decoding="async" id="n2-ss-10item10" alt="" class="skip-lazy" loading="lazy" width="1646" height="1646" data-skip-lazy="1" src="//www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-Xp9sfrvV1sGB" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-Xp9sfrvV1sGB-inner">
+<div class="n2-ss-layer n2-ow n-uc-I5kyrbvL7mZS" data-pm="normal" data-sstype="layer">
+<div id="n2-ss-10item11" class="n2-font-b839fd54489b9138754fb68ba8b1b1a6-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-Wuk0N2zbg5Ph" data-pm="normal" data-sstype="layer">
+<div id="n2-ss-10item12" class="n2-font-a7e6d66737277ad11724ea8016a56daf-hover   n2-ss-item-content n2-ss-text n2-ow" style="display:block;">
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n2-ss-layer--block n2-ss-has-self-align n-uc-f0O8YKCVzqzE" data-pm="normal" data-sstype="row">
+<div class="n2-ss-layer-row n2-ss-layer-with-background n-uc-f0O8YKCVzqzE-inner">
+<div class="n2-ss-layer-row-inner ">
+<div class="n2-ss-layer n2-ow n-uc-CCg1pwLh3J1s" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-CCg1pwLh3J1s-inner">
+<div class="n2-ss-layer n2-ow n-uc-GiwbDgr4HC5b n2-ss-layer--auto" data-pm="normal" data-sstype="layer">
+<div class="n2-ss-button-container n2-ss-item-content n2-ow n2-font-cf27a5bfa74f46477895610b1af3e2a4-link  n2-ss-nowrap n2-ss-button-container--non-full-width">
+<a class="n2-style-dfb0100b1a06cc593150152ad9c43b2e-heading  n2-ow " target="_blank" href="https://www.aecci.org.in/b2b-about/">
+<div>
+<div>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="n2-ss-layer n2-ow n-uc-bTFGA9FFuU0R" data-pm="default" data-sstype="col">
+<div class="n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content n-uc-bTFGA9FFuU0R-inner">
+<div class="n2-ss-layer n2-ow n-uc-5hGALbaMkSm1 n2-ss-layer--auto" data-pm="normal" data-sstype="layer">
+<div class="n2-ss-button-container n2-ss-item-content n2-ow n2-font-cf27a5bfa74f46477895610b1af3e2a4-link  n2-ss-nowrap n2-ss-button-container--non-full-width">
+<a class="n2-style-dfb0100b1a06cc593150152ad9c43b2e-heading  n2-ow " target="_blank" href="https://e-platform.aecci.org.in/b2b-event-booking">
+<div>
+<div>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="n2-ss-slider-controls n2-ss-slider-controls-absolute-left-center">
+<div style="--widget-offset:15px;" class="n2-ss-widget nextend-arrow n2-ow-all nextend-arrow-previous  nextend-arrow-animated-fade" data-hide-mobileportrait="1" id="n2-ss-10-arrow-previous" role="button" aria-label="previous arrow" tabindex="0">
+<img decoding="async" width="32" height="32" class="skip-lazy" data-skip-lazy="1" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0xMS40MzMgMTUuOTkyTDIyLjY5IDUuNzEyYy4zOTMtLjM5LjM5My0xLjAzIDAtMS40Mi0uMzkzLS4zOS0xLjAzLS4zOS0xLjQyMyAwbC0xMS45OCAxMC45NGMtLjIxLjIxLS4zLjQ5LS4yODUuNzYtLjAxNS4yOC4wNzUuNTYuMjg0Ljc3bDExLjk4IDEwLjk0Yy4zOTMuMzkgMS4wMy4zOSAxLjQyNCAwIC4zOTMtLjQuMzkzLTEuMDMgMC0xLjQybC0xMS4yNTctMTAuMjkiCiAgICAgICAgICBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjgiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4=" alt="previous arrow">
+</div>
+</div>
+<div class="n2-ss-slider-controls n2-ss-slider-controls-absolute-right-center">
+<div style="--widget-offset:15px;" class="n2-ss-widget nextend-arrow n2-ow-all nextend-arrow-next  nextend-arrow-animated-fade" data-hide-mobileportrait="1" id="n2-ss-10-arrow-next" role="button" aria-label="next arrow" tabindex="0">
+<img decoding="async" width="32" height="32" class="skip-lazy" data-skip-lazy="1" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0xMC43MjIgNC4yOTNjLS4zOTQtLjM5LTEuMDMyLS4zOS0xLjQyNyAwLS4zOTMuMzktLjM5MyAxLjAzIDAgMS40MmwxMS4yODMgMTAuMjgtMTEuMjgzIDEwLjI5Yy0uMzkzLjM5LS4zOTMgMS4wMiAwIDEuNDIuMzk1LjM5IDEuMDMzLjM5IDEuNDI3IDBsMTIuMDA3LTEwLjk0Yy4yMS0uMjEuMy0uNDkuMjg0LS43Ny4wMTQtLjI3LS4wNzYtLjU1LS4yODYtLjc2TDEwLjcyIDQuMjkzeiIKICAgICAgICAgIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuOCIgZmlsbC1ydWxlPSJldmVub2RkIi8+Cjwvc3ZnPg==" alt="next arrow">
+</div>
+</div>
+<div class="n2-ss-slider-controls n2-ss-slider-controls-absolute-center-bottom">
+<div style="--widget-offset:10px;" class="n2-ss-widget n2-ss-control-bullet n2-ow-all n2-ss-control-bullet-horizontal">
+<div class="n2-style-89e6829493f6425211df0e3f6998e151-simple  nextend-bullet-bar n2-bar-justify-content-center">
+<div class="n2-bullet n2-style-0b1501f187dd486f0b3833aafb1a1b8d-dot " style="visibility:hidden;">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ss3-loader>
+</ss3-loader>
+</div>
+</div>
+<div class="n2_clear">
+</div>
+</div>
+</ss3-force-full-width>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-952b95b elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="952b95b" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-6830b22" data-id="6830b22" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-6b1476f elementor-widget__width-inherit elementor-widget elementor-widget-text-editor" data-id="6b1476f" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<p style="text-align: center;">
+<strong>
+</strong>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-de6499b" data-id="de6499b" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-4e3b400 elementor-widget__width-inherit elementor-widget elementor-widget-html" data-id="4e3b400" data-element_type="widget" data-widget_type="html.default">
+<div class="elementor-widget-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+</title>
+<style>
+</style>
+</head>
+<body data-rsssl=1>
+<div id="scroll-container">
+<div id="scroll-content">
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+<span class="separator">
+</span>
+<span class="news-item">
+</span>
+</div>
+</div>
+</body>
+</html>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-e886c7c elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="e886c7c" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ccac611" data-id="ccac611" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-b9bb146 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="b9bb146" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-13fe1f4" data-id="13fe1f4" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-34a6a93 elementor-widget elementor-widget-heading" data-id="34a6a93" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-8ca2079 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="8ca2079" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-background-overlay">
+</div>
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-9e853c9" data-id="9e853c9" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-0238661 elementor-widget__width-initial elementor-position-top elementor-widget elementor-widget-image-box" data-id="0238661" data-element_type="widget" data-widget_type="image-box.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-box-wrapper">
+<figure class="elementor-image-box-img">
+<a href="https://www.aecci.org.in/our-services/the-wings/exports-wing/" tabindex="-1">
+<img fetchpriority="high" decoding="async" width="300" height="300" src="https://www.aecci.org.in/wp-content/uploads/2024/08/logistics-300x300.png" class="elementor-animation-grow attachment-medium size-medium wp-image-41423" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/08/logistics-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/08/logistics-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/08/logistics-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/08/logistics.png 512w" sizes="(max-width: 300px) 100vw, 300px" />
+</a>
+</figure>
+<div class="elementor-image-box-content">
+<p class="elementor-image-box-description">
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-65655fa elementor-widget__width-initial elementor-position-top elementor-widget elementor-widget-image-box" data-id="65655fa" data-element_type="widget" data-widget_type="image-box.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-box-wrapper">
+<figure class="elementor-image-box-img">
+<a href="https://aecci.org.in/professional-wing/" tabindex="-1">
+<img loading="lazy" decoding="async" width="300" height="300" src="https://www.aecci.org.in/wp-content/uploads/2024/08/engineer-300x300.png" class="elementor-animation-grow attachment-medium size-medium wp-image-41424" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/08/engineer-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/08/engineer-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/08/engineer-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/08/engineer.png 512w" sizes="(max-width: 300px) 100vw, 300px" />
+</a>
+</figure>
+<div class="elementor-image-box-content">
+<p class="elementor-image-box-description">
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-2cce5f4 elementor-widget__width-initial elementor-position-top elementor-widget elementor-widget-image-box" data-id="2cce5f4" data-element_type="widget" data-widget_type="image-box.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-box-wrapper">
+<figure class="elementor-image-box-img">
+<a href="https://www.aecci.org.in/aecci-legal-wing/" tabindex="-1">
+<img loading="lazy" decoding="async" width="300" height="300" src="https://www.aecci.org.in/wp-content/uploads/2024/08/agreement-300x300.png" class="elementor-animation-grow attachment-medium size-medium wp-image-41417" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/08/agreement-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/08/agreement-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/08/agreement-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/08/agreement.png 512w" sizes="(max-width: 300px) 100vw, 300px" />
+</a>
+</figure>
+<div class="elementor-image-box-content">
+<p class="elementor-image-box-description">
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-1d36f85 elementor-widget__width-initial elementor-position-top elementor-widget elementor-widget-image-box" data-id="1d36f85" data-element_type="widget" data-widget_type="image-box.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-box-wrapper">
+<figure class="elementor-image-box-img">
+<a href="https://www.aecci.org.in/our-services/the-wings/hr-support-wing/" tabindex="-1">
+<img loading="lazy" decoding="async" width="300" height="300" src="https://www.aecci.org.in/wp-content/uploads/2024/08/desk-300x300.png" class="elementor-animation-grow attachment-medium size-medium wp-image-41419" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/08/desk-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/08/desk-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/08/desk-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/08/desk.png 512w" sizes="(max-width: 300px) 100vw, 300px" />
+</a>
+</figure>
+<div class="elementor-image-box-content">
+<p class="elementor-image-box-description">
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-2a615cb elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="2a615cb" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-cd4e969" data-id="cd4e969" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-ae3cf27 elementor-widget__width-initial elementor-position-top elementor-widget elementor-widget-image-box" data-id="ae3cf27" data-element_type="widget" data-widget_type="image-box.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-box-wrapper">
+<figure class="elementor-image-box-img">
+<a href="https://aecci.org.in/business-advice-wing/" tabindex="-1">
+<img loading="lazy" decoding="async" width="300" height="300" src="https://www.aecci.org.in/wp-content/uploads/2024/08/cooperation-300x300.png" class="elementor-animation-grow attachment-medium size-medium wp-image-41420" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/08/cooperation-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/08/cooperation-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/08/cooperation-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/08/cooperation.png 512w" sizes="(max-width: 300px) 100vw, 300px" />
+</a>
+</figure>
+<div class="elementor-image-box-content">
+<p class="elementor-image-box-description">
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-f034ea9 elementor-widget__width-initial elementor-position-top elementor-widget elementor-widget-image-box" data-id="f034ea9" data-element_type="widget" data-widget_type="image-box.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-box-wrapper">
+<figure class="elementor-image-box-img">
+<a href="https://www.aecci.org.in/our-services/the-wings/event-and-seminar-wing/" tabindex="-1">
+<img loading="lazy" decoding="async" width="300" height="300" src="https://www.aecci.org.in/wp-content/uploads/2024/08/people-300x300.png" class="elementor-animation-grow attachment-medium size-medium wp-image-41422" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/08/people-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/08/people-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/08/people-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/08/people.png 512w" sizes="(max-width: 300px) 100vw, 300px" />
+</a>
+</figure>
+<div class="elementor-image-box-content">
+<p class="elementor-image-box-description">
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-31b01b5 elementor-widget__width-initial elementor-position-top elementor-widget elementor-widget-image-box" data-id="31b01b5" data-element_type="widget" data-widget_type="image-box.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-box-wrapper">
+<figure class="elementor-image-box-img">
+<a href="https://aecci.org.in/women-wing/" tabindex="-1">
+<img loading="lazy" decoding="async" width="300" height="300" src="https://www.aecci.org.in/wp-content/uploads/2024/08/profile-300x300.png" class="elementor-animation-grow attachment-medium size-medium wp-image-41421" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/08/profile-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/08/profile-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/08/profile-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/08/profile.png 512w" sizes="(max-width: 300px) 100vw, 300px" />
+</a>
+</figure>
+<div class="elementor-image-box-content">
+<p class="elementor-image-box-description">
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-96f8dfc elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="96f8dfc" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-b83efae" data-id="b83efae" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-4d2384e elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="4d2384e" data-element_type="widget" data-widget_type="divider.default">
+<div class="elementor-widget-container">
+<div class="elementor-divider">
+<span class="elementor-divider-separator">
+</span>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-d961abe elementor-widget elementor-widget-heading" data-id="d961abe" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-409e400 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="409e400" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-2c0c384" data-id="2c0c384" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-ff6ec83 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="ff6ec83" data-element_type="widget" data-widget_type="divider.default">
+<div class="elementor-widget-container">
+<div class="elementor-divider">
+<span class="elementor-divider-separator">
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-4c05766" data-id="4c05766" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-383f396 elementor-widget__width-initial elementor-widget elementor-widget-heading" data-id="383f396" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-medium">
+<a href="https://e-platform.aecci.org.in/b2b-event-booking">
+</a>
+</h2>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-c60bf77" data-id="c60bf77" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-c6f7314 elementor-widget elementor-widget-image" data-id="c6f7314" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/b2b-about/">
+<img loading="lazy" decoding="async" width="800" height="800" src="https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8-1024x1024.png" class="attachment-large size-large wp-image-42407" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8-1024x1024.png 1024w, https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8-768x768.png 768w, https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8-1536x1536.png 1536w, https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8-200x200.png 200w, https://www.aecci.org.in/wp-content/uploads/2024/10/www.aecci_.org_.in-8.png 1646w" sizes="(max-width: 800px) 100vw, 800px" />
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-74b3911" data-id="74b3911" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-30f0372 elementor-widget elementor-widget-heading" data-id="30f0372" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-medium">
+<a href="https://e-platform.aecci.org.in/collaboration-signup">
+</a>
+</h2>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-6ee7554" data-id="6ee7554" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-d6bc2c6 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="d6bc2c6" data-element_type="widget" data-widget_type="divider.default">
+<div class="elementor-widget-container">
+<div class="elementor-divider">
+<span class="elementor-divider-separator">
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-6854731 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="6854731" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1aceb62" data-id="1aceb62" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-150e23c elementor-widget elementor-widget-spacer" data-id="150e23c" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-7bc034b elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="7bc034b" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-e40fc5d" data-id="e40fc5d" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-35bc2b4 elementor-widget__width-initial elementor-widget elementor-widget-image" data-id="35bc2b4" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<img loading="lazy" decoding="async" width="800" height="800" src="https://www.aecci.org.in/wp-content/uploads/2025/03/phoneMokeup.png" class="attachment-large size-large wp-image-44062" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2025/03/phoneMokeup.png 1024w, https://www.aecci.org.in/wp-content/uploads/2025/03/phoneMokeup-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2025/03/phoneMokeup-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2025/03/phoneMokeup-768x768.png 768w, https://www.aecci.org.in/wp-content/uploads/2025/03/phoneMokeup-200x200.png 200w" sizes="(max-width: 800px) 100vw, 800px" />
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-8ecf7bd" data-id="8ecf7bd" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-f281ddc elementor-widget elementor-widget-heading" data-id="f281ddc" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+<font color="#008000">
+</font>
+<br>
+</h2>
+</div>
+</div>
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-820117c elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="820117c" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-90d8c72" data-id="90d8c72" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-cc1829f elementor-widget__width-initial elementor-widget elementor-widget-heading" data-id="cc1829f" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-43e1ac4 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="43e1ac4" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-e0b6f62" data-id="e0b6f62" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-f38acca elementor-widget__width-initial elementor-widget elementor-widget-heading" data-id="f38acca" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-9915842 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="9915842" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-5c16698" data-id="5c16698" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-c7e481d elementor-widget elementor-widget-text-editor" data-id="c7e481d" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+</div>
+</div>
+<div class="elementor-element elementor-element-22aa6ab elementor-widget elementor-widget-button" data-id="22aa6ab" data-element_type="widget" data-widget_type="button.default">
+<div class="elementor-widget-container">
+<div class="elementor-button-wrapper">
+<a class="elementor-button elementor-button-link elementor-size-sm" href="https://aecci-bucket-new.s3.us-east-1.amazonaws.com/apks/AECCI.apk">
+<span class="elementor-button-content-wrapper">
+<span class="elementor-button-icon elementor-align-icon-left">
+<i aria-hidden="true" class="fab fa-android">
+</i>
+</span>
+<span class="elementor-button-text">
+</span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-4dd284f elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="4dd284f" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-f928170" data-id="f928170" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-90b92a6 elementor-widget elementor-widget-spacer" data-id="90b92a6" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-0a2aa36 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="0a2aa36" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;gradient&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-e394728" data-id="e394728" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-d548d66 elementor-widget elementor-widget-spacer" data-id="d548d66" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-1b04ffb elementor-widget elementor-widget-heading" data-id="1b04ffb" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+</h2>
+</div>
+</div>
+<div class="elementor-element elementor-element-6bfc28f elementor-widget-mobile__width-inherit elementor-widget elementor-widget-image-carousel" data-id="6bfc28f" data-element_type="widget" data-settings="{&quot;slides_to_show&quot;:&quot;2&quot;,&quot;navigation&quot;:&quot;none&quot;,&quot;slides_to_show_tablet&quot;:&quot;2&quot;,&quot;autoplay_speed&quot;:2412,&quot;image_spacing_custom&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:42,&quot;sizes&quot;:[]},&quot;lazyload&quot;:&quot;yes&quot;,&quot;speed&quot;:842,&quot;slides_to_show_mobile&quot;:&quot;2&quot;,&quot;_animation_mobile&quot;:&quot;none&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;pause_on_hover&quot;:&quot;yes&quot;,&quot;pause_on_interaction&quot;:&quot;yes&quot;,&quot;infinite&quot;:&quot;yes&quot;,&quot;image_spacing_custom_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;image_spacing_custom_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="image-carousel.default">
+<div class="elementor-widget-container">
+<div class="elementor-image-carousel-wrapper swiper-container" dir="ltr">
+<div class="elementor-image-carousel swiper-wrapper swiper-image-stretch" aria-live="off">
+<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="6bfc28f" data-elementor-lightbox-title="6" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NDM0MDYsInVybCI6Imh0dHBzOlwvXC93d3cuYWVjY2kub3JnLmluXC93cC1jb250ZW50XC91cGxvYWRzXC8yMDI1XC8wMlwvNi0xLnBuZyIsInNsaWRlc2hvdyI6IjZiZmMyOGYifQ%3D%3D" href="https://www.aecci.org.in/about/chamber-dynamics/">
+<figure class="swiper-slide-inner">
+<img class="swiper-slide-image swiper-lazy" data-src="https://www.aecci.org.in/wp-content/uploads/2025/02/6-1-300x109.png" alt="6" />
+<div class="swiper-lazy-preloader">
+</div>
+</figure>
+</a>
+</div>
+<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="6bfc28f" data-elementor-lightbox-title="5" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NDM0MDUsInVybCI6Imh0dHBzOlwvXC93d3cuYWVjY2kub3JnLmluXC93cC1jb250ZW50XC91cGxvYWRzXC8yMDI1XC8wMlwvNS0xLnBuZyIsInNsaWRlc2hvdyI6IjZiZmMyOGYifQ%3D%3D" href="https://www.aecci.org.in/about/chamber-dynamics/">
+<figure class="swiper-slide-inner">
+<img class="swiper-slide-image swiper-lazy" data-src="https://www.aecci.org.in/wp-content/uploads/2025/02/5-1-300x109.png" alt="5" />
+<div class="swiper-lazy-preloader">
+</div>
+</figure>
+</a>
+</div>
+<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="6bfc28f" data-elementor-lightbox-title="2" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NDM0MDQsInVybCI6Imh0dHBzOlwvXC93d3cuYWVjY2kub3JnLmluXC93cC1jb250ZW50XC91cGxvYWRzXC8yMDI1XC8wMlwvMi0xLnBuZyIsInNsaWRlc2hvdyI6IjZiZmMyOGYifQ%3D%3D" href="https://www.aecci.org.in/about/chamber-dynamics/">
+<figure class="swiper-slide-inner">
+<img class="swiper-slide-image swiper-lazy" data-src="https://www.aecci.org.in/wp-content/uploads/2025/02/2-1-300x109.png" alt="2" />
+<div class="swiper-lazy-preloader">
+</div>
+</figure>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-1f0eecb elementor-widget elementor-widget-spacer" data-id="1f0eecb" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-787a834 elementor-widget elementor-widget-text-editor" data-id="787a834" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<p>
+</p>
+</div>
+</div>
+<div class="elementor-element elementor-element-7a1f399 elementor-widget elementor-widget-spacer" data-id="7a1f399" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-30c0acb elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="30c0acb" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8713d41" data-id="8713d41" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-1be295a elementor-widget elementor-widget-spacer" data-id="1be295a" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-b099003 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="b099003" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-9071533" data-id="9071533" data-element_type="column">
+<div class="elementor-widget-wrap">
+</div>
+</div>
+<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-4252ae4" data-id="4252ae4" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-cc76541 elementor-widget__width-initial elementor-widget elementor-widget-image" data-id="cc76541" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://aecci.org.in/">
+<img loading="lazy" decoding="async" width="1200" height="1200" src="https://www.aecci.org.in/wp-content/uploads/2020/10/AECCI-24.png" class="attachment-full size-full wp-image-31733" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2020/10/AECCI-24.png 1200w, https://www.aecci.org.in/wp-content/uploads/2020/10/AECCI-24-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2020/10/AECCI-24-1024x1024.png 1024w, https://www.aecci.org.in/wp-content/uploads/2020/10/AECCI-24-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2020/10/AECCI-24-768x768.png 768w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1mm96pnn2lcsu0oe9o9vjyjo7ch8bhsurbu8.png 120w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1mdhffc1fuh0ns96i02epmtbk7avegkknvu0.png 100w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1m4po50ft3l8hjtyqbuxvb2yx24ihfcakfts.png 80w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1m2iqbfjeevafzq5set2nq5dr9tx96181ktq.png 75w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1ly4uo9ql1fecvijwkpc8ka7fp8qsnf2zutm.png 65w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1lkz7qsc4x3q3ivq92e4z2oogzh7f3knuota.png 35w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1ltqz13xrnzi9ray0qlltef144nkc4sxy4ti.png 55w, https://www.aecci.org.in/wp-content/uploads/2020/10/elementor/thumbs/AECCI-24-qgaxnu1lwdp7t0noun4fficn28vaqjb2lveudfdkf6.png 61w" sizes="(max-width: 1200px) 100vw, 1200px" />
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-aba3bf3" data-id="aba3bf3" data-element_type="column">
+<div class="elementor-widget-wrap">
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-1f4c890 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="1f4c890" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-970d3b3" data-id="970d3b3" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-fc3e5ac elementor-widget elementor-widget-spacer" data-id="fc3e5ac" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-77be682 elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="77be682" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-8da644b" data-id="8da644b" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-6e2ed08 elementor-widget elementor-widget-image" data-id="6e2ed08" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<img decoding="async" src="https://www.aecci.org.in/wp-content/uploads/2023/03/quick-oy8ogrzxrgy1wa0axk6skqqql2m458avfco2n7lgew__1_-removebg-preview.png" title="quick-oy8ogrzxrgy1wa0axk6skqqql2m458avfco2n7lgew__1_-removebg-preview" alt="quick-oy8ogrzxrgy1wa0axk6skqqql2m458avfco2n7lgew__1_-removebg-preview" loading="lazy" />
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-ed16643" data-id="ed16643" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-83dda92 elementor-widget elementor-widget-heading" data-id="83dda92" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-8088f50 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="8088f50" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-a1db290" data-id="a1db290" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-7eac72d elementor-widget elementor-widget-text-editor" data-id="7eac72d" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<img loading="lazy" decoding="async" class="alignleft wp-image-1092" src="https://www.aecci.org.in/wp-content/uploads/2026/05/verified.png" alt="" width="60" height="60" />
+<a style="color: #21653e;" href="https://e-platform.aecci.org.in/e-co-verification">
+</a>
+</div>
+</div>
+<div class="elementor-element elementor-element-6828aaa elementor-widget elementor-widget-text-editor" data-id="6828aaa" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<img loading="lazy" decoding="async" class="alignleft wp-image-551" src="https://aecci.org.in/wp-content/uploads/2020/11/research-1.png" alt="" width="60" height="60" />
+<a style="color: #21653E" href="https://aecci.org.in/aecci-research-and-information-2/">
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-e81f09a" data-id="e81f09a" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-c79ef03 elementor-widget elementor-widget-text-editor" data-id="c79ef03" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<img loading="lazy" decoding="async" class="wp-image-546 alignleft" src="https://aecci.org.in/wp-content/uploads/2020/11/annual-report-1.png" alt="" width="60" height="60" />
+<a href="https://aecci.org.in/aecci-annual-report/" style="color: #21653E">
+</a>
+</div>
+</div>
+<div class="elementor-element elementor-element-9912a5f elementor-widget elementor-widget-text-editor" data-id="9912a5f" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<a style="color: #21653e;" href="https://aecci.org.in/india-innovation-index/">
+<img loading="lazy" decoding="async" class="wp-image-13125 alignleft" src="https://www.aecci.org.in/wp-content/uploads/2023/03/india-innovation-removebg-preview.png" alt="" width="65" height="65" />
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-160ae86" data-id="160ae86" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-84f359a elementor-widget elementor-widget-text-editor" data-id="84f359a" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<img loading="lazy" decoding="async" class="alignleft wp-image-1076" src="https://www.aecci.org.in/wp-content/uploads/2026/05/e-commerce-platform.png" alt="" width="60" height="60" />
+<a style="color: #21653e;" href="https://aecci.org.in/e-platform/">
+</a>
+</div>
+</div>
+<div class="elementor-element elementor-element-e614f40 elementor-widget elementor-widget-text-editor" data-id="e614f40" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<img loading="lazy" decoding="async" class="alignleft wp-image-1080" src="https://www.aecci.org.in/wp-content/uploads/2026/05/member-card.png" alt="" width="60" height="60" />
+<a style="color: #21653e;" href="https://aecci.org.in/membership/">
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="elementor-element elementor-element-e1657d8 elementor-widget elementor-widget-spacer" data-id="e1657d8" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-c43fb23 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="c43fb23" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-61ec39e" data-id="61ec39e" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-5859352 elementor-widget elementor-widget-spacer" data-id="5859352" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-9bd1953 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="9bd1953" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-15d5354" data-id="15d5354" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-747c43f elementor-widget elementor-widget-heading" data-id="747c43f" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+<a href="https://aecci.org.in/upcoming-events/">
+</a>
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-4c91f9c elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="4c91f9c" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-a343305" data-id="a343305" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-8732e6d e-transform elementor-widget elementor-widget-image" data-id="8732e6d" data-element_type="widget" data-settings="{&quot;_transform_rotateZ_effect&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;_transform_rotateZ_effect_tablet&quot;:{&quot;unit&quot;:&quot;deg&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;_transform_rotateZ_effect_mobile&quot;:{&quot;unit&quot;:&quot;deg&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/international-collaboration/">
+<img loading="lazy" decoding="async" width="820" height="816" src="https://www.aecci.org.in/wp-content/uploads/2024/03/collaborations-2.png" class="attachment-full size-full wp-image-36202" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/03/collaborations-2.png 820w, https://www.aecci.org.in/wp-content/uploads/2024/03/collaborations-2-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/03/collaborations-2-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2024/03/collaborations-2-768x764.png 768w" sizes="(max-width: 820px) 100vw, 820px" />
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d56a15e" data-id="d56a15e" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-8035ebd elementor-widget elementor-widget-image" data-id="8035ebd" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/upcoming-events/">
+<img loading="lazy" decoding="async" width="1080" height="1080" src="https://www.aecci.org.in/wp-content/uploads/2025/02/September.png" class="attachment-full size-full wp-image-43412" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2025/02/September.png 1080w, https://www.aecci.org.in/wp-content/uploads/2025/02/September-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2025/02/September-1024x1024.png 1024w, https://www.aecci.org.in/wp-content/uploads/2025/02/September-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2025/02/September-768x768.png 768w, https://www.aecci.org.in/wp-content/uploads/2025/02/September-200x200.png 200w" sizes="(max-width: 1080px) 100vw, 1080px" />
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-95c4055" data-id="95c4055" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-fd8f89d elementor-widget elementor-widget-image" data-id="fd8f89d" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/wp-content/uploads/2025/06/List-of-569-International-Exhibitions.pdf">
+<img decoding="async" src="https://www.aecci.org.in/wp-content/uploads/2025/06/2025-1.png" title="2025 (1)" alt="2025 (1)" loading="lazy" />
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="elementor-section elementor-top-section elementor-element elementor-element-019fb99 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="019fb99" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-c97c7b4" data-id="c97c7b4" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-efd5985 elementor-widget elementor-widget-shortcode" data-id="efd5985" data-element_type="widget" data-widget_type="shortcode.default">
+<div class="elementor-widget-container">
+<div class="elementor-shortcode">
+<style type='text/css' media='all'>
+</style>
+<div class='rt-container-fluid tss-wrapper ' id='tss-container-3295943720'  data-layout='carousel3' data-desktop-col='3'  data-tab-col='2'  data-mobile-col='1'>
+<div data-title='Loading ...' class='rt-row tss-carousel3 tss-even tss-pre-loader'>
+<div class="carousel-wrapper">
+<div class="swiper-wrapper">
+<div class='rt-col-md-12 rt-col-sm-12 rt-col-xs-12 even-grid-item tss-grid-item slide-item swiper-slide even-grid-item default-margin'>
+<div class="single-item-wrapper">
+<div class="tss-meta-info">
+<div class='profile-img-wrapper'>
+<img alt='Mr. Mike Wilson' class='rt-responsive-img swiper-lazy' data-src='https://www.aecci.org.in/wp-content/uploads/2025/04/Mr.-Mike-Wilson-CEO-150x150.png' />
+<div class="swiper-lazy-preloader swiper-lazy-preloader-white">
+</div>
+</div>
+</div>
+<h3 class='author-name'>
+</h3>
+<h4 class="author-bio">
+<span class='author-designation'>
+</span>
+</h4>
+<div class="item-content-wrapper">
+<div class='item-content'>
+</div>
+</div>
+</div>
+</div>
+<div class='rt-col-md-12 rt-col-sm-12 rt-col-xs-12 even-grid-item tss-grid-item slide-item swiper-slide even-grid-item default-margin'>
+<div class="single-item-wrapper">
+<div class="tss-meta-info">
+<div class='profile-img-wrapper'>
+<img alt='Barrister Mobeen Rana' class='rt-responsive-img swiper-lazy' data-src='https://www.aecci.org.in/wp-content/uploads/2025/04/Barrister-Mobeen-Rana-150x150.png' />
+<div class="swiper-lazy-preloader swiper-lazy-preloader-white">
+</div>
+</div>
+</div>
+<h3 class='author-name'>
+</h3>
+<h4 class="author-bio">
+<span class='author-designation'>
+</span>
+</h4>
+<div class="item-content-wrapper">
+<div class='item-content'>
+</div>
+</div>
+</div>
+</div>
+<div class='rt-col-md-12 rt-col-sm-12 rt-col-xs-12 even-grid-item tss-grid-item slide-item swiper-slide even-grid-item default-margin'>
+<div class="single-item-wrapper">
+<div class="tss-meta-info">
+<div class='profile-img-wrapper'>
+<img alt='Pr Karim Adyel' class='rt-responsive-img swiper-lazy' data-src='https://www.aecci.org.in/wp-content/uploads/2025/04/Pr-Karim-Adyel-Senior-Attorney-150x150.png' />
+<div class="swiper-lazy-preloader swiper-lazy-preloader-white">
+</div>
+</div>
+</div>
+<h3 class='author-name'>
+</h3>
+<h4 class="author-bio">
+<span class='author-designation'>
+</span>
+</h4>
+<div class="item-content-wrapper">
+<div class='item-content'>
+</div>
+</div>
+</div>
+</div>
+<div class='rt-col-md-12 rt-col-sm-12 rt-col-xs-12 even-grid-item tss-grid-item slide-item swiper-slide even-grid-item default-margin'>
+<div class="single-item-wrapper">
+<div class="tss-meta-info">
+<div class='profile-img-wrapper'>
+<img alt='Mr. Jafar Al-Sabbagh,' class='rt-responsive-img swiper-lazy' data-src='https://www.aecci.org.in/wp-content/uploads/2025/04/Mr.-Jafar-Al-Sabbagh-Partner-150x150.png' />
+<div class="swiper-lazy-preloader swiper-lazy-preloader-white">
+</div>
+</div>
+</div>
+<h3 class='author-name'>
+</h3>
+<h4 class="author-bio">
+<span class='author-designation'>
+</span>
+</h4>
+<div class="item-content-wrapper">
+<div class='item-content'>
+</div>
+</div>
+</div>
+</div>
+<div class='rt-col-md-12 rt-col-sm-12 rt-col-xs-12 even-grid-item tss-grid-item slide-item swiper-slide even-grid-item default-margin'>
+<div class="single-item-wrapper">
+<div class="tss-meta-info">
+<div class='profile-img-wrapper'>
+<img alt='Dr. Jamil Abdo' class='rt-responsive-img swiper-lazy' data-src='https://www.aecci.org.in/wp-content/uploads/2025/04/Dr.-Jamil-Abdo-Partner-150x150.png' />
+<div class="swiper-lazy-preloader swiper-lazy-preloader-white">
+</div>
+</div>
+</div>
+<h3 class='author-name'>
+</h3>
+<h4 class="author-bio">
+<span class='author-designation'>
+</span>
+</h4>
+<div class="item-content-wrapper">
+<div class='item-content'>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="swiper-arrow swiper-button-next">
+<i class="rttss-right-open">
+</i>
+</div>
+<div class="swiper-arrow swiper-button-prev">
+<i class="rttss-left-open">
+</i>
+</div>
+</div>
+</div>
+<div class="rt-loading-overlay">
+</div>
+<div class="rt-loading rt-ball-clip-rotate">
+<div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-a79b795 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="a79b795" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-653b6e9" data-id="653b6e9" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-adb2942 elementor-widget elementor-widget-spacer" data-id="adb2942" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-25119f4 elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="25119f4" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-b77671f" data-id="b77671f" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-6ec6a4e elementor-widget__width-initial elementor-widget elementor-widget-heading" data-id="6ec6a4e" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="elementor-element elementor-element-1643d06 elementor-widget__width-initial elementor-widget elementor-widget-heading" data-id="1643d06" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+<a style=" color: rgb(33, 101, 62); font-family: Raleway, sans-serif; font-size: 18px; font-weight: 500; letter-spacing: normal; white-space: normal;">
+</a>
+</h2>
+</div>
+</div>
+<section class="elementor-section elementor-inner-section elementor-element elementor-element-c6709ec elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="c6709ec" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-a6b5493" data-id="a6b5493" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-a3f54d5 elementor-align-center elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="a3f54d5" data-element_type="widget" data-widget_type="button.default">
+<div class="elementor-widget-container">
+<div class="elementor-button-wrapper">
+<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.arbitration-icca.org/institutes">
+<span class="elementor-button-content-wrapper">
+<span class="elementor-button-icon elementor-align-icon-right">
+<i aria-hidden="true" class="far fa-check-circle">
+</i>
+</span>
+<span class="elementor-button-text">
+</span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="elementor-element elementor-element-6f1818a elementor-widget elementor-widget-spacer" data-id="6f1818a" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-1f2fedb elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="1f2fedb" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-844c175" data-id="844c175" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-ea1fd60 elementor-widget elementor-widget-spacer" data-id="ea1fd60" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-09e2a3d elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="09e2a3d" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-8eafb8d" data-id="8eafb8d" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-d754d52 animated-fast elementor-widget elementor-widget-image" data-id="d754d52" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;none&quot;}" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/advertise-with-us" target="_blank">
+<img loading="lazy" decoding="async" width="800" height="200" src="https://www.aecci.org.in/wp-content/uploads/2024/02/advertise-with-us-1024x256.png" class="attachment-large size-large wp-image-35482" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2024/02/advertise-with-us-1024x256.png 1024w, https://www.aecci.org.in/wp-content/uploads/2024/02/advertise-with-us-300x75.png 300w, https://www.aecci.org.in/wp-content/uploads/2024/02/advertise-with-us-768x192.png 768w, https://www.aecci.org.in/wp-content/uploads/2024/02/advertise-with-us-1536x384.png 1536w, https://www.aecci.org.in/wp-content/uploads/2024/02/advertise-with-us-2048x512.png 2048w" sizes="(max-width: 800px) 100vw, 800px" />
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-c961909" data-id="c961909" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-7302b4f elementor-widget elementor-widget-image" data-id="7302b4f" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<a href="https://www.aecci.org.in/aecci-viewpoints/" target="_blank">
+<img loading="lazy" decoding="async" width="800" height="200" src="https://www.aecci.org.in/wp-content/uploads/2025/04/Website-Banners.png" class="attachment-large size-large wp-image-44272" alt="" srcset="https://www.aecci.org.in/wp-content/uploads/2025/04/Website-Banners.png 800w, https://www.aecci.org.in/wp-content/uploads/2025/04/Website-Banners-300x75.png 300w, https://www.aecci.org.in/wp-content/uploads/2025/04/Website-Banners-768x192.png 768w, https://www.aecci.org.in/wp-content/uploads/2025/04/Website-Banners-200x50.png 200w" sizes="(max-width: 800px) 100vw, 800px" />
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-ea36097 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="ea36097" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-72b1b14" data-id="72b1b14" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-2484657 elementor-align-center elementor-widget elementor-widget-button" data-id="2484657" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;none&quot;}" data-widget_type="button.default">
+<div class="elementor-widget-container">
+<div class="elementor-button-wrapper">
+<a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow" href="https://www.aecci.org.in/wp-content/uploads/2024/08/Aecci-Media-Kit.pdf">
+<span class="elementor-button-content-wrapper">
+<span class="elementor-button-text">
+</span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-a6b529e" data-id="a6b529e" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-21f3c54 elementor-align-center elementor-widget elementor-widget-button" data-id="21f3c54" data-element_type="widget" data-widget_type="button.default">
+<div class="elementor-widget-container">
+<div class="elementor-button-wrapper">
+<a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow" href="https://www.aecci.org.in/wp-content/uploads/2023/04/MEMBERSHIP-FORM-1-2.pdf">
+<span class="elementor-button-content-wrapper">
+<span class="elementor-button-text">
+</span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-0321ae9 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="0321ae9" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4aeae37" data-id="4aeae37" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-1204695 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="1204695" data-element_type="widget" data-widget_type="divider.default">
+<div class="elementor-widget-container">
+<div class="elementor-divider">
+<span class="elementor-divider-separator">
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-aed8ae9 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="aed8ae9" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-fb406dc" data-id="fb406dc" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-4b6f73d elementor-widget elementor-widget-heading" data-id="4b6f73d" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h3 class="elementor-heading-title elementor-size-default">
+</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-5f229d3 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="5f229d3" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-755aaa6" data-id="755aaa6" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-d753dce wpr-adv-slider-columns-1 wpr-adv-slider-columns--tablet1 wpr-adv-slider-columns--mobile1 wpr-adv-slides-to-scroll-1 wpr-slider-dots-horizontal elementor-widget elementor-widget-wpr-advanced-slider" data-id="d753dce" data-element_type="widget" data-settings="{&quot;slider_amount&quot;:1,&quot;slider_amount_tablet&quot;:1,&quot;slider_amount_mobile&quot;:1,&quot;slides_to_scroll&quot;:1,&quot;slider_loop&quot;:&quot;yes&quot;,&quot;slider_hide_video_content&quot;:&quot;yes&quot;,&quot;slider_video_btn_size&quot;:&quot;medium&quot;}" data-widget_type="wpr-advanced-slider.default">
+<div class="elementor-widget-container">
+<!-- Advanced Slider -->
+<div class="wpr-advanced-slider-wrap">
+<div class="wpr-advanced-slider" dir="ltr" data-slick="{&quot;rtl&quot;:false,&quot;infinite&quot;:true,&quot;speed&quot;:700,&quot;arrows&quot;:true,&quot;dots&quot;:true,&quot;autoplay&quot;:false,&quot;autoplaySpeed&quot;:0,&quot;pauseOnHover&quot;:&quot;&quot;,&quot;prevArrow&quot;:&quot;#wpr-slider-prev-d753dce&quot;,&quot;nextArrow&quot;:&quot;#wpr-slider-next-d753dce&quot;,&quot;vertical&quot;:false,&quot;adaptiveHeight&quot;:true}" data-hide-video-content="yes" data-video-btn-size="{&quot;widescreen&quot;:&quot;medium&quot;,&quot;desktop&quot;:&quot;medium&quot;,&quot;laptop&quot;:&quot;medium&quot;,&quot;tablet_extra&quot;:&quot;medium&quot;,&quot;tablet&quot;:&quot;medium&quot;,&quot;mobile_extra&quot;:&quot;medium&quot;,&quot;mobile&quot;:&quot;medium&quot;}" data-slide-effect="slide">
+<div class="wpr-slider-item elementor-repeater-item-3547b89">
+<div class="wpr-slider-item-bg " style="background-image: url()">
+</div>
+<div class="wpr-slider-item-overlay">
+</div>
+<div class="wpr-cv-container">
+<div class="wpr-cv-outer">
+<div class="wpr-cv-inner">
+<div class="wpr-slider-content">
+<div class="wpr-slider-sub-title">
+<h3>
+</h3>
+</div>
+<div class="wpr-slider-description">
+<p>
+</p>
+</div>
+<div class="wpr-slider-btns">
+<a class="wpr-slider-primary-btn" href="https://www.jawaharcustoms.gov.in/pdf/PN-2026/PN-BTT.pdf">
+</a>
+<a class="wpr-slider-secondary-btn" href="https://gujaratcustoms.gov.in/juridictional_commissionerate/public//storage/pdfs/2rzzoZACXzmO2f1X2fuv2zxy1bOsMD2qU5PXFAmX.pdf">
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="wpr-slider-item elementor-repeater-item-b8731db">
+<div class="wpr-slider-item-bg " style="background-image: url()">
+</div>
+<div class="wpr-slider-item-overlay">
+</div>
+<div class="wpr-cv-container">
+<div class="wpr-cv-outer">
+<div class="wpr-cv-inner">
+<div class="wpr-slider-content">
+<div class="wpr-slider-sub-title">
+<h3>
+</h3>
+</div>
+<div class="wpr-slider-description">
+<p>
+</p>
+</div>
+<div class="wpr-slider-btns">
+<a class="wpr-slider-primary-btn" href="https://jawaharcustoms.gov.in/pdf/PN-2026/DOC-20260314-WA0001..pdf">
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="wpr-slider-item elementor-repeater-item-4642b09">
+<div class="wpr-slider-item-bg " style="background-image: url()">
+</div>
+<div class="wpr-slider-item-overlay">
+</div>
+<div class="wpr-cv-container">
+<div class="wpr-cv-outer">
+<div class="wpr-cv-inner">
+<div class="wpr-slider-content">
+<div class="wpr-slider-sub-title">
+<h3>
+</h3>
+</div>
+<div class="wpr-slider-description">
+<p>
+</p>
+</div>
+<div class="wpr-slider-btns">
+<a class="wpr-slider-primary-btn" href="https://www.dgft.gov.in/CP/?opt=public-notice">
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="wpr-slider-item elementor-repeater-item-af0b4b6">
+<div class="wpr-slider-item-bg " style="background-image: url()">
+</div>
+<div class="wpr-slider-item-overlay">
+</div>
+<div class="wpr-cv-container">
+<div class="wpr-cv-outer">
+<div class="wpr-cv-inner">
+<div class="wpr-slider-content">
+<div class="wpr-slider-sub-title">
+<h3>
+</h3>
+</div>
+<div class="wpr-slider-description">
+<p>
+</p>
+</div>
+<div class="wpr-slider-btns">
+<a class="wpr-slider-primary-btn" href="https://epces.in/uploads/highlight/7b6d2924-e2e8-4e07-b8c5-7bb1e7a34941%20(1)202603091773051148.pdf">
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="wpr-slider-controls">
+<div class="wpr-slider-dots">
+</div>
+</div>
+<div class="wpr-slider-arrow-container">
+<div class="wpr-slider-prev-arrow wpr-slider-arrow" id="wpr-slider-prev-d753dce">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 283.4 512" style="enable-background:new 0 0 283.4 512;" xml:space="preserve">
+<g>
+<polygon class="st0" points="54.5,256.3 283.4,485.1 256.1,512.5 0,256.3 0,256.3 27.2,229 256.1,0 283.4,27.4 "/>
+</g>
+</svg>
+</div>
+<div class="wpr-slider-next-arrow wpr-slider-arrow" id="wpr-slider-next-d753dce">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 283.4 512" style="enable-background:new 0 0 283.4 512;" xml:space="preserve">
+<g>
+<polygon class="st0" points="54.5,256.3 283.4,485.1 256.1,512.5 0,256.3 0,256.3 27.2,229 256.1,0 283.4,27.4 "/>
+</g>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="post-tags">
+</div>
+</div>
+<section id="comments" class="comments-area">
+</section>
+<!-- .comments-area -->
+</main>
+<footer itemtype="https://schema.org/WPFooter" itemscope="itemscope" id="colophon" role="contentinfo">
+<div class='footer-width-fixer'>
+<div data-elementor-type="wp-post" data-elementor-id="32582" class="elementor elementor-32582">
+<section class="elementor-section elementor-top-section elementor-element elementor-element-01e9294 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="01e9294" data-element_type="section">
+<div class="elementor-container elementor-column-gap-default">
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-59b1b5f elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="59b1b5f" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-589c2e1" data-id="589c2e1" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-95d6bb0 elementor-widget elementor-widget-image" data-id="95d6bb0" data-element_type="widget" data-widget_type="image.default">
+<div class="elementor-widget-container">
+<figure class="wp-caption">
+<img width="150" height="150" src="https://www.aecci.org.in/wp-content/uploads/2023/12/AECCI-24-removebg-preview-150x150.png" class="attachment-thumbnail size-thumbnail wp-image-35605" alt="" loading="lazy" srcset="https://www.aecci.org.in/wp-content/uploads/2023/12/AECCI-24-removebg-preview-150x150.png 150w, https://www.aecci.org.in/wp-content/uploads/2023/12/AECCI-24-removebg-preview-300x300.png 300w, https://www.aecci.org.in/wp-content/uploads/2023/12/AECCI-24-removebg-preview.png 500w" sizes="(max-width: 150px) 100vw, 150px" />
+<figcaption class="widget-image-caption wp-caption-text">
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="elementor-element elementor-element-13b639c elementor-widget elementor-widget-text-editor" data-id="13b639c" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<h6 style="text-align: center;">
+<strong>
+</strong>
+</h6>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-7c2749f" data-id="7c2749f" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-2a7c3af elementor-widget elementor-widget-heading" data-id="2a7c3af" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+<a href="https://www.aecci.org.in/about/">
+</a>
+</h2>
+</div>
+</div>
+<div class="elementor-element elementor-element-a9ae22b hfe-nav-menu__breakpoint-none elementor-hidden-phone elementor-widget__width-initial hfe-nav-menu__align-left hfe-submenu-icon-arrow hfe-link-redirect-child elementor-widget elementor-widget-navigation-menu" data-id="a9ae22b" data-element_type="widget" data-settings="{&quot;padding_horizontal_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:7,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;dropdown_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;padding_horizontal_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:15,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="navigation-menu.default">
+<div class="elementor-widget-container">
+<div class="hfe-nav-menu hfe-layout-vertical hfe-nav-menu-layout vertical" data-layout="vertical">
+<div role="button" class="hfe-nav-menu__toggle elementor-clickable">
+<span class="screen-reader-text">
+</span>
+<div class="hfe-nav-menu-icon">
+</div>
+</div>
+<nav class="hfe-nav-menu__layout-vertical hfe-nav-menu__submenu-arrow" data-toggle-icon="" data-close-icon="" data-full-width="">
+<ul id="menu-1-a9ae22b" class="hfe-nav-menu">
+<li id="menu-item-13744" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/about-chamber" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-13739" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/our-history/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-13740" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/chairman-message/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-13738" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/chamber-policy/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-34471" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/office-bearers-3/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-13741" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/roles-responsibility/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-28833" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/strategic-partners/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-13742" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/chamber-dynamics/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-13743" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/about/jobs-opportunities/" class = "hfe-menu-item">
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-6b3f892 elementor-widget elementor-widget-spacer" data-id="6b3f892" data-element_type="widget" data-widget_type="spacer.default">
+<div class="elementor-widget-container">
+<div class="elementor-spacer">
+<div class="elementor-spacer-inner">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-e36511a" data-id="e36511a" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-a0f16d3 elementor-widget elementor-widget-heading" data-id="a0f16d3" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+<a href="https://www.aecci.org.in/our-services/">
+</a>
+</h2>
+</div>
+</div>
+<div class="elementor-element elementor-element-f35fb0c hfe-nav-menu__breakpoint-none elementor-hidden-phone elementor-widget__width-initial hfe-nav-menu__align-left hfe-submenu-icon-arrow hfe-link-redirect-child elementor-widget elementor-widget-navigation-menu" data-id="f35fb0c" data-element_type="widget" data-settings="{&quot;padding_horizontal_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:7,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;dropdown_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;padding_horizontal_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:15,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="navigation-menu.default">
+<div class="elementor-widget-container">
+<div class="hfe-nav-menu hfe-layout-vertical hfe-nav-menu-layout vertical" data-layout="vertical">
+<div role="button" class="hfe-nav-menu__toggle elementor-clickable">
+<span class="screen-reader-text">
+</span>
+<div class="hfe-nav-menu-icon">
+</div>
+</div>
+<nav class="hfe-nav-menu__layout-vertical hfe-nav-menu__submenu-arrow" data-toggle-icon="" data-close-icon="" data-full-width="">
+<ul id="menu-1-f35fb0c" class="hfe-nav-menu">
+<li id="menu-item-7170" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/the-wings/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-7171" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/entrepreneur-hub/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-7172" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/b2b-connect/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-7173" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/our-services/membership/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-34136" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-affiliate-program/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-44016" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/aecci-arbitrationcenter/" class = "hfe-menu-item">
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-b4d0fb2" data-id="b4d0fb2" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-bb127ba elementor-widget elementor-widget-heading" data-id="bb127ba" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+<a href="https://www.aecci.org.in/media/">
+</a>
+</h2>
+</div>
+</div>
+<div class="elementor-element elementor-element-57cbe5b hfe-nav-menu__breakpoint-none elementor-hidden-phone elementor-widget__width-initial hfe-nav-menu__align-left hfe-submenu-icon-arrow hfe-link-redirect-child elementor-widget elementor-widget-navigation-menu" data-id="57cbe5b" data-element_type="widget" data-settings="{&quot;padding_horizontal_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:7,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;dropdown_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;padding_horizontal_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:15,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="navigation-menu.default">
+<div class="elementor-widget-container">
+<div class="hfe-nav-menu hfe-layout-vertical hfe-nav-menu-layout vertical" data-layout="vertical">
+<div role="button" class="hfe-nav-menu__toggle elementor-clickable">
+<span class="screen-reader-text">
+</span>
+<div class="hfe-nav-menu-icon">
+</div>
+</div>
+<nav class="hfe-nav-menu__layout-vertical hfe-nav-menu__submenu-arrow" data-toggle-icon="" data-close-icon="" data-full-width="">
+<ul id="menu-1-57cbe5b" class="hfe-nav-menu">
+<li id="menu-item-33122" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/ways-means/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-33123" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/media/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-33124" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/events/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-33125" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/e-platform/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-33126" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/trade-assistant-centre/" class = "hfe-menu-item">
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-3acd178" data-id="3acd178" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-cc53863 elementor-widget elementor-widget-heading" data-id="cc53863" data-element_type="widget" data-widget_type="heading.default">
+<div class="elementor-widget-container">
+<h2 class="elementor-heading-title elementor-size-default">
+<a href="https://www.aecci.org.in/contact-us/">
+</a>
+</h2>
+</div>
+</div>
+<div class="elementor-element elementor-element-d6465aa hfe-nav-menu__breakpoint-none elementor-hidden-mobile elementor-hidden-tablet hfe-nav-menu__align-left hfe-submenu-icon-arrow hfe-link-redirect-child elementor-widget elementor-widget-navigation-menu" data-id="d6465aa" data-element_type="widget" data-settings="{&quot;padding_horizontal_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:7,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;dropdown_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;padding_horizontal_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:15,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="navigation-menu.default">
+<div class="elementor-widget-container">
+<div class="hfe-nav-menu hfe-layout-vertical hfe-nav-menu-layout vertical" data-layout="vertical">
+<div role="button" class="hfe-nav-menu__toggle elementor-clickable">
+<span class="screen-reader-text">
+</span>
+<div class="hfe-nav-menu-icon">
+</div>
+</div>
+<nav class="hfe-nav-menu__layout-vertical hfe-nav-menu__submenu-arrow" data-toggle-icon="" data-close-icon="" data-full-width="">
+<ul id="menu-1-d6465aa" class="hfe-nav-menu">
+<li id="menu-item-7201" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/contact-us/aecci-head-office/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-7202" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/contact-us/aecci-international-hub/" class = "hfe-menu-item">
+</a>
+</li>
+<li id="menu-item-46057" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
+<a href="https://www.aecci.org.in/upcoming/" class = "hfe-menu-item">
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="elementor-element elementor-element-2347279 elementor-widget elementor-widget-text-editor" data-id="2347279" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<span>
+<strong>
+</strong>
+</span>
+</div>
+</div>
+<div class="elementor-element elementor-element-ea54872 e-grid-align-left elementor-shape-circle e-grid-align-mobile-center elementor-grid-0 elementor-widget elementor-widget-social-icons" data-id="ea54872" data-element_type="widget" data-widget_type="social-icons.default">
+<div class="elementor-widget-container">
+<div class="elementor-social-icons-wrapper elementor-grid">
+<span class="elementor-grid-item">
+<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-9b2a10b" href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2FAsian-Expoters-Chamber-of-Commerce-and-industry-961779850577468%2F%3Fref%3Dhl" target="_blank">
+<span class="elementor-screen-only">
+</span>
+<i class="fab fa-facebook">
+</i>
+</a>
+</span>
+<span class="elementor-grid-item">
+<a class="elementor-icon elementor-social-icon elementor-social-icon-twitter elementor-repeater-item-c8ea25f" href="https://twitter.com/aecci2015" target="_blank">
+<span class="elementor-screen-only">
+</span>
+<i class="fab fa-twitter">
+</i>
+</a>
+</span>
+<span class="elementor-grid-item">
+<a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-repeater-item-45d6a02" href="https://www.youtube.com/channel/UCkTKN8LiakB8SsYpIEiB7sw" target="_blank">
+<span class="elementor-screen-only">
+</span>
+<i class="fab fa-youtube">
+</i>
+</a>
+</span>
+<span class="elementor-grid-item">
+<a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-4f465d9" href="https://www.linkedin.com/in/asian-exporters-chamber-of-commerce-and-industry-9420a8101/" target="_blank">
+<span class="elementor-screen-only">
+</span>
+<i class="fab fa-linkedin">
+</i>
+</a>
+</span>
+<span class="elementor-grid-item">
+<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-9e60fc0" href="https://www.instagram.com/aecci_india/" target="_blank">
+<span class="elementor-screen-only">
+</span>
+<i class="fab fa-instagram">
+</i>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-c879d5e elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="c879d5e" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-82cc3f7" data-id="82cc3f7" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-6b3cf1d elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="6b3cf1d" data-element_type="widget" data-widget_type="divider.default">
+<div class="elementor-widget-container">
+<div class="elementor-divider">
+<span class="elementor-divider-separator">
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-0d60139 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no" data-id="0d60139" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-container elementor-column-gap-default">
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-60ef494" data-id="60ef494" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-855619d elementor-widget elementor-widget-text-editor" data-id="855619d" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<p>
+<strong>
+</strong>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-1f151d0" data-id="1f151d0" data-element_type="column">
+<div class="elementor-widget-wrap elementor-element-populated">
+<div class="elementor-element elementor-element-f8b69b7 elementor-widget elementor-widget-text-editor" data-id="f8b69b7" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<p style="text-align: right;">
+<span style="color: #000000;">
+<strong>
+<a style="color: #000000;" href="https://aecci.org.in/terms-conditions/">
+</a>
+<a style="color: #000000;" href="https://aecci.org.in/privacy-policy-2/">
+</a>
+<a style="color: #000000;" href="https://aecci.org.in/sitemap/">
+</a>
+</strong>
+</span>
+</p>
+</div>
+</div>
+<div class="elementor-element elementor-element-a079986 elementor-widget elementor-widget-text-editor" data-id="a079986" data-element_type="widget" data-widget_type="text-editor.default">
+<div class="elementor-widget-container">
+<p style="text-align: right;">
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</footer>
+</div>
+<!-- #page -->
+<script>
+</script>
+<!-- Consent Management powered by Complianz | GDPR/CCPA Cookie Consent https://wordpress.org/plugins/complianz-gdpr -->
+<div id="cmplz-cookiebanner-container">
+</div>
+<div id="cmplz-manage-consent" data-nosnippet="true">
+</div>
+<link rel='stylesheet' id='wpr-animations-css-css' href='https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/css/lib/animations/wpr-animations.min.css?ver=1.7.1014' type='text/css' media='all' />
+<link rel='stylesheet' id='e-animations-css' href='https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.16.6' type='text/css' media='all' />
+<link rel='stylesheet' id='tss-popup-css' href='https://www.aecci.org.in/wp-content/plugins/testimonial-slider-and-showcase/assets/vendor/popup/magnific-popup.css?ver=1779642948' type='text/css' media='all' />
+<link rel='stylesheet' id='tss-fontello-css' href='https://www.aecci.org.in/wp-content/plugins/testimonial-slider-and-showcase/assets/vendor/fontello/css/tss-font.min.css?ver=1779642948' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css' href='https://www.aecci.org.in/wp-includes/css/dashicons.min.css?ver=4fd0f5bc13853fae144764d9c4a67c2c' type='text/css' media='all' />
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=5.7.6" id="swv-js">
+</script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.7.6" id="contact-form-7-js">
+</script>
+<script type="text/javascript" defer src="https://www.aecci.org.in/wp-content/plugins/depicter/resources/scripts/player/depicter.js?ver=1721036265" id="depicter--player-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/t4b-news-ticker/assets/js/jquery.ticker.js?ver=1.2.9" id="ticker-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/js/lib/particles/particles.js?ver=3.0.6" id="wpr-particles-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/js/lib/jarallax/jarallax.min.js?ver=1.12.7" id="wpr-jarallax-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/js/lib/parallax/parallax.min.js?ver=1.0" id="wpr-parallax-hover-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/3d-flipbook-dflip-lite/assets/js/dflip.min.js?ver=2.2.54" id="dflip-script-js">
+</script>
+<script type="text/javascript" id="cmplz-cookiebanner-js-extra">
+</script>
+<script defer type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/complianz-gdpr/cookiebanner/js/complianz.min.js?ver=6.4.0" id="cmplz-cookiebanner-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/header-footer-elementor/inc/js/frontend.js?ver=1.6.15" id="hfe-frontend-js-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-includes/js/imagesloaded.min.js?ver=5.0.0" id="imagesloaded-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/js/lib/slick/slick.min.js?ver=1.8.1" id="wpr-slick-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.16.6" id="elementor-webpack-runtime-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.16.6" id="elementor-frontend-modules-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2" id="elementor-waypoints-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2" id="jquery-ui-core-js">
+</script>
+<script type="text/javascript" id="elementor-frontend-js-before">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.16.6" id="elementor-frontend-js">
+</script>
+<script type="text/javascript" id="wpr-addons-js-js-extra">
+</script>
+<script type="text/javascript" data-cfasync="false" src="https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/js/frontend.min.js?ver=1.7.1014" id="wpr-addons-js-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/royal-elementor-addons/assets/js/modal-popups.min.js?ver=1.7.1014" id="wpr-modal-popups-js-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/testimonial-slider-and-showcase/assets/vendor/popup/jquery.magnific-popup.min.js?ver=1779642948" id="tss-popup-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/testimonial-slider-and-showcase/assets/vendor/isotope/imagesloaded.pkgd.min.js?ver=1779642948" id="tss-image-load-js">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/elementor/assets/lib/swiper/swiper.min.js?ver=1779642948" id="swiper-js">
+</script>
+<script type="text/javascript" id="tss-js-extra">
+</script>
+<script type="text/javascript" src="https://www.aecci.org.in/wp-content/plugins/testimonial-slider-and-showcase/assets/js/wptestimonial.js?ver=1779642948" id="tss-js">
+</script>
+<script data-cfasync="false">
+</script>
+</body>
+</html>

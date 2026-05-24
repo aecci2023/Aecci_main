@@ -4,8 +4,10 @@ import Hero from "@/components/portal/Hero"
 import StatsStrip from "@/components/portal/StatsStrip"
 import WingsSection from "@/components/portal/WingsSection"
 import CooTracker from "@/components/portal/CooTracker"
-import ExporterDirectory from "@/components/portal/ExporterDirectory"
 import Initiatives from "@/components/portal/Initiatives"
+import VirtualB2BForum from "@/components/portal/VirtualB2BForum"
+import QuickLinks from "@/components/portal/QuickLinks"
+import NetworkingTestimonials from "@/components/portal/NetworkingTestimonials"
 import ArbitrationCenter from "@/components/portal/ArbitrationCenter"
 import TradeNotices from "@/components/portal/TradeNotices"
 import ChatAssistant from "@/components/portal/ChatAssistant"
@@ -29,10 +31,12 @@ export default function App() {
       <main>
         <Hero />
         <StatsStrip />
+        <VirtualB2BForum />
         <WingsSection />
         <CooTracker />
-        <ExporterDirectory />
+        <QuickLinks />
         <Initiatives />
+        <NetworkingTestimonials />
         <ArbitrationCenter />
         <TradeNotices />
       </main>
