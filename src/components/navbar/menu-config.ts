@@ -30,13 +30,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "About Chamber",
         href: "#about-chamber",
         description: "Pioneering trade facilitation and industry advocacy since 2005.",
-        badge: "Overview"
+        badge: "Overview",
       },
       {
         title: "Our History",
         href: "#our-history",
         description: "A legacy of growth, enabling global trade pathways for Indian exporters.",
-        badge: "Legacy"
+        badge: "Legacy",
       },
       {
         title: "Chairman Message",
@@ -65,7 +65,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Contact Us", href: "#contact", description: "Direct chamber coordinates" },
     ],
   },
-
   {
     title: "Our Services",
     href: "#services",
@@ -75,13 +74,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "The Wings",
         href: "#wings",
         description: "Specialized departments driving targeted growth and compliance.",
-        badge: "Departments"
+        badge: "Departments",
       },
       {
         title: "Entrepreneur Hub",
         href: "#hub",
         description: "Empowering startups with cross-border trade knowledge and support.",
-        badge: "Startup"
+        badge: "Startup",
       },
       {
         title: "B2B Connect",
@@ -109,7 +108,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Event & Seminar Wing", href: "#event-wing", description: "Exhibitions & international seminars" },
     ],
   },
-
   {
     title: "e-Platform",
     href: "#e-platform",
@@ -119,13 +117,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "Members Login",
         href: "#login",
         description: "Access your dashboard to manage, track, and pay with ease.",
-        badge: "Portal"
+        badge: "Portal",
       },
       {
         title: "Request Trial Version",
         href: "#trial",
         description: "Experience our digital portal with a 14-day comprehensive trial.",
-        badge: "Demo"
+        badge: "Demo",
       },
       {
         title: "e-CO Verification",
@@ -151,7 +149,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "B2B Registrations", href: "#b2b-register", description: "Register your brand catalog" },
     ],
   },
-
   {
     title: "Arbitration Center",
     href: "#arbitration",
@@ -161,13 +158,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "AECCI-IAC",
         href: "#iac",
         description: "International Arbitration Centre resolving cross-border disputes.",
-        badge: "Judicial"
+        badge: "Judicial",
       },
       {
         title: "Raise your Dispute",
         href: "#raise-dispute",
         description: "Streamlined online dispute filing system for member protection.",
-        badge: "Action"
+        badge: "Action",
       },
       {
         title: "Panel Name",
@@ -184,7 +181,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Legal Consultation", href: "#legal-consult", description: "1-on-1 advice with trade lawyers" },
     ],
   },
-
   {
     title: "Ways & Means",
     href: "#ways-means",
@@ -194,13 +190,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "Research & Information",
         href: "#research",
         description: "Data-driven research reports on emerging global market shifts.",
-        badge: "Insights"
+        badge: "Insights",
       },
       {
         title: "Commercial Directory",
         href: "#directory",
         description: "Verified database of high-performing Asian exporting enterprises.",
-        badge: "Database"
+        badge: "Database",
       },
       {
         title: "Annual Reports",
@@ -217,7 +213,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Business Resources", href: "#biz-resources", description: "Ready-to-use policy templates" },
     ],
   },
-
   {
     title: "Events",
     href: "#events",
@@ -227,13 +222,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "Chamber Events",
         href: "#chamber-events",
         description: "Key meetings, roundtables, and governmental policy discussions.",
-        badge: "Internal"
+        badge: "Internal",
       },
       {
         title: "B2B Events",
         href: "#b2b-events",
         description: "Exhibitions and expos matching international trade buyers.",
-        badge: "Global"
+        badge: "Global",
       },
       {
         title: "Sponsorships",
@@ -250,7 +245,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Business Forums", href: "#biz-forums", description: "Interactive cross-border discussions" },
     ],
   },
-
   {
     title: "Publications",
     href: "#publications",
@@ -260,13 +254,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "Digital Library",
         href: "#digital-library",
         description: "A curated repository of export handbooks, manuals, and templates.",
-        badge: "Archive"
+        badge: "Archive",
       },
       {
         title: "Media",
         href: "#media-pubs",
         description: "Latest press releases, video coverages, and industry news bulletins.",
-        badge: "Press"
+        badge: "Press",
       },
       {
         title: "Notifications",
@@ -283,7 +277,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Research Papers", href: "#research-papers", description: "Academic research on trade policies" },
     ],
   },
-
   {
     title: "Membership",
     href: "#membership",
@@ -293,13 +286,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "Membership Plans",
         href: "#plans",
         description: "Flexible tiers designed for single exporters up to massive conglomerates.",
-        badge: "Pricing"
+        badge: "Pricing",
       },
       {
         title: "Membership Renewal",
         href: "#renewal",
         description: "Fast renewal pathway with uninterrupted member benefits.",
-        badge: "Quick Pay"
+        badge: "Quick Pay",
       },
       {
         title: "Benefits",
@@ -316,7 +309,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Global Partnerships", href: "#global-partners", description: "Strategic tie-ups with foreign chambers" },
     ],
   },
-
   {
     title: "Contact",
     href: "#contact-section",
@@ -326,13 +318,13 @@ export const menuConfig: MegaMenuSection[] = [
         title: "Contact Us",
         href: "#contact-us",
         description: "Reach out to our main offices, helpline, or specialized desks.",
-        badge: "Helpdesk"
+        badge: "Helpdesk",
       },
       {
         title: "Support",
         href: "#support-help",
         description: "24/7 dedicated support portal for urgent customs and trade challenges.",
-        badge: "Urgent"
+        badge: "Urgent",
       },
     ],
     quickLinks: [

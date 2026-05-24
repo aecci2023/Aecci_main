@@ -1,154 +1,146 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Sun, Moon, User } from "@phosphor-icons/react";
+import { User } from "@phosphor-icons/react";
 import { AuthDialog } from "@/components/auth-dialogs";
 import { menuConfig } from "./menu-config";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
 
-interface NavbarProps {
-  theme: "dark" | "light";
-  setTheme: (t: "dark" | "light") => void;
-}
 
-export default function Navbar({ theme, setTheme }: NavbarProps) {
+
+export default function Navbar() {
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
+  const [brandVisible, setBrandVisible] = React.useState(true);
   const closeTimeoutRef = React.useRef<number | null>(null);
 
-  // Escape key closes immediately
+  // ── Scroll: collapse brand bar after 40px ──
   React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const onScroll = () => setBrandVisible(window.scrollY < 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // ── Escape key ──
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setActiveSection(null);
     };
-
-    window.addEventListener("keydown", handleKeyDown);
-
+    window.addEventListener("keydown", onKey);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-
-      if (closeTimeoutRef.current) {
-        window.clearTimeout(closeTimeoutRef.current);
-      }
+      window.removeEventListener("keydown", onKey);
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     };
   }, []);
 
-  const handleMouseEnter = (title: string) => {
+  const clearClose = () => {
     if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
+      clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
+  };
 
+  const handleMouseEnter = (title: string) => {
+    clearClose();
     setActiveSection(title);
   };
 
   const handleMouseLeave = () => {
-    if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
-    }
-
+    clearClose();
     closeTimeoutRef.current = window.setTimeout(() => {
       setActiveSection(null);
-    }, 150);
+    }, 160);
   };
 
-  const handleDropdownMouseEnter = () => {
-    if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-  };
+  const handleDropdownMouseEnter = () => clearClose();
 
   const handleClose = () => setActiveSection(null);
 
-  const activeSectionConfig = menuConfig.find(
-    (item) => item.title === activeSection
-  );
-
+  const activeSectionConfig = menuConfig.find((s) => s.title === activeSection);
   const isAnyOpen = !!activeSectionConfig;
+
+  // Shared frosted glass bg classes
+  const glassBg =
+    "bg-[rgba(255,255,255,0.82)] dark:bg-[rgba(18,18,19,0.88)] backdrop-blur-2xl";
 
   return (
     <>
       <header className="sticky top-0 z-50 w-full">
 
-        {/* ───────────────────────────────────────────── */}
-        {/* Desktop Top Brand Strip */}
-        {/* Hidden on Mobile */}
-        {/* ───────────────────────────────────────────── */}
-        <div
+        {/* ─────────────────────────────────────── */}
+        {/* Brand Bar — desktop only, hides on scroll */}
+        {/* ─────────────────────────────────────── */}
+        <motion.div
+          initial={false}
+          animate={{ height: brandVisible ? 72 : 0, opacity: brandVisible ? 1 : 0 }}
+          transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           className={[
-            "relative hidden md:block w-full",
-            "bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(22,22,23,0.90)]",
-            "backdrop-blur-2xl",
+            "hidden md:block w-full overflow-hidden",
+            glassBg,
             "border-b border-black/[0.06] dark:border-white/[0.06]",
           ].join(" ")}
         >
-          <div className="mx-auto flex min-h-[86px] max-w-7xl items-center justify-center px-4 md:px-6 py-3">
-
-            {/* Centered brand group */}
+          <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-center px-6">
             <a
               href="#hero"
               onClick={handleClose}
-              className="flex items-center gap-2 group"
+              className="flex items-center gap-3 group no-underline"
+              aria-label="AECCI Home"
             >
               <img
                 src="/aecci-logo.png"
-                alt="AECCI Logo"
-                className="h-[80px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                alt="AECCI"
+                className="h-[58px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        {/* ───────────────────────────────────────────── */}
-        {/* Main Navigation Row */}
-        {/* ───────────────────────────────────────────── */}
+        {/* ─────────────────────────────────────── */}
+        {/* Main Nav Row */}
+        {/* ─────────────────────────────────────── */}
         <div
           className={[
             "relative w-full",
-            "bg-[rgba(255,255,255,0.72)] dark:bg-[rgba(22,22,23,0.80)]",
-            "backdrop-blur-2xl",
+            glassBg,
             !isAnyOpen
-              ? "border-b border-black/[0.08] dark:border-white/[0.08]"
+              ? "border-b border-black/[0.07] dark:border-white/[0.07]"
               : "",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[64px] md:h-[42px] max-w-7xl items-center justify-between px-4 md:px-6 relative">
+          <div className="mx-auto flex h-[54px] md:h-[44px] max-w-7xl items-center justify-between px-4 md:px-6 relative">
 
-            {/* ───────────────────────────────────────── */}
-            {/* Mobile Left: Hamburger */}
-            {/* ───────────────────────────────────────── */}
+            {/* Mobile: Hamburger */}
             <div className="flex md:hidden items-center w-1/3">
-              <MobileMenu theme={theme} setTheme={setTheme} />
+              <MobileMenu />
             </div>
 
-            {/* ───────────────────────────────────────── */}
-            {/* Mobile Center: Logo */}
-            {/* ───────────────────────────────────────── */}
+            {/* Mobile: Logo center */}
             <div className="flex md:hidden items-center justify-center w-1/3">
-              <a href="#hero" onClick={handleClose} className="group flex items-center justify-center">
+              <a href="#hero" onClick={handleClose} className="group">
                 <img
                   src="/aecci-logoonly.png"
                   alt="AECCI"
-                  className="h-[36px] w-auto object-contain"
+                  className="h-[34px] w-auto object-contain"
                 />
               </a>
             </div>
 
-            {/* ───────────────────────────────────────── */}
-            {/* Mobile Right: User Icon */}
-            {/* ───────────────────────────────────────── */}
+            {/* Mobile: User icon right */}
             <div className="flex md:hidden items-center justify-end w-1/3">
               <AuthDialog
-                triggerText={<User className="size-5" />}
+                triggerText={<User className="size-[18px]" />}
                 defaultTab="login"
                 variant="ghost"
-                className="flex size-9 items-center justify-center rounded-full bg-muted/40 border border-border p-0 text-foreground hover:text-primary transition-all duration-200"
+                className={[
+                  "flex size-9 items-center justify-center rounded-full p-0",
+                  "bg-black/[0.04] dark:bg-white/[0.06]",
+                  "border border-black/[0.08] dark:border-white/[0.08]",
+                  "text-foreground hover:text-primary transition-all duration-200",
+                ].join(" ")}
               />
             </div>
 
-            {/* ───────────────────────────────────────── */}
-            {/* Desktop Navigation */}
-            {/* ───────────────────────────────────────── */}
+            {/* Desktop: Nav links centered */}
             <nav
               className="hidden md:flex items-center justify-center gap-0 flex-1"
               onMouseLeave={handleMouseLeave}
@@ -161,14 +153,15 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
                   onMouseLeave={handleMouseLeave}
                   onClick={handleClose}
                   className={[
-                    "cursor-pointer select-none px-3.5 py-2",
-                    "text-[13px] font-medium tracking-wide",
+                    "cursor-pointer select-none no-underline",
+                    "px-[11px] py-2",
+                    "text-[12.5px] font-[400] tracking-wide",
                     "transition-all duration-200",
                     isAnyOpen
                       ? activeSection === item.title
                         ? "text-primary opacity-100"
-                        : "text-foreground opacity-40 hover:opacity-70"
-                      : "text-foreground opacity-80 hover:text-primary hover:opacity-100",
+                        : "text-foreground opacity-30 hover:opacity-60"
+                      : "text-foreground opacity-75 hover:text-primary hover:opacity-100",
                   ].join(" ")}
                 >
                   {item.title}
@@ -176,61 +169,38 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
               ))}
             </nav>
 
-            {/* ───────────────────────────────────────── */}
-            {/* Right Actions */}
-            {/* ───────────────────────────────────────── */}
-            <div className="hidden md:flex items-center gap-2.5">
+            {/* Desktop: Right actions */}
+            <div
+              className={[
+                "hidden md:flex items-center gap-2",
+                "transition-opacity duration-200",
+                isAnyOpen ? "opacity-30 pointer-events-none" : "opacity-100",
+              ].join(" ")}
+            >
 
-              {/* Theme Toggle */}
-              <button
-                onClick={() =>
-                  setTheme(theme === "dark" ? "light" : "dark")
-                }
-                className={[
-                  "flex size-8 items-center justify-center rounded-full",
-                  "cursor-pointer text-foreground transition-all duration-200",
-                  "hover:bg-foreground/5",
-                  isAnyOpen
-                    ? "opacity-40"
-                    : "opacity-70 hover:opacity-100",
-                ].join(" ")}
-                title="Toggle Theme"
-              >
-                {theme === "dark" ? (
-                  <Sun className="size-4" />
-                ) : (
-                  <Moon className="size-4" />
-                )}
-              </button>
 
-              {/* Auth Buttons */}
-              <div
-                className={[
-                  "flex items-center gap-2 transition-opacity duration-200",
-                  isAnyOpen ? "opacity-40" : "opacity-100",
-                ].join(" ")}
-              >
-                <AuthDialog
-                  triggerText="Member Login"
-                  defaultTab="login"
-                  variant="ghost"
-                  className="h-8 cursor-pointer px-3 text-[12px] font-medium text-foreground/80 transition-opacity hover:text-foreground hover:opacity-60"
-                />
+              {/* Auth */}
+              <AuthDialog
+                triggerText="Member Login"
+                defaultTab="login"
+                variant="ghost"
+                className="h-8 px-3 text-[12px] font-[400] text-foreground/65 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
+              />
 
-                <AuthDialog
-                  triggerText="Become Member"
-                  defaultTab="register"
-                  variant="default"
-                  className="h-8 cursor-pointer rounded-full bg-primary px-4 text-[12px] font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
-                />
-              </div>
+              <AuthDialog
+                triggerText="Become Member"
+                defaultTab="register"
+                variant="default"
+                className="h-8 px-4 text-[12px] font-[500] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
+              />
             </div>
+
           </div>
         </div>
 
-        {/* ───────────────────────────────────────────── */}
-        {/* Mega Menu Dropdown */}
-        {/* ───────────────────────────────────────────── */}
+        {/* ─────────────────────────────────────── */}
+        {/* Mega Menu Panel */}
+        {/* ─────────────────────────────────────── */}
         <AnimatePresence>
           {activeSectionConfig && (
             <div
@@ -238,10 +208,15 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
               onMouseEnter={handleDropdownMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-
-              {/* Frosted Background */}
-              <div className="absolute inset-0 border-b border-black/[0.08] bg-[rgba(255,255,255,0.85)] backdrop-blur-2xl dark:border-white/[0.08] dark:bg-[rgba(22,22,23,0.90)]" />
-
+              {/* Panel frosted background */}
+              <div
+                className={[
+                  "absolute inset-0",
+                  "bg-[rgba(252,252,252,0.94)] dark:bg-[rgba(20,20,21,0.96)]",
+                  "backdrop-blur-2xl",
+                  "border-b border-black/[0.07] dark:border-white/[0.07]",
+                ].join(" ")}
+              />
               <div className="relative">
                 <MegaMenu
                   section={activeSectionConfig}
@@ -253,23 +228,21 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
             </div>
           )}
         </AnimatePresence>
+
       </header>
 
-      {/* ───────────────────────────────────────────── */}
-      {/* Background Overlay */}
-      {/* ───────────────────────────────────────────── */}
+      {/* ─────────────────────────────────────── */}
+      {/* Backdrop overlay */}
+      {/* ─────────────────────────────────────── */}
       <AnimatePresence>
         {isAnyOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{
-              duration: 0.35,
-              ease: [0.25, 0.1, 0.25, 1.0],
-            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1.0] }}
             onClick={handleClose}
-            className="fixed inset-0 z-40 bg-black/[0.12] backdrop-blur-md dark:bg-black/[0.30]"
+            className="fixed inset-0 z-40 bg-black/[0.10] dark:bg-black/[0.28] backdrop-blur-[10px]"
             style={{ top: 0 }}
           />
         )}

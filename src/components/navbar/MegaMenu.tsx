@@ -21,8 +21,6 @@ export default function MegaMenu({
     <motion.div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      // Apple style: no separate card/box — the nav bar itself expands downward
-      // The panel is flush with the header, same background, no separate border
       initial={{ height: 0 }}
       animate={{ height: "auto" }}
       exit={{ height: 0 }}
@@ -30,83 +28,91 @@ export default function MegaMenu({
       style={{ overflow: "hidden" }}
       className="w-full"
     >
-      {/* Inner content fades/slides in after the panel height expands */}
       <motion.div
-        initial={{ opacity: 0, y: -8 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -8 }}
+        exit={{ opacity: 0, y: -6 }}
         transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1], delay: 0.06 }}
-        className="mx-auto max-w-[980px] px-6 md:px-10 pt-6 pb-10 grid grid-cols-12 gap-8 text-left"
+        className="mx-auto max-w-7xl px-4 md:px-6 pt-7 pb-10 grid grid-cols-12 gap-0 text-left"
       >
 
-        {/* LEFT COLUMN: Featured */}
-        <div className="col-span-12 md:col-span-5 flex flex-col gap-5 pr-6 md:border-r border-black/[0.06] dark:border-white/[0.08]">
-          <span className="uppercase text-[10px] font-semibold tracking-widest text-foreground/40 block">
+        {/* ── LEFT: Featured ── */}
+        <div className="col-span-12 md:col-span-5 flex flex-col gap-5 pr-8 md:border-r border-black/[0.06] dark:border-white/[0.07]">
+          <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/35">
             Featured
           </span>
 
           {section.featured?.map((item, idx) => (
-            <div key={idx} className="group space-y-2 border-b border-black/[0.06] dark:border-white/[0.06] last:border-0 pb-5 last:pb-0">
+            <div
+              key={idx}
+              className="group pb-5 border-b border-black/[0.05] dark:border-white/[0.05] last:border-0 last:pb-0"
+            >
               {item.badge && (
-                <span className="inline-block text-[10px] font-semibold text-foreground/40 uppercase tracking-wider">
+                <span className="inline-block mb-1.5 text-[9px] font-semibold uppercase tracking-wide text-foreground/40">
                   {item.badge}
                 </span>
               )}
               <a
                 href={item.href}
                 onClick={onClose}
-                className="flex items-start gap-1 group/link"
+                className="group/link flex items-start gap-1 no-underline"
               >
-                <span className="text-[22px] font-semibold leading-tight text-foreground group-hover/link:opacity-60 transition-opacity duration-200">
+                <span className="text-[21px] font-[450] leading-tight tracking-[-0.3px] text-foreground transition-opacity duration-200 group-hover/link:opacity-50">
                   {item.title}
                 </span>
-                <ArrowRight className="size-4 text-foreground/40 group-hover/link:text-foreground/60 transition-all duration-200 mt-1.5 shrink-0 group-hover/link:translate-x-0.5" />
+                <ArrowRight
+                  className="mt-[5px] size-[15px] shrink-0 text-foreground/30 transition-all duration-200
+                             group-hover/link:text-foreground/50 group-hover/link:translate-x-0.5"
+                />
               </a>
-              <p className="text-[13px] text-foreground/50 leading-relaxed font-light">
+              <p className="mt-1 text-[12px] leading-relaxed font-light text-foreground/45">
                 {item.description}
               </p>
             </div>
           ))}
         </div>
 
-        {/* MIDDLE COLUMN: Core Links */}
-        <div className="col-span-12 md:col-span-4 flex flex-col gap-3 pl-0 md:pl-6 md:border-r border-black/[0.06] dark:border-white/[0.08]">
-          <span className="uppercase text-[10px] font-semibold tracking-widest text-foreground/40 block mb-1">
+        {/* ── MIDDLE: Explore ── */}
+        <div className="col-span-12 md:col-span-4 flex flex-col px-0 md:px-8 md:border-r border-black/[0.06] dark:border-white/[0.07]">
+          <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/35 mb-3">
             Explore
           </span>
-          <nav className="flex flex-col gap-0.5">
+          <nav className="flex flex-col">
             {section.quickLinks?.map((link, idx) => (
               <a
                 key={idx}
                 href={link.href}
                 onClick={onClose}
-                className="text-[13px] font-normal text-foreground/70 hover:text-foreground transition-all duration-150 py-1.5 pl-0 pr-2 flex items-center gap-1 group rounded"
+                className="group/q flex items-center gap-1 py-[7px] text-[13px] font-[350] text-foreground/60
+                           hover:text-foreground transition-colors duration-150 no-underline"
               >
                 <span>{link.title}</span>
-                <span className="opacity-0 group-hover:opacity-60 group-hover:translate-x-0.5 transition-all duration-150 text-[11px]">›</span>
+                <span className="text-[11px] opacity-0 translate-x-0 group-hover/q:opacity-50 group-hover/q:translate-x-0.5 transition-all duration-150">
+                  ›
+                </span>
               </a>
             ))}
           </nav>
         </div>
 
-        {/* RIGHT COLUMN: Resources */}
-        <div className="col-span-12 md:col-span-3 flex flex-col gap-4 pl-0 md:pl-6">
-          <span className="uppercase text-[10px] font-semibold tracking-widest text-foreground/40 block mb-1">
+        {/* ── RIGHT: Resources ── */}
+        <div className="col-span-12 md:col-span-3 flex flex-col pl-0 md:pl-8">
+          <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/35 mb-3">
             Resources
           </span>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-[14px]">
             {section.resources?.map((link, idx) => (
               <a
                 key={idx}
                 href={link.href}
                 onClick={onClose}
-                className="group block space-y-0.5"
+                className="group/r block no-underline"
               >
-                <span className="block text-[13px] font-medium text-foreground/80 group-hover:text-foreground transition-opacity duration-150">
+                <span className="block text-[13px] font-[450] text-foreground/75 transition-opacity duration-150 group-hover/r:opacity-50">
                   {link.title}
                 </span>
                 {link.description && (
-                  <span className="block text-[12px] text-foreground/45 leading-snug font-light">
+                  <span className="block mt-0.5 text-[11px] font-light leading-snug text-foreground/40">
                     {link.description}
                   </span>
                 )}
