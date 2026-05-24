@@ -1,4 +1,5 @@
 import { ShieldCheck, SealCheck } from "@phosphor-icons/react"
+import { motion } from "framer-motion"
 
 export default function Hero() {
   return (
@@ -7,31 +8,56 @@ export default function Hero() {
         
         {/* Hero Content */}
         <div className="z-10 flex flex-col items-start text-left">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-full border border-primary/20 mb-6 tracking-wide">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-full border border-primary/20 mb-6 tracking-wide"
+          >
             <ShieldCheck className="size-4 animate-pulse" /> ISO 9001:2015 CERTIFIED CHAMBER
-          </div>
+          </motion.div>
           
-          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-foreground tracking-tight mb-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+            className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-foreground tracking-tight mb-6"
+          >
             Empowering Asian Exporters.<br />
             <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Connecting Global Trade.</span>
-          </h1>
+          </motion.h1>
           
-          <p className="font-body text-base md:text-lg text-muted-foreground mb-10 max-w-xl leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+            className="font-body text-base md:text-lg text-muted-foreground mb-10 max-w-xl leading-relaxed"
+          >
             The Asian Exporters' Chamber of Commerce and Industry (AECCI) serves as the definitive gateway for modern enterprises. We facilitate Certificate of Origin issuances, legal arbitration panels, and dynamic B2B international matchmakings to accelerate your market scaling.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+            className="flex flex-wrap gap-4 w-full sm:w-auto"
+          >
             <a href="#b2b-forum" className="w-full sm:w-auto flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/95 text-sm font-bold px-8 h-12 rounded-full shadow-lg shadow-primary/20 hover:-translate-y-px transition-all">
               Explore B2B Exporters Directory
             </a>
             <a href="#coo-tracker" className="w-full sm:w-auto flex items-center justify-center bg-muted/50 border border-border text-foreground hover:bg-muted text-sm font-bold px-8 h-12 rounded-full hover:-translate-y-px transition-all">
               Track CO Certificate
             </a>
-          </div>
+          </motion.div>
         </div>
 
         {/* Hero Graphic Container */}
-        <div className="relative flex justify-center items-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1.0] }}
+          className="relative flex justify-center items-center"
+        >
           {/* Visual Glass Block Frame */}
           <div className="rounded-3xl border border-border/80 bg-card/45 backdrop-blur-xl p-4 shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-primary/5 opacity-60 pointer-events-none" />
@@ -43,7 +69,12 @@ export default function Hero() {
           </div>
 
           {/* Glowing Accent Badge */}
-          <div className="absolute -bottom-6 -left-6 bg-card/90 border border-border shadow-2xl p-5 rounded-2xl hidden lg:block backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0, x: -20, y: 20 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.32, 0.72, 0, 1] }}
+            className="absolute -bottom-6 -left-6 bg-card/90 border border-border shadow-2xl p-5 rounded-2xl hidden lg:block backdrop-blur-md"
+          >
             <div className="flex items-center gap-3">
               <div className="flex size-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary">
                 <SealCheck className="size-7" />
@@ -53,8 +84,8 @@ export default function Hero() {
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-0.5">Legally Approved Rules</p>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
       </div>
     </section>
