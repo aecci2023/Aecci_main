@@ -100,6 +100,8 @@ export default function MobileMenu() {
                       <a
                         key={`link-${lidx}`}
                         href={link.href}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         onClick={() => setOpen(false)}
                         className="block text-[13px] font-normal text-foreground/70 hover:text-primary transition-colors !no-underline py-[7px]"
                       >
