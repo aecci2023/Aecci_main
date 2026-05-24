@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar/Navbar"
 import Hero from "@/components/portal/Hero"
@@ -13,19 +12,6 @@ import ChatAssistant from "@/components/portal/ChatAssistant"
 import Footer from "@/components/portal/Footer"
 
 export default function App() {
-  const [theme, setTheme] = React.useState<"dark" | "light">("light")
-
-  // Apply theme class on load / toggle
-  React.useEffect(() => {
-    const root = window.document.documentElement
-    if (theme === "dark") {
-      root.classList.add("dark")
-      root.classList.remove("light")
-    } else {
-      root.classList.add("light")
-      root.classList.remove("dark")
-    }
-  }, [theme])
 
   return (
     <div className="min-h-screen bg-background text-foreground font-body select-none transition-colors duration-300 relative">
@@ -38,7 +24,7 @@ export default function App() {
       <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:32px_32px] -z-10 pointer-events-none" />
 
       {/* Orchestrated Components */}
-      <Navbar theme={theme} setTheme={setTheme} />
+      <Navbar />
       
       <main>
         <Hero />

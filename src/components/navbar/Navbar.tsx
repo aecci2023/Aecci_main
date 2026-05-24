@@ -89,7 +89,7 @@ export default function Navbar() {
               <img
                 src="/aecci-logo.png"
                 alt="AECCI"
-                className="h-[58px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                className="h-[58px] w-auto object-contain "
               />
             </a>
           </div>
