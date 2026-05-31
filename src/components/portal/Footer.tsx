@@ -5,52 +5,53 @@ import {
   LinkedinLogo,
   InstagramLogo,
 } from "@phosphor-icons/react"
+import { Link } from "react-router-dom"
 
 const footerSections = [
   {
     title: "About Us",
     links: [
-      { label: "About Chamber", href: "#" },
-      { label: "Our History", href: "#" },
-      { label: "Chairman Message", href: "#" },
-      { label: "Chamber Policy", href: "#" },
-      { label: "Office Bearers", href: "#" },
-      { label: "Roles & Responsibility", href: "#" },
-      { label: "Strategic Partners", href: "#" },
-      { label: "Chamber Dynamics", href: "#" },
-      { label: "Job Opportunities", href: "#" },
+      { label: "About Chamber", href: "/about/about-chamber" },
+      { label: "Our History", href: "/about/our-history" },
+      { label: "Chairman Message", href: "/about/chairman-message" },
+      { label: "Chamber Policy", href: "/about/chamber-policy" },
+      { label: "Office Bearers", href: "/about/office-bearers" },
+      { label: "Roles & Responsibility", href: "/about/roles-responsibility" },
+      { label: "Strategic Partners", href: "/about/strategic-partners" },
+      { label: "Chamber Dynamics", href: "/about/chamber-dynamics" },
+      { label: "Job Opportunities", href: "/about/jobs-opportunities" },
     ],
   },
 
   {
     title: "Our Services",
     links: [
-      { label: "The Wings", href: "#" },
-      { label: "Entrepreneur Hub", href: "#" },
-      { label: "B2B Connect", href: "#" },
-      { label: "Membership", href: "#" },
-      { label: "AECCI Affiliate Program", href: "#" },
-      { label: "Arbitration Center", href: "#" },
+      { label: "The Wings", href: "/services/the-wings" },
+      { label: "Entrepreneur Hub", href: "/services/entrepreneur-hub" },
+      { label: "B2B Connect", href: "/services/b2b-connect" },
+      { label: "Membership", href: "/services/membership" },
+      { label: "AECCI Affiliate Program", href: "/aecci-affiliate-program" },
+      { label: "Arbitration Center", href: "/arbitration-center" },
     ],
   },
 
   {
     title: "Media",
     links: [
-      { label: "Ways & Means", href: "#" },
-      { label: "Media", href: "#" },
-      { label: "Events", href: "#" },
-      { label: "e-Platform", href: "#" },
-      { label: "AECCI-TAC", href: "#" },
+      { label: "Ways & Means", href: "/ways-means" },
+      { label: "Media", href: "/media" },
+      { label: "Events", href: "/events" },
+      { label: "e-Platform", href: "/e-platform" },
+      { label: "AECCI-TAC", href: "/trade-assistant-centre" },
     ],
   },
 
   {
     title: "Contact Us",
     links: [
-      { label: "AECCI Head Office", href: "#" },
-      { label: "AECCI International Hub", href: "#" },
-      { label: "Upcoming", href: "#" },
+      { label: "AECCI Head Office", href: "/contact-us/aecci-head-office" },
+      { label: "AECCI International Hub", href: "/contact-us/aecci-international-hub" },
+      { label: "Upcoming", href: "/upcoming-events" },
     ],
   },
 ]
@@ -78,15 +79,23 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-3 flex flex-col items-start">
 
-            <img src="/arccilogoWithText.png" alt="AECCI" className="h-16 w-auto object-contain" />
+            <Link to="/" className="block cursor-pointer">
+              <img src="/arccilogoWithText.png" alt="AECCI" className="h-24 mx-auto w-auto object-contain" />
+            </Link>
 
             <h3 className="mt-4 text-[16px] font-extrabold uppercase tracking-tight text-[#0f5132] dark:text-primary">
               Come Grow With Us!
             </h3>
+
+            <div className="mt-3 text-[12.5px] leading-relaxed text-muted-foreground font-light max-w-xs">
+              <p className="font-semibold text-foreground">Asian Exporters’ Chamber Of Commerce & Industry</p>
+              <p className="mt-1">604 | 6th floor | Hilton Center | Plot no.66 | Sector No.11 |</p>
+              <p>CBD Belapur | Navi Mumbai-400614 | Maharashtra-India</p>
+            </div>
           </div>
 
           {/* Menus */}
-          <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="md:col-span-9 grid grid-cols-2 md:grid-cols-4 gap-6">
 
             {footerSections.map((section) => (
               <div key={section.title}>
@@ -94,18 +103,18 @@ export default function Footer() {
                   {section.title}
                 </h4>
 
-                  <ul className="space-y-1">
-                    {section.links.map((link) => (
-                      <li key={link.label}>
-                        <a
-                          href={link.href}
-                          className="text-[14px] text-muted-foreground transition-colors duration-200 hover:text-primary"
-                        >
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                <ul className="space-y-1">
+                  {section.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        to={link.href}
+                        className="text-[14px] text-muted-foreground transition-colors duration-200 hover:text-primary"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
 
                 {/* Social */}
                 {section.title === "Contact Us" && (
@@ -151,7 +160,7 @@ export default function Footer() {
 
           {/* Left */}
           <p className="text-[13px] text-muted-foreground">
-            Copyright © 2024{" "}
+            Copyright © {new Date().getFullYear()}{" "}
             <span className="font-semibold text-foreground">
               Asian Exporters' Chamber of Commerce and Industry
             </span>

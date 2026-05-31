@@ -1,87 +1,7 @@
 import type { RouteObject } from "react-router-dom";
 import Home from "@/pages/Home";
+import { NotFound } from "@/pages/not-found";
 
-import AboutChamber from "@/pages/about/AboutChamber";
-import OurHistory from "@/pages/about/OurHistory";
-import ChairmanMessage from "@/pages/about/ChairmanMessage";
-import ChamberPolicy from "@/pages/about/ChamberPolicy";
-import OfficeBearers from "@/pages/about/OfficeBearers";
-import RolesResponsibility from "@/pages/about/RolesResponsibility";
-import StrategicPartners from "@/pages/about/StrategicPartners";
-import ChamberDynamics from "@/pages/about/ChamberDynamics";
-import JobOpportunities from "@/pages/about/JobOpportunities";
-
-import ArbitrationCenter from "@/pages/arbitration-center/index";
-import WhyAecci from "@/pages/why-aecci/index";
-import ScheduleFees from "@/pages/schedule-fees/index";
-import RulesAndPolicies from "@/pages/rules-and-policies/index";
-import AecciIacModelClause from "@/pages/aecci-iac-model-clause/index";
-import AecciIacFaq from "@/pages/aecci-iac-faq/index";
-import AecciIacPanel from "@/pages/aecci-iac-panel/index";
-import WaysMeans from "@/pages/ways-means/index";
-import ResearchAndInformation from "@/pages/ways-means/research-and-information/index";
-import EconomicAnalysis from "@/pages/ways-means/research-and-information/economic-analysis/index";
-import BusinessOpportunitiesBrief from "@/pages/ways-means/research-and-information/business-opportunities-brief/index";
-import IndianEconomicReport from "@/pages/ways-means/research-and-information/indian-economic-report/index";
-import OperationalGuides from "@/pages/ways-means/research-and-information/operational-guides/index";
-import IndiaInnovationIndex from "@/pages/ways-means/india-innovation-index/index";
-import AnnualReport from "@/pages/ways-means/annual-report/index";
-import CommercialDirectory from "@/pages/ways-means/commercial-directory/index";
-import ExportPromotionCouncil from "@/pages/ways-means/export-promotion-council/index";
-
-import Media from "@/pages/media/index";
-import ENewsletters from "@/pages/media/e-newsletters/index";
-import MediaCenter from "@/pages/media/media-center/index";
-import AecciViewpoints from "@/pages/aecci-viewpoints/index";
-import Gallery from "@/pages/media/gallery/index";
-import Publications from "@/pages/media/publications/index";
-
-import Events from "@/pages/events/index";
-import UpcomingEvents from "@/pages/upcoming-events/index";
-import PastEvents from "@/pages/events/past-events/index";
-import VirtualB2bForum from "@/pages/aecci-iac-virtual-b2b-forum/index";
-import Sponsorship from "@/pages/events/sponsorship/index";
-import AdvertiseWithUs from "@/pages/advertise-with-us/index";
-import InternationalCollaboration from "@/pages/international-collaboration/index";
-import WorldConference from "@/pages/world-conference/index";
-
-import EPlatform from "@/pages/e-platform/index";
-import EPlatformInformation from "@/pages/e-platform/e-platform-information/index";
-import FormalitiesGuidelines from "@/pages/e-platform/formalities-guidelines/index";
-import InformationForEServices from "@/pages/e-platform/formalities-guidelines/information-for-e-services/index";
-import IndemnityBondFormat from "@/pages/e-platform/formalities-guidelines/indemnity-bond-format/index";
-import CooFormat from "@/pages/e-platform/formalities-guidelines/coo-format/index";
-import AttestationFeesInformation from "@/pages/e-platform/formalities-guidelines/attestation-fees-information/index";
-import AuthorizedChamberCard from "@/pages/e-platform/formalities-guidelines/authorized-chamber-card/index";
-
-import TradeAssistantCentre from "@/pages/trade-assistant-centre/index";
-import AboutTac from "@/pages/about-tac/index";
-import TacProcess from "@/pages/tac-process/index";
-import TacLocations from "@/pages/tac-locations/index";
-
-import ContactUs from "@/pages/contact-us/index";
-import AecciHeadOffice from "@/pages/contact-us/aecci-head-office/index";
-import AecciInternationalHub from "@/pages/contact-us/aecci-international-hub/index";
-
-import PlaceholderPage from "@/pages/PlaceholderPage";
-import OurServices from "@/pages/services/OurServices";
-import TheWings from "@/pages/services/the-wings/TheWings";
-import ExportsWing from "@/pages/services/the-wings/ExportsWing";
-import LegalWing from "@/pages/services/the-wings/LegalWing";
-import HrSupportWing from "@/pages/services/the-wings/HrSupportWing";
-import ProfessionalWing from "@/pages/services/the-wings/ProfessionalWing";
-import BusinessAdviceWing from "@/pages/services/the-wings/BusinessAdviceWing";
-import WomenWing from "@/pages/services/the-wings/WomenWing";
-import EventSeminarWing from "@/pages/services/the-wings/EventSeminarWing";
-
-import EntrepreneurHub from "@/pages/services/entrepreneur-hub/EntrepreneurHub";
-import StartupIndia from "@/pages/services/entrepreneur-hub/StartupIndia";
-import InvestmentIndia from "@/pages/services/entrepreneur-hub/InvestmentIndia";
-import MakeInIndia from "@/pages/services/entrepreneur-hub/MakeInIndia";
-
-import B2bConnect from "@/pages/services/b2b-connect/B2bConnect";
-import Membership from "@/pages/services/membership/Membership";
-import AffiliateProgram from "@/pages/services/affiliate-program/AffiliateProgram";
 
 export const routes: RouteObject[] = [
   {
@@ -91,407 +11,411 @@ export const routes: RouteObject[] = [
   // Added mappings for simple /about and /contact standard paths
   {
     path: "/about",
-    element: <AboutChamber />,
+    element: <NotFound />,
   },
   {
     path: "/contact",
-    element: <ContactUs />,
+    element: <NotFound />,
   },
   {
     path: "/about/about-chamber",
-    element: <AboutChamber />,
+    element: <NotFound />,
   },
   {
     path: "/about/our-history",
-    element: <OurHistory />,
+    element: <NotFound />,
   },
   {
     path: "/about/chairman-message",
-    element: <ChairmanMessage />,
+    element: <NotFound />,
   },
   {
     path: "/about/chamber-policy",
-    element: <ChamberPolicy />,
+    element: <NotFound />,
   },
   {
     path: "/about/office-bearers",
-    element: <OfficeBearers />,
+    element: <NotFound />,
   },
   {
     path: "/about/roles-responsibility",
-    element: <RolesResponsibility />,
+    element: <NotFound />,
   },
   {
     path: "/about/strategic-partners",
-    element: <StrategicPartners />,
+    element: <NotFound />,
   },
   {
     path: "/about/chamber-dynamics",
-    element: <ChamberDynamics />,
+    element: <NotFound />,
   },
   {
     path: "/about/jobs-opportunities",
-    element: <JobOpportunities />,
+    element: <NotFound />,
   },
 
   // Services Main & The Wings
   {
     path: "/services",
-    element: <OurServices />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings",
-    element: <TheWings />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/exports-wing",
-    element: <ExportsWing />,
+    element: <NotFound />,
   },
   {
     path: "/services/legal-wing",
-    element: <LegalWing />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/hr-support-wing",
-    element: <HrSupportWing />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/professional-wing",
-    element: <ProfessionalWing />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/business-advice-wing",
-    element: <BusinessAdviceWing />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/women-wing",
-    element: <WomenWing />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/event-and-seminar-wing",
-    element: <EventSeminarWing />,
+    element: <NotFound />,
   },
 
   // Added nested routes matching user's format explicitly
   {
     path: "/services/exports-wing",
-    element: <ExportsWing />,
+    element: <NotFound />,
   },
 
   {
     path: "/services/the-wings/exports-wing-our-export-wing",
-    element: <PlaceholderPage title="Our Export Wing" />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/exports-wing-our-initiatives",
-    element: <PlaceholderPage title="Export Wing Initiatives" />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-export-our-team",
-    element: <PlaceholderPage title="Export Team" />,
+    element: <NotFound />,
   },
 
   {
     path: "/aecci-legal-expertise",
-    element: <PlaceholderPage title="Legal Expertise" />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-legal-what-we-do",
-    element: <PlaceholderPage title="What We Do" />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-legal-initiatives",
-    element: <PlaceholderPage title="Legal Initiatives" />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-legal-our-team",
-    element: <PlaceholderPage title="Legal Team" />,
+    element: <NotFound />,
   },
 
   {
     path: "/services/the-wings/event-and-seminar-wing-our-expertise",
-    element: <PlaceholderPage title="Event Wing Expertise" />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/event-and-seminar-wing-what-we-do",
-    element: <PlaceholderPage title="Event Wing What We Do" />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/event-and-seminar-wing-our-initiatives",
-    element: <PlaceholderPage title="Event Wing Initiatives" />,
+    element: <NotFound />,
   },
   {
     path: "/services/the-wings/event-and-seminar-wing-our-team",
-    element: <PlaceholderPage title="Event Wing Team" />,
+    element: <NotFound />,
   },
 
   {
     path: "/submit-professionals-profile",
-    element: <PlaceholderPage title="Submit Professionals Profile" />,
+    element: <NotFound />,
   },
 
   // Entrepreneur Hub
   {
     path: "/services/entrepreneur-hub",
-    element: <EntrepreneurHub />,
+    element: <NotFound />,
   },
   {
     path: "/services/entrepreneur-hub/startup-india",
-    element: <StartupIndia />,
+    element: <NotFound />,
   },
   {
     path: "/services/entrepreneur-hub/investment-india",
-    element: <InvestmentIndia />,
+    element: <NotFound />,
   },
   {
     path: "/services/entrepreneur-hub/make-in-india",
-    element: <MakeInIndia />,
+    element: <NotFound />,
   },
 
   // B2B Connect
   {
     path: "/services/b2b-connect",
-    element: <B2bConnect />,
+    element: <NotFound />,
   },
   {
     path: "/services/b2b-connect/consultations",
-    element: <PlaceholderPage title="B2B Consultations" />,
+    element: <NotFound />,
   },
   {
     path: "/services/b2b-connect/business-matches",
-    element: <PlaceholderPage title="B2B Business Matches" />,
+    element: <NotFound />,
   },
   {
     path: "/services/b2b-connect/market-studies",
-    element: <PlaceholderPage title="B2B Market Studies" />,
+    element: <NotFound />,
   },
   {
     path: "/b2b-about",
-    element: <PlaceholderPage title="Virtual B2B Forum" />,
+    element: <NotFound />,
   },
 
   // Membership
   {
     path: "/services/membership",
-    element: <Membership />,
+    element: <NotFound />,
   },
   {
     path: "/patron-members",
-    element: <PlaceholderPage title="Patron Membership" />,
+    element: <NotFound />,
   },
   {
     path: "/membership-and-its-benefits",
-    element: <PlaceholderPage title="Membership & Its Benefits" />,
+    element: <NotFound />,
   },
   {
     path: "/services/membership/guidelines-and-form",
-    element: <PlaceholderPage title="Guidelines and Form" />,
+    element: <NotFound />,
   },
   {
     path: "/services/membership/enrollment-offers",
-    element: <PlaceholderPage title="Enrollment Offers" />,
+    element: <NotFound />,
   },
   {
     path: "/services/membership/visa-recommendations-letter",
-    element: <PlaceholderPage title="Visa Recommendations Letter" />,
+    element: <NotFound />,
   },
 
   // Affiliate Program
   {
     path: "/aecci-affiliate-program",
-    element: <AffiliateProgram />,
+    element: <NotFound />,
   },
   {
     path: "/meet-our-wings-experts",
-    element: <PlaceholderPage title="Meet Our Wing Experts" />,
+    element: <NotFound />,
   },
   {
     path: "/join-our-affiliate-network",
-    element: <PlaceholderPage title="Join Our Affiliate Network" />,
+    element: <NotFound />,
   },
 
   {
     path: "/arbitration-center",
-    element: <ArbitrationCenter />,
+    element: <NotFound />,
   },
   {
     path: "/why-aecci",
-    element: <WhyAecci />,
+    element: <NotFound />,
   },
   {
     path: "/schedule-fees",
-    element: <ScheduleFees />,
+    element: <NotFound />,
   },
   {
     path: "/rules-and-policies",
-    element: <RulesAndPolicies />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-iac-model-clause",
-    element: <AecciIacModelClause />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-iac-faq",
-    element: <AecciIacFaq />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-iac-panel",
-    element: <AecciIacPanel />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means",
-    element: <WaysMeans />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/research-and-information",
-    element: <ResearchAndInformation />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/research-and-information/economic-analysis",
-    element: <EconomicAnalysis />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/research-and-information/business-opportunities-brief",
-    element: <BusinessOpportunitiesBrief />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/research-and-information/indian-economic-report",
-    element: <IndianEconomicReport />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/research-and-information/operational-guides",
-    element: <OperationalGuides />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/india-innovation-index",
-    element: <IndiaInnovationIndex />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/annual-report",
-    element: <AnnualReport />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/commercial-directory",
-    element: <CommercialDirectory />,
+    element: <NotFound />,
   },
   {
     path: "/ways-means/export-promotion-council",
-    element: <ExportPromotionCouncil />,
+    element: <NotFound />,
   },
   {
     path: "/media",
-    element: <Media />,
+    element: <NotFound />,
   },
   {
     path: "/media/e-newsletters",
-    element: <ENewsletters />,
+    element: <NotFound />,
   },
   {
     path: "/media/media-center",
-    element: <MediaCenter />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-viewpoints",
-    element: <AecciViewpoints />,
+    element: <NotFound />,
   },
   {
     path: "/media/gallery",
-    element: <Gallery />,
+    element: <NotFound />,
   },
   {
     path: "/media/publications",
-    element: <Publications />,
+    element: <NotFound />,
   },
   {
     path: "/events",
-    element: <Events />,
+    element: <NotFound />,
   },
   {
     path: "/upcoming-events",
-    element: <UpcomingEvents />,
+    element: <NotFound />,
   },
   {
     path: "/events/past-events",
-    element: <PastEvents />,
+    element: <NotFound />,
   },
   {
     path: "/aecci-iac-virtual-b2b-forum",
-    element: <VirtualB2bForum />,
+    element: <NotFound />,
   },
   {
     path: "/events/sponsorship",
-    element: <Sponsorship />,
+    element: <NotFound />,
   },
   {
     path: "/advertise-with-us",
-    element: <AdvertiseWithUs />,
+    element: <NotFound />,
   },
   {
     path: "/international-collaboration",
-    element: <InternationalCollaboration />,
+    element: <NotFound />,
   },
   {
     path: "/world-conference",
-    element: <WorldConference />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform",
-    element: <EPlatform />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform/e-platform-information",
-    element: <EPlatformInformation />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform/formalities-guidelines",
-    element: <FormalitiesGuidelines />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform/formalities-guidelines/information-for-e-services",
-    element: <InformationForEServices />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform/formalities-guidelines/indemnity-bond-format",
-    element: <IndemnityBondFormat />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform/formalities-guidelines/coo-format",
-    element: <CooFormat />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform/formalities-guidelines/attestation-fees-information",
-    element: <AttestationFeesInformation />,
+    element: <NotFound />,
   },
   {
     path: "/e-platform/formalities-guidelines/authorized-chamber-card",
-    element: <AuthorizedChamberCard />,
+    element: <NotFound />,
   },
   {
     path: "/trade-assistant-centre",
-    element: <TradeAssistantCentre />,
+    element: <NotFound />,
   },
   {
     path: "/about-tac",
-    element: <AboutTac />,
+    element: <NotFound />,
   },
   {
     path: "/tac-process",
-    element: <TacProcess />,
+    element: <NotFound />,
   },
   {
     path: "/tac-locations",
-    element: <TacLocations />,
+    element: <NotFound />,
   },
   {
     path: "/contact-us",
-    element: <ContactUs />,
+    element: <NotFound />,
   },
   {
     path: "/contact-us/aecci-head-office",
-    element: <AecciHeadOffice />,
+    element: <NotFound />,
   },
   {
     path: "/contact-us/aecci-international-hub",
-    element: <AecciInternationalHub />,
+    element: <NotFound />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ];
