@@ -2,6 +2,7 @@ import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { User } from "@phosphor-icons/react";
 import { AuthDialog } from "@/components/auth-dialogs";
+import { useLocation } from "react-router-dom";
 import { menuConfig } from "./menu-config";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
@@ -9,6 +10,7 @@ import MobileMenu from "./MobileMenu";
 
 
 export default function Navbar() {
+  const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
   const [brandVisible, setBrandVisible] = React.useState(true);
   const closeTimeoutRef = React.useRef<number | null>(null);
@@ -145,28 +147,34 @@ export default function Navbar() {
               className="hidden md:flex items-center justify-center gap-0 flex-1"
               onMouseLeave={handleMouseLeave}
             >
-              {menuConfig.map((item, idx) => (
-                <a
-                  key={idx}
-                  href={item.href}
-                  onMouseEnter={() => handleMouseEnter(item.title)}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={handleClose}
-                  className={[
-                    "cursor-pointer select-none no-underline",
-                    "px-[11px] py-2",
-                    "text-[12.5px] font-[400] tracking-wide",
-                    "transition-all duration-200",
-                    isAnyOpen
-                      ? activeSection === item.title
-                        ? "text-primary opacity-100"
-                        : "text-foreground opacity-30 hover:opacity-60"
-                      : "text-foreground opacity-75 hover:text-primary hover:opacity-100",
-                  ].join(" ")}
-                >
-                  {item.title}
-                </a>
-              ))}
+              {menuConfig.map((item, idx) => {
+                const isActivePath = location.pathname.startsWith(item.href);
+
+                return (
+                  <a
+                    key={idx}
+                    href={item.href}
+                    onMouseEnter={() => handleMouseEnter(item.title)}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={handleClose}
+                    className={[
+                      "cursor-pointer select-none no-underline",
+                      "px-[11px] py-2",
+                      "text-[12.5px] font-[400] tracking-wide",
+                      "transition-all duration-200",
+                      isAnyOpen
+                        ? activeSection === item.title
+                          ? "text-primary opacity-100"
+                          : "text-foreground opacity-30 hover:opacity-60"
+                        : isActivePath
+                        ? "text-primary opacity-100 font-medium"
+                        : "text-foreground opacity-75 hover:text-primary hover:opacity-100",
+                    ].join(" ")}
+                  >
+                    {item.title}
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Desktop: Right actions */}

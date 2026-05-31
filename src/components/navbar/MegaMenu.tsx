@@ -1,6 +1,8 @@
-import { motion } from "framer-motion";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import type { MegaMenuSection } from "./menu-config";
+import { useLocation } from "react-router-dom";
+import type { MegaMenuSection, SubMenuItem } from "./menu-config";
 
 interface MegaMenuProps {
   section: MegaMenuSection;
@@ -15,7 +17,21 @@ export default function MegaMenu({
   onMouseLeave,
   onClose,
 }: MegaMenuProps) {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const [activeSubItems, setActiveSubItems] = React.useState<{ title: string; items: SubMenuItem[] } | null>(null);
+  const [prevSectionTitle, setPrevSectionTitle] = React.useState(section.title);
+
+  // Reset when section changes (React-recommended pattern instead of useEffect)
+  if (section.title !== prevSectionTitle) {
+    setPrevSectionTitle(section.title);
+    setActiveSubItems(null);
+  }
+
   if (!section.hasDropdown) return null;
+
+  const showThirdColumn = activeSubItems && activeSubItems.items.length > 0;
 
   return (
     <motion.div
@@ -33,98 +49,145 @@ export default function MegaMenu({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -6 }}
         transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1], delay: 0.06 }}
-        className="mx-auto max-w-7xl px-4 md:px-6 pt-7 pb-10 grid grid-cols-12 gap-0 text-left"
+        className="mx-auto max-w-7xl px-4 md:px-6 pt-7 pb-10 flex gap-0 text-left transition-all duration-300"
       >
-
-        {/* ── LEFT: Featured ── */}
-        <div className="col-span-12 md:col-span-5 flex flex-col gap-5 pr-8 md:border-r border-black/[0.06] dark:border-white/[0.07]">
-          <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/35">
-            Featured
-          </span>
-
-          {section.featured?.map((item, idx) => (
-            <div
-              key={idx}
-              className="group pb-5 border-b border-black/[0.05] dark:border-white/[0.05] last:border-0 last:pb-0"
-            >
-              {item.badge && (
-                <span className="inline-block mb-1.5 text-[9px] font-semibold uppercase tracking-wide text-foreground/40">
-                  {item.badge}
-                </span>
-              )}
-              <a
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                onClick={onClose}
-                className="group/link flex items-start gap-1 no-underline"
-              >
-                <span className="text-[21px] font-[450] leading-tight tracking-[-0.3px] text-foreground transition-opacity duration-200 group-hover/link:opacity-50">
-                  {item.title}
-                </span>
-                <ArrowRight
-                  className="mt-[5px] size-[15px] shrink-0 text-foreground/30 transition-all duration-200
-                             group-hover/link:text-foreground/50 group-hover/link:translate-x-0.5"
-                />
-              </a>
-              <p className="mt-1 text-[12px] leading-relaxed font-light text-foreground/45">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* ── MIDDLE: Explore ── */}
-        <div className="col-span-12 md:col-span-4 flex flex-col px-0 md:px-8 md:border-r border-black/[0.06] dark:border-white/[0.07]">
-          <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/35 mb-3">
-            Explore
-          </span>
-          <nav className="flex flex-col">
-            {section.quickLinks?.map((link, idx) => (
-              <a
+        {/* ── LEFT: Menus (Featured) ── */}
+        <div 
+          className={`flex flex-col gap-5 pr-8 border-r border-black/[0.06] dark:border-white/[0.07] transition-all duration-300 ${showThirdColumn ? 'w-[38%]' : 'w-[55%]'}`}
+        >
+          {section.featured?.map((item, idx) => {
+            const isActive = currentPath === item.href || currentPath.startsWith(item.href + '/');
+            return (
+              <div
                 key={idx}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                onClick={onClose}
-                className="group/q flex items-center gap-1 py-[7px] text-[13px] font-[350] text-foreground/60
-                           hover:text-foreground transition-colors duration-150 no-underline"
+                onMouseEnter={() => item.items ? setActiveSubItems({ title: item.title, items: item.items }) : setActiveSubItems(null)}
+                className="group pb-4 border-b border-black/[0.05] dark:border-white/[0.05] last:border-0 last:pb-0"
               >
-                <span>{link.title}</span>
-                <span className="text-[11px] opacity-0 translate-x-0 group-hover/q:opacity-50 group-hover/q:translate-x-0.5 transition-all duration-150">
-                  ›
-                </span>
-              </a>
-            ))}
-          </nav>
-        </div>
-
-        {/* ── RIGHT: Resources ── */}
-        <div className="col-span-12 md:col-span-3 flex flex-col pl-0 md:pl-8">
-          <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/35 mb-3">
-            Resources
-          </span>
-          <div className="flex flex-col gap-[14px]">
-            {section.resources?.map((link, idx) => (
-              <a
-                key={idx}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                onClick={onClose}
-                className="group/r block no-underline"
-              >
-                <span className="block text-[13px] font-[450] text-foreground/75 transition-opacity duration-150 group-hover/r:opacity-50">
-                  {link.title}
-                </span>
-                {link.description && (
-                  <span className="block mt-0.5 text-[11px] font-light leading-snug text-foreground/40">
-                    {link.description}
+                <a
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  onClick={onClose}
+                  className="group/link flex items-start gap-1 no-underline"
+                >
+                  <span className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                    {item.title}
                   </span>
-                )}
-              </a>
-            ))}
-          </div>
+                  {item.items && item.items.length > 0 && (
+                    <ArrowRight
+                      className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? 'text-primary opacity-50' : 'text-foreground/30 group-hover/link:text-foreground/50'}`}
+                    />
+                  )}
+                </a>
+                <p className="mt-1 text-[12px] leading-relaxed font-light text-foreground/50 line-clamp-2 pr-4">
+                  {item.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ── MIDDLE: Dynamic 3rd Column for Sub-items ── */}
+        <AnimatePresence>
+          {showThirdColumn && (
+            <motion.div 
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.2 }}
+              className="w-[32%] flex flex-col px-8 border-r border-black/[0.06] dark:border-white/[0.07]"
+            >
+              <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-primary mb-3">
+                {activeSubItems.title}
+              </span>
+              <div className="flex flex-col gap-[2px]">
+                {activeSubItems.items.map((subItem, idx) => {
+                  const isActive = currentPath === subItem.href;
+                  return (
+                    <a
+                      key={idx}
+                      href={subItem.href}
+                      target={subItem.href.startsWith("http") ? "_blank" : undefined}
+                      rel={subItem.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      onClick={onClose}
+                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'bg-primary/5 text-primary' : 'text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground'}`}
+                    >
+                      {subItem.title}
+                    </a>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ── RIGHT: Explore & Resources ── */} 
+        <div 
+          className={`flex flex-col pl-0 md:pl-8 transition-all duration-300 ${showThirdColumn ? 'w-[30%]' : 'w-[45%] pl-0 md:pl-8'}`}
+        >
+          {section.quickLinks && section.quickLinks.length > 0 && (
+            <div className="mb-6">
+              <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/40 mb-3">
+                Explore
+              </span>
+              <nav className="flex flex-col gap-1">
+                {section.quickLinks?.map((link, idx) => {
+                  const isActive = currentPath === link.href;
+                  return (
+                    <a
+                      key={idx}
+                      href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      onClick={onClose}
+                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
+                      className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
+                    >
+                      <span>{link.title}</span>
+                      {link.items && link.items.length > 0 && (
+                        <span className="text-[11px] opacity-0 translate-x-0 group-hover/q:opacity-50 group-hover/q:translate-x-0.5 transition-all duration-150">
+                          ›
+                        </span>
+                      )}
+                    </a>
+                  );
+                })}
+              </nav>
+            </div>
+          )}
+
+          {section.resources && section.resources.length > 0 && (
+            <div>
+              <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-foreground/40 mb-3">
+                Resources
+              </span>
+              <div className="flex flex-col gap-3">
+                {section.resources?.map((link, idx) => {
+                  const isActive = currentPath === link.href;
+                  return (
+                    <a
+                      key={idx}
+                      href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      onClick={onClose}
+                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
+                      className="group/r block no-underline"
+                    >
+                      <span className={`block text-[13px] font-[500] transition-opacity duration-150 group-hover/r:opacity-70 ${isActive ? 'text-primary' : 'text-foreground/80'}`}>
+                        {link.title}
+                      </span>
+                      {link.description && (
+                        <span className="block mt-[2px] text-[11px] font-[300] leading-snug text-foreground/45">
+                          {link.description}
+                        </span>
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
       </motion.div>
