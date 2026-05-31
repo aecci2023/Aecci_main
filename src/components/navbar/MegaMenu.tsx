@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import type { MegaMenuSection, SubMenuItem } from "./menu-config";
 
 interface MegaMenuProps {
@@ -63,22 +63,39 @@ export default function MegaMenu({
                 onMouseEnter={() => item.items ? setActiveSubItems({ title: item.title, items: item.items }) : setActiveSubItems(null)}
                 className="group pb-4 border-b border-black/[0.05] dark:border-white/[0.05] last:border-0 last:pb-0"
               >
-                <a
-                  href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  onClick={onClose}
-                  className="group/link flex items-start gap-1 no-underline"
-                >
-                  <span className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? 'text-primary' : 'text-foreground'}`}>
-                    {item.title}
-                  </span>
-                  {item.items && item.items.length > 0 && (
-                    <ArrowRight
-                      className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? 'text-primary opacity-50' : 'text-foreground/30 group-hover/link:text-foreground/50'}`}
-                    />
-                  )}
-                </a>
+                {item.href.startsWith("http") ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="group/link flex items-start gap-1 no-underline"
+                  >
+                    <span className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                      {item.title}
+                    </span>
+                    {item.items && item.items.length > 0 && (
+                      <ArrowRight
+                        className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? 'text-primary opacity-50' : 'text-foreground/30 group-hover/link:text-foreground/50'}`}
+                      />
+                    )}
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href}
+                    onClick={onClose}
+                    className="group/link flex items-start gap-1 no-underline"
+                  >
+                    <span className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                      {item.title}
+                    </span>
+                    {item.items && item.items.length > 0 && (
+                      <ArrowRight
+                        className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? 'text-primary opacity-50' : 'text-foreground/30 group-hover/link:text-foreground/50'}`}
+                      />
+                    )}
+                  </Link>
+                )}
                 <p className="mt-1 text-[12px] leading-relaxed font-light text-foreground/50 line-clamp-2 pr-4">
                   {item.description}
                 </p>
@@ -103,17 +120,26 @@ export default function MegaMenu({
               <div className="flex flex-col gap-[2px]">
                 {activeSubItems.items.map((subItem, idx) => {
                   const isActive = currentPath === subItem.href;
-                  return (
+                  return subItem.href.startsWith("http") ? (
                     <a
                       key={idx}
                       href={subItem.href}
-                      target={subItem.href.startsWith("http") ? "_blank" : undefined}
-                      rel={subItem.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={onClose}
                       className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'bg-primary/5 text-primary' : 'text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground'}`}
                     >
                       {subItem.title}
                     </a>
+                  ) : (
+                    <Link
+                      key={idx}
+                      to={subItem.href}
+                      onClick={onClose}
+                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'bg-primary/5 text-primary' : 'text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground'}`}
+                    >
+                      {subItem.title}
+                    </Link>
                   );
                 })}
               </div>
@@ -133,12 +159,12 @@ export default function MegaMenu({
               <nav className="flex flex-col gap-1">
                 {section.quickLinks?.map((link, idx) => {
                   const isActive = currentPath === link.href;
-                  return (
+                  return link.href.startsWith("http") ? (
                     <a
                       key={idx}
                       href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={onClose}
                       onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
                       className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
@@ -150,6 +176,21 @@ export default function MegaMenu({
                         </span>
                       )}
                     </a>
+                  ) : (
+                    <Link
+                      key={idx}
+                      to={link.href}
+                      onClick={onClose}
+                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
+                      className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
+                    >
+                      <span>{link.title}</span>
+                      {link.items && link.items.length > 0 && (
+                        <span className="text-[11px] opacity-0 translate-x-0 group-hover/q:opacity-50 group-hover/q:translate-x-0.5 transition-all duration-150">
+                          ›
+                        </span>
+                      )}
+                    </Link>
                   );
                 })}
               </nav>
@@ -164,12 +205,12 @@ export default function MegaMenu({
               <div className="flex flex-col gap-3">
                 {section.resources?.map((link, idx) => {
                   const isActive = currentPath === link.href;
-                  return (
+                  return link.href.startsWith("http") ? (
                     <a
                       key={idx}
                       href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={onClose}
                       onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
                       className="group/r block no-underline"
@@ -183,6 +224,23 @@ export default function MegaMenu({
                         </span>
                       )}
                     </a>
+                  ) : (
+                    <Link
+                      key={idx}
+                      to={link.href}
+                      onClick={onClose}
+                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
+                      className="group/r block no-underline"
+                    >
+                      <span className={`block text-[13px] font-[500] transition-opacity duration-150 group-hover/r:opacity-70 ${isActive ? 'text-primary' : 'text-foreground/80'}`}>
+                        {link.title}
+                      </span>
+                      {link.description && (
+                        <span className="block mt-[2px] text-[11px] font-[300] leading-snug text-foreground/45">
+                          {link.description}
+                        </span>
+                      )}
+                    </Link>
                   );
                 })}
               </div>

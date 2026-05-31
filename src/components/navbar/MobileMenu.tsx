@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -40,17 +40,26 @@ function NestedCategory({ category, currentPath, setOpen }: { category: MenuCate
             <div className="flex flex-col gap-1.5 pl-3 border-l border-black/[0.1] dark:border-white/[0.1] ml-1 pb-3 pt-1">
               {category.items?.map((subLink: SubMenuItem, slidx: number) => {
                 const isSubLinkActive = currentPath === subLink.href;
-                return (
+                return subLink.href.startsWith("http") ? (
                   <a
                     key={`sub-${slidx}`}
                     href={subLink.href}
-                    target={subLink.href.startsWith("http") ? "_blank" : undefined}
-                    rel={subLink.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
                     className={`block text-[13px] font-normal !no-underline py-1.5 pl-2 transition-colors ${isSubLinkActive ? 'text-primary border-l-[1.5px] border-primary -ml-[1.5px]' : 'text-foreground/60 hover:text-primary'}`}
                   >
                     {subLink.title}
                   </a>
+                ) : (
+                  <Link
+                    key={`sub-${slidx}`}
+                    to={subLink.href}
+                    onClick={() => setOpen(false)}
+                    className={`block text-[13px] font-normal !no-underline py-1.5 pl-2 transition-colors ${isSubLinkActive ? 'text-primary border-l-[1.5px] border-primary -ml-[1.5px]' : 'text-foreground/60 hover:text-primary'}`}
+                  >
+                    {subLink.title}
+                  </Link>
                 );
               })}
             </div>
@@ -103,17 +112,26 @@ function MobileTopLevelItem({ item, currentPath, setOpen, isOpen, onToggle }: { 
 
                 // Just a link
                 const isCategoryActive = currentPath === category.href || currentPath.startsWith(category.href + '/');
-                return (
+                return category.href?.startsWith("http") ? (
                   <a
                     key={`cat-${cidx}`}
                     href={category.href}
-                    target={category.href?.startsWith("http") ? "_blank" : undefined}
-                    rel={category.href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
                     className={`block text-[13px] font-[500] !no-underline py-2.5 transition-colors ${isCategoryActive ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}
                   >
                     {category.title}
                   </a>
+                ) : (
+                  <Link
+                    key={`cat-${cidx}`}
+                    to={category.href || "#"}
+                    onClick={() => setOpen(false)}
+                    className={`block text-[13px] font-[500] !no-underline py-2.5 transition-colors ${isCategoryActive ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}
+                  >
+                    {category.title}
+                  </Link>
                 );
               })}
             </div>
@@ -167,13 +185,13 @@ export default function MobileMenu() {
           {/* Header with logo */}
           <div className="p-0 text-center pb-5 mb-0">
             <div className="text-xl font-bold flex items-center justify-center">
-              <a href="#hero" onClick={() => setOpen(false)} className="block">
+              <Link to="/" onClick={() => setOpen(false)} className="block">
                 <img
                   src="/arccilogoWithText.png"
                   alt="AECCI"
                   className="h-[90px] w-auto object-contain"
                 />
-              </a>
+              </Link>
             </div>
           </div>
 

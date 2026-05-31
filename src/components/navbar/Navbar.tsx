@@ -2,7 +2,7 @@ import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { User } from "@phosphor-icons/react";
 import { AuthDialog } from "@/components/auth-dialogs";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { menuConfig } from "./menu-config";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
@@ -82,8 +82,8 @@ export default function Navbar() {
           ].join(" ")}
         >
           <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-center px-6">
-            <a
-              href="#hero"
+            <Link
+              to="/"
               onClick={handleClose}
               className="flex items-center gap-3 group no-underline"
               aria-label="AECCI Home"
@@ -93,7 +93,7 @@ export default function Navbar() {
                 alt="AECCI"
                 className="h-[58px] w-auto object-contain "
               />
-            </a>
+            </Link>
           </div>
         </motion.div>
 
@@ -118,13 +118,13 @@ export default function Navbar() {
 
             {/* Mobile: Logo center */}
             <div className="flex md:hidden items-center justify-center w-1/3">
-              <a href="#hero" onClick={handleClose} className="group">
+              <Link to="/" onClick={handleClose} className="group">
                 <img
                   src="/aecci-logoonly.png"
                   alt="AECCI"
                   className="h-[34px] w-auto object-contain"
                 />
-              </a>
+              </Link>
             </div>
 
             {/* Mobile: User icon right */}
@@ -151,9 +151,9 @@ export default function Navbar() {
                 const isActivePath = location.pathname.startsWith(item.href);
 
                 return (
-                  <a
+                  <Link
                     key={idx}
-                    href={item.href}
+                    to={item.href}
                     onMouseEnter={() => handleMouseEnter(item.title)}
                     onMouseLeave={handleMouseLeave}
                     onClick={handleClose}
@@ -172,7 +172,7 @@ export default function Navbar() {
                     ].join(" ")}
                   >
                     {item.title}
-                  </a>
+                  </Link>
                 );
               })}
             </nav>
