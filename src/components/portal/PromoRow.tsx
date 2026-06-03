@@ -17,7 +17,7 @@ export default function PromoRow() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center gap-6"
           >
-            <div className="w-full rounded-2xl overflow-hidden border border-border/80 shadow-md hover:shadow-xl hover:border-primary/45 transition-all duration-300 group cursor-pointer bg-[#00703C]">
+            <div className="w-full rounded-2xl overflow-hidden border border-border/80 shadow-md hover:shadow-xl hover:border-primary/45 transition-all duration-300 group cursor-pointer bg-primary">
               <img 
                 src={advertiseImg} 
                 alt="Advertise With Us" 
@@ -41,7 +41,7 @@ export default function PromoRow() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex flex-col items-center gap-6"
           >
-            <div className="w-full rounded-2xl overflow-hidden border border-border/80 shadow-md hover:shadow-xl hover:border-primary/45 transition-all duration-300 group cursor-pointer bg-[#00703C]">
+            <div className="w-full rounded-2xl overflow-hidden border border-border/80 shadow-md hover:shadow-xl hover:border-primary/45 transition-all duration-300 group cursor-pointer bg-primary">
               <img 
                 src={viewpointImg} 
                 alt="AECCI Viewpoint" 

@@ -160,14 +160,14 @@ export default function Navbar() {
                     className={[
                       "cursor-pointer select-none no-underline",
                       "px-[11px] py-2",
-                      "text-[12.5px] font-[400] tracking-wide",
+                      "text-[12.5px] font-[600] tracking-wide",
                       "transition-all duration-200",
                       isAnyOpen
                         ? activeSection === item.title
                           ? "text-primary opacity-100"
                           : "text-foreground opacity-30 hover:opacity-60"
                         : isActivePath
-                        ? "text-primary opacity-100 font-medium"
+                        ? "text-primary opacity-100 font-bold"
                         : "text-foreground opacity-75 hover:text-primary hover:opacity-100",
                     ].join(" ")}
                   >

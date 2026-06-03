@@ -10,6 +10,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: monospace;
   --background: oklch(0.99 0 0);
   --foreground: oklch(0.35 0.02 165.48);
   --card: oklch(1.00 0 0);
@@ -95,12 +98,31 @@
   --shadow-2xl: 0px 1px 2px 0px oklch(0 0 0 / 0.03);
 }
 
+/* Custom Themes */
+@import "./styles/themes/emerald.css";
+@import "./styles/themes/witch-rave.css";
+@import "./styles/themes/slack.css";
+@import "./styles/themes/clean-state.css";
+@import "./styles/themes/nature.css";
+@import "./styles/themes/claude.css";
+@import "./styles/themes/neobrutualism.css";
+@import "./styles/themes/supabase.css";
+@import "./styles/themes/vercel.css";
+@import "./styles/themes/mono.css";
+@import "./styles/themes/notebook.css";
+@import "./styles/themes/light-green.css";
+@import "./styles/themes/zen.css";
+@import "./styles/themes/astro-vista.css";
+@import "./styles/themes/whatsapp.css";
+
 @theme inline {
-  --font-heading: 'Poppins', sans-serif;
-  --font-sans: 'Poppins', sans-serif;
-  --font-lato: 'Poppins', sans-serif;
-  --font-merriweather: var(--font-merriweather);
-  --font-roboto-mono: var(--font-roboto-mono);
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+  --font-lato: var(--font-sans);
+  --font-merriweather: var(--font-serif);
+  --font-roboto-mono: var(--font-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -165,9 +187,9 @@
   }
 
   :root {
-    --font-heading: 'Poppins', sans-serif;
-    --font-body: 'Poppins', sans-serif;
-    --font-mono: var(--font-roboto-mono);
+    --font-heading: var(--font-sans);
+    --font-body: var(--font-sans);
+    --font-mono: var(--font-mono);
   }
 
   h1 {

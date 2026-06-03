@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { ArrowUpRight } from "@phosphor-icons/react"
+import { Card } from "@/components/ui/card"
 import collaborationImg from "@/assets/networking/international-collaboration.png"
 import calendarImg from "@/assets/networking/calendar-february.png"
 import exhibitionsImg from "@/assets/networking/worldwide-exhibitions.png"
@@ -66,48 +67,50 @@ export default function NetworkingSection() {
                     e.preventDefault();
                   }
                 }}
-                className={`group relative rounded-3xl border border-border/80 bg-card overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/45 transition-all duration-300 flex flex-col justify-between ${
+                className={`group relative flex flex-col justify-between ${
                   item.isClickable ? "cursor-pointer" : "cursor-default"
                 }`}
               >
-                {/* Image Container with square aspect ratio */}
-                <div className="relative overflow-hidden aspect-square w-full bg-white flex items-center justify-center p-6 border-b border-border/40">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className={`w-full h-full object-contain transition-transform duration-700 ${
-                      item.isClickable ? "group-hover:scale-[1.03]" : ""
-                    }`}
-                  />
-                  
-                  {/* Hover overlay for clickable items */}
-                  {item.isClickable && (
-                    <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
-                        <ArrowUpRight className="size-6" />
+                <Card className="flex flex-col flex-1 h-full w-full overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/45 transition-all duration-300 rounded-3xl">
+                  {/* Image Container with square aspect ratio */}
+                  <div className="relative overflow-hidden aspect-square w-full bg-white flex items-center justify-center p-6 border-b border-border/40">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className={`w-full h-full object-contain transition-transform duration-700 ${
+                        item.isClickable ? "group-hover:scale-[1.03]" : ""
+                      }`}
+                    />
+                    
+                    {/* Hover overlay for clickable items */}
+                    {item.isClickable && (
+                      <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
+                          <ArrowUpRight className="size-6" />
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Caption Content */}
-                <div className="p-6 flex flex-col text-left justify-between flex-1 bg-card">
-                  <div>
-                    <h3 className="font-heading font-black text-base text-foreground group-hover:text-primary transition-colors mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                      {item.desc}
-                    </p>
+                    )}
                   </div>
                   
-                  {item.isClickable && (
-                    <div className="mt-4 flex items-center gap-1 text-primary text-xs font-bold font-heading uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-                      <span>Access Portal</span>
-                      <ArrowUpRight className="size-3.5" />
+                  {/* Caption Content */}
+                  <div className="p-6 flex flex-col text-left justify-between flex-1 bg-card">
+                    <div>
+                      <h3 className="font-heading font-black text-base text-foreground group-hover:text-primary transition-colors mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
-                  )}
-                </div>
+                    
+                    {item.isClickable && (
+                      <div className="mt-4 flex items-center gap-1 text-primary text-xs font-bold font-heading uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                        <span>Access Portal</span>
+                        <ArrowUpRight className="size-3.5" />
+                      </div>
+                    )}
+                  </div>
+                </Card>
               </motion.a>
             )
           })}

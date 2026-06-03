@@ -6,6 +6,7 @@ import {
   InstagramLogo,
 } from "@phosphor-icons/react"
 import { Link } from "react-router-dom"
+import { ThemeSelector } from "@/components/themes/theme-selector"
 
 const footerSections = [
   {
@@ -66,7 +67,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-border bg-[#f7f7f7] text-[#1f2937] dark:bg-[#111111] dark:text-white">
+    <footer className="relative overflow-hidden border-t border-border bg-card text-card-foreground">
 
       {/* subtle texture */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.04] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:18px_18px]" />
@@ -83,7 +84,7 @@ export default function Footer() {
               <img src="/arccilogoWithText.png" alt="AECCI" className="h-24 mx-auto w-auto object-contain" />
             </Link>
 
-            <h3 className="mt-4 text-[16px] font-extrabold uppercase tracking-tight text-[#0f5132] dark:text-primary">
+            <h3 className="mt-4 text-[16px] font-extrabold uppercase tracking-tight text-primary">
               Come Grow With Us!
             </h3>
 
@@ -120,7 +121,7 @@ export default function Footer() {
                 {section.title === "Contact Us" && (
                   <div className="mt-6">
 
-                    <h5 className="mb-3 text-[16px] font-bold tracking-tight text-[#0f5132] dark:text-primary">
+                    <h5 className="mb-3 text-[16px] font-bold tracking-tight text-primary">
                       Stay Connected:
                     </h5>
 
@@ -159,12 +160,15 @@ export default function Footer() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
 
           {/* Left */}
-          <p className="text-[13px] text-muted-foreground">
-            Copyright © {new Date().getFullYear()}{" "}
-            <span className="font-semibold text-foreground">
-              Asian Exporters' Chamber of Commerce and Industry
-            </span>
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <p className="text-[13px] text-muted-foreground">
+              Copyright © {new Date().getFullYear()}{" "}
+              <span className="font-semibold text-foreground">
+                Asian Exporters' Chamber of Commerce and Industry
+              </span>
+            </p>
+            <ThemeSelector />
+          </div>
 
           {/* Right */}
           <div className="flex flex-col items-start gap-2 md:items-end">
