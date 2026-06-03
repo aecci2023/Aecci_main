@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { List, CaretDown } from "@phosphor-icons/react";
-import { AuthDialog } from "@/components/auth-dialogs";
+
 import { menuConfig, type MenuCategory, type MegaMenuSection, type SubMenuItem } from "./menu-config";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -216,18 +216,22 @@ export default function MobileMenu() {
         <div className="shrink-0 px-5 py-4 border-t border-black/[0.06] dark:border-white/[0.06] space-y-3 bg-background">
           {/* Auth buttons */}
           <div className="flex flex-col gap-2.5">
-            <AuthDialog
-              triggerText="Member Login"
-              defaultTab="login"
-              variant="outline"
-              className="w-full h-10 text-[13px] font-medium border-black/[0.1] dark:border-white/[0.1]"
-            />
-            <AuthDialog
-              triggerText="Become a Member"
-              defaultTab="register"
-              variant="default"
-              className="w-full h-10 text-[13px] font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full"
-            />
+            <a
+              href="https://e-platform.aecci.org.in/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full h-10 inline-flex items-center justify-center text-[13px] font-medium border border-black/[0.1] dark:border-white/[0.1] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] rounded-full transition-all duration-200"
+            >
+              Member Login
+            </a>
+            <a
+              href="https://e-platform.aecci.org.in/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full h-10 inline-flex items-center justify-center text-[13px] font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full transition-all duration-200"
+            >
+              Become a Member
+            </a>
           </div>
 
           <p className="text-center text-[8px] uppercase tracking-[2px] font-medium text-foreground/25">

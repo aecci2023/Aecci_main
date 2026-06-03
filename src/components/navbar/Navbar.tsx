@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { User } from "@phosphor-icons/react";
-import { AuthDialog } from "@/components/auth-dialogs";
+
 import { useLocation, Link } from "react-router-dom";
 import { menuConfig } from "./menu-config";
 import MegaMenu from "./MegaMenu";
@@ -129,17 +129,19 @@ export default function Navbar() {
 
             {/* Mobile: User icon right */}
             <div className="flex md:hidden items-center justify-end w-1/3">
-              <AuthDialog
-                triggerText={<User className="size-[18px]" />}
-                defaultTab="login"
-                variant="ghost"
+              <a
+                href="https://e-platform.aecci.org.in/login"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={[
                   "flex size-9 items-center justify-center rounded-full p-0",
                   "bg-black/[0.04] dark:bg-white/[0.06]",
                   "border border-black/[0.08] dark:border-white/[0.08]",
                   "text-foreground hover:text-primary transition-all duration-200",
                 ].join(" ")}
-              />
+              >
+                <User className="size-[18px]" />
+              </a>
             </div>
 
             {/* Desktop: Nav links centered */}
@@ -188,19 +190,23 @@ export default function Navbar() {
 
 
               {/* Auth */}
-              <AuthDialog
-                triggerText="Member Login"
-                defaultTab="login"
-                variant="ghost"
-                className="h-8 px-3 text-[12px] font-[400] text-foreground/65 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
-              />
+              <a
+                href="https://e-platform.aecci.org.in/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-8 px-3 text-[12px] font-[400] text-foreground/65 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
+              >
+                Member Login
+              </a>
 
-              <AuthDialog
-                triggerText="Become Member"
-                defaultTab="register"
-                variant="default"
-                className="h-8 px-4 text-[12px] font-[500] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
-              />
+              <a
+                href="https://e-platform.aecci.org.in/register"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-8 px-4 text-[12px] font-[500] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
+              >
+                Become Member
+              </a>
             </div>
 
           </div>

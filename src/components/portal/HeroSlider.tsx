@@ -120,7 +120,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
             animate={isActive ? "visible" : "hidden"}
             variants={contentVariants}
             custom={0.1}
-            className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-white tracking-tight mb-6"
+            className="font-heading font-black text-3xl sm:text-5xl lg:text-6xl leading-[1.1] text-white tracking-tight mb-6"
           >
             {slide.heading}
             <br />
@@ -167,7 +167,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
         </div>
 
         {/* Right Column: Interactive Slide Visuals */}
-        <div className="flex justify-center items-center">
+        <div className="hidden md:flex justify-center items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}

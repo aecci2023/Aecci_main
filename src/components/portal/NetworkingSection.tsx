@@ -34,11 +34,11 @@ const networkingItems = [
 
 export default function NetworkingSection() {
   return (
-    <section id="networking-portals" className="py-20 bg-card/10 border-b border-border overflow-hidden">
+    <section id="networking-portals" className="py-10 md:py-20 bg-card/10 border-b border-border overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
             AECCI CONNECT
           </span>
@@ -52,7 +52,7 @@ export default function NetworkingSection() {
         </div>
 
         {/* 3-Column Grid Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
           {networkingItems.map((item, idx) => {
             return (
               <motion.a

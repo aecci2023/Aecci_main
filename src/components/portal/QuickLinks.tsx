@@ -64,13 +64,13 @@ export default function QuickLinks() {
   }
 
   return (
-    <section id="quick-links" className="py-24 bg-card/15 border-y border-border backdrop-blur-md relative overflow-hidden">
+    <section id="quick-links" className="py-12 md:py-24 bg-card/15 border-y border-border backdrop-blur-md relative overflow-hidden">
       {/* Decorative subtle background highlights */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,var(--primary-foreground)/4,transparent_25%)] pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
             E-SERVICES & PORTALS
           </span>
@@ -88,7 +88,7 @@ export default function QuickLinks() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           {QUICK_LINKS.map((link) => (
             <motion.a

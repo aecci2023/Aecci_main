@@ -60,5 +60,29 @@ export const THEMES = [
   {
     name: 'WhatsApp',
     value: 'whatsapp'
+  },
+  {
+    name: 'Northern Lights',
+    value: 'northern-lights'
+  },
+  {
+    name: 'Fork of Ocean Breeze',
+    value: 'fork-ocean-breeze'
+  },
+  {
+    name: 'Mist Green 9000',
+    value: 'mist-green-9000'
+  },
+  {
+    name: 'Starbucks',
+    value: 'starbucks'
+  },
+  {
+    name: 'Netflix',
+    value: 'netflix'
+  },
+  {
+    name: 'Neon Void',
+    value: 'neon-void'
   }
 ];

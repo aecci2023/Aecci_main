@@ -5,7 +5,7 @@ export default function ArbitrationHero() {
   return (
     <section 
       id="arbitration-hero-banner" 
-      className="relative min-h-[520px] flex items-center justify-center overflow-hidden bg-cover bg-center py-28 border-b border-border"
+      className="relative min-h-[400px] md:min-h-[520px] flex items-center justify-center overflow-hidden bg-cover bg-center py-14 md:py-28 border-b border-border"
       style={{
         backgroundImage: "url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1600')"
       }}
@@ -28,7 +28,7 @@ export default function ArbitrationHero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground text-xs font-bold px-4.5 py-1.5 rounded-full border border-primary/30 mb-8 tracking-wide uppercase shadow-inner"
+          className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground text-xs font-bold px-4.5 py-1.5 rounded-full border border-primary/30 mb-4 md:mb-8 tracking-wide uppercase shadow-inner"
         >
           <ShieldCheck className="size-4 text-primary animate-pulse" />
           <span>ICCA Registered Directory</span>
@@ -40,7 +40,7 @@ export default function ArbitrationHero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-heading font-black text-3xl sm:text-4xl md:text-5xl text-white leading-tight tracking-tight mb-6"
+          className="font-heading font-black text-3xl sm:text-4xl md:text-5xl text-white leading-tight tracking-tight mb-4 md:mb-6"
         >
           AECCI–International <br />
           <span className="bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
@@ -54,7 +54,7 @@ export default function ArbitrationHero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-body text-base md:text-lg text-slate-200 leading-relaxed mb-10 max-w-3xl"
+          className="font-body text-base md:text-lg text-slate-200 leading-relaxed mb-6 md:mb-10 max-w-3xl"
         >
           AECCI–International Arbitration Centre (AECCI-IAC), Navi Mumbai has been included in the Arbitral Institutes Directory of the International Council for Commercial Arbitration (ICCA), reflecting its growing international recognition.
         </motion.p>

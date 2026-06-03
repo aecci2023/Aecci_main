@@ -80,7 +80,7 @@ export default function NetworkingTestimonials() {
   }, [api])
 
   return (
-    <section id="testimonials-section" className="py-24 bg-card/25 border-b border-border overflow-hidden">
+    <section id="testimonials-section" className="py-12 md:py-24 bg-card/25 border-b border-border overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
 
         {/* Redesigned Heading Block */}
@@ -89,7 +89,7 @@ export default function NetworkingTestimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
             GLOBAL ENDORSEMENTS
@@ -171,7 +171,7 @@ export default function NetworkingTestimonials() {
             </CarouselContent>
 
             {/* Custom Carousel Arrows centered below the carousel */}
-            <div className="flex items-center justify-center gap-3 mt-10 z-20">
+            <div className="flex items-center justify-center gap-3 mt-6 md:mt-10 z-20">
               <CarouselPrevious className="static translate-y-0 size-10 bg-background hover:bg-primary hover:text-primary-foreground border-border/80 shadow-md transition-colors" />
               
               {/* Dot Indicators */}

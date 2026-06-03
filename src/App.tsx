@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <ActiveThemeProvider>
-      <div className="min-h-screen flex flex-col bg-background text-foreground font-body select-none transition-colors duration-300 relative">
+      <div className="min-h-screen flex flex-col bg-background text-foreground font-body transition-colors duration-300 relative">
         <Toaster position="top-right" richColors />
 
         {/* Atmospheric Theme Gradient Layer (Dark mode only) */}

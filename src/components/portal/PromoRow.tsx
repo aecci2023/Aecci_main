@@ -5,9 +5,9 @@ import viewpointImg from "@/assets/banners/aecci-viewpoint.png"
 
 export default function PromoRow() {
   return (
-    <section id="promo-banners" className="py-16 bg-background border-b border-border overflow-hidden">
+    <section id="promo-banners" className="py-10 md:py-16 bg-background border-b border-border overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
           
           {/* Column 1: Advertise With Us banner & Media Kit button */}
           <motion.div 

@@ -129,7 +129,7 @@ export function ScrollOverHero({
             const el = titleRef.current;
             if (!el) return;
             const titleBottom = TITLE_PT + el.offsetHeight;
-            if (titleBottom > window.innerHeight - MIN_PEEK) {
+            if (window.innerWidth < 768 || titleBottom > window.innerHeight - MIN_PEEK) {
                 setState((s) =>
                     s.mode === "stacked" ? s : { mode: "stacked", peek: 0 },
                 );
@@ -182,7 +182,7 @@ export function ScrollOverHero({
                             />
                         </div>
                     </motion.div>
-
+ 
                     {/* Rising media — higher z-index, so it overlaps the title. */}
                     <motion.div
                         style={{ y: mediaY, scale: mediaScale }}
@@ -193,7 +193,7 @@ export function ScrollOverHero({
                 </div>
             ) : (
                 // Stacked layout — reduced-motion, landscape/tiny viewports, no-JS.
-                <div className="py-20 md:py-28">
+                <div className="py-10 md:py-20">
                     <div ref={titleRef}>
                         <TitleStack
                             eyebrow={eyebrow}

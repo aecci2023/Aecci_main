@@ -94,13 +94,13 @@ const cardVariants: Variants = {
 
 export default function WingsGrid() {
   return (
-    <section id="wings-grid" className="py-20 bg-background relative overflow-hidden border-b border-border">
+    <section id="wings-grid" className="py-10 md:py-20 bg-background relative overflow-hidden border-b border-border">
       {/* Grid Pattern Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)/4_1px,transparent_1px),linear-gradient(to_bottom,var(--border)/4_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--primary-foreground)/5,transparent)] pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
             AECCI WINGS
           </span>

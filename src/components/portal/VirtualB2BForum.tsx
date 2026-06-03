@@ -1,12 +1,13 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Users, PresentationChart, ArrowRight } from "@phosphor-icons/react"
+import { CountUp } from "@/components/ui/count-up"
 
 export default function VirtualB2BForum() {
   return (
-    <section id="virtual-b2b" className="py-24 bg-card/5 border-t border-border overflow-hidden">
+    <section id="virtual-b2b" className="py-12 md:py-24 bg-card/5 border-t border-border overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -39,13 +40,17 @@ export default function VirtualB2BForum() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 pt-8 mt-8 border-t border-border/50">
+            <div className="grid grid-cols-2 gap-6 pt-6 mt-6 border-t border-border/50">
                 <div className="flex flex-col text-left">
-                    <span className="font-heading font-black text-3xl text-foreground">10,218+</span>
+                    <span className="font-heading font-black text-3xl text-foreground">
+                      <CountUp value={10218} suffix="+" />
+                    </span>
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Users Registered</span>
                 </div>
                 <div className="flex flex-col text-left">
-                    <span className="font-heading font-black text-3xl text-foreground">35+</span>
+                    <span className="font-heading font-black text-3xl text-foreground">
+                      <CountUp value={35} suffix="+" />
+                    </span>
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Countries Connected</span>
                 </div>
             </div>

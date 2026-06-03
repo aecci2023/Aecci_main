@@ -15,13 +15,13 @@ export default function MobileAppPromo() {
   }, [])
 
   return (
-    <section id="mobile-app" className="py-24 bg-card/25 border-b border-border relative overflow-hidden">
+    <section id="mobile-app" className="py-12 md:py-24 bg-card/25 border-b border-border relative overflow-hidden">
       {/* Decorative background gradients */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 items-center">
           
           {/* Left Column: Interactive Mobile Mockup Image */}
           <div className="lg:col-span-6 flex justify-center order-2 lg:order-1">
@@ -51,7 +51,7 @@ export default function MobileAppPromo() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-2 mb-6 shadow-sm"
+              className="inline-flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-2 mb-4 md:mb-6 shadow-sm"
             >
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>

@@ -28,11 +28,11 @@ const initiatives = [
 
 export default function ChamberDynamics() {
   return (
-    <section id="dynamics" className="py-20 bg-background border-b border-border overflow-hidden">
+    <section id="dynamics" className="py-10 md:py-20 bg-background border-b border-border overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
             AECCI INITIATIVES
           </span>
@@ -46,7 +46,7 @@ export default function ChamberDynamics() {
         </div>
 
         {/* Grid Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {initiatives.map((item, idx) => (
             <motion.div
               key={item.id}
