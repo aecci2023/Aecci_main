@@ -1,11 +1,8 @@
 import * as React from "react"
 import { motion } from "framer-motion"
 import {
-  ShieldCheck,
-  SealCheck,
   Globe,
   Buildings,
-  Gavel,
   ArrowRight,
 } from "@phosphor-icons/react"
 import {
@@ -20,56 +17,42 @@ import { cn } from "@/lib/utils"
 
 const slides = [
   {
-    id: "identity",
-    badge: { Icon: ShieldCheck, text: "ISO 9001:2015 Certified Chamber" },
-    heading: "Empowering Asian Exporters.",
-    highlight: "Connecting Global Trade.",
+    id: "services",
+    badge: { Icon: Buildings, text: "AECCI Services" },
+    heading: "Expert Consultations With Our Global",
+    highlight: "Business Partners",
     description:
-      "The Asian Exporters' Chamber of Commerce and Industry serves as the definitive gateway for modern enterprises — facilitating Certificate of Origin issuances, legal arbitration, and dynamic B2B international matchmaking.",
+      "AECCI Wings services includes Export Wing | Legal Wing | HR Support Wing | Professional Wing | Business Advice Wing | Women Wing | Event & Seminar Wing.",
     ctas: [
-      { label: "Explore B2B Directory", href: "#b2b-forum", primary: true },
-      { label: "Track CO Certificate", href: "#coo-tracker", primary: false },
+      { label: "Read More", href: "#", primary: true },
     ],
-    bgGradient: "from-primary/10 via-background to-secondary/15",
+    bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1600",
   },
   {
-    id: "b2b",
-    badge: { Icon: Globe, text: "39 International Collaborations" },
+    id: "b2b-intro",
+    badge: { Icon: Globe, text: "Virtual B2B Forum" },
     heading: "Virtual B2B Forum",
     highlight: "Connect. Trade. Succeed.",
     description:
-      "Create meaningful one-on-one connections between Indian businesses and international Trade & Law Expert collaborators from the UK, Vietnam, and 37 more partner nations.",
+      "The 'Virtual B2B Forum' provides a platform to create meaningful connections between Indian businesses and international Trade & Law Expert collaborators.",
     ctas: [
-      { label: "Register Now", href: "#b2b-forum", primary: true },
-      { label: "Learn More", href: "#b2b-forum", primary: false },
+      { label: "Register Now", href: "#", primary: true },
+      { label: "Learn More", href: "#", primary: false },
     ],
-    bgGradient: "from-sky-500/10 via-background to-primary/5",
+    bgImage: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600",
   },
   {
-    id: "services",
-    badge: { Icon: Buildings, text: "Expert Consultations" },
-    heading: "AECCI Services & Wings",
-    highlight: "Your Global Business Partner.",
+    id: "b2b-detailed",
+    badge: { Icon: Globe, text: "Virtual B2B Forum" },
+    heading: "Connect One-to-One With",
+    highlight: "UK & Vietnam Experts",
     description:
-      "Access a full spectrum of business support — export advisory, legal counsel, HR support, professional advisory, business advice, women entrepreneurship, and event facilitation.",
+      "Connect one-to-one this month with trade experts from the UK and Vietnam. Book slots to discuss trade potential and explore emerging markets.",
     ctas: [
-      { label: "Explore Services", href: "#services", primary: true },
-      { label: "Contact Us", href: "#contact", primary: false },
+      { label: "Register Now", href: "#", primary: true },
+      { label: "Learn More", href: "#", primary: false },
     ],
-    bgGradient: "from-emerald-500/10 via-background to-primary/10",
-  },
-  {
-    id: "arbitration",
-    badge: { Icon: Gavel, text: "ICCA Legally Approved Rules" },
-    heading: "International Arbitration",
-    highlight: "Dispute Resolution & Legal Panel.",
-    description:
-      "Resolve international trade disputes efficiently and legally. Our arbitration center follows internationally recognized rules to protect business interests.",
-    ctas: [
-      { label: "Learn More", href: "#arbitration", primary: true },
-      { label: "File a Case", href: "#arbitration", primary: false },
-    ],
-    bgGradient: "from-amber-500/10 via-background to-primary/5",
+    bgImage: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1600",
   },
 ] as const
 
@@ -94,17 +77,21 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
   return (
     <div
       className={cn(
-        "relative min-h-[640px] md:min-h-[700px] flex items-center overflow-hidden",
-        "bg-gradient-to-br",
-        slide.bgGradient
+        "relative min-h-[640px] md:min-h-[700px] flex items-center overflow-hidden bg-cover bg-center"
       )}
+      style={{
+        backgroundImage: `url(${slide.bgImage})`,
+      }}
     >
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply z-0" />
+
       {/* Decorative Blobs & Grids */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden z-10">
+        <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl opacity-40" />
+        <div className="absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl opacity-40" />
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03] text-white"
           style={{
             backgroundImage: "radial-gradient(circle, currentColor 1px, transparent 1px)",
             backgroundSize: "32px 32px",
@@ -112,7 +99,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1280px] w-full px-6 md:px-12 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="relative z-20 mx-auto max-w-[1280px] w-full px-6 md:px-12 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Left Column: Animated Text Content */}
         <div className="flex flex-col items-start text-left">
           {/* Badge */}
@@ -121,9 +108,9 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
             animate={isActive ? "visible" : "hidden"}
             variants={contentVariants}
             custom={0.0}
-            className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-full border border-primary/20 mb-6 tracking-wide"
+            className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full border border-primary/30 mb-6 tracking-wide"
           >
-            <BadgeIcon className="size-4" />
+            <BadgeIcon className="size-4 text-primary" />
             {slide.badge.text}
           </motion.div>
 
@@ -133,11 +120,11 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
             animate={isActive ? "visible" : "hidden"}
             variants={contentVariants}
             custom={0.1}
-            className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-foreground tracking-tight mb-6"
+            className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-white tracking-tight mb-6"
           >
             {slide.heading}
             <br />
-            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
               {slide.highlight}
             </span>
           </motion.h1>
@@ -148,7 +135,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
             animate={isActive ? "visible" : "hidden"}
             variants={contentVariants}
             custom={0.2}
-            className="font-body text-base md:text-lg text-muted-foreground mb-10 max-w-xl leading-relaxed"
+            className="font-body text-base md:text-lg text-slate-200 mb-10 max-w-xl leading-relaxed whitespace-pre-line"
           >
             {slide.description}
           </motion.p>
@@ -169,7 +156,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
                   "w-full sm:w-auto flex items-center justify-center text-sm font-bold px-8 h-12 rounded-full transition-all hover:-translate-y-px",
                   cta.primary
                     ? "bg-primary text-primary-foreground hover:bg-primary/95 shadow-lg shadow-primary/20"
-                    : "bg-muted/50 border border-border text-foreground hover:bg-muted"
+                    : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
                 )}
               >
                 {cta.label}
@@ -187,90 +174,30 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
             className="w-full flex justify-center"
           >
-            {slide.id === "identity" && (
-              <div className="relative">
-                <div className="rounded-3xl border border-border/80 bg-card/45 backdrop-blur-xl p-4 shadow-2xl relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-primary/5 opacity-60 pointer-events-none" />
-                  <img
-                    alt="Corporate Global Trade Network"
-                    className="w-full aspect-[4/3] sm:aspect-square object-cover rounded-2xl shadow-inner transition-transform duration-700 group-hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhvDo0RYoNFzMbetVCsvPC0xsxFAlFi0QGexdINMRc1Fcnx3nCacND0aUXuGbuAzji_1PocGQsaONFK5Dj64Pq5YTnCHZfiSL5IwnqNJZVDKK0CY4p2CM08N78A95qHCbE_TgEE9-u_fO6EBbUfj3nTqtG-P1kMczBrf2Ds6Q8jXm1KZvXY0I4W9RGUh_UwJ4RuQi5AsdAQFNF9VaE_Fg9cxlTo7R6aZB2w0P5Ou0ChHe7sokY3tADS1lrvIkKszB2vKc6tv0fQ17-"
-                  />
-                </div>
-
-                <div className="absolute -bottom-6 -left-6 bg-card/90 border border-border shadow-2xl p-5 rounded-2xl hidden lg:block backdrop-blur-md">
-                  <div className="flex items-center gap-3">
-                    <div className="flex size-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary">
-                      <SealCheck className="size-7" />
-                    </div>
-                    <div className="text-left">
-                      <p className="font-heading font-black text-foreground text-sm">International ICCA</p>
-                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-0.5">
-                        Legally Approved Rules
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {slide.id === "b2b" && (
-              <div className="rounded-3xl border border-border/80 bg-card/45 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
-                <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/10 via-transparent to-primary/5 opacity-60 pointer-events-none" />
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="flex size-14 items-center justify-center rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-500">
-                      <Globe className="size-8" />
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-bold text-foreground text-lg">Global Reach</h4>
-                      <p className="text-xs text-muted-foreground">Connecting UK, Vietnam & 37+ countries</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="p-4 rounded-xl bg-background/50 border border-border/60">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs font-semibold text-muted-foreground">Collaborations</span>
-                        <span className="text-xs font-bold text-sky-500">Active</span>
-                      </div>
-                      <p className="text-2xl font-black text-foreground">39 Partner Nations</p>
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-background/50 border border-border/60">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs font-semibold text-muted-foreground">
-                          B2B Matchmaking Meetings
-                        </span>
-                        <span className="text-xs font-bold text-primary">Live</span>
-                      </div>
-                      <p className="text-2xl font-black text-foreground">1-on-1 Consultations</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {slide.id === "services" && (
-              <div className="rounded-3xl border border-border/80 bg-card/45 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
+              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-primary/5 opacity-60 pointer-events-none" />
                 <div className="relative z-10">
-                  <h4 className="font-heading font-bold text-foreground text-lg mb-4">AECCI Service Wings</h4>
+                  <h4 className="font-heading font-bold text-white text-lg mb-4">AECCI Wings & Services</h4>
                   <div className="grid grid-cols-2 gap-3">
                     {[
                       { name: "Export Wing", desc: "COO & Logistics" },
                       { name: "Legal Wing", desc: "Arbitration & Advice" },
-                      { name: "HR Support", desc: "Talent & Compliance" },
+                      { name: "HR Support Wing", desc: "Talent & Compliance" },
                       { name: "Professional Wing", desc: "Business Advisory" },
-                      { name: "Women Entrepreneur", desc: "Support & Mentoring" },
-                      { name: "Events & Seminars", desc: "Expos & Networking" },
+                      { name: "Business Advice Wing", desc: "Expert Advisory" },
+                      { name: "Women Wing", desc: "Support & Mentorship" },
+                      { name: "Event & Seminar Wing", desc: "Expos & Networking" },
                     ].map((wing, idx) => (
                       <div
                         key={idx}
-                        className="p-3 rounded-xl bg-background/60 border border-border/40 hover:border-emerald-500/30 transition-colors"
+                        className={cn(
+                          "p-3 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-colors",
+                          idx === 6 ? "col-span-2 text-center" : ""
+                        )}
                       >
-                        <p className="text-xs font-bold text-foreground">{wing.name}</p>
-                        <p className="text-[10px] text-muted-foreground">{wing.desc}</p>
+                        <p className="text-xs font-bold text-white">{wing.name}</p>
+                        <p className="text-[10px] text-slate-300">{wing.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -278,34 +205,71 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
               </div>
             )}
 
-            {slide.id === "arbitration" && (
-              <div className="rounded-3xl border border-border/80 bg-card/45 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
+            {slide.id === "b2b-intro" && (
+              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
+                <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/10 via-transparent to-primary/5 opacity-60 pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="flex size-14 items-center justify-center rounded-2xl bg-sky-500/20 border border-sky-500/30 text-sky-400">
+                      <Globe className="size-8" />
+                    </div>
+                    <div>
+                      <h4 className="font-heading font-bold text-white text-lg">B2B Platform</h4>
+                      <p className="text-xs text-slate-300">Indian businesses & Global Experts</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-xl bg-black/30 border border-white/10">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs font-semibold text-slate-300">Collaborations</span>
+                        <span className="text-xs font-bold text-sky-400">Active</span>
+                      </div>
+                      <p className="text-2xl font-black text-white">39 International Partners</p>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-black/30 border border-white/10">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs font-semibold text-slate-300">Target Matchmaking</span>
+                        <span className="text-xs font-bold text-primary">Live Connection</span>
+                      </div>
+                      <p className="text-2xl font-black text-white">Expert Trade Collaborations</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {slide.id === "b2b-detailed" && (
+              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/10 via-transparent to-primary/5 opacity-60 pointer-events-none" />
                 <div className="relative z-10 text-center">
-                  <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 mb-4">
-                    <Gavel className="size-8" />
+                  <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 mb-4">
+                    <Globe className="size-8" />
                   </div>
-                  <h4 className="font-heading font-black text-foreground text-xl mb-1">Arbitration Center</h4>
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mb-6">
-                    ICCA Approved Rules
+                  <h4 className="font-heading font-black text-white text-xl mb-1">Featured Experts</h4>
+                  <p className="text-xs text-slate-300 uppercase tracking-widest font-semibold mb-6">
+                    This Month's Visitors
                   </p>
 
-                  <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/10 inline-block w-full">
-                    <p className="text-sm font-semibold text-foreground leading-relaxed">
-                      Providing legally binding dispute resolutions under standard global international trade regulations.
-                    </p>
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="p-4 rounded-2xl bg-black/30 border border-white/10">
+                      <p className="text-[10px] uppercase font-bold text-slate-400">From</p>
+                      <p className="text-lg font-black text-white">United Kingdom</p>
+                      <p className="text-[10px] text-amber-400 mt-1">Trade & Law Expert</p>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-black/30 border border-white/10">
+                      <p className="text-[10px] uppercase font-bold text-slate-400">From</p>
+                      <p className="text-lg font-black text-white">Vietnam</p>
+                      <p className="text-[10px] text-amber-400 mt-1">Market Analyst</p>
+                    </div>
                   </div>
 
-                  <div className="mt-6 flex justify-around text-left">
-                    <div>
-                      <p className="text-2xl font-black text-amber-500">100%</p>
-                      <p className="text-[10px] uppercase font-bold text-muted-foreground">Legally Binding</p>
-                    </div>
-                    <div className="border-r border-border h-10 my-auto" />
-                    <div>
-                      <p className="text-2xl font-black text-primary">Fast-track</p>
-                      <p className="text-[10px] uppercase font-bold text-muted-foreground">Dispute Handling</p>
-                    </div>
+                  <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-left">
+                    <p className="text-xs font-bold text-emerald-400 mb-1">✓ Limited Slots Available</p>
+                    <p className="text-[11px] text-slate-200">
+                      Discuss trade potential, explore emerging markets, and exchange business cards.
+                    </p>
                   </div>
                 </div>
               </div>

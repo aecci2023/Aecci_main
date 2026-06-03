@@ -1,24 +1,24 @@
-// import Hero from "@/components/portal/Hero"
 import HeroSlider from "@/components/portal/HeroSlider"
 import StatsStrip from "@/components/portal/StatsStrip"
-import WingsSection from "@/components/portal/WingsSection"
-import CooTracker from "@/components/portal/CooTracker"
-import Initiatives from "@/components/portal/Initiatives"
 import VirtualB2BForum from "@/components/portal/VirtualB2BForum"
 import QuickLinks from "@/components/portal/QuickLinks"
 import NetworkingTestimonials from "@/components/portal/NetworkingTestimonials"
-import ArbitrationCenter from "@/components/portal/ArbitrationCenter"
-import TradeNotices from "@/components/portal/TradeNotices"
 import { NotificationsTicker } from "@/components/notifications-ticker"
+import WingsGrid from "@/components/portal/WingsGrid"
+import MobileAppPromo from "@/components/portal/MobileAppPromo"
+import ChamberDynamics from "@/components/portal/ChamberDynamics"
+import NetworkingSection from "@/components/portal/NetworkingSection"
+import ArbitrationHero from "@/components/portal/ArbitrationHero"
+import PromoRow from "@/components/portal/PromoRow"
 import ScrollOverHero from "@/components/common/scroll-over-hero"
-import dashboardImg from "@/assets/dashboard.png"
+import dashboardImg from "@/assets/dashboard/dashboard.png"
 
 export default function Home() {
   return (
     <main>
       <HeroSlider />
-      {/* <Hero /> */}
       <NotificationsTicker />
+      <WingsGrid />
       <StatsStrip />
       <ScrollOverHero
         eyebrow={
@@ -50,7 +50,6 @@ export default function Home() {
           </>
         }
         media={
-          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={dashboardImg}
             alt="AECCI e-Platform Dashboard"
@@ -59,13 +58,13 @@ export default function Home() {
         }
       />
       <VirtualB2BForum />
-      <WingsSection />
-      <CooTracker />
+      <MobileAppPromo />
       <QuickLinks />
-      <Initiatives />
+      <ChamberDynamics />
+      <NetworkingSection />
       <NetworkingTestimonials />
-      <ArbitrationCenter />
-      <TradeNotices />
+      <ArbitrationHero />
+      <PromoRow />
     </main>
   )
 }
