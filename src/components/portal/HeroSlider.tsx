@@ -19,40 +19,27 @@ const slides = [
   {
     id: "services",
     badge: { Icon: Buildings, text: "AECCI Services" },
-    heading: "Expert Consultations With Our Global",
-    highlight: "Business Partners",
+    heading: "Empowering Indian Exporters",
+    highlight: "Worldwide",
     description:
-      "AECCI Wings services includes Export Wing | Legal Wing | HR Support Wing | Professional Wing | Business Advice Wing | Women Wing | Event & Seminar Wing.",
+      "We provide comprehensive assistance, trade facilitation, and professional guidance to help businesses navigate international markets and scale globally.",
     ctas: [
-      { label: "Read More", href: "#", primary: true },
+      { label: "Our Services", href: "/services", primary: true },
     ],
     bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1600",
   },
   {
-    id: "b2b-intro",
-    badge: { Icon: Globe, text: "Virtual B2B Forum" },
-    heading: "Virtual B2B Forum",
-    highlight: "Connect. Trade. Succeed.",
+    id: "e-platform",
+    badge: { Icon: Globe, text: "Digital E-Platform" },
+    heading: "Chamber Services, Digitized &",
+    highlight: "Accelerated",
     description:
-      "The 'Virtual B2B Forum' provides a platform to create meaningful connections between Indian businesses and international Trade & Law Expert collaborators.",
+      "Verify Certificates of Origin instantly, submit customs documents electronically, request trade recommendation letters, and manage membership online.",
     ctas: [
-      { label: "Register Now", href: "#", primary: true },
-      { label: "Learn More", href: "#", primary: false },
+      { label: "Members Login", href: "https://e-platform.aecci.org.in/login", primary: true },
+      { label: "Learn More", href: "/e-platform", primary: false },
     ],
     bgImage: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600",
-  },
-  {
-    id: "b2b-detailed",
-    badge: { Icon: Globe, text: "Virtual B2B Forum" },
-    heading: "Connect One-to-One With",
-    highlight: "UK & Vietnam Experts",
-    description:
-      "Connect one-to-one this month with trade experts from the UK and Vietnam. Book slots to discuss trade potential and explore emerging markets.",
-    ctas: [
-      { label: "Register Now", href: "#", primary: true },
-      { label: "Learn More", href: "#", primary: false },
-    ],
-    bgImage: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1600",
   },
 ] as const
 
@@ -178,26 +165,20 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
               <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-primary/5 opacity-60 pointer-events-none" />
                 <div className="relative z-10">
-                  <h4 className="font-heading font-bold text-white text-lg mb-4">AECCI Wings & Services</h4>
+                  <h4 className="font-heading font-bold text-white text-lg mb-4">Core Chamber Benefits</h4>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { name: "Export Wing", desc: "COO & Logistics" },
-                      { name: "Legal Wing", desc: "Arbitration & Advice" },
-                      { name: "HR Support Wing", desc: "Talent & Compliance" },
-                      { name: "Professional Wing", desc: "Business Advisory" },
-                      { name: "Business Advice Wing", desc: "Expert Advisory" },
-                      { name: "Women Wing", desc: "Support & Mentorship" },
-                      { name: "Event & Seminar Wing", desc: "Expos & Networking" },
-                    ].map((wing, idx) => (
+                      { name: "Trade Facilitation", desc: "Global export pathways" },
+                      { name: "Market Advisory", desc: "Expert economic studies" },
+                      { name: "Attestation Services", desc: "Swift custom compliance" },
+                      { name: "Business Network", desc: "Unlock cross-border trade" },
+                    ].map((benefit, idx) => (
                       <div
                         key={idx}
-                        className={cn(
-                          "p-3 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-colors",
-                          idx === 6 ? "col-span-2 text-center" : ""
-                        )}
+                        className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-colors"
                       >
-                        <p className="text-xs font-bold text-white">{wing.name}</p>
-                        <p className="text-[10px] text-slate-300">{wing.desc}</p>
+                        <p className="text-xs font-bold text-white">{benefit.name}</p>
+                        <p className="text-[10px] text-slate-300">{benefit.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -205,7 +186,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
               </div>
             )}
 
-            {slide.id === "b2b-intro" && (
+            {slide.id === "e-platform" && (
               <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/10 via-transparent to-primary/5 opacity-60 pointer-events-none" />
                 <div className="relative z-10">
@@ -214,62 +195,27 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
                       <Globe className="size-8" />
                     </div>
                     <div>
-                      <h4 className="font-heading font-bold text-white text-lg">B2B Platform</h4>
-                      <p className="text-xs text-slate-300">Indian businesses & Global Experts</p>
+                      <h4 className="font-heading font-bold text-white text-lg">E-Platform</h4>
+                      <p className="text-xs text-slate-300">Digitized & Accelerated</p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <div className="p-4 rounded-xl bg-black/30 border border-white/10">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs font-semibold text-slate-300">Collaborations</span>
-                        <span className="text-xs font-bold text-sky-400">Active</span>
+                        <span className="text-xs font-semibold text-slate-300">Certificate of Origin</span>
+                        <span className="text-xs font-bold text-sky-400">Instant</span>
                       </div>
-                      <p className="text-2xl font-black text-white">39 International Partners</p>
+                      <p className="text-2xl font-black text-white">Digital Attestation</p>
                     </div>
 
                     <div className="p-4 rounded-xl bg-black/30 border border-white/10">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs font-semibold text-slate-300">Target Matchmaking</span>
-                        <span className="text-xs font-bold text-primary">Live Connection</span>
+                        <span className="text-xs font-semibold text-slate-300">Verification</span>
+                        <span className="text-xs font-bold text-primary">Secure Portal</span>
                       </div>
-                      <p className="text-2xl font-black text-white">Expert Trade Collaborations</p>
+                      <p className="text-2xl font-black text-white">Online Validation</p>
                     </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {slide.id === "b2b-detailed" && (
-              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
-                <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/10 via-transparent to-primary/5 opacity-60 pointer-events-none" />
-                <div className="relative z-10 text-center">
-                  <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 mb-4">
-                    <Globe className="size-8" />
-                  </div>
-                  <h4 className="font-heading font-black text-white text-xl mb-1">Featured Experts</h4>
-                  <p className="text-xs text-slate-300 uppercase tracking-widest font-semibold mb-6">
-                    This Month's Visitors
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="p-4 rounded-2xl bg-black/30 border border-white/10">
-                      <p className="text-[10px] uppercase font-bold text-slate-400">From</p>
-                      <p className="text-lg font-black text-white">United Kingdom</p>
-                      <p className="text-[10px] text-amber-400 mt-1">Trade & Law Expert</p>
-                    </div>
-                    <div className="p-4 rounded-2xl bg-black/30 border border-white/10">
-                      <p className="text-[10px] uppercase font-bold text-slate-400">From</p>
-                      <p className="text-lg font-black text-white">Vietnam</p>
-                      <p className="text-[10px] text-amber-400 mt-1">Market Analyst</p>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-left">
-                    <p className="text-xs font-bold text-emerald-400 mb-1">✓ Limited Slots Available</p>
-                    <p className="text-[11px] text-slate-200">
-                      Discuss trade potential, explore emerging markets, and exchange business cards.
-                    </p>
                   </div>
                 </div>
               </div>

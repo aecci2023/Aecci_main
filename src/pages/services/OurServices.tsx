@@ -5,27 +5,6 @@ import { Link } from "react-router-dom"
 export default function OurServices() {
   const services = [
     {
-      title: "The Wings",
-      desc: "AECCI wings are the separate divisions headed by the expert professionals to guide and motivate the business community with their day to day issues.",
-      img: "https://www.aecci.org.in/wp-content/uploads/2020/11/the-wimg-1.jpg",
-      href: "/services/the-wings",
-      btnText: "THE WINGS"
-    },
-    {
-      title: "Entrepreneur Hub",
-      desc: "To encourage entrepreneurship, to kick-start innovative businesses that will eventually create employment opportunities, the government of India offers innumerable schemes to make the process easy.",
-      img: "https://www.aecci.org.in/wp-content/uploads/2020/11/enterp.jpg",
-      href: "/services/entrepreneur-hub",
-      btnText: "ENTREPRENEURSHIP HUB"
-    },
-    {
-      title: "B2B Connect",
-      desc: "Access to a continuously evolving extensive network of business opportunities and gain a deep understanding of the challenges and rewards of entrepreneurship.",
-      img: "https://www.aecci.org.in/wp-content/uploads/2020/11/b2b.jpg",
-      href: "/services/b2b-connect",
-      btnText: "B2B CONNECT"
-    },
-    {
       title: "Membership",
       desc: "Membership with AECCI allows you to enjoy exclusive and wide range of support and benefits for getting ahead in business. We're here to help you with everything from raising awareness of your brand, creating new business opportunities and building your network and making you successfully reach to international markets.",
       img: "https://www.aecci.org.in/wp-content/uploads/2020/12/membership.jpg",

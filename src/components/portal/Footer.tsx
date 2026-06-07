@@ -27,9 +27,6 @@ const footerSections = [
   {
     title: "Our Services",
     links: [
-      { label: "The Wings", href: "/services/the-wings" },
-      { label: "Entrepreneur Hub", href: "/services/entrepreneur-hub" },
-      { label: "B2B Connect", href: "/services/b2b-connect" },
       { label: "Membership", href: "/services/membership" },
       { label: "AECCI Affiliate Program", href: "/aecci-affiliate-program" },
       { label: "Arbitration Center", href: "/arbitration-center" },
@@ -43,7 +40,6 @@ const footerSections = [
       { label: "Media", href: "/media" },
       { label: "Events", href: "/events" },
       { label: "e-Platform", href: "/e-platform" },
-      { label: "AECCI-TAC", href: "/trade-assistant-centre" },
     ],
   },
 

@@ -90,43 +90,6 @@ export const menuConfig: MegaMenuSection[] = [
     hasDropdown: true,
     featured: [
       {
-        title: "The Wings",
-        href: "/services/the-wings",
-        description: "Specialized departments driving targeted growth and compliance.",
-        badge: "Departments",
-        items: [
-          { title: "Exports Wing", href: "/services/the-wings/exports-wing" },
-          { title: "Legal Wing", href: "/services/the-wings/legal-wing" },
-          { title: "HR Support Wing", href: "/services/the-wings/hr-support-wing" },
-          { title: "Professional Wing", href: "/services/the-wings/professional-wing" },
-          { title: "Business Advice Wing", href: "/services/the-wings/business-advice-wing" },
-          { title: "Women Wing", href: "/services/the-wings/women-wing" },
-          { title: "Event and Seminar Wing", href: "/services/the-wings/event-and-seminar-wing" },
-        ],
-      },
-      {
-        title: "Entrepreneur Hub",
-        href: "/services/entrepreneur-hub",
-        description: "Empowering startups with cross-border trade knowledge and support.",
-        badge: "Startup",
-        items: [
-          { title: "Startup India", href: "/services/entrepreneur-hub/startup-india" },
-          { title: "Investment India", href: "/services/entrepreneur-hub/investment-india" },
-          { title: "Make in India", href: "/services/entrepreneur-hub/make-in-india" },
-        ],
-      },
-      {
-        title: "B2B Forum",
-        href: "/services/b2b-forum",
-        description: "Global business matchmaking platform connecting buyers and suppliers.",
-        items: [
-          { title: "Consultations", href: "/services/b2b-forum/consultations" },
-          { title: "Business Matches", href: "/services/b2b-forum/business-matches" },
-          { title: "Market Studies", href: "/services/b2b-forum/market-studies" },
-          { title: "Virtual B2B Forum", href: "/services/b2b-forum/virtual-b2b-forum" },
-        ],
-      },
-      {
         title: "Membership",
         href: "/services/membership",
         description: "Exclusive access to premium tools, discounts, and trade networks.",
@@ -151,38 +114,6 @@ export const menuConfig: MegaMenuSection[] = [
     ],
     resources: [], // Moved the wings here before, now they are in featured -> items
     mobileMenu: [
-      {
-        title: "The Wings",
-        href: "/services/the-wings",
-        items: [
-          { title: "Exports Wing", href: "/services/the-wings/exports-wing" },
-          { title: "Legal Wing", href: "/services/the-wings/legal-wing" },
-          { title: "HR Support Wing", href: "/services/the-wings/hr-support-wing" },
-          { title: "Professional Wing", href: "/services/the-wings/professional-wing" },
-          { title: "Business Advice Wing", href: "/services/the-wings/business-advice-wing" },
-          { title: "Women Wing", href: "/services/the-wings/women-wing" },
-          { title: "Event and Seminar Wing", href: "/services/the-wings/event-and-seminar-wing" },
-        ],
-      },
-      {
-        title: "Entrepreneur Hub",
-        href: "/services/entrepreneur-hub",
-        items: [
-          { title: "Startup India", href: "/services/entrepreneur-hub/startup-india" },
-          { title: "Investment India", href: "/services/entrepreneur-hub/investment-india" },
-          { title: "Make in India", href: "/services/entrepreneur-hub/make-in-india" },
-        ],
-      },
-      {
-        title: "B2B Forum",
-        href: "/services/b2b-forum",
-        items: [
-          { title: "Consultations", href: "/services/b2b-forum/consultations" },
-          { title: "Business Matches", href: "/services/b2b-forum/business-matches" },
-          { title: "Market Studies", href: "/services/b2b-forum/market-studies" },
-          { title: "Virtual B2B Forum", href: "/services/b2b-forum/virtual-b2b-forum" },
-        ],
-      },
       {
         title: "Membership",
         href: "/services/membership",
@@ -305,11 +236,6 @@ export const menuConfig: MegaMenuSection[] = [
         href: "/media/publications",
         description: "A curated repository of export handbooks, manuals, and templates.",
       },
-      {
-        title: "Daily Viewpoint",
-        href: "/media/daily-viewpoint",
-        description: "Direct updates on custom policies, tariffs, and trade mandates.",
-      },
     ],
     quickLinks: [
       { title: "e-Newsletters", href: "/media/e-newsletters" },
@@ -318,7 +244,6 @@ export const menuConfig: MegaMenuSection[] = [
     mobileMenu: [
       { title: "e-Newsletters", href: "/media/e-newsletters" },
       { title: "Media Center", href: "/media/media-center" },
-      { title: "Daily Viewpoint", href: "/media/daily-viewpoint" },
       { title: "Gallery", href: "/media/gallery" },
       { title: "Publications", href: "/media/publications" },
     ]
@@ -412,31 +337,6 @@ export const menuConfig: MegaMenuSection[] = [
         ],
       },
       { title: "Document Verification", href: "/e-platform/document-verification" },
-    ]
-  },
-  {
-    title: "AECCI – TAC",
-    href: "/aecci-tac",
-    hasDropdown: true,
-    featured: [
-      {
-        title: "About TAC",
-        href: "/aecci-tac/about",
-        description: "The primary hub for attestation and certification services.",
-      },
-      {
-        title: "TAC Operational Guide",
-        href: "/aecci-tac/operational-guide",
-        description: "Step-by-step procedures for seamless document attestation.",
-      },
-    ],
-    quickLinks: [
-      { title: "TAC Location", href: "/aecci-tac/location" },
-    ],
-    mobileMenu: [
-      { title: "About TAC", href: "/aecci-tac/about" },
-      { title: "TAC Operational Guide", href: "/aecci-tac/operational-guide" },
-      { title: "TAC Location", href: "/aecci-tac/location" },
     ]
   },
   {

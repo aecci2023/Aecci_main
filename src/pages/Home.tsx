@@ -1,10 +1,7 @@
 import HeroSlider from "@/components/portal/HeroSlider"
 import StatsStrip from "@/components/portal/StatsStrip"
-import VirtualB2BForum from "@/components/portal/VirtualB2BForum"
-import QuickLinks from "@/components/portal/QuickLinks"
 import NetworkingTestimonials from "@/components/portal/NetworkingTestimonials"
 import { NotificationsTicker } from "@/components/notifications-ticker"
-import WingsGrid from "@/components/portal/WingsGrid"
 import MobileAppPromo from "@/components/portal/MobileAppPromo"
 import ChamberDynamics from "@/components/portal/ChamberDynamics"
 import NetworkingSection from "@/components/portal/NetworkingSection"
@@ -12,13 +9,13 @@ import ArbitrationHero from "@/components/portal/ArbitrationHero"
 import PromoRow from "@/components/portal/PromoRow"
 import ScrollOverHero from "@/components/common/scroll-over-hero"
 import dashboardImg from "@/assets/dashboard/dashboard.png"
+import PublicationsSection from "@/components/portal/PublicationsSection"
 
 export default function Home() {
   return (
     <main>
       <HeroSlider />
       <NotificationsTicker />
-      <WingsGrid />
       <StatsStrip />
       <ScrollOverHero
         eyebrow={
@@ -57,10 +54,9 @@ export default function Home() {
           />
         }
       />
-      <VirtualB2BForum />
       <MobileAppPromo />
-      <QuickLinks />
       <ChamberDynamics />
+      <PublicationsSection />
       <NetworkingSection />
       <NetworkingTestimonials />
       <ArbitrationHero />
