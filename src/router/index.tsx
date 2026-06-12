@@ -1,12 +1,122 @@
 import type { RouteObject } from "react-router-dom";
 import Home from "@/pages/Home";
 import { NotFound } from "@/pages/not-found";
-
-
+import SignupPage from "@/pages/signup";
+import { AuthenticatedLayout } from "@/components/layout/authenticated-layout";
+import DashboardPage from "@/pages/dashboard";
+import IntelligencePage from "@/pages/dashboard/intelligence";
+import PartnerBriefPage from "@/pages/dashboard/partner-brief";
+import SubmitQuestionsPage from "@/pages/dashboard/submit-questions";
+import WaitingRoomPage from "@/pages/dashboard/waiting-room";
+import LiveDealRoomPage from "@/pages/dashboard/live-deal-room";
+import SessionSummaryPage from "@/pages/dashboard/session-summary";
+import OpportunityReportPage from "@/pages/dashboard/opportunity-report";
+import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
+import ServicePurchasePage from "@/pages/dashboard/service-purchase";
+import MySessionsPage from "@/pages/dashboard/my-sessions";
+import MessagesPage from "@/pages/dashboard/messages";
+import ProfileSettingsPage from "@/pages/dashboard/profile-settings";
+import MarketplacePage from "@/pages/dashboard/marketplace";
+import SessionDetailsPage from "@/pages/dashboard/session-details";
+import ApplicationPage from "@/pages/dashboard/application";
+import ScreeningPage from "@/pages/dashboard/screening";
+import ApprovalPage from "@/pages/dashboard/approval";
+import PaymentPage from "@/pages/dashboard/payment";
+import PaymentSuccessPage from "@/pages/dashboard/payment-success";
 export const routes: RouteObject[] = [
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <AuthenticatedLayout />,
+    children: [
+      {
+        path: "",
+        element: <DashboardPage />,
+      },
+      {
+        path: "intelligence",
+        element: <IntelligencePage />,
+      },
+      {
+        path: "partner-brief",
+        element: <PartnerBriefPage />,
+      },
+      {
+        path: "submit-questions",
+        element: <SubmitQuestionsPage />,
+      },
+      {
+        path: "waiting-room",
+        element: <WaitingRoomPage />,
+      },
+      {
+        path: "live-deal-room",
+        element: <LiveDealRoomPage />,
+      },
+      {
+        path: "session-summary",
+        element: <SessionSummaryPage />,
+      },
+      {
+        path: "opportunity-report",
+        element: <OpportunityReportPage />,
+      },
+      {
+        path: "follow-up-services",
+        element: <FollowUpServicesPage />,
+      },
+      {
+        path: "service-purchase",
+        element: <ServicePurchasePage />,
+      },
+      {
+        path: "my-sessions",
+        element: <MySessionsPage />,
+      },
+      {
+        path: "messages",
+        element: <MessagesPage />,
+      },
+      {
+        path: "profile-settings",
+        element: <ProfileSettingsPage />,
+      },
+      {
+        path: "marketplace",
+        element: <MarketplacePage />,
+      },
+      {
+        path: "session-details",
+        element: <SessionDetailsPage />,
+      },
+      {
+        path: "application",
+        element: <ApplicationPage />,
+      },
+      {
+        path: "screening",
+        element: <ScreeningPage />,
+      },
+      {
+        path: "approval",
+        element: <ApprovalPage />,
+      },
+      {
+        path: "payment",
+        element: <PaymentPage />,
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccessPage />,
+      },
+    ]
   },
   // Added mappings for simple /about and /contact standard paths
   {

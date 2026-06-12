@@ -1,7 +1,23 @@
 'use client'
 
-import * as React from 'react'
 import { cn } from '@/lib/utils'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card'
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '@/components/ui/table'
+import { Badge } from '@/components/ui/badge'
 
 // High quality avatars from Unsplash
 const INDUS_AVATAR = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80'
@@ -65,27 +81,6 @@ const DEFAULT_TRANSACTIONS: ExporterTransaction[] = [
   },
 ]
 
-const Badge = ({
-  children,
-  variant,
-}: {
-  children: React.ReactNode
-  variant: 'success' | 'danger' | 'warning'
-}) => {
-  const styles =
-    variant === 'success'
-      ? 'bg-lime-500/15 text-lime-800 dark:text-lime-300'
-      : variant === 'danger'
-      ? 'bg-red-500/15 text-red-800 dark:text-red-300'
-      : 'bg-yellow-500/15 text-yellow-800 dark:text-yellow-300'
-
-  return (
-    <span className={cn('rounded-full px-2 py-1 text-xs font-medium', styles)}>
-      {children}
-    </span>
-  )
-}
-
 export default function ExporterTransactionsCard({
   title = 'Recent E-Attestation Transactions',
   subtitle = 'Live monitoring of Certificates of Origin processed through the digital registry.',
@@ -93,50 +88,55 @@ export default function ExporterTransactionsCard({
   className,
 }: ExporterTransactionsCardProps) {
   return (
-    <section
-      className={cn(
-        'bg-background shadow-foreground/5 inset-ring-1 inset-ring-background ring-foreground/5 relative w-full overflow-hidden rounded-2xl border border-border/60 shadow-md ring-1',
-        className
-      )}
-      aria-label={title}
-    >
+    <Card className={cn('overflow-hidden border border-border shadow-md rounded-2xl', className)}>
       {/* Header */}
-      <div className="space-y-1 border-b border-border/60 p-6">
+      <CardHeader className="space-y-1.5 p-6 border-b border-border/60">
         <div className="flex items-center gap-1.5">
-          <span className="bg-muted size-2 rounded-full border border-black/5" />
-          <span className="bg-muted size-2 rounded-full border border-black/5" />
-          <span className="bg-muted size-2 rounded-full border border-black/5" />
+          <span className="size-2 rounded-full border border-black/5 bg-primary" />
+          <span className="size-2 rounded-full border border-black/5 bg-emerald-400" />
+          <span className="size-2 rounded-full border border-black/5 bg-muted-foreground" />
         </div>
-        <h2 className="text-lg font-semibold leading-none tracking-tight">{title}</h2>
-        <p className="text-muted-foreground text-sm">{subtitle}</p>
-      </div>
+        <CardTitle className="text-lg font-bold tracking-tight text-foreground">{title}</CardTitle>
+        <CardDescription className="text-muted-foreground text-sm">{subtitle}</CardDescription>
+      </CardHeader>
 
-      {/* Table wrapper for responsive overflow */}
-      <div className="overflow-x-auto">
-        <table className="min-w-[640px] w-full border-collapse text-sm">
-          <thead className="bg-muted/50 supports-[backdrop-filter]:backdrop-blur-sm sticky top-0 z-10">
-            <tr className="text-muted-foreground *:text-left *:px-3 *:py-3 *:font-medium">
-              <th className="w-28 pl-4">Transaction ID</th>
-              <th className="min-w-[120px]">Date</th>
-              <th className="min-w-[120px]">Status</th>
-              <th className="min-w-[220px]">Exporter Member</th>
-              <th className="min-w-[120px] text-right pr-4">Processing Fee</th>
-            </tr>
-          </thead>
-          <tbody>
+      {/* Content containing Table */}
+      <CardContent className="p-0">
+        <Table>
+          <TableHeader className="bg-muted/40">
+            <TableRow>
+              <TableHead className="w-32 pl-6 font-semibold">Transaction ID</TableHead>
+              <TableHead className="min-w-[120px] font-semibold">Date</TableHead>
+              <TableHead className="min-w-[120px] font-semibold">Status</TableHead>
+              <TableHead className="min-w-[220px] font-semibold">Exporter Member</TableHead>
+              <TableHead className="min-w-[120px] text-right pr-6 font-semibold">Processing Fee</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {transactions.map((txn) => (
-              <tr
-                key={txn.id}
-                className="hover:bg-muted/30 transition-colors *:px-3 *:py-2 border-b border-border/60 last:border-0"
-              >
-                <td className="text-muted-foreground pl-4 font-mono text-xs">{txn.id}</td>
-                <td className="whitespace-nowrap">{txn.date}</td>
-                <td>
-                  <Badge variant={txn.statusVariant}>{txn.status}</Badge>
-                </td>
-                <td>
+              <TableRow key={txn.id} className="hover:bg-muted/20 transition-colors">
+                <TableCell className="pl-6 font-mono text-xs text-muted-foreground">{txn.id}</TableCell>
+                <TableCell className="whitespace-nowrap font-medium">{txn.date}</TableCell>
+                <TableCell>
+                  {txn.statusVariant === 'success' && (
+                    <Badge className="bg-emerald-500/15 dark:bg-emerald-500/25 text-emerald-700 dark:text-emerald-300 border-none hover:bg-emerald-500/20 font-bold uppercase text-[9px] tracking-wider">
+                      {txn.status}
+                    </Badge>
+                  )}
+                  {txn.statusVariant === 'warning' && (
+                    <Badge className="bg-amber-500/15 dark:bg-amber-500/25 text-amber-700 dark:text-amber-300 border-none hover:bg-amber-500/20 font-bold uppercase text-[9px] tracking-wider">
+                      {txn.status}
+                    </Badge>
+                  )}
+                  {txn.statusVariant === 'danger' && (
+                    <Badge variant="destructive" className="border-none font-bold uppercase text-[9px] tracking-wider">
+                      {txn.status}
+                    </Badge>
+                  )}
+                </TableCell>
+                <TableCell>
                   <div className="flex items-center gap-2">
-                    <div className="size-7 overflow-hidden rounded-full ring-1 ring-border/60">
+                    <div className="size-7 overflow-hidden rounded-full ring-1 ring-border">
                       <img
                         src={txn.avatar}
                         alt={txn.name}
@@ -146,23 +146,27 @@ export default function ExporterTransactionsCard({
                         loading="lazy"
                       />
                     </div>
-                    <span className="text-foreground font-medium truncate">{txn.name}</span>
+                    <span className="text-foreground font-semibold truncate">{txn.name}</span>
                   </div>
-                </td>
-                <td className="text-right pr-4 font-medium tabular-nums">{txn.fee}</td>
-              </tr>
+                </TableCell>
+                <TableCell className="text-right pr-6 font-semibold text-foreground tabular-nums">{txn.fee}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </CardContent>
 
       {/* Footer */}
-      <div className="flex items-center justify-between border-t border-border/60 p-4 text-xs text-muted-foreground">
+      <CardFooter className="flex items-center justify-between border-t border-border/60 px-6 py-4 text-xs text-muted-foreground">
         <span>
           Showing <strong>{transactions.length}</strong> transactions
         </span>
-        <span>Updated just now</span>
-      </div>
-    </section>
+        <span className="flex items-center gap-1.5">
+          <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+          Updated just now
+        </span>
+      </CardFooter>
+    </Card>
   )
 }
+

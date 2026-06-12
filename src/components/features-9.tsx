@@ -22,7 +22,7 @@ export function Features9() {
                     <div aria-hidden className="relative p-6 pt-0">
                         <div className="absolute inset-0 z-10 m-auto size-fit">
                             <div className="rounded-xl bg-card border border-border relative flex size-fit w-fit items-center gap-2 px-3 py-1.5 text-xs font-bold shadow-lg shadow-black/10">
-                                <span className="text-lg">🇮🇳</span> Attestation verification route: Mumbai -&gt; Dubai
+                                <span className="text-[10px] bg-primary/10 border border-primary/20 text-primary px-1.5 py-0.5 rounded font-mono">IN</span> Attestation verification route: Mumbai -&gt; Dubai
                             </div>
                         </div>
 

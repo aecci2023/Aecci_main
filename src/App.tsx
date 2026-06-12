@@ -1,16 +1,22 @@
-import { useRoutes } from "react-router-dom"
+import { useRoutes, useLocation } from "react-router-dom"
 import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar/Navbar"
 import Footer from "@/components/portal/Footer"
 import { routes } from "@/router"
 import { ActiveThemeProvider } from "@/components/themes/active-theme"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 export default function App() {
   const element = useRoutes(routes);
+  const location = useLocation();
+  const isSignupPage = location.pathname.startsWith("/signup");
+  const isDashboardPage = location.pathname.startsWith("/dashboard");
+  const hideChrome = isSignupPage || isDashboardPage;
 
   return (
     <ActiveThemeProvider>
-      <div className="min-h-screen flex flex-col bg-background text-foreground font-body transition-colors duration-300 relative">
+      <TooltipProvider>
+        <div className="min-h-screen flex flex-col bg-background text-foreground font-body transition-colors duration-300 relative">
         <Toaster position="top-right" richColors />
 
         {/* Atmospheric Theme Gradient Layer (Dark mode only) */}
@@ -19,13 +25,14 @@ export default function App() {
         {/* Subtle Grid Dot Accent */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:32px_32px] -z-10 pointer-events-none fixed" />
 
-        <Navbar />
+        {!hideChrome && <Navbar />}
 
         <div className="flex-1">
           {element}
         </div>
-        <Footer />
-      </div>
+        {!hideChrome && <Footer />}
+        </div>
+      </TooltipProvider>
     </ActiveThemeProvider>
   )
 }

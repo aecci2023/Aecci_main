@@ -60,11 +60,7 @@ export const menuConfig: MegaMenuSection[] = [
         href: "/about/chamber-policy",
         description: "Unwavering commitment to ethical, progressive, and efficient commerce.",
       },
-      {
-        title: "Office Bearers",
-        href: "/about/office-bearers",
-        description: "Distinguished board of directors and executive administrative staff.",
-      },
+
     ],
     quickLinks: [
       { title: "Roles & Responsibility", href: "/about/roles-responsibility" },
@@ -77,7 +73,7 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Our History", href: "/about/our-history" },
       { title: "Chairman Message", href: "/about/chairman-message" },
       { title: "Chamber Policy", href: "/about/chamber-policy" },
-      { title: "Office Bearers", href: "/about/office-bearers" },
+
       { title: "Roles & Responsibility", href: "/about/roles-responsibility" },
       { title: "Strategic Partners", href: "/about/strategic-partners" },
       { title: "Chamber Dynamics", href: "/about/chamber-dynamics" },
@@ -178,47 +174,13 @@ export const menuConfig: MegaMenuSection[] = [
     hasDropdown: true,
     featured: [
       {
-        title: "Research and Information",
-        href: "/ways-means/research-and-information",
-        description: "Data-driven research reports on emerging global market shifts.",
-        items: [
-          { title: "The Economic Analysis", href: "/ways-means/research-and-information/economic-analysis" },
-          { title: "Business Opportunities Brief", href: "/ways-means/research-and-information/business-opportunities-brief" },
-          { title: "Indian Economic Report", href: "/ways-means/research-and-information/indian-economic-report" },
-          { title: "Operational Guides", href: "/ways-means/research-and-information/operational-guides" },
-        ],
-      },
-      {
         title: "Commercial Directory",
         href: "/ways-means/commercial-directory",
         description: "Verified database of high-performing Asian exporting enterprises.",
       },
-      {
-        title: "Annual Report",
-        href: "/ways-means/annual-report",
-        description: "Comprehensive review of trade progress and economic insights.",
-      },
     ],
-    quickLinks: [
-      { title: "India innovation index", href: "/ways-means/india-innovation-index" },
-      { title: "Export Promotion Council", href: "/ways-means/export-promotion-council" },
-    ],
-    resources: [], // Moved the research items to featured -> items
     mobileMenu: [
-      {
-        title: "Research and Information",
-        href: "/ways-means/research-and-information",
-        items: [
-          { title: "The Economic Analysis", href: "/ways-means/research-and-information/economic-analysis" },
-          { title: "Business Opportunities Brief", href: "/ways-means/research-and-information/business-opportunities-brief" },
-          { title: "Indian Economic Report", href: "/ways-means/research-and-information/indian-economic-report" },
-          { title: "Operational Guides", href: "/ways-means/research-and-information/operational-guides" },
-        ],
-      },
-      { title: "India innovation index", href: "/ways-means/india-innovation-index" },
-      { title: "Annual Report", href: "/ways-means/annual-report" },
       { title: "Commercial Directory", href: "/ways-means/commercial-directory" },
-      { title: "Export Promotion Council", href: "/ways-means/export-promotion-council" },
     ]
   },
   {

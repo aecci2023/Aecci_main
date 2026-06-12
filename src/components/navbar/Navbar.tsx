@@ -61,22 +61,20 @@ export default function Navbar() {
   const isAnyOpen = !!activeSectionConfig;
 
   // Shared frosted glass bg classes
-  const glassBg =
-    "bg-[rgba(255,255,255,0.82)] dark:bg-[rgba(18,18,19,0.88)] backdrop-blur-2xl";
+  const glassBg = brandVisible
+    ? "bg-[rgba(255,255,255,0.82)] dark:bg-[rgba(18,18,19,0.88)] backdrop-blur-2xl"
+    : "bg-white dark:bg-[#121213] shadow-sm";
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full">
+      <header className="sticky top-0 lg:top-[-72px] z-50 w-full transition-colors duration-300">
 
         {/* ─────────────────────────────────────── */}
         {/* Brand Bar — desktop only, hides on scroll */}
         {/* ─────────────────────────────────────── */}
-        <motion.div
-          initial={false}
-          animate={{ height: brandVisible ? 72 : 0, opacity: brandVisible ? 1 : 0 }}
-          transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+        <div
           className={[
-            "hidden md:block w-full overflow-hidden",
+            "hidden lg:block w-full overflow-hidden h-[72px] transition-colors duration-300",
             glassBg,
             "border-b border-black/[0.06] dark:border-white/[0.06]",
           ].join(" ")}
@@ -95,7 +93,7 @@ export default function Navbar() {
               />
             </Link>
           </div>
-        </motion.div>
+        </div>
 
         {/* ─────────────────────────────────────── */}
         {/* Main Nav Row */}
@@ -109,15 +107,15 @@ export default function Navbar() {
               : "",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[54px] md:h-[44px] max-w-7xl items-center justify-between px-4 md:px-6 relative">
+          <div className="mx-auto flex h-[54px] lg:h-[44px] max-w-7xl items-center justify-between px-4 lg:px-6 relative">
 
             {/* Mobile: Hamburger */}
-            <div className="flex md:hidden items-center w-1/3">
+            <div className="flex lg:hidden items-center w-1/3">
               <MobileMenu />
             </div>
 
             {/* Mobile: Logo center */}
-            <div className="flex md:hidden items-center justify-center w-1/3">
+            <div className="flex lg:hidden items-center justify-center w-1/3">
               <Link to="/" onClick={handleClose} className="group">
                 <img
                   src="/aecci-logoonly.png"
@@ -128,7 +126,7 @@ export default function Navbar() {
             </div>
 
             {/* Mobile: User icon right */}
-            <div className="flex md:hidden items-center justify-end w-1/3">
+            <div className="flex lg:hidden items-center justify-end w-1/3">
               <a
                 href="https://e-platform.aecci.org.in/login"
                 target="_blank"
@@ -146,7 +144,7 @@ export default function Navbar() {
 
             {/* Desktop: Nav links centered */}
             <nav
-              className="hidden md:flex items-center justify-center gap-0 flex-1"
+              className="hidden lg:flex items-center justify-center gap-0 flex-1"
               onMouseLeave={handleMouseLeave}
             >
               {menuConfig.map((item, idx) => {
@@ -182,7 +180,7 @@ export default function Navbar() {
             {/* Desktop: Right actions */}
             <div
               className={[
-                "hidden md:flex items-center gap-2",
+                "hidden lg:flex items-center gap-2",
                 "transition-opacity duration-200",
                 isAnyOpen ? "opacity-30 pointer-events-none" : "opacity-100",
               ].join(" ")}

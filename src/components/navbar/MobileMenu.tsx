@@ -162,7 +162,7 @@ export default function MobileMenu() {
             "rounded-full bg-black/[0.04] dark:bg-white/[0.06]",
             "border border-black/[0.08] dark:border-white/[0.08]",
             "text-foreground hover:text-primary",
-            "transition-all duration-200 cursor-pointer md:hidden",
+            "transition-all duration-200 cursor-pointer lg:hidden",
             open ? "opacity-0 pointer-events-none" : "opacity-100",
           ].join(" ")}
         >

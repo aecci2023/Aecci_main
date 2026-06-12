@@ -1,5 +1,5 @@
 import * as React from "react"
-import { MagnifyingGlass, CheckCircle, ChatCircle, Users, X } from "@phosphor-icons/react"
+import { MagnifyingGlass, CheckCircle, ChatCircle, Users, X, Crown, Check } from "@phosphor-icons/react"
 import { Card, CardHeader, CardContent, CardFooter, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -206,14 +206,14 @@ export default function ExporterDirectory() {
 
                     {/* Badges */}
                     <div className="flex flex-col gap-1.5 items-end">
-                      <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                         exp.tier === "Gold" 
                           ? "bg-primary/10 text-primary border border-primary/20" 
                           : exp.tier === "Premium" 
                             ? "bg-primary/15 text-primary border border-primary/20"
                             : "bg-muted text-muted-foreground border border-border"
                       }`}>
-                        👑 {exp.tier} Tier
+                        <Crown className="size-3 text-amber-500" /> {exp.tier} Tier
                       </span>
                       {exp.verified && (
                         <span className="flex items-center gap-1 bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest">
@@ -296,8 +296,8 @@ export default function ExporterDirectory() {
                   <label className="text-xs font-semibold text-muted-foreground">Target Export Products</label>
                   <div className="flex flex-wrap gap-2 p-2.5 rounded bg-muted/30 border border-border">
                     {selectedExporter.products.map((p, idx) => (
-                      <span key={idx} className="bg-muted px-2 py-0.5 rounded text-xs font-semibold border border-border">
-                        ✅ {p}
+                      <span key={idx} className="inline-flex items-center gap-1 bg-muted px-2 py-0.5 rounded text-xs font-semibold border border-border">
+                        <Check className="size-3 text-emerald-500" /> {p}
                       </span>
                     ))}
                   </div>

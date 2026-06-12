@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { DownloadSimple } from "@phosphor-icons/react"
+import { Button } from "@/components/ui/button"
 import advertiseImg from "@/assets/banners/advertise-with-us.png"
 
 export default function PromoRow() {
@@ -23,13 +24,16 @@ export default function PromoRow() {
                 className="w-full h-auto object-cover transition-transform duration-750 group-hover:scale-[1.01]"
               />
             </div>
-            <a 
-              href="#" 
-              className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/95 text-primary-foreground text-xs font-extrabold px-8 h-12 rounded-xl transition-all shadow-md shadow-primary/10 active:scale-98 cursor-pointer w-full sm:w-auto"
+            
+            <Button
+              asChild
+              className="w-full sm:w-auto font-bold px-8 h-12 shadow-md shadow-primary/10 rounded-xl"
             >
-              <DownloadSimple className="size-4" />
-              <span>Media Kit</span>
-            </a>
+              <a href="#">
+                <DownloadSimple className="size-4 mr-2" />
+                <span>Media Kit</span>
+              </a>
+            </Button>
           </motion.div>
 
         </div>

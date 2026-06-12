@@ -16,7 +16,7 @@ const footerSections = [
       { label: "Our History", href: "/about/our-history" },
       { label: "Chairman Message", href: "/about/chairman-message" },
       { label: "Chamber Policy", href: "/about/chamber-policy" },
-      { label: "Office Bearers", href: "/about/office-bearers" },
+
       { label: "Roles & Responsibility", href: "/about/roles-responsibility" },
       { label: "Strategic Partners", href: "/about/strategic-partners" },
       { label: "Chamber Dynamics", href: "/about/chamber-dynamics" },

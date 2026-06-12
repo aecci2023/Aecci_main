@@ -206,8 +206,9 @@ export function AuthDialog({ triggerText, defaultTab = "login", className, varia
                 </select>
               </div>
 
-              <div className="text-[10px] text-muted-foreground mt-2 leading-relaxed bg-muted/30 p-2.5 rounded border border-border/50">
-                🔒 By submitting, you request formal enrollment in the Asian Exporters' Chamber of Commerce and Industry. A verified trade officer will evaluate your corporate filings within 1 working day.
+              <div className="text-[10px] text-muted-foreground mt-2 leading-relaxed bg-muted/30 p-2.5 rounded border border-border/50 flex items-start gap-1.5">
+                <Lock className="size-3.5 text-primary shrink-0 mt-0.5" />
+                <span>By submitting, you request formal enrollment in the Asian Exporters' Chamber of Commerce and Industry. A verified trade officer will evaluate your corporate filings within 1 working day.</span>
               </div>
 
               <Button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-10 font-bold transition-all mt-4 shadow-lg shadow-primary/10">
