@@ -1,20 +1,20 @@
-import * as React from "react"
-import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
-import { Quotes } from "@phosphor-icons/react"
+import * as React from "react";
+import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
+import { Quotes } from "@phosphor-icons/react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
-import type { CarouselApi } from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
+import type { CarouselApi } from "@/components/ui/carousel";
 
-import karimImg from "@/assets/testimonials/karim-adyel.png"
-import jamilImg from "@/assets/testimonials/jamil-abdo.png"
-import mikeImg from "@/assets/testimonials/mike-wilson.png"
-import mobeenImg from "@/assets/testimonials/mobeen-rana.png"
+import karimImg from "@/assets/testimonials/karim-adyel.png";
+import jamilImg from "@/assets/testimonials/jamil-abdo.png";
+import mikeImg from "@/assets/testimonials/mike-wilson.png";
+import mobeenImg from "@/assets/testimonials/mobeen-rana.png";
 
 interface Testimonial {
   readonly name: string;
@@ -62,27 +62,37 @@ const TESTIMONIALS: readonly Testimonial[] = [
     text: "AECCI has outperformed many other chambers of commerce in the region by introducing e-meetings, e-conferences, e-live webinars that has bridged the long commercial distances for promotion of trade and commerce amongst the international business community. I wish AECCI's distinguished leadership very best in carrying the vision forward.",
     image: mobeenImg,
   },
-]
+];
 
 export default function NetworkingTestimonials() {
-  const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-  const [count, setCount] = React.useState(0)
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
-    if (!api) return
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap())
+    if (!api) return;
 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap())
-    })
-  }, [api])
+    const updateState = () => {
+      setCount(api.scrollSnapList().length);
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    const timer = setTimeout(updateState, 0);
+
+    api.on("select", updateState);
+    api.on("reInit", updateState);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [api]);
 
   return (
-    <section id="testimonials-section" className="py-12 md:py-24 bg-card/25 border-b border-border overflow-hidden">
+    <section
+      id="testimonials-section"
+      className="py-12 md:py-24 bg-card/25 border-b border-border overflow-hidden"
+    >
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-
         {/* Redesigned Heading Block */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -99,7 +109,8 @@ export default function NetworkingTestimonials() {
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Hear from our esteemed international trade consultants, legal advisors, and corporate partner representatives.
+            Hear from our esteemed international trade consultants, legal
+            advisors, and corporate partner representatives.
           </p>
         </motion.div>
 
@@ -115,7 +126,10 @@ export default function NetworkingTestimonials() {
           >
             <CarouselContent className="-ml-6 py-4 flex items-stretch">
               {TESTIMONIALS.map((testimonial, idx) => (
-                <CarouselItem key={idx} className="pl-6 md:basis-1/2 lg:basis-1/3 flex flex-col">
+                <CarouselItem
+                  key={idx}
+                  className="pl-6 md:basis-1/2 lg:basis-1/3 flex flex-col"
+                >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +140,7 @@ export default function NetworkingTestimonials() {
                     <Card className="h-full border-border bg-card shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-300 p-8 relative overflow-hidden flex flex-col justify-between group">
                       {/* Quotes Icon */}
                       <Quotes className="absolute top-6 right-6 size-12 text-primary/10 rotate-180 pointer-events-none transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/15" />
-                      
+
                       {/* Quote Text */}
                       <div className="flex-grow flex items-start text-left">
                         <p className="text-xs md:text-sm text-muted-foreground leading-relaxed italic relative z-10">
@@ -150,7 +164,7 @@ export default function NetworkingTestimonials() {
                             {testimonial.initials}
                           </div>
                         )}
-                        
+
                         {/* Details */}
                         <div className="flex flex-col min-w-0">
                           <span className="font-heading font-black text-sm text-foreground truncate">
@@ -173,7 +187,7 @@ export default function NetworkingTestimonials() {
             {/* Custom Carousel Arrows centered below the carousel */}
             <div className="flex items-center justify-center gap-3 mt-6 md:mt-10 z-20">
               <CarouselPrevious className="static translate-y-0 size-10 bg-background hover:bg-primary hover:text-primary-foreground border-border/80 shadow-md transition-colors" />
-              
+
               {/* Dot Indicators */}
               <div className="flex items-center gap-1.5 px-4">
                 {Array.from({ length: count }).map((_, idx) => (
@@ -181,7 +195,9 @@ export default function NetworkingTestimonials() {
                     key={idx}
                     onClick={() => api?.scrollTo(idx)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      current === idx ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/35 hover:bg-muted-foreground/50"
+                      current === idx
+                        ? "w-6 bg-primary"
+                        : "w-1.5 bg-muted-foreground/35 hover:bg-muted-foreground/50"
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -192,8 +208,7 @@ export default function NetworkingTestimonials() {
             </div>
           </Carousel>
         </div>
-
       </div>
     </section>
-  )
+  );
 }

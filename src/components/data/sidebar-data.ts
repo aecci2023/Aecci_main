@@ -1,122 +1,115 @@
 import {
   LayoutDashboard,
-  Globe,
-  Users,
+  Calendar,
   MessageSquare,
+  Globe,
   Clock,
   Video,
   FileText,
-  BarChart,
+  Users,
+  HelpCircle,
+  TrendingUp,
   Briefcase,
-  CreditCard,
-  Calendar,
-  Settings,
-  HelpCircle
-} from 'lucide-react'
-import { type SidebarData } from '../layout/types'
+  Receipt,
+  Store,
+} from "lucide-react";
+import { type SidebarData } from "../layout/types";
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'AECCI Member',
-    email: 'member@aecci.org.in',
-    avatar: '',
+    name: "AECCI Member",
+    email: "member@aecci.org.in",
+    avatar: "",
   },
   teams: [],
   navGroups: [
     {
-      title: 'Overview',
+      title: "Main",
       items: [
         {
-          title: 'Client Dashboard',
-          url: '/dashboard',
+          title: "Dashboard",
+          url: "/dashboard",
           icon: LayoutDashboard,
         },
         {
-          title: 'Deal Room Marketplace',
-          url: '/dashboard/marketplace',
-          icon: Globe,
+          title: "My Sessions",
+          url: "/dashboard/my-sessions",
+          icon: Calendar,
+          badge: "2",
+        },
+        {
+          title: "Messages",
+          url: "/dashboard/messages",
+          icon: MessageSquare,
+          badge: "3",
         },
       ],
     },
     {
-      title: 'Country Access & Intelligence',
+      title: "Deal Room",
       items: [
         {
-          title: 'Country Intelligence',
-          url: '/dashboard/intelligence',
-          icon: Globe,
+          title: "Marketplace",
+          url: "/dashboard/marketplace",
+          icon: Store,
         },
         {
-          title: 'Partner Brief',
-          url: '/dashboard/partner-brief',
-          icon: Users,
-        },
-        {
-          title: 'Submit Questions',
-          url: '/dashboard/submit-questions',
-          icon: HelpCircle,
-        },
-      ],
-    },
-    {
-      title: 'Live Sessions',
-      items: [
-        {
-          title: 'Waiting Room',
-          url: '/dashboard/waiting-room',
+          title: "Waiting Room",
+          url: "/dashboard/waiting-room",
           icon: Clock,
         },
         {
-          title: 'Live Deal Room',
-          url: '/dashboard/live-deal-room',
+          title: "Live Deal Room",
+          url: "/dashboard/live-deal-room",
           icon: Video,
         },
         {
-          title: 'Session Summary',
-          url: '/dashboard/session-summary',
+          title: "Session Summary",
+          url: "/dashboard/session-summary",
           icon: FileText,
         },
       ],
     },
     {
-      title: 'Post-Event Services',
+      title: "Intelligence",
       items: [
         {
-          title: 'Opportunity Reports',
-          url: '/dashboard/opportunity-report',
-          icon: BarChart,
+          title: "Country Intelligence",
+          url: "/dashboard/intelligence",
+          icon: Globe,
         },
         {
-          title: 'Follow-Up Services',
-          url: '/dashboard/follow-up-services',
-          icon: Briefcase,
+          title: "Partner Brief",
+          url: "/dashboard/partner-brief",
+          icon: Users,
         },
         {
-          title: 'Service Purchase',
-          url: '/dashboard/service-purchase',
-          icon: CreditCard,
+          title: "Submit Questions",
+          url: "/dashboard/submit-questions",
+          icon: HelpCircle,
         },
       ],
     },
     {
-      title: 'Account Management',
+      title: "Reports & Services",
       items: [
         {
-          title: 'My Sessions',
-          url: '/dashboard/my-sessions',
-          icon: Calendar,
+          title: "Opportunity Report",
+          url: "/dashboard/opportunity-report",
+          icon: TrendingUp,
         },
         {
-          title: 'Messages',
-          url: '/dashboard/messages',
-          icon: MessageSquare,
+          title: "Follow-Up Services",
+          url: "/dashboard/follow-up-services",
+          icon: Briefcase,
+          badge: "New",
         },
         {
-          title: 'Profile Settings',
-          url: '/dashboard/profile-settings',
-          icon: Settings,
+          title: "Invoices & Payments",
+          url: "/dashboard/payment",
+          icon: Receipt,
         },
       ],
     },
   ],
-}
+};

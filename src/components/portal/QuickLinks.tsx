@@ -1,6 +1,14 @@
-import { motion } from "framer-motion"
-import { ShieldCheck, MagnifyingGlass, BookOpenText, Lightbulb, Desktop, CreditCard, ArrowRight } from "@phosphor-icons/react"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import {
+  ShieldCheck,
+  MagnifyingGlass,
+  BookOpenText,
+  Lightbulb,
+  Desktop,
+  CreditCard,
+  ArrowRight,
+} from "@phosphor-icons/react";
+import { cn } from "@/lib/utils";
 
 const QUICK_LINKS = [
   {
@@ -45,7 +53,7 @@ const QUICK_LINKS = [
     icon: <CreditCard className="size-6" />,
     badge: "Registration",
   },
-] as const
+] as const;
 
 export default function QuickLinks() {
   const container = {
@@ -53,18 +61,25 @@ export default function QuickLinks() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08
-      }
-    }
-  }
+        staggerChildren: 0.08,
+      },
+    },
+  };
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
-  }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
+  };
 
   return (
-    <section id="quick-links" className="py-12 md:py-24 bg-card/15 border-y border-border backdrop-blur-md relative overflow-hidden">
+    <section
+      id="quick-links"
+      className="py-12 md:py-24 bg-card/15 border-y border-border backdrop-blur-md relative overflow-hidden"
+    >
       {/* Decorative subtle background highlights */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,var(--primary-foreground)/4,transparent_25%)] pointer-events-none" />
@@ -79,7 +94,8 @@ export default function QuickLinks() {
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-xl mx-auto">
-            Instantly navigate to our core trade tools, member platforms, and official digital resources.
+            Instantly navigate to our core trade tools, member platforms, and
+            official digital resources.
           </p>
         </div>
 
@@ -98,7 +114,7 @@ export default function QuickLinks() {
               className={cn(
                 "group relative flex flex-col items-start p-8 rounded-2xl bg-card border border-border/80",
                 "hover:border-primary/50 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/5",
-                "transition-all duration-300 text-left cursor-pointer overflow-hidden"
+                "transition-all duration-300 text-left cursor-pointer overflow-hidden",
               )}
             >
               {/* Subtle background gradient on hover */}
@@ -125,7 +141,7 @@ export default function QuickLinks() {
                 <p className="font-body text-xs text-muted-foreground leading-relaxed flex-1">
                   {link.desc}
                 </p>
-                
+
                 {/* Explore Link */}
                 <div className="mt-6 flex items-center gap-1 text-primary text-xs font-bold font-heading uppercase tracking-wider group-hover:translate-x-1 transition-transform">
                   <span>Access Portal</span>
@@ -137,5 +153,5 @@ export default function QuickLinks() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

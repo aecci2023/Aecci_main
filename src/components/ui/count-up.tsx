@@ -18,7 +18,10 @@ export function CountUp({ value, duration = 1.5, suffix = "" }: CountUpProps) {
     let startTimestamp: number | null = null;
     const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      const progress = Math.min(
+        (timestamp - startTimestamp) / (duration * 1000),
+        1,
+      );
       setCount(Math.floor(progress * value));
       if (progress < 1) {
         window.requestAnimationFrame(step);
@@ -29,5 +32,10 @@ export function CountUp({ value, duration = 1.5, suffix = "" }: CountUpProps) {
 
   const formatted = count.toLocaleString("en-US");
 
-  return <span ref={ref}>{formatted}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {formatted}
+      {suffix}
+    </span>
+  );
 }

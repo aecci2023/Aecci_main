@@ -1,22 +1,62 @@
-import { motion } from "framer-motion"
-import { ArrowRight, Globe, Users } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { ArrowRight, Globe, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 const DEPARTURES = [
-  { country: "KENYA", code: "NBO", status: "SESSION OPEN", variant: "success", sector: "FMCG • AGRO", slots: "4/10 Left", time: "11:30 GMT" },
-  { country: "GHANA", code: "ACC", status: "SESSION OPEN", variant: "success", sector: "BUILDING MAT.", slots: "6/10 Left", time: "12:45 GMT" },
-  { country: "NETHERLANDS", code: "AMS", status: "CLOSING SOON", variant: "warning", sector: "BIO-TECH • MED", slots: "1/10 Left", time: "15:00 GMT" },
-  { country: "SINGAPORE", code: "SIN", status: "COMING SOON", variant: "info", sector: "FINTECH • TECH", slots: "10/10 Open", time: "16:30 GMT" },
-  { country: "MEXICO", code: "MEX", status: "PREMIUM ACCESS", variant: "premium", sector: "AUTOMOTIVE", slots: "3/5 Left", time: "18:00 GMT" },
-]
+  {
+    country: "KENYA",
+    code: "NBO",
+    status: "SESSION OPEN",
+    variant: "success",
+    sector: "FMCG • AGRO",
+    slots: "4/10 Left",
+    time: "11:30 GMT",
+  },
+  {
+    country: "GHANA",
+    code: "ACC",
+    status: "SESSION OPEN",
+    variant: "success",
+    sector: "BUILDING MAT.",
+    slots: "6/10 Left",
+    time: "12:45 GMT",
+  },
+  {
+    country: "NETHERLANDS",
+    code: "AMS",
+    status: "CLOSING SOON",
+    variant: "warning",
+    sector: "BIO-TECH • MED",
+    slots: "1/10 Left",
+    time: "15:00 GMT",
+  },
+  {
+    country: "SINGAPORE",
+    code: "SIN",
+    status: "COMING SOON",
+    variant: "info",
+    sector: "FINTECH • TECH",
+    slots: "10/10 Open",
+    time: "16:30 GMT",
+  },
+  {
+    country: "MEXICO",
+    code: "MEX",
+    status: "PREMIUM ACCESS",
+    variant: "premium",
+    sector: "AUTOMOTIVE",
+    slots: "3/5 Left",
+    time: "18:00 GMT",
+  },
+];
 
 export default function LiveAccessWall() {
   return (
     <section className="bg-background py-16 md:py-24 border-y border-border/60 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(16,185,129,0.03),transparent_70%)] pointer-events-none" />
-      
+
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div>
@@ -25,14 +65,21 @@ export default function LiveAccessWall() {
               Live Deal Room Access
             </div>
             <h2 className="text-3xl md:text-5xl font-heading font-black text-foreground tracking-tight flex items-center gap-3">
-              <Globe className="size-8 text-primary shrink-0" /> LIVE MARKET ACCESS WALL
+              <Globe className="size-8 text-primary shrink-0" /> LIVE MARKET
+              ACCESS WALL
             </h2>
             <p className="text-muted-foreground text-base md:text-lg mt-3 max-w-2xl leading-relaxed">
-              Real-time schedule of active country deal rooms. Book your access slot immediately to pitch directly to verified global distributors and trade buyers.
+              Real-time schedule of active country deal rooms. Book your access
+              slot immediately to pitch directly to verified global distributors
+              and trade buyers.
             </p>
           </div>
-          
-          <Button asChild variant="outline" className="rounded-full border-border text-foreground hover:bg-muted shrink-0">
+
+          <Button
+            asChild
+            variant="outline"
+            className="rounded-full border-border text-foreground hover:bg-muted shrink-0"
+          >
             <a href="#pricing">
               View All Access Slots <ArrowRight className="size-4 ml-2" />
             </a>
@@ -71,7 +118,10 @@ export default function LiveAccessWall() {
 
                 {/* Port Code */}
                 <div className="col-span-4 md:col-span-1 text-muted-foreground font-bold md:text-center text-sm">
-                  <Badge variant="outline" className="bg-background border-border font-bold text-foreground">
+                  <Badge
+                    variant="outline"
+                    className="bg-background border-border font-bold text-foreground"
+                  >
                     {item.code}
                   </Badge>
                 </div>
@@ -120,7 +170,7 @@ export default function LiveAccessWall() {
                       "w-full rounded-lg font-sans font-bold transition-all text-xs",
                       item.variant === "success" || item.variant === "warning"
                         ? "bg-amber-400 text-slate-950 hover:bg-amber-300 hover:text-slate-950"
-                        : "bg-muted text-foreground hover:bg-muted/80 border border-border"
+                        : "bg-muted text-foreground hover:bg-muted/80 border border-border",
                     )}
                   >
                     <a href="#pricing">
@@ -134,7 +184,5 @@ export default function LiveAccessWall() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
-

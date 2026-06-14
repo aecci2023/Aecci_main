@@ -1,26 +1,26 @@
-import HeroSlider from "@/components/portal/HeroSlider"
-import { NotificationsTicker } from "@/components/notifications-ticker"
-import StatsStrip from "@/components/portal/StatsStrip"
-import LiveAccessWall from "@/components/portal/LiveAccessWall"
-import CommandCenter from "@/components/portal/CommandCenter"
-import DealRooms from "@/components/portal/DealRooms"
-import ExpansionPathway from "@/components/portal/ExpansionPathway"
-import CollaborationNetwork from "@/components/portal/CollaborationNetwork"
-import BusinessIntelligence from "@/components/portal/BusinessIntelligence"
-import VideoExplainer from "@/components/portal/VideoExplainer"
-import AccessPlans from "@/components/portal/AccessPlans"
-import TradeRadar from "@/components/portal/TradeRadar"
-import ExporterTransactionsCard from "@/components/features"
-import MemberTestimonials from "@/components/testimonials-columns-1"
-import ArbitrationHero from "@/components/portal/ArbitrationHero"
-import PromoRow from "@/components/portal/PromoRow"
+import HeroSlider from "@/components/portal/HeroSlider";
+import { NotificationsTicker } from "@/components/notifications-ticker";
+import StatsStrip from "@/components/portal/StatsStrip";
+import LiveAccessWall from "@/components/portal/LiveAccessWall";
+import CommandCenter from "@/components/portal/CommandCenter";
+import DealRooms from "@/components/portal/DealRooms";
+import ExpansionPathway from "@/components/portal/ExpansionPathway";
+import CollaborationNetwork from "@/components/portal/CollaborationNetwork";
+import BusinessIntelligence from "@/components/portal/BusinessIntelligence";
+import VideoExplainer from "@/components/portal/VideoExplainer";
+import AccessPlans from "@/components/portal/AccessPlans";
+import TradeRadar from "@/components/portal/TradeRadar";
+import ExporterTransactionsCard from "@/components/features";
+import MemberTestimonials from "@/components/testimonials-columns-1";
+import ArbitrationHero from "@/components/portal/ArbitrationHero";
+import PromoRow from "@/components/portal/PromoRow";
 
 export default function Home() {
   return (
     <main className="bg-background text-foreground min-h-screen relative overflow-hidden">
       {/* 1. Cinematic Global Hero */}
       <HeroSlider />
-      
+
       {/* Notifications and Statistics Strip */}
       <NotificationsTicker />
       <StatsStrip />
@@ -42,7 +42,7 @@ export default function Home() {
 
       {/* 7. Live Business Intelligence Dashboard & Transactions */}
       <BusinessIntelligence />
-      
+
       <div className="mx-auto max-w-5xl px-6 py-12 md:pb-24">
         <ExporterTransactionsCard />
       </div>
@@ -65,6 +65,5 @@ export default function Home() {
       {/* Join the Chamber / Book Country Slot Callout */}
       <PromoRow />
     </main>
-  )
+  );
 }
-

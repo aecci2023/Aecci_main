@@ -1,5 +1,5 @@
-import { motion } from "framer-motion"
-import type { Variants } from "framer-motion"
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import {
   Globe,
   Briefcase,
@@ -9,8 +9,8 @@ import {
   Calendar,
   GenderFemale,
   ArrowRight,
-} from "@phosphor-icons/react"
-import { cn } from "@/lib/utils"
+} from "@phosphor-icons/react";
+import { cn } from "@/lib/utils";
 
 const wings = [
   {
@@ -18,7 +18,8 @@ const wings = [
     title: "Export Wing",
     desc: "Certificate of Origin issuance, export documentation guidelines, customs compliance, and global trade facilitation.",
     icon: Globe,
-    bgImage: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=600",
+    bgImage:
+      "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=600",
     href: "#wings",
   },
   {
@@ -26,7 +27,8 @@ const wings = [
     title: "Professional Wing",
     desc: "Corporate training, industry-specific skills development, and executive professional advisory programs.",
     icon: Briefcase,
-    bgImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600",
+    bgImage:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600",
     href: "#wings",
   },
   {
@@ -34,7 +36,8 @@ const wings = [
     title: "Legal Wing",
     desc: "Legal arbitration rules, commercial dispute resolution, mediation panels, and trade contract advisory.",
     icon: Gavel,
-    bgImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600",
+    bgImage:
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600",
     href: "#wings",
   },
   {
@@ -42,7 +45,8 @@ const wings = [
     title: "HR Support Wing",
     desc: "Talent compliance advisory, export industry recruitment guidelines, and workforce optimization consultancy.",
     icon: Users,
-    bgImage: "https://images.unsplash.com/photo-1521791136368-1a46827d3ad4?auto=format&fit=crop&q=80&w=600",
+    bgImage:
+      "https://images.unsplash.com/photo-1521791136368-1a46827d3ad4?auto=format&fit=crop&q=80&w=600",
     href: "#wings",
   },
   {
@@ -50,7 +54,8 @@ const wings = [
     title: "Business Advice Wing",
     desc: "Cross-border financial assistance, emerging market advisory, and export venture scaling programs.",
     icon: Lightbulb,
-    bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600",
+    bgImage:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600",
     href: "#wings",
   },
   {
@@ -58,7 +63,8 @@ const wings = [
     title: "Event & Seminar Wing",
     desc: "International trade expos, B2B matchmaking networking meets, and policy-focused knowledge webinars.",
     icon: Calendar,
-    bgImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=600",
+    bgImage:
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=600",
     href: "#wings",
   },
   {
@@ -66,10 +72,11 @@ const wings = [
     title: "Women Wing",
     desc: "Empowering female exporters through mentoring networks, cross-border venture funds, and leadership programs.",
     icon: GenderFemale,
-    bgImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
+    bgImage:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
     href: "#wings",
   },
-] as const
+] as const;
 
 const containerVariants: Variants = {
   hidden: {},
@@ -78,7 +85,7 @@ const containerVariants: Variants = {
       staggerChildren: 0.08,
     },
   },
-}
+};
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -90,11 +97,14 @@ const cardVariants: Variants = {
       ease: "easeOut",
     },
   },
-}
+};
 
 export default function WingsGrid() {
   return (
-    <section id="wings-grid" className="py-10 md:py-20 bg-background relative overflow-hidden border-b border-border">
+    <section
+      id="wings-grid"
+      className="py-10 md:py-20 bg-background relative overflow-hidden border-b border-border"
+    >
       {/* Grid Pattern Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)/4_1px,transparent_1px),linear-gradient(to_bottom,var(--border)/4_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--primary-foreground)/5,transparent)] pointer-events-none" />
@@ -118,7 +128,7 @@ export default function WingsGrid() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {wings.map((wing) => {
-            const IconComponent = wing.icon
+            const IconComponent = wing.icon;
             return (
               <motion.a
                 key={wing.id}
@@ -126,7 +136,7 @@ export default function WingsGrid() {
                 variants={cardVariants}
                 className={cn(
                   "group relative h-64 rounded-2xl overflow-hidden border border-border/80 shadow-lg hover:shadow-2xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-end p-6 cursor-pointer",
-                  wing.id === "women" ? "sm:col-span-2 lg:col-span-1" : ""
+                  wing.id === "women" ? "sm:col-span-2 lg:col-span-1" : "",
                 )}
               >
                 {/* Background Image */}
@@ -160,10 +170,10 @@ export default function WingsGrid() {
                   </div>
                 </div>
               </motion.a>
-            )
+            );
           })}
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

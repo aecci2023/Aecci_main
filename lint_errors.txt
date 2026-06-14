@@ -1,0 +1,170 @@
+
+> aecci-main@0.0.0 lint
+> eslint .
+
+
+D:\Projects\AECCI\Aecci_main\src\components\command-menu.tsx
+  36:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  53:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Projects\AECCI\Aecci_main\src\components\layout\nav-group.tsx
+  64:7  error  The value assigned to 'variantClass' is not used in subsequent statements  no-useless-assignment
+
+D:\Projects\AECCI\Aecci_main\src\components\news-cards.tsx
+  168:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Projects\AECCI\Aecci_main\src\components\news-cards.tsx:168:7
+  166 |       return () => clearTimeout(timer);
+  167 |     } else {
+> 168 |       setIsLoaded(true);
+      |       ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  169 |     }
+  170 |   }, [shouldAnimate]);
+  171 |  react-hooks/set-state-in-effect
+
+D:\Projects\AECCI\Aecci_main\src\components\portal\NetworkingTestimonials.tsx
+  74:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Projects\AECCI\Aecci_main\src\components\portal\NetworkingTestimonials.tsx:74:5
+  72 |   React.useEffect(() => {
+  73 |     if (!api) return;
+> 74 |     setCount(api.scrollSnapList().length);
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  75 |     setCurrent(api.selectedScrollSnap());
+  76 |
+  77 |     api.on("select", () => {  react-hooks/set-state-in-effect
+
+D:\Projects\AECCI\Aecci_main\src\components\portal\PublicationsSection.tsx
+  168:57  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Projects\AECCI\Aecci_main\src\components\testimonials-columns-1.tsx
+  12:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\themes\active-theme.tsx
+  84:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\badge.tsx
+  49:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\button-group.tsx
+  82:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\button.tsx
+  59:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\carousel.tsx
+   96:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\carousel.tsx:96:5
+  94 |   React.useEffect(() => {
+  95 |     if (!api) return;
+> 96 |     onSelect(api);
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  97 |     api.on("reInit", onSelect);
+  98 |     api.on("select", onSelect);
+  99 |  react-hooks/set-state-in-effect
+  239:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\chart.tsx
+   70:7   error  '_' is defined but never used             @typescript-eslint/no-unused-vars
+  112:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  113:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  188:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  264:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  289:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\combobox.tsx
+  301:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\direction.tsx
+  22:29  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\form.tsx
+  163:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\navigation-menu.tsx
+  166:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\phone-input.tsx
+  61:59  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\sidebar.tsx
+  702:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\tabs.tsx
+  90:52  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\components\ui\toggle.tsx
+  43:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Projects\AECCI\Aecci_main\src\hooks\use-mobile.ts
+  16:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Projects\AECCI\Aecci_main\src\hooks\use-mobile.ts:16:5
+  14 |     };
+  15 |     mql.addEventListener("change", onChange);
+> 16 |     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  17 |     return () => mql.removeEventListener("change", onChange);
+  18 |   }, []);
+  19 |  react-hooks/set-state-in-effect
+
+D:\Projects\AECCI\Aecci_main\src\pages\not-found.tsx
+  12:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-refresh/only-export-components
+  23:5   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Projects\AECCI\Aecci_main\src\pages\not-found.tsx:23:5
+  21 |     };
+  22 |     mql.addEventListener("change", onChange);
+> 23 |     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  24 |     return () => mql.removeEventListener("change", onChange);
+  25 |   }, []);
+  26 |  react-hooks/set-state-in-effect
+
+D:\Projects\AECCI\Aecci_main\src\pages\signup\components\SignupWizard.tsx
+  97:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+D:\Projects\AECCI\Aecci_main\src\pages\signup\components\SignupWizard.tsx:97:20
+   95 |   });
+   96 |
+>  97 |   const userType = methods.watch("userType");
+      |                    ^^^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+   98 |   const country = methods.watch("country");
+   99 |
+  100 |   const nextStep = async () => {  react-hooks/incompatible-library
+
+✖ 31 problems (30 errors, 1 warning)
+

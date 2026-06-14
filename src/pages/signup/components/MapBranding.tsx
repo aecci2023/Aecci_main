@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { SpinningGlobe } from "@/components/portal/SpinningGlobe";
 
@@ -12,7 +11,11 @@ export default function MapBranding() {
 
       {/* Foreground Content */}
       <div className="relative z-10 flex flex-col items-start gap-4">
-        <img src="/arccilogoWithText.png" alt="AECCI" className="h-16 w-auto brightness-0 invert" />
+        <img
+          src="/arccilogoWithText.png"
+          alt="AECCI"
+          className="h-16 w-auto brightness-0 invert"
+        />
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-12 text-white">
           AECCI Global Deal Room
         </h1>
@@ -36,22 +39,33 @@ export default function MapBranding() {
         >
           <div className="flex items-center gap-4 mb-4">
             <div className="flex -space-x-3">
-              <div className="w-10 h-10 rounded-full border-2 border-black bg-blue-500/20 flex items-center justify-center text-xs">🇮🇳</div>
-              <div className="w-10 h-10 rounded-full border-2 border-black bg-green-500/20 flex items-center justify-center text-xs">🇰🇪</div>
-              <div className="w-10 h-10 rounded-full border-2 border-black bg-purple-500/20 flex items-center justify-center text-xs">🇬🇭</div>
+              <div className="w-10 h-10 rounded-full border-2 border-black bg-blue-500/20 flex items-center justify-center text-xs">
+                🇮🇳
+              </div>
+              <div className="w-10 h-10 rounded-full border-2 border-black bg-green-500/20 flex items-center justify-center text-xs">
+                🇰🇪
+              </div>
+              <div className="w-10 h-10 rounded-full border-2 border-black bg-purple-500/20 flex items-center justify-center text-xs">
+                🇬🇭
+              </div>
             </div>
-            <p className="text-sm font-medium text-white/90">Join 10,000+ verified global traders</p>
+            <p className="text-sm font-medium text-white/90">
+              Join 10,000+ verified global traders
+            </p>
           </div>
-          
+
           <ul className="space-y-3 text-sm text-white/70">
             <li className="flex items-center gap-2">
-              <div className="size-1.5 rounded-full bg-primary" /> Simplified KYC & Onboarding
+              <div className="size-1.5 rounded-full bg-primary" /> Simplified
+              KYC & Onboarding
             </li>
             <li className="flex items-center gap-2">
-              <div className="size-1.5 rounded-full bg-primary" /> Personalized Trade Matches
+              <div className="size-1.5 rounded-full bg-primary" /> Personalized
+              Trade Matches
             </li>
             <li className="flex items-center gap-2">
-              <div className="size-1.5 rounded-full bg-primary" /> Expert Consultation & Support
+              <div className="size-1.5 rounded-full bg-primary" /> Expert
+              Consultation & Support
             </li>
           </ul>
         </motion.div>

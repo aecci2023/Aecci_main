@@ -116,7 +116,7 @@ export const routes: RouteObject[] = [
         path: "payment-success",
         element: <PaymentSuccessPage />,
       },
-    ]
+    ],
   },
   // Added mappings for simple /about and /contact standard paths
   {

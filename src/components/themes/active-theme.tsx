@@ -1,14 +1,22 @@
-'use client';
+"use client";
 
-import { type ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import {
+  type ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-import { DEFAULT_THEME } from './theme.config';
+import { DEFAULT_THEME } from "./theme.config";
 
-const COOKIE_NAME = 'active_theme';
+const COOKIE_NAME = "active_theme";
 
 function getStoredTheme(): string {
-  if (typeof window === 'undefined') return DEFAULT_THEME;
-  const match = document.cookie.match(new RegExp('(^| )' + COOKIE_NAME + '=([^;]+)'));
+  if (typeof window === "undefined") return DEFAULT_THEME;
+  const match = document.cookie.match(
+    new RegExp("(^| )" + COOKIE_NAME + "=([^;]+)"),
+  );
   if (match) return match[2];
   const local = localStorage.getItem(COOKIE_NAME);
   if (local) return local;
@@ -16,9 +24,9 @@ function getStoredTheme(): string {
 }
 
 function setThemeCookie(theme: string) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
-  document.cookie = `${COOKIE_NAME}=${theme}; path=/; max-age=31536000; SameSite=Lax; ${window.location.protocol === 'https:' ? 'Secure;' : ''}`;
+  document.cookie = `${COOKIE_NAME}=${theme}; path=/; max-age=31536000; SameSite=Lax; ${window.location.protocol === "https:" ? "Secure;" : ""}`;
   localStorage.setItem(COOKIE_NAME, theme);
 }
 
@@ -31,7 +39,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ActiveThemeProvider({
   children,
-  initialTheme
+  initialTheme,
 }: {
   children: ReactNode;
   initialTheme?: string;
@@ -42,23 +50,23 @@ export function ActiveThemeProvider({
 
   useEffect(() => {
     // Only update if theme has changed
-    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const currentTheme = document.documentElement.getAttribute("data-theme");
     if (currentTheme !== activeTheme) {
       setThemeCookie(activeTheme);
 
       // Remove existing data-theme attribute
-      document.documentElement.removeAttribute('data-theme');
+      document.documentElement.removeAttribute("data-theme");
 
       // Remove any theme classes from body (cleanup)
       Array.from(document.body.classList)
-        .filter((className) => className.startsWith('theme-'))
+        .filter((className) => className.startsWith("theme-"))
         .forEach((className) => {
           document.body.classList.remove(className);
         });
 
       // Set data-theme on html element
       if (activeTheme) {
-        document.documentElement.setAttribute('data-theme', activeTheme);
+        document.documentElement.setAttribute("data-theme", activeTheme);
       }
     } else {
       // Still update cookie in case it's missing
@@ -76,7 +84,9 @@ export function ActiveThemeProvider({
 export function useThemeConfig() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useThemeConfig must be used within an ActiveThemeProvider');
+    throw new Error(
+      "useThemeConfig must be used within an ActiveThemeProvider",
+    );
   }
   return context;
 }

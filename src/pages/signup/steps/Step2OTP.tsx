@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
-import type { SignupFormData } from "../types";
+import { useFormContext, useWatch } from "react-hook-form";
+import type { SignupFormData } from "../schema";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 
 interface Props {
-  data: SignupFormData;
-  updateData: (data: Partial<SignupFormData>) => void;
   nextStep: () => void;
 }
 
-export default function Step2OTP({ data, nextStep }: Props) {
+export default function Step2OTP({ nextStep }: Props) {
+  const { control } = useFormContext<SignupFormData>();
+  const email = useWatch({ control, name: "email" });
+
   const [emailOtp, setEmailOtp] = useState("");
-  const [mobileOtp, setMobileOtp] = useState("");
   const [timeLeft, setTimeLeft] = useState(120);
 
   useEffect(() => {
@@ -29,47 +34,36 @@ export default function Step2OTP({ data, nextStep }: Props) {
   };
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
 
-  const isVerified = emailOtp.length === 6 && mobileOtp.length === 6;
+  const isVerified = emailOtp.length === 6;
 
   return (
     <div className="flex flex-col h-full">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold tracking-tight mb-2">Verify Your Contact Details</h1>
+        <h1 className="text-2xl font-bold tracking-tight mb-2">
+          Verify Your Contact Details
+        </h1>
         <p className="text-muted-foreground text-sm">
-          We've sent one-time passwords to your email and mobile number.
+          We've sent a one-time password to your email address.
         </p>
       </div>
 
       <div className="space-y-8">
-        
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <Label>Email OTP</Label>
-            <span className="text-xs text-muted-foreground">Sent to {data.email}</span>
+            <span className="text-xs text-muted-foreground">
+              Sent to {email}
+            </span>
           </div>
           <div className="flex justify-center w-full">
             <InputOTP maxLength={6} value={emailOtp} onChange={setEmailOtp}>
-              <InputOTPGroup className="gap-2">
-                {[0, 1, 2, 3, 4, 5].map((index) => (
-                  <InputOTPSlot key={index} index={index} />
-                ))}
-              </InputOTPGroup>
-            </InputOTP>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Label>Mobile OTP</Label>
-            <span className="text-xs text-muted-foreground">Sent to {data.mobile}</span>
-          </div>
-          <div className="flex justify-center w-full">
-            <InputOTP maxLength={6} value={mobileOtp} onChange={setMobileOtp}>
               <InputOTPGroup className="gap-2">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <InputOTPSlot key={index} index={index} />
@@ -83,26 +77,32 @@ export default function Step2OTP({ data, nextStep }: Props) {
           <p className="text-sm text-muted-foreground">
             Didn't receive a code?{" "}
             {timeLeft > 0 ? (
-              <span className="font-medium text-foreground">Resend in {formatTime(timeLeft)}</span>
+              <span className="font-medium text-foreground">
+                Resend in {formatTime(timeLeft)}
+              </span>
             ) : (
-              <button 
+              <button
                 onClick={handleResend}
                 className="text-primary font-medium hover:underline"
+                type="button"
               >
-                Resend OTPs
+                Resend OTP
               </button>
             )}
           </p>
         </div>
-
       </div>
 
       <div className="mt-8 pt-6 border-t border-border">
         <Button
           className="w-full"
           size="lg"
-          onClick={nextStep}
+          onClick={(e) => {
+            e.preventDefault();
+            nextStep();
+          }}
           disabled={!isVerified}
+          type="button"
         >
           Verify & Continue
         </Button>

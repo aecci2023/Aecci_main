@@ -1,43 +1,115 @@
-import * as React from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { MapPin, Award, ShieldCheck, Mail, Globe } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, Award, ShieldCheck, Mail, Globe } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 type Partner = {
-  name: string
-  location: string
-  role: string
-  certification: string
-  contact: string
-}
+  name: string;
+  location: string;
+  role: string;
+  certification: string;
+  contact: string;
+};
 
 const REGIONS: Record<string, Partner[]> = {
   AFRICA: [
-    { name: "Nairobi Trade Hub & Advisory", location: "Nairobi, Kenya", role: "East Africa Access Facilitator", certification: "Customs Pre-Verification Hub", contact: "nairobi-desk@aecci.org" },
-    { name: "West Africa Chamber Syndicate", location: "Accra, Ghana", role: "Sovereign Trade Advisor", certification: "ECOWAS Trade Clearance Board", contact: "accra-desk@aecci.org" },
-    { name: "Southern Africa Merchant Union", location: "Johannesburg, South Africa", role: "Industrial Market Advisor", certification: "SADC Advisory Council", contact: "joburg-desk@aecci.org" },
+    {
+      name: "Nairobi Trade Hub & Advisory",
+      location: "Nairobi, Kenya",
+      role: "East Africa Access Facilitator",
+      certification: "Customs Pre-Verification Hub",
+      contact: "nairobi-desk@aecci.org",
+    },
+    {
+      name: "West Africa Chamber Syndicate",
+      location: "Accra, Ghana",
+      role: "Sovereign Trade Advisor",
+      certification: "ECOWAS Trade Clearance Board",
+      contact: "accra-desk@aecci.org",
+    },
+    {
+      name: "Southern Africa Merchant Union",
+      location: "Johannesburg, South Africa",
+      role: "Industrial Market Advisor",
+      certification: "SADC Advisory Council",
+      contact: "joburg-desk@aecci.org",
+    },
   ],
   EUROPE: [
-    { name: "Rotterdam Trade & Logistics Syndicate", location: "Rotterdam, Netherlands", role: "EU Customs Port Authority Liaison", certification: "Schengen Tariff Gateway", contact: "rotterdam-desk@aecci.org" },
-    { name: "Frankfurt Trade Match Alliance", location: "Frankfurt, Germany", role: "Bilateral Industrial Broker", certification: "EU Industry Validation Board", contact: "frankfurt-desk@aecci.org" },
-    { name: "Baltic Exporter Hub", location: "Riga, Latvia", role: "Northern Europe Distribution Agent", certification: "Baltic Chamber Registry", contact: "riga-desk@aecci.org" },
+    {
+      name: "Rotterdam Trade & Logistics Syndicate",
+      location: "Rotterdam, Netherlands",
+      role: "EU Customs Port Authority Liaison",
+      certification: "Schengen Tariff Gateway",
+      contact: "rotterdam-desk@aecci.org",
+    },
+    {
+      name: "Frankfurt Trade Match Alliance",
+      location: "Frankfurt, Germany",
+      role: "Bilateral Industrial Broker",
+      certification: "EU Industry Validation Board",
+      contact: "frankfurt-desk@aecci.org",
+    },
+    {
+      name: "Baltic Exporter Hub",
+      location: "Riga, Latvia",
+      role: "Northern Europe Distribution Agent",
+      certification: "Baltic Chamber Registry",
+      contact: "riga-desk@aecci.org",
+    },
   ],
   ASIA: [
-    { name: "Enterprise Singapore Advisory Board", location: "Singapore Hub", role: "ASEAN Compliance Gateway", certification: "Singapore Fintech Registry", contact: "singapore-desk@aecci.org" },
-    { name: "Tokyo Business Integration Council", location: "Tokyo, Japan", role: "Precision Engineering Matchmaker", certification: "METI Import Advisory Group", contact: "tokyo-desk@aecci.org" },
-    { name: "GCC Trade Facilitation Desk", location: "Dubai, UAE", role: "Middle East Logistics Router", certification: "Dubai Chamber Partner", contact: "dubai-desk@aecci.org" },
+    {
+      name: "Enterprise Singapore Advisory Board",
+      location: "Singapore Hub",
+      role: "ASEAN Compliance Gateway",
+      certification: "Singapore Fintech Registry",
+      contact: "singapore-desk@aecci.org",
+    },
+    {
+      name: "Tokyo Business Integration Council",
+      location: "Tokyo, Japan",
+      role: "Precision Engineering Matchmaker",
+      certification: "METI Import Advisory Group",
+      contact: "tokyo-desk@aecci.org",
+    },
+    {
+      name: "GCC Trade Facilitation Desk",
+      location: "Dubai, UAE",
+      role: "Middle East Logistics Router",
+      certification: "Dubai Chamber Partner",
+      contact: "dubai-desk@aecci.org",
+    },
   ],
   AMERICAS: [
-    { name: "Mexico-India Commerce Association (MICA)", location: "Monterrey, Mexico", role: "Manufacturing Supply Matchmaker", certification: "USMCA Cross-Border Board", contact: "mexico-desk@aecci.org" },
-    { name: "North America Deal Room Syndicate", location: "Chicago, USA", role: "FMCG Wholesale Broker", certification: "USDA Import Compliance Desk", contact: "chicago-desk@aecci.org" },
-    { name: "Brazil Agro-Commerce Group", location: "São Paulo, Brazil", role: "Mercosur Market Advisory", certification: "Brazil Import Registry Authority", contact: "saopaulo-desk@aecci.org" },
+    {
+      name: "Mexico-India Commerce Association (MICA)",
+      location: "Monterrey, Mexico",
+      role: "Manufacturing Supply Matchmaker",
+      certification: "USMCA Cross-Border Board",
+      contact: "mexico-desk@aecci.org",
+    },
+    {
+      name: "North America Deal Room Syndicate",
+      location: "Chicago, USA",
+      role: "FMCG Wholesale Broker",
+      certification: "USDA Import Compliance Desk",
+      contact: "chicago-desk@aecci.org",
+    },
+    {
+      name: "Brazil Agro-Commerce Group",
+      location: "São Paulo, Brazil",
+      role: "Mercosur Market Advisory",
+      certification: "Brazil Import Registry Authority",
+      contact: "saopaulo-desk@aecci.org",
+    },
   ],
-}
+};
 
 export default function CollaborationNetwork() {
-  const [activeRegion, setActiveRegion] = React.useState<string>("AFRICA")
-  const currentPartners = REGIONS[activeRegion]
+  const [activeRegion, setActiveRegion] = React.useState<string>("AFRICA");
+  const currentPartners = REGIONS[activeRegion];
 
   return (
     <section className="bg-background py-16 md:py-24 relative border-b border-border/60">
@@ -47,10 +119,13 @@ export default function CollaborationNetwork() {
             Global Infrastructure
           </Badge>
           <h2 className="text-3xl md:text-5xl font-heading font-black text-foreground tracking-tight flex items-center justify-center gap-3">
-            <Globe className="size-8 text-primary shrink-0" /> GLOBAL COLLABORATION NETWORK
+            <Globe className="size-8 text-primary shrink-0" /> GLOBAL
+            COLLABORATION NETWORK
           </h2>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed font-light">
-            We partner directly with leading sovereign trade authorities, ports, and chambers to validate markets and connect you with verified local buyers.
+            We partner directly with leading sovereign trade authorities, ports,
+            and chambers to validate markets and connect you with verified local
+            buyers.
           </p>
         </div>
 
@@ -64,7 +139,7 @@ export default function CollaborationNetwork() {
                 "px-6 py-2 rounded-full border text-xs font-bold font-mono tracking-wider transition-all duration-200",
                 activeRegion === reg
                   ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
-                  : "bg-muted border-border text-muted-foreground hover:text-foreground hover:border-border/80"
+                  : "bg-muted border-border text-muted-foreground hover:text-foreground hover:border-border/80",
               )}
             >
               {reg}
@@ -88,9 +163,14 @@ export default function CollaborationNetwork() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <MapPin className="size-4 text-primary" />
-                      <span className="text-[11px] font-bold font-mono uppercase tracking-wide">{part.location}</span>
+                      <span className="text-[11px] font-bold font-mono uppercase tracking-wide">
+                        {part.location}
+                      </span>
                     </div>
-                    <Badge variant="outline" className="bg-background border-border text-[9px] font-mono text-muted-foreground">
+                    <Badge
+                      variant="outline"
+                      className="bg-background border-border text-[9px] font-mono text-muted-foreground"
+                    >
                       Verified Partner
                     </Badge>
                   </div>
@@ -102,11 +182,15 @@ export default function CollaborationNetwork() {
                   <div className="space-y-1.5 pt-3 border-t border-border/60 text-xs text-muted-foreground">
                     <p className="flex items-center gap-2">
                       <Award className="size-3.5 text-muted-foreground/85" />
-                      <span>Role: <strong>{part.role}</strong></span>
+                      <span>
+                        Role: <strong>{part.role}</strong>
+                      </span>
                     </p>
                     <p className="flex items-center gap-2">
                       <ShieldCheck className="size-3.5 text-muted-foreground/85" />
-                      <span>Auth: <strong>{part.certification}</strong></span>
+                      <span>
+                        Auth: <strong>{part.certification}</strong>
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -123,5 +207,5 @@ export default function CollaborationNetwork() {
         </div>
       </div>
     </section>
-  )
+  );
 }
