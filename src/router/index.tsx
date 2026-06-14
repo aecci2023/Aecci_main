@@ -14,8 +14,13 @@ import OpportunityReportPage from "@/pages/dashboard/opportunity-report";
 import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
 import ServicePurchasePage from "@/pages/dashboard/service-purchase";
 import MySessionsPage from "@/pages/dashboard/my-sessions";
-import MessagesPage from "@/pages/dashboard/messages";
-import ProfileSettingsPage from "@/pages/dashboard/profile-settings";
+import { Chats } from "@/features/chats";
+import { Settings } from "@/features/settings";
+import { SettingsProfile } from "@/features/settings/profile";
+import { SettingsAccount } from "@/features/settings/account";
+import { SettingsAppearance } from "@/features/settings/appearance";
+import { SettingsNotifications } from "@/features/settings/notifications";
+import { SettingsDisplay } from "@/features/settings/display";
 import MarketplacePage from "@/pages/dashboard/marketplace";
 import SessionDetailsPage from "@/pages/dashboard/session-details";
 import ApplicationPage from "@/pages/dashboard/application";
@@ -82,11 +87,18 @@ export const routes: RouteObject[] = [
       },
       {
         path: "messages",
-        element: <MessagesPage />,
+        element: <Chats />,
       },
       {
         path: "profile-settings",
-        element: <ProfileSettingsPage />,
+        element: <Settings />,
+        children: [
+          { index: true, element: <SettingsProfile /> },
+          { path: "account", element: <SettingsAccount /> },
+          { path: "appearance", element: <SettingsAppearance /> },
+          { path: "notifications", element: <SettingsNotifications /> },
+          { path: "display", element: <SettingsDisplay /> },
+        ],
       },
       {
         path: "marketplace",
