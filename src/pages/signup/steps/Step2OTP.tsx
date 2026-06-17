@@ -8,6 +8,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { useVerifyOtpMutation } from "../../../store/api/authApi";
 
 interface Props {
   nextStep: () => void;
@@ -19,6 +20,9 @@ export default function Step2OTP({ nextStep }: Props) {
 
   const [emailOtp, setEmailOtp] = useState("");
   const [timeLeft, setTimeLeft] = useState(120);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
 
   useEffect(() => {
     if (timeLeft <= 0) return;
@@ -42,6 +46,22 @@ export default function Step2OTP({ nextStep }: Props) {
   };
 
   const isVerified = emailOtp.length === 6;
+
+  const handleVerify = async () => {
+    try {
+      setErrorMsg("");
+      const res = await verifyOtp({ email, otp: emailOtp }).unwrap();
+      if (res.success) {
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        nextStep();
+      } else {
+        setErrorMsg(res.message || "Invalid OTP");
+      }
+    } catch (err: any) {
+      setErrorMsg(err.data?.message || "Verification failed");
+    }
+  };
 
   return (
     <div className="flex flex-col h-full">
@@ -71,6 +91,7 @@ export default function Step2OTP({ nextStep }: Props) {
               </InputOTPGroup>
             </InputOTP>
           </div>
+          {errorMsg && <p className="text-red-500 text-sm text-center">{errorMsg}</p>}
         </div>
 
         <div className="pt-4 text-center">
@@ -99,12 +120,12 @@ export default function Step2OTP({ nextStep }: Props) {
           size="lg"
           onClick={(e) => {
             e.preventDefault();
-            nextStep();
+            handleVerify();
           }}
-          disabled={!isVerified}
+          disabled={!isVerified || isLoading}
           type="button"
         >
-          Verify & Continue
+          {isLoading ? "Verifying..." : "Verify & Continue"}
         </Button>
       </div>
     </div>
