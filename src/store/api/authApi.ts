@@ -59,6 +59,13 @@ export const authApi = createApi({
         };
       },
     }),
+    sendOtp: builder.mutation<any, any>({
+      query: (data) => ({
+        url: 'auth/send-otp',
+        method: 'POST',
+        body: data,
+      }),
+    }),
     signup: builder.mutation<any, any>({
       query: (userData) => ({
         url: 'auth/signup',
@@ -90,4 +97,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useUploadFileMutation, useSignupMutation, useVerifyOtpMutation, useUpdateProfileMutation, useRefreshTokenMutation } = authApi;
+export const { useUploadFileMutation, useSendOtpMutation, useSignupMutation, useVerifyOtpMutation, useUpdateProfileMutation, useRefreshTokenMutation } = authApi;

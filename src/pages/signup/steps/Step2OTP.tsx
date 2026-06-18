@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import { useFormContext, useWatch } from "react-hook-form";
 import type { SignupFormData } from "../schema";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,7 @@ export default function Step2OTP({ nextStep }: Props) {
 
   const [emailOtp, setEmailOtp] = useState("");
   const [timeLeft, setTimeLeft] = useState(120);
-  const [errorMsg, setErrorMsg] = useState("");
+
 
   const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
 
@@ -47,19 +48,19 @@ export default function Step2OTP({ nextStep }: Props) {
 
   const isVerified = emailOtp.length === 6;
 
+
+
   const handleVerify = async () => {
     try {
-      setErrorMsg("");
       const res = await verifyOtp({ email, otp: emailOtp }).unwrap();
       if (res.success) {
-        localStorage.setItem("accessToken", res.data.accessToken);
-        localStorage.setItem("refreshToken", res.data.refreshToken);
+        toast.success(res.message || "OTP verified successfully!");
         nextStep();
       } else {
-        setErrorMsg(res.message || "Invalid OTP");
+        toast.error(res.message || "Invalid OTP");
       }
     } catch (err: any) {
-      setErrorMsg(err.data?.message || "Verification failed");
+      toast.error(err.data?.message || "Verification failed");
     }
   };
 
@@ -91,7 +92,7 @@ export default function Step2OTP({ nextStep }: Props) {
               </InputOTPGroup>
             </InputOTP>
           </div>
-          {errorMsg && <p className="text-red-500 text-sm text-center">{errorMsg}</p>}
+
         </div>
 
         <div className="pt-4 text-center">

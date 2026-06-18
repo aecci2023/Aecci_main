@@ -2,8 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm, FormProvider, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { signupSchema, type SignupFormData, initialFormData } from "../schema";
-import { useUploadFileMutation, useSignupMutation, useUpdateProfileMutation } from "../../../store/api/authApi";
+import { useUploadFileMutation, useSignupMutation, useSendOtpMutation } from "../../../store/api/authApi";
 
 import Step1Registration from "../steps/Step1Registration";
 import Step2OTP from "../steps/Step2OTP";
@@ -89,11 +90,10 @@ const getFieldsForStep = (
 export default function SignupWizard() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
 
   const [uploadFile] = useUploadFileMutation();
+  const [sendOtp] = useSendOtpMutation();
   const [signup] = useSignupMutation();
-  const [updateProfile] = useUpdateProfileMutation();
 
   const methods = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -115,32 +115,26 @@ export default function SignupWizard() {
     if (isValid) {
       if (step === 1) {
         setIsSubmitting(true);
-        setErrorMsg("");
         try {
           const data = methods.getValues();
           const submitData = {
-            fullName: data.fullName,
             email: data.email,
-            mobileNumber: data.mobile, // mapping mobile -> mobileNumber
-            password: data.password,
-            country: data.country,
-            userType: data.userType,
-            companyName: data.companyName,
+            fullName: data.fullName,
           };
-          const res = await signup(submitData).unwrap();
+          const res = await sendOtp(submitData).unwrap();
           if (res.success) {
+            toast.success(res.message || "OTP sent to your email!");
             setStep(2);
           } else {
-            setErrorMsg(res.message || "Registration failed");
+            toast.error(res.message || "Registration failed");
           }
         } catch (error: any) {
-          setErrorMsg(error.data?.message || "An error occurred during registration");
+          toast.error(error.data?.message || "An error occurred during registration");
         } finally {
           setIsSubmitting(false);
         }
       } else if (step === 5) {
         setIsSubmitting(true);
-        setErrorMsg("");
         try {
           const data = methods.getValues();
           
@@ -161,32 +155,34 @@ export default function SignupWizard() {
 
           // Map the rest of the profile data
           const profileData: Record<string, any> = { ...data };
-          delete profileData.fullName;
-          delete profileData.email;
-          delete profileData.mobile;
-          delete profileData.password;
           delete profileData.confirmPassword;
-          delete profileData.country;
-          delete profileData.userType;
           delete profileData.agreedToTerms;
           delete profileData.documents;
           delete profileData.productCatalogue;
 
+          // Map mobile to mobileNumber for backend compatibility
+          const mobileNumber = profileData.mobile;
+          delete profileData.mobile;
+
           const submitData = {
             ...profileData,
+            mobileNumber,
             documents: uploadedDocuments,
             productCatalogue: uploadedCatalogue
           };
 
-          const res = await updateProfile(submitData).unwrap();
+          const res = await signup(submitData).unwrap();
           if (res.success) {
+            localStorage.setItem("accessToken", res.data.accessToken);
+            localStorage.setItem("refreshToken", res.data.refreshToken);
+            toast.success(res.message || "Registration complete!");
             setStep(6);
           } else {
-            setErrorMsg(res.message || "Profile update failed");
+            toast.error(res.message || "Registration failed");
           }
         } catch (error: any) {
-          console.error("Profile update failed:", error);
-          setErrorMsg(error.data?.message || "An error occurred while updating profile");
+          console.error("Registration failed:", error);
+          toast.error(error.data?.message || "An error occurred during final registration");
         } finally {
           setIsSubmitting(false);
         }
@@ -224,11 +220,6 @@ export default function SignupWizard() {
 
       {/* Step Content */}
       <FormProvider {...methods}>
-        {errorMsg && (
-          <div className="mb-4 p-3 bg-red-100 text-red-600 rounded-md text-sm text-center">
-            {errorMsg}
-          </div>
-        )}
         <div className="flex-1 flex flex-col relative">
           <AnimatePresence mode="wait">
             <motion.div
