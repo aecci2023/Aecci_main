@@ -32,6 +32,12 @@ import LoginPage from "@/pages/login";
 import { AdminLayout } from "@/components/layout/admin-layout";
 import { AdminRoute } from "@/components/layout/admin-route";
 import AdminDashboard from "@/pages/admin/dashboard";
+import AdminUsersPage from "@/pages/admin/users";
+import AdminBusinessesPage from "@/pages/admin/businesses";
+import AdminIndividualsPage from "@/pages/admin/individuals";
+import AdminPartnersPage from "@/pages/admin/partners";
+import AdminVerificationsPage from "@/pages/admin/verifications";
+import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
 
 export const routes: RouteObject[] = [
   {
@@ -57,6 +63,30 @@ export const routes: RouteObject[] = [
           {
             path: "dashboard",
             element: <AdminDashboard />,
+          },
+          {
+            path: "verifications",
+            element: <AdminVerificationsPage />,
+          },
+          {
+            path: "verifications/:id",
+            element: <AdminVerificationDetailsPage />,
+          },
+          {
+            path: "users",
+            element: <AdminUsersPage />,
+          },
+          {
+            path: "businesses",
+            element: <AdminBusinessesPage />,
+          },
+          {
+            path: "individuals",
+            element: <AdminIndividualsPage />,
+          },
+          {
+            path: "partners",
+            element: <AdminPartnersPage />,
           },
           {
             path: "*",
