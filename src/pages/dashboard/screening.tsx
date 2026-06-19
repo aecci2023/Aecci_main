@@ -63,34 +63,46 @@ export default function ScreeningPage() {
                   <Check className="size-3" />
                 </div>
                 <h4 className="text-sm font-semibold text-foreground leading-none">
-                  Onboarding Registration Complete
+                  Registration Complete
                 </h4>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Submitted June 10, 2026
-                </p>
-              </div>
-
-              <div className="relative pt-2">
-                <div className="absolute -left-[31px] top-2 size-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold">
-                  <Check className="size-3" />
-                </div>
-                <h4 className="text-sm font-semibold text-foreground leading-none">
-                  Company Profile Checked
-                </h4>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Verified June 12, 2026
+                  You have successfully created your profile.
                 </p>
               </div>
 
               <div className="relative pt-2">
                 <div className="absolute -left-[31px] top-2 size-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold">
-                  •
+                  <Clock className="size-3" />
                 </div>
                 <h4 className="text-sm font-semibold text-foreground leading-none">
-                  IEC & GST Verification
+                  Screening & Verification
                 </h4>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Currently querying local tax APIs
+                  Review usually takes 1-3 business days. We are verifying your documents and details.
+                </p>
+              </div>
+
+              <div className="relative pt-2">
+                <div className="absolute -left-[31px] top-2 size-5 rounded-full bg-muted text-muted-foreground flex items-center justify-center text-[10px] font-bold">
+                  •
+                </div>
+                <h4 className="text-sm font-semibold text-muted-foreground leading-none">
+                  Partner Assignment & Pricing
+                </h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Pending review approval
+                </p>
+              </div>
+
+              <div className="relative pt-2">
+                <div className="absolute -left-[31px] top-2 size-5 rounded-full bg-muted text-muted-foreground flex items-center justify-center text-[10px] font-bold">
+                  •
+                </div>
+                <h4 className="text-sm font-semibold text-muted-foreground leading-none">
+                  Full Deal Room Access
+                </h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Pending payment
                 </p>
               </div>
             </div>

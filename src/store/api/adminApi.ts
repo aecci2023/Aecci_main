@@ -16,14 +16,15 @@ export const adminApi = createApi({
   baseQuery,
   tagTypes: ['Users'],
   endpoints: (builder) => ({
-    getUsers: builder.query<any, { role?: string; userType?: string; kycStatus?: string }>({
+    getUsers: builder.query<any, { role?: string; userType?: string; kycStatus?: string; partnerId?: string }>({
       query: (params) => {
         let queryString = '';
-        if (params.role || params.userType || params.kycStatus) {
+        if (params.role || params.userType || params.kycStatus || params.partnerId) {
           const searchParams = new URLSearchParams();
           if (params.role) searchParams.append('role', params.role);
           if (params.userType) searchParams.append('userType', params.userType);
           if (params.kycStatus) searchParams.append('kycStatus', params.kycStatus);
+          if (params.partnerId) searchParams.append('partnerId', params.partnerId);
           queryString = `?${searchParams.toString()}`;
         }
         return `users${queryString}`;
@@ -42,7 +43,57 @@ export const adminApi = createApi({
       }),
       invalidatesTags: ['Users'],
     }),
+    assignPartner: builder.mutation<any, { id: string; partnerId: string }>({
+      query: ({ id, partnerId }) => ({
+        url: `users/${id}/assign-partner`,
+        method: 'POST',
+        body: { partnerId },
+      }),
+      invalidatesTags: ['Users'],
+    }),
+    setPricing: builder.mutation<any, { id: string; dealRoomPrice: number }>({
+      query: ({ id, dealRoomPrice }) => ({
+        url: `users/${id}/pricing`,
+        method: 'POST',
+        body: { dealRoomPrice },
+      }),
+      invalidatesTags: ['Users'],
+    }),
+    processPayment: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `users/${id}/payment`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Users'],
+    }),
+    
+    // --- Payments ---
+    createPaymentOrder: builder.mutation<any, { sessionId: string; userId: string }>({
+      query: (body) => ({
+        url: '/payment/create-order',
+        method: 'POST',
+        body,
+      }),
+    }),
+    verifyPayment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: '/payment/verify',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Users'],
+    }),
+
   }),
 });
 
-export const { useGetUsersQuery, useGetUserByIdQuery, useUpdateKycStatusMutation } = adminApi;
+export const { 
+  useGetUsersQuery, 
+  useGetUserByIdQuery, 
+  useUpdateKycStatusMutation,
+  useAssignPartnerMutation,
+  useSetPricingMutation,
+  useProcessPaymentMutation,
+  useCreatePaymentOrderMutation,
+  useVerifyPaymentMutation,
+} = adminApi;

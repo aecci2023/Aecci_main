@@ -1,20 +1,16 @@
 import { useRef, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-import { Header } from "@/components/layout/header";
 import { Main } from "@/components/layout/main";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { Badge } from "@/components/ui/badge";
 
-export default function LiveDealRoomPage() {
+export default function LiveDealRoom() {
+  const { id: roomId } = useParams<{ id: string }>();
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get('sessionId') || 'test_deal_room_123';
 
   useEffect(() => {
     const initZego = async () => {
-      if (!containerRef.current || !sessionId) return;
+      if (!containerRef.current || !roomId) return;
 
       // Get user from local storage
       const userStr = localStorage.getItem("user");
@@ -27,12 +23,13 @@ export default function LiveDealRoomPage() {
           if (user.fullName) userName = user.fullName;
           if (user.id) userId = user.id;
         } catch (e) {
-          console.error(e);
+          console.log(e)
           console.error("Failed to parse user from local storage");
         }
       }
 
-      // AppID and ServerSecret from environment
+      // AppID and ServerSecret should ideally be retrieved from backend in production
+      // but ZegoUIKitPrebuilt allows generating it directly for rapid testing
       const appID = parseInt(import.meta.env.VITE_ZEGOCLOUD_APP_ID || '0');
       const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET || '';
 
@@ -44,7 +41,7 @@ export default function LiveDealRoomPage() {
       const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
         appID,
         serverSecret,
-        sessionId,
+        roomId,
         userId,
         userName
       );
@@ -58,11 +55,11 @@ export default function LiveDealRoomPage() {
         sharedLinks: [
           {
             name: 'Deal Room Link',
-            url: `${window.location.protocol}//${window.location.host}/dashboard/live-deal-room?sessionId=${sessionId}`,
+            url: `${window.location.protocol}//${window.location.host}/dashboard/dealroom/${roomId}`,
           },
         ],
         scenario: {
-          mode: ZegoUIKitPrebuilt.VideoConference,
+          mode: ZegoUIKitPrebuilt.VideoConference, // Choose VideoConference or GroupCall
         },
         turnOnMicrophoneWhenJoining: false,
         turnOnCameraWhenJoining: false,
@@ -76,39 +73,35 @@ export default function LiveDealRoomPage() {
         layout: "Auto",
         showLayoutButton: true,
         onLeaveRoom: () => {
-          navigate("/dashboard/session-summary");
+          navigate("/dashboard");
         }
       });
     };
 
     initZego();
-  }, [sessionId, navigate]);
+  }, [roomId, navigate]);
 
   return (
-    <>
-      <Header>
-        <div className="flex items-center space-x-2">
-          <span className="font-semibold text-sm text-muted-foreground">
-            AECCI Hub
-          </span>
-          <span className="text-muted-foreground">/</span>
-          <span className="font-semibold text-sm">Live Deal Room</span>
-        </div>
-        <div className="ml-auto flex items-center gap-3">
-          <Badge className="bg-rose-500 hover:bg-rose-500 text-white flex items-center gap-1.5 animate-pulse">
-            <span className="size-1.5 rounded-full bg-white animate-ping"></span>{" "}
+    <Main>
+      <div className="w-full h-[calc(100vh-64px)] bg-background flex flex-col">
+        <div className="p-4 bg-muted/30 border-b border-border flex justify-between items-center">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight text-primary">Global Deal Room</h1>
+            <p className="text-sm text-muted-foreground">Session ID: {roomId}</p>
+          </div>
+          <div className="px-3 py-1 bg-green-500/10 text-green-600 rounded-full text-xs font-semibold flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
             Live Session
-          </Badge>
-          <ProfileDropdown />
+          </div>
         </div>
-      </Header>
-
-      <Main fluid className="h-[calc(100vh-100px)] p-0">
         <div 
-          className="w-full h-full bg-zinc-950"
+          className="flex-1 w-full h-full"
           ref={containerRef} 
         />
-      </Main>
-    </>
+      </div>
+    </Main>
   );
 }

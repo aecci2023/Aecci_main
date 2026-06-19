@@ -49,6 +49,8 @@ import AdminAnnouncementsPage from "@/pages/admin/announcements";
 import AdminTransactionsPage from "@/pages/admin/transactions";
 import AdminInvoicesPage from "@/pages/admin/invoices";
 
+import PartnerDashboard from "@/pages/partner/dashboard";
+
 export const routes: RouteObject[] = [
   {
     path: "/",
@@ -61,6 +63,12 @@ export const routes: RouteObject[] = [
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/partner",
+    children: [
+      { path: "dashboard", element: <PartnerDashboard /> },
+    ],
   },
   {
     path: "/admin",

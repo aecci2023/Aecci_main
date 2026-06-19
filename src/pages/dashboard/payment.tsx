@@ -13,8 +13,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ShieldCheck, CreditCard, ArrowRight, Lock } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useCreatePaymentOrderMutation, useVerifyPaymentMutation, useGetUserByIdQuery } from "@/store/api/adminApi";
+import { toast } from "sonner";
 
 export default function PaymentPage() {
   const navigate = useNavigate();
@@ -22,9 +24,119 @@ export default function PaymentPage() {
   const [expiry, setExpiry] = useState("");
   const [cvc, setCvc] = useState("");
 
-  const handleSimulatePayment = (e: React.FormEvent) => {
+  const [currentUser] = useState<any>(() => {
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      try {
+        return JSON.parse(userStr);
+      } catch (e) {
+        console.log(e)
+        return null;
+      }
+    }
+    return null;
+  });
+
+  const { data: userData } = useGetUserByIdQuery(currentUser?.id as string, {
+    skip: !currentUser?.id,
+  });
+  
+  const dbUser = userData?.data;
+  const price = dbUser?.dealRoomPrice || 29500;
+
+  const [createOrder, { isLoading: isCreating }] = useCreatePaymentOrderMutation();
+  const [verifyPayment, { isLoading: isVerifying }] = useVerifyPaymentMutation();
+
+  const isProcessing = isCreating || isVerifying;
+
+  // Use URL query parameters for sessionId if available, otherwise fallback
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const sessionId = queryParams.get('sessionId') || "dummy_session_id"; // Ideally pass actual sessionId
+
+  const handleSimulatePayment = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/dashboard/payment-success");
+    if (!dbUser?.id) return;
+    
+    try {
+      // 1. Create Order
+      const orderResponse = await createOrder({ sessionId, userId: dbUser.id }).unwrap();
+      
+      if (!orderResponse.success) {
+        throw new Error("Failed to create order");
+      }
+
+      // 2. Load Razorpay script dynamically
+      const res = await loadRazorpayScript();
+      if (!res) {
+        toast.error("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
+
+      // 3. Initialize Razorpay options
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_YourKeyId', // Use env var in prod
+        amount: orderResponse.amount,
+        currency: orderResponse.currency,
+        name: "AECCI Global",
+        description: "Deal Room Registration",
+        order_id: orderResponse.orderId,
+        handler: async function (response: any) {
+          try {
+            // 4. Verify Payment on success
+            const verifyRes = await verifyPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              sessionId,
+              userId: dbUser.id
+            }).unwrap();
+
+            if (verifyRes.success) {
+              toast.success("Payment successful!");
+              const updatedUser = { ...currentUser, kycStatus: 'active', paymentStatus: 'paid' };
+              localStorage.setItem("user", JSON.stringify(updatedUser));
+              navigate("/dashboard/payment-success");
+            }
+          } catch (err) {
+            console.error(err);
+            toast.error("Payment verification failed.");
+          }
+        },
+        prefill: {
+          name: dbUser.fullName,
+          email: dbUser.email,
+          contact: dbUser.mobileNumber,
+        },
+        theme: {
+          color: "#1e3a8a",
+        },
+      };
+
+      const rzp1 = new (window as any).Razorpay(options);
+      rzp1.on('payment.failed', function (response: any) {
+        toast.error(response.error.description || "Payment failed");
+      });
+      rzp1.open();
+
+    } catch (error) {
+      console.error(error);
+      toast.error("Payment process could not be initiated.");
+    }
+  };
+
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
   };
 
   return (
@@ -60,7 +172,7 @@ export default function PaymentPage() {
             <CardDescription>
               Order Total:{" "}
               <span className="font-bold text-foreground">
-                ₹29,500 (incl. GST)
+                ${price.toLocaleString()} (USD)
               </span>
             </CardDescription>
           </CardHeader>
@@ -119,9 +231,10 @@ export default function PaymentPage() {
 
               <Button
                 type="submit"
+                disabled={isProcessing}
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-5"
               >
-                Simulate Successful Payment{" "}
+                {isProcessing ? "Processing..." : "Pay with Razorpay"}{" "}
                 <ArrowRight className="size-4 ml-1.5" />
               </Button>
             </form>

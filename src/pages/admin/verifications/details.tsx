@@ -1,12 +1,19 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Main } from "@/components/layout/main";
-import { useGetUserByIdQuery, useUpdateKycStatusMutation } from "@/store/api/adminApi";
+import { 
+  useGetUserByIdQuery, 
+  useUpdateKycStatusMutation,
+  useGetUsersQuery,
+  useAssignPartnerMutation
+} from "@/store/api/adminApi";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, XCircle, FileText, Download, ArrowLeft, Building2 } from "lucide-react";
+import { CheckCircle2, XCircle, FileText, Download, ArrowLeft, Building2, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function AdminVerificationDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -16,6 +23,12 @@ export default function AdminVerificationDetailsPage() {
     skip: !id,
   });
   const [updateKycStatus, { isLoading: isUpdating }] = useUpdateKycStatusMutation();
+
+  const { data: partnersData } = useGetUsersQuery({ role: 'partner' });
+  const partners = partnersData?.data || [];
+
+  const [selectedPartner, setSelectedPartner] = useState("");
+  const [assignPartner, { isLoading: isAssigning }] = useAssignPartnerMutation();
 
   const user = data?.data;
 
@@ -38,14 +51,32 @@ export default function AdminVerificationDetailsPage() {
     );
   }
 
-  const handleUpdateStatus = async (status: 'approved' | 'rejected') => {
+  const handleUpdateStatus = async (status: string) => {
     try {
       await updateKycStatus({ id: user.id, kycStatus: status }).unwrap();
-      toast.success(`User KYC status has been ${status}.`);
-      navigate("/admin/verifications");
+      toast.success(`User KYC status has been updated.`);
+      // Instead of navigating away immediately, let them assign a partner if approved
+      if (status === 'rejected') {
+        navigate("/admin/verifications");
+      }
     } catch (err) {
       console.error("KYC Update Error:", err);
       toast.error(`Failed to update KYC status.`);
+    }
+  };
+
+  const handleAssignPartner = async () => {
+    if (!selectedPartner) {
+      toast.error("Please select a partner first.");
+      return;
+    }
+    try {
+      await assignPartner({ id: user.id, partnerId: selectedPartner }).unwrap();
+      toast.success("Partner assigned successfully.");
+      navigate("/admin/verifications");
+    } catch (err) {
+      console.error("Partner Assignment Error:", err);
+      toast.error("Failed to assign partner.");
     }
   };
 
@@ -93,21 +124,49 @@ export default function AdminVerificationDetailsPage() {
           <ArrowLeft className="w-4 h-4" /> Back to List
         </Button>
         <div className="flex gap-3">
-          <Button
-            variant="outline"
-            className="text-destructive hover:text-destructive hover:bg-destructive/10"
-            disabled={isUpdating}
-            onClick={() => handleUpdateStatus('rejected')}
-          >
-            <XCircle className="w-4 h-4 mr-2" /> Reject Application
-          </Button>
-          <Button
-            className="bg-emerald-600 hover:bg-emerald-700 text-white"
-            disabled={isUpdating}
-            onClick={() => handleUpdateStatus('approved')}
-          >
-            <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC
-          </Button>
+          {user.kycStatus === 'pending' || user.kycStatus === 'pending_verification' ? (
+            <>
+              <Button
+                variant="outline"
+                className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                disabled={isUpdating}
+                onClick={() => handleUpdateStatus('rejected')}
+              >
+                <XCircle className="w-4 h-4 mr-2" /> Reject Application
+              </Button>
+              <Button
+                className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                disabled={isUpdating}
+                onClick={() => handleUpdateStatus('approved_pending_assignment')}
+              >
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC
+              </Button>
+            </>
+          ) : user.kycStatus === 'approved_pending_assignment' ? (
+            <div className="flex items-center gap-3">
+              <Select value={selectedPartner} onValueChange={setSelectedPartner}>
+                <SelectTrigger className="w-[200px] bg-background">
+                  <SelectValue placeholder="Select Partner" />
+                </SelectTrigger>
+                <SelectContent>
+                  {partners.map((p: any) => (
+                    <SelectItem key={p.id} value={p.id}>{p.fullName || p.email}</SelectItem>
+                  ))}
+                  {partners.length === 0 && <SelectItem value="none" disabled>No partners available</SelectItem>}
+                </SelectContent>
+              </Select>
+              <Button 
+                onClick={handleAssignPartner} 
+                disabled={!selectedPartner || isAssigning || selectedPartner === "none"}
+              >
+                <UserPlus className="w-4 h-4 mr-2" /> Assign Partner
+              </Button>
+            </div>
+          ) : (
+            <Badge className="bg-primary/10 text-primary hover:bg-primary/20 capitalize">
+              Status: {user.kycStatus.replace(/_/g, ' ')}
+            </Badge>
+          )}
         </div>
       </div>
 
