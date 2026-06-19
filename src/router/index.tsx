@@ -38,6 +38,16 @@ import AdminIndividualsPage from "@/pages/admin/individuals";
 import AdminPartnersPage from "@/pages/admin/partners";
 import AdminVerificationsPage from "@/pages/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
+import AdminDocumentsPage from "@/pages/admin/documents";
+import AdminPartnerOnboardingPage from "@/pages/admin/partner-onboarding";
+import AdminSessionsPage from "@/pages/admin/sessions";
+import AdminMarketplacePage from "@/pages/admin/marketplace";
+import AdminQuestionsPage from "@/pages/admin/questions";
+import AdminCountryIntelligencePage from "@/pages/admin/country-intelligence";
+import AdminReportsPage from "@/pages/admin/reports";
+import AdminAnnouncementsPage from "@/pages/admin/announcements";
+import AdminTransactionsPage from "@/pages/admin/transactions";
+import AdminInvoicesPage from "@/pages/admin/invoices";
 
 export const routes: RouteObject[] = [
   {
@@ -87,6 +97,46 @@ export const routes: RouteObject[] = [
           {
             path: "partners",
             element: <AdminPartnersPage />,
+          },
+          {
+            path: "documents",
+            element: <AdminDocumentsPage />,
+          },
+          {
+            path: "partner-onboarding",
+            element: <AdminPartnerOnboardingPage />,
+          },
+          {
+            path: "sessions",
+            element: <AdminSessionsPage />,
+          },
+          {
+            path: "marketplace",
+            element: <AdminMarketplacePage />,
+          },
+          {
+            path: "questions",
+            element: <AdminQuestionsPage />,
+          },
+          {
+            path: "country-intelligence",
+            element: <AdminCountryIntelligencePage />,
+          },
+          {
+            path: "reports",
+            element: <AdminReportsPage />,
+          },
+          {
+            path: "announcements",
+            element: <AdminAnnouncementsPage />,
+          },
+          {
+            path: "transactions",
+            element: <AdminTransactionsPage />,
+          },
+          {
+            path: "invoices",
+            element: <AdminInvoicesPage />,
           },
           {
             path: "*",
