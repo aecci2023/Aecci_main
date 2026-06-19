@@ -73,6 +73,13 @@ export const authApi = createApi({
         body: userData,
       }),
     }),
+    login: builder.mutation<any, any>({
+      query: (userData) => ({
+        url: 'auth/login',
+        method: 'POST',
+        body: userData,
+      }),
+    }),
     verifyOtp: builder.mutation<any, { email: string; otp: string }>({
       query: (data) => ({
         url: 'auth/verify-otp',
@@ -94,7 +101,39 @@ export const authApi = createApi({
         body: data,
       }),
     }),
+    forgotPassword: builder.mutation<any, { email: string }>({
+      query: (data) => ({
+        url: 'auth/forgot-password',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    verifyResetOtp: builder.mutation<any, { email: string; otp: string }>({
+      query: (data) => ({
+        url: 'auth/verify-reset-otp',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    resetPassword: builder.mutation<any, any>({
+      query: (data) => ({
+        url: 'auth/reset-password',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useUploadFileMutation, useSendOtpMutation, useSignupMutation, useVerifyOtpMutation, useUpdateProfileMutation, useRefreshTokenMutation } = authApi;
+export const { 
+  useUploadFileMutation, 
+  useSendOtpMutation, 
+  useSignupMutation, 
+  useLoginMutation, 
+  useVerifyOtpMutation, 
+  useUpdateProfileMutation, 
+  useRefreshTokenMutation,
+  useForgotPasswordMutation,
+  useVerifyResetOtpMutation,
+  useResetPasswordMutation
+} = authApi;

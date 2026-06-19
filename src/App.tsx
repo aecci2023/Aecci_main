@@ -11,7 +11,9 @@ export default function App() {
   const location = useLocation();
   const isSignupPage = location.pathname.startsWith("/signup");
   const isDashboardPage = location.pathname.startsWith("/dashboard");
-  const hideChrome = isSignupPage || isDashboardPage;
+  const isLoginPage = location.pathname.startsWith("/login");
+  const isAdminPage = location.pathname.startsWith("/admin");
+  const hideChrome = isSignupPage || isDashboardPage || isLoginPage || isAdminPage;
 
   return (
     <ActiveThemeProvider>

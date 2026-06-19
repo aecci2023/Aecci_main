@@ -28,6 +28,11 @@ import ScreeningPage from "@/pages/dashboard/screening";
 import ApprovalPage from "@/pages/dashboard/approval";
 import PaymentPage from "@/pages/dashboard/payment";
 import PaymentSuccessPage from "@/pages/dashboard/payment-success";
+import LoginPage from "@/pages/login";
+import { AdminLayout } from "@/components/layout/admin-layout";
+import { AdminRoute } from "@/components/layout/admin-route";
+import AdminDashboard from "@/pages/admin/dashboard";
+
 export const routes: RouteObject[] = [
   {
     path: "/",
@@ -36,6 +41,30 @@ export const routes: RouteObject[] = [
   {
     path: "/signup",
     element: <SignupPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/admin",
+    element: <AdminRoute />,
+    children: [
+      {
+        path: "",
+        element: <AdminLayout />,
+        children: [
+          {
+            path: "dashboard",
+            element: <AdminDashboard />,
+          },
+          {
+            path: "*",
+            element: <NotFound />,
+          }
+        ]
+      }
+    ]
   },
   {
     path: "/dashboard",

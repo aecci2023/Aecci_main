@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import type { SignupFormData } from "../types";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -53,6 +54,7 @@ const getStrengthText = (score: number) => {
 };
 
 export default function Step1Registration({ nextStep }: Props) {
+  const navigate = useNavigate();
   const { control } = useFormContext<SignupFormData>();
 
   const userType = useWatch({ control, name: "userType" });
@@ -349,6 +351,17 @@ export default function Step1Registration({ nextStep }: Props) {
         >
           Create Account
         </Button>
+      </div>
+
+      <div className="mt-6 text-center text-sm">
+        <span className="text-muted-foreground">Already have an account? </span>
+        <button
+          type="button"
+          onClick={() => navigate("/login")}
+          className="text-primary font-medium hover:underline"
+        >
+          Log in
+        </button>
       </div>
     </div>
   );
