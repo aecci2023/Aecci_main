@@ -16,6 +16,7 @@ import { ShieldCheck, CreditCard, ArrowRight, Lock } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCreatePaymentOrderMutation, useVerifyPaymentMutation, useGetUserByIdQuery } from "@/store/api/adminApi";
+import { useGetSessionByIdQuery } from "@/store/api/sessionApi";
 import { toast } from "sonner";
 
 export default function PaymentPage() {
@@ -42,7 +43,6 @@ export default function PaymentPage() {
   });
   
   const dbUser = userData?.data;
-  const price = dbUser?.dealRoomPrice || 29500;
 
   const [createOrder, { isLoading: isCreating }] = useCreatePaymentOrderMutation();
   const [verifyPayment, { isLoading: isVerifying }] = useVerifyPaymentMutation();
@@ -53,6 +53,10 @@ export default function PaymentPage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const sessionId = queryParams.get('sessionId') || "dummy_session_id"; // Ideally pass actual sessionId
+
+  const { data: sessionData } = useGetSessionByIdQuery(sessionId, { skip: !sessionId });
+  const session = sessionData?.data;
+  const price = session?.price || 29500;
 
   const handleSimulatePayment = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,7 +83,7 @@ export default function PaymentPage() {
         amount: orderResponse.amount,
         currency: orderResponse.currency,
         name: "AECCI Global",
-        description: "Deal Room Registration",
+        description: `Deal Room Registration: ${session?.title || "Session"}`,
         order_id: orderResponse.orderId,
         handler: async function (response: any) {
           try {

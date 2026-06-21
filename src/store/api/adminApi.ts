@@ -35,11 +35,19 @@ export const adminApi = createApi({
       query: (id) => `users/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Users', id }],
     }),
-    updateKycStatus: builder.mutation<any, { id: string; kycStatus: string }>({
-      query: ({ id, kycStatus }) => ({
+    updateKycStatus: builder.mutation<any, { id: string; kycStatus: string; reason?: string; partnerId?: string; assignedPartnerFee?: number | string; assignedPartnerSlot?: string }>({
+      query: ({ id, ...body }) => ({
         url: `users/${id}/kyc`,
         method: 'PATCH',
-        body: { kycStatus },
+        body,
+      }),
+      invalidatesTags: ['Users'],
+    }),
+    createPartnerManually: builder.mutation<any, any>({
+      query: (body) => ({
+        url: 'partners/admin/create',
+        method: 'POST',
+        body,
       }),
       invalidatesTags: ['Users'],
     }),
@@ -84,6 +92,32 @@ export const adminApi = createApi({
       invalidatesTags: ['Users'],
     }),
 
+    // --- Partners ---
+    getPartnerProfiles: builder.query<any, string | void>({
+      query: (status) => status ? `partners/profiles?status=${status}` : `partners/profiles`,
+      providesTags: ['Users'],
+    }),
+    updatePartnerStatus: builder.mutation<any, { userId: string; status: string; tier?: string }>({
+      query: ({ userId, status, tier }) => ({
+        url: `partners/profiles/${userId}/status`,
+        method: 'PUT',
+        body: { status, tier },
+      }),
+      invalidatesTags: ['Users'],
+    }),
+    getPartnerProfile: builder.query<any, string | void>({
+      query: (userId) => userId ? `partners/profiles/${userId}` : `partners/me`,
+      providesTags: ['Users'],
+    }),
+    setupPartnerProfile: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `partners/setup`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['Users'],
+    }),
+
   }),
 });
 
@@ -96,4 +130,9 @@ export const {
   useProcessPaymentMutation,
   useCreatePaymentOrderMutation,
   useVerifyPaymentMutation,
+  useGetPartnerProfilesQuery,
+  useUpdatePartnerStatusMutation,
+  useGetPartnerProfileQuery,
+  useSetupPartnerProfileMutation,
+  useCreatePartnerManuallyMutation,
 } = adminApi;

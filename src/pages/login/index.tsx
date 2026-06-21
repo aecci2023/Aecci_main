@@ -36,9 +36,9 @@ export default function LoginPage() {
   const [timer, setTimer] = useState(120);
 
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
+    let interval: ReturnType<typeof window.setInterval>;
     if (requiresAdminOtp && timer > 0) {
-      interval = setInterval(() => {
+      interval = window.setInterval(() => {
         setTimer((prev) => prev - 1);
       }, 1000);
     }
@@ -87,6 +87,8 @@ export default function LoginPage() {
         
         if (user.role === "admin") {
           navigate("/admin/dashboard");
+        } else if (user.role === "partner") {
+          navigate("/partner/dashboard");
         } else {
           navigate("/dashboard");
         }

@@ -3,17 +3,20 @@ import { Main } from "@/components/layout/main";
 import { 
   useGetUserByIdQuery, 
   useUpdateKycStatusMutation,
-  useGetUsersQuery,
-  useAssignPartnerMutation
+  useGetUsersQuery
 } from "@/store/api/adminApi";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, XCircle, FileText, Download, ArrowLeft, Building2, UserPlus } from "lucide-react";
+import { CheckCircle2, XCircle, FileText, Download, ArrowLeft, Building2 } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function AdminVerificationDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -28,7 +31,14 @@ export default function AdminVerificationDetailsPage() {
   const partners = partnersData?.data || [];
 
   const [selectedPartner, setSelectedPartner] = useState("");
-  const [assignPartner, { isLoading: isAssigning }] = useAssignPartnerMutation();
+
+
+  const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
+  const [rejectionReason, setRejectionReason] = useState("");
+
+  const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
+  const [assignedPartnerFee, setAssignedPartnerFee] = useState("");
+  const [assignedPartnerSlot, setAssignedPartnerSlot] = useState("");
 
   const user = data?.data;
 
@@ -51,12 +61,28 @@ export default function AdminVerificationDetailsPage() {
     );
   }
 
-  const handleUpdateStatus = async (status: string) => {
+  const handleUpdateStatus = async (status: string, reason?: string) => {
     try {
-      await updateKycStatus({ id: user.id, kycStatus: status }).unwrap();
+      const payload: any = { id: user.id, kycStatus: status, reason };
+      if (status === 'approved') {
+        if (!selectedPartner || !assignedPartnerFee || !assignedPartnerSlot) {
+          toast.error("Please fill in all assignment details.");
+          return;
+        }
+        payload.partnerId = selectedPartner;
+        payload.assignedPartnerFee = assignedPartnerFee;
+        payload.assignedPartnerSlot = assignedPartnerSlot;
+      }
+
+      await updateKycStatus(payload).unwrap();
       toast.success(`User KYC status has been updated.`);
-      // Instead of navigating away immediately, let them assign a partner if approved
+      
       if (status === 'rejected') {
+        setIsRejectDialogOpen(false);
+        setRejectionReason("");
+        navigate("/admin/verifications");
+      } else if (status === 'approved') {
+        setIsApproveDialogOpen(false);
         navigate("/admin/verifications");
       }
     } catch (err) {
@@ -65,20 +91,7 @@ export default function AdminVerificationDetailsPage() {
     }
   };
 
-  const handleAssignPartner = async () => {
-    if (!selectedPartner) {
-      toast.error("Please select a partner first.");
-      return;
-    }
-    try {
-      await assignPartner({ id: user.id, partnerId: selectedPartner }).unwrap();
-      toast.success("Partner assigned successfully.");
-      navigate("/admin/verifications");
-    } catch (err) {
-      console.error("Partner Assignment Error:", err);
-      toast.error("Failed to assign partner.");
-    }
-  };
+
 
   const renderDocumentCard = (label: string, url: string | undefined | null) => {
     if (!url) {
@@ -130,38 +143,18 @@ export default function AdminVerificationDetailsPage() {
                 variant="outline"
                 className="text-destructive hover:text-destructive hover:bg-destructive/10"
                 disabled={isUpdating}
-                onClick={() => handleUpdateStatus('rejected')}
+                onClick={() => setIsRejectDialogOpen(true)}
               >
                 <XCircle className="w-4 h-4 mr-2" /> Reject Application
               </Button>
               <Button
                 className="bg-emerald-600 hover:bg-emerald-700 text-white"
                 disabled={isUpdating}
-                onClick={() => handleUpdateStatus('approved_pending_assignment')}
+                onClick={() => setIsApproveDialogOpen(true)}
               >
-                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC & Assign
               </Button>
             </>
-          ) : user.kycStatus === 'approved_pending_assignment' ? (
-            <div className="flex items-center gap-3">
-              <Select value={selectedPartner} onValueChange={setSelectedPartner}>
-                <SelectTrigger className="w-[200px] bg-background">
-                  <SelectValue placeholder="Select Partner" />
-                </SelectTrigger>
-                <SelectContent>
-                  {partners.map((p: any) => (
-                    <SelectItem key={p.id} value={p.id}>{p.fullName || p.email}</SelectItem>
-                  ))}
-                  {partners.length === 0 && <SelectItem value="none" disabled>No partners available</SelectItem>}
-                </SelectContent>
-              </Select>
-              <Button 
-                onClick={handleAssignPartner} 
-                disabled={!selectedPartner || isAssigning || selectedPartner === "none"}
-              >
-                <UserPlus className="w-4 h-4 mr-2" /> Assign Partner
-              </Button>
-            </div>
           ) : (
             <Badge className="bg-primary/10 text-primary hover:bg-primary/20 capitalize">
               Status: {user.kycStatus.replace(/_/g, ' ')}
@@ -243,6 +236,89 @@ export default function AdminVerificationDetailsPage() {
           </div>
         </div>
       </div>
+
+      <Dialog open={isRejectDialogOpen} onOpenChange={setIsRejectDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Reject Application</DialogTitle>
+            <DialogDescription>
+              Please provide a reason for rejecting this application. This will be sent to the user via email.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <Textarea 
+              placeholder="Enter rejection reason..."
+              value={rejectionReason}
+              onChange={(e) => setRejectionReason(e.target.value)}
+              className="min-h-[100px]"
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsRejectDialogOpen(false)}>Cancel</Button>
+            <Button 
+              variant="destructive" 
+              onClick={() => handleUpdateStatus('rejected', rejectionReason)}
+              disabled={isUpdating || !rejectionReason.trim()}
+            >
+              Confirm Rejection
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Approve KYC & Assign Partner</DialogTitle>
+            <DialogDescription>
+              Select an available partner, set the meeting date/time, and decide the fee for this Deal Room session.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4 space-y-4">
+            <div className="space-y-2">
+              <Label>Assign Partner</Label>
+              <Select value={selectedPartner} onValueChange={setSelectedPartner}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Partner" />
+                </SelectTrigger>
+                <SelectContent>
+                  {partners.map((p: any) => (
+                    <SelectItem key={p.id} value={p.id}>{p.fullName || p.email}</SelectItem>
+                  ))}
+                  {partners.length === 0 && <SelectItem value="none" disabled>No partners available</SelectItem>}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label>Session Slot (Date & Time)</Label>
+              <Input 
+                type="datetime-local" 
+                value={assignedPartnerSlot}
+                onChange={(e) => setAssignedPartnerSlot(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Amount to Pay (Fee)</Label>
+              <Input 
+                type="number" 
+                placeholder="e.g. 500"
+                value={assignedPartnerFee}
+                onChange={(e) => setAssignedPartnerFee(e.target.value)}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsApproveDialogOpen(false)}>Cancel</Button>
+            <Button 
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+              onClick={() => handleUpdateStatus('approved')}
+              disabled={isUpdating || !selectedPartner || !assignedPartnerSlot || !assignedPartnerFee}
+            >
+              Confirm Approval & Assignment
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Main>
   );
 }

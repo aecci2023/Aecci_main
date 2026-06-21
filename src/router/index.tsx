@@ -30,7 +30,7 @@ import PaymentPage from "@/pages/dashboard/payment";
 import PaymentSuccessPage from "@/pages/dashboard/payment-success";
 import LoginPage from "@/pages/login";
 import { AdminLayout } from "@/components/layout/admin-layout";
-import { AdminRoute } from "@/components/layout/admin-route";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminUsersPage from "@/pages/admin/users";
 import AdminBusinessesPage from "@/pages/admin/businesses";
@@ -50,6 +50,16 @@ import AdminTransactionsPage from "@/pages/admin/transactions";
 import AdminInvoicesPage from "@/pages/admin/invoices";
 
 import PartnerDashboard from "@/pages/partner/dashboard";
+import BecomePartnerPage from "@/pages/partner/apply";
+import { PartnerLayout } from "@/components/layout/partner-layout";
+
+// Generic placeholder for partner routes
+const PartnerPlaceholder = ({ title }: { title: string }) => (
+  <div className="flex flex-col items-center justify-center h-[calc(100vh-100px)]">
+    <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+    <p className="text-muted-foreground mt-2">This module is currently under development.</p>
+  </div>
+);
 
 export const routes: RouteObject[] = [
   {
@@ -67,12 +77,42 @@ export const routes: RouteObject[] = [
   {
     path: "/partner",
     children: [
-      { path: "dashboard", element: <PartnerDashboard /> },
+      { path: "apply", element: <BecomePartnerPage /> },
+      {
+        path: "",
+        element: <ProtectedRoute allowedRoles={['partner']} />,
+        children: [
+          {
+            path: "",
+            element: <PartnerLayout />,
+            children: [
+              { path: "dashboard", element: <PartnerDashboard /> },
+          { path: "sessions/schedule", element: <PartnerPlaceholder title="My Schedule" /> },
+          { path: "sessions/upcoming", element: <PartnerPlaceholder title="Upcoming Sessions" /> },
+          { path: "sessions/past", element: <PartnerPlaceholder title="Past Sessions" /> },
+          { path: "sessions/host", element: <PartnerPlaceholder title="Host New Session" /> },
+          { path: "engagement/questions", element: <PartnerPlaceholder title="Pending Questions" /> },
+          { path: "engagement/active", element: <PartnerPlaceholder title="Active Clients" /> },
+          { path: "engagement/assignments", element: <PartnerPlaceholder title="Client Assignments" /> },
+          { path: "content/country-briefs", element: <PartnerPlaceholder title="Country Briefs" /> },
+          { path: "content/opportunity-reports", element: <PartnerPlaceholder title="Opportunity Reports" /> },
+          { path: "earnings/overview", element: <PartnerPlaceholder title="Earnings Overview" /> },
+          { path: "earnings/invoices", element: <PartnerPlaceholder title="Invoices & Payouts" /> },
+          { path: "profile", element: <PartnerPlaceholder title="My Profile" /> },
+          { path: "resources/training", element: <PartnerPlaceholder title="Training & Guidelines" /> },
+          { path: "resources/availability", element: <PartnerPlaceholder title="Availability Settings" /> },
+          { path: "resources/documents", element: <PartnerPlaceholder title="Resources & Documents" /> },
+          { path: "support/messages", element: <PartnerPlaceholder title="Messages" /> },
+          { path: "support/help", element: <PartnerPlaceholder title="Help & Support" /> },
+            ]
+          }
+        ]
+      }
     ],
   },
   {
     path: "/admin",
-    element: <AdminRoute />,
+    element: <ProtectedRoute allowedRoles={['admin']} />,
     children: [
       {
         path: "",
@@ -156,12 +196,16 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/dashboard",
-    element: <AuthenticatedLayout />,
+    element: <ProtectedRoute allowedRoles={['user']} />,
     children: [
       {
         path: "",
-        element: <DashboardPage />,
-      },
+        element: <AuthenticatedLayout />,
+        children: [
+          {
+            path: "",
+            element: <DashboardPage />,
+          },
       {
         path: "intelligence",
         element: <IntelligencePage />,
@@ -241,9 +285,11 @@ export const routes: RouteObject[] = [
         path: "payment",
         element: <PaymentPage />,
       },
-      {
-        path: "payment-success",
-        element: <PaymentSuccessPage />,
+          {
+            path: "payment-success",
+            element: <PaymentSuccessPage />,
+          },
+        ],
       },
     ],
   },

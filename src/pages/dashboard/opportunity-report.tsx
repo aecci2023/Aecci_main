@@ -14,20 +14,60 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Download, Globe, Ship, Landmark, ShieldAlert } from "lucide-react";
 import { useState } from "react";
+import { useGetOpportunityReportsQuery } from "@/store/api/sessionApi";
 
 export default function OpportunityReportPage() {
   const [agreed, setAgreed] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  const handleDownload = () => {
-    if (!agreed) return;
+  const { data: response, isLoading } = useGetOpportunityReportsQuery();
+  const reports = response?.data || [];
+  const latestReport = reports.length > 0 ? reports[0] : null;
+
+  const handleDownload = async () => {
+    if (!agreed || !latestReport) return;
     setDownloading(true);
-    setTimeout(() => {
+    try {
+      const token = localStorage.getItem('accessToken');
+      const url = `${import.meta.env.VITE_API_BASE_URL?.replace('/api/', '/api') || 'http://localhost:5000/api'}/reports/${latestReport.id}/pdf`;
+      
+      const res = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!res.ok) throw new Error('Download failed');
+      
+      const blob = await res.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `Opportunity_Report_${latestReport.id}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (e) {
+      console.error(e);
+      alert('Failed to download PDF.');
+    } finally {
       setDownloading(false);
-      // Trigger simple download simulation
-      alert("Opportunity Report PDF downloaded successfully!");
-    }, 1500);
+    }
   };
+
+  if (isLoading) {
+    return <Main fluid className="flex justify-center p-10"><p className="text-muted-foreground animate-pulse">Loading Report...</p></Main>;
+  }
+
+  if (!latestReport) {
+    return (
+      <Main fluid className="flex justify-center p-10 flex-col items-center gap-4">
+        <ShieldAlert className="size-10 text-muted-foreground opacity-50" />
+        <h2 className="text-xl font-bold">No Opportunity Reports Found</h2>
+        <p className="text-muted-foreground">You will receive a report after completing a Deal Room session.</p>
+      </Main>
+    );
+  }
 
   return (
     <>
@@ -50,14 +90,14 @@ export default function OpportunityReportPage() {
       <Main fluid className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            Kenya Matchmaking Opportunity Report
+            {latestReport.session?.country || 'Global'} Matchmaking Opportunity Report
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Industry Sector: Textiles & Apparel • Generated June 15, 2026
+            Session: {latestReport.session?.title} • Generated {new Date(latestReport.createdAt).toLocaleDateString()}
           </p>
         </div>
 
-        {/* Disclaimer acceptance card (Business Outcome Disclaimer) */}
+        {/* Disclaimer acceptance card */}
         <Card className="border-amber-500/20 bg-amber-500/5">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
@@ -120,25 +160,11 @@ export default function OpportunityReportPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  Nairobi Textile Market Outlook
+                  Market Outlook
                 </CardTitle>
-                <CardDescription>
-                  Analysis of apparel imports, regional distribution, and
-                  consumer demand.
-                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-                <p>
-                  The East African Community (EAC) textile sector is growing at
-                  a compound rate of 7.2%. Kenya is the primary distribution
-                  hub, imports over 180,000 tons of fabric annually, and acts as
-                  the gatekeeper for trade into Uganda, Rwanda, and South Sudan.
-                </p>
-                <p>
-                  <strong>Demand Hotspots:</strong> Synthetic blended cotton and
-                  value-added denim are seeing highest demand increase among
-                  retail stores in Nairobi and Mombasa.
-                </p>
+              <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
+                {latestReport.marketSummary}
               </CardContent>
             </Card>
           </TabsContent>
@@ -149,21 +175,9 @@ export default function OpportunityReportPage() {
                 <CardTitle className="text-base">
                   Logistics & Customs Clearance Corridors
                 </CardTitle>
-                <CardDescription>
-                  Shipping guidelines, ports of entry, and clearance frameworks.
-                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-                <p>
-                  <strong>Port of Entry:</strong> Mombasa Sea Port remains the
-                  cheapest logistics node for bulk container shipments from
-                  Mumbai or Nhava Sheva. Typical transit time is 12-14 days.
-                </p>
-                <p>
-                  <strong>Certification Milestones:</strong> Exporters must
-                  conform to the Pre-export Verification of Conformity (PVoC)
-                  program to avoid delays at Mombasa port customs.
-                </p>
+              <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
+                {latestReport.potentialRoutes}
               </CardContent>
             </Card>
           </TabsContent>
@@ -174,23 +188,9 @@ export default function OpportunityReportPage() {
                 <CardTitle className="text-base">
                   Chamber Strategic Recommendations
                 </CardTitle>
-                <CardDescription>
-                  Price structures and agent matchmaking frameworks.
-                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-                <p>
-                  1. <strong>Pricing Strategy:</strong> Quote on a CIF basis
-                  (Cost, Insurance, Freight) in USD. Nairobi buyers rarely
-                  purchase on FOB (Free on Board) terms due to complex freight
-                  pricing.
-                </p>
-                <p>
-                  2. <strong>Sample Dispatch:</strong> Send sample swatches of
-                  1m x 1m lengths via air courier directly to the KNCCI Nairobi
-                  office for physical verification before the buyers dispatch
-                  orders.
-                </p>
+              <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
+                {latestReport.recommendations}
               </CardContent>
             </Card>
           </TabsContent>
@@ -205,7 +205,7 @@ export default function OpportunityReportPage() {
             className="w-full md:w-64 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base"
           >
             {downloading ? (
-              <span>Downloading Report...</span>
+              <span>Generating PDF...</span>
             ) : (
               <span className="flex items-center gap-2">
                 Download Full Report (PDF) <Download className="size-5" />

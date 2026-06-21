@@ -13,13 +13,14 @@ export default function App() {
   const isDashboardPage = location.pathname.startsWith("/dashboard");
   const isLoginPage = location.pathname.startsWith("/login");
   const isAdminPage = location.pathname.startsWith("/admin");
-  const hideChrome = isSignupPage || isDashboardPage || isLoginPage || isAdminPage;
+  const isPartnerPage = location.pathname.startsWith("/partner");
+  const hideChrome = isSignupPage || isDashboardPage || isLoginPage || isAdminPage || isPartnerPage;
 
   return (
     <ActiveThemeProvider>
       <TooltipProvider>
         <div className="min-h-screen flex flex-col bg-background text-foreground font-body transition-colors duration-300 relative">
-          <Toaster position="top-right" richColors />
+          <Toaster position="top-right" />
 
           {/* Atmospheric Theme Gradient Layer (Dark mode only) */}
           <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5 opacity-0 dark:opacity-100 -z-10 pointer-events-none transition-opacity duration-500 fixed" />

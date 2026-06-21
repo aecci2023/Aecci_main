@@ -13,13 +13,23 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Check, Info } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { useGetSessionByIdQuery } from "@/store/api/sessionApi";
 
 export default function SessionDetailsPage() {
-  useNavigate();
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get("id");
+  
+  const { data, isLoading } = useGetSessionByIdQuery(sessionId as string, { skip: !sessionId });
+  const session = data?.data;
+
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [step, setStep] = useState(1); // 1: Screening Approved, 2: Terms Acceptance, 3: Payment Checkout
+
+  if (isLoading || !session) {
+    return <Main fluid className="flex justify-center p-10"><p className="text-muted-foreground animate-pulse">Loading session details...</p></Main>;
+  }
 
   return (
     <>
@@ -42,11 +52,10 @@ export default function SessionDetailsPage() {
       <Main fluid className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            India-Kenya Textile Matching
+            {session.title}
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Session ID: AECCI-2026-06B • Co-Host: Kenya Chamber of Commerce
-            (KNCCI)
+            Session ID: {session.id} • Co-Host: {session.partner?.companyName || session.partner?.fullName}
           </p>
         </div>
 
@@ -59,42 +68,26 @@ export default function SessionDetailsPage() {
                   Bilateral Matchmaking Overview
                 </CardTitle>
                 <CardDescription>
-                  Targeted trade matchmaking for verified textile producers.
+                  Targeted trade matchmaking for verified producers.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground">
                 <p>
-                  This session connects Indian textile manufacturers and
-                  exporters directly with Nairobi’s top wholesale buyers,
-                  department store chains, and regional fashion designers.
-                  Discussions will center around sourcing specifications,
-                  logistics, customs clearance under special bilateral treaties,
-                  and direct supply contracts.
+                  {session.marketOverview || "Join this deal room session to connect directly with international buyers and distribution partners."}
                 </p>
 
                 <h3 className="font-semibold text-foreground mt-4 mb-2">
-                  Agenda
+                  Rules & Agenda
                 </h3>
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>
-                    <strong>14:00 - 14:15 IST:</strong> Briefing on East African
-                    Import Duties and Conformity standards (KNCCI Commissioner).
-                  </li>
-                  <li>
-                    <strong>14:15 - 15:30 IST:</strong> 1-on-1 private rooms
-                    with 3 pre-matched distributors (Nairobi retail sector).
-                  </li>
-                  <li>
-                    <strong>15:30 - 16:00 IST:</strong> Q&A with AECCI Legal
-                    Wing concerning trade logistics and payment guarantees.
-                  </li>
-                </ul>
+                <div className="bg-muted p-3 rounded-md">
+                  {session.rules || "No specific rules provided."}
+                </div>
 
                 <h3 className="font-semibold text-foreground mt-4 mb-2">
                   Deliverables Provided
                 </h3>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li>3 Verified Buyer Introductions during session</li>
+                  <li>Verified Buyer Introductions during session</li>
                   <li>Full Post-Session Opportunity Report</li>
                   <li>Draft non-circumvention facilitation advisory</li>
                 </ul>
@@ -225,8 +218,7 @@ export default function SessionDetailsPage() {
                         internet and webcam equipment.
                       </p>
                       <p>
-                        4. All prices are exclusive of 18% GST (India GST
-                        regulations apply for local members).
+                        4. All prices are exclusive of applicable taxes.
                       </p>
                     </div>
 
@@ -266,20 +258,14 @@ export default function SessionDetailsPage() {
                     </h3>
                     <div className="space-y-2 text-xs text-muted-foreground">
                       <div className="flex justify-between">
-                        <span>Bilateral Matchmaking Slot Fee</span>
+                        <span>Matchmaking Slot Fee</span>
                         <span className="font-semibold text-foreground">
-                          ₹25,000
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>GST (18%)</span>
-                        <span className="font-semibold text-foreground">
-                          ₹4,500
+                          ${session.price} USD
                         </span>
                       </div>
                       <div className="border-t border-border pt-2 flex justify-between font-bold text-sm text-foreground">
                         <span>Total Payable</span>
-                        <span>₹29,500</span>
+                        <span>${session.price} USD</span>
                       </div>
                     </div>
 
@@ -287,7 +273,7 @@ export default function SessionDetailsPage() {
                       asChild
                       className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs"
                     >
-                      <Link to="/dashboard/payment">
+                      <Link to={`/dashboard/payment?sessionId=${session.id}`}>
                         Proceed to Secure Checkout
                       </Link>
                     </Button>
