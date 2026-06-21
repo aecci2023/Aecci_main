@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +33,17 @@ export default function LoginPage() {
   const [requiresAdminOtp, setRequiresAdminOtp] = useState(false);
   const [adminOtp, setAdminOtp] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [timer, setTimer] = useState(120);
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (requiresAdminOtp && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [requiresAdminOtp, timer]);
 
   // Forgot Password States
   const [resetOtp, setResetOtp] = useState("");
@@ -61,6 +72,7 @@ export default function LoginPage() {
       
       if (result.data?.requiresOtp) {
         setRequiresAdminOtp(true);
+        setTimer(120);
         toast.success(result.message || "OTP sent to your email");
         return;
       }
@@ -81,6 +93,20 @@ export default function LoginPage() {
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Login failed");
+    }
+  };
+
+  const handleResendOtp = async () => {
+    try {
+      const payload = { email: formData.email, password: formData.password };
+      const result = await login(payload).unwrap();
+      
+      if (result.data?.requiresOtp) {
+        toast.success(result.message || "OTP resent to your email");
+        setTimer(120);
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to resend OTP");
     }
   };
 
@@ -246,6 +272,22 @@ export default function LoginPage() {
                   <InputOTPSlot index={5} />
                 </InputOTPGroup>
               </InputOTP>
+              <div className="text-sm mt-4">
+                {timer > 0 ? (
+                  <span className="text-muted-foreground">
+                    Resend OTP in {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, "0")}
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleResendOtp}
+                    disabled={isLoading}
+                    className="text-primary font-medium hover:underline focus:outline-none"
+                  >
+                    Resend OTP
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
