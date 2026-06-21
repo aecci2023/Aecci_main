@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -130,7 +130,7 @@ export default function AdminVerificationDetailsPage() {
   };
 
   return (
-    <Main fluid className="space-y-6 max-w-5xl mx-auto pb-10">
+    <Main fluid className="space-y-6 w-full pb-10">
       {/* Header Actions */}
       <div className="flex items-center justify-between">
         <Button variant="ghost" onClick={() => navigate("/admin/verifications")} className="gap-2 text-muted-foreground">
@@ -174,10 +174,9 @@ export default function AdminVerificationDetailsPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Left Column: Info */}
-        <div className="space-y-6">
-          <Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Top Row: Account Information & Roles & Markets */}
+        <Card className="h-fit">
             <CardHeader>
               <CardTitle>Account Information</CardTitle>
               <CardDescription>Primary details submitted during registration.</CardDescription>
@@ -212,29 +211,194 @@ export default function AdminVerificationDetailsPage() {
                 <p className="text-sm text-muted-foreground font-medium">Country</p>
                 <p className="font-medium">{user.country || "N/A"}</p>
               </div>
+              {user.companyName && (
+                <>
+                  <Separator />
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium">Company Name</p>
+                    <p className="font-medium">{user.companyName}</p>
+                  </div>
+                </>
+              )}
+              {user.businessAddress && (
+                <>
+                  <Separator />
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium">Business Address</p>
+                    <p className="font-medium">{user.businessAddress}</p>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
-        </div>
 
-        {/* Right Column: Documents */}
-        <div className="md:col-span-2 space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight">Verification Documents</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {renderDocumentCard("IEC (Import Export Code) Document", user.iecDocument)}
-            {renderDocumentCard("GST Document", user.gstDocument)}
-            {renderDocumentCard("PAN Document", user.panDocument)}
-            {renderDocumentCard("Company Profile", user.companyProfileDocument)}
-            
-            {user.productCatalogue && user.productCatalogue.length > 0 && (
-              <div className="space-y-4 mt-6">
-                <h3 className="text-lg font-medium">Product Catalogues</h3>
-                {user.productCatalogue.map((doc: string, idx: number) => 
-                  renderDocumentCard(`Product Catalogue ${idx + 1}`, doc)
-                )}
+          <Card className="h-fit">
+            <CardHeader>
+              <CardTitle>Roles & Markets</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <p className="text-sm text-muted-foreground font-medium">Business Roles</p>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {user.businessRole && user.businessRole.length > 0 ? user.businessRole.map((role: string) => (
+                    <Badge key={role} variant="secondary">{role}</Badge>
+                  )) : "N/A"}
+                </div>
+              </div>
+              <Separator />
+              <div>
+                <p className="text-sm text-muted-foreground font-medium">Target Markets</p>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {user.targetMarkets && user.targetMarkets.length > 0 ? user.targetMarkets.map((market: string) => (
+                    <Badge key={market} variant="secondary">{market}</Badge>
+                  )) : "N/A"}
+                </div>
+              </div>
+              <Separator />
+              <div>
+                <p className="text-sm text-muted-foreground font-medium">Products</p>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {user.products && user.products.length > 0 ? user.products.map((product: string) => (
+                    <Badge key={product} variant="outline">{product}</Badge>
+                  )) : "N/A"}
+                </div>
+              </div>
+              {user.experience && (
+                <>
+                  <Separator />
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium">Experience Level</p>
+                    <p className="font-medium">{user.experience}</p>
+                  </div>
+                </>
+              )}
+              {user.objective && (
+                <>
+                  <Separator />
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium">Business Objective</p>
+                    <p className="font-medium whitespace-pre-wrap">{user.objective}</p>
+                  </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
+
+        {/* Bottom Row: Verification Documents & Business Overview */}
+        <Card className="h-fit">
+          <CardHeader>
+            <CardTitle>Verification Documents</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {(user.internationalBusinessIds?.length > 0 || user.internationalKycIds?.length > 0) && (
+              <div className="space-y-4 mb-4">
+                <h3 className="text-lg font-medium border-b pb-2">International Identifications</h3>
+                
+                {user.internationalBusinessIds && user.internationalBusinessIds.length > 0 && user.internationalBusinessIds.some((idObj: any) => idObj.type || idObj.idNumber) && user.internationalBusinessIds.map((idObj: any, idx: number) => (
+                  idObj.type || idObj.idNumber ? (
+                    <Card key={`biz-${idx}`} className="bg-muted/10">
+                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                        <span className="font-medium">{idObj.type || "Business ID"}</span>
+                        <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
+                      </CardContent>
+                    </Card>
+                  ) : null
+                ))}
+
+                {user.internationalKycIds && user.internationalKycIds.length > 0 && user.internationalKycIds.some((idObj: any) => idObj.type || idObj.idNumber) && user.internationalKycIds.map((idObj: any, idx: number) => (
+                  idObj.type || idObj.idNumber ? (
+                    <Card key={`kyc-${idx}`} className="bg-muted/10">
+                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                        <span className="font-medium">{idObj.type || "Personal KYC ID"}</span>
+                        <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
+                      </CardContent>
+                    </Card>
+                  ) : null
+                ))}
               </div>
             )}
-          </div>
-        </div>
+
+            <h3 className="text-lg font-medium border-b pb-2 mt-4">Required Documents</h3>
+            {user.documents && user.documents.length > 0 ? (
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                {user.documents.map((doc: string, idx: number) => (
+                  <React.Fragment key={`kyc-doc-${idx}`}>
+                    {renderDocumentCard(`KYC Document ${idx + 1}`, doc)}
+                  </React.Fragment>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">No KYC documents uploaded.</p>
+            )}
+
+            {user.productCatalogue && user.productCatalogue.length > 0 && (
+              <div className="space-y-4 mt-8">
+                <h3 className="text-lg font-medium border-b pb-2">Product Catalogues</h3>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                  {user.productCatalogue.map((doc: string, idx: number) => (
+                    <React.Fragment key={`cat-doc-${idx}`}>
+                      {renderDocumentCard(`Product Catalogue ${idx + 1}`, doc)}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card className="h-fit">
+          <CardHeader>
+            <CardTitle>Business Overview</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Industry</p>
+              <p className="font-medium">{user.industrySector || "N/A"}</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Company Size</p>
+              <p className="font-medium">{user.companySize || "N/A"}</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Turnover</p>
+              <p className="font-medium">{user.turnover || "N/A"}</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Legal Structure</p>
+              <p className="font-medium">{user.legalStructure || "N/A"}</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Est. Year</p>
+              <p className="font-medium">{user.yearEstablished || "N/A"}</p>
+            </div>
+            {user.websiteUrl && (
+              <>
+                <Separator />
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Website</p>
+                  <a href={user.websiteUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline block truncate">
+                    {user.websiteUrl}
+                  </a>
+                </div>
+              </>
+            )}
+            {user.linkedinUrl && (
+              <>
+                <Separator />
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">LinkedIn Profile</p>
+                  <a href={user.linkedinUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline block truncate">
+                    {user.linkedinUrl}
+                  </a>
+                </div>
+              </>
+            )}
+          </CardContent>
+        </Card>
       </div>
 
       <Dialog open={isRejectDialogOpen} onOpenChange={setIsRejectDialogOpen}>
@@ -256,7 +420,7 @@ export default function AdminVerificationDetailsPage() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsRejectDialogOpen(false)}>Cancel</Button>
             <Button 
-              variant="destructive" 
+              variant="destructive"
               onClick={() => handleUpdateStatus('rejected', rejectionReason)}
               disabled={isUpdating || !rejectionReason.trim()}
             >

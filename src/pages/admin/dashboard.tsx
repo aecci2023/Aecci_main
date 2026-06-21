@@ -14,13 +14,33 @@ import {
   ShieldAlert,
   Activity,
   ArrowRight,
-  TrendingUp,
   Globe,
   FileText
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGetUsersQuery } from "@/store/api/adminApi";
+import { Loader2 } from "lucide-react";
 
 export default function AdminDashboard() {
+  const { data: usersResponse, isLoading } = useGetUsersQuery({});
+  const users = usersResponse?.data || [];
+
+  const totalUsers = users.length;
+  const businessAccounts = users.filter((u: any) => u.userType === 'business').length;
+  const individualAccounts = users.filter((u: any) => u.userType === 'individual').length;
+  const globalPartners = users.filter((u: any) => u.role === 'partner').length;
+  const pendingVerifications = users.filter((u: any) => 
+    u.kycStatus === 'pending' || u.kycStatus === 'pending_verification'
+  ).length;
+
+  if (isLoading) {
+    return (
+      <Main fluid className="flex h-full items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </Main>
+    );
+  }
+
   return (
     <Main fluid className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -43,7 +63,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -52,9 +72,9 @@ export default function AdminDashboard() {
             <Users className="size-4 text-blue-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2,405</div>
+            <div className="text-2xl font-bold">{totalUsers}</div>
             <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-              <TrendingUp className="size-3 text-emerald-500" /> +12% from last month
+              Registered users
             </p>
           </CardContent>
         </Card>
@@ -66,9 +86,37 @@ export default function AdminDashboard() {
             <Building2 className="size-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">842</div>
+            <div className="text-2xl font-bold">{businessAccounts}</div>
             <p className="text-xs text-muted-foreground mt-1">
-              Primarily from India & Kenya
+              Corporate entities
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Individual Accounts
+            </CardTitle>
+            <Users className="size-4 text-emerald-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{individualAccounts}</div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Freelancers & professionals
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Global Partners
+            </CardTitle>
+            <Globe className="size-4 text-teal-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{globalPartners}</div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Platform partners
             </p>
           </CardContent>
         </Card>
@@ -80,23 +128,9 @@ export default function AdminDashboard() {
             <ShieldAlert className="size-4 text-amber-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-amber-600">18</div>
+            <div className="text-2xl font-bold text-amber-600">{pendingVerifications}</div>
             <p className="text-xs text-muted-foreground mt-1">
               Requires manual KYC review
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="hover:shadow-md transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Live Deal Rooms
-            </CardTitle>
-            <Globe className="size-4 text-teal-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">4</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              Currently active sessions
             </p>
           </CardContent>
         </Card>

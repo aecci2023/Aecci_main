@@ -15,11 +15,12 @@ import { useState } from "react";
 
 interface Props {
   nextStep: () => void;
+  isSubmitting?: boolean;
 }
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
-export default function Step5Uploads({ nextStep }: Props) {
+export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
   const { control } = useFormContext<SignupFormData>();
   const userType = useWatch({ control, name: "userType" });
   const country = useWatch({ control, name: "country" });
@@ -327,15 +328,26 @@ export default function Step5Uploads({ nextStep }: Props) {
 
       <div className="mt-6 pt-6 border-t border-border flex gap-4">
         <Button
-          className="w-full"
+          className="w-full relative"
           size="lg"
           onClick={(e) => {
             e.preventDefault();
             nextStep();
           }}
           type="button"
+          disabled={isSubmitting}
         >
-          Submit for Review
+          {isSubmitting ? (
+            <>
+              <span className="opacity-0">Submit for Review</span>
+              <div className="absolute inset-0 flex items-center justify-center gap-2">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground"></div>
+                <span>Uploading files...</span>
+              </div>
+            </>
+          ) : (
+            "Submit for Review"
+          )}
         </Button>
       </div>
     </div>

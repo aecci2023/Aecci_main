@@ -1,5 +1,7 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import type { SignupFormData } from "../schema";
+import { COUNTRIES } from "@/lib/countries";
+import { MultiSelect } from "@/components/ui/multi-select";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -139,10 +141,11 @@ export default function Step4Details({ nextStep }: Props) {
                     <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="e.g. UAE, United States, Kenya"
-                      {...field}
-                      value={field.value || ""}
+                    <MultiSelect
+                      options={COUNTRIES.map((c) => ({ label: c.name, value: c.name }))}
+                      selected={field.value || []}
+                      onChange={field.onChange}
+                      placeholder="Select target countries..."
                     />
                   </FormControl>
                   <FormMessage />

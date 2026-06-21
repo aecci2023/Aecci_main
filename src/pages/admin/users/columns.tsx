@@ -12,6 +12,8 @@ export type UserRow = {
   country: string | null
   isEmailVerified: boolean
   kycStatus: string
+  industrySector?: string
+  mobileNumber?: string
   iecDocument?: string
   gstDocument?: string
   panDocument?: string

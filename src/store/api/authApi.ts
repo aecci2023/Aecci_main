@@ -48,12 +48,12 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
-    uploadFile: builder.mutation<{ success: boolean; data: { url: string; key: string } }, File>({
-      query: (file) => {
+    uploadFile: builder.mutation<{ success: boolean; data: { url: string; key: string } }, { file: File, folder: string }>({
+      query: ({ file, folder }) => {
         const formData = new FormData();
         formData.append('file', file);
         return {
-          url: 'upload',
+          url: `upload?folder=${folder}`,
           method: 'POST',
           body: formData,
         };

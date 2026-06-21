@@ -3,8 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useForm, FormProvider, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { signupSchema, type SignupFormData, initialFormData } from "../schema";
-import { useUploadFileMutation, useSignupMutation, useSendOtpMutation } from "../../../store/api/authApi";
+import { useUploadFileMutation, useSignupMutation, useSendOtpMutation, useUpdateProfileMutation } from "../../../store/api/authApi";
 
 import Step1Registration from "../steps/Step1Registration";
 import Step2OTP from "../steps/Step2OTP";
@@ -88,18 +90,40 @@ const getFieldsForStep = (
 };
 
 export default function SignupWizard() {
+  const [searchParams] = useSearchParams();
+  const isResubmit = searchParams.get("resubmit") === "true";
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [uploadFile] = useUploadFileMutation();
   const [sendOtp] = useSendOtpMutation();
   const [signup] = useSignupMutation();
+  const [updateProfile] = useUpdateProfileMutation();
+  const navigate = useNavigate();
 
   const methods = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
     defaultValues: initialFormData,
     mode: "onChange",
   });
+
+  useEffect(() => {
+    if (isResubmit) {
+      const userStr = localStorage.getItem("user");
+      if (userStr) {
+        try {
+          const user = JSON.parse(userStr);
+          methods.reset({
+            ...initialFormData,
+            ...user,
+            mobile: user.mobileNumber || "",
+          });
+        } catch (e) {
+          console.log(e)
+        }
+      }
+    }
+  }, [isResubmit, methods]);
 
   const userType = useWatch({ control: methods.control, name: "userType" });
   const country = useWatch({ control: methods.control, name: "country" });
@@ -139,10 +163,10 @@ export default function SignupWizard() {
           const data = methods.getValues();
           
           // Helper to upload files and get URLs
-          const uploadFiles = async (files: File[]) => {
+          const uploadFiles = async (files: File[], folder: string) => {
             const urls: string[] = [];
             for (const file of files) {
-              const res = await uploadFile(file).unwrap();
+              const res = await uploadFile({ file, folder }).unwrap();
               if (res.success) {
                 urls.push(res.data.url);
               }
@@ -150,8 +174,8 @@ export default function SignupWizard() {
             return urls;
           };
 
-          const uploadedDocuments = data.documents ? await uploadFiles(data.documents) : [];
-          const uploadedCatalogue = data.productCatalogue ? await uploadFiles(data.productCatalogue) : [];
+          const uploadedDocuments = data.documents && data.documents.length > 0 ? await uploadFiles(data.documents, 'documents') : undefined;
+          const uploadedCatalogue = data.productCatalogue && data.productCatalogue.length > 0 ? await uploadFiles(data.productCatalogue, 'catalog') : undefined;
 
           // Map the rest of the profile data
           const profileData: Record<string, any> = { ...data };
@@ -171,14 +195,29 @@ export default function SignupWizard() {
             productCatalogue: uploadedCatalogue
           };
 
-          const res = await signup(submitData).unwrap();
-          if (res.success) {
-            localStorage.setItem("accessToken", res.data.accessToken);
-            localStorage.setItem("refreshToken", res.data.refreshToken);
-            toast.success(res.message || "Registration complete!");
-            setStep(6);
+          if (isResubmit) {
+            const res = await updateProfile({ ...submitData, resubmit: true }).unwrap();
+            if (res.success) {
+              const userStr = localStorage.getItem("user");
+              if (userStr) {
+                const user = JSON.parse(userStr);
+                localStorage.setItem("user", JSON.stringify({ ...user, ...res.data, kycStatus: "pending_verification" }));
+              }
+              toast.success("Application resubmitted successfully!");
+              setStep(6);
+            } else {
+              toast.error(res.message || "Resubmission failed");
+            }
           } else {
-            toast.error(res.message || "Registration failed");
+            const res = await signup(submitData).unwrap();
+            if (res.success) {
+              localStorage.setItem("accessToken", res.data.accessToken);
+              localStorage.setItem("refreshToken", res.data.refreshToken);
+              toast.success(res.message || "Registration complete!");
+              setStep(6);
+            } else {
+              toast.error(res.message || "Registration failed");
+            }
           }
         } catch (error: any) {
           console.error("Registration failed:", error);
@@ -192,7 +231,13 @@ export default function SignupWizard() {
     }
   };
 
-  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
+  const prevStep = () => {
+    if (isResubmit && step === 3) {
+      navigate("/dashboard/rejected");
+    } else {
+      setStep((s) => Math.max(s - 1, 1));
+    }
+  };
 
   const progressValue = (step / 6) * 100;
 
@@ -234,19 +279,7 @@ export default function SignupWizard() {
               {step === 2 && <Step2OTP nextStep={nextStep} />}
               {step === 3 && <Step3Profile nextStep={nextStep} />}
               {step === 4 && <Step4Details nextStep={nextStep} />}
-              {step === 5 && (
-                <div className="relative h-full flex flex-col">
-                  <Step5Uploads nextStep={nextStep} />
-                  {isSubmitting && (
-                    <div className="absolute inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50">
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                        <p className="text-sm font-medium">Submitting registration...</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
+              {step === 5 && <Step5Uploads nextStep={nextStep} isSubmitting={isSubmitting} />}
               {step === 6 && <Step6Complete />}
             </motion.div>
           </AnimatePresence>

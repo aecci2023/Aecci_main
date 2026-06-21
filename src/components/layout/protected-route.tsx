@@ -23,6 +23,10 @@ export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
     return <Navigate to="/login" replace />;
   }
 
+  if (user.role !== 'admin' && user.kycStatus === 'rejected' && window.location.pathname !== '/dashboard/rejected') {
+    return <Navigate to="/dashboard/rejected" replace />;
+  }
+
   // If authenticated but role doesn't match, show Access Denied page
   if (!allowedRoles.includes(user.role)) {
     return <AccessDenied />;

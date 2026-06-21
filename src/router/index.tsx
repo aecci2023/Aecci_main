@@ -14,6 +14,7 @@ import OpportunityReportPage from "@/pages/dashboard/opportunity-report";
 import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
 import ServicePurchasePage from "@/pages/dashboard/service-purchase";
 import MySessionsPage from "@/pages/dashboard/my-sessions";
+import RejectedApplicationPage from "@/pages/dashboard/rejected";
 import { Chats } from "@/features/chats";
 import { Settings } from "@/features/settings";
 import { SettingsProfile } from "@/features/settings/profile";
@@ -53,6 +54,8 @@ import PartnerDashboard from "@/pages/partner/dashboard";
 import BecomePartnerPage from "@/pages/partner/apply";
 import { PartnerLayout } from "@/components/layout/partner-layout";
 
+import PartnerQuestionsPage from "@/pages/partner/questions";
+
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
   <div className="flex flex-col items-center justify-center h-[calc(100vh-100px)]">
@@ -91,7 +94,7 @@ export const routes: RouteObject[] = [
           { path: "sessions/upcoming", element: <PartnerPlaceholder title="Upcoming Sessions" /> },
           { path: "sessions/past", element: <PartnerPlaceholder title="Past Sessions" /> },
           { path: "sessions/host", element: <PartnerPlaceholder title="Host New Session" /> },
-          { path: "engagement/questions", element: <PartnerPlaceholder title="Pending Questions" /> },
+          { path: "engagement/questions", element: <PartnerQuestionsPage /> },
           { path: "engagement/active", element: <PartnerPlaceholder title="Active Clients" /> },
           { path: "engagement/assignments", element: <PartnerPlaceholder title="Client Assignments" /> },
           { path: "content/country-briefs", element: <PartnerPlaceholder title="Country Briefs" /> },
@@ -199,6 +202,10 @@ export const routes: RouteObject[] = [
     element: <ProtectedRoute allowedRoles={['user']} />,
     children: [
       {
+        path: "rejected",
+        element: <RejectedApplicationPage />,
+      },
+      {
         path: "",
         element: <AuthenticatedLayout />,
         children: [
@@ -251,7 +258,7 @@ export const routes: RouteObject[] = [
         element: <Chats />,
       },
       {
-        path: "profile-settings",
+        path: "settings",
         element: <Settings />,
         children: [
           { index: true, element: <SettingsProfile /> },

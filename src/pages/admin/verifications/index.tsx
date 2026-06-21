@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminVerificationsPage() {
   const navigate = useNavigate();
-  const { data, isLoading, error } = useGetUsersQuery({ kycStatus: 'pending', userType: 'business' });
+  const { data, isLoading, error } = useGetUsersQuery({ kycStatus: 'pending_verification', userType: 'business' });
   const users = data?.data || [];
 
   const handleReview = (user: UserRow) => {
@@ -40,6 +40,27 @@ export default function AdminVerificationsPage() {
           </Badge>
         );
       }
+    },
+    {
+      accessorKey: "country",
+      header: "Country",
+      cell: ({ row }) => (
+        <span className="text-sm">{row.original.country || "N/A"}</span>
+      ),
+    },
+    {
+      accessorKey: "industrySector",
+      header: "Industry",
+      cell: ({ row }) => (
+        <span className="text-sm">{row.original.industrySector || "N/A"}</span>
+      ),
+    },
+    {
+      accessorKey: "mobileNumber",
+      header: "Contact",
+      cell: ({ row }) => (
+        <span className="text-sm">{row.original.mobileNumber || "N/A"}</span>
+      ),
     },
     {
       accessorKey: "createdAt",

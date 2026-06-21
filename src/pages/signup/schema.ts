@@ -74,7 +74,7 @@ export const signupSchema = z
     // Business
     businessRole: z.array(z.string()).optional(),
     products: z.string().optional(),
-    targetMarkets: z.string().optional(),
+    targetMarkets: z.array(z.string()).optional(),
     keyCertifications: z.string().optional(),
     experience: z.string().optional(),
     objective: z.string().optional(),
@@ -203,7 +203,7 @@ export const signupSchema = z
   .refine(
     (data) => {
       if (data.userType === "business")
-        return !!data.targetMarkets && data.targetMarkets.trim().length > 0;
+        return data.targetMarkets && data.targetMarkets.length > 0;
       return true;
     },
     { message: "Required", path: ["targetMarkets"] },
@@ -290,6 +290,7 @@ export const initialFormData: Partial<SignupFormData> = {
   agreedToTerms: false,
   documents: [],
   productCatalogue: [],
+  targetMarkets: [],
   internationalBusinessIds: [{ type: "", idNumber: "" }],
   internationalKycIds: [{ type: "", idNumber: "" }],
 };

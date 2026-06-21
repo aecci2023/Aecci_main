@@ -40,9 +40,9 @@ export default function Step6Complete() {
         </div>
       </div>
 
-      <Link to="/dashboard" className="w-full max-w-xs">
+      <Link to="/login" className="w-full max-w-xs">
         <Button className="w-full" size="lg" variant="default">
-          Go to Dashboard
+          Go to Login
         </Button>
       </Link>
     </div>
