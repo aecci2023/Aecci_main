@@ -11,7 +11,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Download, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function PaymentSuccessPage() {
@@ -32,55 +32,39 @@ export default function PaymentSuccessPage() {
       </Header>
 
       <Main fluid className="space-y-6">
-        <Card className="border-emerald-500/20 bg-emerald-500/5 text-center shadow-md">
+        <Card className="border-emerald-500/20 bg-emerald-500/5 text-center shadow-md max-w-2xl mx-auto">
           <CardHeader className="pt-8 pb-4">
             <CheckCircle2 className="size-16 text-emerald-500 mx-auto animate-bounce" />
-            <CardTitle className="text-2xl mt-4">Payment Successful!</CardTitle>
+            <CardTitle className="text-2xl mt-4">Subscription Activated!</CardTitle>
             <CardDescription>
-              Thank you. Your slot has been fully booked.
+              Thank you. Your AECCI Global Deal Room plan has been successfully activated and slots are now available.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4 text-sm">
+          <CardContent className="space-y-4 text-sm pb-6">
             <div className="bg-background border border-border rounded-lg p-4 space-y-2 text-xs text-muted-foreground text-left max-w-sm mx-auto">
               <div className="flex justify-between">
-                <span>Transaction ID</span>
-                <span className="font-mono font-semibold text-foreground">
-                  TXN-9847193247
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span>Amount Paid</span>
-                <span className="font-semibold text-foreground">₹29,500</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Payment Method</span>
-                <span className="font-semibold text-foreground">
-                  Credit Card (Visa)
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span>Status</span>
+                <span>Transaction Status</span>
                 <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                  Settled
+                  Paid & Settled
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Activation Status</span>
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                  Instant Access Granted
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Verification Method</span>
+                <span className="font-semibold text-foreground">
+                  Razorpay Secure Gateway
                 </span>
               </div>
             </div>
 
-            <Button
-              asChild
-              variant="outline"
-              className="w-full max-w-sm mx-auto text-xs flex items-center gap-1.5 mt-2"
-            >
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert("Invoice PDF downloaded successfully!");
-                }}
-              >
-                <Download className="size-4" /> Download Official Tax Invoice
-              </a>
-            </Button>
+            <p className="text-xs text-muted-foreground max-w-md mx-auto mt-2">
+              Your official tax invoice PDF has been queued for generation. You can view and download it anytime from the Billing & Invoice history section on the Subscription Plans page.
+            </p>
           </CardContent>
           <CardFooter className="flex flex-col gap-2 pb-8 pt-2">
             <Button
@@ -88,10 +72,10 @@ export default function PaymentSuccessPage() {
               className="w-full max-w-sm mx-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
             >
               <Link
-                to="/dashboard/waiting-room"
+                to="/dashboard/marketplace"
                 className="flex items-center gap-1.5 justify-center"
               >
-                Go to Waiting Room <ArrowRight className="size-4" />
+                Go to Partner Marketplace <ArrowRight className="size-4" />
               </Link>
             </Button>
             <Button

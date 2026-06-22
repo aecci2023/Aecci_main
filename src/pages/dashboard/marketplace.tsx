@@ -12,18 +12,24 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, ArrowRight, Tag } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { MapPin, ArrowRight, Briefcase, GraduationCap, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useGetSessionsQuery } from "@/store/api/sessionApi";
-import { format } from "date-fns";
+import { useGetMarketplacePartnersQuery } from "@/store/api/adminApi";
 import { useState } from "react";
 
 export default function MarketplacePage() {
   const navigate = useNavigate();
   const [filterCountry, setFilterCountry] = useState<string>("");
   
-  const { data, isLoading } = useGetSessionsQuery(filterCountry ? { country: filterCountry } : {});
-  const sessions = data?.data || [];
+  const { data, isLoading } = useGetMarketplacePartnersQuery(
+    filterCountry ? { country: filterCountry } : undefined
+  );
+  
+  const partners = data?.data || [];
+
+  // Extract unique countries from partners list dynamically if not filtering, or define a standard list
+  const countries = ["Kenya", "UAE", "Germany", "India", "South Africa", "United Kingdom", "United States"];
 
   return (
     <>
@@ -41,120 +47,129 @@ export default function MarketplacePage() {
         </div>
       </Header>
 
-      <Main fluid className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            B2B Deal Room Marketplace
-          </h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            Explore upcoming trade match rounds. Book slots to pitch directly to
-            verified buyers and distribution partners.
-          </p>
+      <Main fluid className="space-y-6 max-w-7xl mx-auto py-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-6">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">
+              Verified Partners Directory
+            </h1>
+            <p className="text-muted-foreground text-sm mt-1">
+              Connect 1-on-1 with accredited trade officers, logistics experts, and local chamber representatives.
+            </p>
+          </div>
         </div>
 
         {/* Filter bar */}
-        <div className="flex flex-wrap gap-2 pb-2">
-          <Button
-            variant={filterCountry === "" ? "secondary" : "outline"}
-            size="sm"
-            onClick={() => setFilterCountry("")}
-            className={filterCountry === "" ? "bg-primary/10 text-primary hover:bg-primary/20 border-none" : ""}
-          >
-            All Countries
-          </Button>
-          <Button 
-            variant={filterCountry === "Kenya" ? "secondary" : "outline"} 
-            size="sm"
-            onClick={() => setFilterCountry("Kenya")}
-          >
-            Kenya
-          </Button>
-          <Button 
-            variant={filterCountry === "UAE" ? "secondary" : "outline"} 
-            size="sm"
-            onClick={() => setFilterCountry("UAE")}
-          >
-            UAE
-          </Button>
-          <Button 
-            variant={filterCountry === "Germany" ? "secondary" : "outline"} 
-            size="sm"
-            onClick={() => setFilterCountry("Germany")}
-          >
-            Germany
-          </Button>
+        <div className="space-y-2">
+          <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Filter by country of operation</label>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant={filterCountry === "" ? "secondary" : "outline"}
+              size="sm"
+              onClick={() => setFilterCountry("")}
+              className={filterCountry === "" ? "bg-primary/10 text-primary hover:bg-primary/20 border-none" : "text-xs"}
+            >
+              All Countries
+            </Button>
+            {countries.map((country) => (
+              <Button
+                key={country}
+                variant={filterCountry === country ? "secondary" : "outline"}
+                size="sm"
+                onClick={() => setFilterCountry(country)}
+                className={filterCountry === country ? "bg-primary/10 text-primary hover:bg-primary/20 border-none" : "text-xs"}
+              >
+                {country}
+              </Button>
+            ))}
+          </div>
         </div>
 
         {/* Grid */}
         {isLoading ? (
-          <div className="flex justify-center p-10"><p className="text-muted-foreground animate-pulse">Loading Deal Rooms...</p></div>
-        ) : sessions.length === 0 ? (
-          <div className="flex justify-center p-10"><p className="text-muted-foreground">No upcoming Deal Rooms found.</p></div>
+          <div className="flex flex-col items-center justify-center p-12 gap-2">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-muted-foreground animate-pulse text-sm">Loading Verified Partners...</p>
+          </div>
+        ) : partners.length === 0 ? (
+          <div className="flex flex-col items-center justify-center p-12 border rounded-xl bg-muted/10 text-center space-y-2">
+            <Briefcase className="size-8 text-muted-foreground/50" />
+            <p className="text-muted-foreground text-sm">No verified partners found for {filterCountry || "any country"} at this time.</p>
+          </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {sessions.map((deal: any) => {
-              const isClosed = deal.status === "completed" || deal.seatsAvailable <= 0;
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {partners.map((partner: any) => {
+              const userDetails = partner.user || {};
+              const initials = userDetails.fullName
+                ? userDetails.fullName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
+                : "PA";
+
               return (
                 <Card
-                  key={deal.id}
-                  className={`flex flex-col h-full hover:shadow-md transition-shadow relative ${isClosed ? "opacity-75" : ""}`}
+                  key={partner.id}
+                  className="flex flex-col h-full hover:shadow-md transition-all duration-300 border hover:border-primary/20 group cursor-pointer"
+                  onClick={() => navigate(`/dashboard/partner-brief?userId=${partner.userId}`)}
                 >
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-mono">
-                        <span>{deal.id.slice(-6)}</span>
-                        <span>•</span>
-                        <span>{deal.country}</span>
+                  <CardHeader className="pb-3 flex flex-row gap-4 items-start">
+                    <Avatar className="h-14 w-14 rounded-xl border-2 border-background shadow-sm shrink-0">
+                      {userDetails.profilePicture ? (
+                        <img src={userDetails.profilePicture} alt={userDetails.fullName} className="size-full object-cover" />
+                      ) : (
+                        <AvatarFallback className="bg-primary/10 text-primary font-bold text-base rounded-xl">
+                          {initials}
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 justify-between">
+                        <Badge className="bg-primary/5 text-primary border-primary/10 text-[10px] font-semibold px-2">
+                          {partner.tier} Expert
+                        </Badge>
                       </div>
-                      <Badge
-                        className={
-                          isClosed
-                            ? "bg-muted text-muted-foreground"
-                            : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
-                        }
-                      >
-                        {isClosed ? "Closed" : "Booking Open"}
-                      </Badge>
+                      <CardTitle className="text-base font-bold truncate group-hover:text-primary transition-colors">
+                        {userDetails.fullName || "Trade Representative"}
+                      </CardTitle>
+                      <CardDescription className="text-xs truncate font-medium text-foreground/80">
+                        {partner.organization || "Independent Advisory"}
+                      </CardDescription>
                     </div>
-                    <CardTitle className="text-xl flex items-center gap-2 leading-tight">
-                      {deal.title}
-                    </CardTitle>
-                    <CardDescription className="mt-1">
-                      Co-Host:{" "}
-                      <span className="font-medium text-foreground">
-                        {deal.partner?.companyName || deal.partner?.fullName || "AECCI Partner"}
-                      </span>
-                    </CardDescription>
                   </CardHeader>
-                  <CardContent className="flex-1 space-y-4">
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {deal.marketOverview || deal.rules || "Join this deal room session to connect directly with international buyers and distribution partners."}
+                  
+                  <CardContent className="flex-1 space-y-3 pt-0">
+                    <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
+                      <MapPin className="size-3.5 text-primary shrink-0" />
+                      <span>Operates in: <strong className="text-foreground/80">{partner.expertiseCountries?.join(", ")}</strong></span>
+                    </div>
+
+                    <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
+                      {partner.bio || "No professional biography provided yet. This partner facilitates global trade compliance and buyer matchmaking."}
                     </p>
-                    <div className="grid grid-cols-2 gap-4 text-xs bg-muted/40 p-3 rounded-lg border border-border/50">
-                      <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <Calendar className="size-3.5 text-primary shrink-0" />
-                        <span>{format(new Date(deal.date), "MMM dd, yyyy h:mm a")}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-muted-foreground justify-end font-semibold text-primary">
-                        <Tag className="size-3.5 shrink-0" />
-                        <span>${deal.price} USD</span>
+
+                    {/* Trade specialties tags */}
+                    <div className="space-y-1 pt-1">
+                      <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Specialties</span>
+                      <div className="flex flex-wrap gap-1">
+                        {partner.expertiseSectors?.slice(0, 3).map((sector: string, idx: number) => (
+                          <Badge key={idx} variant="secondary" className="text-[10px] px-2 py-0">
+                            {sector}
+                          </Badge>
+                        ))}
+                        {partner.expertiseSectors?.length > 3 && (
+                          <Badge variant="outline" className="text-[10px] px-1 py-0">
+                            +{partner.expertiseSectors.length - 3} more
+                          </Badge>
+                        )}
                       </div>
                     </div>
                   </CardContent>
-                  <CardFooter className="border-t border-border/50 pt-4 flex items-center justify-between">
-                    <span className={`text-xs font-medium ${deal.seatsAvailable <= 2 ? 'text-rose-500' : 'text-emerald-600'}`}>
-                      {deal.seatsAvailable} Slots Left (of {deal.seatsTotal})
+                  
+                  <CardFooter className="border-t border-border/50 pt-3 pb-3 bg-muted/10 justify-between items-center text-xs">
+                    <span className="text-muted-foreground text-[10px] flex items-center gap-1">
+                      <GraduationCap className="size-3.5" /> Language: {userDetails.languagesSpoken?.join(", ") || "English"}
                     </span>
-                    <Button
-                      disabled={isClosed}
-                      size="sm"
-                      onClick={() => navigate(`/dashboard/session-details?id=${deal.id}`)}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                    >
-                      <span className="flex items-center gap-1.5">
-                        {isClosed ? "Closed" : "Book Match Slot"} <ArrowRight className="size-4" />
-                      </span>
-                    </Button>
+                    <span className="text-primary font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      View Profile <ArrowRight className="size-3.5" />
+                    </span>
                   </CardFooter>
                 </Card>
               );

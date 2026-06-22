@@ -55,6 +55,7 @@ import BecomePartnerPage from "@/pages/partner/apply";
 import { PartnerLayout } from "@/components/layout/partner-layout";
 
 import PartnerQuestionsPage from "@/pages/partner/questions";
+import PartnerAvailabilityPage from "@/pages/partner/availability";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -103,7 +104,7 @@ export const routes: RouteObject[] = [
           { path: "earnings/invoices", element: <PartnerPlaceholder title="Invoices & Payouts" /> },
           { path: "profile", element: <PartnerPlaceholder title="My Profile" /> },
           { path: "resources/training", element: <PartnerPlaceholder title="Training & Guidelines" /> },
-          { path: "resources/availability", element: <PartnerPlaceholder title="Availability Settings" /> },
+          { path: "resources/availability", element: <PartnerAvailabilityPage /> },
           { path: "resources/documents", element: <PartnerPlaceholder title="Resources & Documents" /> },
           { path: "support/messages", element: <PartnerPlaceholder title="Messages" /> },
           { path: "support/help", element: <PartnerPlaceholder title="Help & Support" /> },

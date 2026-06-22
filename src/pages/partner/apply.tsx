@@ -6,26 +6,47 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Building2, FileText, Send } from "lucide-react";
+import { User, FileText, Send } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function BecomePartnerPage() {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
-  
+  const storedUser = localStorage.getItem("user");
+  let defaultUser = { fullName: "", email: "" };
+  if (storedUser) {
+    try {
+      defaultUser = JSON.parse(storedUser);
+    } catch {
+      // Ignore
+    }
+  }
+
   const [formData, setFormData] = useState({
-    organization: "",
+    fullName: defaultUser.fullName || "",
+    email: defaultUser.email || "",
     expertiseCountries: "",
     expertiseSectors: "",
-    motivation: "",
-    governmentId: "",
+    yearsOfExperience: "",
+    linkedinUrl: "",
     professionalCert: "",
-    businessProof: "",
+    motivation: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({ ...prev, yearsOfExperience: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,9 +66,14 @@ export default function BecomePartnerPage() {
           "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-          ...formData,
-          expertiseCountries: formData.expertiseCountries.split(",").map(s => s.trim()),
-          expertiseSectors: formData.expertiseSectors.split(",").map(s => s.trim()),
+          fullName: formData.fullName,
+          email: formData.email,
+          expertiseCountries: formData.expertiseCountries.split(",").map(s => s.trim()).filter(Boolean),
+          expertiseSectors: formData.expertiseSectors.split(",").map(s => s.trim()).filter(Boolean),
+          yearsOfExperience: formData.yearsOfExperience,
+          linkedinUrl: formData.linkedinUrl,
+          professionalCert: formData.professionalCert,
+          motivation: formData.motivation,
         }),
       });
 
@@ -70,7 +96,7 @@ export default function BecomePartnerPage() {
     <Main fluid className="py-12 bg-muted/20">
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">Become an AECCI Partner</h1>
+          <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">Become an AECCI Partner</h1>
           <p className="text-xl text-muted-foreground">
             Join our global network and host your own Deal Room sessions to connect with international businesses.
           </p>
@@ -80,55 +106,98 @@ export default function BecomePartnerPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-primary" /> Organization Details
+                <User className="w-5 h-5 text-primary" /> Professional Details
               </h2>
               
-              <div className="space-y-2">
-                <Label htmlFor="organization">Organization Name</Label>
-                <Input 
-                  id="organization" 
-                  name="organization" 
-                  required 
-                  value={formData.organization}
-                  onChange={handleInputChange}
-                  placeholder="e.g. Global Trade Advisory Ltd."
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName">Full Name</Label>
+                  <Input 
+                    id="fullName" 
+                    name="fullName" 
+                    required 
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Professional Email</Label>
+                  <Input 
+                    id="email" 
+                    name="email" 
+                    type="email"
+                    required 
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="you@company.com"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="expertiseCountries">Expertise Countries (comma separated)</Label>
+                  <Label htmlFor="expertiseCountries">Countries of Operation / Expertise (comma separated)</Label>
                   <Input 
                     id="expertiseCountries" 
                     name="expertiseCountries" 
                     required 
                     value={formData.expertiseCountries}
                     onChange={handleInputChange}
-                    placeholder="e.g. USA, UK, Germany"
+                    placeholder="e.g. Kenya, UAE, Germany"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="expertiseSectors">Expertise Sectors (comma separated)</Label>
+                  <Label htmlFor="expertiseSectors">Core Trade Expertise (comma separated)</Label>
                   <Input 
                     id="expertiseSectors" 
                     name="expertiseSectors" 
                     required 
                     value={formData.expertiseSectors}
                     onChange={handleInputChange}
-                    placeholder="e.g. Tech, Manufacturing"
+                    placeholder="e.g. Customs Clearance, Logistics, Buyer Matchmaking"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="yearsOfExperience">Years of Professional Experience</Label>
+                  <Select onValueChange={handleSelectChange} value={formData.yearsOfExperience}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select Experience" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0-2">0-2 Years</SelectItem>
+                      <SelectItem value="3-5">3-5 Years</SelectItem>
+                      <SelectItem value="6-10">6-10 Years</SelectItem>
+                      <SelectItem value="10+">10+ Years</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="linkedinUrl">LinkedIn Profile URL</Label>
+                  <Input 
+                    id="linkedinUrl" 
+                    name="linkedinUrl" 
+                    type="url"
+                    required 
+                    value={formData.linkedinUrl}
+                    onChange={handleInputChange}
+                    placeholder="https://linkedin.com/in/yourprofile"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="motivation">Why do you want to partner with AECCI?</Label>
+                <Label htmlFor="motivation">Motivation & Value Proposal</Label>
                 <Textarea 
                   id="motivation" 
                   name="motivation" 
                   required 
                   value={formData.motivation}
                   onChange={handleInputChange}
-                  placeholder="Briefly describe your motivation and how you can add value..."
+                  placeholder="Describe how you can support chamber members and facilitate trade..."
                   className="min-h-[100px]"
                 />
               </div>
@@ -136,45 +205,20 @@ export default function BecomePartnerPage() {
 
             <div className="space-y-4 pt-6 border-t">
               <h2 className="text-2xl font-semibold flex items-center gap-2">
-                <FileText className="w-5 h-5 text-primary" /> Verification Documents
+                <FileText className="w-5 h-5 text-primary" /> Credentials & Certifications
               </h2>
               <p className="text-sm text-muted-foreground mb-4">
-                Please provide links to your verification documents (Google Drive, Dropbox, etc. with public access).
+                Please provide links to your professional credentials or business profile (e.g. Google Drive, Dropbox link).
               </p>
               
               <div className="space-y-2">
-                <Label htmlFor="governmentId">Government ID / Registration Proof Link</Label>
-                <Input 
-                  id="governmentId" 
-                  name="governmentId" 
-                  type="url"
-                  required 
-                  value={formData.governmentId}
-                  onChange={handleInputChange}
-                  placeholder="https://..."
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="professionalCert">Professional Certifications Link (Optional)</Label>
+                <Label htmlFor="professionalCert">Credentials Link (Certificates or Professional Profile)</Label>
                 <Input 
                   id="professionalCert" 
                   name="professionalCert" 
                   type="url"
-                  value={formData.professionalCert}
-                  onChange={handleInputChange}
-                  placeholder="https://..."
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="businessProof">Business Proof / Profile Link</Label>
-                <Input 
-                  id="businessProof" 
-                  name="businessProof" 
-                  type="url"
                   required 
-                  value={formData.businessProof}
+                  value={formData.professionalCert}
                   onChange={handleInputChange}
                   placeholder="https://..."
                 />

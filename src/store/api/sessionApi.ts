@@ -49,6 +49,44 @@ export const sessionApi = createApi({
       }),
       invalidatesTags: ['Sessions', 'Registrations'],
     }),
+    requestSession: builder.mutation<any, { partnerId: string; date: string; questionnaire: string }>({
+      query: (body) => ({
+        url: `sessions/request`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Sessions'],
+    }),
+    getMySessions: builder.query<any, void>({
+      query: () => `sessions/my-sessions`,
+      providesTags: ['Sessions'],
+    }),
+    getPendingSessions: builder.query<any, void>({
+      query: () => `sessions/admin/pending`,
+      providesTags: ['Sessions'],
+    }),
+    approveSession: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `sessions/${id}/approve`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Sessions'],
+    }),
+    rejectSession: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `sessions/${id}/reject`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Sessions'],
+    }),
+    submitSessionSummary: builder.mutation<any, { sessionId: string; summary: string }>({
+      query: ({ sessionId, summary }) => ({
+        url: `sessions/${sessionId}/summary`,
+        method: 'POST',
+        body: { summary },
+      }),
+      invalidatesTags: ['Sessions'],
+    }),
 
     // --- Services ---
     getServices: builder.query<any, void>({
@@ -85,6 +123,12 @@ export const {
   useGetSessionByIdQuery, 
   useCreateSessionMutation,
   useBookSessionMutation,
+  useRequestSessionMutation,
+  useGetMySessionsQuery,
+  useGetPendingSessionsQuery,
+  useApproveSessionMutation,
+  useRejectSessionMutation,
+  useSubmitSessionSummaryMutation,
   useGetServicesQuery,
   usePurchaseServiceMutation,
   useGetUserPurchasesQuery,

@@ -8,6 +8,11 @@ const fileSchema = z.custom<File>(
   "Must be a PDF file under 5MB",
 );
 
+const fileOrUrlSchema = z.union([
+  fileSchema,
+  z.string().url("Must be a valid URL")
+]);
+
 export const signupSchema = z
   .object({
     // Step 1
@@ -85,8 +90,8 @@ export const signupSchema = z
     languagesSpoken: z.string().optional(),
 
     // Step 5
-    documents: z.array(fileSchema).optional(),
-    productCatalogue: z.array(fileSchema).optional(),
+    documents: z.array(fileOrUrlSchema).optional(),
+    productCatalogue: z.array(fileOrUrlSchema).optional(),
     agreedToTerms: z.boolean().refine((val) => val === true, {
       message: "You must agree to the Terms and Conditions",
     }),

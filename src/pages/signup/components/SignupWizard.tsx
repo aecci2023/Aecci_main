@@ -163,12 +163,16 @@ export default function SignupWizard() {
           const data = methods.getValues();
           
           // Helper to upload files and get URLs
-          const uploadFiles = async (files: File[], folder: string) => {
+          const uploadFiles = async (files: (File | string)[], folder: string) => {
             const urls: string[] = [];
             for (const file of files) {
-              const res = await uploadFile({ file, folder }).unwrap();
-              if (res.success) {
-                urls.push(res.data.url);
+              if (typeof file === 'string') {
+                urls.push(file);
+              } else {
+                const res = await uploadFile({ file, folder }).unwrap();
+                if (res.success) {
+                  urls.push(res.data.url);
+                }
               }
             }
             return urls;

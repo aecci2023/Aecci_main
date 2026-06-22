@@ -7,7 +7,7 @@ import { ProfileDropdown } from "@/components/profile-dropdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Hand, Users } from "lucide-react";
+import { Hand, Users, FileText } from "lucide-react";
 import { toast } from "sonner";
 import { useGetSessionByIdQuery } from "@/store/api/sessionApi";
 import { io, Socket } from 'socket.io-client';
@@ -28,6 +28,11 @@ export default function LiveDealRoomPage() {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [raisedHands, setRaisedHands] = useState<{userId: string, userName: string}[]>([]);
   const [myHandRaised, setMyHandRaised] = useState(false);
+
+  // Private Notepad state
+  const [notes, setNotes] = useState(() => localStorage.getItem(`aecci_notes_${sessionId}`) || "");
+  const [showNotepad, setShowNotepad] = useState(true);
+  const [saveStatus, setSaveStatus] = useState("Saved");
 
   // Parse user info
   const userStr = localStorage.getItem("user");
@@ -162,6 +167,30 @@ export default function LiveDealRoomPage() {
     }
   };
 
+  const handleNotesChange = (text: string) => {
+    setNotes(text);
+    localStorage.setItem(`aecci_notes_${sessionId}`, text);
+    setSaveStatus("Saving...");
+    setTimeout(() => {
+      setSaveStatus("Saved");
+    }, 600);
+  };
+
+  const handleCopyNotes = () => {
+    navigator.clipboard.writeText(notes);
+    toast.success("Notes copied to clipboard!");
+  };
+
+  const handleDownloadNotes = () => {
+    const element = document.createElement("a");
+    const file = new Blob([notes], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = `AECCI_DealRoom_Notes_${sessionId || 'Session'}.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
   const formatCountdown = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
     const hours = Math.floor(totalSeconds / 3600);
@@ -242,6 +271,41 @@ export default function LiveDealRoomPage() {
         {/* ZegoCloud Container */}
         <div className="flex-1 h-full bg-zinc-950 relative" ref={containerRef} />
         
+        {/* Notepad Panel */}
+        {showNotepad && (
+          <div className="w-80 h-full border-l bg-background flex flex-col z-40 animate-in slide-in-from-right duration-200">
+            <div className="p-4 border-b flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold text-sm">Private Notepad</h3>
+                <p className="text-[10px] text-muted-foreground">Autosaved to your browser</p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setShowNotepad(false)} className="size-8">
+                <span className="text-base">×</span>
+              </Button>
+            </div>
+            <div className="flex-1 p-4 flex flex-col gap-2">
+              <textarea
+                value={notes}
+                onChange={(e) => handleNotesChange(e.target.value)}
+                placeholder="Type your private notes, trade offers, and discussion points here..."
+                className="flex-1 w-full p-3 text-sm rounded-lg border border-input bg-background resize-none focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-sans leading-relaxed"
+              />
+              <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                <span>{notes.length} characters</span>
+                {saveStatus && <span className="text-emerald-600 flex items-center gap-1">✓ {saveStatus}</span>}
+              </div>
+            </div>
+            <div className="p-3 border-t bg-muted/30 grid grid-cols-2 gap-2">
+              <Button variant="outline" size="sm" onClick={handleDownloadNotes} className="text-xs">
+                Download .txt
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleCopyNotes} className="text-xs">
+                Copy Notes
+              </Button>
+            </div>
+          </div>
+        )}
+
         {/* Custom Overlay Controls */}
         <div className="absolute bottom-6 left-6 z-50 flex flex-col gap-2 pointer-events-none">
           {raisedHands.length > 0 && (
@@ -260,14 +324,25 @@ export default function LiveDealRoomPage() {
             </div>
           )}
           
-          <Button 
-            onClick={toggleRaiseHand}
-            variant={myHandRaised ? "default" : "secondary"}
-            className={`pointer-events-auto shadow-lg gap-2 ${myHandRaised ? 'bg-amber-500 hover:bg-amber-600 text-white' : ''}`}
-          >
-            <Hand className="size-4" />
-            {myHandRaised ? "Lower Hand" : "Raise Hand"}
-          </Button>
+          <div className="flex gap-2 pointer-events-auto">
+            <Button 
+              onClick={toggleRaiseHand}
+              variant={myHandRaised ? "default" : "secondary"}
+              className={`shadow-lg gap-2 ${myHandRaised ? 'bg-amber-500 hover:bg-amber-600 text-white' : ''}`}
+            >
+              <Hand className="size-4" />
+              {myHandRaised ? "Lower Hand" : "Raise Hand"}
+            </Button>
+
+            <Button
+              onClick={() => setShowNotepad(!showNotepad)}
+              variant={showNotepad ? "default" : "secondary"}
+              className="shadow-lg gap-2"
+            >
+              <FileText className="size-4" />
+              {showNotepad ? "Hide Notepad" : "Show Notepad"}
+            </Button>
+          </div>
         </div>
       </Main>
     </>

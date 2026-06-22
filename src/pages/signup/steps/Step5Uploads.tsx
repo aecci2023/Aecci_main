@@ -30,6 +30,16 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
 
   const [fileErrors, setFileErrors] = useState<Record<string, string>>({});
 
+  const getFileName = (file: File | string) => {
+    if (file instanceof File) return file.name;
+    try {
+      const parts = file.split("/");
+      return decodeURIComponent(parts[parts.length - 1]);
+    } catch {
+      return "Uploaded Document";
+    }
+  };
+
   const validateFiles = (files: File[], fieldName: string) => {
     const validFiles: File[] = [];
     let errorMsg = "";
@@ -170,7 +180,7 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
                               <div className="flex items-center gap-3 overflow-hidden">
                                 <FileText className="size-5 text-primary shrink-0" />
                                 <span className="text-sm truncate max-w-[200px]">
-                                  {file.name}
+                                  {getFileName(file)}
                                 </span>
                               </div>
                               <button
@@ -274,7 +284,7 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
                               <div className="flex items-center gap-3 overflow-hidden">
                                 <FileText className="size-5 text-primary shrink-0" />
                                 <span className="text-sm truncate max-w-[200px]">
-                                  {file.name}
+                                  {getFileName(file)}
                                 </span>
                               </div>
                               <button

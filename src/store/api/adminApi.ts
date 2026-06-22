@@ -92,6 +92,43 @@ export const adminApi = createApi({
       invalidatesTags: ['Users'],
     }),
 
+    // --- Subscriptions ---
+    createSubscriptionOrder: builder.mutation<any, { planName: string }>({
+      query: (body) => ({
+        url: '/payment/subscription/create-order',
+        method: 'POST',
+        body,
+      }),
+    }),
+    verifySubscriptionPayment: builder.mutation<any, { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string; planName: string }>({
+      query: (body) => ({
+        url: '/payment/subscription/verify',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Users'],
+    }),
+    getSubscriptionHistory: builder.query<any, void>({
+      query: () => '/payment/subscription/history',
+      providesTags: ['Users'],
+    }),
+    
+    // --- Marketplace Partners ---
+    getMarketplacePartners: builder.query<any, { country?: string } | void>({
+      query: (params) => {
+        let queryString = '';
+        if (params?.country) {
+          queryString = `?country=${encodeURIComponent(params.country)}`;
+        }
+        return `partners/marketplace/list${queryString}`;
+      },
+      providesTags: ['Users'],
+    }),
+    getMarketplacePartnerDetail: builder.query<any, string>({
+      query: (userId) => `partners/marketplace/detail/${userId}`,
+      providesTags: (_result, _error, userId) => [{ type: 'Users', id: userId }],
+    }),
+
     // --- Partners ---
     getPartnerProfiles: builder.query<any, string | void>({
       query: (status) => status ? `partners/profiles?status=${status}` : `partners/profiles`,
@@ -135,4 +172,9 @@ export const {
   useGetPartnerProfileQuery,
   useSetupPartnerProfileMutation,
   useCreatePartnerManuallyMutation,
+  useCreateSubscriptionOrderMutation,
+  useVerifySubscriptionPaymentMutation,
+  useGetSubscriptionHistoryQuery,
+  useGetMarketplacePartnersQuery,
+  useGetMarketplacePartnerDetailQuery,
 } = adminApi;
