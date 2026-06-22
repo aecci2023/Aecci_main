@@ -1,25 +1,25 @@
+import { ThemeSelector } from "@/components/themes/theme-selector"
 import {
   FacebookLogo,
+  InstagramLogo,
+  LinkedinLogo,
   TwitterLogo,
   YoutubeLogo,
-  LinkedinLogo,
-  InstagramLogo,
 } from "@phosphor-icons/react"
 import { Link } from "react-router-dom"
-import { ThemeSelector } from "@/components/themes/theme-selector"
 
 const footerSections = [
   {
     title: "About Us",
     links: [
       { label: "About Chamber", href: "/about/about-chamber" },
-      { label: "Our History", href: "/about/our-history" },
+      // { label: "Our History", href: "/about/our-history" },
       { label: "Chairman Message", href: "/about/chairman-message" },
-      { label: "Chamber Policy", href: "/about/chamber-policy" },
+      // { label: "Chamber Policy", href: "/about/chamber-policy" },
 
-      { label: "Roles & Responsibility", href: "/about/roles-responsibility" },
+      // { label: "Roles & Responsibility", href: "/about/roles-responsibility" },
       { label: "Strategic Partners", href: "/about/strategic-partners" },
-      { label: "Chamber Dynamics", href: "/about/chamber-dynamics" },
+      // { label: "Chamber Dynamics", href: "/about/chamber-dynamics" },
       { label: "Job Opportunities", href: "/about/jobs-opportunities" },
     ],
   },
@@ -28,18 +28,23 @@ const footerSections = [
     title: "Our Services",
     links: [
       { label: "Membership", href: "/services/membership" },
-      { label: "AECCI Affiliate Program", href: "/aecci-affiliate-program" },
-      { label: "Arbitration Center", href: "/arbitration-center" },
+      { label: "Renew Membership", href: "#" },
+      // { label: "Arbitration Center", href: "/arbitration-center" },
     ],
   },
 
   {
-    title: "Media",
+    title: "AECCI Spotlight",
     links: [
-      { label: "Ways & Means", href: "/ways-means" },
-      { label: "Media", href: "/media" },
-      { label: "Events", href: "/events" },
-      { label: "e-Platform", href: "/e-platform" },
+      { label: "Upcoming events", href: "#" },
+      { label: "Virtual B2B Forum", href: "#" },
+      { label: "Sponsorship", href: "#" },
+      { label: "Past Events", href: "#" },
+      { label: "Advertise With Us", href: "#" },
+      { label: "International Collaboration", href: "#" },
+      { label: "Media Center", href: "#" },
+      { label: "Publications", href: "#" },
+      { label: "E-Newsletters", href: "#" },
     ],
   },
 

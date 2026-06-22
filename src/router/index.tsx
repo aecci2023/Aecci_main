@@ -1,28 +1,32 @@
-import type { RouteObject } from "react-router-dom";
+import { AuthenticatedLayout } from "@/components/layout/authenticated-layout";
+import AboutChamber from "@/pages/about/AboutChamber";
+import ChairmanMessage from "@/pages/about/ChairmanMessage";
+import JobOpportunities from "@/pages/about/JobOpportunities";
+import StrategicPartners from "@/pages/about/StrategicPartners";
+import DashboardPage from "@/pages/dashboard";
+import ApplicationPage from "@/pages/dashboard/application";
+import ApprovalPage from "@/pages/dashboard/approval";
+import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
+import IntelligencePage from "@/pages/dashboard/intelligence";
+import LiveDealRoomPage from "@/pages/dashboard/live-deal-room";
+import MarketplacePage from "@/pages/dashboard/marketplace";
+import MessagesPage from "@/pages/dashboard/messages";
+import MySessionsPage from "@/pages/dashboard/my-sessions";
+import OpportunityReportPage from "@/pages/dashboard/opportunity-report";
+import PartnerBriefPage from "@/pages/dashboard/partner-brief";
+import PaymentPage from "@/pages/dashboard/payment";
+import PaymentSuccessPage from "@/pages/dashboard/payment-success";
+import ProfileSettingsPage from "@/pages/dashboard/profile-settings";
+import ScreeningPage from "@/pages/dashboard/screening";
+import ServicePurchasePage from "@/pages/dashboard/service-purchase";
+import SessionDetailsPage from "@/pages/dashboard/session-details";
+import SessionSummaryPage from "@/pages/dashboard/session-summary";
+import SubmitQuestionsPage from "@/pages/dashboard/submit-questions";
+import WaitingRoomPage from "@/pages/dashboard/waiting-room";
 import Home from "@/pages/Home";
 import { NotFound } from "@/pages/not-found";
 import SignupPage from "@/pages/signup";
-import { AuthenticatedLayout } from "@/components/layout/authenticated-layout";
-import DashboardPage from "@/pages/dashboard";
-import IntelligencePage from "@/pages/dashboard/intelligence";
-import PartnerBriefPage from "@/pages/dashboard/partner-brief";
-import SubmitQuestionsPage from "@/pages/dashboard/submit-questions";
-import WaitingRoomPage from "@/pages/dashboard/waiting-room";
-import LiveDealRoomPage from "@/pages/dashboard/live-deal-room";
-import SessionSummaryPage from "@/pages/dashboard/session-summary";
-import OpportunityReportPage from "@/pages/dashboard/opportunity-report";
-import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
-import ServicePurchasePage from "@/pages/dashboard/service-purchase";
-import MySessionsPage from "@/pages/dashboard/my-sessions";
-import MessagesPage from "@/pages/dashboard/messages";
-import ProfileSettingsPage from "@/pages/dashboard/profile-settings";
-import MarketplacePage from "@/pages/dashboard/marketplace";
-import SessionDetailsPage from "@/pages/dashboard/session-details";
-import ApplicationPage from "@/pages/dashboard/application";
-import ScreeningPage from "@/pages/dashboard/screening";
-import ApprovalPage from "@/pages/dashboard/approval";
-import PaymentPage from "@/pages/dashboard/payment";
-import PaymentSuccessPage from "@/pages/dashboard/payment-success";
+import type { RouteObject } from "react-router-dom";
 export const routes: RouteObject[] = [
   {
     path: "/",
@@ -129,7 +133,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/about/about-chamber",
-    element: <NotFound />,
+    element: <AboutChamber />,
   },
   {
     path: "/about/our-history",
@@ -137,7 +141,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/about/chairman-message",
-    element: <NotFound />,
+    element: <ChairmanMessage />,
   },
   {
     path: "/about/chamber-policy",
@@ -153,7 +157,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/about/strategic-partners",
-    element: <NotFound />,
+    element: <StrategicPartners />,
   },
   {
     path: "/about/chamber-dynamics",
@@ -161,7 +165,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/about/jobs-opportunities",
-    element: <NotFound />,
+    element: <JobOpportunities />,
   },
 
   // Services Main & The Wings

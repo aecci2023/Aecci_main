@@ -55,7 +55,7 @@ export default function LiveAccessWall() {
           <div className="space-y-3 font-mono">
             {DEPARTURES.map((item, idx) => (
               <motion.div
-                key={item.country}
+                key= {item.country}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
