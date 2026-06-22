@@ -1,28 +1,28 @@
-import { useNavigate } from 'react-router-dom'
-import { ConfirmDialog } from '@/components/confirm-dialog'
+import { useNavigate } from "react-router-dom";
+import { ConfirmDialog } from "@/components/confirm-dialog";
 
 interface SignOutDialogProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   return (
     <ConfirmDialog
       open={open}
       onOpenChange={onOpenChange}
-      title='Sign out'
-      desc='Are you sure you want to sign out? You will need to sign in again to access your account.'
-      confirmText='Sign out'
+      title="Sign out"
+      desc="Are you sure you want to sign out? You will need to sign in again to access your account."
+      confirmText="Sign out"
       destructive
       handleConfirm={handleSignOut}
-      className='sm:max-w-sm'
+      className="sm:max-w-sm"
     />
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import * as React from "react"
-import { Play, Volume2, Film } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import * as React from "react";
+import { Play, Volume2, Film } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export default function VideoExplainer() {
-  const [isPlaying, setIsPlaying] = React.useState(false)
+  const [isPlaying, setIsPlaying] = React.useState(false);
 
   return (
     <section className="bg-background py-16 md:py-24 border-b border-border/60 relative overflow-hidden">
@@ -13,7 +13,8 @@ export default function VideoExplainer() {
             Platform Explainer
           </Badge>
           <h2 className="text-3xl md:text-5xl font-heading font-black text-foreground tracking-tight flex items-center justify-center gap-3">
-            <Film className="size-8 text-primary shrink-0" /> WHY THE AECCI GLOBAL DEAL ROOM?
+            <Film className="size-8 text-primary shrink-0" /> WHY THE AECCI
+            GLOBAL DEAL ROOM?
           </h2>
         </div>
 
@@ -23,7 +24,8 @@ export default function VideoExplainer() {
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-102"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600')",
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600')",
             }}
           />
           {/* Heavy gradient shadows resembling Netflix preview UI */}
@@ -41,7 +43,9 @@ export default function VideoExplainer() {
             </h3>
 
             <p className="text-slate-200 text-xs md:text-sm max-w-xl font-light font-sans leading-relaxed hidden sm:block">
-              Watch our 90-second platform walk-through to see how Indian trade councils, verified distributors, and custom clearing networks orchestrate tariff-free corridors.
+              Watch our 90-second platform walk-through to see how Indian trade
+              councils, verified distributors, and custom clearing networks
+              orchestrate tariff-free corridors.
             </p>
 
             {/* Simulated controls */}
@@ -57,7 +61,7 @@ export default function VideoExplainer() {
               <button className="h-11 w-11 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-colors">
                 <Volume2 className="size-4" />
               </button>
-              
+
               <span className="text-[10px] text-slate-400 font-mono tracking-widest uppercase ml-auto sm:ml-4 font-bold">
                 90 SECONDS COMMERCIAL • MUTED LOOP
               </span>
@@ -85,5 +89,5 @@ export default function VideoExplainer() {
         </div>
       </div>
     </section>
-  )
+  );
 }

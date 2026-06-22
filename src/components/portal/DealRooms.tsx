@@ -1,8 +1,14 @@
-import { Briefcase, ChevronRight, Target, Calendar } from "lucide-react"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Briefcase, ChevronRight, Target, Calendar } from "lucide-react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const ROOMS = [
   {
@@ -49,7 +55,7 @@ const ROOMS = [
     demand: "STEADY",
     gradient: "from-purple-500/10 to-pink-500/10",
   },
-]
+];
 
 export default function DealRooms() {
   return (
@@ -60,40 +66,50 @@ export default function DealRooms() {
             Connect & Pitch Directly
           </Badge>
           <h2 className="text-3xl md:text-5xl font-heading font-black text-foreground tracking-tight flex items-center justify-center gap-3">
-            <Target className="size-8 text-primary shrink-0" /> ACTIVE GLOBAL DEAL ROOMS
+            <Target className="size-8 text-primary shrink-0" /> ACTIVE GLOBAL
+            DEAL ROOMS
           </h2>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed font-light">
-            Pre-vetted country access sessions matching Indian exporters with verified distributors and trade advisors. Slots are strictly limited.
+            Pre-vetted country access sessions matching Indian exporters with
+            verified distributors and trade advisors. Slots are strictly
+            limited.
           </p>
         </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {ROOMS.map((room) => {
-            const slotsPercentage = (room.slotsLeft / room.totalSlots) * 100
-            const isCritical = room.slotsLeft <= 2
-            
+            const slotsPercentage = (room.slotsLeft / room.totalSlots) * 100;
+            const isCritical = room.slotsLeft <= 2;
+
             return (
               <Card
                 key={room.country}
                 className="bg-card border-border hover:border-border/80 transition-all duration-300 rounded-2xl flex flex-col justify-between overflow-hidden relative group hover:-translate-y-1 shadow-sm"
               >
                 {/* Visual gradient backdrop */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${room.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${room.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
+                />
 
                 <CardHeader className="p-6 pb-4 relative z-10">
                   <div className="flex items-center justify-between mb-4">
-                    <Badge variant="outline" className="font-mono text-[10px] font-bold px-1.5 py-0.5 border-primary/30 text-primary bg-primary/5 rounded">
+                    <Badge
+                      variant="outline"
+                      className="font-mono text-[10px] font-bold px-1.5 py-0.5 border-primary/30 text-primary bg-primary/5 rounded"
+                    >
                       {room.code}
                     </Badge>
-                    <Badge className={cn(
-                      "font-mono text-[9px] tracking-wider uppercase border border-none px-2 py-0.5",
-                      room.demand === "CRITICAL"
-                        ? "bg-red-500/15 text-red-650 dark:text-red-400"
-                        : room.demand === "HIGH"
-                        ? "bg-amber-500/15 text-amber-650 dark:text-amber-400"
-                        : "bg-emerald-500/15 text-emerald-650 dark:text-emerald-400"
-                    )}>
+                    <Badge
+                      className={cn(
+                        "font-mono text-[9px] tracking-wider uppercase border border-none px-2 py-0.5",
+                        room.demand === "CRITICAL"
+                          ? "bg-red-500/15 text-red-650 dark:text-red-400"
+                          : room.demand === "HIGH"
+                            ? "bg-amber-500/15 text-amber-650 dark:text-amber-400"
+                            : "bg-emerald-500/15 text-emerald-650 dark:text-emerald-400",
+                      )}
+                    >
                       {room.demand} Demand
                     </Badge>
                   </div>
@@ -119,22 +135,32 @@ export default function DealRooms() {
                   <div className="space-y-2.5 text-xs text-muted-foreground pt-2 border-t border-border/60">
                     <div className="flex items-center gap-2">
                       <Briefcase className="size-3.5 text-muted-foreground/80" />
-                      <span>Partner: <strong>{room.partner}</strong></span>
+                      <span>
+                        Partner: <strong>{room.partner}</strong>
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar className="size-3.5 text-muted-foreground/80" />
-                      <span>Session: <strong>{room.date}</strong></span>
+                      <span>
+                        Session: <strong>{room.date}</strong>
+                      </span>
                     </div>
                   </div>
 
                   {/* Progress Indicator for slots */}
                   <div className="space-y-1.5 pt-2">
                     <div className="flex items-center justify-between text-[11px] font-mono">
-                      <span className="text-muted-foreground">Available Slots:</span>
-                      <span className={cn(
-                        "font-bold",
-                        isCritical ? "text-red-600 dark:text-red-400" : "text-foreground"
-                      )}>
+                      <span className="text-muted-foreground">
+                        Available Slots:
+                      </span>
+                      <span
+                        className={cn(
+                          "font-bold",
+                          isCritical
+                            ? "text-red-600 dark:text-red-400"
+                            : "text-foreground",
+                        )}
+                      >
                         {room.slotsLeft}/{room.totalSlots} left
                       </span>
                     </div>
@@ -142,7 +168,7 @@ export default function DealRooms() {
                       <div
                         className={cn(
                           "h-full rounded-full transition-all duration-500",
-                          isCritical ? "bg-red-500" : "bg-primary"
+                          isCritical ? "bg-red-500" : "bg-primary",
                         )}
                         style={{ width: `${slotsPercentage}%` }}
                       />
@@ -151,19 +177,20 @@ export default function DealRooms() {
                 </CardContent>
 
                 <CardFooter className="p-6 pt-0 relative z-10">
-                  <Button asChild className="w-full rounded-xl bg-muted border border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary font-bold transition-all duration-300">
+                  <Button
+                    asChild
+                    className="w-full rounded-xl bg-muted border border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary font-bold transition-all duration-300"
+                  >
                     <a href="#pricing">
                       Book Access <ChevronRight className="size-4 ml-1.5" />
                     </a>
                   </Button>
                 </CardFooter>
               </Card>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
-
-

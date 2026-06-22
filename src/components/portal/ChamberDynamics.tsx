@@ -1,9 +1,9 @@
-import { motion } from "framer-motion"
-import { ArrowUpRight } from "@phosphor-icons/react"
-import { Card } from "@/components/ui/card"
-import golfImg from "@/assets/chamber-dynamics/golf-tournament.png"
-import excellenceImg from "@/assets/chamber-dynamics/business-excellence.png"
-import womenImg from "@/assets/chamber-dynamics/women-empowerment.png"
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "@phosphor-icons/react";
+import { Card } from "@/components/ui/card";
+import golfImg from "@/assets/chamber-dynamics/golf-tournament.png";
+import excellenceImg from "@/assets/chamber-dynamics/business-excellence.png";
+import womenImg from "@/assets/chamber-dynamics/women-empowerment.png";
 
 const initiatives = [
   {
@@ -24,13 +24,15 @@ const initiatives = [
     date: "February 2025",
     img: womenImg,
   },
-] as const
+] as const;
 
 export default function ChamberDynamics() {
   return (
-    <section id="dynamics" className="py-10 md:py-20 bg-background border-b border-border overflow-hidden">
+    <section
+      id="dynamics"
+      className="py-10 md:py-20 bg-background border-b border-border overflow-hidden"
+    >
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-        
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
@@ -41,7 +43,8 @@ export default function ChamberDynamics() {
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Over the years, AECCI has established a number of successful initiatives.
+            Over the years, AECCI has established a number of successful
+            initiatives.
           </p>
         </div>
 
@@ -71,7 +74,7 @@ export default function ChamberDynamics() {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Caption and title */}
                 <div className="p-5 flex flex-col text-left flex-1 justify-between bg-card/50">
                   <div>
@@ -89,5 +92,5 @@ export default function ChamberDynamics() {
         </div>
       </div>
     </section>
-  )
+  );
 }

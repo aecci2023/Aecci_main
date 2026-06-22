@@ -20,7 +20,10 @@ export default function MegaMenu({
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const [activeSubItems, setActiveSubItems] = React.useState<{ title: string; items: SubMenuItem[] } | null>(null);
+  const [activeSubItems, setActiveSubItems] = React.useState<{
+    title: string;
+    items: SubMenuItem[];
+  } | null>(null);
   const [prevSectionTitle, setPrevSectionTitle] = React.useState(section.title);
 
   // Reset when section changes (React-recommended pattern instead of useEffect)
@@ -52,15 +55,24 @@ export default function MegaMenu({
         className="mx-auto max-w-7xl px-4 md:px-6 pt-7 pb-10 flex gap-0 text-left transition-all duration-300"
       >
         {/* ── LEFT: Menus (Featured) ── */}
-        <div 
-          className={`flex flex-col gap-5 pr-8 border-r border-black/[0.06] dark:border-white/[0.07] transition-all duration-300 ${showThirdColumn ? 'w-[38%]' : 'w-[55%]'}`}
+        <div
+          className={`flex flex-col gap-5 pr-8 border-r border-black/[0.06] dark:border-white/[0.07] transition-all duration-300 ${showThirdColumn ? "w-[38%]" : "w-[55%]"}`}
         >
           {section.featured?.map((item, idx) => {
-            const isActive = currentPath === item.href || currentPath.startsWith(item.href + '/');
+            const isActive =
+              currentPath === item.href ||
+              currentPath.startsWith(item.href + "/");
             return (
               <div
                 key={idx}
-                onMouseEnter={() => item.items ? setActiveSubItems({ title: item.title, items: item.items }) : setActiveSubItems(null)}
+                onMouseEnter={() =>
+                  item.items
+                    ? setActiveSubItems({
+                        title: item.title,
+                        items: item.items,
+                      })
+                    : setActiveSubItems(null)
+                }
                 className="group pb-4 border-b border-black/[0.05] dark:border-white/[0.05] last:border-0 last:pb-0"
               >
                 {item.href.startsWith("http") ? (
@@ -71,12 +83,14 @@ export default function MegaMenu({
                     onClick={onClose}
                     className="group/link flex items-start gap-1 no-underline"
                   >
-                    <span className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                    <span
+                      className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? "text-primary" : "text-foreground"}`}
+                    >
                       {item.title}
                     </span>
                     {item.items && item.items.length > 0 && (
                       <ArrowRight
-                        className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? 'text-primary opacity-50' : 'text-foreground/30 group-hover/link:text-foreground/50'}`}
+                        className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? "text-primary opacity-50" : "text-foreground/30 group-hover/link:text-foreground/50"}`}
                       />
                     )}
                   </a>
@@ -86,12 +100,14 @@ export default function MegaMenu({
                     onClick={onClose}
                     className="group/link flex items-start gap-1 no-underline"
                   >
-                    <span className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                    <span
+                      className={`text-[20px] font-[450] leading-tight tracking-[-0.3px] transition-opacity duration-200 group-hover/link:opacity-70 ${isActive ? "text-primary" : "text-foreground"}`}
+                    >
                       {item.title}
                     </span>
                     {item.items && item.items.length > 0 && (
                       <ArrowRight
-                        className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? 'text-primary opacity-50' : 'text-foreground/30 group-hover/link:text-foreground/50'}`}
+                        className={`mt-[4px] size-[15px] shrink-0 transition-all duration-200 group-hover/link:translate-x-0.5 ${isActive ? "text-primary opacity-50" : "text-foreground/30 group-hover/link:text-foreground/50"}`}
                       />
                     )}
                   </Link>
@@ -107,7 +123,7 @@ export default function MegaMenu({
         {/* ── MIDDLE: Dynamic 3rd Column for Sub-items ── */}
         <AnimatePresence>
           {showThirdColumn && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
@@ -127,7 +143,7 @@ export default function MegaMenu({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={onClose}
-                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'bg-primary/5 text-primary' : 'text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground'}`}
+                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "bg-primary/5 text-primary" : "text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"}`}
                     >
                       {subItem.title}
                     </a>
@@ -136,7 +152,7 @@ export default function MegaMenu({
                       key={idx}
                       to={subItem.href}
                       onClick={onClose}
-                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'bg-primary/5 text-primary' : 'text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground'}`}
+                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "bg-primary/5 text-primary" : "text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"}`}
                     >
                       {subItem.title}
                     </Link>
@@ -147,9 +163,9 @@ export default function MegaMenu({
           )}
         </AnimatePresence>
 
-        {/* ── RIGHT: Explore & Resources ── */} 
-        <div 
-          className={`flex flex-col pl-0 md:pl-8 transition-all duration-300 ${showThirdColumn ? 'w-[30%]' : 'w-[45%] pl-0 md:pl-8'}`}
+        {/* ── RIGHT: Explore & Resources ── */}
+        <div
+          className={`flex flex-col pl-0 md:pl-8 transition-all duration-300 ${showThirdColumn ? "w-[30%]" : "w-[45%] pl-0 md:pl-8"}`}
         >
           {section.quickLinks && section.quickLinks.length > 0 && (
             <div className="mb-6">
@@ -166,8 +182,15 @@ export default function MegaMenu({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={onClose}
-                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
-                      className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
+                      onMouseEnter={() =>
+                        link.items
+                          ? setActiveSubItems({
+                              title: link.title,
+                              items: link.items,
+                            })
+                          : setActiveSubItems(null)
+                      }
+                      className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
                     >
                       <span>{link.title}</span>
                       {link.items && link.items.length > 0 && (
@@ -181,8 +204,15 @@ export default function MegaMenu({
                       key={idx}
                       to={link.href}
                       onClick={onClose}
-                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
-                      className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
+                      onMouseEnter={() =>
+                        link.items
+                          ? setActiveSubItems({
+                              title: link.title,
+                              items: link.items,
+                            })
+                          : setActiveSubItems(null)
+                      }
+                      className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
                     >
                       <span>{link.title}</span>
                       {link.items && link.items.length > 0 && (
@@ -212,10 +242,19 @@ export default function MegaMenu({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={onClose}
-                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
+                      onMouseEnter={() =>
+                        link.items
+                          ? setActiveSubItems({
+                              title: link.title,
+                              items: link.items,
+                            })
+                          : setActiveSubItems(null)
+                      }
                       className="group/r block no-underline"
                     >
-                      <span className={`block text-[13px] font-[500] transition-opacity duration-150 group-hover/r:opacity-70 ${isActive ? 'text-primary' : 'text-foreground/80'}`}>
+                      <span
+                        className={`block text-[13px] font-[500] transition-opacity duration-150 group-hover/r:opacity-70 ${isActive ? "text-primary" : "text-foreground/80"}`}
+                      >
                         {link.title}
                       </span>
                       {link.description && (
@@ -229,10 +268,19 @@ export default function MegaMenu({
                       key={idx}
                       to={link.href}
                       onClick={onClose}
-                      onMouseEnter={() => link.items ? setActiveSubItems({ title: link.title, items: link.items }) : setActiveSubItems(null)}
+                      onMouseEnter={() =>
+                        link.items
+                          ? setActiveSubItems({
+                              title: link.title,
+                              items: link.items,
+                            })
+                          : setActiveSubItems(null)
+                      }
                       className="group/r block no-underline"
                     >
-                      <span className={`block text-[13px] font-[500] transition-opacity duration-150 group-hover/r:opacity-70 ${isActive ? 'text-primary' : 'text-foreground/80'}`}>
+                      <span
+                        className={`block text-[13px] font-[500] transition-opacity duration-150 group-hover/r:opacity-70 ${isActive ? "text-primary" : "text-foreground/80"}`}
+                      >
                         {link.title}
                       </span>
                       {link.description && (
@@ -247,7 +295,6 @@ export default function MegaMenu({
             </div>
           )}
         </div>
-
       </motion.div>
     </motion.div>
   );

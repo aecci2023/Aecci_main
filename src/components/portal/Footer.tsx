@@ -5,8 +5,11 @@ import {
   LinkedinLogo,
   TwitterLogo,
   YoutubeLogo,
-} from "@phosphor-icons/react"
-import { Link } from "react-router-dom"
+  LinkedinLogo,
+  InstagramLogo,
+} from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
+import { ThemeSelector } from "@/components/themes/theme-selector";
 
 const footerSections = [
   {
@@ -52,11 +55,14 @@ const footerSections = [
     title: "Contact Us",
     links: [
       { label: "AECCI Head Office", href: "/contact-us/aecci-head-office" },
-      { label: "AECCI International Hub", href: "/contact-us/aecci-international-hub" },
+      {
+        label: "AECCI International Hub",
+        href: "/contact-us/aecci-international-hub",
+      },
       { label: "Upcoming", href: "/upcoming-events" },
     ],
   },
-]
+];
 
 const socialLinks = [
   { label: "Facebook", icon: FacebookLogo, href: "#", bg: "bg-[#3b5998]" },
@@ -64,25 +70,25 @@ const socialLinks = [
   { label: "YouTube", icon: YoutubeLogo, href: "#", bg: "bg-[#FF0000]" },
   { label: "LinkedIn", icon: LinkedinLogo, href: "#", bg: "bg-[#0077B5]" },
   { label: "Instagram", icon: InstagramLogo, href: "#", bg: "bg-[#222]" },
-]
+];
 
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-border bg-card text-card-foreground">
-
       {/* subtle texture */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.04] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:18px_18px]" />
 
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-10 py-8">
-
         {/* Top Footer */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-
           {/* Brand */}
           <div className="md:col-span-3 flex flex-col items-start">
-
             <Link to="/" className="block cursor-pointer">
-              <img src="/arccilogoWithText.png" alt="AECCI" className="h-24 mx-auto w-auto object-contain" />
+              <img
+                src="/arccilogoWithText.png"
+                alt="AECCI"
+                className="h-24 mx-auto w-auto object-contain"
+              />
             </Link>
 
             <h3 className="mt-4 text-[16px] font-extrabold uppercase tracking-tight text-primary">
@@ -90,15 +96,18 @@ export default function Footer() {
             </h3>
 
             <div className="mt-3 text-[12.5px] leading-relaxed text-muted-foreground font-light max-w-xs">
-              <p className="font-semibold text-foreground">Asian Exporters’ Chamber Of Commerce & Industry</p>
-              <p className="mt-1">604 | 6th floor | Hilton Center | Plot no.66 | Sector No.11 |</p>
+              <p className="font-semibold text-foreground">
+                Asian Exporters’ Chamber Of Commerce & Industry
+              </p>
+              <p className="mt-1">
+                604 | 6th floor | Hilton Center | Plot no.66 | Sector No.11 |
+              </p>
               <p>CBD Belapur | Navi Mumbai-400614 | Maharashtra-India</p>
             </div>
           </div>
 
           {/* Menus */}
           <div className="md:col-span-9 grid grid-cols-2 md:grid-cols-4 gap-6">
-
             {footerSections.map((section) => (
               <div key={section.title}>
                 <h4 className="mb-3 text-[16px] font-semibold tracking-tight">
@@ -121,14 +130,13 @@ export default function Footer() {
                 {/* Social */}
                 {section.title === "Contact Us" && (
                   <div className="mt-6">
-
                     <h5 className="mb-3 text-[16px] font-bold tracking-tight text-primary">
                       Stay Connected:
                     </h5>
 
                     <div className="flex items-center gap-2">
                       {socialLinks.map((item, idx) => {
-                        const Icon = item.icon
+                        const Icon = item.icon;
 
                         return (
                           <a
@@ -144,7 +152,7 @@ export default function Footer() {
                           >
                             <Icon weight="fill" className="w-4 h-4" />
                           </a>
-                        )
+                        );
                       })}
                     </div>
                   </div>
@@ -159,7 +167,6 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-
           {/* Left */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <p className="text-[13px] text-muted-foreground">
@@ -173,7 +180,6 @@ export default function Footer() {
 
           {/* Right */}
           <div className="flex flex-col items-start gap-2 md:items-end">
-
             <div className="flex flex-wrap items-center gap-2 text-[13px] font-medium">
               <a href="#" className="hover:text-primary">
                 Terms & Conditions
@@ -204,5 +210,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

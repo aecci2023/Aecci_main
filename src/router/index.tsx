@@ -9,6 +9,19 @@ import ApprovalPage from "@/pages/dashboard/approval";
 import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
 import IntelligencePage from "@/pages/dashboard/intelligence";
 import LiveDealRoomPage from "@/pages/dashboard/live-deal-room";
+import SessionSummaryPage from "@/pages/dashboard/session-summary";
+import OpportunityReportPage from "@/pages/dashboard/opportunity-report";
+import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
+import ServicePurchasePage from "@/pages/dashboard/service-purchase";
+import MySessionsPage from "@/pages/dashboard/my-sessions";
+import RejectedApplicationPage from "@/pages/dashboard/rejected";
+import { Chats } from "@/features/chats";
+import { Settings } from "@/features/settings";
+import { SettingsProfile } from "@/features/settings/profile";
+import { SettingsAccount } from "@/features/settings/account";
+import { SettingsAppearance } from "@/features/settings/appearance";
+import { SettingsNotifications } from "@/features/settings/notifications";
+import { SettingsDisplay } from "@/features/settings/display";
 import MarketplacePage from "@/pages/dashboard/marketplace";
 import MessagesPage from "@/pages/dashboard/messages";
 import MySessionsPage from "@/pages/dashboard/my-sessions";
@@ -27,6 +40,41 @@ import Home from "@/pages/Home";
 import { NotFound } from "@/pages/not-found";
 import SignupPage from "@/pages/signup";
 import type { RouteObject } from "react-router-dom";
+import LoginPage from "@/pages/login";
+import { AdminLayout } from "@/components/layout/admin-layout";
+import { ProtectedRoute } from "@/components/layout/protected-route";
+import AdminDashboard from "@/pages/admin/dashboard";
+import AdminUsersPage from "@/pages/admin/users";
+import AdminBusinessesPage from "@/pages/admin/businesses";
+import AdminIndividualsPage from "@/pages/admin/individuals";
+import AdminPartnersPage from "@/pages/admin/partners";
+import AdminVerificationsPage from "@/pages/admin/verifications";
+import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
+import AdminDocumentsPage from "@/pages/admin/documents";
+import AdminPartnerOnboardingPage from "@/pages/admin/partner-onboarding";
+import AdminSessionsPage from "@/pages/admin/sessions";
+import AdminMarketplacePage from "@/pages/admin/marketplace";
+import AdminQuestionsPage from "@/pages/admin/questions";
+import AdminCountryIntelligencePage from "@/pages/admin/country-intelligence";
+import AdminReportsPage from "@/pages/admin/reports";
+import AdminAnnouncementsPage from "@/pages/admin/announcements";
+import AdminTransactionsPage from "@/pages/admin/transactions";
+import AdminInvoicesPage from "@/pages/admin/invoices";
+
+import PartnerDashboard from "@/pages/partner/dashboard";
+import BecomePartnerPage from "@/pages/partner/apply";
+import { PartnerLayout } from "@/components/layout/partner-layout";
+
+import PartnerQuestionsPage from "@/pages/partner/questions";
+
+// Generic placeholder for partner routes
+const PartnerPlaceholder = ({ title }: { title: string }) => (
+  <div className="flex flex-col items-center justify-center h-[calc(100vh-100px)]">
+    <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+    <p className="text-muted-foreground mt-2">This module is currently under development.</p>
+  </div>
+);
+
 export const routes: RouteObject[] = [
   {
     path: "/",
@@ -37,13 +85,145 @@ export const routes: RouteObject[] = [
     element: <SignupPage />,
   },
   {
-    path: "/dashboard",
-    element: <AuthenticatedLayout />,
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/partner",
+    children: [
+      { path: "apply", element: <BecomePartnerPage /> },
+      {
+        path: "",
+        element: <ProtectedRoute allowedRoles={['partner']} />,
+        children: [
+          {
+            path: "",
+            element: <PartnerLayout />,
+            children: [
+              { path: "dashboard", element: <PartnerDashboard /> },
+          { path: "sessions/schedule", element: <PartnerPlaceholder title="My Schedule" /> },
+          { path: "sessions/upcoming", element: <PartnerPlaceholder title="Upcoming Sessions" /> },
+          { path: "sessions/past", element: <PartnerPlaceholder title="Past Sessions" /> },
+          { path: "sessions/host", element: <PartnerPlaceholder title="Host New Session" /> },
+          { path: "engagement/questions", element: <PartnerQuestionsPage /> },
+          { path: "engagement/active", element: <PartnerPlaceholder title="Active Clients" /> },
+          { path: "engagement/assignments", element: <PartnerPlaceholder title="Client Assignments" /> },
+          { path: "content/country-briefs", element: <PartnerPlaceholder title="Country Briefs" /> },
+          { path: "content/opportunity-reports", element: <PartnerPlaceholder title="Opportunity Reports" /> },
+          { path: "earnings/overview", element: <PartnerPlaceholder title="Earnings Overview" /> },
+          { path: "earnings/invoices", element: <PartnerPlaceholder title="Invoices & Payouts" /> },
+          { path: "profile", element: <PartnerPlaceholder title="My Profile" /> },
+          { path: "resources/training", element: <PartnerPlaceholder title="Training & Guidelines" /> },
+          { path: "resources/availability", element: <PartnerPlaceholder title="Availability Settings" /> },
+          { path: "resources/documents", element: <PartnerPlaceholder title="Resources & Documents" /> },
+          { path: "support/messages", element: <PartnerPlaceholder title="Messages" /> },
+          { path: "support/help", element: <PartnerPlaceholder title="Help & Support" /> },
+            ]
+          }
+        ]
+      }
+    ],
+  },
+  {
+    path: "/admin",
+    element: <ProtectedRoute allowedRoles={['admin']} />,
     children: [
       {
         path: "",
-        element: <DashboardPage />,
+        element: <AdminLayout />,
+        children: [
+          {
+            path: "dashboard",
+            element: <AdminDashboard />,
+          },
+          {
+            path: "verifications",
+            element: <AdminVerificationsPage />,
+          },
+          {
+            path: "verifications/:id",
+            element: <AdminVerificationDetailsPage />,
+          },
+          {
+            path: "users",
+            element: <AdminUsersPage />,
+          },
+          {
+            path: "businesses",
+            element: <AdminBusinessesPage />,
+          },
+          {
+            path: "individuals",
+            element: <AdminIndividualsPage />,
+          },
+          {
+            path: "partners",
+            element: <AdminPartnersPage />,
+          },
+          {
+            path: "documents",
+            element: <AdminDocumentsPage />,
+          },
+          {
+            path: "partner-onboarding",
+            element: <AdminPartnerOnboardingPage />,
+          },
+          {
+            path: "sessions",
+            element: <AdminSessionsPage />,
+          },
+          {
+            path: "marketplace",
+            element: <AdminMarketplacePage />,
+          },
+          {
+            path: "questions",
+            element: <AdminQuestionsPage />,
+          },
+          {
+            path: "country-intelligence",
+            element: <AdminCountryIntelligencePage />,
+          },
+          {
+            path: "reports",
+            element: <AdminReportsPage />,
+          },
+          {
+            path: "announcements",
+            element: <AdminAnnouncementsPage />,
+          },
+          {
+            path: "transactions",
+            element: <AdminTransactionsPage />,
+          },
+          {
+            path: "invoices",
+            element: <AdminInvoicesPage />,
+          },
+          {
+            path: "*",
+            element: <NotFound />,
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: "/dashboard",
+    element: <ProtectedRoute allowedRoles={['user']} />,
+    children: [
+      {
+        path: "rejected",
+        element: <RejectedApplicationPage />,
       },
+      {
+        path: "",
+        element: <AuthenticatedLayout />,
+        children: [
+          {
+            path: "",
+            element: <DashboardPage />,
+          },
       {
         path: "intelligence",
         element: <IntelligencePage />,
@@ -86,11 +266,18 @@ export const routes: RouteObject[] = [
       },
       {
         path: "messages",
-        element: <MessagesPage />,
+        element: <Chats />,
       },
       {
-        path: "profile-settings",
-        element: <ProfileSettingsPage />,
+        path: "settings",
+        element: <Settings />,
+        children: [
+          { index: true, element: <SettingsProfile /> },
+          { path: "account", element: <SettingsAccount /> },
+          { path: "appearance", element: <SettingsAppearance /> },
+          { path: "notifications", element: <SettingsNotifications /> },
+          { path: "display", element: <SettingsDisplay /> },
+        ],
       },
       {
         path: "marketplace",
@@ -116,11 +303,13 @@ export const routes: RouteObject[] = [
         path: "payment",
         element: <PaymentPage />,
       },
-      {
-        path: "payment-success",
-        element: <PaymentSuccessPage />,
+          {
+            path: "payment-success",
+            element: <PaymentSuccessPage />,
+          },
+        ],
       },
-    ]
+    ],
   },
   // Added mappings for simple /about and /contact standard paths
   {

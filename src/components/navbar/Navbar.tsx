@@ -7,8 +7,6 @@ import { menuConfig } from "./menu-config";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
 
-
-
 export default function Navbar() {
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
@@ -68,7 +66,6 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 lg:top-[-72px] z-50 w-full transition-colors duration-300">
-
         {/* ─────────────────────────────────────── */}
         {/* Brand Bar — desktop only, hides on scroll */}
         {/* ─────────────────────────────────────── */}
@@ -108,7 +105,6 @@ export default function Navbar() {
           ].join(" ")}
         >
           <div className="mx-auto flex h-[54px] lg:h-[44px] max-w-7xl items-center justify-between px-4 lg:px-6 relative">
-
             {/* Mobile: Hamburger */}
             <div className="flex lg:hidden items-center w-1/3">
               <MobileMenu />
@@ -162,11 +158,7 @@ export default function Navbar() {
                       "px-[11px] py-2",
                       "text-[12.5px] font-[600] tracking-wide",
                       "transition-all duration-200",
-                      isAnyOpen
-                        ? activeSection === item.title
-                          ? "text-primary opacity-100"
-                          : "text-foreground opacity-30 hover:opacity-60"
-                        : isActivePath
+                      activeSection === item.title || isActivePath
                         ? "text-primary opacity-100 font-bold"
                         : "text-foreground opacity-75 hover:text-primary hover:opacity-100",
                     ].join(" ")}
@@ -182,11 +174,9 @@ export default function Navbar() {
               className={[
                 "hidden lg:flex items-center gap-2",
                 "transition-opacity duration-200",
-                isAnyOpen ? "opacity-30 pointer-events-none" : "opacity-100",
+                "opacity-100",
               ].join(" ")}
             >
-
-
               {/* Auth */}
               <a
                 href="https://e-platform.aecci.org.in/login"
@@ -206,7 +196,6 @@ export default function Navbar() {
                 Become Member
               </a>
             </div>
-
           </div>
         </div>
 
@@ -224,8 +213,7 @@ export default function Navbar() {
               <div
                 className={[
                   "absolute inset-0",
-                  "bg-[rgba(252,252,252,0.94)] dark:bg-[rgba(20,20,21,0.96)]",
-                  "backdrop-blur-2xl",
+                  "bg-white dark:bg-[#141415]",
                   "border-b border-black/[0.07] dark:border-white/[0.07]",
                 ].join(" ")}
               />
@@ -240,7 +228,6 @@ export default function Navbar() {
             </div>
           )}
         </AnimatePresence>
-
       </header>
 
       {/* ─────────────────────────────────────── */}
@@ -254,7 +241,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1.0] }}
             onClick={handleClose}
-            className="fixed inset-0 z-40 bg-black/[0.10] dark:bg-black/[0.28] backdrop-blur-[10px]"
+            className="fixed inset-0 z-40 bg-transparent"
             style={{ top: 0 }}
           />
         )}

@@ -1,28 +1,30 @@
-import * as React from "react"
-import { motion } from "framer-motion"
-import { DownloadSimple, QrCode } from "@phosphor-icons/react"
-import appMockup from "@/assets/mobile-app/aecci-mobile-mockup.png"
+import * as React from "react";
+import { motion } from "framer-motion";
+import { DownloadSimple, QrCode } from "@phosphor-icons/react";
+import appMockup from "@/assets/mobile-app/aecci-mobile-mockup.png";
 
 export default function MobileAppPromo() {
-  const [userCount, setUserCount] = React.useState(10218)
+  const [userCount, setUserCount] = React.useState(10218);
 
   // Simulation of a live registering counter
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setUserCount(prev => prev + Math.floor(Math.random() * 2))
-    }, 7000)
-    return () => clearInterval(interval)
-  }, [])
+      setUserCount((prev) => prev + Math.floor(Math.random() * 2));
+    }, 7000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section id="mobile-app" className="py-12 md:py-24 bg-card/25 border-b border-border relative overflow-hidden">
+    <section
+      id="mobile-app"
+      className="py-12 md:py-24 bg-card/25 border-b border-border relative overflow-hidden"
+    >
       {/* Decorative background gradients */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 items-center">
-          
           {/* Left Column: Interactive Mobile Mockup Image */}
           <div className="lg:col-span-6 flex justify-center order-2 lg:order-1">
             <motion.div
@@ -34,7 +36,7 @@ export default function MobileAppPromo() {
             >
               {/* Glowing backdrop circle */}
               <div className="absolute inset-4 rounded-[60px] bg-gradient-to-tr from-primary/20 via-emerald-500/10 to-transparent blur-3xl -z-10 animate-pulse duration-[6000ms]" />
-              
+
               <img
                 src={appMockup}
                 alt="AECCI Mobile Application Mockup"
@@ -45,7 +47,6 @@ export default function MobileAppPromo() {
 
           {/* Right Column: Dynamic Text & Action Controls */}
           <div className="lg:col-span-6 flex flex-col items-start text-left order-1 lg:order-2">
-            
             {/* Live Counter Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -58,7 +59,8 @@ export default function MobileAppPromo() {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
               <span className="text-xs font-heading font-black text-emerald-500 tracking-wide uppercase">
-                {userCount.toLocaleString()} Users Live Counter Registered With Us
+                {userCount.toLocaleString()} Users Live Counter Registered With
+                Us
               </span>
             </motion.div>
 
@@ -84,7 +86,10 @@ export default function MobileAppPromo() {
               transition={{ delay: 0.2 }}
               className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-xl"
             >
-              An Opportunity to meet with our collaborator partners from over 35 countries. Download the official AECCI app to access member utilities, manage Certificates of Origin, and get legal advice instantly.
+              An Opportunity to meet with our collaborator partners from over 35
+              countries. Download the official AECCI app to access member
+              utilities, manage Certificates of Origin, and get legal advice
+              instantly.
             </motion.p>
 
             {/* Actions Grid (QR and APK Download) */}
@@ -149,7 +154,8 @@ export default function MobileAppPromo() {
                     Scan to Download App
                   </h4>
                   <p className="text-[11px] text-muted-foreground mt-0.5">
-                    Point your camera at this QR code to load the app package directly.
+                    Point your camera at this QR code to load the app package
+                    directly.
                   </p>
                 </div>
               </div>
@@ -169,12 +175,10 @@ export default function MobileAppPromo() {
                   <span>v2.4.1</span>
                 </div>
               </div>
-
             </motion.div>
           </div>
-
         </div>
       </div>
     </section>
-  )
+  );
 }

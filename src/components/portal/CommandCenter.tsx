@@ -1,31 +1,40 @@
-import * as React from 'react'
-import { motion, AnimatePresence } from "framer-motion"
-import { Database, Target, Handshake, Compass, Terminal, Calendar } from "lucide-react"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Database,
+  Target,
+  Handshake,
+  Compass,
+  Terminal,
+  Calendar,
+} from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 type CountryData = {
-  name: string
-  code: string
-  overview: string
-  opportunity: string
-  demand: string
-  demandLevel: "CRITICAL" | "HIGH" | "STEADY"
-  partner: string
-  partnerLogo: string
-  session: string
-  sessionDate: string
-  volumeGrowth: string
-  topSector: string
-}
+  name: string;
+  code: string;
+  overview: string;
+  opportunity: string;
+  demand: string;
+  demandLevel: "CRITICAL" | "HIGH" | "STEADY";
+  partner: string;
+  partnerLogo: string;
+  session: string;
+  sessionDate: string;
+  volumeGrowth: string;
+  topSector: string;
+};
 
 const COUNTRIES: Record<string, CountryData> = {
   KENYA: {
     name: "Kenya",
     code: "KE",
-    overview: "Fastest-growing tech & commerce hub in East Africa. Ideal entry point for agricultural machinery, fast-moving consumer goods (FMCG), and construction materials.",
-    opportunity: "Looking for 15+ Indian distributors for processed foods, solar-energy solutions, and eco-friendly packaging materials.",
+    overview:
+      "Fastest-growing tech & commerce hub in East Africa. Ideal entry point for agricultural machinery, fast-moving consumer goods (FMCG), and construction materials.",
+    opportunity:
+      "Looking for 15+ Indian distributors for processed foods, solar-energy solutions, and eco-friendly packaging materials.",
     demand: "FMCG, Agro-Tech, Building Materials",
     demandLevel: "CRITICAL",
     partner: "East Africa Chamber of Commerce & Industry",
@@ -38,8 +47,10 @@ const COUNTRIES: Record<string, CountryData> = {
   NETHERLANDS: {
     name: "Netherlands",
     code: "NL",
-    overview: "Primary gateway to the European Union market. Highly advanced logistics networks with massive demand for biological goods, medical equipment, and organic chemicals.",
-    opportunity: "Exclusive tender access for bio-medical suppliers and packaging distributors through the Rotterdam Port Innovation Hub.",
+    overview:
+      "Primary gateway to the European Union market. Highly advanced logistics networks with massive demand for biological goods, medical equipment, and organic chemicals.",
+    opportunity:
+      "Exclusive tender access for bio-medical suppliers and packaging distributors through the Rotterdam Port Innovation Hub.",
     demand: "Biotech, Pharmaceuticals, Sustainable Packaging",
     demandLevel: "HIGH",
     partner: "Rotterdam Trade & Logistics Syndicate",
@@ -52,8 +63,10 @@ const COUNTRIES: Record<string, CountryData> = {
   SINGAPORE: {
     name: "Singapore",
     code: "SG",
-    overview: "Financial capital of Southeast Asia. Hub for advanced technology products, high-grade electronics, fintech solutions, and premium gourmet food products.",
-    opportunity: "AECCI partnership provides fast-track compliance pathways for SaaS companies and food-export conglomerates into ASEAN.",
+    overview:
+      "Financial capital of Southeast Asia. Hub for advanced technology products, high-grade electronics, fintech solutions, and premium gourmet food products.",
+    opportunity:
+      "AECCI partnership provides fast-track compliance pathways for SaaS companies and food-export conglomerates into ASEAN.",
     demand: "SaaS, Fine Dining Exports, E-Commerce Solutions",
     demandLevel: "HIGH",
     partner: "Singapore Enterprise and Trade Council",
@@ -66,8 +79,10 @@ const COUNTRIES: Record<string, CountryData> = {
   MEXICO: {
     name: "Mexico",
     code: "MX",
-    overview: "Key manufacturing hub bordering North America. Rapidly growing demand for automotive components, engineering equipment, and heavy industrial raw materials.",
-    opportunity: "Bilateral integration slots with auto-assembly plants in Monterrey and parts distributors across Mexico City.",
+    overview:
+      "Key manufacturing hub bordering North America. Rapidly growing demand for automotive components, engineering equipment, and heavy industrial raw materials.",
+    opportunity:
+      "Bilateral integration slots with auto-assembly plants in Monterrey and parts distributors across Mexico City.",
     demand: "Automotive Components, Precision Engineering Tools",
     demandLevel: "STEADY",
     partner: "Mexico-India Commerce Association (MICA)",
@@ -80,8 +95,10 @@ const COUNTRIES: Record<string, CountryData> = {
   GHANA: {
     name: "Ghana",
     code: "GH",
-    overview: "Extremely stable economy with strong trade agreements. Primary demand includes building materials, agricultural inputs, and pharmaceutical formulations.",
-    opportunity: "Looking for suppliers of generic pharmaceutical formulations and small-scale manufacturing machinery.",
+    overview:
+      "Extremely stable economy with strong trade agreements. Primary demand includes building materials, agricultural inputs, and pharmaceutical formulations.",
+    opportunity:
+      "Looking for suppliers of generic pharmaceutical formulations and small-scale manufacturing machinery.",
     demand: "Pharmaceuticals, Steel & Cement, Agro Inputs",
     demandLevel: "HIGH",
     partner: "Accra Chamber of Commerce & Trade Authority",
@@ -91,41 +108,45 @@ const COUNTRIES: Record<string, CountryData> = {
     volumeGrowth: "+21.1%",
     topSector: "Infrastructure",
   },
-}
+};
 
 export default function CommandCenter() {
-  const [activeKey, setActiveKey] = React.useState<string>("KENYA")
-  const current = COUNTRIES[activeKey]
+  const [activeKey, setActiveKey] = React.useState<string>("KENYA");
+  const current = COUNTRIES[activeKey];
 
   return (
-    <section id="command-center" className="bg-background py-16 md:py-24 border-b border-border/60 relative">
+    <section
+      id="command-center"
+      className="bg-background py-16 md:py-24 border-b border-border/60 relative"
+    >
       {/* Visual background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:40px_40px] opacity-[0.25] dark:opacity-[0.12] pointer-events-none" />
-      
+
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <Badge className="bg-primary/10 text-primary border-primary/20 mb-4 px-3 py-1 font-mono uppercase tracking-widest text-xs">
             Command Center Terminal
           </Badge>
           <h2 className="text-3xl md:text-5.5xl font-heading font-black text-foreground tracking-tight flex items-center justify-center gap-3">
-            <Terminal className="size-8 text-primary shrink-0" /> GLOBAL OPPORTUNITY COMMAND CENTER
+            <Terminal className="size-8 text-primary shrink-0" /> GLOBAL
+            OPPORTUNITY COMMAND CENTER
           </h2>
           <p className="text-muted-foreground mt-4 text-base md:text-lg leading-relaxed">
-            Select a target global market to unlock live intelligence, sector demands, distributor vacancies, and upcoming deal room schedules.
+            Select a target global market to unlock live intelligence, sector
+            demands, distributor vacancies, and upcoming deal room schedules.
           </p>
         </div>
 
         {/* Grid Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch font-mono">
-          
           {/* Left Country Sidebar (3 columns) */}
           <div className="lg:col-span-3 space-y-2.5 flex flex-col justify-start">
             <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider px-2 mb-1">
               Active Trade Nodes
             </p>
             {Object.keys(COUNTRIES).map((key) => {
-              const country = COUNTRIES[key]
-              const isActive = activeKey === key
+              const country = COUNTRIES[key];
+              const isActive = activeKey === key;
               return (
                 <button
                   key={key}
@@ -134,15 +155,25 @@ export default function CommandCenter() {
                     "w-full flex items-center justify-between p-4 rounded-xl border transition-all duration-200 text-left relative overflow-hidden group",
                     isActive
                       ? "bg-primary/15 border-primary text-foreground shadow-lg shadow-primary/5"
-                      : "bg-card border-border text-muted-foreground hover:bg-muted hover:border-border/80"
+                      : "bg-card border-border text-muted-foreground hover:bg-muted hover:border-border/80",
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <Badge variant="outline" className="font-mono text-[10px] font-bold px-1.5 py-0.5 border-primary/30 text-primary bg-primary/5 rounded shrink-0">
+                    <Badge
+                      variant="outline"
+                      className="font-mono text-[10px] font-bold px-1.5 py-0.5 border-primary/30 text-primary bg-primary/5 rounded shrink-0"
+                    >
                       {country.code}
                     </Badge>
                     <div>
-                      <p className={cn("text-xs font-bold font-sans", isActive ? "text-foreground font-bold" : "text-foreground/80 group-hover:text-foreground")}>
+                      <p
+                        className={cn(
+                          "text-xs font-bold font-sans",
+                          isActive
+                            ? "text-foreground font-bold"
+                            : "text-foreground/80 group-hover:text-foreground",
+                        )}
+                      >
                         {country.name}
                       </p>
                       <p className="text-[9px] text-muted-foreground font-mono tracking-wider mt-0.5">
@@ -151,23 +182,24 @@ export default function CommandCenter() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={cn(
-                      "size-1.5 rounded-full",
-                      country.demandLevel === "CRITICAL"
-                        ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"
-                        : country.demandLevel === "HIGH"
-                        ? "bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]"
-                        : "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"
-                    )} />
+                    <span
+                      className={cn(
+                        "size-1.5 rounded-full",
+                        country.demandLevel === "CRITICAL"
+                          ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+                          : country.demandLevel === "HIGH"
+                            ? "bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]"
+                            : "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]",
+                      )}
+                    />
                   </div>
                 </button>
-              )
+              );
             })}
           </div>
 
           {/* Right Information Terminal (9 columns) */}
           <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-4">
-            
             {/* Box 1: Market Overview */}
             <Card className="bg-card border-border rounded-2xl relative overflow-hidden p-6 md:col-span-2">
               <div className="absolute top-0 right-0 p-3 text-muted-foreground pointer-events-none">
@@ -241,29 +273,45 @@ export default function CommandCenter() {
                   className="space-y-3 font-sans"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground font-mono">INDICATOR:</span>
-                    <Badge className={cn(
-                      "font-mono font-bold text-[9px] tracking-widest uppercase border border-none py-0.5 px-2",
-                      current.demandLevel === "CRITICAL"
-                        ? "bg-red-500/10 text-red-650 dark:text-red-400 border-red-500/20"
-                        : current.demandLevel === "HIGH"
-                        ? "bg-amber-500/10 text-amber-650 dark:text-amber-400 border-amber-500/20"
-                        : "bg-emerald-500/10 text-emerald-650 dark:text-emerald-400 border-emerald-500/20"
-                    )}>
+                    <span className="text-xs text-muted-foreground font-mono">
+                      INDICATOR:
+                    </span>
+                    <Badge
+                      className={cn(
+                        "font-mono font-bold text-[9px] tracking-widest uppercase border border-none py-0.5 px-2",
+                        current.demandLevel === "CRITICAL"
+                          ? "bg-red-500/10 text-red-650 dark:text-red-400 border-red-500/20"
+                          : current.demandLevel === "HIGH"
+                            ? "bg-amber-500/10 text-amber-650 dark:text-amber-400 border-amber-500/20"
+                            : "bg-emerald-500/10 text-emerald-650 dark:text-emerald-400 border-emerald-500/20",
+                      )}
+                    >
                       {current.demandLevel}
                     </Badge>
                   </div>
-                  
+
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground font-mono">DEMAND SECTORS:</p>
+                    <p className="text-xs text-muted-foreground font-mono">
+                      DEMAND SECTORS:
+                    </p>
                     <p className="text-sm font-bold text-foreground leading-relaxed">
                       {current.demand}
                     </p>
                   </div>
 
                   <div className="flex items-center gap-4 pt-1.5 border-t border-border/65 font-mono text-[10px]">
-                    <span className="text-muted-foreground">GROWTH: <strong className="text-emerald-500 dark:text-emerald-400">{current.volumeGrowth}</strong></span>
-                    <span className="text-muted-foreground">PEAK SECTOR: <strong className="text-foreground">{current.topSector}</strong></span>
+                    <span className="text-muted-foreground">
+                      GROWTH:{" "}
+                      <strong className="text-emerald-500 dark:text-emerald-400">
+                        {current.volumeGrowth}
+                      </strong>
+                    </span>
+                    <span className="text-muted-foreground">
+                      PEAK SECTOR:{" "}
+                      <strong className="text-foreground">
+                        {current.topSector}
+                      </strong>
+                    </span>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -289,10 +337,13 @@ export default function CommandCenter() {
                   </p>
                   <div className="inline-flex items-center gap-2 p-2.5 rounded-lg bg-muted border border-border">
                     <div className="size-2 rounded-full bg-sky-500 animate-pulse" />
-                    <span className="text-[10px] text-foreground/80 font-mono">{current.partnerLogo}</span>
+                    <span className="text-[10px] text-foreground/80 font-mono">
+                      {current.partnerLogo}
+                    </span>
                   </div>
                   <p className="text-[10px] text-muted-foreground font-mono leading-relaxed mt-1">
-                    Provides legal support, localized compliance validation, and verified buyer matchmaking services.
+                    Provides legal support, localized compliance validation, and
+                    verified buyer matchmaking services.
                   </p>
                 </motion.div>
               </AnimatePresence>
@@ -314,24 +365,30 @@ export default function CommandCenter() {
                   className="space-y-3 font-sans"
                 >
                   <div className="space-y-0.5">
-                    <p className="text-[10px] text-muted-foreground font-mono">UPCOMING SESSION:</p>
+                    <p className="text-[10px] text-muted-foreground font-mono">
+                      UPCOMING SESSION:
+                    </p>
                     <p className="text-sm font-bold text-foreground">
                       {current.session}
                     </p>
                   </div>
                   <div className="flex items-center justify-between text-xs pt-1.5 border-t border-border/60 font-mono">
-                    <span className="text-muted-foreground">DATE: <strong className="text-amber-500">{current.sessionDate}</strong></span>
-                    <span className="text-emerald-500 dark:text-emerald-400 font-bold">MATCHMAKING ACTIVE</span>
+                    <span className="text-muted-foreground">
+                      DATE:{" "}
+                      <strong className="text-amber-500">
+                        {current.sessionDate}
+                      </strong>
+                    </span>
+                    <span className="text-emerald-500 dark:text-emerald-400 font-bold">
+                      MATCHMAKING ACTIVE
+                    </span>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </Card>
-
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-
-

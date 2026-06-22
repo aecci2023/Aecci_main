@@ -1,4 +1,3 @@
-
 import MapBranding from "./components/MapBranding";
 import SignupWizard from "./components/SignupWizard";
 

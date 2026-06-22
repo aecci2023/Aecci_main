@@ -1,19 +1,30 @@
 import * as React from "react";
 import { useLocation, Link } from "react-router-dom";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { List, CaretDown } from "@phosphor-icons/react";
 
-import { menuConfig, type MenuCategory, type MegaMenuSection, type SubMenuItem } from "./menu-config";
+import {
+  menuConfig,
+  type MenuCategory,
+  type MegaMenuSection,
+  type SubMenuItem,
+} from "./menu-config";
 import { AnimatePresence, motion } from "framer-motion";
 
-function NestedCategory({ category, currentPath, setOpen }: { category: MenuCategory, currentPath: string, setOpen: (v: boolean) => void }) {
+function NestedCategory({
+  category,
+  currentPath,
+  setOpen,
+}: {
+  category: MenuCategory;
+  currentPath: string;
+  setOpen: (v: boolean) => void;
+}) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const isCategoryActive = currentPath === category.href || currentPath.startsWith(category.href + '/');
+  const isCategoryActive =
+    currentPath === category.href ||
+    currentPath.startsWith(category.href + "/");
 
   return (
     <div className="flex flex-col">
@@ -21,11 +32,15 @@ function NestedCategory({ category, currentPath, setOpen }: { category: MenuCate
         onClick={() => setIsOpen(!isOpen)}
         className={[
           "flex items-center justify-between w-full text-left text-[13px] font-[500] py-2.5 px-0 !no-underline hover:!no-underline !border-none",
-          isCategoryActive ? "text-primary" : "text-foreground/80 hover:text-primary",
+          isCategoryActive
+            ? "text-primary"
+            : "text-foreground/80 hover:text-primary",
         ].join(" ")}
       >
         <span>{category.title}</span>
-        <CaretDown className={`size-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <CaretDown
+          className={`size-3.5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
 
       <AnimatePresence initial={false}>
@@ -47,7 +62,7 @@ function NestedCategory({ category, currentPath, setOpen }: { category: MenuCate
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
-                    className={`block text-[13px] font-normal !no-underline py-1.5 pl-2 transition-colors ${isSubLinkActive ? 'text-primary border-l-[1.5px] border-primary -ml-[1.5px]' : 'text-foreground/60 hover:text-primary'}`}
+                    className={`block text-[13px] font-normal !no-underline py-1.5 pl-2 transition-colors ${isSubLinkActive ? "text-primary border-l-[1.5px] border-primary -ml-[1.5px]" : "text-foreground/60 hover:text-primary"}`}
                   >
                     {subLink.title}
                   </a>
@@ -56,7 +71,7 @@ function NestedCategory({ category, currentPath, setOpen }: { category: MenuCate
                     key={`sub-${slidx}`}
                     to={subLink.href}
                     onClick={() => setOpen(false)}
-                    className={`block text-[13px] font-normal !no-underline py-1.5 pl-2 transition-colors ${isSubLinkActive ? 'text-primary border-l-[1.5px] border-primary -ml-[1.5px]' : 'text-foreground/60 hover:text-primary'}`}
+                    className={`block text-[13px] font-normal !no-underline py-1.5 pl-2 transition-colors ${isSubLinkActive ? "text-primary border-l-[1.5px] border-primary -ml-[1.5px]" : "text-foreground/60 hover:text-primary"}`}
                   >
                     {subLink.title}
                   </Link>
@@ -70,8 +85,21 @@ function NestedCategory({ category, currentPath, setOpen }: { category: MenuCate
   );
 }
 
-function MobileTopLevelItem({ item, currentPath, setOpen, isOpen, onToggle }: { item: MegaMenuSection, currentPath: string, setOpen: (v: boolean) => void, isOpen: boolean, onToggle: () => void }) {
-  const isItemActive = currentPath === item.href || currentPath.startsWith(item.href + '/');
+function MobileTopLevelItem({
+  item,
+  currentPath,
+  setOpen,
+  isOpen,
+  onToggle,
+}: {
+  item: MegaMenuSection;
+  currentPath: string;
+  setOpen: (v: boolean) => void;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const isItemActive =
+    currentPath === item.href || currentPath.startsWith(item.href + "/");
 
   return (
     <div className="flex flex-col border-b border-black/[0.04] dark:border-white/[0.04] last:border-0">
@@ -83,7 +111,9 @@ function MobileTopLevelItem({ item, currentPath, setOpen, isOpen, onToggle }: { 
         ].join(" ")}
       >
         <span>{item.title}</span>
-        <CaretDown className={`size-4 transition-transform duration-300 ${isOpen ? 'rotate-180 text-primary' : 'text-foreground/40'}`} />
+        <CaretDown
+          className={`size-4 transition-transform duration-300 ${isOpen ? "rotate-180 text-primary" : "text-foreground/40"}`}
+        />
       </button>
 
       <AnimatePresence initial={false}>
@@ -101,17 +131,19 @@ function MobileTopLevelItem({ item, currentPath, setOpen, isOpen, onToggle }: { 
 
                 if (hasItems) {
                   return (
-                    <NestedCategory 
-                      key={`cat-${cidx}`} 
-                      category={category} 
-                      currentPath={currentPath} 
-                      setOpen={setOpen} 
+                    <NestedCategory
+                      key={`cat-${cidx}`}
+                      category={category}
+                      currentPath={currentPath}
+                      setOpen={setOpen}
                     />
                   );
                 }
 
                 // Just a link
-                const isCategoryActive = currentPath === category.href || currentPath.startsWith(category.href + '/');
+                const isCategoryActive =
+                  currentPath === category.href ||
+                  currentPath.startsWith(category.href + "/");
                 return category.href?.startsWith("http") ? (
                   <a
                     key={`cat-${cidx}`}
@@ -119,7 +151,7 @@ function MobileTopLevelItem({ item, currentPath, setOpen, isOpen, onToggle }: { 
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
-                    className={`block text-[13px] font-[500] !no-underline py-2.5 transition-colors ${isCategoryActive ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}
+                    className={`block text-[13px] font-[500] !no-underline py-2.5 transition-colors ${isCategoryActive ? "text-primary" : "text-foreground/80 hover:text-primary"}`}
                   >
                     {category.title}
                   </a>
@@ -128,7 +160,7 @@ function MobileTopLevelItem({ item, currentPath, setOpen, isOpen, onToggle }: { 
                     key={`cat-${cidx}`}
                     to={category.href || "#"}
                     onClick={() => setOpen(false)}
-                    className={`block text-[13px] font-[500] !no-underline py-2.5 transition-colors ${isCategoryActive ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}
+                    className={`block text-[13px] font-[500] !no-underline py-2.5 transition-colors ${isCategoryActive ? "text-primary" : "text-foreground/80 hover:text-primary"}`}
                   >
                     {category.title}
                   </Link>
@@ -149,7 +181,7 @@ export default function MobileMenu() {
   const currentPath = location.pathname;
 
   const handleToggle = (title: string) => {
-    setOpenTopLevel(prev => prev === title ? null : title);
+    setOpenTopLevel((prev) => (prev === title ? null : title));
   };
 
   return (
@@ -181,7 +213,6 @@ export default function MobileMenu() {
       >
         {/* ── Scrollable body ── */}
         <div className="flex-1 overflow-y-auto min-h-0 px-5 py-5">
-
           {/* Header with logo */}
           <div className="p-0 text-center pb-5 mb-0">
             <div className="text-xl font-bold flex items-center justify-center">

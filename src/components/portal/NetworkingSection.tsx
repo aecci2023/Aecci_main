@@ -1,9 +1,9 @@
-import { motion } from "framer-motion"
-import { ArrowUpRight } from "@phosphor-icons/react"
-import { Card } from "@/components/ui/card"
-import collaborationImg from "@/assets/networking/international-collaboration.png"
-import calendarImg from "@/assets/networking/calendar-february.png"
-import exhibitionsImg from "@/assets/networking/worldwide-exhibitions.png"
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "@phosphor-icons/react";
+import { Card } from "@/components/ui/card";
+import collaborationImg from "@/assets/networking/international-collaboration.png";
+import calendarImg from "@/assets/networking/calendar-february.png";
+import exhibitionsImg from "@/assets/networking/worldwide-exhibitions.png";
 
 const networkingItems = [
   {
@@ -30,13 +30,15 @@ const networkingItems = [
     href: "#",
     isClickable: true,
   },
-] as const
+] as const;
 
 export default function NetworkingSection() {
   return (
-    <section id="networking-portals" className="py-10 md:py-20 bg-card/10 border-b border-border overflow-hidden">
+    <section
+      id="networking-portals"
+      className="py-10 md:py-20 bg-card/10 border-b border-border overflow-hidden"
+    >
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-        
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
           <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
@@ -47,7 +49,8 @@ export default function NetworkingSection() {
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Participate in global networking sessions, check upcoming exhibitions, and coordinate with partner organizations.
+            Participate in global networking sessions, check upcoming
+            exhibitions, and coordinate with partner organizations.
           </p>
         </div>
 
@@ -81,7 +84,7 @@ export default function NetworkingSection() {
                         item.isClickable ? "group-hover:scale-[1.03]" : ""
                       }`}
                     />
-                    
+
                     {/* Hover overlay for clickable items */}
                     {item.isClickable && (
                       <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -91,7 +94,7 @@ export default function NetworkingSection() {
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Caption Content */}
                   <div className="p-6 flex flex-col text-left justify-between flex-1 bg-card">
                     <div>
@@ -102,7 +105,7 @@ export default function NetworkingSection() {
                         {item.desc}
                       </p>
                     </div>
-                    
+
                     {item.isClickable && (
                       <div className="mt-4 flex items-center gap-1 text-primary text-xs font-bold font-heading uppercase tracking-wider group-hover:translate-x-1 transition-transform">
                         <span>Access Portal</span>
@@ -112,10 +115,10 @@ export default function NetworkingSection() {
                   </div>
                 </Card>
               </motion.a>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
