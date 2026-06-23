@@ -106,7 +106,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: "Invoices & Payments",
-          url: "/dashboard/payment",
+          url: "/dashboard/invoices",
           icon: Receipt,
         },
       ],

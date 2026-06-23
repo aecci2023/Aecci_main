@@ -56,6 +56,15 @@ import { PartnerLayout } from "@/components/layout/partner-layout";
 
 import PartnerQuestionsPage from "@/pages/partner/questions";
 import PartnerAvailabilityPage from "@/pages/partner/availability";
+import PartnerUpcomingSessionsPage from "@/pages/partner/sessions/upcoming";
+import PartnerPastSessionsPage from "@/pages/partner/sessions/past";
+import PartnerSubmitSummaryPage from "@/pages/partner/sessions/submit-summary";
+import PartnerProfilePage from "@/pages/partner/profile";
+import UserInvoicesPage from "@/pages/dashboard/invoices";
+import AdminAuditLogsPage from "@/pages/admin/audit-logs";
+import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
+import AdminSettingsPage from "@/pages/admin/settings";
+import PartnerOnboardingPage from "@/pages/partner/onboarding";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -82,6 +91,7 @@ export const routes: RouteObject[] = [
     path: "/partner",
     children: [
       { path: "apply", element: <BecomePartnerPage /> },
+      { path: "onboarding", element: <PartnerOnboardingPage /> },
       {
         path: "",
         element: <ProtectedRoute allowedRoles={['partner']} />,
@@ -92,9 +102,10 @@ export const routes: RouteObject[] = [
             children: [
               { path: "dashboard", element: <PartnerDashboard /> },
           { path: "sessions/schedule", element: <PartnerPlaceholder title="My Schedule" /> },
-          { path: "sessions/upcoming", element: <PartnerPlaceholder title="Upcoming Sessions" /> },
-          { path: "sessions/past", element: <PartnerPlaceholder title="Past Sessions" /> },
+          { path: "sessions/upcoming", element: <PartnerUpcomingSessionsPage /> },
+          { path: "sessions/past", element: <PartnerPastSessionsPage /> },
           { path: "sessions/host", element: <PartnerPlaceholder title="Host New Session" /> },
+          { path: "sessions/:id/summary", element: <PartnerSubmitSummaryPage /> },
           { path: "engagement/questions", element: <PartnerQuestionsPage /> },
           { path: "engagement/active", element: <PartnerPlaceholder title="Active Clients" /> },
           { path: "engagement/assignments", element: <PartnerPlaceholder title="Client Assignments" /> },
@@ -102,7 +113,7 @@ export const routes: RouteObject[] = [
           { path: "content/opportunity-reports", element: <PartnerPlaceholder title="Opportunity Reports" /> },
           { path: "earnings/overview", element: <PartnerPlaceholder title="Earnings Overview" /> },
           { path: "earnings/invoices", element: <PartnerPlaceholder title="Invoices & Payouts" /> },
-          { path: "profile", element: <PartnerPlaceholder title="My Profile" /> },
+          { path: "profile", element: <PartnerProfilePage /> },
           { path: "resources/training", element: <PartnerPlaceholder title="Training & Guidelines" /> },
           { path: "resources/availability", element: <PartnerAvailabilityPage /> },
           { path: "resources/documents", element: <PartnerPlaceholder title="Resources & Documents" /> },
@@ -189,6 +200,18 @@ export const routes: RouteObject[] = [
           {
             path: "invoices",
             element: <AdminInvoicesPage />,
+          },
+          {
+            path: "audit-logs",
+            element: <AdminAuditLogsPage />,
+          },
+          {
+            path: "subscriptions",
+            element: <AdminSubscriptionsPage />,
+          },
+          {
+            path: "settings",
+            element: <AdminSettingsPage />,
           },
           {
             path: "*",
@@ -293,15 +316,20 @@ export const routes: RouteObject[] = [
         path: "payment",
         element: <PaymentPage />,
       },
-          {
-            path: "payment-success",
-            element: <PaymentSuccessPage />,
-          },
+      {
+        path: "payment-success",
+        element: <PaymentSuccessPage />,
+      },
+      {
+        path: "invoices",
+        element: <UserInvoicesPage />,
+      },
         ],
       },
     ],
   },
   // Added mappings for simple /about and /contact standard paths
+
   {
     path: "/about",
     element: <NotFound />,
