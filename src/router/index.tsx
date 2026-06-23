@@ -66,6 +66,14 @@ import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
 import AdminSettingsPage from "@/pages/admin/settings";
 import PartnerOnboardingPage from "@/pages/partner/onboarding";
 import StrategicPartnersPage from "@/pages/about/strategic-partners";
+import AboutChamberPage from "@/pages/about/AboutChamber";
+import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
+import OurHistoryPage from "@/pages/about/OurHistory";
+import ChamberPolicyPage from "@/pages/about/ChamberPolicy";
+import OfficeBearersPage from "@/pages/about/OfficeBearers";
+import RolesResponsibilityPage from "@/pages/about/RolesResponsibility";
+import ChamberDynamicsPage from "@/pages/about/ChamberDynamics";
+import JobOpportunitiesPage from "@/pages/about/JobOpportunities";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -341,27 +349,27 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/about/about-chamber",
-    element: <NotFound />,
+    element: <AboutChamberPage />,
   },
   {
     path: "/about/our-history",
-    element: <NotFound />,
+    element: <OurHistoryPage />,
   },
   {
     path: "/about/chairman-message",
-    element: <NotFound />,
+    element: <ChairmanMessagePage />,
   },
   {
     path: "/about/chamber-policy",
-    element: <NotFound />,
+    element: <ChamberPolicyPage />,
   },
   {
     path: "/about/office-bearers",
-    element: <NotFound />,
+    element: <OfficeBearersPage />,
   },
   {
     path: "/about/roles-responsibility",
-    element: <NotFound />,
+    element: <RolesResponsibilityPage />,
   },
   {
     path: "/about/strategic-partners",
@@ -369,11 +377,11 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/about/chamber-dynamics",
-    element: <NotFound />,
+    element: <ChamberDynamicsPage />,
   },
   {
     path: "/about/jobs-opportunities",
-    element: <NotFound />,
+    element: <JobOpportunitiesPage />,
   },
 
   // Services Main & The Wings
