@@ -65,6 +65,7 @@ import AdminAuditLogsPage from "@/pages/admin/audit-logs";
 import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
 import AdminSettingsPage from "@/pages/admin/settings";
 import PartnerOnboardingPage from "@/pages/partner/onboarding";
+import StrategicPartnersPage from "@/pages/about/strategic-partners";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -364,7 +365,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/about/strategic-partners",
-    element: <NotFound />,
+    element: <StrategicPartnersPage />,
   },
   {
     path: "/about/chamber-dynamics",
