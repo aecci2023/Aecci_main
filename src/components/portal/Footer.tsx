@@ -1,15 +1,12 @@
-import { ThemeSelector } from "@/components/themes/theme-selector"
+import { ThemeSelector } from "@/components/themes/theme-selector";
 import {
   FacebookLogo,
   InstagramLogo,
   LinkedinLogo,
   TwitterLogo,
-  YoutubeLogo,
-  LinkedinLogo,
-  InstagramLogo,
+  YoutubeLogo
 } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
-import { ThemeSelector } from "@/components/themes/theme-selector";
 
 const footerSections = [
   {

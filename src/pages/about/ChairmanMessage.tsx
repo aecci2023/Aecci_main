@@ -11,6 +11,7 @@ export default function ChairmanMessage() {
         <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
           Chairman's Message
         </span>
+
         <h1 className="font-heading font-black text-4xl md:text-5xl text-foreground mb-8">
           Charting a Vision for AECCI
         </h1>
@@ -20,99 +21,78 @@ export default function ChairmanMessage() {
             A Message from Our Honorable Chairman Shri Jaheer Bukhari
           </p>
 
-          {/* <p>Welcome to AECCI website!</p> */}
-
           <p>
-            The world of international trade is evolving rapidly, and businesses today need more than
-            information- they need the right connections, trusted expertise and timely opportunities. At
-            AECCI, we are committed to making global business more accessible for Indian enterprises
-            by creating an ecosystem where meaningful partnerships can flourish.
+            The world of international trade is evolving rapidly, and businesses
+            today need more than information—they need the right connections,
+            trusted expertise, and timely opportunities. At AECCI, we are
+            committed to making global business more accessible for Indian
+            enterprises by creating an ecosystem where meaningful partnerships
+            can flourish.
           </p>
 
           <p>
-            Our vision is to transform AECCI from a traditional chamber into a dynamic Global Deal
-            Room- a platform where Indian exporters, manufacturers, startups and entrepreneurs can
-            connect directly with international experts, trade advisors, legal professionals, investment
-            advisors   and business organizations across the world.<br></br>
-            Through this initiative, we aim to simplify cross-border business by providing a trusted
-            environment for business growth, expert consultations, strategic partnerships and market
-            access. Whether you are entering a new international market or expanding your global
-            presence, AECCI is committed to supporting your journey with the right network and
-            resources.<br></br>
-            Our strength lies in collaboration. By working closely with government institutions, trade
-            promotion organizations, industry experts and diplomats, we are building a global
-            ecosystem that empowers businesses to grow beyond borders.<br></br>
-            As global markets become increasingly interconnected, India&#39;s exporters have an
-            unprecedented opportunity to lead. We believe innovation, digital connectivity and
-            international collaborations will define the next era of trade, and AECCI is proud to be at the
-            forefront of this transformation.<br></br>
-            I warmly invite exporters, entrepreneurs, investors, professionals, trade organizations and
-            international partners to become part of this growing global network. Together, we can
-            create new opportunities, strengthen international partnerships and contribute to India&#39;s
-            emergence as a leading global trading nation.
-          </p>
-
-          <p>Thank you for visiting AECCI. We look forward  to partnering with you in shaping the future
-          of global commerce.</p>
-
-          <div className="pt-2 pb-4">
-          <p className="font-heading font-black text-xl text-foreground">Shri Jaheer Bukhari</p>
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">Hon’ble Board Chairman</p>
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">Asian Exporters' Chamber of Commerce & Industry (AECCI)</p>
-            Through this platform, our goal is to share valuable insights into
-            our mission, who we are, our objectives, and the reasons that drive
-            us. AECCI is dedicated to fostering knowledge, skills, and the
-            adoption of best practices in investment, business, industry, trade,
-            and sustainable policies. We are committed to engaging in productive
-            dialogues with government bodies.
+            Our vision is to transform AECCI from a traditional chamber into a
+            dynamic Global Deal Room—a platform where Indian exporters,
+            manufacturers, startups, and entrepreneurs can connect directly
+            with international experts, trade advisors, legal professionals,
+            investment advisors, and business organizations across the world.
           </p>
 
           <p>
-            Furthermore, we offer our members access to valuable business
-            intelligence and a wealth of opportunities. We facilitate the
-            expansion of their networks, connecting them with Asian and
-            international business partners through various channels and events.
-            In essence, we empower our members to forge connections and achieve
-            their business goals. Our vision instills in us a profound belief
-            that our endeavors will contribute to India and Asia's emergence as
-            key players in global trade, fostering long-term growth for our
-            nation and the wider region.
+            Through this initiative, we aim to simplify cross-border business by
+            providing a trusted environment for business growth, expert
+            consultations, strategic partnerships, and market access. Whether
+            you are entering a new international market or expanding your global
+            presence, AECCI is committed to supporting your journey with the
+            right network and resources.
           </p>
 
           <p>
-            To the business community at large, if you have not yet become a
-            member, I strongly encourage you to take the leap. By joining us,
-            you will enhance your connectivity, stay informed about new
-            prospects, and ensure that your interests are well-represented in
-            the corridors of policymaking. So, seize the opportunity today,
-            embark on the journey of expanding your business, networks, and
-            influence.
+            Our strength lies in collaboration. By working closely with
+            government institutions, trade promotion organizations, industry
+            experts, and diplomats, we are building a global ecosystem that
+            empowers businesses to grow beyond borders.
           </p>
 
           <p>
-            We extend a warm invitation to Asian and regional companies who wish
-            to join us in this remarkable journey. Your feedback and inquiries
-            about AECCI are always welcome.
+            As global markets become increasingly interconnected, India's
+            exporters have an unprecedented opportunity to lead. We believe
+            innovation, digital connectivity, and international collaborations
+            will define the next era of trade, and AECCI is proud to be at the
+            forefront of this transformation.
           </p>
 
           <p>
-            Together, let's nurture the growth of India and Asia and other
-            respective Regions.
+            I warmly invite exporters, entrepreneurs, investors, professionals,
+            trade organizations, and international partners to become part of
+            this growing global network. Together, we can create new
+            opportunities, strengthen international partnerships, and
+            contribute to India's emergence as a leading global trading nation.
+          </p>
+
+          <p>
+            Thank you for visiting AECCI. We look forward to partnering with you
+            in shaping the future of global commerce.
           </p>
 
           <div className="pt-8 pb-4">
             <p className="font-heading font-black text-xl text-foreground">
               Shri Jaheer Bukhari
             </p>
+
             <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">
               Hon’ble Board Chairman
+            </p>
+
+            <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">
+              Asian Exporters' Chamber of Commerce & Industry (AECCI)
             </p>
           </div>
 
           <blockquote className="bg-primary/5 border-l-4 border-primary p-6 rounded-r-xl italic font-heading text-lg text-foreground/80 mt-8 shadow-sm">
             ❝ Our vision gives us a deep conviction that our endeavor will help
-            spur India & Asia's role as a global trade hub & support long-term
-            growth for the nation & the broader region.❞
+            spur India's and Asia's role as a global trade hub and support
+            long-term growth for the nation and the broader region. ❞
           </blockquote>
         </div>
       </motion.div>
