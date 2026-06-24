@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { getCookie } from "@/lib/cookies";
 import { cn } from "@/lib/utils";
 import { LayoutProvider } from "@/context/layout-provider";
@@ -9,6 +9,7 @@ import { SkipToMain } from "@/components/skip-to-main";
 import { Header } from "@/components/layout/header";
 import { ProfileDropdown } from "@/components/profile-dropdown";
 import { Search } from "@/components/search";
+import { useGetPartnerProfileQuery } from "@/store/api/adminApi";
 
 type PartnerLayoutProps = {
   children?: React.ReactNode;
@@ -16,6 +17,19 @@ type PartnerLayoutProps = {
 
 export function PartnerLayout({ children }: PartnerLayoutProps) {
   const defaultOpen = getCookie("sidebar_state") !== "false";
+  const location = useLocation();
+
+  const { data: profileData, isLoading } = useGetPartnerProfileQuery();
+  const partnerProfile = profileData?.data;
+
+  // If profile is loaded and setup is incomplete, force partner to dashboard setup page
+  const needsSetup = !isLoading && partnerProfile && (!partnerProfile.bio || !partnerProfile.signedAgreement);
+  const isOnDashboard = location.pathname === "/partner/dashboard" || location.pathname === "/partner/dashboard/";
+
+  if (needsSetup && !isOnDashboard) {
+    return <Navigate to="/partner/dashboard" replace />;
+  }
+
   return (
     <SearchProvider>
       <LayoutProvider>
@@ -24,15 +38,8 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
           <AppPartnerSidebar />
           <SidebarInset
             className={cn(
-              // Set content container, so we can use container queries
               "@container/content",
-
-              // If layout is fixed, set the height
-              // to 100svh to prevent overflow
               "has-data-[layout=fixed]:h-svh",
-
-              // If layout is fixed and sidebar is inset,
-              // set the height to 100svh - spacing (total margins) to prevent overflow
               "peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]",
             )}
           >

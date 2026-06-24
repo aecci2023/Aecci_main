@@ -108,6 +108,10 @@ export const adminApi = createApi({
       }),
       invalidatesTags: ['Users'],
     }),
+    getAdminDashboardStats: builder.query<any, void>({
+      query: () => 'admin/dashboard',
+      providesTags: ['Users'],
+    }),
     getSubscriptionHistory: builder.query<any, void>({
       query: () => '/payment/subscription/history',
       providesTags: ['Users'],
@@ -158,9 +162,9 @@ export const adminApi = createApi({
   }),
 });
 
-export const { 
-  useGetUsersQuery, 
-  useGetUserByIdQuery, 
+export const {
+  useGetUsersQuery,
+  useGetUserByIdQuery,
   useUpdateKycStatusMutation,
   useAssignPartnerMutation,
   useSetPricingMutation,
@@ -177,4 +181,5 @@ export const {
   useGetSubscriptionHistoryQuery,
   useGetMarketplacePartnersQuery,
   useGetMarketplacePartnerDetailQuery,
+  useGetAdminDashboardStatsQuery,
 } = adminApi;

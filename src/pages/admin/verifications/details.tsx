@@ -1,9 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Main } from "@/components/layout/main";
-import { 
-  useGetUserByIdQuery, 
+import {
+  useGetUserByIdQuery,
   useUpdateKycStatusMutation,
-  useGetUsersQuery
 } from "@/store/api/adminApi";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, XCircle, FileText, Download, ArrowLeft, Building2 } from "lucide-react";
@@ -12,33 +11,18 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import React, { useState } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 export default function AdminVerificationDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useGetUserByIdQuery(id as string, {
-    skip: !id,
-  });
+  const { data, isLoading, error } = useGetUserByIdQuery(id as string, { skip: !id });
   const [updateKycStatus, { isLoading: isUpdating }] = useUpdateKycStatusMutation();
-
-  const { data: partnersData } = useGetUsersQuery({ role: 'partner' });
-  const partners = partnersData?.data || [];
-
-  const [selectedPartner, setSelectedPartner] = useState("");
-
 
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
-
-  const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
-  const [assignedPartnerFee, setAssignedPartnerFee] = useState("");
-  const [assignedPartnerSlot, setAssignedPartnerSlot] = useState("");
 
   const user = data?.data;
 
@@ -63,35 +47,18 @@ export default function AdminVerificationDetailsPage() {
 
   const handleUpdateStatus = async (status: string, reason?: string) => {
     try {
-      const payload: any = { id: user.id, kycStatus: status, reason };
-      if (status === 'approved') {
-        if (!selectedPartner || !assignedPartnerFee || !assignedPartnerSlot) {
-          toast.error("Please fill in all assignment details.");
-          return;
-        }
-        payload.partnerId = selectedPartner;
-        payload.assignedPartnerFee = assignedPartnerFee;
-        payload.assignedPartnerSlot = assignedPartnerSlot;
-      }
-
-      await updateKycStatus(payload).unwrap();
-      toast.success(`User KYC status has been updated.`);
-      
-      if (status === 'rejected') {
+      await updateKycStatus({ id: user.id, kycStatus: status, reason }).unwrap();
+      toast.success("KYC status updated successfully.");
+      if (status === "rejected") {
         setIsRejectDialogOpen(false);
         setRejectionReason("");
-        navigate("/admin/verifications");
-      } else if (status === 'approved') {
-        setIsApproveDialogOpen(false);
-        navigate("/admin/verifications");
       }
+      navigate("/admin/verifications");
     } catch (err) {
       console.error("KYC Update Error:", err);
-      toast.error(`Failed to update KYC status.`);
+      toast.error("Failed to update KYC status.");
     }
   };
-
-
 
   const renderDocumentCard = (label: string, url: string | undefined | null) => {
     if (!url) {
@@ -129,15 +96,17 @@ export default function AdminVerificationDetailsPage() {
     );
   };
 
+  const isPending = user.kycStatus === "pending" || user.kycStatus === "pending_verification";
+
   return (
     <Main fluid className="space-y-6 w-full pb-10">
-      {/* Header Actions */}
+      {/* Header */}
       <div className="flex items-center justify-between">
         <Button variant="ghost" onClick={() => navigate("/admin/verifications")} className="gap-2 text-muted-foreground">
           <ArrowLeft className="w-4 h-4" /> Back to List
         </Button>
         <div className="flex gap-3">
-          {user.kycStatus === 'pending' || user.kycStatus === 'pending_verification' ? (
+          {isPending ? (
             <>
               <Button
                 variant="outline"
@@ -145,28 +114,28 @@ export default function AdminVerificationDetailsPage() {
                 disabled={isUpdating}
                 onClick={() => setIsRejectDialogOpen(true)}
               >
-                <XCircle className="w-4 h-4 mr-2" /> Reject Application
+                <XCircle className="w-4 h-4 mr-2" /> Reject
               </Button>
               <Button
                 className="bg-emerald-600 hover:bg-emerald-700 text-white"
                 disabled={isUpdating}
-                onClick={() => setIsApproveDialogOpen(true)}
+                onClick={() => handleUpdateStatus("approved")}
               >
-                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC & Assign
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC
               </Button>
             </>
           ) : (
             <Badge className="bg-primary/10 text-primary hover:bg-primary/20 capitalize">
-              Status: {user.kycStatus.replace(/_/g, ' ')}
+              Status: {user.kycStatus.replace(/_/g, " ")}
             </Badge>
           )}
         </div>
       </div>
 
-      {/* Main Title */}
+      {/* Title */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight flex items-center gap-3">
-          <Building2 className="size-8 text-primary" /> 
+          <Building2 className="size-8 text-primary" />
           {user.companyName || user.fullName}
         </h1>
         <p className="text-muted-foreground mt-2">
@@ -175,116 +144,130 @@ export default function AdminVerificationDetailsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Top Row: Account Information & Roles & Markets */}
+        {/* Account Information */}
         <Card className="h-fit">
-            <CardHeader>
-              <CardTitle>Account Information</CardTitle>
-              <CardDescription>Primary details submitted during registration.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Account Type</p>
-                <p className="capitalize font-medium">{user.userType}</p>
+          <CardHeader>
+            <CardTitle>Account Information</CardTitle>
+            <CardDescription>Primary details submitted during registration.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Account Type</p>
+              <p className="capitalize font-medium">{user.userType}</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Full Name</p>
+              <p className="font-medium">{user.fullName || "N/A"}</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Email Address</p>
+              <div className="flex items-center justify-between">
+                <p className="font-medium">{user.email}</p>
+                <Badge
+                  variant="outline"
+                  className={
+                    user.isEmailVerified
+                      ? "text-emerald-500 border-emerald-500/20 bg-emerald-500/10"
+                      : "text-amber-500 border-amber-500/20 bg-amber-500/10"
+                  }
+                >
+                  {user.isEmailVerified ? "Verified" : "Pending"}
+                </Badge>
               </div>
-              <Separator />
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Full Name</p>
-                <p className="font-medium">{user.fullName || "N/A"}</p>
-              </div>
-              <Separator />
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Email Address</p>
-                <div className="flex items-center justify-between">
-                  <p className="font-medium">{user.email}</p>
-                  <Badge variant="outline" className={user.isEmailVerified ? "text-emerald-500 border-emerald-500/20 bg-emerald-500/10" : "text-amber-500 border-amber-500/20 bg-amber-500/10"}>
-                    {user.isEmailVerified ? "Verified" : "Pending"}
-                  </Badge>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Mobile Number</p>
+              <p className="font-medium">{user.mobileNumber || "N/A"}</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Country</p>
+              <p className="font-medium">{user.country || "N/A"}</p>
+            </div>
+            {user.companyName && (
+              <>
+                <Separator />
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Company Name</p>
+                  <p className="font-medium">{user.companyName}</p>
                 </div>
-              </div>
-              <Separator />
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Mobile Number</p>
-                <p className="font-medium">{user.mobileNumber || "N/A"}</p>
-              </div>
-              <Separator />
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Country</p>
-                <p className="font-medium">{user.country || "N/A"}</p>
-              </div>
-              {user.companyName && (
-                <>
-                  <Separator />
-                  <div>
-                    <p className="text-sm text-muted-foreground font-medium">Company Name</p>
-                    <p className="font-medium">{user.companyName}</p>
-                  </div>
-                </>
-              )}
-              {user.businessAddress && (
-                <>
-                  <Separator />
-                  <div>
-                    <p className="text-sm text-muted-foreground font-medium">Business Address</p>
-                    <p className="font-medium">{user.businessAddress}</p>
-                  </div>
-                </>
-              )}
-            </CardContent>
-          </Card>
+              </>
+            )}
+            {user.businessAddress && (
+              <>
+                <Separator />
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Business Address</p>
+                  <p className="font-medium">{user.businessAddress}</p>
+                </div>
+              </>
+            )}
+          </CardContent>
+        </Card>
 
-          <Card className="h-fit">
-            <CardHeader>
-              <CardTitle>Roles & Markets</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Business Roles</p>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {user.businessRole && user.businessRole.length > 0 ? user.businessRole.map((role: string) => (
-                    <Badge key={role} variant="secondary">{role}</Badge>
-                  )) : "N/A"}
-                </div>
+        {/* Roles & Markets */}
+        <Card className="h-fit">
+          <CardHeader>
+            <CardTitle>Roles & Markets</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Business Roles</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {user.businessRole && user.businessRole.length > 0
+                  ? user.businessRole.map((role: string) => (
+                      <Badge key={role} variant="secondary">{role}</Badge>
+                    ))
+                  : "N/A"}
               </div>
-              <Separator />
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Target Markets</p>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {user.targetMarkets && user.targetMarkets.length > 0 ? user.targetMarkets.map((market: string) => (
-                    <Badge key={market} variant="secondary">{market}</Badge>
-                  )) : "N/A"}
-                </div>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Target Markets</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {user.targetMarkets && user.targetMarkets.length > 0
+                  ? user.targetMarkets.map((market: string) => (
+                      <Badge key={market} variant="secondary">{market}</Badge>
+                    ))
+                  : "N/A"}
               </div>
-              <Separator />
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Products</p>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {user.products && user.products.length > 0 ? user.products.map((product: string) => (
-                    <Badge key={product} variant="outline">{product}</Badge>
-                  )) : "N/A"}
-                </div>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Products</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {user.products && user.products.length > 0
+                  ? user.products.map((product: string) => (
+                      <Badge key={product} variant="outline">{product}</Badge>
+                    ))
+                  : "N/A"}
               </div>
-              {user.experience && (
-                <>
-                  <Separator />
-                  <div>
-                    <p className="text-sm text-muted-foreground font-medium">Experience Level</p>
-                    <p className="font-medium">{user.experience}</p>
-                  </div>
-                </>
-              )}
-              {user.objective && (
-                <>
-                  <Separator />
-                  <div>
-                    <p className="text-sm text-muted-foreground font-medium">Business Objective</p>
-                    <p className="font-medium whitespace-pre-wrap">{user.objective}</p>
-                  </div>
-                </>
-              )}
-            </CardContent>
-          </Card>
+            </div>
+            {user.experience && (
+              <>
+                <Separator />
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Experience Level</p>
+                  <p className="font-medium">{user.experience}</p>
+                </div>
+              </>
+            )}
+            {user.objective && (
+              <>
+                <Separator />
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Business Objective</p>
+                  <p className="font-medium whitespace-pre-wrap">{user.objective}</p>
+                </div>
+              </>
+            )}
+          </CardContent>
+        </Card>
 
-        {/* Bottom Row: Verification Documents & Business Overview */}
+        {/* Verification Documents */}
         <Card className="h-fit">
           <CardHeader>
             <CardTitle>Verification Documents</CardTitle>
@@ -293,27 +276,21 @@ export default function AdminVerificationDetailsPage() {
             {(user.internationalBusinessIds?.length > 0 || user.internationalKycIds?.length > 0) && (
               <div className="space-y-4 mb-4">
                 <h3 className="text-lg font-medium border-b pb-2">International Identifications</h3>
-                
-                {user.internationalBusinessIds && user.internationalBusinessIds.length > 0 && user.internationalBusinessIds.some((idObj: any) => idObj.type || idObj.idNumber) && user.internationalBusinessIds.map((idObj: any, idx: number) => (
-                  idObj.type || idObj.idNumber ? (
-                    <Card key={`biz-${idx}`} className="bg-muted/10">
-                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                        <span className="font-medium">{idObj.type || "Business ID"}</span>
-                        <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
-                      </CardContent>
-                    </Card>
-                  ) : null
+                {user.internationalBusinessIds?.filter((o: any) => o.type || o.idNumber).map((idObj: any, idx: number) => (
+                  <Card key={`biz-${idx}`} className="bg-muted/10">
+                    <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                      <span className="font-medium">{idObj.type || "Business ID"}</span>
+                      <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
+                    </CardContent>
+                  </Card>
                 ))}
-
-                {user.internationalKycIds && user.internationalKycIds.length > 0 && user.internationalKycIds.some((idObj: any) => idObj.type || idObj.idNumber) && user.internationalKycIds.map((idObj: any, idx: number) => (
-                  idObj.type || idObj.idNumber ? (
-                    <Card key={`kyc-${idx}`} className="bg-muted/10">
-                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                        <span className="font-medium">{idObj.type || "Personal KYC ID"}</span>
-                        <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
-                      </CardContent>
-                    </Card>
-                  ) : null
+                {user.internationalKycIds?.filter((o: any) => o.type || o.idNumber).map((idObj: any, idx: number) => (
+                  <Card key={`kyc-${idx}`} className="bg-muted/10">
+                    <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                      <span className="font-medium">{idObj.type || "Personal KYC ID"}</span>
+                      <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             )}
@@ -346,6 +323,7 @@ export default function AdminVerificationDetailsPage() {
           </CardContent>
         </Card>
 
+        {/* Business Overview */}
         <Card className="h-fit">
           <CardHeader>
             <CardTitle>Business Overview</CardTitle>
@@ -380,7 +358,12 @@ export default function AdminVerificationDetailsPage() {
                 <Separator />
                 <div>
                   <p className="text-sm text-muted-foreground font-medium">Website</p>
-                  <a href={user.websiteUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline block truncate">
+                  <a
+                    href={user.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary hover:underline block truncate"
+                  >
                     {user.websiteUrl}
                   </a>
                 </div>
@@ -391,7 +374,12 @@ export default function AdminVerificationDetailsPage() {
                 <Separator />
                 <div>
                   <p className="text-sm text-muted-foreground font-medium">LinkedIn Profile</p>
-                  <a href={user.linkedinUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline block truncate">
+                  <a
+                    href={user.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary hover:underline block truncate"
+                  >
                     {user.linkedinUrl}
                   </a>
                 </div>
@@ -401,16 +389,17 @@ export default function AdminVerificationDetailsPage() {
         </Card>
       </div>
 
+      {/* Reject Dialog */}
       <Dialog open={isRejectDialogOpen} onOpenChange={setIsRejectDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Reject Application</DialogTitle>
             <DialogDescription>
-              Please provide a reason for rejecting this application. This will be sent to the user via email.
+              Provide a reason for rejection. This will be sent to the user via email.
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
-            <Textarea 
+            <Textarea
               placeholder="Enter rejection reason..."
               value={rejectionReason}
               onChange={(e) => setRejectionReason(e.target.value)}
@@ -419,66 +408,12 @@ export default function AdminVerificationDetailsPage() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsRejectDialogOpen(false)}>Cancel</Button>
-            <Button 
+            <Button
               variant="destructive"
-              onClick={() => handleUpdateStatus('rejected', rejectionReason)}
+              onClick={() => handleUpdateStatus("rejected", rejectionReason)}
               disabled={isUpdating || !rejectionReason.trim()}
             >
               Confirm Rejection
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Approve KYC & Assign Partner</DialogTitle>
-            <DialogDescription>
-              Select an available partner, set the meeting date/time, and decide the fee for this Deal Room session.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="py-4 space-y-4">
-            <div className="space-y-2">
-              <Label>Assign Partner</Label>
-              <Select value={selectedPartner} onValueChange={setSelectedPartner}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Partner" />
-                </SelectTrigger>
-                <SelectContent>
-                  {partners.map((p: any) => (
-                    <SelectItem key={p.id} value={p.id}>{p.fullName || p.email}</SelectItem>
-                  ))}
-                  {partners.length === 0 && <SelectItem value="none" disabled>No partners available</SelectItem>}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label>Session Slot (Date & Time)</Label>
-              <Input 
-                type="datetime-local" 
-                value={assignedPartnerSlot}
-                onChange={(e) => setAssignedPartnerSlot(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Amount to Pay (Fee)</Label>
-              <Input 
-                type="number" 
-                placeholder="e.g. 500"
-                value={assignedPartnerFee}
-                onChange={(e) => setAssignedPartnerFee(e.target.value)}
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsApproveDialogOpen(false)}>Cancel</Button>
-            <Button 
-              className="bg-emerald-600 hover:bg-emerald-700 text-white"
-              onClick={() => handleUpdateStatus('approved')}
-              disabled={isUpdating || !selectedPartner || !assignedPartnerSlot || !assignedPartnerFee}
-            >
-              Confirm Approval & Assignment
             </Button>
           </DialogFooter>
         </DialogContent>

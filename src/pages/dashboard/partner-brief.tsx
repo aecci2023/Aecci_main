@@ -165,7 +165,7 @@ export default function PartnerBriefPage() {
         </div>
       </Header>
 
-      <Main fluid className="space-y-6 max-w-6xl mx-auto py-6">
+      <Main fluid className="space-y-6 py-6">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">
             Partner Brief & Profile
