@@ -30,7 +30,7 @@ export function AdminNotificationBell() {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    const socket = io(import.meta.env.VITE_API_URL || "http://localhost:5000", {
+    const socket = io(import.meta.env.VITE_API_URL, {
       auth: { token },
       transports: ["websocket"],
     });
