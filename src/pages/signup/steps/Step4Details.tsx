@@ -142,7 +142,10 @@ export default function Step4Details({ nextStep }: Props) {
                   </FormLabel>
                   <FormControl>
                     <MultiSelect
-                      options={COUNTRIES.map((c) => ({ label: c.name, value: c.name }))}
+                      options={COUNTRIES.map((c) => ({
+                        label: c.name,
+                        value: c.name,
+                      }))}
                       selected={field.value || []}
                       onChange={field.onChange}
                       placeholder="Select target countries..."

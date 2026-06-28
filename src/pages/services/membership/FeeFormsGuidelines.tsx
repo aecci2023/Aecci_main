@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
-import { Download, CheckCircle2, Building2, Rocket, Building, Crown, Globe2, HeartHandshake } from "lucide-react";
+import {
+  Download,
+  CheckCircle2,
+  Building2,
+  Rocket,
+  Building,
+  Crown,
+  Globe2,
+  HeartHandshake,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -17,7 +26,8 @@ const guidelinesData = [
       { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
-      category: "Proprietorship, Partnership, Professional, LLP, LLC, or other SME's.",
+      category:
+        "Proprietorship, Partnership, Professional, LLP, LLC, or other SME's.",
       details: [
         "Membership Form filled, signed & stamped",
         "2 Passport size photos",
@@ -40,7 +50,8 @@ const guidelinesData = [
       { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
-      category: "IT, Real estate, Healthcare tech, Delivery services, AI, E-commerce, B2B Software, Supply chain & Logistics — LESS THAN A YEAR OLD.",
+      category:
+        "IT, Real estate, Healthcare tech, Delivery services, AI, E-commerce, B2B Software, Supply chain & Logistics — LESS THAN A YEAR OLD.",
       details: [
         "Membership Form filled, signed & stamped",
         "2 Passport size photos",
@@ -153,7 +164,6 @@ const guidelinesData = [
 export default function FeeFormsGuidelines() {
   return (
     <div className="w-full bg-background text-foreground">
-
       {/* Hero */}
       <section className="relative w-full py-16 md:py-20 bg-foreground overflow-hidden flex items-center">
         <div className="absolute right-0 top-0 w-1/2 h-full bg-primary/20 blur-[100px] pointer-events-none rounded-full translate-x-1/3 -translate-y-1/4 z-0" />
@@ -164,12 +174,16 @@ export default function FeeFormsGuidelines() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">Membership</span>
+            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+              Membership
+            </span>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-background mb-4 leading-tight">
               Fees, Forms &amp; <span className="text-primary">Guidelines</span>
             </h1>
             <p className="text-background/70 text-base md:text-lg leading-relaxed italic">
-              "Follow the guidelines &amp; fulfill the requirements to enjoy day-to-day chamber services and connect directly with the AECCI management."
+              "Follow the guidelines &amp; fulfill the requirements to enjoy
+              day-to-day chamber services and connect directly with the AECCI
+              management."
             </p>
           </motion.div>
         </div>
@@ -193,32 +207,48 @@ export default function FeeFormsGuidelines() {
                     <div className="p-3 rounded-xl bg-primary/10 text-primary">
                       <item.icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
+                    <h3 className="text-lg font-bold text-foreground">
+                      {item.title}
+                    </h3>
                   </div>
 
                   <CardContent className="p-6 flex flex-col gap-6 flex-1">
                     {/* Investment */}
                     <div>
-                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">Investment Schedule</p>
+                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">
+                        Investment Schedule
+                      </p>
                       <div className="bg-muted/50 rounded-xl p-4 border border-border space-y-2">
                         <div className="flex justify-between items-center text-sm">
-                          <span className="text-muted-foreground">Joining Fee</span>
-                          <span className="font-bold text-foreground">{item.investment.joining}</span>
+                          <span className="text-muted-foreground">
+                            Joining Fee
+                          </span>
+                          <span className="font-bold text-foreground">
+                            {item.investment.joining}
+                          </span>
                         </div>
                         <Separator className="bg-border" />
                         <div className="flex justify-between items-center text-sm">
-                          <span className="text-muted-foreground">Annual Fee</span>
-                          <span className="font-bold text-foreground">{item.investment.annual}</span>
+                          <span className="text-muted-foreground">
+                            Annual Fee
+                          </span>
+                          <span className="font-bold text-foreground">
+                            {item.investment.annual}
+                          </span>
                         </div>
                         {item.note && (
-                          <p className="text-xs text-muted-foreground italic pt-1">{item.note}</p>
+                          <p className="text-xs text-muted-foreground italic pt-1">
+                            {item.note}
+                          </p>
                         )}
                       </div>
                     </div>
 
                     {/* Forms */}
                     <div>
-                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">Forms</p>
+                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">
+                        Forms
+                      </p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         {item.forms.map((form, fIdx) => (
                           <a
@@ -231,7 +261,9 @@ export default function FeeFormsGuidelines() {
                             <div className="bg-muted p-1.5 rounded-md group-hover:bg-primary/10 transition-colors shrink-0">
                               <Download className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary" />
                             </div>
-                            <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors truncate">{form.name}</span>
+                            <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors truncate">
+                              {form.name}
+                            </span>
                           </a>
                         ))}
                       </div>
@@ -239,19 +271,29 @@ export default function FeeFormsGuidelines() {
 
                     {/* Guidelines */}
                     <div className="flex-1">
-                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">Guidelines</p>
+                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">
+                        Guidelines
+                      </p>
                       <div className="space-y-4">
                         <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
-                          <span className="block text-[10px] font-bold text-primary tracking-wider uppercase mb-1">Business Category</span>
-                          <p className="text-foreground text-sm font-medium leading-relaxed">{item.guidelines.category}</p>
+                          <span className="block text-[10px] font-bold text-primary tracking-wider uppercase mb-1">
+                            Business Category
+                          </span>
+                          <p className="text-foreground text-sm font-medium leading-relaxed">
+                            {item.guidelines.category}
+                          </p>
                         </div>
                         <div>
-                          <span className="block text-[10px] font-bold text-muted-foreground tracking-wider uppercase mb-2">Details Required</span>
+                          <span className="block text-[10px] font-bold text-muted-foreground tracking-wider uppercase mb-2">
+                            Details Required
+                          </span>
                           <ul className="space-y-2">
                             {item.guidelines.details.map((detail, dIdx) => (
                               <li key={dIdx} className="flex items-start gap-2">
                                 <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                                <span className="text-muted-foreground text-xs leading-relaxed">{detail}</span>
+                                <span className="text-muted-foreground text-xs leading-relaxed">
+                                  {detail}
+                                </span>
                               </li>
                             ))}
                           </ul>

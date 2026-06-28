@@ -5,21 +5,66 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const ACTIVE_MARKETS = [
-  { name: "Kenya (Nairobi Hub)", code: "KE", tariff: "0% for Agro Imports", clearance: "Fast-track, 4m attestation" },
-  { name: "Netherlands (Rotterdam)", code: "NL", tariff: "Preferential EU Rates", clearance: "Rotterdam pre-checked" },
-  { name: "Singapore (Port Node)", code: "SG", tariff: "0% under CECA Agreement", clearance: "Instant SSL API verification" },
+  {
+    name: "Kenya (Nairobi Hub)",
+    code: "KE",
+    tariff: "0% for Agro Imports",
+    clearance: "Fast-track, 4m attestation",
+  },
+  {
+    name: "Netherlands (Rotterdam)",
+    code: "NL",
+    tariff: "Preferential EU Rates",
+    clearance: "Rotterdam pre-checked",
+  },
+  {
+    name: "Singapore (Port Node)",
+    code: "SG",
+    tariff: "0% under CECA Agreement",
+    clearance: "Instant SSL API verification",
+  },
 ];
 
 const EMERGING_MARKETS = [
-  { name: "Ghana (Accra Node)", code: "GH", tariff: "5% Standard duties", clearance: "Awaiting registry sync" },
-  { name: "Mexico (Monterrey)", code: "MX", tariff: "Varies (Auto components)", clearance: "Logistics checks active" },
-  { name: "Vietnam (Hanoi Port)", code: "VN", tariff: "FTA Pending Review", clearance: "Regional attestation pending" },
+  {
+    name: "Ghana (Accra Node)",
+    code: "GH",
+    tariff: "5% Standard duties",
+    clearance: "Awaiting registry sync",
+  },
+  {
+    name: "Mexico (Monterrey)",
+    code: "MX",
+    tariff: "Varies (Auto components)",
+    clearance: "Logistics checks active",
+  },
+  {
+    name: "Vietnam (Hanoi Port)",
+    code: "VN",
+    tariff: "FTA Pending Review",
+    clearance: "Regional attestation pending",
+  },
 ];
 
 const HIGH_RISK_MARKETS = [
-  { name: "Libya (Tripoli Node)", code: "LY", tariff: "Suspended Tariffs", clearance: "Customs processing block active" },
-  { name: "Sudan (Port Sudan)", code: "SD", tariff: "Unstable duties", clearance: "Port clearance logs offline" },
-  { name: "Syria (Latakia Port)", code: "SY", tariff: "Embargoed categories", clearance: "Attestation services frozen" },
+  {
+    name: "Libya (Tripoli Node)",
+    code: "LY",
+    tariff: "Suspended Tariffs",
+    clearance: "Customs processing block active",
+  },
+  {
+    name: "Sudan (Port Sudan)",
+    code: "SD",
+    tariff: "Unstable duties",
+    clearance: "Port clearance logs offline",
+  },
+  {
+    name: "Syria (Latakia Port)",
+    code: "SY",
+    tariff: "Embargoed categories",
+    clearance: "Attestation services frozen",
+  },
 ];
 
 const COLUMNS = [
@@ -65,7 +110,14 @@ const container = {
 
 const col = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
 };
 
 export default function TradeRadar() {
@@ -79,11 +131,11 @@ export default function TradeRadar() {
             <Radar className="size-3.5" /> Exclusive AECCI Feature
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-[1.1] mb-4">
-            Global Trade{" "}
-            <span className="text-primary">Radar™</span>
+            Global Trade <span className="text-primary">Radar™</span>
           </h2>
           <p className="text-muted-foreground text-base leading-relaxed">
-            Actionable intelligence detailing tariff validations, custom clearing statuses, and regulatory risk ratings.
+            Actionable intelligence detailing tariff validations, custom
+            clearing statuses, and regulatory risk ratings.
           </p>
         </div>
 
@@ -98,15 +150,32 @@ export default function TradeRadar() {
             const Icon = col_.icon;
             return (
               <motion.div key={col_.title} variants={col}>
-                <Card className={cn("h-full rounded-2xl border bg-card/50 backdrop-blur-sm p-6 flex flex-col shadow-sm transition-colors duration-300", col_.cardBorder)}>
+                <Card
+                  className={cn(
+                    "h-full rounded-2xl border bg-card/50 backdrop-blur-sm p-6 flex flex-col shadow-sm transition-colors duration-300",
+                    col_.cardBorder,
+                  )}
+                >
                   {/* Header */}
                   <div className="flex items-center justify-between pb-4 border-b border-border/50 mb-5">
-                    <span className={cn("font-bold flex items-center gap-2 text-[11px] uppercase tracking-wider", col_.accent)}>
+                    <span
+                      className={cn(
+                        "font-bold flex items-center gap-2 text-[11px] uppercase tracking-wider",
+                        col_.accent,
+                      )}
+                    >
                       <Icon className="size-4" />
                       {col_.title}
                     </span>
-                    <Badge className={cn("text-[9px] font-bold border px-2 py-0.5 flex items-center gap-1.5", col_.badgeClass)}>
-                      <span className={cn("size-1.5 rounded-full", col_.dotColor)} />
+                    <Badge
+                      className={cn(
+                        "text-[9px] font-bold border px-2 py-0.5 flex items-center gap-1.5",
+                        col_.badgeClass,
+                      )}
+                    >
+                      <span
+                        className={cn("size-1.5 rounded-full", col_.dotColor)}
+                      />
                       {col_.risk}
                     </Badge>
                   </div>
@@ -114,15 +183,35 @@ export default function TradeRadar() {
                   {/* Markets */}
                   <div className="space-y-3 flex-1">
                     {col_.markets.map((m) => (
-                      <div key={m.name} className="p-3.5 rounded-xl bg-muted/25 border border-border/40 hover:bg-muted/40 transition-colors space-y-1.5">
+                      <div
+                        key={m.name}
+                        className="p-3.5 rounded-xl bg-muted/25 border border-border/40 hover:bg-muted/40 transition-colors space-y-1.5"
+                      >
                         <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="font-mono text-[9px] font-bold border-border bg-muted/50 shrink-0">{m.code}</Badge>
-                          <span className="text-xs font-bold text-foreground leading-none">{m.name}</span>
+                          <Badge
+                            variant="outline"
+                            className="font-mono text-[9px] font-bold border-border bg-muted/50 shrink-0"
+                          >
+                            {m.code}
+                          </Badge>
+                          <span className="text-xs font-bold text-foreground leading-none">
+                            {m.name}
+                          </span>
                         </div>
-                        <p className={cn("text-[10px] font-mono", col_.isRisk ? "text-destructive font-semibold" : "text-muted-foreground")}>
-                          {col_.isRisk ? "Status: " : "Tariff: "}{m.tariff}
+                        <p
+                          className={cn(
+                            "text-[10px] font-mono",
+                            col_.isRisk
+                              ? "text-destructive font-semibold"
+                              : "text-muted-foreground",
+                          )}
+                        >
+                          {col_.isRisk ? "Status: " : "Tariff: "}
+                          {m.tariff}
                         </p>
-                        <p className="text-[9px] text-muted-foreground/70 font-mono">Logistics: {m.clearance}</p>
+                        <p className="text-[9px] text-muted-foreground/70 font-mono">
+                          Logistics: {m.clearance}
+                        </p>
                       </div>
                     ))}
                   </div>

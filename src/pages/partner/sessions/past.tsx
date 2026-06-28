@@ -30,7 +30,9 @@ export default function PartnerPastSessionsPage() {
       .then((r) => r.json())
       .then((data) => {
         if (data.success) {
-          const past = (data.data as Session[]).filter((s) => s.status === "completed");
+          const past = (data.data as Session[]).filter(
+            (s) => s.status === "completed",
+          );
           setSessions(past);
         }
       })
@@ -49,7 +51,9 @@ export default function PartnerPastSessionsPage() {
     <div className="space-y-6 p-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Past Sessions</h1>
-        <p className="text-muted-foreground">History of completed Deal Room sessions</p>
+        <p className="text-muted-foreground">
+          History of completed Deal Room sessions
+        </p>
       </div>
 
       {sessions.length === 0 ? (
@@ -57,7 +61,9 @@ export default function PartnerPastSessionsPage() {
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
             <CheckCircle className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No completed sessions yet</p>
-            <p className="text-muted-foreground text-sm mt-1">Completed sessions will appear here</p>
+            <p className="text-muted-foreground text-sm mt-1">
+              Completed sessions will appear here
+            </p>
           </CardContent>
         </Card>
       ) : (
@@ -67,7 +73,10 @@ export default function PartnerPastSessionsPage() {
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <CardTitle className="text-lg">{session.title}</CardTitle>
-                  <Badge variant="outline" className="text-green-600 border-green-600">
+                  <Badge
+                    variant="outline"
+                    className="text-green-600 border-green-600"
+                  >
                     Completed
                   </Badge>
                 </div>
@@ -76,12 +85,18 @@ export default function PartnerPastSessionsPage() {
                 <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4" />
-                    <span>{format(new Date(session.date), "d MMM yyyy, h:mm a")}</span>
+                    <span>
+                      {format(new Date(session.date), "d MMM yyyy, h:mm a")}
+                    </span>
                   </div>
                   {session.client && (
                     <div className="flex items-center gap-2">
                       <User className="h-4 w-4" />
-                      <span>{session.client.fullName || session.client.companyName || "Client"}</span>
+                      <span>
+                        {session.client.fullName ||
+                          session.client.companyName ||
+                          "Client"}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -92,14 +107,18 @@ export default function PartnerPastSessionsPage() {
                       <CheckCircle className="h-4 w-4 text-green-500" />
                       Summary Submitted
                     </p>
-                    <p className="text-muted-foreground line-clamp-2">{session.postSessionSummary}</p>
+                    <p className="text-muted-foreground line-clamp-2">
+                      {session.postSessionSummary}
+                    </p>
                   </div>
                 ) : (
                   <Button
                     size="sm"
                     variant="outline"
                     className="gap-2"
-                    onClick={() => navigate(`/partner/sessions/${session.id}/summary`)}
+                    onClick={() =>
+                      navigate(`/partner/sessions/${session.id}/summary`)
+                    }
                   >
                     <FileText className="h-4 w-4" />
                     Submit Post-Session Summary

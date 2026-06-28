@@ -4,11 +4,41 @@ import { CountUp } from "@/components/ui/count-up";
 import { Users, Globe, Building2, Layers, Handshake } from "lucide-react";
 
 const STATS = [
-  { value: 10218, suffix: "+", label: "Active Exporters", icon: Users, color: "text-primary" },
-  { value: 35, suffix: "+", label: "Asian Territories", icon: Globe, color: "text-chart-2" },
-  { value: 39, suffix: "", label: "State Collaborations", icon: Building2, color: "text-chart-3" },
-  { value: 55, suffix: "+", label: "Global Collaborations", icon: Handshake, color: "text-chart-4" },
-  { value: 7, suffix: "", label: "Specialized Wings", icon: Layers, color: "text-chart-5" },
+  {
+    value: 10218,
+    suffix: "+",
+    label: "Active Exporters",
+    icon: Users,
+    color: "text-primary",
+  },
+  {
+    value: 35,
+    suffix: "+",
+    label: "Asian Territories",
+    icon: Globe,
+    color: "text-chart-2",
+  },
+  {
+    value: 39,
+    suffix: "",
+    label: "State Collaborations",
+    icon: Building2,
+    color: "text-chart-3",
+  },
+  {
+    value: 55,
+    suffix: "+",
+    label: "Global Collaborations",
+    icon: Handshake,
+    color: "text-chart-4",
+  },
+  {
+    value: 7,
+    suffix: "",
+    label: "Specialized Wings",
+    icon: Layers,
+    color: "text-chart-5",
+  },
 ];
 
 const container = {
@@ -18,7 +48,14 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
 };
 
 export default function StatsStrip() {
@@ -38,7 +75,9 @@ export default function StatsStrip() {
               variants={item}
               className="flex flex-col items-center justify-center text-center gap-2 py-6 md:py-4 px-6 group cursor-default"
             >
-              <div className={`size-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center mb-1 group-hover:scale-110 transition-transform duration-300 ${color}`}>
+              <div
+                className={`size-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center mb-1 group-hover:scale-110 transition-transform duration-300 ${color}`}
+              >
                 <Icon className="size-4" />
               </div>
               <span className="font-black text-3xl md:text-4xl text-foreground tabular-nums tracking-tight leading-none">

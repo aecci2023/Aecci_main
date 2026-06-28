@@ -6,18 +6,74 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const DEPARTURES = [
-  { country: "Kenya", code: "NBO", status: "SESSION OPEN", variant: "success", sector: "FMCG • Agro-Processing", slots: "4/10", time: "11:30 GMT" },
-  { country: "Ghana", code: "ACC", status: "SESSION OPEN", variant: "success", sector: "Building Materials", slots: "6/10", time: "12:45 GMT" },
-  { country: "Netherlands", code: "AMS", status: "CLOSING SOON", variant: "warning", sector: "Bio-Tech • Medical", slots: "1/10", time: "15:00 GMT" },
-  { country: "Singapore", code: "SIN", status: "COMING SOON", variant: "info", sector: "Fintech • SaaS", slots: "10/10", time: "16:30 GMT" },
-  { country: "Mexico", code: "MEX", status: "PREMIUM ACCESS", variant: "premium", sector: "Automotive Parts", slots: "3/5", time: "18:00 GMT" },
+  {
+    country: "Kenya",
+    code: "NBO",
+    status: "SESSION OPEN",
+    variant: "success",
+    sector: "FMCG • Agro-Processing",
+    slots: "4/10",
+    time: "11:30 GMT",
+  },
+  {
+    country: "Ghana",
+    code: "ACC",
+    status: "SESSION OPEN",
+    variant: "success",
+    sector: "Building Materials",
+    slots: "6/10",
+    time: "12:45 GMT",
+  },
+  {
+    country: "Netherlands",
+    code: "AMS",
+    status: "CLOSING SOON",
+    variant: "warning",
+    sector: "Bio-Tech • Medical",
+    slots: "1/10",
+    time: "15:00 GMT",
+  },
+  {
+    country: "Singapore",
+    code: "SIN",
+    status: "COMING SOON",
+    variant: "info",
+    sector: "Fintech • SaaS",
+    slots: "10/10",
+    time: "16:30 GMT",
+  },
+  {
+    country: "Mexico",
+    code: "MEX",
+    status: "PREMIUM ACCESS",
+    variant: "premium",
+    sector: "Automotive Parts",
+    slots: "3/5",
+    time: "18:00 GMT",
+  },
 ];
 
 const STATUS_CONFIG = {
-  success: { dot: "bg-primary", badge: "bg-primary/10 text-primary border-primary/20", ping: true },
-  warning: { dot: "bg-chart-4", badge: "bg-chart-4/10 text-chart-4 border-chart-4/20", ping: true },
-  info: { dot: "bg-chart-2", badge: "bg-chart-2/10 text-chart-2 border-chart-2/20", ping: false },
-  premium: { dot: "bg-chart-5", badge: "bg-chart-5/10 text-chart-5 border-chart-5/20", ping: false },
+  success: {
+    dot: "bg-primary",
+    badge: "bg-primary/10 text-primary border-primary/20",
+    ping: true,
+  },
+  warning: {
+    dot: "bg-chart-4",
+    badge: "bg-chart-4/10 text-chart-4 border-chart-4/20",
+    ping: true,
+  },
+  info: {
+    dot: "bg-chart-2",
+    badge: "bg-chart-2/10 text-chart-2 border-chart-2/20",
+    ping: false,
+  },
+  premium: {
+    dot: "bg-chart-5",
+    badge: "bg-chart-5/10 text-chart-5 border-chart-5/20",
+    ping: false,
+  },
 };
 
 const container = {
@@ -27,7 +83,14 @@ const container = {
 
 const row = {
   hidden: { opacity: 0, x: -16 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
 };
 
 export default function LiveAccessWall() {
@@ -47,15 +110,21 @@ export default function LiveAccessWall() {
               Live Deal Room Access
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-[1.1]">
-              Live Market{" "}
-              <span className="text-primary">Access Wall</span>
+              Live Market <span className="text-primary">Access Wall</span>
             </h2>
             <p className="text-muted-foreground text-base md:text-lg max-w-xl leading-relaxed">
-              Real-time schedule of active country deal rooms. Book your access slot to pitch directly to verified global distributors.
+              Real-time schedule of active country deal rooms. Book your access
+              slot to pitch directly to verified global distributors.
             </p>
           </div>
-          <Button asChild variant="outline" className="rounded-full border-border shrink-0 gap-2 hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all">
-            <a href="#pricing">View All Slots <ArrowRight className="size-4" /></a>
+          <Button
+            asChild
+            variant="outline"
+            className="rounded-full border-border shrink-0 gap-2 hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all"
+          >
+            <a href="#pricing">
+              View All Slots <ArrowRight className="size-4" />
+            </a>
           </Button>
         </div>
 
@@ -80,8 +149,10 @@ export default function LiveAccessWall() {
             className="divide-y divide-border/40"
           >
             {DEPARTURES.map((item) => {
-              const cfg = STATUS_CONFIG[item.variant as keyof typeof STATUS_CONFIG];
-              const canBook = item.variant === "success" || item.variant === "warning";
+              const cfg =
+                STATUS_CONFIG[item.variant as keyof typeof STATUS_CONFIG];
+              const canBook =
+                item.variant === "success" || item.variant === "warning";
               return (
                 <motion.div
                   key={item.country}
@@ -90,21 +161,41 @@ export default function LiveAccessWall() {
                 >
                   {/* Country */}
                   <div className="col-span-12 md:col-span-3 flex items-center gap-3">
-                    <div className={cn("size-2 rounded-full shrink-0", cfg.dot, cfg.ping && "animate-pulse")} />
-                    <span className="font-bold text-base text-foreground group-hover:text-primary transition-colors">{item.country}</span>
+                    <div
+                      className={cn(
+                        "size-2 rounded-full shrink-0",
+                        cfg.dot,
+                        cfg.ping && "animate-pulse",
+                      )}
+                    />
+                    <span className="font-bold text-base text-foreground group-hover:text-primary transition-colors">
+                      {item.country}
+                    </span>
                   </div>
 
                   {/* Code */}
                   <div className="col-span-3 md:col-span-1 md:text-center">
-                    <Badge variant="outline" className="font-mono text-[10px] font-bold border-border bg-muted/50">{item.code}</Badge>
+                    <Badge
+                      variant="outline"
+                      className="font-mono text-[10px] font-bold border-border bg-muted/50"
+                    >
+                      {item.code}
+                    </Badge>
                   </div>
 
                   {/* Sector */}
-                  <div className="col-span-9 md:col-span-3 text-xs text-muted-foreground">{item.sector}</div>
+                  <div className="col-span-9 md:col-span-3 text-xs text-muted-foreground">
+                    {item.sector}
+                  </div>
 
                   {/* Status */}
                   <div className="col-span-6 md:col-span-2">
-                    <Badge className={cn("font-bold text-[10px] tracking-wider border px-2.5 py-1", cfg.badge)}>
+                    <Badge
+                      className={cn(
+                        "font-bold text-[10px] tracking-wider border px-2.5 py-1",
+                        cfg.badge,
+                      )}
+                    >
                       {item.status}
                     </Badge>
                   </div>
@@ -117,7 +208,8 @@ export default function LiveAccessWall() {
 
                   {/* Time */}
                   <div className="col-span-3 md:col-span-1 text-center hidden md:flex items-center justify-center gap-1 text-xs text-muted-foreground">
-                    <Clock className="size-3" />{item.time}
+                    <Clock className="size-3" />
+                    {item.time}
                   </div>
 
                   {/* CTA */}
@@ -132,7 +224,9 @@ export default function LiveAccessWall() {
                           : "bg-muted text-foreground hover:bg-muted/80 border border-border",
                       )}
                     >
-                      <a href="#pricing">{item.variant === "info" ? "Pre-Register" : "Book Slot"}</a>
+                      <a href="#pricing">
+                        {item.variant === "info" ? "Pre-Register" : "Book Slot"}
+                      </a>
                     </Button>
                   </div>
                 </motion.div>

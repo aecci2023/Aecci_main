@@ -19,7 +19,7 @@ import {
 type TeamSwitcherProps = {
   teams: {
     name: string;
-    logo: React.ElementType;
+    logo: any;
     plan: string;
   }[];
 };

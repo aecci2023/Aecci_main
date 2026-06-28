@@ -22,7 +22,6 @@ export default function Step2OTP({ nextStep }: Props) {
   const [emailOtp, setEmailOtp] = useState("");
   const [timeLeft, setTimeLeft] = useState(120);
 
-
   const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
 
   useEffect(() => {
@@ -47,8 +46,6 @@ export default function Step2OTP({ nextStep }: Props) {
   };
 
   const isVerified = emailOtp.length === 6;
-
-
 
   const handleVerify = async () => {
     try {
@@ -92,7 +89,6 @@ export default function Step2OTP({ nextStep }: Props) {
               </InputOTPGroup>
             </InputOTP>
           </div>
-
         </div>
 
         <div className="pt-4 text-center">

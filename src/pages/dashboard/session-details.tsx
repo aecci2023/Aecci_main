@@ -20,15 +20,23 @@ import { useGetSessionByIdQuery } from "@/store/api/sessionApi";
 export default function SessionDetailsPage() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("id");
-  
-  const { data, isLoading } = useGetSessionByIdQuery(sessionId as string, { skip: !sessionId });
+
+  const { data, isLoading } = useGetSessionByIdQuery(sessionId as string, {
+    skip: !sessionId,
+  });
   const session = data?.data;
 
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [step, setStep] = useState(1); // 1: Screening Approved, 2: Terms Acceptance, 3: Payment Checkout
 
   if (isLoading || !session) {
-    return <Main fluid className="flex justify-center p-10"><p className="text-muted-foreground animate-pulse">Loading session details...</p></Main>;
+    return (
+      <Main fluid className="flex justify-center p-10">
+        <p className="text-muted-foreground animate-pulse">
+          Loading session details...
+        </p>
+      </Main>
+    );
   }
 
   return (
@@ -51,11 +59,10 @@ export default function SessionDetailsPage() {
 
       <Main fluid className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            {session.title}
-          </h1>
+          <h1 className="text-3xl font-bold tracking-tight">{session.title}</h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Session ID: {session.id} • Co-Host: {session.partner?.companyName || session.partner?.fullName}
+            Session ID: {session.id} • Co-Host:{" "}
+            {session.partner?.companyName || session.partner?.fullName}
           </p>
         </div>
 
@@ -73,7 +80,8 @@ export default function SessionDetailsPage() {
               </CardHeader>
               <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground">
                 <p>
-                  {session.marketOverview || "Join this deal room session to connect directly with international buyers and distribution partners."}
+                  {session.marketOverview ||
+                    "Join this deal room session to connect directly with international buyers and distribution partners."}
                 </p>
 
                 <h3 className="font-semibold text-foreground mt-4 mb-2">
@@ -217,9 +225,7 @@ export default function SessionDetailsPage() {
                         3. Participants must join on time with proper high-speed
                         internet and webcam equipment.
                       </p>
-                      <p>
-                        4. All prices are exclusive of applicable taxes.
-                      </p>
+                      <p>4. All prices are exclusive of applicable taxes.</p>
                     </div>
 
                     <div className="flex items-start gap-2.5">

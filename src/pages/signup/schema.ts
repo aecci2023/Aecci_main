@@ -10,7 +10,7 @@ const fileSchema = z.custom<File>(
 
 const fileOrUrlSchema = z.union([
   fileSchema,
-  z.string().url("Must be a valid URL")
+  z.string().url("Must be a valid URL"),
 ]);
 
 export const signupSchema = z

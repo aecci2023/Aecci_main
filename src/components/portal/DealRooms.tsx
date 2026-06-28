@@ -1,6 +1,18 @@
 import { motion } from "framer-motion";
-import { Briefcase, ChevronRight, Target, Calendar, TrendingUp } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Briefcase,
+  ChevronRight,
+  Target,
+  Calendar,
+  TrendingUp,
+} from "lucide-react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -58,9 +70,21 @@ const ROOMS = [
 ];
 
 const DEMAND_CONFIG = {
-  CRITICAL: { label: "Critical Demand", badge: "bg-destructive/10 text-destructive border-destructive/20", bar: "bg-destructive" },
-  HIGH: { label: "High Demand", badge: "bg-chart-4/10 text-chart-4 border-chart-4/20", bar: "bg-chart-4" },
-  STEADY: { label: "Steady Demand", badge: "bg-primary/10 text-primary border-primary/20", bar: "bg-primary" },
+  CRITICAL: {
+    label: "Critical Demand",
+    badge: "bg-destructive/10 text-destructive border-destructive/20",
+    bar: "bg-destructive",
+  },
+  HIGH: {
+    label: "High Demand",
+    badge: "bg-chart-4/10 text-chart-4 border-chart-4/20",
+    bar: "bg-chart-4",
+  },
+  STEADY: {
+    label: "Steady Demand",
+    badge: "bg-primary/10 text-primary border-primary/20",
+    bar: "bg-primary",
+  },
 };
 
 const container = {
@@ -70,7 +94,14 @@ const container = {
 
 const card = {
   hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
 };
 
 export default function DealRooms() {
@@ -84,11 +115,11 @@ export default function DealRooms() {
             <Target className="size-3.5" /> Connect & Pitch Directly
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-[1.1] mb-4">
-            Active Global{" "}
-            <span className="text-primary">Deal Rooms</span>
+            Active Global <span className="text-primary">Deal Rooms</span>
           </h2>
           <p className="text-muted-foreground text-base leading-relaxed">
-            Pre-vetted country sessions matching exporters with verified distributors. Slots are strictly limited.
+            Pre-vetted country sessions matching exporters with verified
+            distributors. Slots are strictly limited.
           </p>
         </div>
 
@@ -100,7 +131,8 @@ export default function DealRooms() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {ROOMS.map((room) => {
-            const cfg = DEMAND_CONFIG[room.demand as keyof typeof DEMAND_CONFIG];
+            const cfg =
+              DEMAND_CONFIG[room.demand as keyof typeof DEMAND_CONFIG];
             const pct = (room.slotsLeft / room.totalSlots) * 100;
             const isCritical = room.slotsLeft <= 2;
 
@@ -111,9 +143,19 @@ export default function DealRooms() {
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{room.flag}</span>
-                        <Badge variant="outline" className="font-mono text-[10px] font-bold border-border bg-muted/50">{room.code}</Badge>
+                        <Badge
+                          variant="outline"
+                          className="font-mono text-[10px] font-bold border-border bg-muted/50"
+                        >
+                          {room.code}
+                        </Badge>
                       </div>
-                      <Badge className={cn("font-mono text-[9px] tracking-wider uppercase border px-2 py-0.5", cfg.badge)}>
+                      <Badge
+                        className={cn(
+                          "font-mono text-[9px] tracking-wider uppercase border px-2 py-0.5",
+                          cfg.badge,
+                        )}
+                      >
                         {room.demand}
                       </Badge>
                     </div>
@@ -126,7 +168,10 @@ export default function DealRooms() {
                     {/* Sectors */}
                     <div className="flex flex-wrap gap-1.5">
                       {room.sectors.map((sec) => (
-                        <span key={sec} className="text-[10px] font-semibold bg-muted/60 border border-border/50 text-muted-foreground px-2 py-0.5 rounded-full">
+                        <span
+                          key={sec}
+                          className="text-[10px] font-semibold bg-muted/60 border border-border/50 text-muted-foreground px-2 py-0.5 rounded-full"
+                        >
                           {sec}
                         </span>
                       ))}
@@ -136,29 +181,54 @@ export default function DealRooms() {
                     <div className="space-y-2 text-xs text-muted-foreground border-t border-border/50 pt-3">
                       <div className="flex items-center gap-2">
                         <Briefcase className="size-3.5 shrink-0 text-muted-foreground/60" />
-                        <span className="truncate">Partner: <strong className="text-foreground/80">{room.partner}</strong></span>
+                        <span className="truncate">
+                          Partner:{" "}
+                          <strong className="text-foreground/80">
+                            {room.partner}
+                          </strong>
+                        </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="size-3.5 shrink-0 text-muted-foreground/60" />
-                        <span>Session: <strong className="text-foreground/80">{room.date}</strong></span>
+                        <span>
+                          Session:{" "}
+                          <strong className="text-foreground/80">
+                            {room.date}
+                          </strong>
+                        </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <TrendingUp className="size-3.5 shrink-0 text-primary" />
-                        <span>Growth: <strong className="text-primary">{room.growth}</strong></span>
+                        <span>
+                          Growth:{" "}
+                          <strong className="text-primary">
+                            {room.growth}
+                          </strong>
+                        </span>
                       </div>
                     </div>
 
                     {/* Slots */}
                     <div className="space-y-1.5">
                       <div className="flex justify-between text-[11px] font-mono">
-                        <span className="text-muted-foreground">Available Slots</span>
-                        <span className={cn("font-bold", isCritical ? "text-destructive" : "text-foreground")}>
+                        <span className="text-muted-foreground">
+                          Available Slots
+                        </span>
+                        <span
+                          className={cn(
+                            "font-bold",
+                            isCritical ? "text-destructive" : "text-foreground",
+                          )}
+                        >
                           {room.slotsLeft}/{room.totalSlots} left
                         </span>
                       </div>
                       <div className="h-1.5 bg-muted/60 rounded-full overflow-hidden border border-border/40">
                         <div
-                          className={cn("h-full rounded-full transition-all duration-700", isCritical ? "bg-destructive" : "bg-primary")}
+                          className={cn(
+                            "h-full rounded-full transition-all duration-700",
+                            isCritical ? "bg-destructive" : "bg-primary",
+                          )}
                           style={{ width: `${pct}%` }}
                         />
                       </div>
@@ -166,8 +236,13 @@ export default function DealRooms() {
                   </CardContent>
 
                   <CardFooter className="p-5 pt-0">
-                    <Button asChild className="w-full rounded-xl font-bold text-xs bg-muted/60 border border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
-                      <a href="#pricing">Book Access <ChevronRight className="size-3.5 ml-1" /></a>
+                    <Button
+                      asChild
+                      className="w-full rounded-xl font-bold text-xs bg-muted/60 border border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+                    >
+                      <a href="#pricing">
+                        Book Access <ChevronRight className="size-3.5 ml-1" />
+                      </a>
                     </Button>
                   </CardFooter>
                 </Card>

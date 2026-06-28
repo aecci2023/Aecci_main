@@ -5,12 +5,12 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   getFilteredRowModel,
-} from "@tanstack/react-table"
-import type { 
-  ColumnDef, 
-  SortingState, 
-  ColumnFiltersState 
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
+import type {
+  ColumnDef,
+  SortingState,
+  ColumnFiltersState,
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -19,16 +19,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { useState } from "react"
-import { Search, SlidersHorizontal } from "lucide-react"
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { Search, SlidersHorizontal } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
-  searchKey?: string
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  searchKey?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -36,8 +36,8 @@ export function DataTable<TData, TValue>({
   data,
   searchKey,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data,
@@ -52,7 +52,7 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
     },
-  })
+  });
 
   return (
     <div>
@@ -62,7 +62,9 @@ export function DataTable<TData, TValue>({
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder={`Search...`}
-              value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
+              value={
+                (table.getColumn(searchKey)?.getFilterValue() as string) ?? ""
+              }
               onChange={(event) =>
                 table.getColumn(searchKey)?.setFilterValue(event.target.value)
               }
@@ -86,10 +88,10 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -103,14 +105,20 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center text-muted-foreground">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center text-muted-foreground"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -143,5 +151,5 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
     </div>
-  )
+  );
 }

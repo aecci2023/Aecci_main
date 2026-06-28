@@ -6,7 +6,12 @@ import { toast } from "sonner";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { signupSchema, type SignupFormData, initialFormData } from "../schema";
-import { useUploadFileMutation, useSignupMutation, useSendOtpMutation, useUpdateProfileMutation } from "../../../store/api/authApi";
+import {
+  useUploadFileMutation,
+  useSignupMutation,
+  useSendOtpMutation,
+  useUpdateProfileMutation,
+} from "../../../store/api/authApi";
 
 import Step1Registration from "../steps/Step1Registration";
 import Step2OTP from "../steps/Step2OTP";
@@ -119,7 +124,7 @@ export default function SignupWizard() {
             mobile: user.mobileNumber || "",
           });
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
       }
     }
@@ -153,7 +158,9 @@ export default function SignupWizard() {
             toast.error(res.message || "Registration failed");
           }
         } catch (error: any) {
-          toast.error(error.data?.message || "An error occurred during registration");
+          toast.error(
+            error.data?.message || "An error occurred during registration",
+          );
         } finally {
           setIsSubmitting(false);
         }
@@ -161,12 +168,15 @@ export default function SignupWizard() {
         setIsSubmitting(true);
         try {
           const data = methods.getValues();
-          
+
           // Helper to upload files and get URLs
-          const uploadFiles = async (files: (File | string)[], folder: string) => {
+          const uploadFiles = async (
+            files: (File | string)[],
+            folder: string,
+          ) => {
             const urls: string[] = [];
             for (const file of files) {
-              if (typeof file === 'string') {
+              if (typeof file === "string") {
                 urls.push(file);
               } else {
                 const res = await uploadFile({ file, folder }).unwrap();
@@ -178,8 +188,14 @@ export default function SignupWizard() {
             return urls;
           };
 
-          const uploadedDocuments = data.documents && data.documents.length > 0 ? await uploadFiles(data.documents, 'documents') : undefined;
-          const uploadedCatalogue = data.productCatalogue && data.productCatalogue.length > 0 ? await uploadFiles(data.productCatalogue, 'catalog') : undefined;
+          const uploadedDocuments =
+            data.documents && data.documents.length > 0
+              ? await uploadFiles(data.documents, "documents")
+              : undefined;
+          const uploadedCatalogue =
+            data.productCatalogue && data.productCatalogue.length > 0
+              ? await uploadFiles(data.productCatalogue, "catalog")
+              : undefined;
 
           // Map the rest of the profile data
           const profileData: Record<string, any> = { ...data };
@@ -196,16 +212,26 @@ export default function SignupWizard() {
             ...profileData,
             mobileNumber,
             documents: uploadedDocuments,
-            productCatalogue: uploadedCatalogue
+            productCatalogue: uploadedCatalogue,
           };
 
           if (isResubmit) {
-            const res = await updateProfile({ ...submitData, resubmit: true }).unwrap();
+            const res = await updateProfile({
+              ...submitData,
+              resubmit: true,
+            }).unwrap();
             if (res.success) {
               const userStr = localStorage.getItem("user");
               if (userStr) {
                 const user = JSON.parse(userStr);
-                localStorage.setItem("user", JSON.stringify({ ...user, ...res.data, kycStatus: "pending_verification" }));
+                localStorage.setItem(
+                  "user",
+                  JSON.stringify({
+                    ...user,
+                    ...res.data,
+                    kycStatus: "pending_verification",
+                  }),
+                );
               }
               toast.success("Application resubmitted successfully!");
               setStep(6);
@@ -225,7 +251,10 @@ export default function SignupWizard() {
           }
         } catch (error: any) {
           console.error("Registration failed:", error);
-          toast.error(error.data?.message || "An error occurred during final registration");
+          toast.error(
+            error.data?.message ||
+              "An error occurred during final registration",
+          );
         } finally {
           setIsSubmitting(false);
         }
@@ -283,7 +312,9 @@ export default function SignupWizard() {
               {step === 2 && <Step2OTP nextStep={nextStep} />}
               {step === 3 && <Step3Profile nextStep={nextStep} />}
               {step === 4 && <Step4Details nextStep={nextStep} />}
-              {step === 5 && <Step5Uploads nextStep={nextStep} isSubmitting={isSubmitting} />}
+              {step === 5 && (
+                <Step5Uploads nextStep={nextStep} isSubmitting={isSubmitting} />
+              )}
               {step === 6 && <Step6Complete />}
             </motion.div>
           </AnimatePresence>

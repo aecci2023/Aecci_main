@@ -26,7 +26,10 @@ export default function AdminAuditLogsPage() {
 
   const fetchLogs = (p: number, q: string) => {
     const token = localStorage.getItem("accessToken");
-    const params = new URLSearchParams({ page: String(p), limit: String(PAGE_SIZE) });
+    const params = new URLSearchParams({
+      page: String(p),
+      limit: String(PAGE_SIZE),
+    });
     if (q) params.set("action", q);
     fetch(`${import.meta.env.VITE_API_URL}/api/audit?${params}`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -61,7 +64,9 @@ export default function AdminAuditLogsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Audit Logs</h1>
-          <p className="text-muted-foreground">Un-editable record of all platform activity</p>
+          <p className="text-muted-foreground">
+            Un-editable record of all platform activity
+          </p>
         </div>
         <Badge variant="outline" className="gap-1">
           <Shield className="h-3 w-3" />
@@ -106,13 +111,23 @@ export default function AdminAuditLogsPage() {
                 </thead>
                 <tbody>
                   {logs.map((log) => (
-                    <tr key={log.id} className="border-b last:border-0 hover:bg-muted/30 transition-colors">
+                    <tr
+                      key={log.id}
+                      className="border-b last:border-0 hover:bg-muted/30 transition-colors"
+                    >
                       <td className="p-4 text-muted-foreground whitespace-nowrap">
-                        {format(new Date(log.createdAt), "d MMM yyyy, HH:mm:ss")}
+                        {format(
+                          new Date(log.createdAt),
+                          "d MMM yyyy, HH:mm:ss",
+                        )}
                       </td>
                       <td className="p-4">
-                        <div className="font-medium">{log.user.fullName || "—"}</div>
-                        <div className="text-xs text-muted-foreground">{log.user.email}</div>
+                        <div className="font-medium">
+                          {log.user.fullName || "—"}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {log.user.email}
+                        </div>
                       </td>
                       <td className="p-4">
                         <Badge variant="outline" className="capitalize text-xs">

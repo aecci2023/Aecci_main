@@ -14,7 +14,9 @@ export default function PartnerDetail() {
     return (
       <div className="w-full bg-background text-foreground min-h-[60vh] flex flex-col items-center justify-center gap-4 px-6">
         <Globe className="w-12 h-12 text-muted-foreground" />
-        <h1 className="text-2xl font-bold text-foreground">Partner Not Found</h1>
+        <h1 className="text-2xl font-bold text-foreground">
+          Partner Not Found
+        </h1>
         <p className="text-muted-foreground text-sm">
           We couldn't find a collaboration partner for this country.
         </p>
@@ -30,7 +32,6 @@ export default function PartnerDetail() {
 
   return (
     <div className="w-full bg-background text-foreground">
-
       {/* Hero */}
       <section className="relative w-full py-16 md:py-24 bg-foreground overflow-hidden flex items-center">
         <div className="absolute right-0 top-0 w-1/2 h-full bg-primary/20 blur-[100px] pointer-events-none rounded-full translate-x-1/3 -translate-y-1/4 z-0" />
@@ -76,7 +77,6 @@ export default function PartnerDetail() {
       <section className="py-20 md:py-24 bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-
             {/* About */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -84,7 +84,9 @@ export default function PartnerDetail() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">About the Partnership</span>
+              <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+                About the Partnership
+              </span>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 AECCI's Official Partner in {partner.country}
               </h2>
@@ -94,17 +96,30 @@ export default function PartnerDetail() {
                   : `AECCI is actively establishing a collaboration partner in ${partner.country}. Contact us to learn more or to express interest in becoming the official partner.`}
               </p>
               <p className="text-muted-foreground text-base leading-relaxed mb-6">
-                Through this partnership, AECCI members gain access to on-the-ground expertise, market-entry support, legal compliance guidance, and business introduction services within {partner.country}.
+                Through this partnership, AECCI members gain access to
+                on-the-ground expertise, market-entry support, legal compliance
+                guidance, and business introduction services within{" "}
+                {partner.country}.
               </p>
 
               <div className="flex flex-wrap gap-3">
-                <Badge variant="outline" className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border-border">
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border-border"
+                >
                   <Globe className="size-3 text-primary" /> Trade Facilitation
                 </Badge>
-                <Badge variant="outline" className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border-border">
-                  <Handshake className="size-3 text-primary" /> Business Matchmaking
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border-border"
+                >
+                  <Handshake className="size-3 text-primary" /> Business
+                  Matchmaking
                 </Badge>
-                <Badge variant="outline" className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border-border">
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border-border"
+                >
                   <Globe className="size-3 text-primary" /> Legal Advisory
                 </Badge>
               </div>
@@ -119,30 +134,43 @@ export default function PartnerDetail() {
             >
               <Card className="border-border">
                 <CardContent className="p-8 flex flex-col gap-5">
-                  <h3 className="text-lg font-bold text-foreground">Partner Details</h3>
+                  <h3 className="text-lg font-bold text-foreground">
+                    Partner Details
+                  </h3>
 
                   <div className="flex flex-col gap-1">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Country</p>
-                    <p className="text-foreground font-medium">{partner.country}</p>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Country
+                    </p>
+                    <p className="text-foreground font-medium">
+                      {partner.country}
+                    </p>
                   </div>
 
                   {partner.firm && (
                     <div className="flex flex-col gap-1">
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Firm Name</p>
-                      <p className="text-foreground font-medium">{partner.firm}</p>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Firm Name
+                      </p>
+                      <p className="text-foreground font-medium">
+                        {partner.firm}
+                      </p>
                     </div>
                   )}
 
                   {partner.website && (
                     <div className="flex flex-col gap-1">
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Website</p>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Website
+                      </p>
                       <a
                         href={partner.website}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:underline text-sm inline-flex items-center gap-1.5 break-all"
                       >
-                        {partner.website} <ExternalLink className="size-3 shrink-0" />
+                        {partner.website}{" "}
+                        <ExternalLink className="size-3 shrink-0" />
                       </a>
                     </div>
                   )}
@@ -154,8 +182,13 @@ export default function PartnerDetail() {
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="font-semibold text-foreground text-sm mb-0.5">Enquire via AECCI</p>
-                      <a href="mailto:info@aecci.org.in" className="text-primary hover:underline text-sm">
+                      <p className="font-semibold text-foreground text-sm mb-0.5">
+                        Enquire via AECCI
+                      </p>
+                      <a
+                        href="mailto:info@aecci.org.in"
+                        className="text-primary hover:underline text-sm"
+                      >
                         info@aecci.org.in
                       </a>
                     </div>
@@ -163,7 +196,8 @@ export default function PartnerDetail() {
 
                   <Separator className="bg-border" />
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Hilton Towers, 604, 6th Floor, Plot No.66, Sector 11, CBD Belapur, Navi Mumbai, Maharashtra 400614
+                    Hilton Towers, 604, 6th Floor, Plot No.66, Sector 11, CBD
+                    Belapur, Navi Mumbai, Maharashtra 400614
                   </p>
                 </CardContent>
               </Card>
@@ -176,12 +210,15 @@ export default function PartnerDetail() {
       <section className="py-20 md:py-24 bg-muted/30 border-b border-border">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">Services</span>
+            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+              Services
+            </span>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
               What This Partnership Enables
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              AECCI members can leverage this collaboration to access the following services in {partner.country}.
+              AECCI members can leverage this collaboration to access the
+              following services in {partner.country}.
             </p>
           </div>
 
@@ -224,8 +261,12 @@ export default function PartnerDetail() {
                     <div className="p-2.5 bg-primary/10 rounded-lg text-primary w-fit group-hover:bg-primary/20 transition-colors">
                       <Handshake className="w-5 h-5" />
                     </div>
-                    <h3 className="text-base font-bold text-foreground">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    <h3 className="text-base font-bold text-foreground">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.desc}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -245,12 +286,17 @@ export default function PartnerDetail() {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center text-center"
           >
-            <img src="/arccilogoWithText.png" alt="AECCI Logo" className="w-32 h-auto object-contain mb-6" />
+            <img
+              src="/arccilogoWithText.png"
+              alt="AECCI Logo"
+              className="w-32 h-auto object-contain mb-6"
+            />
             <h2 className="text-3xl md:text-4xl font-bold text-background mb-4 uppercase tracking-wide">
               Ready to Enter {partner.country}?
             </h2>
             <p className="text-background/60 text-base max-w-xl mb-8">
-              Reach out to AECCI to connect with our {partner.country} partner and explore how we can support your international trade goals.
+              Reach out to AECCI to connect with our {partner.country} partner
+              and explore how we can support your international trade goals.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <a

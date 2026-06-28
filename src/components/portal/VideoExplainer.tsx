@@ -21,7 +21,8 @@ export default function VideoExplainer() {
             <span className="text-primary">Global Deal Room?</span>
           </h2>
           <p className="text-muted-foreground text-base leading-relaxed">
-            Watch how Indian trade councils, verified distributors, and custom clearing networks orchestrate tariff-free corridors.
+            Watch how Indian trade councils, verified distributors, and custom
+            clearing networks orchestrate tariff-free corridors.
           </p>
         </div>
 
@@ -35,7 +36,10 @@ export default function VideoExplainer() {
           {/* Background image */}
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.02]"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600')" }}
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600')",
+            }}
           />
 
           {/* Overlays */}
@@ -71,7 +75,8 @@ export default function VideoExplainer() {
             </h3>
 
             <p className="text-background/65 text-xs md:text-sm max-w-xl font-light leading-relaxed hidden sm:block">
-              See how exporters, distributors, and trade councils connect through verified corridors.
+              See how exporters, distributors, and trade councils connect
+              through verified corridors.
             </p>
 
             <div className="flex items-center gap-3 flex-wrap">

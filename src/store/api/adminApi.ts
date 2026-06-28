@@ -1,164 +1,206 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseQuery = fetchBaseQuery({ 
-  baseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api/',
+const baseQuery = fetchBaseQuery({
+  baseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/",
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem("accessToken");
     if (token) {
-      headers.set('authorization', `Bearer ${token}`);
+      headers.set("authorization", `Bearer ${token}`);
     }
     return headers;
   },
 });
 
 export const adminApi = createApi({
-  reducerPath: 'adminApi',
+  reducerPath: "adminApi",
   baseQuery,
-  tagTypes: ['Users'],
+  tagTypes: ["Users"],
   endpoints: (builder) => ({
-    getUsers: builder.query<any, { role?: string; userType?: string; kycStatus?: string; partnerId?: string }>({
+    getUsers: builder.query<
+      any,
+      {
+        role?: string;
+        userType?: string;
+        kycStatus?: string;
+        partnerId?: string;
+      }
+    >({
       query: (params) => {
-        let queryString = '';
-        if (params.role || params.userType || params.kycStatus || params.partnerId) {
+        let queryString = "";
+        if (
+          params.role ||
+          params.userType ||
+          params.kycStatus ||
+          params.partnerId
+        ) {
           const searchParams = new URLSearchParams();
-          if (params.role) searchParams.append('role', params.role);
-          if (params.userType) searchParams.append('userType', params.userType);
-          if (params.kycStatus) searchParams.append('kycStatus', params.kycStatus);
-          if (params.partnerId) searchParams.append('partnerId', params.partnerId);
+          if (params.role) searchParams.append("role", params.role);
+          if (params.userType) searchParams.append("userType", params.userType);
+          if (params.kycStatus)
+            searchParams.append("kycStatus", params.kycStatus);
+          if (params.partnerId)
+            searchParams.append("partnerId", params.partnerId);
           queryString = `?${searchParams.toString()}`;
         }
         return `users${queryString}`;
       },
-      providesTags: ['Users'],
+      providesTags: ["Users"],
     }),
     getUserById: builder.query<any, string>({
       query: (id) => `users/${id}`,
-      providesTags: (_result, _error, id) => [{ type: 'Users', id }],
+      providesTags: (_result, _error, id) => [{ type: "Users", id }],
     }),
-    updateKycStatus: builder.mutation<any, { id: string; kycStatus: string; reason?: string; partnerId?: string; assignedPartnerFee?: number | string; assignedPartnerSlot?: string }>({
+    updateKycStatus: builder.mutation<
+      any,
+      {
+        id: string;
+        kycStatus: string;
+        reason?: string;
+        partnerId?: string;
+        assignedPartnerFee?: number | string;
+        assignedPartnerSlot?: string;
+      }
+    >({
       query: ({ id, ...body }) => ({
         url: `users/${id}/kyc`,
-        method: 'PATCH',
+        method: "PATCH",
         body,
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
     createPartnerManually: builder.mutation<any, any>({
       query: (body) => ({
-        url: 'partners/admin/create',
-        method: 'POST',
+        url: "partners/admin/create",
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
     assignPartner: builder.mutation<any, { id: string; partnerId: string }>({
       query: ({ id, partnerId }) => ({
         url: `users/${id}/assign-partner`,
-        method: 'POST',
+        method: "POST",
         body: { partnerId },
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
     setPricing: builder.mutation<any, { id: string; dealRoomPrice: number }>({
       query: ({ id, dealRoomPrice }) => ({
         url: `users/${id}/pricing`,
-        method: 'POST',
+        method: "POST",
         body: { dealRoomPrice },
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
     processPayment: builder.mutation<any, string>({
       query: (id) => ({
         url: `users/${id}/payment`,
-        method: 'POST',
+        method: "POST",
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
-    
+
     // --- Payments ---
-    createPaymentOrder: builder.mutation<any, { sessionId: string; userId: string }>({
+    createPaymentOrder: builder.mutation<
+      any,
+      { sessionId: string; userId: string }
+    >({
       query: (body) => ({
-        url: '/payment/create-order',
-        method: 'POST',
+        url: "/payment/create-order",
+        method: "POST",
         body,
       }),
     }),
     verifyPayment: builder.mutation<any, any>({
       query: (body) => ({
-        url: '/payment/verify',
-        method: 'POST',
+        url: "/payment/verify",
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
 
     // --- Subscriptions ---
     createSubscriptionOrder: builder.mutation<any, { planName: string }>({
       query: (body) => ({
-        url: '/payment/subscription/create-order',
-        method: 'POST',
+        url: "/payment/subscription/create-order",
+        method: "POST",
         body,
       }),
     }),
-    verifySubscriptionPayment: builder.mutation<any, { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string; planName: string }>({
+    verifySubscriptionPayment: builder.mutation<
+      any,
+      {
+        razorpay_order_id: string;
+        razorpay_payment_id: string;
+        razorpay_signature: string;
+        planName: string;
+      }
+    >({
       query: (body) => ({
-        url: '/payment/subscription/verify',
-        method: 'POST',
+        url: "/payment/subscription/verify",
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
     getAdminDashboardStats: builder.query<any, void>({
-      query: () => 'admin/dashboard',
-      providesTags: ['Users'],
+      query: () => "admin/dashboard",
+      providesTags: ["Users"],
     }),
     getSubscriptionHistory: builder.query<any, void>({
-      query: () => '/payment/subscription/history',
-      providesTags: ['Users'],
+      query: () => "/payment/subscription/history",
+      providesTags: ["Users"],
     }),
-    
+
     // --- Marketplace Partners ---
     getMarketplacePartners: builder.query<any, { country?: string } | void>({
       query: (params) => {
-        let queryString = '';
+        let queryString = "";
         if (params?.country) {
           queryString = `?country=${encodeURIComponent(params.country)}`;
         }
         return `partners/marketplace/list${queryString}`;
       },
-      providesTags: ['Users'],
+      providesTags: ["Users"],
     }),
     getMarketplacePartnerDetail: builder.query<any, string>({
       query: (userId) => `partners/marketplace/detail/${userId}`,
-      providesTags: (_result, _error, userId) => [{ type: 'Users', id: userId }],
+      providesTags: (_result, _error, userId) => [
+        { type: "Users", id: userId },
+      ],
     }),
 
     // --- Partners ---
     getPartnerProfiles: builder.query<any, string | void>({
-      query: (status) => status ? `partners/profiles?status=${status}` : `partners/profiles`,
-      providesTags: ['Users'],
+      query: (status) =>
+        status ? `partners/profiles?status=${status}` : `partners/profiles`,
+      providesTags: ["Users"],
     }),
-    updatePartnerStatus: builder.mutation<any, { userId: string; status: string; tier?: string }>({
+    updatePartnerStatus: builder.mutation<
+      any,
+      { userId: string; status: string; tier?: string }
+    >({
       query: ({ userId, status, tier }) => ({
         url: `partners/profiles/${userId}/status`,
-        method: 'PUT',
+        method: "PUT",
         body: { status, tier },
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
     getPartnerProfile: builder.query<any, string | void>({
-      query: (userId) => userId ? `partners/profiles/${userId}` : `partners/me`,
-      providesTags: ['Users'],
+      query: (userId) =>
+        userId ? `partners/profiles/${userId}` : `partners/me`,
+      providesTags: ["Users"],
     }),
     setupPartnerProfile: builder.mutation<any, any>({
       query: (body) => ({
         url: `partners/setup`,
-        method: 'PUT',
+        method: "PUT",
         body,
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ["Users"],
     }),
-
   }),
 });
 

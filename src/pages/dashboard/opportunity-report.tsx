@@ -28,20 +28,20 @@ export default function OpportunityReportPage() {
     if (!agreed || !latestReport) return;
     setDownloading(true);
     try {
-      const token = localStorage.getItem('accessToken');
-      const url = `${import.meta.env.VITE_API_BASE_URL?.replace('/api/', '/api') || 'http://localhost:5000/api'}/reports/${latestReport.id}/pdf`;
-      
+      const token = localStorage.getItem("accessToken");
+      const url = `${import.meta.env.VITE_API_BASE_URL?.replace("/api/", "/api") || "http://localhost:5000/api"}/reports/${latestReport.id}/pdf`;
+
       const res = await fetch(url, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      
-      if (!res.ok) throw new Error('Download failed');
-      
+
+      if (!res.ok) throw new Error("Download failed");
+
       const blob = await res.blob();
       const downloadUrl = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = downloadUrl;
       a.download = `Opportunity_Report_${latestReport.id}.pdf`;
       document.body.appendChild(a);
@@ -49,22 +49,31 @@ export default function OpportunityReportPage() {
       a.remove();
     } catch (e) {
       console.error(e);
-      alert('Failed to download PDF.');
+      alert("Failed to download PDF.");
     } finally {
       setDownloading(false);
     }
   };
 
   if (isLoading) {
-    return <Main fluid className="flex justify-center p-10"><p className="text-muted-foreground animate-pulse">Loading Report...</p></Main>;
+    return (
+      <Main fluid className="flex justify-center p-10">
+        <p className="text-muted-foreground animate-pulse">Loading Report...</p>
+      </Main>
+    );
   }
 
   if (!latestReport) {
     return (
-      <Main fluid className="flex justify-center p-10 flex-col items-center gap-4">
+      <Main
+        fluid
+        className="flex justify-center p-10 flex-col items-center gap-4"
+      >
         <ShieldAlert className="size-10 text-muted-foreground opacity-50" />
         <h2 className="text-xl font-bold">No Opportunity Reports Found</h2>
-        <p className="text-muted-foreground">You will receive a report after completing a Deal Room session.</p>
+        <p className="text-muted-foreground">
+          You will receive a report after completing a Deal Room session.
+        </p>
       </Main>
     );
   }
@@ -90,10 +99,12 @@ export default function OpportunityReportPage() {
       <Main fluid className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            {latestReport.session?.country || 'Global'} Matchmaking Opportunity Report
+            {latestReport.session?.country || "Global"} Matchmaking Opportunity
+            Report
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Session: {latestReport.session?.title} • Generated {new Date(latestReport.createdAt).toLocaleDateString()}
+            Session: {latestReport.session?.title} • Generated{" "}
+            {new Date(latestReport.createdAt).toLocaleDateString()}
           </p>
         </div>
 
@@ -159,9 +170,7 @@ export default function OpportunityReportPage() {
           <TabsContent value="summary" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">
-                  Market Outlook
-                </CardTitle>
+                <CardTitle className="text-base">Market Outlook</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
                 {latestReport.marketSummary}

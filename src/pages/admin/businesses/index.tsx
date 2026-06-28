@@ -5,8 +5,8 @@ import { useGetUsersQuery } from "@/store/api/adminApi";
 import { Building2 } from "lucide-react";
 
 export default function AdminBusinessesPage() {
-  const { data, isLoading, error } = useGetUsersQuery({ userType: 'business' });
-  
+  const { data, isLoading, error } = useGetUsersQuery({ userType: "business" });
+
   const users = data?.data || [];
 
   return (

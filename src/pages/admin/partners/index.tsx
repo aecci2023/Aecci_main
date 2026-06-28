@@ -1,18 +1,29 @@
 import { Main } from "@/components/layout/main";
 import { DataTable } from "@/components/ui/data-table";
 import { userColumns } from "../users/columns";
-import { useGetUsersQuery, useCreatePartnerManuallyMutation } from "@/store/api/adminApi";
+import {
+  useGetUsersQuery,
+  useCreatePartnerManuallyMutation,
+} from "@/store/api/adminApi";
 import { Globe, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 export default function AdminPartnersPage() {
-  const { data, isLoading, error } = useGetUsersQuery({ role: 'partner' });
-  const [createPartner, { isLoading: isCreating }] = useCreatePartnerManuallyMutation();
+  const { data, isLoading, error } = useGetUsersQuery({ role: "partner" });
+  const [createPartner, { isLoading: isCreating }] =
+    useCreatePartnerManuallyMutation();
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [newPartner, setNewPartner] = useState({
     fullName: "",
@@ -21,7 +32,7 @@ export default function AdminPartnersPage() {
     country: "",
     organization: "",
   });
-  
+
   const users = data?.data || [];
 
   const handleCreatePartner = async () => {
@@ -33,7 +44,13 @@ export default function AdminPartnersPage() {
       await createPartner(newPartner).unwrap();
       toast.success("Partner created successfully.");
       setIsCreateOpen(false);
-      setNewPartner({ fullName: "", email: "", mobileNumber: "", country: "", organization: "" });
+      setNewPartner({
+        fullName: "",
+        email: "",
+        mobileNumber: "",
+        country: "",
+        organization: "",
+      });
     } catch (err: any) {
       toast.error(err?.data?.message || "Failed to create partner.");
     }
@@ -72,55 +89,71 @@ export default function AdminPartnersPage() {
           <DialogHeader>
             <DialogTitle>Create Partner</DialogTitle>
             <DialogDescription>
-              Directly onboard a global partner. A random secure password will be generated automatically.
+              Directly onboard a global partner. A random secure password will
+              be generated automatically.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="space-y-2">
               <Label>Full Name *</Label>
-              <Input 
-                value={newPartner.fullName} 
-                onChange={(e) => setNewPartner({ ...newPartner, fullName: e.target.value })} 
-                placeholder="John Doe" 
+              <Input
+                value={newPartner.fullName}
+                onChange={(e) =>
+                  setNewPartner({ ...newPartner, fullName: e.target.value })
+                }
+                placeholder="John Doe"
               />
             </div>
             <div className="space-y-2">
               <Label>Email *</Label>
-              <Input 
-                value={newPartner.email} 
-                onChange={(e) => setNewPartner({ ...newPartner, email: e.target.value })} 
-                type="email" 
-                placeholder="john@example.com" 
+              <Input
+                value={newPartner.email}
+                onChange={(e) =>
+                  setNewPartner({ ...newPartner, email: e.target.value })
+                }
+                type="email"
+                placeholder="john@example.com"
               />
             </div>
             <div className="space-y-2">
               <Label>Mobile Number</Label>
-              <Input 
-                value={newPartner.mobileNumber} 
-                onChange={(e) => setNewPartner({ ...newPartner, mobileNumber: e.target.value })} 
-                placeholder="+1 234 567 890" 
+              <Input
+                value={newPartner.mobileNumber}
+                onChange={(e) =>
+                  setNewPartner({ ...newPartner, mobileNumber: e.target.value })
+                }
+                placeholder="+1 234 567 890"
               />
             </div>
             <div className="space-y-2">
               <Label>Country</Label>
-              <Input 
-                value={newPartner.country} 
-                onChange={(e) => setNewPartner({ ...newPartner, country: e.target.value })} 
-                placeholder="United States" 
+              <Input
+                value={newPartner.country}
+                onChange={(e) =>
+                  setNewPartner({ ...newPartner, country: e.target.value })
+                }
+                placeholder="United States"
               />
             </div>
             <div className="space-y-2">
               <Label>Organization</Label>
-              <Input 
-                value={newPartner.organization} 
-                onChange={(e) => setNewPartner({ ...newPartner, organization: e.target.value })} 
-                placeholder="US Chamber of Commerce" 
+              <Input
+                value={newPartner.organization}
+                onChange={(e) =>
+                  setNewPartner({ ...newPartner, organization: e.target.value })
+                }
+                placeholder="US Chamber of Commerce"
               />
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsCreateOpen(false)}>Cancel</Button>
-            <Button onClick={handleCreatePartner} disabled={isCreating || !newPartner.fullName || !newPartner.email}>
+            <Button variant="outline" onClick={() => setIsCreateOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleCreatePartner}
+              disabled={isCreating || !newPartner.fullName || !newPartner.email}
+            >
               Create Partner
             </Button>
           </DialogFooter>

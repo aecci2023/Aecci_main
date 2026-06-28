@@ -5,21 +5,44 @@ import {
   useUpdateKycStatusMutation,
 } from "@/store/api/adminApi";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, XCircle, FileText, Download, ArrowLeft, Building2 } from "lucide-react";
+import {
+  CheckCircle2,
+  XCircle,
+  FileText,
+  Download,
+  ArrowLeft,
+  Building2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function AdminVerificationDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useGetUserByIdQuery(id as string, { skip: !id });
-  const [updateKycStatus, { isLoading: isUpdating }] = useUpdateKycStatusMutation();
+  const { data, isLoading, error } = useGetUserByIdQuery(id as string, {
+    skip: !id,
+  });
+  const [updateKycStatus, { isLoading: isUpdating }] =
+    useUpdateKycStatusMutation();
 
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
@@ -29,16 +52,24 @@ export default function AdminVerificationDetailsPage() {
   if (isLoading) {
     return (
       <Main fluid className="flex items-center justify-center h-screen">
-        <p className="text-muted-foreground animate-pulse">Loading verification details...</p>
+        <p className="text-muted-foreground animate-pulse">
+          Loading verification details...
+        </p>
       </Main>
     );
   }
 
   if (error || !user) {
     return (
-      <Main fluid className="flex items-center justify-center h-screen flex-col gap-4">
+      <Main
+        fluid
+        className="flex items-center justify-center h-screen flex-col gap-4"
+      >
         <p className="text-destructive">Failed to load user details.</p>
-        <Button variant="outline" onClick={() => navigate("/admin/verifications")}>
+        <Button
+          variant="outline"
+          onClick={() => navigate("/admin/verifications")}
+        >
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Verifications
         </Button>
       </Main>
@@ -47,7 +78,11 @@ export default function AdminVerificationDetailsPage() {
 
   const handleUpdateStatus = async (status: string, reason?: string) => {
     try {
-      await updateKycStatus({ id: user.id, kycStatus: status, reason }).unwrap();
+      await updateKycStatus({
+        id: user.id,
+        kycStatus: status,
+        reason,
+      }).unwrap();
       toast.success("KYC status updated successfully.");
       if (status === "rejected") {
         setIsRejectDialogOpen(false);
@@ -60,7 +95,10 @@ export default function AdminVerificationDetailsPage() {
     }
   };
 
-  const renderDocumentCard = (label: string, url: string | undefined | null) => {
+  const renderDocumentCard = (
+    label: string,
+    url: string | undefined | null,
+  ) => {
     if (!url) {
       return (
         <Card className="bg-muted/10 border-dashed">
@@ -86,7 +124,12 @@ export default function AdminVerificationDetailsPage() {
               <CardTitle className="text-base font-medium">{label}</CardTitle>
             </div>
             <Button variant="outline" size="sm" asChild>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
                 <Download className="w-4 h-4" /> View Document
               </a>
             </Button>
@@ -96,13 +139,18 @@ export default function AdminVerificationDetailsPage() {
     );
   };
 
-  const isPending = user.kycStatus === "pending" || user.kycStatus === "pending_verification";
+  const isPending =
+    user.kycStatus === "pending" || user.kycStatus === "pending_verification";
 
   return (
     <Main fluid className="space-y-6 w-full pb-10">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <Button variant="ghost" onClick={() => navigate("/admin/verifications")} className="gap-2 text-muted-foreground">
+        <Button
+          variant="ghost"
+          onClick={() => navigate("/admin/verifications")}
+          className="gap-2 text-muted-foreground"
+        >
           <ArrowLeft className="w-4 h-4" /> Back to List
         </Button>
         <div className="flex gap-3">
@@ -148,21 +196,29 @@ export default function AdminVerificationDetailsPage() {
         <Card className="h-fit">
           <CardHeader>
             <CardTitle>Account Information</CardTitle>
-            <CardDescription>Primary details submitted during registration.</CardDescription>
+            <CardDescription>
+              Primary details submitted during registration.
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Account Type</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Account Type
+              </p>
               <p className="capitalize font-medium">{user.userType}</p>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Full Name</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Full Name
+              </p>
               <p className="font-medium">{user.fullName || "N/A"}</p>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Email Address</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Email Address
+              </p>
               <div className="flex items-center justify-between">
                 <p className="font-medium">{user.email}</p>
                 <Badge
@@ -179,19 +235,25 @@ export default function AdminVerificationDetailsPage() {
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Mobile Number</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Mobile Number
+              </p>
               <p className="font-medium">{user.mobileNumber || "N/A"}</p>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Country</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Country
+              </p>
               <p className="font-medium">{user.country || "N/A"}</p>
             </div>
             {user.companyName && (
               <>
                 <Separator />
                 <div>
-                  <p className="text-sm text-muted-foreground font-medium">Company Name</p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Company Name
+                  </p>
                   <p className="font-medium">{user.companyName}</p>
                 </div>
               </>
@@ -200,7 +262,9 @@ export default function AdminVerificationDetailsPage() {
               <>
                 <Separator />
                 <div>
-                  <p className="text-sm text-muted-foreground font-medium">Business Address</p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Business Address
+                  </p>
                   <p className="font-medium">{user.businessAddress}</p>
                 </div>
               </>
@@ -215,33 +279,45 @@ export default function AdminVerificationDetailsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Business Roles</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Business Roles
+              </p>
               <div className="flex flex-wrap gap-2 mt-1">
                 {user.businessRole && user.businessRole.length > 0
                   ? user.businessRole.map((role: string) => (
-                      <Badge key={role} variant="secondary">{role}</Badge>
+                      <Badge key={role} variant="secondary">
+                        {role}
+                      </Badge>
                     ))
                   : "N/A"}
               </div>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Target Markets</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Target Markets
+              </p>
               <div className="flex flex-wrap gap-2 mt-1">
                 {user.targetMarkets && user.targetMarkets.length > 0
                   ? user.targetMarkets.map((market: string) => (
-                      <Badge key={market} variant="secondary">{market}</Badge>
+                      <Badge key={market} variant="secondary">
+                        {market}
+                      </Badge>
                     ))
                   : "N/A"}
               </div>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Products</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Products
+              </p>
               <div className="flex flex-wrap gap-2 mt-1">
                 {user.products && user.products.length > 0
                   ? user.products.map((product: string) => (
-                      <Badge key={product} variant="outline">{product}</Badge>
+                      <Badge key={product} variant="outline">
+                        {product}
+                      </Badge>
                     ))
                   : "N/A"}
               </div>
@@ -250,7 +326,9 @@ export default function AdminVerificationDetailsPage() {
               <>
                 <Separator />
                 <div>
-                  <p className="text-sm text-muted-foreground font-medium">Experience Level</p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Experience Level
+                  </p>
                   <p className="font-medium">{user.experience}</p>
                 </div>
               </>
@@ -259,8 +337,12 @@ export default function AdminVerificationDetailsPage() {
               <>
                 <Separator />
                 <div>
-                  <p className="text-sm text-muted-foreground font-medium">Business Objective</p>
-                  <p className="font-medium whitespace-pre-wrap">{user.objective}</p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Business Objective
+                  </p>
+                  <p className="font-medium whitespace-pre-wrap">
+                    {user.objective}
+                  </p>
                 </div>
               </>
             )}
@@ -273,29 +355,46 @@ export default function AdminVerificationDetailsPage() {
             <CardTitle>Verification Documents</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {(user.internationalBusinessIds?.length > 0 || user.internationalKycIds?.length > 0) && (
+            {(user.internationalBusinessIds?.length > 0 ||
+              user.internationalKycIds?.length > 0) && (
               <div className="space-y-4 mb-4">
-                <h3 className="text-lg font-medium border-b pb-2">International Identifications</h3>
-                {user.internationalBusinessIds?.filter((o: any) => o.type || o.idNumber).map((idObj: any, idx: number) => (
-                  <Card key={`biz-${idx}`} className="bg-muted/10">
-                    <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                      <span className="font-medium">{idObj.type || "Business ID"}</span>
-                      <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
-                    </CardContent>
-                  </Card>
-                ))}
-                {user.internationalKycIds?.filter((o: any) => o.type || o.idNumber).map((idObj: any, idx: number) => (
-                  <Card key={`kyc-${idx}`} className="bg-muted/10">
-                    <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                      <span className="font-medium">{idObj.type || "Personal KYC ID"}</span>
-                      <Badge variant="outline" className="w-fit">{idObj.idNumber}</Badge>
-                    </CardContent>
-                  </Card>
-                ))}
+                <h3 className="text-lg font-medium border-b pb-2">
+                  International Identifications
+                </h3>
+                {user.internationalBusinessIds
+                  ?.filter((o: any) => o.type || o.idNumber)
+                  .map((idObj: any, idx: number) => (
+                    <Card key={`biz-${idx}`} className="bg-muted/10">
+                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                        <span className="font-medium">
+                          {idObj.type || "Business ID"}
+                        </span>
+                        <Badge variant="outline" className="w-fit">
+                          {idObj.idNumber}
+                        </Badge>
+                      </CardContent>
+                    </Card>
+                  ))}
+                {user.internationalKycIds
+                  ?.filter((o: any) => o.type || o.idNumber)
+                  .map((idObj: any, idx: number) => (
+                    <Card key={`kyc-${idx}`} className="bg-muted/10">
+                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                        <span className="font-medium">
+                          {idObj.type || "Personal KYC ID"}
+                        </span>
+                        <Badge variant="outline" className="w-fit">
+                          {idObj.idNumber}
+                        </Badge>
+                      </CardContent>
+                    </Card>
+                  ))}
               </div>
             )}
 
-            <h3 className="text-lg font-medium border-b pb-2 mt-4">Required Documents</h3>
+            <h3 className="text-lg font-medium border-b pb-2 mt-4">
+              Required Documents
+            </h3>
             {user.documents && user.documents.length > 0 ? (
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                 {user.documents.map((doc: string, idx: number) => (
@@ -305,12 +404,16 @@ export default function AdminVerificationDetailsPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">No KYC documents uploaded.</p>
+              <p className="text-sm text-muted-foreground">
+                No KYC documents uploaded.
+              </p>
             )}
 
             {user.productCatalogue && user.productCatalogue.length > 0 && (
               <div className="space-y-4 mt-8">
-                <h3 className="text-lg font-medium border-b pb-2">Product Catalogues</h3>
+                <h3 className="text-lg font-medium border-b pb-2">
+                  Product Catalogues
+                </h3>
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                   {user.productCatalogue.map((doc: string, idx: number) => (
                     <React.Fragment key={`cat-doc-${idx}`}>
@@ -330,34 +433,46 @@ export default function AdminVerificationDetailsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Industry</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Industry
+              </p>
               <p className="font-medium">{user.industrySector || "N/A"}</p>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Company Size</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Company Size
+              </p>
               <p className="font-medium">{user.companySize || "N/A"}</p>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Turnover</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Turnover
+              </p>
               <p className="font-medium">{user.turnover || "N/A"}</p>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Legal Structure</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Legal Structure
+              </p>
               <p className="font-medium">{user.legalStructure || "N/A"}</p>
             </div>
             <Separator />
             <div>
-              <p className="text-sm text-muted-foreground font-medium">Est. Year</p>
+              <p className="text-sm text-muted-foreground font-medium">
+                Est. Year
+              </p>
               <p className="font-medium">{user.yearEstablished || "N/A"}</p>
             </div>
             {user.websiteUrl && (
               <>
                 <Separator />
                 <div>
-                  <p className="text-sm text-muted-foreground font-medium">Website</p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Website
+                  </p>
                   <a
                     href={user.websiteUrl}
                     target="_blank"
@@ -373,7 +488,9 @@ export default function AdminVerificationDetailsPage() {
               <>
                 <Separator />
                 <div>
-                  <p className="text-sm text-muted-foreground font-medium">LinkedIn Profile</p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    LinkedIn Profile
+                  </p>
                   <a
                     href={user.linkedinUrl}
                     target="_blank"
@@ -395,7 +512,8 @@ export default function AdminVerificationDetailsPage() {
           <DialogHeader>
             <DialogTitle>Reject Application</DialogTitle>
             <DialogDescription>
-              Provide a reason for rejection. This will be sent to the user via email.
+              Provide a reason for rejection. This will be sent to the user via
+              email.
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
@@ -407,7 +525,12 @@ export default function AdminVerificationDetailsPage() {
             />
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsRejectDialogOpen(false)}>Cancel</Button>
+            <Button
+              variant="outline"
+              onClick={() => setIsRejectDialogOpen(false)}
+            >
+              Cancel
+            </Button>
             <Button
               variant="destructive"
               onClick={() => handleUpdateStatus("rejected", rejectionReason)}

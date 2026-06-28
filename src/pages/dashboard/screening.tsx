@@ -78,7 +78,8 @@ export default function ScreeningPage() {
                   Screening & Verification
                 </h4>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Review usually takes 1-3 business days. We are verifying your documents and details.
+                  Review usually takes 1-3 business days. We are verifying your
+                  documents and details.
                 </p>
               </div>
 

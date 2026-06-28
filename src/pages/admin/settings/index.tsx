@@ -1,5 +1,11 @@
 import { Main } from "@/components/layout/main";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Settings, Shield, Bell, Globe, Mail, CreditCard } from "lucide-react";
 
@@ -7,13 +13,15 @@ const SETTING_GROUPS = [
   {
     icon: Globe,
     title: "Platform",
-    description: "General platform configuration — name, timezone, maintenance mode",
+    description:
+      "General platform configuration — name, timezone, maintenance mode",
     status: "coming soon",
   },
   {
     icon: Mail,
     title: "Email & Notifications",
-    description: "Configure SES sender address, reply-to, notification templates",
+    description:
+      "Configure SES sender address, reply-to, notification templates",
     status: "coming soon",
   },
   {
@@ -31,7 +39,8 @@ const SETTING_GROUPS = [
   {
     icon: Bell,
     title: "Alerts & Thresholds",
-    description: "Slot warning thresholds, expiry notice days, admin notification rules",
+    description:
+      "Slot warning thresholds, expiry notice days, admin notification rules",
     status: "coming soon",
   },
 ];
@@ -62,7 +71,9 @@ export default function AdminSettingsPage() {
                   {status}
                 </Badge>
               </div>
-              <CardDescription className="text-sm">{description}</CardDescription>
+              <CardDescription className="text-sm">
+                {description}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-10 border border-dashed rounded-md flex items-center justify-center text-xs text-muted-foreground">
@@ -74,7 +85,8 @@ export default function AdminSettingsPage() {
       </div>
 
       <p className="text-xs text-muted-foreground text-center">
-        For urgent configuration changes, update environment variables directly on the server.
+        For urgent configuration changes, update environment variables directly
+        on the server.
       </p>
     </Main>
   );

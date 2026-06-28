@@ -47,25 +47,37 @@ export function ProfileDropdown() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link to="/dashboard/profile-settings" className="flex items-center gap-2">
+                <Link
+                  to="/dashboard/profile-settings"
+                  className="flex items-center gap-2"
+                >
                   <User className="size-4" />
                   Profile
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/dashboard/profile-settings" className="flex items-center gap-2">
+                <Link
+                  to="/dashboard/profile-settings"
+                  className="flex items-center gap-2"
+                >
                   <BadgeCheck className="size-4" />
                   Account
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/dashboard/profile-settings" className="flex items-center gap-2">
+                <Link
+                  to="/dashboard/profile-settings"
+                  className="flex items-center gap-2"
+                >
                   <Settings className="size-4" />
                   Settings
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/dashboard/messages" className="flex items-center gap-2">
+                <Link
+                  to="/dashboard/messages"
+                  className="flex items-center gap-2"
+                >
                   <Bell className="size-4" />
                   Notifications
                 </Link>

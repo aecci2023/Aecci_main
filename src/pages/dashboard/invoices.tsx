@@ -49,8 +49,12 @@ export default function UserInvoicesPage() {
   return (
     <div className="space-y-6 p-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Invoices &amp; Payments</h1>
-        <p className="text-muted-foreground">Receipts and billing history for your plan purchases</p>
+        <h1 className="text-2xl font-bold tracking-tight">
+          Invoices &amp; Payments
+        </h1>
+        <p className="text-muted-foreground">
+          Receipts and billing history for your plan purchases
+        </p>
       </div>
 
       {invoices.length === 0 ? (
@@ -73,10 +77,18 @@ export default function UserInvoicesPage() {
                     {planLabel[invoice.planName] || invoice.planName}
                   </CardTitle>
                   <Badge
-                    variant={invoice.paymentStatus === "paid" ? "default" : "secondary"}
-                    className={invoice.paymentStatus === "paid" ? "bg-green-100 text-green-700 border-green-200" : ""}
+                    variant={
+                      invoice.paymentStatus === "paid" ? "default" : "secondary"
+                    }
+                    className={
+                      invoice.paymentStatus === "paid"
+                        ? "bg-green-100 text-green-700 border-green-200"
+                        : ""
+                    }
                   >
-                    {invoice.paymentStatus === "paid" ? "Paid" : invoice.paymentStatus}
+                    {invoice.paymentStatus === "paid"
+                      ? "Paid"
+                      : invoice.paymentStatus}
                   </Badge>
                 </div>
               </CardHeader>
@@ -85,7 +97,9 @@ export default function UserInvoicesPage() {
                   <div className="space-y-1 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
-                      <span>{format(new Date(invoice.createdAt), "d MMM yyyy")}</span>
+                      <span>
+                        {format(new Date(invoice.createdAt), "d MMM yyyy")}
+                      </span>
                     </div>
                     <p className="text-lg font-semibold text-foreground">
                       {invoice.currency === "INR" ? "₹" : "$"}

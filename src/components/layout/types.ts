@@ -8,14 +8,14 @@ type User = {
 
 type Team = {
   name: string;
-  logo: React.ElementType;
+  logo: any;
   plan: string;
 };
 
 type BaseNavItem = {
   title: string;
   badge?: string;
-  icon?: React.ElementType;
+  icon?: any;
 };
 
 type NavLink = BaseNavItem & {

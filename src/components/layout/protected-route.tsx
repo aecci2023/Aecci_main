@@ -9,7 +9,7 @@ export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
   const token = localStorage.getItem("accessToken");
   const userStr = localStorage.getItem("user");
   let user = null;
-  
+
   if (userStr) {
     try {
       user = JSON.parse(userStr);
@@ -23,11 +23,17 @@ export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
     return <Navigate to="/login" replace />;
   }
 
-  if (user.role !== 'admin') {
-    if (user.kycStatus === 'pending_verification' && window.location.pathname !== '/dashboard/screening') {
+  if (user.role !== "admin") {
+    if (
+      user.kycStatus === "pending_verification" &&
+      window.location.pathname !== "/dashboard/screening"
+    ) {
       return <Navigate to="/dashboard/screening" replace />;
     }
-    if (user.kycStatus === 'rejected' && window.location.pathname !== '/dashboard/rejected') {
+    if (
+      user.kycStatus === "rejected" &&
+      window.location.pathname !== "/dashboard/rejected"
+    ) {
       return <Navigate to="/dashboard/rejected" replace />;
     }
   }

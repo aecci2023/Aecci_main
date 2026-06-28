@@ -113,18 +113,11 @@ function latLngToVector3(
 interface MarkerProps {
   marker: GlobeMarker;
   radius: number;
-  defaultSize: number;
   onClick?: (marker: GlobeMarker) => void;
   onHover?: (marker: GlobeMarker | null) => void;
 }
 
-function Marker({
-  marker,
-  radius,
-  defaultSize,
-  onClick,
-  onHover,
-}: MarkerProps) {
+function Marker({ marker, radius, onClick, onHover }: MarkerProps) {
   const [hovered, setHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const groupRef = useRef<THREE.Group>(null);
@@ -266,6 +259,10 @@ function RotatingGlobe({
 }: RotatingGlobeProps) {
   const groupRef = useRef<THREE.Group>(null);
 
+  // Rotate so India (lng ~79°E) faces front on load.
+  // texture maps: lng=0 → θ=π, so Y offset = π - (79° in radians) = π - 1.379 ≈ 1.763
+  const indiaInitialY = Math.PI - (79 * Math.PI) / 180;
+
   // Load Earth textures
   const [earthTexture, bumpTexture] = useTexture([
     config.textureUrl,
@@ -293,7 +290,7 @@ function RotatingGlobe({
   }, [config.radius]);
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} rotation={[0, indiaInitialY, 0]}>
       {/* Main globe mesh with Earth texture */}
       <mesh geometry={geometry}>
         <meshStandardMaterial
@@ -323,7 +320,6 @@ function RotatingGlobe({
           key={`marker-${index}-${marker.lat}-${marker.lng}`}
           marker={marker}
           radius={config.radius}
-          defaultSize={config.markerSize}
           onClick={onMarkerClick}
           onHover={onMarkerHover}
         />

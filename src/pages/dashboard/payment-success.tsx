@@ -35,9 +35,12 @@ export default function PaymentSuccessPage() {
         <Card className="border-emerald-500/20 bg-emerald-500/5 text-center shadow-md max-w-2xl mx-auto">
           <CardHeader className="pt-8 pb-4">
             <CheckCircle2 className="size-16 text-emerald-500 mx-auto animate-bounce" />
-            <CardTitle className="text-2xl mt-4">Subscription Activated!</CardTitle>
+            <CardTitle className="text-2xl mt-4">
+              Subscription Activated!
+            </CardTitle>
             <CardDescription>
-              Thank you. Your AECCI Global Deal Room plan has been successfully activated and slots are now available.
+              Thank you. Your AECCI Global Deal Room plan has been successfully
+              activated and slots are now available.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4 text-sm pb-6">
@@ -63,7 +66,9 @@ export default function PaymentSuccessPage() {
             </div>
 
             <p className="text-xs text-muted-foreground max-w-md mx-auto mt-2">
-              Your official tax invoice PDF has been queued for generation. You can view and download it anytime from the Billing & Invoice history section on the Subscription Plans page.
+              Your official tax invoice PDF has been queued for generation. You
+              can view and download it anytime from the Billing & Invoice
+              history section on the Subscription Plans page.
             </p>
           </CardContent>
           <CardFooter className="flex flex-col gap-2 pb-8 pt-2">

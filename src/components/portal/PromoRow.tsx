@@ -18,11 +18,11 @@ export default function PromoRow() {
             <Megaphone className="size-3.5" /> Media & Advertising
           </div>
           <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tight mb-3">
-            Advertise With{" "}
-            <span className="text-primary">AECCI</span>
+            Advertise With <span className="text-primary">AECCI</span>
           </h2>
           <p className="text-muted-foreground text-sm leading-relaxed">
-            Reach 10,000+ verified exporters, importers, and trade advisors through AECCI's digital and print channels.
+            Reach 10,000+ verified exporters, importers, and trade advisors
+            through AECCI's digital and print channels.
           </p>
         </div>
 
@@ -57,9 +57,7 @@ export default function PromoRow() {
                 variant="outline"
                 className="w-full sm:w-auto font-bold px-8 h-12 rounded-xl gap-2 border-border hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all duration-300"
               >
-                <a href="mailto:media@aecci.org.in">
-                  Contact Media Desk
-                </a>
+                <a href="mailto:media@aecci.org.in">Contact Media Desk</a>
               </Button>
             </div>
           </motion.div>

@@ -41,12 +41,14 @@ export default function BecomePartnerPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSelectChange = (value: string) => {
-    setFormData(prev => ({ ...prev, yearsOfExperience: value }));
+    setFormData((prev) => ({ ...prev, yearsOfExperience: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -63,13 +65,19 @@ export default function BecomePartnerPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
-          expertiseCountries: formData.expertiseCountries.split(",").map(s => s.trim()).filter(Boolean),
-          expertiseSectors: formData.expertiseSectors.split(",").map(s => s.trim()).filter(Boolean),
+          expertiseCountries: formData.expertiseCountries
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean),
+          expertiseSectors: formData.expertiseSectors
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean),
           yearsOfExperience: formData.yearsOfExperience,
           linkedinUrl: formData.linkedinUrl,
           professionalCert: formData.professionalCert,
@@ -96,9 +104,12 @@ export default function BecomePartnerPage() {
     <Main fluid className="py-12 bg-muted/20">
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">Become an AECCI Partner</h1>
+          <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">
+            Become an AECCI Partner
+          </h1>
           <p className="text-xl text-muted-foreground">
-            Join our global network and host your own Deal Room sessions to connect with international businesses.
+            Join our global network and host your own Deal Room sessions to
+            connect with international businesses.
           </p>
         </div>
 
@@ -108,14 +119,14 @@ export default function BecomePartnerPage() {
               <h2 className="text-2xl font-semibold flex items-center gap-2">
                 <User className="w-5 h-5 text-primary" /> Professional Details
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Full Name</Label>
-                  <Input 
-                    id="fullName" 
-                    name="fullName" 
-                    required 
+                  <Input
+                    id="fullName"
+                    name="fullName"
+                    required
                     value={formData.fullName}
                     onChange={handleInputChange}
                     placeholder="Your full name"
@@ -123,11 +134,11 @@ export default function BecomePartnerPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Professional Email</Label>
-                  <Input 
-                    id="email" 
-                    name="email" 
+                  <Input
+                    id="email"
+                    name="email"
                     type="email"
-                    required 
+                    required
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="you@company.com"
@@ -137,22 +148,26 @@ export default function BecomePartnerPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="expertiseCountries">Countries of Operation / Expertise (comma separated)</Label>
-                  <Input 
-                    id="expertiseCountries" 
-                    name="expertiseCountries" 
-                    required 
+                  <Label htmlFor="expertiseCountries">
+                    Countries of Operation / Expertise (comma separated)
+                  </Label>
+                  <Input
+                    id="expertiseCountries"
+                    name="expertiseCountries"
+                    required
                     value={formData.expertiseCountries}
                     onChange={handleInputChange}
                     placeholder="e.g. Kenya, UAE, Germany"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="expertiseSectors">Core Trade Expertise (comma separated)</Label>
-                  <Input 
-                    id="expertiseSectors" 
-                    name="expertiseSectors" 
-                    required 
+                  <Label htmlFor="expertiseSectors">
+                    Core Trade Expertise (comma separated)
+                  </Label>
+                  <Input
+                    id="expertiseSectors"
+                    name="expertiseSectors"
+                    required
                     value={formData.expertiseSectors}
                     onChange={handleInputChange}
                     placeholder="e.g. Customs Clearance, Logistics, Buyer Matchmaking"
@@ -162,8 +177,13 @@ export default function BecomePartnerPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="yearsOfExperience">Years of Professional Experience</Label>
-                  <Select onValueChange={handleSelectChange} value={formData.yearsOfExperience}>
+                  <Label htmlFor="yearsOfExperience">
+                    Years of Professional Experience
+                  </Label>
+                  <Select
+                    onValueChange={handleSelectChange}
+                    value={formData.yearsOfExperience}
+                  >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select Experience" />
                     </SelectTrigger>
@@ -177,11 +197,11 @@ export default function BecomePartnerPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="linkedinUrl">LinkedIn Profile URL</Label>
-                  <Input 
-                    id="linkedinUrl" 
-                    name="linkedinUrl" 
+                  <Input
+                    id="linkedinUrl"
+                    name="linkedinUrl"
                     type="url"
-                    required 
+                    required
                     value={formData.linkedinUrl}
                     onChange={handleInputChange}
                     placeholder="https://linkedin.com/in/yourprofile"
@@ -191,10 +211,10 @@ export default function BecomePartnerPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="motivation">Motivation & Value Proposal</Label>
-                <Textarea 
-                  id="motivation" 
-                  name="motivation" 
-                  required 
+                <Textarea
+                  id="motivation"
+                  name="motivation"
+                  required
                   value={formData.motivation}
                   onChange={handleInputChange}
                   placeholder="Describe how you can support chamber members and facilitate trade..."
@@ -205,19 +225,23 @@ export default function BecomePartnerPage() {
 
             <div className="space-y-4 pt-6 border-t">
               <h2 className="text-2xl font-semibold flex items-center gap-2">
-                <FileText className="w-5 h-5 text-primary" /> Credentials & Certifications
+                <FileText className="w-5 h-5 text-primary" /> Credentials &
+                Certifications
               </h2>
               <p className="text-sm text-muted-foreground mb-4">
-                Please provide links to your professional credentials or business profile (e.g. Google Drive, Dropbox link).
+                Please provide links to your professional credentials or
+                business profile (e.g. Google Drive, Dropbox link).
               </p>
-              
+
               <div className="space-y-2">
-                <Label htmlFor="professionalCert">Credentials Link (Certificates or Professional Profile)</Label>
-                <Input 
-                  id="professionalCert" 
-                  name="professionalCert" 
+                <Label htmlFor="professionalCert">
+                  Credentials Link (Certificates or Professional Profile)
+                </Label>
+                <Input
+                  id="professionalCert"
+                  name="professionalCert"
                   type="url"
-                  required 
+                  required
                   value={formData.professionalCert}
                   onChange={handleInputChange}
                   placeholder="https://..."
@@ -226,7 +250,12 @@ export default function BecomePartnerPage() {
             </div>
 
             <div className="pt-6 border-t flex justify-end">
-              <Button type="submit" size="lg" disabled={isSubmitting} className="w-full md:w-auto">
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+                className="w-full md:w-auto"
+              >
                 <Send className="w-4 h-4 mr-2" />
                 {isSubmitting ? "Submitting..." : "Submit Application"}
               </Button>

@@ -36,27 +36,27 @@ const footerSections = [
   {
     title: "AECCI Spotlight",
     links: [
-      { label: "Upcoming events", href: "#" },
-      { label: "Virtual B2B Forum", href: "#" },
-      { label: "Sponsorship", href: "#" },
-      { label: "Past Events", href: "#" },
-      { label: "Advertise With Us", href: "#" },
-      { label: "International Collaboration", href: "#" },
-      { label: "Media Center", href: "#" },
-      { label: "Publications", href: "#" },
-      { label: "E-Newsletters", href: "#" },
+      { label: "Upcoming events", href: "/events/upcoming-events" },
+      { label: "Sponsorship", href: "/events/sponsorship" },
+      { label: "Past Events", href: "/events/past-events" },
+      { label: "Advertise With Us", href: "/events/advertise-with-us" },
+      {
+        label: "International Collaboration",
+        href: "/events/international-collaboration",
+      },
+      { label: "Media Center", href: "/events/media-center" },
+      { label: "Publications", href: "/events/publications" },
     ],
   },
 
   {
     title: "Contact Us",
     links: [
-      { label: "AECCI Head Office", href: "/contact-us/aecci-head-office" },
+      { label: "AECCI Head Office", href: "/contact-us/head-office" },
       {
         label: "AECCI International Hub",
-        href: "/contact-us/aecci-international-hub",
+        href: "/contact-us/international-hub",
       },
-      { label: "Upcoming", href: "/upcoming-events" },
     ],
   },
 ];

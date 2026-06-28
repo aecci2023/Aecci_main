@@ -15,7 +15,7 @@ import {
   BookOpen,
   Settings,
   FolderOpen,
-  LifeBuoy
+  LifeBuoy,
 } from "lucide-react";
 
 export const partnerSidebarData = {

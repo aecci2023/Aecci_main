@@ -133,7 +133,10 @@ export default function AdminCountryIntelligencePage() {
               </TableRow>
             ) : briefs.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={3} className="text-center text-muted-foreground">
+                <TableCell
+                  colSpan={3}
+                  className="text-center text-muted-foreground"
+                >
                   No country intelligence data found.
                 </TableCell>
               </TableRow>

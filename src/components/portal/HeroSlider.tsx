@@ -1,10 +1,21 @@
 import * as React from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
-  Globe, Buildings, ArrowRight, Check, Lock, CaretLeft, CaretRight, Database,
+  Globe,
+  Buildings,
+  ArrowRight,
+  Check,
+  Lock,
+  CaretLeft,
+  CaretRight,
+  Database,
 } from "@phosphor-icons/react";
 import { Award, RefreshCw } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import type { CarouselApi } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,9 +33,14 @@ const slides = [
       "AECCI Membership is more than a chamber affiliation—it's your gateway to a global business ecosystem. The membership is designed to empower businesses through global connectivity, business matchmaking, expert advisory services, trade facilitation and strategic collaborations.",
     ctas: [
       { label: "Become a Member", href: "/services/membership", primary: true },
-      { label: "Membership Benefits", href: "/services/membership/benefits", primary: false },
+      {
+        label: "Membership Benefits",
+        href: "/services/membership/benefits",
+        primary: false,
+      },
     ],
-    bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1600",
+    bgImage:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1600",
   },
   {
     id: "e-platform",
@@ -35,10 +51,15 @@ const slides = [
     description:
       "Verify Certificates of Origin instantly, submit customs documents electronically, request trade recommendation letters, and manage membership online.",
     ctas: [
-      { label: "Members Login", href: "https://e-platform.aecci.org.in/login", primary: true },
+      {
+        label: "Members Login",
+        href: "https://e-platform.aecci.org.in/login",
+        primary: true,
+      },
       { label: "Learn More", href: "/e-platform", primary: false },
     ],
-    bgImage: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600",
+    bgImage:
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1600",
   },
   {
     id: "command-center-preview",
@@ -52,7 +73,8 @@ const slides = [
       { label: "Enter Command Center", href: "#command-center", primary: true },
       { label: "View Pricing Tiers", href: "#pricing", primary: false },
     ],
-    bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600",
+    bgImage:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600",
   },
 ] as const;
 
@@ -61,7 +83,8 @@ type SlideType = (typeof slides)[number];
 const contentVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: (delay: number) => ({
-    opacity: 1, y: 0,
+    opacity: 1,
+    y: 0,
     transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
   }),
 };
@@ -76,27 +99,41 @@ function TerminalVisual() {
             <span className="size-2.5 rounded-full bg-destructive/80" />
             <span className="size-2.5 rounded-full bg-chart-4/80" />
             <span className="size-2.5 rounded-full bg-primary/80" />
-            <span className="text-[10px] text-background/40 ml-2 font-sans font-bold">AECCI-COMMAND-CENTER://LIVE-STREAM</span>
+            <span className="text-[10px] text-background/40 ml-2 font-sans font-bold">
+              AECCI-COMMAND-CENTER://LIVE-STREAM
+            </span>
           </div>
-          <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20 animate-pulse font-sans font-bold">ONLINE</span>
+          <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20 animate-pulse font-sans font-bold">
+            ONLINE
+          </span>
         </div>
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-          <p className="text-background/30">// Fetching live cargo routing feeds...</p>
+          <p className="text-background/30">
+            // Fetching live cargo routing feeds...
+          </p>
           <div className="flex items-center justify-between text-primary">
             <span>[OK] EXPORT_DEAL_ROOM_01://KENYA</span>
-            <span className="text-background/80">Session Active (FMCG Focus)</span>
+            <span className="text-background/80">
+              Session Active (FMCG Focus)
+            </span>
           </div>
           <div className="flex items-center justify-between text-primary">
             <span>[OK] PORT_CLEARANCE://MUMBAI_NS</span>
-            <span className="text-background/80">Transit Rate: 98.7% Clear</span>
+            <span className="text-background/80">
+              Transit Rate: 98.7% Clear
+            </span>
           </div>
           <div className="flex items-center justify-between text-chart-2">
             <span>[LOAD] EXPORT_DEAL_ROOM_04://SINGAPORE</span>
-            <span className="text-background/40">Registrations Open (15 July)</span>
+            <span className="text-background/40">
+              Registrations Open (15 July)
+            </span>
           </div>
           <div className="flex items-center justify-between text-chart-4">
             <span>[PENDING] REGULATORY_VISAS://NETHERLANDS</span>
-            <span className="text-background/80">Closing in 12h (Tariff-free path)</span>
+            <span className="text-background/80">
+              Closing in 12h (Tariff-free path)
+            </span>
           </div>
           <div className="flex items-center justify-between text-background/30">
             <span>[SECURE] ENCRYPT_HANDSHAKE_COMPLETED</span>
@@ -109,16 +146,33 @@ function TerminalVisual() {
 }
 
 function InteractiveAttestationHub() {
-  const [step, setStep] = React.useState<"idle" | "signing" | "sealing" | "completed">("idle");
+  const [step, setStep] = React.useState<
+    "idle" | "signing" | "sealing" | "completed"
+  >("idle");
   const [progress, setProgress] = React.useState(0);
 
-  const handleAttest = () => { if (step !== "idle") return; setStep("signing"); setProgress(0); };
-  const handleReset = (e: React.MouseEvent) => { e.stopPropagation(); setStep("idle"); setProgress(0); };
+  const handleAttest = () => {
+    if (step !== "idle") return;
+    setStep("signing");
+    setProgress(0);
+  };
+  const handleReset = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setStep("idle");
+    setProgress(0);
+  };
 
   React.useEffect(() => {
     if (step === "signing") {
       const interval = setInterval(() => {
-        setProgress((prev) => { if (prev >= 100) { clearInterval(interval); setStep("sealing"); return 100; } return prev + 10; });
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setStep("sealing");
+            return 100;
+          }
+          return prev + 10;
+        });
       }, 100);
       return () => clearInterval(interval);
     } else if (step === "sealing") {
@@ -129,70 +183,114 @@ function InteractiveAttestationHub() {
 
   return (
     <div className="relative w-full max-w-md">
-      <div className={cn(
-        "absolute -inset-2 rounded-3xl blur-2xl opacity-60 transition-all duration-500",
-        step === "completed" ? "bg-gradient-to-r from-primary/30 to-primary/20"
-        : step === "sealing" || step === "signing" ? "bg-gradient-to-r from-chart-4/30 to-chart-4/20"
-        : "bg-gradient-to-r from-muted/20 to-primary/10",
-      )} />
+      <div
+        className={cn(
+          "absolute -inset-2 rounded-3xl blur-2xl opacity-60 transition-all duration-500",
+          step === "completed"
+            ? "bg-gradient-to-r from-primary/30 to-primary/20"
+            : step === "sealing" || step === "signing"
+              ? "bg-gradient-to-r from-chart-4/30 to-chart-4/20"
+              : "bg-gradient-to-r from-muted/20 to-primary/10",
+        )}
+      />
 
       <div className="relative rounded-3xl border border-background/10 bg-foreground/85 p-6 md:p-8 shadow-2xl overflow-hidden backdrop-blur-xl">
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-background/10">
           <div className="flex items-center gap-1.5">
             <span className="size-2.5 rounded-full bg-background/10" />
-            <span className="text-[10px] font-mono text-background/30 uppercase tracking-widest font-bold">e-CO Attestation Engine v4.2</span>
+            <span className="text-[10px] font-mono text-background/30 uppercase tracking-widest font-bold">
+              e-CO Attestation Engine v4.2
+            </span>
           </div>
-          <span className={cn(
-            "text-[9px] font-mono font-bold px-2 py-0.5 rounded border uppercase tracking-wider",
-            step === "completed" ? "bg-primary/10 border-primary/20 text-primary"
-            : step === "signing" || step === "sealing" ? "bg-chart-4/10 border-chart-4/20 text-chart-4 animate-pulse"
-            : "bg-background/5 border-background/10 text-background/40",
-          )}>{step}</span>
+          <span
+            className={cn(
+              "text-[9px] font-mono font-bold px-2 py-0.5 rounded border uppercase tracking-wider",
+              step === "completed"
+                ? "bg-primary/10 border-primary/20 text-primary"
+                : step === "signing" || step === "sealing"
+                  ? "bg-chart-4/10 border-chart-4/20 text-chart-4 animate-pulse"
+                  : "bg-background/5 border-background/10 text-background/40",
+            )}
+          >
+            {step}
+          </span>
         </div>
 
         <div className="relative rounded-2xl bg-background/5 border border-background/10 p-5 space-y-4 mb-6 overflow-hidden">
           {step === "signing" && (
-            <motion.div animate={{ y: ["0%", "100%", "0%"] }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-chart-4 to-transparent z-20" />
+            <motion.div
+              animate={{ y: ["0%", "100%", "0%"] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+              className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-chart-4 to-transparent z-20"
+            />
           )}
           {step === "sealing" && (
-            <motion.div animate={{ y: ["0%", "100%", "0%"] }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent z-20" />
+            <motion.div
+              animate={{ y: ["0%", "100%", "0%"] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+              className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent z-20"
+            />
           )}
 
           <div className="flex items-center justify-between pb-3 border-b border-background/5">
             <div>
-              <p className="text-[9px] font-bold text-background/30 tracking-wider">AECCI CHAMBER SERVICES</p>
-              <h5 className="text-sm font-bold text-background font-sans">Certificate of Origin</h5>
+              <p className="text-[9px] font-bold text-background/30 tracking-wider">
+                AECCI CHAMBER SERVICES
+              </p>
+              <h5 className="text-sm font-bold text-background font-sans">
+                Certificate of Origin
+              </h5>
             </div>
-            <span className="text-[10px] font-mono text-background/40">NO: #92-K8A1</span>
+            <span className="text-[10px] font-mono text-background/40">
+              NO: #92-K8A1
+            </span>
           </div>
 
           <div className="space-y-2.5 font-sans">
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div>
-                <p className="text-[9px] font-bold text-background/30">Exporter Registry Name</p>
-                <p className="font-semibold text-background/80 mt-0.5">Indus Agro Exports</p>
+                <p className="text-[9px] font-bold text-background/30">
+                  Exporter Registry Name
+                </p>
+                <p className="font-semibold text-background/80 mt-0.5">
+                  Indus Agro Exports
+                </p>
               </div>
               <div>
-                <p className="text-[9px] font-bold text-background/30">Consignment Destination</p>
-                <p className="font-semibold text-background/80 mt-0.5">Mombasa Port, Kenya</p>
+                <p className="text-[9px] font-bold text-background/30">
+                  Consignment Destination
+                </p>
+                <p className="font-semibold text-background/80 mt-0.5">
+                  Mombasa Port, Kenya
+                </p>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div>
-                <p className="text-[9px] font-bold text-background/30">Invoice Valuation</p>
-                <p className="font-semibold text-background/80 mt-0.5">$45,200.00 USD</p>
+                <p className="text-[9px] font-bold text-background/30">
+                  Invoice Valuation
+                </p>
+                <p className="font-semibold text-background/80 mt-0.5">
+                  $45,200.00 USD
+                </p>
               </div>
               <div>
-                <p className="text-[9px] font-bold text-background/30">Seal Status</p>
+                <p className="text-[9px] font-bold text-background/30">
+                  Seal Status
+                </p>
                 <div className="mt-0.5">
                   {step === "completed" ? (
-                    <Badge className="bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold uppercase tracking-wider px-2 py-0">VERIFIED & SEALED</Badge>
+                    <Badge className="bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold uppercase tracking-wider px-2 py-0">
+                      VERIFIED & SEALED
+                    </Badge>
                   ) : step === "signing" || step === "sealing" ? (
-                    <Badge className="bg-chart-4/10 text-chart-4 border border-chart-4/20 text-[9px] font-bold uppercase tracking-wider px-2 py-0 animate-pulse">PROCESSING...</Badge>
+                    <Badge className="bg-chart-4/10 text-chart-4 border border-chart-4/20 text-[9px] font-bold uppercase tracking-wider px-2 py-0 animate-pulse">
+                      PROCESSING...
+                    </Badge>
                   ) : (
-                    <Badge className="bg-background/5 text-background/40 border border-background/10 text-[9px] font-bold uppercase tracking-wider px-2 py-0">PENDING SEAL</Badge>
+                    <Badge className="bg-background/5 text-background/40 border border-background/10 text-[9px] font-bold uppercase tracking-wider px-2 py-0">
+                      PENDING SEAL
+                    </Badge>
                   )}
                 </div>
               </div>
@@ -201,8 +299,12 @@ function InteractiveAttestationHub() {
 
           <AnimatePresence>
             {(step === "sealing" || step === "completed") && (
-              <motion.div initial={{ scale: 3, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="absolute right-4 bottom-4 size-20 rounded-full border-2 border-dashed border-chart-4/60 bg-chart-4/5 flex items-center justify-center rotate-12 z-10">
+              <motion.div
+                initial={{ scale: 3, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="absolute right-4 bottom-4 size-20 rounded-full border-2 border-dashed border-chart-4/60 bg-chart-4/5 flex items-center justify-center rotate-12 z-10"
+              >
                 <div className="size-16 rounded-full border border-dashed border-chart-4/40 flex flex-col items-center justify-center text-[7px] font-mono text-chart-4 font-bold tracking-tighter leading-none text-center">
                   <span>AECCI SEAL</span>
                   <Award className="size-5 my-0.5" />
@@ -215,18 +317,26 @@ function InteractiveAttestationHub() {
 
         <div className="space-y-4">
           {step === "idle" && (
-            <Button onClick={handleAttest} className="w-full rounded-2xl bg-chart-4 hover:bg-chart-4/90 text-foreground font-bold py-6 text-xs shadow-lg flex items-center justify-center gap-2">
+            <Button
+              onClick={handleAttest}
+              className="w-full rounded-2xl bg-chart-4 hover:bg-chart-4/90 text-foreground font-bold py-6 text-xs shadow-lg flex items-center justify-center gap-2"
+            >
               <Lock className="size-4" /> SIMULATE DIGITAL ATTESTATION
             </Button>
           )}
           {step === "signing" && (
             <div className="space-y-2">
               <div className="flex items-center justify-between text-[10px] font-mono">
-                <span className="text-chart-4 animate-pulse font-bold">1/3 Signing Document...</span>
+                <span className="text-chart-4 animate-pulse font-bold">
+                  1/3 Signing Document...
+                </span>
                 <span>{progress}%</span>
               </div>
               <div className="h-2 bg-background/5 border border-background/10 rounded-full overflow-hidden">
-                <motion.div className="h-full bg-chart-4 rounded-full" style={{ width: `${progress}%` }} />
+                <motion.div
+                  className="h-full bg-chart-4 rounded-full"
+                  style={{ width: `${progress}%` }}
+                />
               </div>
             </div>
           )}
@@ -242,9 +352,15 @@ function InteractiveAttestationHub() {
             <div className="space-y-4 font-sans">
               <div className="p-3 bg-primary/10 border border-primary/20 rounded-xl text-primary text-center flex items-center justify-center gap-2">
                 <Check className="size-4 stroke-[3px]" />
-                <span className="font-bold text-xs">Attestation cleared in 1.2s!</span>
+                <span className="font-bold text-xs">
+                  Attestation cleared in 1.2s!
+                </span>
               </div>
-              <Button onClick={handleReset} variant="outline" className="w-full rounded-2xl border-background/10 text-background/60 hover:text-background hover:bg-background/5 font-bold text-xs">
+              <Button
+                onClick={handleReset}
+                variant="outline"
+                className="w-full rounded-2xl border-background/10 text-background/60 hover:text-background hover:bg-background/5 font-bold text-xs"
+              >
                 Reset Attestation Simulation
               </Button>
             </div>
@@ -255,50 +371,92 @@ function InteractiveAttestationHub() {
   );
 }
 
-function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean }) {
+function SlideContent({
+  slide,
+  isActive,
+}: {
+  slide: SlideType;
+  isActive: boolean;
+}) {
   const { Icon: BadgeIcon } = slide.badge;
 
   if (slide.layout === "centered") {
     return (
       <div className="relative min-h-[660px] md:min-h-[740px] flex flex-col justify-center items-center overflow-hidden w-full text-center px-6 py-20 bg-foreground">
         <div className="absolute inset-0 z-0">
-          <motion.div initial={{ scale: 1 }} animate={isActive ? { scale: 1.05 } : { scale: 1 }} transition={{ duration: 5.2, ease: "linear" }}
-            className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: `url(${slide.bgImage})` }} />
+          <motion.div
+            initial={{ scale: 1 }}
+            animate={isActive ? { scale: 1.05 } : { scale: 1 }}
+            transition={{ duration: 5.2, ease: "linear" }}
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{ backgroundImage: `url(${slide.bgImage})` }}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/80 to-foreground z-[1]" />
         </div>
 
         <div className="relative z-10 max-w-4xl flex flex-col items-center">
-          <motion.div initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.0}
-            className="inline-flex items-center gap-2 bg-background/5 backdrop-blur-md text-background text-xs font-semibold px-4 py-1.5 rounded-full border border-background/10 mb-6 tracking-wide">
-            <BadgeIcon className="size-4 text-background/60" />{slide.badge.text}
+          <motion.div
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.0}
+            className="inline-flex items-center gap-2 bg-background/5 backdrop-blur-md text-background text-xs font-semibold px-4 py-1.5 rounded-full border border-background/10 mb-6 tracking-wide"
+          >
+            <BadgeIcon className="size-4 text-background/60" />
+            {slide.badge.text}
           </motion.div>
 
-          <motion.h1 initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.1}
-            className="font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.1] text-background tracking-tight mb-6">
-            {slide.heading}<br />
+          <motion.h1
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.1}
+            className="font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.1] text-background tracking-tight mb-6"
+          >
+            {slide.heading}
+            <br />
             <span className="text-primary">{slide.highlight}</span>
           </motion.h1>
 
-          <motion.p initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.2}
-            className="text-base md:text-lg text-background/70 mb-8 max-w-2xl leading-relaxed font-light">
+          <motion.p
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.2}
+            className="text-base md:text-lg text-background/70 mb-8 max-w-2xl leading-relaxed font-light"
+          >
             {slide.description}
           </motion.p>
 
-          <motion.div initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.3}
-            className="flex flex-wrap gap-4 justify-center w-full sm:w-auto mb-12">
+          <motion.div
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.3}
+            className="flex flex-wrap gap-4 justify-center w-full sm:w-auto mb-12"
+          >
             {slide.ctas.map((cta) => (
-              <a key={cta.label} href={cta.href}
+              <a
+                key={cta.label}
+                href={cta.href}
                 className={cn(
                   "w-full sm:w-auto flex items-center justify-center text-sm font-bold px-8 h-12 rounded-full transition-all duration-300 hover:-translate-y-0.5",
-                  cta.primary ? "bg-background text-foreground hover:bg-background/90 shadow-lg"
-                  : "bg-background/10 border border-background/20 text-background hover:bg-background/20",
-                )}>
+                  cta.primary
+                    ? "bg-background text-foreground hover:bg-background/90 shadow-lg"
+                    : "bg-background/10 border border-background/20 text-background hover:bg-background/20",
+                )}
+              >
                 {cta.label}
               </a>
             ))}
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }} transition={{ duration: 0.8, delay: 0.3 }} className="w-full max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="w-full max-w-2xl"
+          >
             <TerminalVisual />
           </motion.div>
         </div>
@@ -309,38 +467,69 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
   return (
     <div className="relative min-h-[640px] md:min-h-[720px] flex items-center overflow-hidden w-full bg-foreground">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <motion.div initial={{ scale: 1 }} animate={isActive ? { scale: 1.05 } : { scale: 1 }} transition={{ duration: 5.2, ease: "linear" }}
-          className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${slide.bgImage})` }} />
+        <motion.div
+          initial={{ scale: 1 }}
+          animate={isActive ? { scale: 1.05 } : { scale: 1 }}
+          transition={{ duration: 5.2, ease: "linear" }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${slide.bgImage})` }}
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/75 to-transparent z-[1]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1280px] w-full px-6 md:px-12 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-        <div className={cn(
-          "col-span-1 md:col-span-7 flex flex-col items-start text-left",
-          slide.layout === "text-right" ? "md:col-start-6 md:col-span-7 md:order-2" : "md:order-1",
-        )}>
-          <motion.div initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.0}
-            className="inline-flex items-center gap-2 bg-background/10 backdrop-blur-md text-background text-xs font-semibold px-4 py-1.5 rounded-full border border-background/15 mb-6 tracking-wide shadow-sm">
-            <BadgeIcon className="size-4 text-background/60" />{slide.badge.text}
+        <div
+          className={cn(
+            "col-span-1 md:col-span-7 flex flex-col items-start text-left",
+            slide.layout === "text-right"
+              ? "md:col-start-6 md:col-span-7 md:order-2"
+              : "md:order-1",
+          )}
+        >
+          <motion.div
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.0}
+            className="inline-flex items-center gap-2 bg-background/10 backdrop-blur-md text-background text-xs font-semibold px-4 py-1.5 rounded-full border border-background/15 mb-6 tracking-wide shadow-sm"
+          >
+            <BadgeIcon className="size-4 text-background/60" />
+            {slide.badge.text}
           </motion.div>
 
-          <motion.h1 initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.1}
-            className="font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.08] text-background tracking-tight mb-6">
-            {slide.heading}<br />
-            <span className="text-primary">
-              {slide.highlight}
-            </span>
+          <motion.h1
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.1}
+            className="font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.08] text-background tracking-tight mb-6"
+          >
+            {slide.heading}
+            <br />
+            <span className="text-primary">{slide.highlight}</span>
           </motion.h1>
 
-          <motion.p initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.2}
-            className="text-base md:text-lg text-background/80 mb-10 max-w-xl leading-relaxed whitespace-pre-line font-light">
+          <motion.p
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.2}
+            className="text-base md:text-lg text-background/80 mb-10 max-w-xl leading-relaxed whitespace-pre-line font-light"
+          >
             {slide.description}
           </motion.p>
 
-          <motion.div initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.3}
-            className="flex flex-wrap gap-4 w-full sm:w-auto">
+          <motion.div
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            variants={contentVariants}
+            custom={0.3}
+            className="flex flex-wrap gap-4 w-full sm:w-auto"
+          >
             {slide.ctas.map((cta) => (
-              <a key={cta.label} href={cta.href}
+              <a
+                key={cta.label}
+                href={cta.href}
                 className={cn(
                   "w-full sm:w-auto flex items-center justify-center text-sm font-bold px-8 h-12 rounded-full transition-all duration-300 hover:-translate-y-0.5",
                   cta.primary
@@ -348,7 +537,8 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
                       ? "bg-chart-4 text-foreground hover:bg-chart-4/90 shadow-lg shadow-chart-4/25 border border-chart-4/20"
                       : "bg-primary text-primary-foreground hover:bg-primary/95 shadow-lg shadow-primary/25 border border-primary/20"
                     : "bg-background/10 border border-background/20 text-background hover:bg-background/20 backdrop-blur-sm shadow-sm",
-                )}>
+                )}
+              >
                 {cta.label}
                 {cta.primary && <ArrowRight className="size-4 ml-2" />}
               </a>
@@ -356,13 +546,29 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
           </motion.div>
         </div>
 
-        <div className={cn(
-          "col-span-1 md:col-span-5 flex justify-center items-center",
-          slide.layout === "text-right" ? "md:col-span-5 md:order-1" : "md:order-2",
-        )}>
-          <motion.div initial={{ opacity: 0, y: 45, scale: 0.95 }} animate={isActive ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 45, scale: 0.95 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="w-full flex justify-center">
-            {slide.id === "membership-slide" ? <SpinningGlobe /> : <InteractiveAttestationHub />}
+        <div
+          className={cn(
+            "col-span-1 md:col-span-5 flex justify-center items-center",
+            slide.layout === "text-right"
+              ? "md:col-span-5 md:order-1"
+              : "md:order-2",
+          )}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 45, scale: 0.95 }}
+            animate={
+              isActive
+                ? { opacity: 1, y: 0, scale: 1 }
+                : { opacity: 0, y: 45, scale: 0.95 }
+            }
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full flex justify-center"
+          >
+            {slide.id === "membership-slide" ? (
+              <SpinningGlobe />
+            ) : (
+              <InteractiveAttestationHub />
+            )}
           </motion.div>
         </div>
       </div>
@@ -385,21 +591,37 @@ export default function HeroSlider() {
   React.useEffect(() => {
     if (!api) return;
     api.on("select", onSelect);
-    return () => { api.off("select", onSelect); };
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api, onSelect]);
 
   React.useEffect(() => {
     if (!api || isHovered) return;
     const interval = setInterval(() => {
-      setProgress((prev) => { if (prev >= 100) { api.scrollNext(); return 0; } return prev + 1; });
+      setProgress((prev) => {
+        if (prev >= 100) {
+          api.scrollNext();
+          return 0;
+        }
+        return prev + 1;
+      });
     }, 50);
     return () => clearInterval(interval);
   }, [api, isHovered]);
 
   return (
-    <section id="hero-slider" className="relative w-full group overflow-hidden bg-foreground"
-      onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <Carousel setApi={setApi} opts={{ loop: true, align: "start" }} className="w-full">
+    <section
+      id="hero-slider"
+      className="relative w-full group overflow-hidden bg-foreground"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Carousel
+        setApi={setApi}
+        opts={{ loop: true, align: "start" }}
+        className="w-full"
+      >
         <CarouselContent className="-ml-0">
           {slides.map((slide, index) => (
             <CarouselItem key={slide.id} className="pl-0">
@@ -408,15 +630,25 @@ export default function HeroSlider() {
           ))}
         </CarouselContent>
 
-        <button onClick={() => { api?.scrollPrev(); setProgress(0); }}
+        <button
+          onClick={() => {
+            api?.scrollPrev();
+            setProgress(0);
+          }}
           className="absolute left-6 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full flex items-center justify-center border border-background/10 bg-foreground/40 text-background backdrop-blur-md shadow-md opacity-0 group-hover:opacity-100 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
-          aria-label="Previous slide">
+          aria-label="Previous slide"
+        >
           <CaretLeft className="size-5" />
         </button>
 
-        <button onClick={() => { api?.scrollNext(); setProgress(0); }}
+        <button
+          onClick={() => {
+            api?.scrollNext();
+            setProgress(0);
+          }}
           className="absolute right-6 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full flex items-center justify-center border border-background/10 bg-foreground/40 text-background backdrop-blur-md shadow-md opacity-0 group-hover:opacity-100 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
-          aria-label="Next slide">
+          aria-label="Next slide"
+        >
           <CaretRight className="size-5" />
         </button>
       </Carousel>
@@ -427,10 +659,19 @@ export default function HeroSlider() {
           if (index < current) fillWidth = "100%";
           else if (index === current) fillWidth = `${progress}%`;
           return (
-            <button key={index} onClick={() => { api?.scrollTo(index); setProgress(0); }}
+            <button
+              key={index}
+              onClick={() => {
+                api?.scrollTo(index);
+                setProgress(0);
+              }}
               className="h-1 flex-1 bg-background/20 hover:bg-background/30 rounded-full overflow-hidden transition-all duration-150 relative cursor-pointer"
-              aria-label={`Go to slide ${index + 1}`}>
-              <div className="h-full rounded-full transition-all duration-75 bg-primary" style={{ width: fillWidth }} />
+              aria-label={`Go to slide ${index + 1}`}
+            >
+              <div
+                className="h-full rounded-full transition-all duration-75 bg-primary"
+                style={{ width: fillWidth }}
+              />
             </button>
           );
         })}

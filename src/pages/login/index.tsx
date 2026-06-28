@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { 
-  useLoginMutation, 
+import {
+  useLoginMutation,
   useForgotPasswordMutation,
   useVerifyResetOtpMutation,
-  useResetPasswordMutation
+  useResetPasswordMutation,
 } from "@/store/api/authApi";
 import MapBranding from "@/pages/signup/components/MapBranding";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
@@ -18,17 +18,20 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-type ViewState = 'login' | 'forgot-email' | 'forgot-otp' | 'reset-password';
+type ViewState = "login" | "forgot-email" | "forgot-otp" | "reset-password";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [login, { isLoading: isLoginLoading }] = useLoginMutation();
-  const [forgotPassword, { isLoading: isForgotLoading }] = useForgotPasswordMutation();
-  const [verifyResetOtp, { isLoading: isVerifyOtpLoading }] = useVerifyResetOtpMutation();
-  const [resetPassword, { isLoading: isResetLoading }] = useResetPasswordMutation();
+  const [forgotPassword, { isLoading: isForgotLoading }] =
+    useForgotPasswordMutation();
+  const [verifyResetOtp, { isLoading: isVerifyOtpLoading }] =
+    useVerifyResetOtpMutation();
+  const [resetPassword, { isLoading: isResetLoading }] =
+    useResetPasswordMutation();
 
-  const [view, setView] = useState<ViewState>('login');
-  
+  const [view, setView] = useState<ViewState>("login");
+
   // Login States
   const [requiresAdminOtp, setRequiresAdminOtp] = useState(false);
   const [adminOtp, setAdminOtp] = useState("");
@@ -58,7 +61,8 @@ export default function LoginPage() {
     confirmPassword: "",
   });
 
-  const isLoading = isLoginLoading || isForgotLoading || isVerifyOtpLoading || isResetLoading;
+  const isLoading =
+    isLoginLoading || isForgotLoading || isVerifyOtpLoading || isResetLoading;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -67,24 +71,26 @@ export default function LoginPage() {
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const payload = requiresAdminOtp ? { email: formData.email, password: formData.password, otp: adminOtp } : { email: formData.email, password: formData.password };
+      const payload = requiresAdminOtp
+        ? { email: formData.email, password: formData.password, otp: adminOtp }
+        : { email: formData.email, password: formData.password };
       const result = await login(payload).unwrap();
-      
+
       if (result.data?.requiresOtp) {
         setRequiresAdminOtp(true);
         setTimer(120);
         toast.success(result.message || "OTP sent to your email");
         return;
       }
-      
+
       if (result.success) {
         toast.success("Logged in successfully");
         const { accessToken, refreshToken, user } = result.data;
-        
+
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("user", JSON.stringify(user));
-        
+
         if (user.role === "admin") {
           navigate("/admin/dashboard");
         } else if (user.role === "partner") {
@@ -102,7 +108,7 @@ export default function LoginPage() {
     try {
       const payload = { email: formData.email, password: formData.password };
       const result = await login(payload).unwrap();
-      
+
       if (result.data?.requiresOtp) {
         toast.success(result.message || "OTP resent to your email");
         setTimer(120);
@@ -119,7 +125,7 @@ export default function LoginPage() {
       const result = await forgotPassword({ email: formData.email }).unwrap();
       if (result.success) {
         toast.success(result.message);
-        setView('forgot-otp');
+        setView("forgot-otp");
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to send reset OTP");
@@ -128,13 +134,17 @@ export default function LoginPage() {
 
   const handleForgotOtpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!resetOtp || resetOtp.length !== 6) return toast.error("Enter a valid 6-digit OTP");
+    if (!resetOtp || resetOtp.length !== 6)
+      return toast.error("Enter a valid 6-digit OTP");
     try {
-      const result = await verifyResetOtp({ email: formData.email, otp: resetOtp }).unwrap();
+      const result = await verifyResetOtp({
+        email: formData.email,
+        otp: resetOtp,
+      }).unwrap();
       if (result.success) {
         toast.success(result.message);
         setResetToken(result.resetToken);
-        setView('reset-password');
+        setView("reset-password");
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Invalid OTP");
@@ -150,21 +160,26 @@ export default function LoginPage() {
       return toast.error("Password must be at least 8 characters");
     }
     try {
-      const result = await resetPassword({ 
-        email: formData.email, 
-        resetToken, 
-        newPassword: formData.newPassword 
+      const result = await resetPassword({
+        email: formData.email,
+        resetToken,
+        newPassword: formData.newPassword,
       }).unwrap();
-      
+
       if (result.success) {
         toast.success(result.message);
         // Reset state and go back to login
-        setFormData(prev => ({ ...prev, password: "", newPassword: "", confirmPassword: "" }));
+        setFormData((prev) => ({
+          ...prev,
+          password: "",
+          newPassword: "",
+          confirmPassword: "",
+        }));
         setRequiresAdminOtp(false);
         setAdminOtp("");
         setResetOtp("");
         setResetToken("");
-        setView('login');
+        setView("login");
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to reset password");
@@ -172,48 +187,60 @@ export default function LoginPage() {
   };
 
   const renderHeader = () => {
-    if (view === 'login') {
+    if (view === "login") {
       return (
         <>
           <h1 className="text-3xl font-bold tracking-tight mb-2">
             {requiresAdminOtp ? "Verify Admin Login" : "Welcome Back"}
           </h1>
           <p className="text-muted-foreground">
-            {requiresAdminOtp 
-              ? "Enter the 6-digit code sent to your email to access the admin portal." 
+            {requiresAdminOtp
+              ? "Enter the 6-digit code sent to your email to access the admin portal."
               : "Sign in to your AECCI Global Deal Room account"}
           </p>
         </>
       );
     }
-    if (view === 'forgot-email') {
+    if (view === "forgot-email") {
       return (
         <>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Reset Password</h1>
-          <p className="text-muted-foreground">Enter your email and we'll send you an OTP.</p>
+          <h1 className="text-3xl font-bold tracking-tight mb-2">
+            Reset Password
+          </h1>
+          <p className="text-muted-foreground">
+            Enter your email and we'll send you an OTP.
+          </p>
         </>
       );
     }
-    if (view === 'forgot-otp') {
+    if (view === "forgot-otp") {
       return (
         <>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Verify Reset OTP</h1>
-          <p className="text-muted-foreground">Enter the 6-digit code sent to {formData.email}</p>
+          <h1 className="text-3xl font-bold tracking-tight mb-2">
+            Verify Reset OTP
+          </h1>
+          <p className="text-muted-foreground">
+            Enter the 6-digit code sent to {formData.email}
+          </p>
         </>
       );
     }
-    if (view === 'reset-password') {
+    if (view === "reset-password") {
       return (
         <>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Create New Password</h1>
-          <p className="text-muted-foreground">Please choose a strong, secure password.</p>
+          <h1 className="text-3xl font-bold tracking-tight mb-2">
+            Create New Password
+          </h1>
+          <p className="text-muted-foreground">
+            Please choose a strong, secure password.
+          </p>
         </>
       );
     }
   };
 
   const renderForm = () => {
-    if (view === 'login') {
+    if (view === "login") {
       return (
         <form onSubmit={handleLoginSubmit} className="space-y-6">
           {!requiresAdminOtp ? (
@@ -233,9 +260,9 @@ export default function LoginPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <button 
-                    type="button" 
-                    onClick={() => setView('forgot-email')}
+                  <button
+                    type="button"
+                    onClick={() => setView("forgot-email")}
                     className="text-xs text-primary hover:underline"
                   >
                     Forgot password?
@@ -257,14 +284,22 @@ export default function LoginPage() {
                     className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
               </div>
             </>
           ) : (
             <div className="space-y-4 flex flex-col items-center">
-              <InputOTP maxLength={6} value={adminOtp} onChange={(val) => setAdminOtp(val)}>
+              <InputOTP
+                maxLength={6}
+                value={adminOtp}
+                onChange={(val) => setAdminOtp(val)}
+              >
                 <InputOTPGroup>
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
@@ -277,7 +312,8 @@ export default function LoginPage() {
               <div className="text-sm mt-4">
                 {timer > 0 ? (
                   <span className="text-muted-foreground">
-                    Resend OTP in {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, "0")}
+                    Resend OTP in {Math.floor(timer / 60)}:
+                    {(timer % 60).toString().padStart(2, "0")}
                   </span>
                 ) : (
                   <button
@@ -295,13 +331,17 @@ export default function LoginPage() {
 
           <div className="flex flex-col space-y-4 pt-2">
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Please wait..." : requiresAdminOtp ? "Verify & Sign In" : "Sign in"}
+              {isLoading
+                ? "Please wait..."
+                : requiresAdminOtp
+                  ? "Verify & Sign In"
+                  : "Sign in"}
             </Button>
-            
+
             {requiresAdminOtp && (
-              <Button 
-                type="button" 
-                variant="ghost" 
+              <Button
+                type="button"
+                variant="ghost"
                 onClick={() => {
                   setRequiresAdminOtp(false);
                   setAdminOtp("");
@@ -317,7 +357,7 @@ export default function LoginPage() {
       );
     }
 
-    if (view === 'forgot-email') {
+    if (view === "forgot-email") {
       return (
         <form onSubmit={handleForgotEmailSubmit} className="space-y-6">
           <div className="space-y-2">
@@ -336,10 +376,10 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Sending..." : "Send OTP"}
             </Button>
-            <Button 
-              type="button" 
-              variant="ghost" 
-              onClick={() => setView('login')}
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => setView("login")}
               className="w-full text-muted-foreground"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -350,11 +390,15 @@ export default function LoginPage() {
       );
     }
 
-    if (view === 'forgot-otp') {
+    if (view === "forgot-otp") {
       return (
         <form onSubmit={handleForgotOtpSubmit} className="space-y-6">
           <div className="space-y-4 flex flex-col items-center">
-            <InputOTP maxLength={6} value={resetOtp} onChange={(val) => setResetOtp(val)}>
+            <InputOTP
+              maxLength={6}
+              value={resetOtp}
+              onChange={(val) => setResetOtp(val)}
+            >
               <InputOTPGroup>
                 <InputOTPSlot index={0} />
                 <InputOTPSlot index={1} />
@@ -369,11 +413,11 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Verifying..." : "Verify OTP"}
             </Button>
-            <Button 
-              type="button" 
-              variant="ghost" 
+            <Button
+              type="button"
+              variant="ghost"
               onClick={() => {
-                setView('forgot-email');
+                setView("forgot-email");
                 setResetOtp("");
               }}
               className="w-full text-muted-foreground"
@@ -386,7 +430,7 @@ export default function LoginPage() {
       );
     }
 
-    if (view === 'reset-password') {
+    if (view === "reset-password") {
       return (
         <form onSubmit={handleResetPasswordSubmit} className="space-y-6">
           <div className="space-y-2">
@@ -407,7 +451,11 @@ export default function LoginPage() {
                 className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
                 onClick={() => setShowNewPassword(!showNewPassword)}
               >
-                {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showNewPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
               </button>
             </div>
           </div>
@@ -429,7 +477,11 @@ export default function LoginPage() {
                 className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showConfirmPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
               </button>
             </div>
           </div>
@@ -453,16 +505,15 @@ export default function LoginPage() {
       {/* Right Form Section */}
       <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col relative bg-background overflow-y-auto h-screen">
         <div className="flex-1 w-full max-w-xl mx-auto px-6 py-12 md:px-12 flex flex-col justify-center">
-          
-          <div className="flex flex-col items-start mb-8">
-            {renderHeader()}
-          </div>
+          <div className="flex flex-col items-start mb-8">{renderHeader()}</div>
 
           {renderForm()}
 
-          {view === 'login' && !requiresAdminOtp && (
+          {view === "login" && !requiresAdminOtp && (
             <div className="mt-8 text-center text-sm">
-              <span className="text-muted-foreground">Don't have an account? </span>
+              <span className="text-muted-foreground">
+                Don't have an account?{" "}
+              </span>
               <button
                 onClick={() => navigate("/signup")}
                 className="text-primary font-medium hover:underline"
@@ -471,7 +522,6 @@ export default function LoginPage() {
               </button>
             </div>
           )}
-
         </div>
       </div>
     </div>

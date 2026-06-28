@@ -9,8 +9,8 @@ export default defineConfig({
   server: {
     allowedHosts: ["test.aecci.org.in"],
     watch: {
-      ignored: ['**/*.pdf']
-    }
+      ignored: ["**/*.pdf"],
+    },
   },
   plugins: [
     react(),

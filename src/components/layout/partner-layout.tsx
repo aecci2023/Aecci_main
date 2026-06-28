@@ -23,8 +23,13 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
   const partnerProfile = profileData?.data;
 
   // If profile is loaded and setup is incomplete, force partner to dashboard setup page
-  const needsSetup = !isLoading && partnerProfile && (!partnerProfile.bio || !partnerProfile.signedAgreement);
-  const isOnDashboard = location.pathname === "/partner/dashboard" || location.pathname === "/partner/dashboard/";
+  const needsSetup =
+    !isLoading &&
+    partnerProfile &&
+    (!partnerProfile.bio || !partnerProfile.signedAgreement);
+  const isOnDashboard =
+    location.pathname === "/partner/dashboard" ||
+    location.pathname === "/partner/dashboard/";
 
   if (needsSetup && !isOnDashboard) {
     return <Navigate to="/partner/dashboard" replace />;

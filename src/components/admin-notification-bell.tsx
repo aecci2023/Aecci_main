@@ -38,17 +38,20 @@ export function AdminNotificationBell() {
 
     socket.emit("join-admin-room");
 
-    socket.on("new-verification", (payload: Omit<Notification, "id" | "type" | "read">) => {
-      setNotifications((prev) => [
-        {
-          ...payload,
-          id: `${payload.userId}-${Date.now()}`,
-          type: "new-verification",
-          read: false,
-        },
-        ...prev.slice(0, 49),
-      ]);
-    });
+    socket.on(
+      "new-verification",
+      (payload: Omit<Notification, "id" | "type" | "read">) => {
+        setNotifications((prev) => [
+          {
+            ...payload,
+            id: `${payload.userId}-${Date.now()}`,
+            type: "new-verification",
+            read: false,
+          },
+          ...prev.slice(0, 49),
+        ]);
+      },
+    );
 
     return () => {
       socket.disconnect();
@@ -103,7 +106,9 @@ export function AdminNotificationBell() {
                 className="flex items-start gap-3 px-4 py-3 hover:bg-muted/40 transition-colors border-b last:border-0 no-underline"
                 onClick={() => setOpen(false)}
               >
-                <div className={`mt-1 h-2 w-2 rounded-full shrink-0 ${n.read ? "bg-transparent" : "bg-primary"}`} />
+                <div
+                  className={`mt-1 h-2 w-2 rounded-full shrink-0 ${n.read ? "bg-transparent" : "bg-primary"}`}
+                />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">
                     {n.companyName || n.fullName || "New user"}
@@ -112,7 +117,9 @@ export function AdminNotificationBell() {
                     {n.userType || "User"} submitted for KYC verification
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {formatDistanceToNow(new Date(n.createdAt), { addSuffix: true })}
+                    {formatDistanceToNow(new Date(n.createdAt), {
+                      addSuffix: true,
+                    })}
                   </p>
                 </div>
               </Link>

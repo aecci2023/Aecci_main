@@ -91,7 +91,13 @@ export function NotificationBell() {
     if (role === "admin") {
       socket.on(
         "new-verification",
-        (payload: { userId: string; fullName: string | null; companyName: string | null; userType: string | null; createdAt: string }) => {
+        (payload: {
+          userId: string;
+          fullName: string | null;
+          companyName: string | null;
+          userType: string | null;
+          createdAt: string;
+        }) => {
           setNotifications((prev) => [
             {
               id: `${payload.userId}-${Date.now()}`,
@@ -104,7 +110,7 @@ export function NotificationBell() {
             },
             ...prev.slice(0, 49),
           ]);
-        }
+        },
       );
     }
 
@@ -156,21 +162,32 @@ export function NotificationBell() {
           ) : (
             notifications.map((n) => {
               const inner = (
-                <div className={cn(
-                  "flex items-start gap-3 px-4 py-3 transition-colors border-b last:border-0",
-                  !n.read ? "bg-muted/30" : "hover:bg-muted/20"
-                )}>
+                <div
+                  className={cn(
+                    "flex items-start gap-3 px-4 py-3 transition-colors border-b last:border-0",
+                    !n.read ? "bg-muted/30" : "hover:bg-muted/20",
+                  )}
+                >
                   {typeIcon[n.type] ?? typeIcon.info}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-foreground flex items-center gap-1.5">
                       {!n.read && (
-                        <span className={cn("h-1.5 w-1.5 rounded-full shrink-0", typeDot[n.type] ?? "bg-primary")} />
+                        <span
+                          className={cn(
+                            "h-1.5 w-1.5 rounded-full shrink-0",
+                            typeDot[n.type] ?? "bg-primary",
+                          )}
+                        />
                       )}
                       {n.title}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{n.message}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
+                      {n.message}
+                    </p>
                     <p className="text-[10px] text-muted-foreground mt-1">
-                      {formatDistanceToNow(new Date(n.createdAt), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(n.createdAt), {
+                        addSuffix: true,
+                      })}
                     </p>
                   </div>
                 </div>
@@ -193,7 +210,10 @@ export function NotificationBell() {
         </div>
         {notifications.length > 0 && (
           <div className="border-t px-4 py-2 flex justify-between items-center">
-            <span className="text-xs text-muted-foreground">{notifications.length} notification{notifications.length !== 1 ? "s" : ""}</span>
+            <span className="text-xs text-muted-foreground">
+              {notifications.length} notification
+              {notifications.length !== 1 ? "s" : ""}
+            </span>
             <button
               className="text-xs text-destructive hover:underline"
               onClick={() => setNotifications([])}

@@ -1,11 +1,26 @@
 import { useState } from "react";
 import { Main } from "@/components/layout/main";
-import { useAskQuestionMutation, useGetMyQuestionsQuery } from "@/store/api/questionApi";
+import {
+  useAskQuestionMutation,
+  useGetMyQuestionsQuery,
+} from "@/store/api/questionApi";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export default function SubmitQuestionsPage() {
@@ -54,7 +69,9 @@ export default function SubmitQuestionsPage() {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-1 block">Question Type</label>
+                <label className="text-sm font-medium mb-1 block">
+                  Question Type
+                </label>
                 <Select value={type} onValueChange={setType}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select type" />
@@ -62,14 +79,18 @@ export default function SubmitQuestionsPage() {
                   <SelectContent>
                     <SelectItem value="Product">Product Specific</SelectItem>
                     <SelectItem value="Market">Market Insights</SelectItem>
-                    <SelectItem value="Expansion">Expansion Strategy</SelectItem>
+                    <SelectItem value="Expansion">
+                      Expansion Strategy
+                    </SelectItem>
                     <SelectItem value="Other">Other</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block">Question Details</label>
-                <Textarea 
+                <label className="text-sm font-medium mb-1 block">
+                  Question Details
+                </label>
+                <Textarea
                   rows={5}
                   placeholder="Describe your question in detail..."
                   value={content}
@@ -95,7 +116,9 @@ export default function SubmitQuestionsPage() {
               <p className="text-muted-foreground">Loading...</p>
             ) : questions.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-48 border rounded-md border-dashed">
-                <p className="text-muted-foreground">You haven't asked any questions yet.</p>
+                <p className="text-muted-foreground">
+                  You haven't asked any questions yet.
+                </p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -103,12 +126,18 @@ export default function SubmitQuestionsPage() {
                   <div key={q.id} className="border rounded-lg p-4 space-y-3">
                     <div className="flex justify-between items-start">
                       <Badge variant="outline">{q.type}</Badge>
-                      <Badge variant={q.status === "answered" ? "default" : "secondary"}>
+                      <Badge
+                        variant={
+                          q.status === "answered" ? "default" : "secondary"
+                        }
+                      >
                         {q.status}
                       </Badge>
                     </div>
                     <div>
-                      <h4 className="font-medium text-sm text-muted-foreground">Question</h4>
+                      <h4 className="font-medium text-sm text-muted-foreground">
+                        Question
+                      </h4>
                       <p className="mt-1">{q.content}</p>
                     </div>
                     {q.answer && (

@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { authApi } from './api/authApi';
-import { adminApi } from './api/adminApi';
-import { sessionApi } from './api/sessionApi';
-import { countryIntelligenceApi } from './api/countryIntelligenceApi';
-import { questionApi } from './api/questionApi';
+import { configureStore } from "@reduxjs/toolkit";
+import { authApi } from "./api/authApi";
+import { adminApi } from "./api/adminApi";
+import { sessionApi } from "./api/sessionApi";
+import { countryIntelligenceApi } from "./api/countryIntelligenceApi";
+import { questionApi } from "./api/questionApi";
 
 export const store = configureStore({
   reducer: {
@@ -15,11 +15,11 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-      authApi.middleware, 
-      adminApi.middleware, 
+      authApi.middleware,
+      adminApi.middleware,
       sessionApi.middleware,
       countryIntelligenceApi.middleware,
-      questionApi.middleware
+      questionApi.middleware,
     ),
 });
 

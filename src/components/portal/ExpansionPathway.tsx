@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
-import { Globe, ShieldCheck, UserPlus, Send, Settings, Award, Compass, ArrowRight } from "lucide-react";
+import {
+  Globe,
+  ShieldCheck,
+  UserPlus,
+  Send,
+  Settings,
+  Award,
+  Compass,
+  ArrowRight,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const STEPS = [
@@ -66,7 +75,14 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
 };
 
 export default function ExpansionPathway() {
@@ -80,11 +96,11 @@ export default function ExpansionPathway() {
             <Compass className="size-3.5" /> Visual Exporter Journey
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-[1.1] mb-4">
-            Global Expansion{" "}
-            <span className="text-primary">Pathway</span>
+            Global Expansion <span className="text-primary">Pathway</span>
           </h2>
           <p className="text-muted-foreground text-base leading-relaxed">
-            A structured path for launching your products overseas with verified matching, legal clearing, and logistical scale.
+            A structured path for launching your products overseas with verified
+            matching, legal clearing, and logistical scale.
           </p>
         </div>
 
@@ -116,10 +132,20 @@ export default function ExpansionPathway() {
                 )}
 
                 <div className="flex items-start justify-between">
-                  <div className={cn("size-11 rounded-xl border flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300", s.bg)}>
+                  <div
+                    className={cn(
+                      "size-11 rounded-xl border flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300",
+                      s.bg,
+                    )}
+                  >
                     <Icon className={cn("size-5", s.accent)} />
                   </div>
-                  <span className={cn("text-4xl font-black opacity-10 leading-none mt-1", s.accent)}>
+                  <span
+                    className={cn(
+                      "text-4xl font-black opacity-10 leading-none mt-1",
+                      s.accent,
+                    )}
+                  >
                     {s.step}
                   </span>
                 </div>
@@ -128,8 +154,12 @@ export default function ExpansionPathway() {
                   <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-mono mb-1">
                     Stage {s.step}
                   </p>
-                  <h4 className="text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{s.title}</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">{s.desc}</p>
+                  <h4 className="text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {s.title}
+                  </h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">
+                    {s.desc}
+                  </p>
                 </div>
               </motion.div>
             );

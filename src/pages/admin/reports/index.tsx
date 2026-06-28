@@ -1,22 +1,49 @@
 import { Main } from "@/components/layout/main";
-import { useGetSessionsQuery, useCreateOpportunityReportMutation } from "@/store/api/sessionApi";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  useGetSessionsQuery,
+  useCreateOpportunityReportMutation,
+} from "@/store/api/sessionApi";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { toast } from "sonner";
 import { format } from "date-fns";
-import { Calendar, FileText, CheckCircle2, Loader2, Download, AlertCircle } from "lucide-react";
+import {
+  Calendar,
+  FileText,
+  CheckCircle2,
+  Loader2,
+  Download,
+  AlertCircle,
+} from "lucide-react";
 
 export default function AdminReportsPage() {
-  const { data, isLoading, refetch } = useGetSessionsQuery({ status: "completed" });
-  const [createReport, { isLoading: isGenerating }] = useCreateOpportunityReportMutation();
+  const { data, isLoading, refetch } = useGetSessionsQuery({
+    status: "completed",
+  });
+  const [createReport, { isLoading: isGenerating }] =
+    useCreateOpportunityReportMutation();
 
   const [selectedSession, setSelectedSession] = useState<any>(null);
-  
+
   // Report form states
   const [marketSummary, setMarketSummary] = useState("");
   const [potentialRoutes, setPotentialRoutes] = useState("");
@@ -25,7 +52,11 @@ export default function AdminReportsPage() {
   const completedSessions = data?.data || [];
 
   const handleGenerateReport = async () => {
-    if (!marketSummary.trim() || !potentialRoutes.trim() || !recommendations.trim()) {
+    if (
+      !marketSummary.trim() ||
+      !potentialRoutes.trim() ||
+      !recommendations.trim()
+    ) {
       toast.error("Please fill out all report sections before compiling.");
       return;
     }
@@ -36,10 +67,12 @@ export default function AdminReportsPage() {
         userId: selectedSession.clientId,
         marketSummary,
         potentialRoutes,
-        recommendations
+        recommendations,
       }).unwrap();
 
-      toast.success("AECCI Opportunity Report generated, emailed to client, and saved in their dashboard.");
+      toast.success(
+        "AECCI Opportunity Report generated, emailed to client, and saved in their dashboard.",
+      );
       setSelectedSession(null);
       setMarketSummary("");
       setPotentialRoutes("");
@@ -47,13 +80,15 @@ export default function AdminReportsPage() {
       refetch();
     } catch (err: any) {
       console.error(err);
-      toast.error(err?.data?.message || "Failed to compile opportunity report.");
+      toast.error(
+        err?.data?.message || "Failed to compile opportunity report.",
+      );
     }
   };
 
   const handleDownloadPdf = (reportId: string) => {
-    const url = `${import.meta.env.VITE_API_BASE_URL?.replace('/api/', '/api') || 'http://localhost:5000/api'}/reports/${reportId}/pdf`;
-    
+    const url = `${import.meta.env.VITE_API_BASE_URL?.replace("/api/", "/api") || "http://localhost:5000/api"}/reports/${reportId}/pdf`;
+
     // Trigger download in new window/tab
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -71,7 +106,8 @@ export default function AdminReportsPage() {
           Bilateral Opportunity Reports
         </h1>
         <p className="text-muted-foreground text-sm mt-1">
-          Review expert post-session summaries and manually compile official AECCI Trade Opportunity Reports for clients.
+          Review expert post-session summaries and manually compile official
+          AECCI Trade Opportunity Reports for clients.
         </p>
       </div>
 
@@ -109,15 +145,26 @@ export default function AdminReportsPage() {
                       {format(new Date(session.date), "MMM dd, yyyy h:mm a")}
                     </TableCell>
                     <TableCell className="text-xs">
-                      <div className="font-bold text-foreground">{session.client?.fullName || "Exporter"}</div>
-                      <div className="text-muted-foreground text-[10px]">{session.client?.companyName || "Individual"}</div>
+                      <div className="font-bold text-foreground">
+                        {session.client?.fullName || "Exporter"}
+                      </div>
+                      <div className="text-muted-foreground text-[10px]">
+                        {session.client?.companyName || "Individual"}
+                      </div>
                     </TableCell>
                     <TableCell className="text-xs">
-                      <div className="font-bold text-foreground">{session.partner?.fullName || "Representative"}</div>
-                      <div className="text-muted-foreground text-[10px]">{session.partner?.companyName || "Chamber Officer"}</div>
+                      <div className="font-bold text-foreground">
+                        {session.partner?.fullName || "Representative"}
+                      </div>
+                      <div className="text-muted-foreground text-[10px]">
+                        {session.partner?.companyName || "Chamber Officer"}
+                      </div>
                     </TableCell>
                     <TableCell className="text-xs">
-                      <Badge variant="secondary" className="text-[10px] px-2 py-0">
+                      <Badge
+                        variant="secondary"
+                        className="text-[10px] px-2 py-0"
+                      >
                         {session.country || "Global"}
                       </Badge>
                     </TableCell>
@@ -134,22 +181,23 @@ export default function AdminReportsPage() {
                     </TableCell>
                     <TableCell className="text-right">
                       {hasReport ? (
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
+                        <Button
+                          variant="outline"
+                          size="sm"
                           className="h-8 text-xs gap-1.5 text-emerald-600 hover:text-emerald-700"
                           onClick={() => handleDownloadPdf(report.id)}
                         >
                           <Download className="w-3.5 h-3.5" /> Download PDF
                         </Button>
                       ) : (
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="h-8 text-xs gap-1.5 border-rose-200 hover:bg-rose-50/50" 
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="h-8 text-xs gap-1.5 border-rose-200 hover:bg-rose-50/50"
                           onClick={() => setSelectedSession(session)}
                         >
-                          <FileText className="w-3.5 h-3.5 text-rose-500" /> Compile Report
+                          <FileText className="w-3.5 h-3.5 text-rose-500" />{" "}
+                          Compile Report
                         </Button>
                       )}
                     </TableCell>
@@ -162,14 +210,18 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Compile Report Dialog */}
-      <Dialog open={!!selectedSession} onOpenChange={(open) => !open && setSelectedSession(null)}>
+      <Dialog
+        open={!!selectedSession}
+        onOpenChange={(open) => !open && setSelectedSession(null)}
+      >
         <DialogContent className="max-w-2xl max-h-[85vh] flex flex-col">
           <DialogHeader className="shrink-0">
             <DialogTitle className="flex items-center gap-2 text-xl font-extrabold text-primary">
               <FileText className="size-5" /> Compile AECCI Opportunity Report
             </DialogTitle>
             <DialogDescription>
-              Process the bilateral meeting summary notes and compose the official client report.
+              Process the bilateral meeting summary notes and compose the
+              official client report.
             </DialogDescription>
           </DialogHeader>
 
@@ -177,24 +229,38 @@ export default function AdminReportsPage() {
             <div className="space-y-4 py-3 text-xs leading-relaxed overflow-y-auto pr-1 flex-1">
               <div className="grid grid-cols-2 gap-4 border-b pb-3">
                 <div>
-                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Client / Exporter</span>
-                  <div className="font-bold text-sm text-foreground">{selectedSession.client?.fullName}</div>
-                  <div className="text-muted-foreground">{selectedSession.client?.companyName}</div>
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
+                    Client / Exporter
+                  </span>
+                  <div className="font-bold text-sm text-foreground">
+                    {selectedSession.client?.fullName}
+                  </div>
+                  <div className="text-muted-foreground">
+                    {selectedSession.client?.companyName}
+                  </div>
                 </div>
                 <div>
-                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Assigned Chamber Expert</span>
-                  <div className="font-bold text-sm text-foreground">{selectedSession.partner?.fullName}</div>
-                  <div className="text-muted-foreground">{selectedSession.partner?.companyName}</div>
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
+                    Assigned Chamber Expert
+                  </span>
+                  <div className="font-bold text-sm text-foreground">
+                    {selectedSession.partner?.fullName}
+                  </div>
+                  <div className="text-muted-foreground">
+                    {selectedSession.partner?.companyName}
+                  </div>
                 </div>
               </div>
 
               {/* Expert Notes */}
               <div className="space-y-1">
                 <span className="text-[10px] text-rose-500 uppercase font-bold tracking-wider block flex items-center gap-1">
-                  <AlertCircle className="size-3.5" /> Expert Post-Session Summary Notes
+                  <AlertCircle className="size-3.5" /> Expert Post-Session
+                  Summary Notes
                 </span>
                 <div className="bg-rose-500/5 p-3.5 rounded-lg border border-rose-100 whitespace-pre-line text-foreground/90 font-medium">
-                  {selectedSession.postSessionSummary || "No summary notes submitted by the expert yet."}
+                  {selectedSession.postSessionSummary ||
+                    "No summary notes submitted by the expert yet."}
                 </div>
               </div>
 
@@ -204,16 +270,25 @@ export default function AdminReportsPage() {
                   Original Client Pre-Session Questionnaire
                 </span>
                 <div className="bg-muted p-3 rounded-lg border text-foreground/80 italic">
-                  {selectedSession.questionnaire || "No questionnaire submitted."}
+                  {selectedSession.questionnaire ||
+                    "No questionnaire submitted."}
                 </div>
               </div>
 
               <div className="border-t pt-4 space-y-3">
-                <h4 className="font-bold text-sm text-foreground">AECCI Official Report Sections</h4>
+                <h4 className="font-bold text-sm text-foreground">
+                  AECCI Official Report Sections
+                </h4>
 
                 <div className="space-y-2">
-                  <Label htmlFor="marketSummary" className="text-xs font-semibold">1. Market Intelligence & Demand Summary <span className="text-red-500">*</span></Label>
-                  <Textarea 
+                  <Label
+                    htmlFor="marketSummary"
+                    className="text-xs font-semibold"
+                  >
+                    1. Market Intelligence & Demand Summary{" "}
+                    <span className="text-red-500">*</span>
+                  </Label>
+                  <Textarea
                     id="marketSummary"
                     required
                     value={marketSummary}
@@ -224,8 +299,14 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="potentialRoutes" className="text-xs font-semibold">2. Potential Routes & Channels to Market <span className="text-red-500">*</span></Label>
-                  <Textarea 
+                  <Label
+                    htmlFor="potentialRoutes"
+                    className="text-xs font-semibold"
+                  >
+                    2. Potential Routes & Channels to Market{" "}
+                    <span className="text-red-500">*</span>
+                  </Label>
+                  <Textarea
                     id="potentialRoutes"
                     required
                     value={potentialRoutes}
@@ -236,8 +317,14 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="recommendations" className="text-xs font-semibold">3. Strategic Recommendations & Actions <span className="text-red-500">*</span></Label>
-                  <Textarea 
+                  <Label
+                    htmlFor="recommendations"
+                    className="text-xs font-semibold"
+                  >
+                    3. Strategic Recommendations & Actions{" "}
+                    <span className="text-red-500">*</span>
+                  </Label>
+                  <Textarea
                     id="recommendations"
                     required
                     value={recommendations}
@@ -251,8 +338,14 @@ export default function AdminReportsPage() {
           )}
 
           <DialogFooter className="flex items-center justify-end w-full pt-4 border-t gap-2 shrink-0">
-            <Button variant="outline" size="sm" onClick={() => setSelectedSession(null)}>Cancel</Button>
-            <Button 
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setSelectedSession(null)}
+            >
+              Cancel
+            </Button>
+            <Button
               className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-9 text-xs"
               onClick={handleGenerateReport}
               disabled={isGenerating}

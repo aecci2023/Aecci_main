@@ -14,7 +14,12 @@ export default function App() {
   const isLoginPage = location.pathname.startsWith("/login");
   const isAdminPage = location.pathname.startsWith("/admin");
   const isPartnerPage = location.pathname.startsWith("/partner");
-  const hideChrome = isSignupPage || isDashboardPage || isLoginPage || isAdminPage || isPartnerPage;
+  const hideChrome =
+    isSignupPage ||
+    isDashboardPage ||
+    isLoginPage ||
+    isAdminPage ||
+    isPartnerPage;
 
   return (
     <ActiveThemeProvider>

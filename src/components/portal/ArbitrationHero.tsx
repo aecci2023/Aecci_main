@@ -8,7 +8,10 @@ export default function ArbitrationHero() {
     <section
       id="arbitration-hero-banner"
       className="relative min-h-[420px] md:min-h-[540px] flex items-center justify-center overflow-hidden border-b border-border py-16 md:py-28"
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1600')" }}
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1600')",
+      }}
     >
       {/* Layered overlays */}
       <div className="absolute inset-0 bg-foreground/82 z-0" />
@@ -58,7 +61,9 @@ export default function ArbitrationHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-base md:text-lg text-background/65 leading-relaxed max-w-2xl font-light"
         >
-          AECCI–IAC, Navi Mumbai has been included in the Arbitral Institutes Directory of the International Council for Commercial Arbitration (ICCA), reflecting its growing international recognition.
+          AECCI–IAC, Navi Mumbai has been included in the Arbitral Institutes
+          Directory of the International Council for Commercial Arbitration
+          (ICCA), reflecting its growing international recognition.
         </motion.p>
 
         <motion.div
@@ -83,7 +88,11 @@ export default function ArbitrationHero() {
             size="lg"
             className="rounded-full text-background/70 hover:text-background hover:bg-background/10 border border-background/15 font-bold px-8 h-13 gap-2"
           >
-            <a href="https://aecci.org.in/arbitration" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://aecci.org.in/arbitration"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Learn More <ExternalLink className="size-4" />
             </a>
           </Button>

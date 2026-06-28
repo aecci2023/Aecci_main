@@ -6,7 +6,7 @@ import { Users } from "lucide-react";
 
 export default function AdminUsersPage() {
   const { data, isLoading, error } = useGetUsersQuery({});
-  
+
   const users = data?.data || [];
 
   return (

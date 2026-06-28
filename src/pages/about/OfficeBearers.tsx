@@ -1,24 +1,72 @@
 import { motion } from "framer-motion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+
+const bearers = [
+  { name: "Mrs. Swarn Dhiman", role: "Executive Director" },
+  { name: "MR. HARISH SHETTY", role: "Human Resource Manager" },
+  { name: "ADV. ROHINI P.K", role: "Legal Wing" },
+  { name: "ADV. AKSHATA MULIK", role: "Legal Wing" },
+  { name: "MR. P. M. DEEPAK", role: "Marketing Executive" },
+  { name: "MS. SUVARNA", role: "Marketing Executive" },
+  { name: "MS. SWETA GAWDE", role: "Assistant Secretary" },
+  { name: "MR. SWAPNIL MAHADIK", role: "Software Developer" },
+];
 
 export default function OfficeBearers() {
-  const bearers = [
-    { name: "Mrs. Swarn Dhiman", role: "Executive Director" },
-    { name: "MR. HARISH SHETTY", role: "Human Resource Manager" },
-    { name: "ADV. ROHINI P.K", role: "Legal Wing" },
-    { name: "ADV. AKSHATA MULIK", role: "Legal Wing" },
-    { name: "MR. P. M. DEEPAK", role: "Marketing Executive" },
-    { name: "MS. SUVARNA", role: "Marketing Executive" },
-    { name: "MS. SWETA GAWDE", role: "Assistant Secretary" },
-    { name: "MR. SWAPNIL MAHADIK", role: "Software Developer" },
-  ];
-
   return (
-    <div className="py-24 max-w-4xl mx-auto px-6 md:px-12 text-left">
+    <div className="py-24 max-w-5xl mx-auto px-6 md:px-12 text-left">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
+        {/* Carousel Section */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-2 block">
+              Our Team
+            </span>
+            <h2 className="font-heading font-black text-2xl md:text-3xl text-foreground">
+              Meet Our Office Administration
+            </h2>
+          </div>
+
+          <Carousel opts={{ align: "start", loop: true }} className="w-full">
+            <CarouselContent className="-ml-4">
+              {bearers.map((bearer, idx) => (
+                <CarouselItem
+                  key={idx}
+                  className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+                >
+                  <Card className="border-border hover:border-primary/40 transition-colors group h-full">
+                    <CardContent className="p-6 flex flex-col items-center text-center gap-3">
+                      <div className="size-16 rounded-full bg-primary/10 flex items-center justify-center font-heading font-black text-xl text-primary group-hover:bg-primary/20 transition-colors">
+                        {bearer.name.charAt(0)}
+                      </div>
+                      <h3 className="font-heading font-black text-foreground text-sm uppercase tracking-wide leading-tight">
+                        {bearer.name}
+                      </h3>
+                      <p className="text-xs text-primary font-bold uppercase tracking-wider">
+                        {bearer.role}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
+          </Carousel>
+        </div>
+
+        {/* Original Section */}
         <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
           Office Bearers
         </span>
@@ -31,7 +79,6 @@ export default function OfficeBearers() {
             Meet the talented and diverse individual with wealth of experience
             and passion for excellence
           </p>
-
           <p>
             Welcome to the Asian Exporters' Chamber of Commerce! We are a team
             of experienced professionals dedicated to supporting businesses in

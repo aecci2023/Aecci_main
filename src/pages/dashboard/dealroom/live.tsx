@@ -1,6 +1,6 @@
-import { useRef, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import { useRef, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { Main } from "@/components/layout/main";
 
 export default function LiveDealRoom() {
@@ -23,15 +23,15 @@ export default function LiveDealRoom() {
           if (user.fullName) userName = user.fullName;
           if (user.id) userId = user.id;
         } catch (e) {
-          console.log(e)
+          console.log(e);
           console.error("Failed to parse user from local storage");
         }
       }
 
       // AppID and ServerSecret should ideally be retrieved from backend in production
       // but ZegoUIKitPrebuilt allows generating it directly for rapid testing
-      const appID = parseInt(import.meta.env.VITE_ZEGOCLOUD_APP_ID || '0');
-      const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET || '';
+      const appID = parseInt(import.meta.env.VITE_ZEGOCLOUD_APP_ID || "0");
+      const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET || "";
 
       if (!appID || !serverSecret) {
         console.error("ZegoCloud credentials are not configured in .env");
@@ -43,7 +43,7 @@ export default function LiveDealRoom() {
         serverSecret,
         roomId,
         userId,
-        userName
+        userName,
       );
 
       // Create instance object from kit token.
@@ -54,7 +54,7 @@ export default function LiveDealRoom() {
         container: containerRef.current,
         sharedLinks: [
           {
-            name: 'Deal Room Link',
+            name: "Deal Room Link",
             url: `${window.location.protocol}//${window.location.host}/dashboard/dealroom/${roomId}`,
           },
         ],
@@ -74,7 +74,7 @@ export default function LiveDealRoom() {
         showLayoutButton: true,
         onLeaveRoom: () => {
           navigate("/dashboard");
-        }
+        },
       });
     };
 
@@ -86,8 +86,12 @@ export default function LiveDealRoom() {
       <div className="w-full h-[calc(100vh-64px)] bg-background flex flex-col">
         <div className="p-4 bg-muted/30 border-b border-border flex justify-between items-center">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-primary">Global Deal Room</h1>
-            <p className="text-sm text-muted-foreground">Session ID: {roomId}</p>
+            <h1 className="text-xl font-bold tracking-tight text-primary">
+              Global Deal Room
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              Session ID: {roomId}
+            </p>
           </div>
           <div className="px-3 py-1 bg-green-500/10 text-green-600 rounded-full text-xs font-semibold flex items-center gap-2">
             <span className="relative flex h-2 w-2">
@@ -97,10 +101,7 @@ export default function LiveDealRoom() {
             Live Session
           </div>
         </div>
-        <div 
-          className="flex-1 w-full h-full"
-          ref={containerRef} 
-        />
+        <div className="flex-1 w-full h-full" ref={containerRef} />
       </div>
     </Main>
   );

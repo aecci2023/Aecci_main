@@ -67,6 +67,17 @@ import AdminSettingsPage from "@/pages/admin/settings";
 import PartnerOnboardingPage from "@/pages/partner/onboarding";
 import SponsorshipPage from "@/pages/events/sponsorship";
 import AdvertiseWithUsPage from "@/pages/events/advertise-with-us";
+import PublicationsPage from "@/pages/events/publications";
+
+import MediaCenterPage from "@/pages/media/media-center";
+import HeadOfficePage from "@/pages/contact-us/head-office";
+import InternationalHubPage from "@/pages/contact-us/international-hub";
+import WhyAecciIacPage from "@/pages/arbitration-center/why-aecci-iac";
+import ScheduleFeesPage from "@/pages/arbitration-center/schedule-fees";
+import AecciIacPanelPage from "@/pages/arbitration-center/aecci-iac-panel";
+import RulesAndPoliciesPage from "@/pages/arbitration-center/rules-and-policies";
+import ModelClausePage from "@/pages/arbitration-center/model-clause";
+import AecciIacFaqPage from "@/pages/arbitration-center/faq";
 import InternationalCollaborationPage from "@/pages/international-collaboration";
 import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/international-collaboration/partnerships/index";
 import PartnerDetailPage from "@/pages/international-collaboration/partnerships/PartnerDetail";
@@ -90,7 +101,9 @@ import RenewMembership from "@/pages/services/membership/RenewMembership";
 const PartnerPlaceholder = ({ title }: { title: string }) => (
   <div className="flex flex-col items-center justify-center h-[calc(100vh-100px)]">
     <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
-    <p className="text-muted-foreground mt-2">This module is currently under development.</p>
+    <p className="text-muted-foreground mt-2">
+      This module is currently under development.
+    </p>
   </div>
 );
 
@@ -114,40 +127,88 @@ export const routes: RouteObject[] = [
       { path: "onboarding", element: <PartnerOnboardingPage /> },
       {
         path: "",
-        element: <ProtectedRoute allowedRoles={['partner']} />,
+        element: <ProtectedRoute allowedRoles={["partner"]} />,
         children: [
           {
             path: "",
             element: <PartnerLayout />,
             children: [
               { path: "dashboard", element: <PartnerDashboard /> },
-          { path: "sessions/schedule", element: <PartnerPlaceholder title="My Schedule" /> },
-          { path: "sessions/upcoming", element: <PartnerUpcomingSessionsPage /> },
-          { path: "sessions/past", element: <PartnerPastSessionsPage /> },
-          { path: "sessions/host", element: <PartnerPlaceholder title="Host New Session" /> },
-          { path: "sessions/:id/summary", element: <PartnerSubmitSummaryPage /> },
-          { path: "engagement/questions", element: <PartnerQuestionsPage /> },
-          { path: "engagement/active", element: <PartnerPlaceholder title="Active Clients" /> },
-          { path: "engagement/assignments", element: <PartnerPlaceholder title="Client Assignments" /> },
-          { path: "content/country-briefs", element: <PartnerPlaceholder title="Country Briefs" /> },
-          { path: "content/opportunity-reports", element: <PartnerPlaceholder title="Opportunity Reports" /> },
-          { path: "earnings/overview", element: <PartnerPlaceholder title="Earnings Overview" /> },
-          { path: "earnings/invoices", element: <PartnerPlaceholder title="Invoices & Payouts" /> },
-          { path: "profile", element: <PartnerProfilePage /> },
-          { path: "resources/training", element: <PartnerPlaceholder title="Training & Guidelines" /> },
-          { path: "resources/availability", element: <PartnerAvailabilityPage /> },
-          { path: "resources/documents", element: <PartnerPlaceholder title="Resources & Documents" /> },
-          { path: "support/messages", element: <PartnerPlaceholder title="Messages" /> },
-          { path: "support/help", element: <PartnerPlaceholder title="Help & Support" /> },
-            ]
-          }
-        ]
-      }
+              {
+                path: "sessions/schedule",
+                element: <PartnerPlaceholder title="My Schedule" />,
+              },
+              {
+                path: "sessions/upcoming",
+                element: <PartnerUpcomingSessionsPage />,
+              },
+              { path: "sessions/past", element: <PartnerPastSessionsPage /> },
+              {
+                path: "sessions/host",
+                element: <PartnerPlaceholder title="Host New Session" />,
+              },
+              {
+                path: "sessions/:id/summary",
+                element: <PartnerSubmitSummaryPage />,
+              },
+              {
+                path: "engagement/questions",
+                element: <PartnerQuestionsPage />,
+              },
+              {
+                path: "engagement/active",
+                element: <PartnerPlaceholder title="Active Clients" />,
+              },
+              {
+                path: "engagement/assignments",
+                element: <PartnerPlaceholder title="Client Assignments" />,
+              },
+              {
+                path: "content/country-briefs",
+                element: <PartnerPlaceholder title="Country Briefs" />,
+              },
+              {
+                path: "content/opportunity-reports",
+                element: <PartnerPlaceholder title="Opportunity Reports" />,
+              },
+              {
+                path: "earnings/overview",
+                element: <PartnerPlaceholder title="Earnings Overview" />,
+              },
+              {
+                path: "earnings/invoices",
+                element: <PartnerPlaceholder title="Invoices & Payouts" />,
+              },
+              { path: "profile", element: <PartnerProfilePage /> },
+              {
+                path: "resources/training",
+                element: <PartnerPlaceholder title="Training & Guidelines" />,
+              },
+              {
+                path: "resources/availability",
+                element: <PartnerAvailabilityPage />,
+              },
+              {
+                path: "resources/documents",
+                element: <PartnerPlaceholder title="Resources & Documents" />,
+              },
+              {
+                path: "support/messages",
+                element: <PartnerPlaceholder title="Messages" />,
+              },
+              {
+                path: "support/help",
+                element: <PartnerPlaceholder title="Help & Support" />,
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
     path: "/admin",
-    element: <ProtectedRoute allowedRoles={['admin']} />,
+    element: <ProtectedRoute allowedRoles={["admin"]} />,
     children: [
       {
         path: "",
@@ -236,14 +297,14 @@ export const routes: RouteObject[] = [
           {
             path: "*",
             element: <NotFound />,
-          }
-        ]
-      }
-    ]
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/dashboard",
-    element: <ProtectedRoute allowedRoles={['user']} />,
+    element: <ProtectedRoute allowedRoles={["user"]} />,
     children: [
       {
         path: "rejected",
@@ -257,93 +318,93 @@ export const routes: RouteObject[] = [
             path: "",
             element: <DashboardPage />,
           },
-      {
-        path: "intelligence",
-        element: <IntelligencePage />,
-      },
-      {
-        path: "partner-brief",
-        element: <PartnerBriefPage />,
-      },
-      {
-        path: "submit-questions",
-        element: <SubmitQuestionsPage />,
-      },
-      {
-        path: "waiting-room",
-        element: <WaitingRoomPage />,
-      },
-      {
-        path: "live-deal-room",
-        element: <LiveDealRoomPage />,
-      },
-      {
-        path: "session-summary",
-        element: <SessionSummaryPage />,
-      },
-      {
-        path: "opportunity-report",
-        element: <OpportunityReportPage />,
-      },
-      {
-        path: "follow-up-services",
-        element: <FollowUpServicesPage />,
-      },
-      {
-        path: "service-purchase",
-        element: <ServicePurchasePage />,
-      },
-      {
-        path: "my-sessions",
-        element: <MySessionsPage />,
-      },
-      {
-        path: "messages",
-        element: <Chats />,
-      },
-      {
-        path: "settings",
-        element: <Settings />,
-        children: [
-          { index: true, element: <SettingsProfile /> },
-          { path: "account", element: <SettingsAccount /> },
-          { path: "appearance", element: <SettingsAppearance /> },
-          { path: "notifications", element: <SettingsNotifications /> },
-          { path: "display", element: <SettingsDisplay /> },
-        ],
-      },
-      {
-        path: "marketplace",
-        element: <MarketplacePage />,
-      },
-      {
-        path: "session-details",
-        element: <SessionDetailsPage />,
-      },
-      {
-        path: "application",
-        element: <ApplicationPage />,
-      },
-      {
-        path: "screening",
-        element: <ScreeningPage />,
-      },
-      {
-        path: "approval",
-        element: <ApprovalPage />,
-      },
-      {
-        path: "payment",
-        element: <PaymentPage />,
-      },
-      {
-        path: "payment-success",
-        element: <PaymentSuccessPage />,
-      },
-      {
-        path: "invoices",
-        element: <UserInvoicesPage />,
-      },
+          {
+            path: "intelligence",
+            element: <IntelligencePage />,
+          },
+          {
+            path: "partner-brief",
+            element: <PartnerBriefPage />,
+          },
+          {
+            path: "submit-questions",
+            element: <SubmitQuestionsPage />,
+          },
+          {
+            path: "waiting-room",
+            element: <WaitingRoomPage />,
+          },
+          {
+            path: "live-deal-room",
+            element: <LiveDealRoomPage />,
+          },
+          {
+            path: "session-summary",
+            element: <SessionSummaryPage />,
+          },
+          {
+            path: "opportunity-report",
+            element: <OpportunityReportPage />,
+          },
+          {
+            path: "follow-up-services",
+            element: <FollowUpServicesPage />,
+          },
+          {
+            path: "service-purchase",
+            element: <ServicePurchasePage />,
+          },
+          {
+            path: "my-sessions",
+            element: <MySessionsPage />,
+          },
+          {
+            path: "messages",
+            element: <Chats />,
+          },
+          {
+            path: "settings",
+            element: <Settings />,
+            children: [
+              { index: true, element: <SettingsProfile /> },
+              { path: "account", element: <SettingsAccount /> },
+              { path: "appearance", element: <SettingsAppearance /> },
+              { path: "notifications", element: <SettingsNotifications /> },
+              { path: "display", element: <SettingsDisplay /> },
+            ],
+          },
+          {
+            path: "marketplace",
+            element: <MarketplacePage />,
+          },
+          {
+            path: "session-details",
+            element: <SessionDetailsPage />,
+          },
+          {
+            path: "application",
+            element: <ApplicationPage />,
+          },
+          {
+            path: "screening",
+            element: <ScreeningPage />,
+          },
+          {
+            path: "approval",
+            element: <ApprovalPage />,
+          },
+          {
+            path: "payment",
+            element: <PaymentPage />,
+          },
+          {
+            path: "payment-success",
+            element: <PaymentSuccessPage />,
+          },
+          {
+            path: "invoices",
+            element: <UserInvoicesPage />,
+          },
         ],
       },
     ],
@@ -588,28 +649,36 @@ export const routes: RouteObject[] = [
     element: <NotFound />,
   },
   {
+    path: "/arbitration-center/why-aecci-iac",
+    element: <WhyAecciIacPage />,
+  },
+  {
     path: "/why-aecci",
     element: <NotFound />,
   },
   {
-    path: "/schedule-fees",
-    element: <NotFound />,
+    path: "/arbitration-center/schedule-fees",
+    element: <ScheduleFeesPage />,
   },
   {
-    path: "/rules-and-policies",
-    element: <NotFound />,
+    path: "/arbitration-center/rules-and-policies",
+    element: <RulesAndPoliciesPage />,
   },
   {
-    path: "/aecci-iac-model-clause",
-    element: <NotFound />,
+    path: "/arbitration-center/model-clause",
+    element: <ModelClausePage />,
   },
   {
     path: "/aecci-iac-faq",
     element: <NotFound />,
   },
   {
-    path: "/aecci-iac-panel",
-    element: <NotFound />,
+    path: "/arbitration-center/faq",
+    element: <AecciIacFaqPage />,
+  },
+  {
+    path: "/arbitration-center/panel-of-arbitrators",
+    element: <AecciIacPanelPage />,
   },
   {
     path: "/ways-means",
@@ -655,13 +724,14 @@ export const routes: RouteObject[] = [
     path: "/media",
     element: <NotFound />,
   },
-  {
-    path: "/media/e-newsletters",
-    element: <NotFound />,
-  },
+
   {
     path: "/media/media-center",
     element: <NotFound />,
+  },
+  {
+    path: "/events/media-center",
+    element: <MediaCenterPage />,
   },
   {
     path: "/aecci-viewpoints",
@@ -673,7 +743,15 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/media/publications",
-    element: <NotFound />,
+    element: <PublicationsPage />,
+  },
+  {
+    path: "/events/publications",
+    element: <PublicationsPage />,
+  },
+  {
+    path: "/events/publication",
+    element: <PublicationsPage />,
   },
   {
     path: "/events",
@@ -766,6 +844,14 @@ export const routes: RouteObject[] = [
   {
     path: "/tac-process",
     element: <NotFound />,
+  },
+  {
+    path: "/contact-us/head-office",
+    element: <HeadOfficePage />,
+  },
+  {
+    path: "/contact-us/international-hub",
+    element: <InternationalHubPage />,
   },
   {
     path: "/tac-locations",

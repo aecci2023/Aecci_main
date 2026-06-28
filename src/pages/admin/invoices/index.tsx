@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
 import { Main } from "@/components/layout/main";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
-import { Search, Download, FileText, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Search,
+  Download,
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 interface Invoice {
   id: string;
@@ -40,11 +53,17 @@ export default function AdminInvoicesPage() {
   const fetchInvoices = (p: number, q: string) => {
     setLoading(true);
     const token = localStorage.getItem("accessToken");
-    const params = new URLSearchParams({ page: String(p), limit: String(PAGE_SIZE) });
+    const params = new URLSearchParams({
+      page: String(p),
+      limit: String(PAGE_SIZE),
+    });
     if (q) params.set("search", q);
-    fetch(`${import.meta.env.VITE_API_URL}/api/payment/subscription/history/all?${params}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      `${import.meta.env.VITE_API_URL}/api/payment/subscription/history/all?${params}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    )
       .then((r) => r.json())
       .then((data) => {
         if (data.success) {
@@ -72,7 +91,9 @@ export default function AdminInvoicesPage() {
     <Main fluid className="space-y-6 max-w-7xl mx-auto py-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Invoices &amp; Payouts</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Invoices &amp; Payouts
+          </h1>
           <p className="text-muted-foreground text-sm mt-1">
             All subscription purchase invoices across the platform.
           </p>
@@ -125,10 +146,16 @@ export default function AdminInvoicesPage() {
               {invoices.map((inv) => (
                 <TableRow key={inv.id} className="hover:bg-muted/20">
                   <TableCell>
-                    <div className="font-medium text-sm">{inv.user?.fullName || "—"}</div>
-                    <div className="text-xs text-muted-foreground">{inv.user?.email || "—"}</div>
+                    <div className="font-medium text-sm">
+                      {inv.user?.fullName || "—"}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {inv.user?.email || "—"}
+                    </div>
                     {inv.user?.companyName && (
-                      <div className="text-xs text-muted-foreground">{inv.user.companyName}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {inv.user.companyName}
+                      </div>
                     )}
                   </TableCell>
                   <TableCell>
@@ -153,7 +180,9 @@ export default function AdminInvoicesPage() {
                           : "bg-yellow-50 text-yellow-700 border-yellow-200 text-xs"
                       }
                     >
-                      {inv.paymentStatus === "paid" ? "Paid" : inv.paymentStatus}
+                      {inv.paymentStatus === "paid"
+                        ? "Paid"
+                        : inv.paymentStatus}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground whitespace-nowrap">

@@ -6,7 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Save, User } from "lucide-react";
@@ -67,14 +74,17 @@ export default function PartnerProfilePage() {
     setSaved(false);
     const token = localStorage.getItem("accessToken");
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/partners/setup`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/partners/setup`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(values),
         },
-        body: JSON.stringify(values),
-      });
+      );
       const data = await res.json();
       if (data.success) setSaved(true);
     } finally {
@@ -93,14 +103,20 @@ export default function PartnerProfilePage() {
   if (!profile) return null;
 
   const initials = profile.user.fullName
-    ? profile.user.fullName.split(" ").map((n) => n[0]).join("").toUpperCase()
+    ? profile.user.fullName
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
     : "P";
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 p-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">My Profile</h1>
-        <p className="text-muted-foreground">Your public partner brief visible to clients</p>
+        <p className="text-muted-foreground">
+          Your public partner brief visible to clients
+        </p>
       </div>
 
       <Card>
@@ -112,7 +128,9 @@ export default function PartnerProfilePage() {
             </Avatar>
             <div className="space-y-1">
               <h2 className="text-xl font-semibold">{profile.user.fullName}</h2>
-              <p className="text-muted-foreground text-sm">{profile.user.email}</p>
+              <p className="text-muted-foreground text-sm">
+                {profile.user.email}
+              </p>
               <div className="flex gap-2 flex-wrap">
                 <Badge variant="outline">{profile.tier}</Badge>
                 <Badge
@@ -148,7 +166,10 @@ export default function PartnerProfilePage() {
                   <FormItem>
                     <FormLabel>Organisation</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your company or organisation name" {...field} />
+                      <Input
+                        placeholder="Your company or organisation name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -176,7 +197,9 @@ export default function PartnerProfilePage() {
                 <p className="text-sm font-medium">Expertise Countries</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.expertiseCountries.map((c) => (
-                    <Badge key={c} variant="secondary">{c}</Badge>
+                    <Badge key={c} variant="secondary">
+                      {c}
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -185,12 +208,18 @@ export default function PartnerProfilePage() {
                 <p className="text-sm font-medium">Expertise Sectors</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.expertiseSectors.map((s) => (
-                    <Badge key={s} variant="secondary">{s}</Badge>
+                    <Badge key={s} variant="secondary">
+                      {s}
+                    </Badge>
                   ))}
                 </div>
               </div>
 
-              {saved && <p className="text-sm text-green-600">Profile saved successfully.</p>}
+              {saved && (
+                <p className="text-sm text-green-600">
+                  Profile saved successfully.
+                </p>
+              )}
 
               <Button type="submit" disabled={saving} className="gap-2">
                 <Save className="h-4 w-4" />

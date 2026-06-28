@@ -1,101 +1,110 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseQuery = fetchBaseQuery({ 
+const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL,
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem("accessToken");
     if (token) {
-      headers.set('authorization', `Bearer ${token}`);
+      headers.set("authorization", `Bearer ${token}`);
     }
     return headers;
   },
 });
 
 export const sessionApi = createApi({
-  reducerPath: 'sessionApi',
+  reducerPath: "sessionApi",
   baseQuery,
-  tagTypes: ['Sessions', 'Registrations'],
+  tagTypes: ["Sessions", "Registrations"],
   endpoints: (builder) => ({
     getSessions: builder.query<any, Record<string, any> | void>({
       query: (params) => {
-        let queryString = '';
+        let queryString = "";
         if (params) {
           const searchParams = new URLSearchParams();
-          Object.keys(params).forEach(key => {
+          Object.keys(params).forEach((key) => {
             if (params[key]) searchParams.append(key, params[key]);
           });
           queryString = `?${searchParams.toString()}`;
         }
         return `sessions${queryString}`;
       },
-      providesTags: ['Sessions'],
+      providesTags: ["Sessions"],
     }),
     getSessionById: builder.query<any, string>({
       query: (id) => `sessions/${id}`,
-      providesTags: (_result, _error, id) => [{ type: 'Sessions', id }],
+      providesTags: (_result, _error, id) => [{ type: "Sessions", id }],
     }),
     createSession: builder.mutation<any, any>({
       query: (body) => ({
         url: `sessions`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Sessions'],
+      invalidatesTags: ["Sessions"],
     }),
     bookSession: builder.mutation<any, string>({
       query: (sessionId) => ({
         url: `sessions/${sessionId}/book`,
-        method: 'POST',
+        method: "POST",
       }),
-      invalidatesTags: ['Sessions', 'Registrations'],
+      invalidatesTags: ["Sessions", "Registrations"],
     }),
-    requestSession: builder.mutation<any, { partnerId: string; date: string; questionnaire: string }>({
+    requestSession: builder.mutation<
+      any,
+      { partnerId: string; date: string; questionnaire: string }
+    >({
       query: (body) => ({
         url: `sessions/request`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Sessions'],
+      invalidatesTags: ["Sessions"],
     }),
     getMySessions: builder.query<any, void>({
       query: () => `sessions/my-sessions`,
-      providesTags: ['Sessions'],
+      providesTags: ["Sessions"],
     }),
     getPendingSessions: builder.query<any, void>({
       query: () => `sessions/admin/pending`,
-      providesTags: ['Sessions'],
+      providesTags: ["Sessions"],
     }),
     approveSession: builder.mutation<any, string>({
       query: (id) => ({
         url: `sessions/${id}/approve`,
-        method: 'PATCH',
+        method: "PATCH",
       }),
-      invalidatesTags: ['Sessions'],
+      invalidatesTags: ["Sessions"],
     }),
     rejectSession: builder.mutation<any, string>({
       query: (id) => ({
         url: `sessions/${id}/reject`,
-        method: 'PATCH',
+        method: "PATCH",
       }),
-      invalidatesTags: ['Sessions'],
+      invalidatesTags: ["Sessions"],
     }),
-    submitSessionSummary: builder.mutation<any, { sessionId: string; summary: string }>({
+    submitSessionSummary: builder.mutation<
+      any,
+      { sessionId: string; summary: string }
+    >({
       query: ({ sessionId, summary }) => ({
         url: `sessions/${sessionId}/summary`,
-        method: 'POST',
+        method: "POST",
         body: { summary },
       }),
-      invalidatesTags: ['Sessions'],
+      invalidatesTags: ["Sessions"],
     }),
 
     // --- Services ---
     getServices: builder.query<any, void>({
       query: () => `services`,
     }),
-    purchaseService: builder.mutation<any, { serviceType: string; price: number }>({
+    purchaseService: builder.mutation<
+      any,
+      { serviceType: string; price: number }
+    >({
       query: (body) => ({
         url: `services/purchase`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
     }),
@@ -107,20 +116,28 @@ export const sessionApi = createApi({
     getOpportunityReports: builder.query<any, void>({
       query: () => `reports`,
     }),
-    createOpportunityReport: builder.mutation<any, { sessionId: string; marketSummary: string; potentialRoutes: string; recommendations: string; userId: string }>({
+    createOpportunityReport: builder.mutation<
+      any,
+      {
+        sessionId: string;
+        marketSummary: string;
+        potentialRoutes: string;
+        recommendations: string;
+        userId: string;
+      }
+    >({
       query: (body) => ({
         url: `reports`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
     }),
-
   }),
 });
 
-export const { 
-  useGetSessionsQuery, 
-  useGetSessionByIdQuery, 
+export const {
+  useGetSessionsQuery,
+  useGetSessionByIdQuery,
   useCreateSessionMutation,
   useBookSessionMutation,
   useRequestSessionMutation,

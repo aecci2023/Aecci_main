@@ -1,59 +1,61 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseQuery = fetchBaseQuery({ 
-  baseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api/',
+const baseQuery = fetchBaseQuery({
+  baseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/",
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem("accessToken");
     if (token) {
-      headers.set('authorization', `Bearer ${token}`);
+      headers.set("authorization", `Bearer ${token}`);
     }
     return headers;
   },
 });
 
 export const countryIntelligenceApi = createApi({
-  reducerPath: 'countryIntelligenceApi',
+  reducerPath: "countryIntelligenceApi",
   baseQuery,
-  tagTypes: ['CountryIntelligence'],
+  tagTypes: ["CountryIntelligence"],
   endpoints: (builder) => ({
     getCountryBriefs: builder.query<any, void>({
-      query: () => 'country-intelligence',
-      providesTags: ['CountryIntelligence'],
+      query: () => "country-intelligence",
+      providesTags: ["CountryIntelligence"],
     }),
     getCountryBriefById: builder.query<any, string>({
       query: (id) => `country-intelligence/${id}`,
-      providesTags: (_result, _error, id) => [{ type: 'CountryIntelligence', id }],
+      providesTags: (_result, _error, id) => [
+        { type: "CountryIntelligence", id },
+      ],
     }),
     createCountryBrief: builder.mutation<any, any>({
       query: (body) => ({
-        url: 'country-intelligence',
-        method: 'POST',
+        url: "country-intelligence",
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['CountryIntelligence'],
+      invalidatesTags: ["CountryIntelligence"],
     }),
     updateCountryBrief: builder.mutation<any, { id: string; body: any }>({
       query: ({ id, body }) => ({
         url: `country-intelligence/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body,
       }),
-      invalidatesTags: ['CountryIntelligence'],
+      invalidatesTags: ["CountryIntelligence"],
     }),
     deleteCountryBrief: builder.mutation<any, string>({
       query: (id) => ({
         url: `country-intelligence/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: ['CountryIntelligence'],
+      invalidatesTags: ["CountryIntelligence"],
     }),
   }),
 });
 
-export const { 
-  useGetCountryBriefsQuery, 
-  useGetCountryBriefByIdQuery, 
-  useCreateCountryBriefMutation, 
-  useUpdateCountryBriefMutation, 
-  useDeleteCountryBriefMutation 
+export const {
+  useGetCountryBriefsQuery,
+  useGetCountryBriefByIdQuery,
+  useCreateCountryBriefMutation,
+  useUpdateCountryBriefMutation,
+  useDeleteCountryBriefMutation,
 } = countryIntelligenceApi;

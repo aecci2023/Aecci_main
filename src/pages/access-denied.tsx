@@ -23,7 +23,8 @@ export function AccessDenied() {
             Access Denied
           </h1>
           <p className="text-center text-lg md:text-xl text-muted-foreground">
-            You do not have the necessary permissions to view this page. If you believe this is an error, please contact support.
+            You do not have the necessary permissions to view this page. If you
+            believe this is an error, please contact support.
           </p>
         </div>
         <div className="flex gap-3 flex-col md:flex-row w-full items-center justify-center mt-4">
@@ -44,10 +45,11 @@ export function AccessDenied() {
                 try {
                   const user = JSON.parse(userStr);
                   if (user.role === "admin") navigate("/admin/dashboard");
-                  else if (user.role === "partner") navigate("/partner/dashboard");
+                  else if (user.role === "partner")
+                    navigate("/partner/dashboard");
                   else navigate("/dashboard");
                 } catch (e) {
-                  console.log(e)
+                  console.log(e);
                   navigate("/dashboard");
                 }
               } else {

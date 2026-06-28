@@ -5,8 +5,10 @@ import { useGetUsersQuery } from "@/store/api/adminApi";
 import { User } from "lucide-react";
 
 export default function AdminIndividualsPage() {
-  const { data, isLoading, error } = useGetUsersQuery({ userType: 'individual' });
-  
+  const { data, isLoading, error } = useGetUsersQuery({
+    userType: "individual",
+  });
+
   const users = data?.data || [];
 
   return (
