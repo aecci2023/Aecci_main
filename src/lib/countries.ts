@@ -242,4 +242,7 @@ export const COUNTRIES = [
   { name: "Yemen", code: "YE" },
   { name: "Zambia", code: "ZM" },
   { name: "Zimbabwe", code: "ZW" },
-];
+].map((country) => ({
+  ...country,
+  flag: `https://flagcdn.com/w320/${country.code.toLowerCase()}.png`,
+}));

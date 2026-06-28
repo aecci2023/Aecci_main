@@ -1,7 +1,9 @@
 import { Check, Sparkles, Coins, ShieldAlert } from "lucide-react";
+import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 const PLANS = [
@@ -9,7 +11,7 @@ const PLANS = [
     name: "Explorer",
     price: "₹2,999",
     period: "per country slot",
-    desc: "Perfect for companies evaluating target segments and logistics duties.",
+    desc: "For companies evaluating target segments and logistics duties.",
     features: [
       "Access to 1 Active Deal Room session",
       "Sovereign tariff check logs",
@@ -19,6 +21,8 @@ const PLANS = [
     ],
     isPopular: false,
     cta: "Book Access",
+    accent: "border-border/60",
+    ctaClass: "bg-muted/60 border border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary",
   },
   {
     name: "Premium",
@@ -34,6 +38,8 @@ const PLANS = [
     ],
     isPopular: false,
     cta: "Select Premium",
+    accent: "border-border/60",
+    ctaClass: "bg-muted/60 border border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary",
   },
   {
     name: "Market Entry",
@@ -50,6 +56,8 @@ const PLANS = [
     ],
     isPopular: true,
     cta: "Initiate Launch",
+    accent: "border-primary ring-1 ring-primary/40",
+    ctaClass: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25",
   },
   {
     name: "Enterprise",
@@ -65,88 +73,107 @@ const PLANS = [
     ],
     isPopular: false,
     cta: "Contact Trade Director",
+    accent: "border-border/60",
+    ctaClass: "bg-muted/60 border border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary",
   },
 ];
 
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const card = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+};
+
 export default function AccessPlans() {
   return (
-    <section id="pricing" className="bg-background py-16 md:py-24 relative border-b border-border/60">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.02),transparent_70%)] pointer-events-none" />
+    <section id="pricing" className="bg-background py-16 md:py-24 relative border-b border-border/60 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_0%,hsl(var(--primary)/0.05),transparent)] pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <Badge className="bg-primary/10 text-primary border-primary/20 mb-4 px-3 py-1 font-mono uppercase tracking-widest text-xs">
-            Global Expansion Plans
-          </Badge>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight flex items-center justify-center gap-3">
-            <Coins className="size-8 text-primary shrink-0" /> ACCESS PLANS & MEMBERSHIPS
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/8 border border-primary/15 text-primary text-xs font-semibold uppercase tracking-wider mb-5">
+            <Coins className="size-3.5" /> Global Expansion Plans
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-[1.1] mb-4">
+            Access Plans &{" "}
+            <span className="text-primary">Memberships</span>
           </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed font-light">
+          <p className="text-muted-foreground text-base leading-relaxed">
             Select the right platform tier for your international growth. Gain direct access to active deal rooms and verify credentials instantly.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch"
+        >
           {PLANS.map((plan) => (
-            <Card
-              key={plan.name}
-              className={cn(
-                "rounded-2xl border flex flex-col justify-between overflow-hidden relative group transition-all duration-300 shadow-sm",
-                plan.isPopular
-                  ? "bg-card border-primary shadow-xl shadow-primary/5 ring-1 ring-primary"
-                  : "bg-card/45 border-border/80 hover:border-border hover:bg-card",
-              )}
-            >
-              {plan.isPopular && (
-                <div className="absolute top-0 right-0 left-0 bg-primary py-1.5 text-[10px] font-bold text-primary-foreground tracking-widest uppercase text-center flex items-center justify-center gap-1.5 z-10 font-mono">
-                  <Sparkles className="size-3" />
-                  Most Popular Choice
-                </div>
-              )}
+            <motion.div key={plan.name} variants={card} className="h-full">
+              <Card className={cn(
+                "h-full flex flex-col rounded-2xl border bg-card/60 backdrop-blur-sm relative overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
+                plan.isPopular ? "bg-card shadow-xl hover:shadow-primary/10" : "bg-card/40 hover:bg-card/80",
+                plan.accent,
+              )}>
+                {plan.isPopular && (
+                  <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                )}
+                {plan.isPopular && (
+                  <div className="px-6 pt-4 pb-0">
+                    <Badge className="bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold uppercase tracking-widest flex items-center gap-1.5 w-fit">
+                      <Sparkles className="size-2.5" /> Most Popular
+                    </Badge>
+                  </div>
+                )}
 
-              <CardHeader className={cn("p-6 pb-4 relative z-10", plan.isPopular ? "pt-10" : "")}>
-                <CardTitle className="text-lg font-bold text-foreground mb-2">{plan.name}</CardTitle>
-                <div className="flex items-baseline gap-1.5 my-3">
-                  <span className="text-3xl md:text-4xl font-black text-foreground tracking-tight">{plan.price}</span>
-                  <span className="text-[10px] text-muted-foreground font-mono tracking-wider">{plan.period}</span>
-                </div>
-                <p className="text-muted-foreground text-xs leading-relaxed font-light mt-1.5">{plan.desc}</p>
-              </CardHeader>
+                <CardHeader className={cn("p-6 pb-4", plan.isPopular ? "pt-3" : "")}>
+                  <div className="flex items-start justify-between mb-3">
+                    <CardTitle className="text-base font-bold text-foreground">{plan.name}</CardTitle>
+                    {plan.name === "Enterprise" && (
+                      <Badge variant="outline" className="text-[9px] border-border text-muted-foreground">Custom</Badge>
+                    )}
+                  </div>
+                  <div className="flex items-baseline gap-1.5 mb-3">
+                    <span className="text-3xl font-black text-foreground tracking-tight leading-none">{plan.price}</span>
+                    <span className="text-[9px] text-muted-foreground font-mono tracking-wider leading-none">{plan.period}</span>
+                  </div>
+                  <p className="text-muted-foreground text-xs leading-relaxed">{plan.desc}</p>
+                </CardHeader>
 
-              <CardContent className="px-6 pb-6 pt-0 flex-1 relative z-10">
-                <ul className="space-y-3 pt-4 border-t border-border/60">
-                  {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2.5 text-xs text-foreground/90 font-light leading-relaxed">
-                      <span className="size-4 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mt-0.5 shrink-0">
-                        <Check className="size-2.5 stroke-[3px]" />
-                      </span>
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
+                <CardContent className="px-6 pb-6 pt-0 flex-1">
+                  <Separator className="mb-4 opacity-50" />
+                  <ul className="space-y-2.5">
+                    {plan.features.map((feat) => (
+                      <li key={feat} className="flex items-start gap-2.5 text-xs text-foreground/80 leading-relaxed">
+                        <span className="size-4 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mt-0.5 shrink-0">
+                          <Check className="size-2.5 text-primary stroke-[3px]" />
+                        </span>
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
 
-              <CardFooter className="p-6 pt-0 relative z-10">
-                <Button
-                  asChild
-                  className={cn(
-                    "w-full rounded-xl font-bold transition-all duration-300 py-5 text-xs",
-                    plan.isPopular
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25"
-                      : "bg-muted border border-border/60 text-foreground hover:bg-muted/80",
-                  )}
-                >
-                  <a href="https://e-platform.aecci.org.in/request-trial-version" target="_blank" rel="noopener noreferrer">
-                    {plan.cta}
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
+                <CardFooter className="p-6 pt-0">
+                  <Button asChild className={cn("w-full rounded-xl font-bold transition-all duration-300 text-xs", plan.ctaClass)}>
+                    <a href="https://e-platform.aecci.org.in/request-trial-version" target="_blank" rel="noopener noreferrer">
+                      {plan.cta}
+                    </a>
+                  </Button>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="mt-10 flex items-center justify-center gap-2 text-[10px] text-muted-foreground text-center font-mono">
-          <ShieldAlert className="size-4 text-muted-foreground/85" />
+          <ShieldAlert className="size-4 text-muted-foreground/70" />
           <span>All fees are exclusive of GST. Payments processed securely via Chamber Administrative Portal.</span>
         </div>
       </div>

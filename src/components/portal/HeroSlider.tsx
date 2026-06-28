@@ -21,7 +21,7 @@ const slides = [
     description:
       "AECCI Membership is more than a chamber affiliation—it's your gateway to a global business ecosystem. The membership is designed to empower businesses through global connectivity, business matchmaking, expert advisory services, trade facilitation and strategic collaborations.",
     ctas: [
-      { label: "Become a Member", href: "/services/membership", primary: true, isYellow: true },
+      { label: "Become a Member", href: "/services/membership", primary: true },
       { label: "Membership Benefits", href: "/services/membership/benefits", primary: false },
     ],
     bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1600",
@@ -270,7 +270,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
         <div className="relative z-10 max-w-4xl flex flex-col items-center">
           <motion.div initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.0}
             className="inline-flex items-center gap-2 bg-background/5 backdrop-blur-md text-background text-xs font-semibold px-4 py-1.5 rounded-full border border-background/10 mb-6 tracking-wide">
-            <BadgeIcon className="size-4 text-primary" />{slide.badge.text}
+            <BadgeIcon className="size-4 text-background/60" />{slide.badge.text}
           </motion.div>
 
           <motion.h1 initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.1}
@@ -290,7 +290,7 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
               <a key={cta.label} href={cta.href}
                 className={cn(
                   "w-full sm:w-auto flex items-center justify-center text-sm font-bold px-8 h-12 rounded-full transition-all duration-300 hover:-translate-y-0.5",
-                  cta.primary ? "bg-primary text-primary-foreground hover:bg-primary/95 shadow-lg shadow-primary/25"
+                  cta.primary ? "bg-background text-foreground hover:bg-background/90 shadow-lg"
                   : "bg-background/10 border border-background/20 text-background hover:bg-background/20",
                 )}>
                 {cta.label}
@@ -321,18 +321,13 @@ function SlideContent({ slide, isActive }: { slide: SlideType; isActive: boolean
         )}>
           <motion.div initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.0}
             className="inline-flex items-center gap-2 bg-background/10 backdrop-blur-md text-background text-xs font-semibold px-4 py-1.5 rounded-full border border-background/15 mb-6 tracking-wide shadow-sm">
-            <BadgeIcon className="size-4 text-primary" />{slide.badge.text}
+            <BadgeIcon className="size-4 text-background/60" />{slide.badge.text}
           </motion.div>
 
           <motion.h1 initial="hidden" animate={isActive ? "visible" : "hidden"} variants={contentVariants} custom={0.1}
             className="font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.08] text-background tracking-tight mb-6">
             {slide.heading}<br />
-            <span className={cn(
-              "bg-clip-text text-transparent drop-shadow-sm",
-              slide.id === "membership-slide"
-                ? "bg-gradient-to-r from-chart-4 via-chart-4/80 to-chart-4/60"
-                : "text-primary",
-            )}>
+            <span className="text-primary">
               {slide.highlight}
             </span>
           </motion.h1>
@@ -435,7 +430,7 @@ export default function HeroSlider() {
             <button key={index} onClick={() => { api?.scrollTo(index); setProgress(0); }}
               className="h-1 flex-1 bg-background/20 hover:bg-background/30 rounded-full overflow-hidden transition-all duration-150 relative cursor-pointer"
               aria-label={`Go to slide ${index + 1}`}>
-              <div className={cn("h-full rounded-full transition-all duration-75", current === 0 ? "bg-chart-4" : "bg-primary")} style={{ width: fillWidth }} />
+              <div className="h-full rounded-full transition-all duration-75 bg-primary" style={{ width: fillWidth }} />
             </button>
           );
         })}

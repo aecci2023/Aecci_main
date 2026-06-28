@@ -66,6 +66,10 @@ import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
 import AdminSettingsPage from "@/pages/admin/settings";
 import PartnerOnboardingPage from "@/pages/partner/onboarding";
 import SponsorshipPage from "@/pages/events/sponsorship";
+import AdvertiseWithUsPage from "@/pages/events/advertise-with-us";
+import InternationalCollaborationPage from "@/pages/international-collaboration";
+import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/international-collaboration/partnerships/index";
+import PartnerDetailPage from "@/pages/international-collaboration/partnerships/PartnerDetail";
 import StrategicPartnersPage from "@/pages/about/strategic-partners";
 import AboutChamberPage from "@/pages/about/AboutChamber";
 import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
@@ -690,6 +694,22 @@ export const routes: RouteObject[] = [
   {
     path: "/events/sponsorship",
     element: <SponsorshipPage />,
+  },
+  {
+    path: "/events/advertise-with-us",
+    element: <AdvertiseWithUsPage />,
+  },
+  {
+    path: "/events/international-collaboration",
+    element: <InternationalCollaborationPage />,
+  },
+  {
+    path: "/events/international-collaboration/partnerships",
+    element: <PartnershipsIndexPage />,
+  },
+  {
+    path: "/events/international-collaboration/partnerships/:country",
+    element: <PartnerDetailPage />,
   },
   {
     path: "/advertise-with-us",
