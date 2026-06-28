@@ -62,11 +62,11 @@ const footerSections = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", icon: FacebookLogo, href: "#", bg: "bg-[#3b5998]" },
-  { label: "Twitter", icon: TwitterLogo, href: "#", bg: "bg-[#1DA1F2]" },
-  { label: "YouTube", icon: YoutubeLogo, href: "#", bg: "bg-[#FF0000]" },
-  { label: "LinkedIn", icon: LinkedinLogo, href: "#", bg: "bg-[#0077B5]" },
-  { label: "Instagram", icon: InstagramLogo, href: "#", bg: "bg-[#222]" },
+  { label: "Facebook", icon: FacebookLogo, href: "#" },
+  { label: "Twitter", icon: TwitterLogo, href: "#" },
+  { label: "YouTube", icon: YoutubeLogo, href: "#" },
+  { label: "LinkedIn", icon: LinkedinLogo, href: "#" },
+  { label: "Instagram", icon: InstagramLogo, href: "#" },
 ];
 
 export default function Footer() {
@@ -141,11 +141,7 @@ export default function Footer() {
                             href={item.href}
                             aria-label={item.label}
                             rel="noopener noreferrer"
-                            className={[
-                              "flex h-8 w-8 items-center justify-center rounded-full text-white",
-                              "transition-transform duration-200 hover:scale-110",
-                              item.bg,
-                            ].join(" ")}
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-200 hover:scale-110 hover:bg-primary/85"
                           >
                             <Icon weight="fill" className="w-4 h-4" />
                           </a>
@@ -160,7 +156,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="my-6 h-px w-full bg-black/20 dark:bg-white/10" />
+        <div className="my-6 h-px w-full bg-border" />
 
         {/* Bottom Footer */}
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">

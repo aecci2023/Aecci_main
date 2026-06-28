@@ -41,7 +41,7 @@ export default function ChamberDynamics() {
           <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground">
             Chamber Dynamics
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl mx-auto">
             Over the years, AECCI has established a number of successful
             initiatives.
@@ -68,8 +68,8 @@ export default function ChamberDynamics() {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Hover overlay with detail icon */}
-                  <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="p-3 bg-background/10 backdrop-blur-md rounded-full border border-background/20 text-background transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <ArrowUpRight className="size-5" />
                     </div>
                   </div>

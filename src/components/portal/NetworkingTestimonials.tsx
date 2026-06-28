@@ -107,7 +107,7 @@ export default function NetworkingTestimonials() {
           <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground">
             What Our Partners Say
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl mx-auto">
             Hear from our esteemed international trade consultants, legal
             advisors, and corporate partner representatives.

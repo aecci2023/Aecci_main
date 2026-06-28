@@ -36,7 +36,7 @@ export function DottedWorldMap() {
 
 export function SpinningGlobe() {
   return (
-    <div className="relative size-80 sm:size-96 rounded-full border border-primary/30 bg-slate-950/90 shadow-[0_0_60px_rgba(16,185,129,0.25)] overflow-hidden flex items-center justify-center">
+    <div className="relative size-80 sm:size-96 rounded-full border border-primary/30 bg-foreground/90 shadow-[0_0_60px_rgba(16,185,129,0.25)] overflow-hidden flex items-center justify-center">
       {/* Atmosphere glow */}
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary/5 to-primary/10 rounded-full z-20 pointer-events-none" />
       <div className="absolute inset-0 shadow-[inset_-30px_-30px_60px_rgba(0,0,0,0.95),inset_20px_20px_40px_rgba(255,255,255,0.05)] rounded-full z-10 pointer-events-none" />
@@ -142,19 +142,19 @@ export function SpinningGlobe() {
           cx="42"
           cy="62"
           r="1.5"
-          className="fill-amber-400 animate-pulse"
+          className="fill-chart-4 animate-pulse"
         />
         <circle
           cx="68"
           cy="56"
           r="1.5"
-          className="fill-sky-400 animate-pulse"
+          className="fill-chart-2 animate-pulse"
         />
         <circle
           cx="36"
           cy="32"
           r="1.5"
-          className="fill-emerald-400 animate-pulse"
+          className="fill-primary animate-pulse"
         />
       </svg>
     </div>

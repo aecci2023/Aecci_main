@@ -201,7 +201,7 @@ export default function PublicationsSection() {
                   className="group flex flex-col h-full bg-card/40 hover:bg-card/75 border border-border/70 hover:border-primary/30 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
                 >
                   {/* Card Cover Wrap */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-slate-900 border-b border-border/50">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-muted border-b border-border/50">
                     <img
                       src={pub.coverImage}
                       alt={pub.title}
@@ -209,10 +209,10 @@ export default function PublicationsSection() {
                     />
 
                     {/* Visual Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     {/* Glassmorphic Category Badge */}
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-foreground/40 backdrop-blur-md border border-background/10 rounded-full text-[10px] font-bold text-background uppercase tracking-wider">
                       {pub.categoryLabel}
                     </div>
 
@@ -256,7 +256,7 @@ export default function PublicationsSection() {
                         href={pub.downloadHref}
                         className="inline-flex items-center gap-1 text-[11px] font-bold text-muted-foreground hover:text-foreground uppercase tracking-wider transition-colors"
                       >
-                        <FilePdf className="size-4 text-red-500" />
+                        <FilePdf className="size-4 text-destructive" />
                         <span>PDF (3.2MB)</span>
                       </a>
                     </div>
@@ -296,11 +296,11 @@ export default function PublicationsSection() {
 
             <div className="w-full lg:w-auto min-w-[320px] md:min-w-[400px]">
               {isSubscribed ? (
-                <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-2xl text-emerald-400">
+                <div className="flex items-center gap-3 bg-primary/10 border border-primary/20 p-4 rounded-2xl text-primary">
                   <CheckCircle className="size-6 shrink-0" weight="fill" />
                   <div className="text-sm text-left">
                     <p className="font-bold">Subscription confirmed!</p>
-                    <p className="text-xs text-emerald-300/80 mt-0.5">
+                    <p className="text-xs text-primary/70 mt-0.5">
                       Thank you for joining AECCI trade insights newsletter.
                     </p>
                   </div>

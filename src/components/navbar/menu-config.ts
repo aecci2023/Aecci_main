@@ -95,6 +95,7 @@ export const menuConfig: MegaMenuSection[] = [
           { title: "Fee, Forms & Guidelines", href: "/services/membership/fee-forms-guidelines" },
           { title: "Enrollment Offers", href: "/services/membership/enrollment-offers" },
           { title: "Visa Recommendation", href: "/services/membership/visa-recommendation" },
+          { title: "Renew Membership", href: "/services/membership/renew" },
         ],
       },
     ],
@@ -119,6 +120,7 @@ export const menuConfig: MegaMenuSection[] = [
           { title: "Fee, Forms & Guidelines", href: "/services/membership/fee-forms-guidelines" },
           { title: "Enrollment Offers", href: "/services/membership/enrollment-offers" },
           { title: "Visa Recommendation", href: "/services/membership/visa-recommendation" },
+          { title: "Renew Membership", href: "/services/membership/renew" },
         ],
       },
       // {

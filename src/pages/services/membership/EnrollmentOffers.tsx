@@ -1,110 +1,116 @@
 import { motion } from "framer-motion";
+import { Mail } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export default function EnrollmentOffers() {
   return (
-    <div className="w-full bg-white font-body text-foreground">
-      {/* Hero Section */}
-      <section className="relative w-full py-16 md:py-24 bg-slate-900 text-white overflow-hidden flex items-center">
-        {/* Placeholder for background image to match the reference */}
-        <div 
-          className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
+    <div className="w-full bg-background text-foreground">
+
+      {/* Hero */}
+      <section className="relative w-full py-16 md:py-24 bg-foreground overflow-hidden flex items-center">
+        <div
+          className="absolute inset-0 z-0 opacity-30 bg-cover bg-center"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=2000')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent z-0"></div>
-
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full flex flex-col items-start">
+        <div className="absolute inset-0 bg-gradient-to-r from-foreground via-foreground/80 to-transparent z-0" />
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <h1 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl mb-4">
+            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">Membership</span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-background mb-4 leading-tight">
               Enrollment Offers
             </h1>
-            <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
-              Considering the service needs of the custom house agents and creating a network for our exporter
-              members we created the opportunity for them to drop in enrolment application online and get enrolled
-              with AECCI
+            <p className="text-background/70 text-base md:text-lg leading-relaxed max-w-2xl">
+              Considering the service needs of custom house agents and creating a network for our exporter members, we created the opportunity to drop in an enrolment application online and get enrolled with AECCI.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Main Content Section */}
-      <section className="py-16 md:py-20">
+      {/* Content */}
+      <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          
-          <div className="space-y-6 text-slate-500 font-light text-base leading-relaxed">
+          <div className="max-w-4xl space-y-5 text-muted-foreground text-base leading-relaxed">
             <p>
-              Considering the service needs of the Custom's clearing agents and to creating a network for our exporter members while assisting them in fulfilling their logistics and custom clearance needs, AECCI has launched a special drive called "Non-Enrolled Members" where the custom clearing agents having their license can enrol with us.
-            </p>
-            <p>
-              Under this NME drive, we keep the CHAs updated with day-to-day news and notification released by the Indian customs and the O/o Director General of Foreign Trade.
+              Considering the service needs of the Custom's clearing agents and to create a network for our exporter members while assisting them in fulfilling their logistics and custom clearance needs, AECCI has launched a special drive called <strong className="text-foreground">"Non-Enrolled Members"</strong> where custom clearing agents holding their license can enrol with us.
             </p>
             <p>
-              We facilitate our far distant exporter members for their Coo (NP) and documents attestation needs by providing the services through their authorised Clearing agents.
+              Under this NME drive, we keep the CHAs updated with day-to-day news and notifications released by the Indian Customs and the O/o Director General of Foreign Trade.
             </p>
             <p>
-              AECCI has decided to charge only admin fees for the registration of Non Member Enrolled. By paying a very nominal fee Custom House Agents can be enrolled with us for a lifetime.
+              We facilitate our far distant exporter members for their CoO (NP) and documents attestation needs by providing services through their authorised Clearing agents.
             </p>
-            <p className="font-bold text-slate-700">
-              You can send you NME enquiries at Membership Desk Email: membership@aecci.org.in
+            <p>
+              AECCI has decided to charge only admin fees for the registration of Non Member Enrolled. By paying a very nominal fee, Custom House Agents can be enrolled with us for a lifetime.
             </p>
+            <div className="flex items-center gap-3 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+              <Mail className="w-5 h-5 text-primary shrink-0" />
+              <p className="text-foreground font-medium text-sm">
+                Send your NME enquiries to Membership Desk:{" "}
+                <a href="mailto:membership@aecci.org.in" className="text-primary hover:underline">
+                  membership@aecci.org.in
+                </a>
+              </p>
+            </div>
           </div>
 
-          <div className="mt-16 mb-10 text-center">
-            <h2 className="text-2xl md:text-3xl font-heading text-slate-600 font-light">
-              AECCI revolving facility information
+          <Separator className="my-16 bg-border" />
+
+          <div className="max-w-4xl">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+              AECCI Revolving Facility Information
             </h2>
+            <div className="space-y-5 text-muted-foreground text-base leading-relaxed">
+              <p>
+                AECCI creates an environment for members to build mutually beneficial and lasting business relationships through various support services.
+              </p>
+              <Card className="border-border">
+                <CardContent className="p-6 space-y-4">
+                  <h3 className="font-bold text-foreground text-lg">Revolving Credit Facility for Exporters and CHA's</h3>
+                  <p className="text-sm leading-relaxed">
+                    In this facility, AECCI shall open a revolving ledger account for the Exporter / CHA. The Exporter / CHA may give an initial amount of <strong className="text-foreground">Rs. 5,000/-</strong> as deposit to the Chamber. Thereafter, whenever documents are brought for attestation, the charges will be automatically debited from the ledger. A receipt to this effect would be generated to show the balance credit available.
+                  </p>
+                  <p className="text-sm leading-relaxed">
+                    By maintaining a credit revolving account facility, it will be easy to keep records of accounts efficiently — rather than paying separately for each document, the amount is deducted from your ledger account itself and an Excel sheet of the ledger is sent regularly.
+                  </p>
+                  <p className="text-sm leading-relaxed">
+                    You may call the chamber desk to ask for your ledger balance at any time.
+                  </p>
+                  <Separator className="bg-border" />
+                  <div className="flex flex-col sm:flex-row gap-4 text-sm font-medium text-foreground">
+                    <span>Maximum deposit: <strong>Rs. 5,000/-</strong></span>
+                    <span>Minimum deposit: <strong>Rs. 3,000/-</strong></span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
-          <div className="space-y-6 text-slate-500 font-light text-base leading-relaxed">
-            <p>
-              "AECCI creates an environment for the members to build mutually beneficial and lasting business relationships through various Support.
-            </p>
-            <p className="font-bold text-slate-700">
-              AECCI introduced Revolving Credit Facility for Exporters and CHA's
-            </p>
-            <p className="font-bold text-slate-700">
-              In this facility, AECCI shall open a revolving ledger account of the Exporter / CHA. The Exporter / CHA may give an initial amount of Rs. 5,000/- as deposit to the Chamber. Thereafter, whenever documents are brought for attestation, the charges will be automatically debited from the Exporter/CHA's ledger. A receipt to this effect would be generated to give the balance credit available.
-            </p>
-            <p>
-              With reference to that I ask my Dear Member to keep a credit revolving Account facility in our Organisation. By this, it will be easy for you as well as for us to keep the records of accounts Efficiently rather than paying separately for each document, we can deduct the amount from your ledger account itself and send you excel sheet of ledger regularly.
-            </p>
-            <p>
-              You may even call the chamber the desk and ask for your ledger balances time to time.
-            </p>
-            <p>
-              Maximum deposit amount should be Rs.5000/-
-            </p>
-            <p>
-              And If your Volume of document are less in a month you can deposit minimum amount of Rs.3000/-"
-            </p>
-          </div>
-
-          {/* Buttons Section */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <a 
-              href="#" 
-              className="flex items-center justify-center py-3 px-6 bg-primary text-white font-bold text-sm hover:bg-primary/90 rounded-md transition-colors shadow-sm"
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl">
+            <a
+              href="#"
+              className="flex items-center justify-center py-3 px-6 bg-primary text-primary-foreground font-semibold text-sm rounded-xl hover:bg-primary/90 transition-colors"
             >
               Non-Member Enrollment
             </a>
-            <a 
-              href="#" 
-              className="flex items-center justify-center py-3 px-6 bg-primary text-white font-bold text-sm hover:bg-primary/90 rounded-md transition-colors shadow-sm"
+            <a
+              href="#"
+              className="flex items-center justify-center py-3 px-6 bg-primary text-primary-foreground font-semibold text-sm rounded-xl hover:bg-primary/90 transition-colors"
             >
               Indemnity Bond
             </a>
-            <a 
-              href="#" 
-              className="flex items-center justify-center py-3 px-6 bg-primary text-white font-bold text-sm hover:bg-primary/90 rounded-md transition-colors shadow-sm"
+            <a
+              href="#"
+              className="flex items-center justify-center py-3 px-6 bg-primary text-primary-foreground font-semibold text-sm rounded-xl hover:bg-primary/90 transition-colors"
             >
               Become a Member
             </a>
           </div>
-
         </div>
       </section>
     </div>

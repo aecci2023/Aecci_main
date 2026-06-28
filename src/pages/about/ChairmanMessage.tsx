@@ -1,98 +1,81 @@
 import { motion } from "framer-motion";
 import { Handshake, Globe, TrendingUp, Shield } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 import chairmanBg from "../../assets/images/image.png";
+
+const pillars = [
+  { icon: Handshake, label: "Trust", sub: "Building Relationships" },
+  { icon: Globe, label: "Global", sub: "Connecting Markets" },
+  { icon: TrendingUp, label: "Growth", sub: "Creating Opportunities" },
+  { icon: Shield, label: "Integrity", sub: "Delivering Excellence" },
+];
 
 export default function ChairmanMessage() {
   return (
-    <div className="w-full bg-white font-body">
+    <div className="w-full bg-background text-foreground">
 
-      {/* Main Content Container */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row w-full bg-slate-950">
+      {/* Two-column layout */}
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row w-full bg-foreground min-h-screen">
 
-        {/* LEFT COLUMN: Visuals */}
-        <div className="w-full md:w-1/2 relative flex flex-col items-center pt-12 pb-24 px-6 min-h-[500px]">
-          {/* Background Image */}
+        {/* LEFT: Image + pillars */}
+        <div className="w-full md:w-1/2 relative flex flex-col items-center pt-12 pb-24 px-6 min-h-[400px] md:min-h-[600px]">
           <div
             className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${chairmanBg})` }}
-          ></div>
-
-          {/* Subtle gradient so icons at the bottom remain readable */}
-          <div className="hidden md:block absolute inset-0 z-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90"></div>
+          />
+          <div className="hidden md:block absolute inset-0 z-0 bg-gradient-to-t from-foreground via-transparent to-transparent opacity-90" />
 
           <div className="relative z-10 hidden md:flex flex-col items-center h-full w-full justify-end">
-            {/* Bottom Icons Grid */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="w-full mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-2 text-center"
+              className="w-full mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 text-center"
             >
-              <div className="flex flex-col items-center">
-                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
-                  <Handshake className="w-5 h-5" />
+              {pillars.map(({ icon: Icon, label, sub }) => (
+                <div key={label} className="flex flex-col items-center">
+                  <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-background/10 backdrop-blur-sm rounded-lg border border-primary/20">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <p className="text-background font-bold text-[10px] uppercase tracking-wider mb-1">{label}</p>
+                  <p className="text-background/50 text-[8px] leading-tight">{sub.replace(" ", "\n")}</p>
                 </div>
-                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Trust</p>
-                <p className="text-slate-400 text-[8px] leading-tight">Building<br />Relationships</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
-                  <Globe className="w-5 h-5" />
-                </div>
-                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Global</p>
-                <p className="text-slate-400 text-[8px] leading-tight">Connecting<br />Markets</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
-                  <TrendingUp className="w-5 h-5" />
-                </div>
-                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Growth</p>
-                <p className="text-slate-400 text-[8px] leading-tight">Creating<br />Opportunities</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
-                  <Shield className="w-5 h-5" />
-                </div>
-                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Integrity</p>
-                <p className="text-slate-400 text-[8px] leading-tight">Delivering<br />Excellence</p>
-              </div>
+              ))}
             </motion.div>
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Message Area */}
-        <div className="w-full md:w-1/2 bg-slate-950 relative z-10 -mt-12 rounded-t-[60px] md:mt-0 md:-ml-8 md:rounded-t-none md:rounded-l-[80px] lg:rounded-l-[120px] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] md:shadow-[-20px_0_50px_rgba(0,0,0,0.5)] flex flex-col justify-between">
-          <div className="relative z-10 px-8 py-16 md:px-16 md:py-20 lg:px-24 flex-1">
+        {/* RIGHT: Message */}
+        <div className="w-full md:w-1/2 bg-foreground relative z-10 -mt-12 rounded-t-[60px] md:mt-0 md:-ml-8 md:rounded-t-none md:rounded-l-[80px] lg:rounded-l-[120px] shadow-2xl flex flex-col justify-between">
+          <div className="px-8 py-16 md:px-14 md:py-20 lg:px-20 flex-1">
 
-            {/* Header Title */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="mb-10 text-center"
             >
-              <h1 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide leading-none text-primary">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-none text-primary">
                 CHAIRMAN'S<br />
-                <span className="text-white">MESSAGE</span>
+                <span className="text-background">MESSAGE</span>
               </h1>
               <div className="flex items-center justify-center gap-4 my-6">
-                <div className="h-[1px] flex-1 bg-primary/30"></div>
-                <div className="w-2 h-2 rotate-45 bg-primary"></div>
-                <div className="h-[1px] flex-1 bg-primary/30"></div>
+                <div className="h-px flex-1 bg-primary/30" />
+                <div className="w-2 h-2 rotate-45 bg-primary" />
+                <div className="h-px flex-1 bg-primary/30" />
               </div>
-              <h2 className="text-primary text-sm md:text-base font-bold uppercase tracking-[0.2em]">
+              <p className="text-primary text-xs md:text-sm font-bold uppercase tracking-[0.2em]">
                 CONNECTING INDIAN ENTERPRISE<br />WITH GLOBAL OPPORTUNITIES
-              </h2>
+              </p>
             </motion.div>
 
-            {/* Letter Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6 text-slate-300 font-light text-sm md:text-base leading-relaxed"
+              className="space-y-5 text-background/70 text-sm md:text-base leading-relaxed"
             >
-              <p className="font-serif italic text-3xl md:text-4xl text-primary mb-6">
+              <p className="italic text-3xl md:text-4xl text-primary mb-4" style={{ fontFamily: "Georgia, serif" }}>
                 Welcome to AECCI
               </p>
               <p>
@@ -110,52 +93,46 @@ export default function ChairmanMessage() {
             </motion.div>
           </div>
 
-          {/* Banner Strip */}
+          {/* Banner */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="w-full bg-primary py-4 px-8 text-center"
           >
-            <p className="text-slate-900 font-black uppercase text-xs md:text-sm tracking-[0.15em]">
-              TOGETHER WE <span className="text-white">CONNECT</span>.
-              TOGETHER WE <span className="text-white">GROW</span>.
-              TOGETHER WE <span className="text-white">SUCCEED</span>.
+            <p className="text-primary-foreground font-bold uppercase text-xs md:text-sm tracking-[0.15em]">
+              TOGETHER WE CONNECT. TOGETHER WE GROW. TOGETHER WE SUCCEED.
             </p>
           </motion.div>
 
-          {/* Signature Area */}
+          {/* Signature */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="px-8 py-10 md:px-16 text-center"
+            className="px-8 py-10 md:px-14 text-center"
           >
-            <div className="font-serif italic text-4xl text-primary mb-4 opacity-90" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+            <p className="italic text-4xl text-primary mb-4 opacity-90" style={{ fontFamily: "Georgia, serif" }}>
               Shri Jaheer Bukhari
-            </div>
-            <h4 className="text-white font-bold tracking-widest text-sm mb-1">CHAIRMAN</h4>
-            <p className="text-slate-400 text-xs tracking-wider uppercase leading-relaxed">
-              ASIAN EXPORTERS' CHAMBER<br />OF COMMERCE & INDUSTRY<br />
+            </p>
+            <Separator className="w-12 mx-auto mb-4 bg-primary/30" />
+            <p className="text-background font-bold tracking-widest text-sm mb-1">CHAIRMAN</p>
+            <p className="text-background/50 text-xs tracking-wider uppercase leading-relaxed">
+              ASIAN EXPORTERS' CHAMBER<br />OF COMMERCE &amp; INDUSTRY<br />
               <span className="text-primary font-bold">(AECCI)</span>
             </p>
           </motion.div>
-
         </div>
       </div>
 
-      {/* GLOBAL FOOTER BAR - Now correctly placed outside the flex-row columns */}
-      <div className="max-w-7xl mx-auto w-full bg-slate-950 border-t border-primary/20 py-4 px-8 flex flex-col md:flex-row items-center justify-between text-xs tracking-widest">
-        <div className="flex items-center gap-2 text-slate-400 hover:text-primary transition-colors cursor-pointer mb-3 md:mb-0">
+      {/* Footer bar */}
+      <div className="max-w-7xl mx-auto w-full bg-foreground border-t border-primary/20 py-4 px-8 flex flex-col sm:flex-row items-center justify-between text-xs tracking-widest gap-3">
+        <div className="flex items-center gap-2 text-background/50 hover:text-primary transition-colors cursor-pointer">
           <Globe className="w-4 h-4" />
           <span>www.aecci.org.in</span>
         </div>
-
-        <div className="text-primary font-bold uppercase mb-3 md:mb-0">
-          SOURCING ENTERPRISE
-        </div>
+        <div className="text-primary font-bold uppercase">SOURCING ENTERPRISE</div>
       </div>
-
     </div>
   );
 }

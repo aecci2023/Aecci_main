@@ -1,299 +1,284 @@
 import { motion } from "framer-motion";
 import { Download, CheckCircle2, Building2, Rocket, Building, Crown, Globe2, HeartHandshake } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import membershipFormPdf from "@/assets/images/membership/MEMBERSHIP-FORM-.pdf";
 
 const guidelinesData = [
   {
     id: "small-business",
-    title: "SMALL BUSINESS",
+    title: "Small Business",
     icon: Building2,
-    color: "bg-blue-50 text-blue-600",
-    investment: { joining: "INR 2000", annual: "INR 6000" },
+    investment: { joining: "INR 2,000", annual: "INR 6,000" },
     forms: [
       { name: "Membership Form", link: membershipFormPdf },
       { name: "Cover Letter", link: "#" },
-      { name: "Indemnity Bond", link: "#" }
+      { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
       category: "Proprietorship, Partnership, Professional, LLP, LLC, or other SME's.",
       details: [
-        "Membership Form fill in/ sign/ stamp.",
-        "2 Passport size photo",
+        "Membership Form filled, signed & stamped",
+        "2 Passport size photos",
         "Request letter on Letter Head",
         "Indemnity bond",
-        "Self-attested copies of GST Certificate/ PAN Copy.",
+        "Self-attested copies of GST Certificate / PAN Copy",
         "IEC License Copy",
-        "Certificate of Registration"
-      ]
-    }
+        "Certificate of Registration",
+      ],
+    },
   },
   {
     id: "start-up",
-    title: "START-UP",
+    title: "Start-Up",
     icon: Rocket,
-    color: "bg-orange-50 text-orange-600",
-    investment: { joining: "INR 2000", annual: "INR 8000" },
+    investment: { joining: "INR 2,000", annual: "INR 8,000" },
     forms: [
       { name: "Membership Form", link: membershipFormPdf },
       { name: "Cover Letter", link: "#" },
-      { name: "Indemnity Bond", link: "#" }
+      { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
-      category: "IT sector, Real estate sector, Healthcare tech, Delivery services, Artificial Intelligence, E-commerce, B2B Software, Supply chain management & Logistics etc. WHICH IS LESS THAN A YEAR OLD.",
+      category: "IT, Real estate, Healthcare tech, Delivery services, AI, E-commerce, B2B Software, Supply chain & Logistics — LESS THAN A YEAR OLD.",
       details: [
-        "Membership Form fill in/ sign/ stamp.",
-        "2 Passport size photo",
+        "Membership Form filled, signed & stamped",
+        "2 Passport size photos",
         "Request letter on Letter Head",
         "Indemnity bond",
-        "Self-attested copies of GST Certificate/ PAN Copy.",
-        "Certificate of Incorporation."
-      ]
-    }
+        "Self-attested copies of GST Certificate / PAN Copy",
+        "Certificate of Incorporation",
+      ],
+    },
   },
   {
     id: "corporate",
-    title: "CORPORATE",
+    title: "Corporate",
     icon: Building,
-    color: "bg-indigo-50 text-indigo-600",
-    investment: { joining: "INR 2000", annual: "INR 10000" },
+    investment: { joining: "INR 2,000", annual: "INR 10,000" },
     forms: [
       { name: "Membership Form", link: membershipFormPdf },
       { name: "Cover Letter", link: "#" },
-      { name: "Indemnity Bond", link: "#" }
+      { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
-      category: "Private Limited companies",
+      category: "Private Limited companies.",
       details: [
-        "Membership Form fill in/ sign/ stamp.",
-        "2 Passport size photo",
+        "Membership Form filled, signed & stamped",
+        "2 Passport size photos",
         "Request letter on Letter Head",
         "Indemnity bond",
-        "Self-attested copies of GST Certificate/ PAN Copy.",
+        "Self-attested copies of GST Certificate / PAN Copy",
         "IEC License Copy",
-        "Certificate of Registration.",
+        "Certificate of Registration",
         "Copy of AOA, MOA",
-        "Certificate of incorporation"
-      ]
-    }
+        "Certificate of Incorporation",
+      ],
+    },
   },
   {
     id: "corporate-plus",
-    title: "CORPORATE +",
+    title: "Corporate +",
     icon: Crown,
-    color: "bg-purple-50 text-purple-600",
-    investment: { joining: "INR 2000", annual: "INR 20000" },
+    investment: { joining: "INR 2,000", annual: "INR 20,000" },
     forms: [
       { name: "Membership Form", link: membershipFormPdf },
       { name: "Cover Letter", link: "#" },
-      { name: "Indemnity Bond", link: "#" }
+      { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
       category: "Banks, Limited companies, or any Public Listed Companies.",
       details: [
-        "Membership Form fill in/ sign/ stamp.",
-        "2 Passport size photo",
+        "Membership Form filled, signed & stamped",
+        "2 Passport size photos",
         "Request letter on Letter Head",
         "Indemnity bond",
-        "Self-attested copies of GST Certificate/ PAN Copy.",
+        "Self-attested copies of GST Certificate / PAN Copy",
         "IEC License Copy",
         "Certificate of Registration",
         "Copy of AOA, MOA",
-        "Certificate of incorporation"
-      ]
-    }
+        "Certificate of Incorporation",
+      ],
+    },
   },
   {
     id: "overseas",
-    title: "OVERSEAS",
+    title: "Overseas",
     icon: Globe2,
-    color: "bg-emerald-50 text-emerald-600",
     investment: { joining: "$ 50", annual: "$ 200" },
-    note: "*Fee will be calculated equivalent to exchange rate INR",
+    note: "*Fee calculated at equivalent INR exchange rate",
     forms: [
       { name: "Membership Form", link: membershipFormPdf },
       { name: "Cover Letter", link: "#" },
-      { name: "Indemnity Bond", link: "#" }
+      { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
-      category: "Companies who are based outside India.",
+      category: "Companies based outside India.",
       details: [
-        "Membership Form fill in/ sign/ stamp.",
-        "2 Passport size photo",
+        "Membership Form filled, signed & stamped",
+        "2 Passport size photos",
         "Request letter on Letter Head",
         "Indemnity bond",
-        "Self-attested copies of GST Certificate/ PAN Copy.",
+        "Self-attested copies of GST Certificate / PAN Copy",
         "IEC License Copy",
         "Certificate of Registration",
-        "Passport copies of Authorized Signatories Must"
-      ]
-    }
+        "Passport copies of Authorized Signatories",
+      ],
+    },
   },
   {
     id: "non-profit",
-    title: "NON-PROFIT ORGANIZATION",
+    title: "Non-Profit Organization",
     icon: HeartHandshake,
-    color: "bg-rose-50 text-rose-600",
-    investment: { joining: "INR 2000/-", annual: "INR 5500/-" },
+    investment: { joining: "INR 2,000", annual: "INR 5,500" },
     forms: [
       { name: "Membership Form", link: membershipFormPdf },
-      { name: "Cover letter", link: "#" },
-      { name: "Indemnity Bond", link: "#" }
+      { name: "Cover Letter", link: "#" },
+      { name: "Indemnity Bond", link: "#" },
     ],
     guidelines: {
-      category: "Trust, Institutions, Foundations, Or Centre's",
+      category: "Trust, Institutions, Foundations, or Centres.",
       details: [
-        "Membership Form fill in/ sign/ stamp.",
-        "2 Passport size photo",
+        "Membership Form filled, signed & stamped",
+        "2 Passport size photos",
         "Request letter on Letter Head",
         "Indemnity bond",
-        "Certificate of Registration/Non-profit making Proof copies",
-        "Certificate of Incorporation."
-      ]
-    }
-  }
+        "Certificate of Registration / Non-profit proof copies",
+        "Certificate of Incorporation",
+      ],
+    },
+  },
 ];
 
 export default function FeeFormsGuidelines() {
   return (
-    <div className="w-full bg-background font-body text-foreground">
-      {/* Hero Section */}
-      <section className="relative w-full py-16 md:py-20 bg-slate-900 text-white overflow-hidden flex items-center">
-        <div className="absolute right-0 top-0 w-1/2 h-full bg-primary/20 blur-[100px] pointer-events-none rounded-full transform translate-x-1/3 -translate-y-1/4 z-0"></div>
+    <div className="w-full bg-background text-foreground">
 
+      {/* Hero */}
+      <section className="relative w-full py-16 md:py-20 bg-foreground overflow-hidden flex items-center">
+        <div className="absolute right-0 top-0 w-1/2 h-full bg-primary/20 blur-[100px] pointer-events-none rounded-full translate-x-1/3 -translate-y-1/4 z-0" />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative z-20 pointer-events-auto max-w-3xl mx-auto text-center"
+            className="max-w-3xl mx-auto text-center"
           >
             <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">Membership</span>
-            <h1 className="font-heading font-black text-3xl md:text-4xl lg:text-5xl mb-4 leading-[1.1]">
-              Fees, Forms & <span className="text-primary">Guidelines</span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-background mb-4 leading-tight">
+              Fees, Forms &amp; <span className="text-primary">Guidelines</span>
             </h1>
-            <p className="text-slate-300 text-lg md:text-xl leading-relaxed mb-4 font-light italic">
-              "Follow the below-given guidelines & fulfill the requirements to enjoy day-to-day chamber services & take the pride of being a member and enables you to connect directly with the AECCI management."
+            <p className="text-background/70 text-base md:text-lg leading-relaxed italic">
+              "Follow the guidelines &amp; fulfill the requirements to enjoy day-to-day chamber services and connect directly with the AECCI management."
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Cards Grid Section */}
-      <section className="py-20 bg-slate-50">
+      {/* Cards */}
+      <section className="py-20 md:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {guidelinesData.map((item, idx) => {
-              return (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col"
-                >
-                  {/* Card Header */}
-                  <div className="p-6 border-b border-slate-100 flex items-center gap-4 bg-slate-50/50">
-                    <div className={`p-3 rounded-xl ${item.color}`}>
-                      <item.icon className="w-6 h-6" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {guidelinesData.map((item, idx) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08, duration: 0.4 }}
+              >
+                <Card className="h-full flex flex-col border-border hover:border-primary/40 transition-colors">
+                  {/* Header */}
+                  <div className="p-5 border-b border-border flex items-center gap-4 bg-muted/30">
+                    <div className="p-3 rounded-xl bg-primary/10 text-primary">
+                      <item.icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900">{item.title}</h3>
+                    <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
                   </div>
 
-                  {/* Card Body */}
-                  <div className="p-6 flex flex-col flex-grow gap-6">
-
-                    {/* Investment Schedule */}
+                  <CardContent className="p-6 flex flex-col gap-6 flex-1">
+                    {/* Investment */}
                     <div>
-                      <h4 className="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3">Investment Schedule</h4>
-                      <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-2">
+                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">Investment Schedule</p>
+                      <div className="bg-muted/50 rounded-xl p-4 border border-border space-y-2">
                         <div className="flex justify-between items-center text-sm">
-                          <span className="text-slate-600 font-medium">Joining Fee</span>
-                          <span className="font-bold text-slate-900">{item.investment.joining}</span>
+                          <span className="text-muted-foreground">Joining Fee</span>
+                          <span className="font-bold text-foreground">{item.investment.joining}</span>
                         </div>
+                        <Separator className="bg-border" />
                         <div className="flex justify-between items-center text-sm">
-                          <span className="text-slate-600 font-medium">Annual Fee</span>
-                          <span className="font-bold text-slate-900">{item.investment.annual}</span>
+                          <span className="text-muted-foreground">Annual Fee</span>
+                          <span className="font-bold text-foreground">{item.investment.annual}</span>
                         </div>
                         {item.note && (
-                          <div className="text-xs text-slate-500 italic mt-2 pt-2 border-t border-slate-200">
-                            {item.note}
-                          </div>
+                          <p className="text-xs text-muted-foreground italic pt-1">{item.note}</p>
                         )}
                       </div>
                     </div>
 
                     {/* Forms */}
                     <div>
-                      <h4 className="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3">Forms</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">Forms</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         {item.forms.map((form, fIdx) => (
                           <a
                             key={fIdx}
                             href={form.link}
                             target={form.link !== "#" ? "_blank" : "_self"}
                             rel={form.link !== "#" ? "noopener noreferrer" : ""}
-                            className="flex items-center gap-2 p-2 rounded-lg border border-slate-200 hover:border-primary hover:bg-primary/5 transition-colors group"
+                            className="flex items-center gap-2 p-2.5 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-colors group"
                           >
-                            <div className="bg-slate-100 p-1.5 rounded-md group-hover:bg-primary/10 transition-colors">
-                              <Download className="w-3.5 h-3.5 text-slate-600 group-hover:text-primary" />
+                            <div className="bg-muted p-1.5 rounded-md group-hover:bg-primary/10 transition-colors shrink-0">
+                              <Download className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary" />
                             </div>
-                            <span className="text-xs font-medium text-slate-700 group-hover:text-primary transition-colors truncate">{form.name}</span>
+                            <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors truncate">{form.name}</span>
                           </a>
                         ))}
                       </div>
                     </div>
 
                     {/* Guidelines */}
-                    <div className="flex-grow">
-                      <h4 className="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3">Guidelines</h4>
-
+                    <div className="flex-1">
+                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">Guidelines</p>
                       <div className="space-y-4">
-                        <div className="bg-slate-50/50 rounded-xl p-4 border border-slate-100">
+                        <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
                           <span className="block text-[10px] font-bold text-primary tracking-wider uppercase mb-1">Business Category</span>
-                          <p className="text-slate-700 text-sm font-medium leading-relaxed">{item.guidelines.category}</p>
+                          <p className="text-foreground text-sm font-medium leading-relaxed">{item.guidelines.category}</p>
                         </div>
-
                         <div>
-                          <span className="block text-[10px] font-bold text-slate-400 tracking-wider uppercase mb-2">Details Required</span>
+                          <span className="block text-[10px] font-bold text-muted-foreground tracking-wider uppercase mb-2">Details Required</span>
                           <ul className="space-y-2">
                             {item.guidelines.details.map((detail, dIdx) => (
                               <li key={dIdx} className="flex items-start gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                                <span className="text-slate-600 text-xs leading-relaxed">{detail}</span>
+                                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                                <span className="text-muted-foreground text-xs leading-relaxed">{detail}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
                       </div>
                     </div>
-
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
 
-          {/* Additional Links Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-16">
-            <Link 
+          {/* Quick links */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mt-14">
+            <Link
               to="/services/membership/enrollment-offers"
-              className="flex items-center justify-center p-4 bg-primary text-white rounded-xl shadow-md hover:bg-primary/90 transition-colors"
+              className="flex items-center justify-center py-3 px-6 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
-              <span className="font-bold">ENROLLMENT OFFERS</span>
+              Enrollment Offers
             </Link>
-
-            <Link 
+            <Link
               to="/services/membership/visa-recommendation"
-              className="flex items-center justify-center p-4 bg-primary text-white rounded-xl shadow-md hover:bg-primary/90 transition-colors"
+              className="flex items-center justify-center py-3 px-6 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
-              <span className="font-bold">VISA RECOMMENDATION LETTER</span>
+              Visa Recommendation Letter
             </Link>
           </div>
-
         </div>
       </section>
     </div>

@@ -260,7 +260,7 @@ export default function ExporterDirectory() {
                                 : "bg-muted text-muted-foreground border border-border"
                           }`}
                         >
-                          <Crown className="size-3 text-amber-500" /> {exp.tier}{" "}
+                          <Crown className="size-3 text-chart-4" /> {exp.tier}{" "}
                           Tier
                         </span>
                         {exp.verified && (
@@ -339,7 +339,7 @@ export default function ExporterDirectory() {
 
         {/* RFQ Sheet/Dialog Simulation overlay */}
         {selectedExporter && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 animate-in fade-in duration-300">
+          <div className="fixed inset-0 z-50 bg-foreground/60 backdrop-blur-sm flex items-center justify-center p-6 animate-in fade-in duration-300">
             <Card className="w-full max-w-[480px] border-border bg-card shadow-2xl p-6 text-left relative animate-in zoom-in-95 duration-300">
               <button
                 onClick={() => setSelectedExporter(null)}
@@ -376,7 +376,7 @@ export default function ExporterDirectory() {
                         key={idx}
                         className="inline-flex items-center gap-1 bg-muted px-2 py-0.5 rounded text-xs font-semibold border border-border"
                       >
-                        <Check className="size-3 text-emerald-500" /> {p}
+                        <Check className="size-3 text-primary" /> {p}
                       </span>
                     ))}
                   </div>

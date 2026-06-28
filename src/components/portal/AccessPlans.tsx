@@ -1,11 +1,5 @@
 import { Check, Sparkles, Coins, ShieldAlert } from "lucide-react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -76,10 +70,7 @@ const PLANS = [
 
 export default function AccessPlans() {
   return (
-    <section
-      id="pricing"
-      className="bg-background py-16 md:py-24 relative border-b border-border/60"
-    >
+    <section id="pricing" className="bg-background py-16 md:py-24 relative border-b border-border/60">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.02),transparent_70%)] pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
@@ -87,17 +78,14 @@ export default function AccessPlans() {
           <Badge className="bg-primary/10 text-primary border-primary/20 mb-4 px-3 py-1 font-mono uppercase tracking-widest text-xs">
             Global Expansion Plans
           </Badge>
-          <h2 className="text-3xl md:text-5xl font-heading font-black text-foreground tracking-tight flex items-center justify-center gap-3">
-            <Coins className="size-8 text-primary shrink-0" /> ACCESS PLANS &
-            MEMBERSHIPS
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight flex items-center justify-center gap-3">
+            <Coins className="size-8 text-primary shrink-0" /> ACCESS PLANS & MEMBERSHIPS
           </h2>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed font-light">
-            Select the right platform tier for your international growth. Gain
-            direct access to active deal rooms and verify credentials instantly.
+            Select the right platform tier for your international growth. Gain direct access to active deal rooms and verify credentials instantly.
           </p>
         </div>
 
-        {/* Pricing Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {PLANS.map((plan) => (
             <Card
@@ -111,41 +99,25 @@ export default function AccessPlans() {
             >
               {plan.isPopular && (
                 <div className="absolute top-0 right-0 left-0 bg-primary py-1.5 text-[10px] font-bold text-primary-foreground tracking-widest uppercase text-center flex items-center justify-center gap-1.5 z-10 font-mono">
-                  <Sparkles className="size-3 text-primary-foreground" />
+                  <Sparkles className="size-3" />
                   Most Popular Choice
                 </div>
               )}
 
-              <CardHeader
-                className={cn(
-                  "p-6 pb-4 relative z-10",
-                  plan.isPopular ? "pt-10" : "",
-                )}
-              >
-                <CardTitle className="text-lg font-bold text-foreground mb-2">
-                  {plan.name}
-                </CardTitle>
+              <CardHeader className={cn("p-6 pb-4 relative z-10", plan.isPopular ? "pt-10" : "")}>
+                <CardTitle className="text-lg font-bold text-foreground mb-2">{plan.name}</CardTitle>
                 <div className="flex items-baseline gap-1.5 my-3">
-                  <span className="text-3xl md:text-4xl font-black text-foreground tracking-tight">
-                    {plan.price}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground font-mono tracking-wider">
-                    {plan.period}
-                  </span>
+                  <span className="text-3xl md:text-4xl font-black text-foreground tracking-tight">{plan.price}</span>
+                  <span className="text-[10px] text-muted-foreground font-mono tracking-wider">{plan.period}</span>
                 </div>
-                <p className="text-muted-foreground text-xs leading-relaxed font-sans font-light mt-1.5">
-                  {plan.desc}
-                </p>
+                <p className="text-muted-foreground text-xs leading-relaxed font-light mt-1.5">{plan.desc}</p>
               </CardHeader>
 
               <CardContent className="px-6 pb-6 pt-0 flex-1 relative z-10">
-                <ul className="space-y-3 pt-4 border-t border-border/60 font-sans">
+                <ul className="space-y-3 pt-4 border-t border-border/60">
                   {plan.features.map((feat) => (
-                    <li
-                      key={feat}
-                      className="flex items-start gap-2.5 text-xs text-foreground/90 font-light leading-relaxed"
-                    >
-                      <span className="size-4 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mt-0.5 shrink-0">
+                    <li key={feat} className="flex items-start gap-2.5 text-xs text-foreground/90 font-light leading-relaxed">
+                      <span className="size-4 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mt-0.5 shrink-0">
                         <Check className="size-2.5 stroke-[3px]" />
                       </span>
                       <span>{feat}</span>
@@ -164,11 +136,7 @@ export default function AccessPlans() {
                       : "bg-muted border border-border/60 text-foreground hover:bg-muted/80",
                   )}
                 >
-                  <a
-                    href="https://e-platform.aecci.org.in/request-trial-version"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://e-platform.aecci.org.in/request-trial-version" target="_blank" rel="noopener noreferrer">
                     {plan.cta}
                   </a>
                 </Button>
@@ -177,13 +145,9 @@ export default function AccessPlans() {
           ))}
         </div>
 
-        {/* Footnote */}
         <div className="mt-10 flex items-center justify-center gap-2 text-[10px] text-muted-foreground text-center font-mono">
           <ShieldAlert className="size-4 text-muted-foreground/85" />
-          <span>
-            All fees are exclusive of GST. Payments processed securely via
-            Chamber Administrative Portal.
-          </span>
+          <span>All fees are exclusive of GST. Payments processed securely via Chamber Administrative Portal.</span>
         </div>
       </div>
     </section>

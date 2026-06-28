@@ -65,6 +65,7 @@ import AdminAuditLogsPage from "@/pages/admin/audit-logs";
 import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
 import AdminSettingsPage from "@/pages/admin/settings";
 import PartnerOnboardingPage from "@/pages/partner/onboarding";
+import SponsorshipPage from "@/pages/events/sponsorship";
 import StrategicPartnersPage from "@/pages/about/strategic-partners";
 import AboutChamberPage from "@/pages/about/AboutChamber";
 import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
@@ -74,10 +75,12 @@ import OfficeBearersPage from "@/pages/about/OfficeBearers";
 import RolesResponsibilityPage from "@/pages/about/RolesResponsibility";
 import ChamberDynamicsPage from "@/pages/about/ChamberDynamics";
 import JobOpportunitiesPage from "@/pages/about/JobOpportunities";
+import Membership from "@/pages/services/membership/Membership";
 import MembershipBenefits from "@/pages/services/membership/MembershipBenefits";
 import FeeFormsGuidelines from "@/pages/services/membership/FeeFormsGuidelines";
 import EnrollmentOffers from "@/pages/services/membership/EnrollmentOffers";
 import VisaRecommendation from "@/pages/services/membership/VisaRecommendation";
+import RenewMembership from "@/pages/services/membership/RenewMembership";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -527,7 +530,7 @@ export const routes: RouteObject[] = [
   // Membership
   {
     path: "/services/membership",
-    element: <NotFound />,
+    element: <Membership />,
   },
   {
     path: "/patron-members",
@@ -556,6 +559,10 @@ export const routes: RouteObject[] = [
   {
     path: "/services/membership/visa-recommendation",
     element: <VisaRecommendation />,
+  },
+  {
+    path: "/services/membership/renew",
+    element: <RenewMembership />,
   },
 
   // Affiliate Program
@@ -682,7 +689,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/events/sponsorship",
-    element: <NotFound />,
+    element: <SponsorshipPage />,
   },
   {
     path: "/advertise-with-us",

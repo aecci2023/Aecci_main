@@ -21,7 +21,7 @@ export default function MobileAppPromo() {
     >
       {/* Decorative background gradients */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 items-center">
@@ -35,7 +35,7 @@ export default function MobileAppPromo() {
               className="relative max-w-sm sm:max-w-md w-full flex justify-center"
             >
               {/* Glowing backdrop circle */}
-              <div className="absolute inset-4 rounded-[60px] bg-gradient-to-tr from-primary/20 via-emerald-500/10 to-transparent blur-3xl -z-10 animate-pulse duration-[6000ms]" />
+              <div className="absolute inset-4 rounded-[60px] bg-gradient-to-tr from-primary/20 via-primary/10 to-transparent blur-3xl -z-10 animate-pulse duration-[6000ms]" />
 
               <img
                 src={appMockup}
@@ -52,13 +52,13 @@ export default function MobileAppPromo() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-2 mb-4 md:mb-6 shadow-sm"
+              className="inline-flex items-center gap-3 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-4 md:mb-6 shadow-sm"
             >
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
               </span>
-              <span className="text-xs font-heading font-black text-emerald-500 tracking-wide uppercase">
+              <span className="text-xs font-heading font-black text-primary tracking-wide uppercase">
                 {userCount.toLocaleString()} Users Live Counter Registered With
                 Us
               </span>
@@ -73,7 +73,7 @@ export default function MobileAppPromo() {
               className="font-heading font-black text-4xl sm:text-5xl text-foreground leading-[1.1] tracking-tight mb-6"
             >
               Connect, Trade, Succeed – <br />
-              <span className="bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 Anytime, Anywhere.
               </span>
             </motion.h2>
@@ -102,7 +102,7 @@ export default function MobileAppPromo() {
             >
               {/* QR Section */}
               <div className="sm:col-span-7 flex items-center gap-4 border-b sm:border-b-0 sm:border-r border-border/80 pb-4 sm:pb-0 sm:pr-4">
-                <div className="bg-white p-2.5 rounded-2xl border border-border flex items-center justify-center shadow-inner shrink-0">
+                <div className="bg-background p-2.5 rounded-2xl border border-border flex items-center justify-center shadow-inner shrink-0">
                   {/* Generated QR Code Vector SVG */}
                   <svg className="size-16" viewBox="0 0 100 100">
                     <rect width="100" height="100" fill="white" />

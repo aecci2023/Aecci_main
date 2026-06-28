@@ -117,7 +117,7 @@ export default function WingsGrid() {
           <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground">
             Supporting your Business
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-4 rounded-full" />
         </div>
 
         <motion.div
@@ -148,19 +148,19 @@ export default function WingsGrid() {
                 />
 
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent group-hover:via-slate-950/60 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/70 to-transparent group-hover:via-foreground/60 transition-colors duration-300" />
 
                 {/* Floating Icon in top right */}
-                <div className="absolute top-4 right-4 p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
+                <div className="absolute top-4 right-4 p-2 bg-background/10 backdrop-blur-md border border-background/20 rounded-xl text-background group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
                   <IconComponent className="size-5" />
                 </div>
 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col text-left">
-                  <h3 className="text-lg font-heading font-black text-white mb-2">
+                  <h3 className="text-lg font-heading font-black text-background mb-2">
                     {wing.title}
                   </h3>
-                  <p className="text-[11px] text-slate-300 leading-relaxed opacity-0 group-hover:opacity-100 group-hover:max-h-20 max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                  <p className="text-[11px] text-background/70 leading-relaxed opacity-0 group-hover:opacity-100 group-hover:max-h-20 max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
                     {wing.desc}
                   </p>
 

@@ -47,7 +47,7 @@ export default function NetworkingSection() {
           <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground">
             AECCI Networking
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-2xl mx-auto">
             Participate in global networking sessions, check upcoming
             exhibitions, and coordinate with partner organizations.
@@ -76,7 +76,7 @@ export default function NetworkingSection() {
               >
                 <Card className="flex flex-col flex-1 h-full w-full overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/45 transition-all duration-300 rounded-3xl">
                   {/* Image Container with square aspect ratio */}
-                  <div className="relative overflow-hidden aspect-square w-full bg-white flex items-center justify-center p-6 border-b border-border/40">
+                  <div className="relative overflow-hidden aspect-square w-full bg-muted flex items-center justify-center p-6 border-b border-border/40">
                     <img
                       src={item.img}
                       alt={item.title}
@@ -87,8 +87,8 @@ export default function NetworkingSection() {
 
                     {/* Hover overlay for clickable items */}
                     {item.isClickable && (
-                      <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
+                      <div className="absolute inset-0 bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="p-4 bg-background/10 backdrop-blur-md rounded-full border border-background/20 text-background transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
                           <ArrowUpRight className="size-6" />
                         </div>
                       </div>

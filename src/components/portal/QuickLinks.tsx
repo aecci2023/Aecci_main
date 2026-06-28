@@ -92,7 +92,7 @@ export default function QuickLinks() {
           <h2 className="font-heading font-black text-3xl md:text-4xl text-foreground">
             Direct Access Points
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-primary to-emerald-400 mx-auto mt-4 rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-4 rounded-full" />
           <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-xl mx-auto">
             Instantly navigate to our core trade tools, member platforms, and
             official digital resources.
@@ -121,7 +121,7 @@ export default function QuickLinks() {
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-primary/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
               {/* Bottom accent glow strip */}
-              <div className="absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-primary to-emerald-400 w-0 group-hover:w-full transition-all duration-500" />
+              <div className="absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-primary to-primary/50 w-0 group-hover:w-full transition-all duration-500" />
 
               {/* Icon & Badge Header */}
               <div className="flex items-center justify-between w-full mb-6 relative z-10">
