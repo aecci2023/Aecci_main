@@ -208,6 +208,7 @@
 
   html {
     @apply font-sans;
+    font-size: 14px;
     scrollbar-color: var(--border) var(--background);
     scrollbar-width: thin;
   }

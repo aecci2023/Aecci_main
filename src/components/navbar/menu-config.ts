@@ -97,11 +97,6 @@ export const menuConfig: MegaMenuSection[] = [
           { title: "Visa Recommendation", href: "/services/membership/visa-recommendation" },
         ],
       },
-      {
-        title: "Renew Membership",
-        href: "#",
-        description: "To renew your membership, contact your local chamber or use their online portal to process your invoice.",
-      },
     ],
     // quickLinks: [
     //   { 

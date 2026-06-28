@@ -68,9 +68,9 @@ export default function MegaMenu({
                 onMouseEnter={() =>
                   item.items
                     ? setActiveSubItems({
-                        title: item.title,
-                        items: item.items,
-                      })
+                      title: item.title,
+                      items: item.items,
+                    })
                     : setActiveSubItems(null)
                 }
                 className="group pb-4 border-b border-black/[0.05] dark:border-white/[0.05] last:border-0 last:pb-0"
@@ -185,9 +185,9 @@ export default function MegaMenu({
                       onMouseEnter={() =>
                         link.items
                           ? setActiveSubItems({
-                              title: link.title,
-                              items: link.items,
-                            })
+                            title: link.title,
+                            items: link.items,
+                          })
                           : setActiveSubItems(null)
                       }
                       className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
@@ -207,9 +207,9 @@ export default function MegaMenu({
                       onMouseEnter={() =>
                         link.items
                           ? setActiveSubItems({
-                              title: link.title,
-                              items: link.items,
-                            })
+                            title: link.title,
+                            items: link.items,
+                          })
                           : setActiveSubItems(null)
                       }
                       className={`group/q flex items-center gap-1 py-[6px] text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
@@ -245,9 +245,9 @@ export default function MegaMenu({
                       onMouseEnter={() =>
                         link.items
                           ? setActiveSubItems({
-                              title: link.title,
-                              items: link.items,
-                            })
+                            title: link.title,
+                            items: link.items,
+                          })
                           : setActiveSubItems(null)
                       }
                       className="group/r block no-underline"
@@ -271,9 +271,9 @@ export default function MegaMenu({
                       onMouseEnter={() =>
                         link.items
                           ? setActiveSubItems({
-                              title: link.title,
-                              items: link.items,
-                            })
+                            title: link.title,
+                            items: link.items,
+                          })
                           : setActiveSubItems(null)
                       }
                       className="group/r block no-underline"

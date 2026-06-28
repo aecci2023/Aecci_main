@@ -24,23 +24,23 @@ import { SpinningGlobe } from "./SpinningGlobe";
 
 const slides = [
   {
-    id: "global-market-access",
+    id: "membership-slide",
     layout: "text-left",
-    badge: { Icon: Globe, text: "Global Deal Room" },
-    heading: "GLOBAL MARKET ACCESS",
-    highlight: "WITHOUT INTERNATIONAL TRAVEL",
+    badge: { Icon: Globe, text: "Membership" },
+    heading: "Membership That Opens Doors to",
+    highlight: "Global Business",
     description:
-      "Connect with verified international trade partners, market advisors, distributors, and expansion experts through the AECCI Global Deal Room.",
+      "AECCI Membership is more than a chamber affiliation—it's your gateway to a global business ecosystem. The membership is designed to empower businesses through global connectivity, business matchmaking, expert advisory services, trade facilitation and strategic collaborations.",
     ctas: [
       {
-        label: "Book Country Access Slot",
-        href: "#pricing",
+        label: "Become a Member",
+        href: "/services/membership",
         primary: true,
         isYellow: true,
       },
       {
-        label: "Explore Global Markets",
-        href: "#command-center",
+        label: "Membership Benefits",
+        href: "/services/membership/benefits",
         primary: false,
       },
     ],
@@ -548,7 +548,7 @@ function SlideContent({
             <span
               className={cn(
                 "bg-gradient-to-r bg-clip-text text-transparent drop-shadow-sm",
-                slide.id === "global-market-access"
+                slide.id === "membership-slide"
                   ? "from-amber-400 via-amber-300 to-yellow-500"
                   : "from-primary via-emerald-400 to-teal-300",
               )}
@@ -615,7 +615,7 @@ function SlideContent({
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="w-full flex justify-center"
           >
-            {slide.id === "global-market-access" ? (
+            {slide.id === "membership-slide" ? (
               <SpinningGlobe />
             ) : (
               <InteractiveAttestationHub />

@@ -152,7 +152,18 @@ export default function Navbar() {
                     to={item.href}
                     onMouseEnter={() => handleMouseEnter(item.title)}
                     onMouseLeave={handleMouseLeave}
-                    onClick={handleClose}
+                    onClick={(e) => {
+                      if (item.hasDropdown) {
+                        e.preventDefault();
+                        if (activeSection === item.title) {
+                          handleClose();
+                        } else {
+                          handleMouseEnter(item.title);
+                        }
+                      } else {
+                        handleClose();
+                      }
+                    }}
                     className={[
                       "cursor-pointer select-none no-underline",
                       "px-[11px] py-2",

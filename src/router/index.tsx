@@ -74,6 +74,10 @@ import OfficeBearersPage from "@/pages/about/OfficeBearers";
 import RolesResponsibilityPage from "@/pages/about/RolesResponsibility";
 import ChamberDynamicsPage from "@/pages/about/ChamberDynamics";
 import JobOpportunitiesPage from "@/pages/about/JobOpportunities";
+import MembershipBenefits from "@/pages/services/membership/MembershipBenefits";
+import FeeFormsGuidelines from "@/pages/services/membership/FeeFormsGuidelines";
+import EnrollmentOffers from "@/pages/services/membership/EnrollmentOffers";
+import VisaRecommendation from "@/pages/services/membership/VisaRecommendation";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -531,19 +535,27 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/membership-and-its-benefits",
-    element: <NotFound />,
+    element: <MembershipBenefits />,
+  },
+  {
+    path: "/services/membership/benefits",
+    element: <MembershipBenefits />,
   },
   {
     path: "/services/membership/guidelines-and-form",
-    element: <NotFound />,
+    element: <FeeFormsGuidelines />,
+  },
+  {
+    path: "/services/membership/fee-forms-guidelines",
+    element: <FeeFormsGuidelines />,
   },
   {
     path: "/services/membership/enrollment-offers",
-    element: <NotFound />,
+    element: <EnrollmentOffers />,
   },
   {
-    path: "/services/membership/visa-recommendations-letter",
-    element: <NotFound />,
+    path: "/services/membership/visa-recommendation",
+    element: <VisaRecommendation />,
   },
 
   // Affiliate Program

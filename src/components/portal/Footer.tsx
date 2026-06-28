@@ -29,7 +29,6 @@ const footerSections = [
     title: "Our Services",
     links: [
       { label: "Membership", href: "/services/membership" },
-      { label: "Renew Membership", href: "#" },
       // { label: "Arbitration Center", href: "/arbitration-center" },
     ],
   },

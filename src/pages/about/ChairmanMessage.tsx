@@ -1,128 +1,161 @@
 import { motion } from "framer-motion";
+import { Handshake, Globe, TrendingUp, Shield } from "lucide-react";
+import chairmanBg from "../../assets/images/image.png";
 
 export default function ChairmanMessage() {
   return (
-    <div className="py-24 max-w-4xl mx-auto px-6 md:px-12 text-left">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
-          Chairman's Message
-        </span>
-        <h1 className="font-heading font-black text-4xl md:text-5xl text-foreground mb-8">
-          Charting a Vision for AECCI
-        </h1>
+    <div className="w-full bg-white font-body">
 
-        <div className="space-y-6 font-body text-base text-muted-foreground leading-relaxed">
-          <p className="font-bold text-foreground">
-            A Message from Our Honorable Chairman Shri Jaheer Bukhari
-          </p>
+      {/* Main Content Container */}
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row w-full bg-slate-950">
 
-          <p>
-            The world of international trade is evolving rapidly, and businesses today need more than
-            information- they need the right connections, trusted expertise and timely opportunities. At
-            AECCI, we are committed to making global business more accessible for Indian enterprises
-            by creating an ecosystem where meaningful partnerships can flourish.
-          </p>
+        {/* LEFT COLUMN: Visuals */}
+        <div className="w-full md:w-1/2 relative flex flex-col items-center pt-12 pb-24 px-6 min-h-[500px]">
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${chairmanBg})` }}
+          ></div>
 
-          <p>
-            Our vision is to transform AECCI from a traditional chamber into a dynamic Global Deal
-            Room- a platform where Indian exporters, manufacturers, startups and entrepreneurs can
-            connect directly with international experts, trade advisors, legal professionals, investment
-            advisors and business organizations across the world.
-            <br />
-            Through this initiative, we aim to simplify cross-border business by providing a trusted
-            environment for business growth, expert consultations, strategic partnerships and market
-            access. Whether you are entering a new international market or expanding your global
-            presence, AECCI is committed to supporting your journey with the right network and
-            resources.
-            <br />
-            Our strength lies in collaboration. By working closely with government institutions, trade
-            promotion organizations, industry experts and diplomats, we are building a global
-            ecosystem that empowers businesses to grow beyond borders.
-            <br />
-            As global markets become increasingly interconnected, India&#39;s exporters have an
-            unprecedented opportunity to lead. We believe innovation, digital connectivity and
-            international collaborations will define the next era of trade, and AECCI is proud to be at the
-            forefront of this transformation.
-            <br />
-            I warmly invite exporters, entrepreneurs, investors, professionals, trade organizations and
-            international partners to become part of this growing global network. Together, we can
-            create new opportunities, strengthen international partnerships and contribute to India&#39;s
-            emergence as a leading global trading nation.
-          </p>
+          {/* Subtle gradient so icons at the bottom remain readable */}
+          <div className="hidden md:block absolute inset-0 z-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90"></div>
 
-          <p>
-            Thank you for visiting AECCI. We look forward to partnering with you in shaping the future
-            of global commerce.
-          </p>
-
-          <div className="pt-2 pb-4">
-            <p className="font-heading font-black text-xl text-foreground">Shri Jaheer Bukhari</p>
-            <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">Hon'ble Board Chairman</p>
-            <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">Asian Exporters' Chamber of Commerce &amp; Industry (AECCI)</p>
+          <div className="relative z-10 hidden md:flex flex-col items-center h-full w-full justify-end">
+            {/* Bottom Icons Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="w-full mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-2 text-center"
+            >
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
+                  <Handshake className="w-5 h-5" />
+                </div>
+                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Trust</p>
+                <p className="text-slate-400 text-[8px] leading-tight">Building<br />Relationships</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
+                  <Globe className="w-5 h-5" />
+                </div>
+                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Global</p>
+                <p className="text-slate-400 text-[8px] leading-tight">Connecting<br />Markets</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Growth</p>
+                <p className="text-slate-400 text-[8px] leading-tight">Creating<br />Opportunities</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-slate-800 rounded-lg">
+                  <Shield className="w-5 h-5" />
+                </div>
+                <p className="text-white font-bold text-[10px] uppercase tracking-wider mb-1">Integrity</p>
+                <p className="text-slate-400 text-[8px] leading-tight">Delivering<br />Excellence</p>
+              </div>
+            </motion.div>
           </div>
-
-          <p>
-            Through this platform, our goal is to share valuable insights into
-            our mission, who we are, our objectives, and the reasons that drive
-            us. AECCI is dedicated to fostering knowledge, skills, and the
-            adoption of best practices in investment, business, industry, trade,
-            and sustainable policies. We are committed to engaging in productive
-            dialogues with government bodies.
-          </p>
-
-          <p>
-            Furthermore, we offer our members access to valuable business
-            intelligence and a wealth of opportunities. We facilitate the
-            expansion of their networks, connecting them with Asian and
-            international business partners through various channels and events.
-            In essence, we empower our members to forge connections and achieve
-            their business goals. Our vision instills in us a profound belief
-            that our endeavors will contribute to India and Asia's emergence as
-            key players in global trade, fostering long-term growth for our
-            nation and the wider region.
-          </p>
-
-          <p>
-            To the business community at large, if you have not yet become a
-            member, I strongly encourage you to take the leap. By joining us,
-            you will enhance your connectivity, stay informed about new
-            prospects, and ensure that your interests are well-represented in
-            the corridors of policymaking. So, seize the opportunity today,
-            embark on the journey of expanding your business, networks, and
-            influence.
-          </p>
-
-          <p>
-            We extend a warm invitation to Asian and regional companies who wish
-            to join us in this remarkable journey. Your feedback and inquiries
-            about AECCI are always welcome.
-          </p>
-
-          <p>
-            Together, let's nurture the growth of India and Asia and other
-            respective Regions.
-          </p>
-
-          <div className="pt-8 pb-4">
-            <p className="font-heading font-black text-xl text-foreground">
-              Shri Jaheer Bukhari
-            </p>
-            <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">
-              Hon'ble Board Chairman
-            </p>
-          </div>
-
-          <blockquote className="bg-primary/5 border-l-4 border-primary p-6 rounded-r-xl italic font-heading text-lg text-foreground/80 mt-8 shadow-sm">
-            ❝ Our vision gives us a deep conviction that our endeavor will help
-            spur India &amp; Asia's role as a global trade hub &amp; support long-term
-            growth for the nation &amp; the broader region.❞
-          </blockquote>
         </div>
-      </motion.div>
+
+        {/* RIGHT COLUMN: Message Area */}
+        <div className="w-full md:w-1/2 bg-slate-950 relative z-10 -mt-12 rounded-t-[60px] md:mt-0 md:-ml-8 md:rounded-t-none md:rounded-l-[80px] lg:rounded-l-[120px] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] md:shadow-[-20px_0_50px_rgba(0,0,0,0.5)] flex flex-col justify-between">
+          <div className="relative z-10 px-8 py-16 md:px-16 md:py-20 lg:px-24 flex-1">
+
+            {/* Header Title */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-10 text-center"
+            >
+              <h1 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide leading-none text-primary">
+                CHAIRMAN'S<br />
+                <span className="text-white">MESSAGE</span>
+              </h1>
+              <div className="flex items-center justify-center gap-4 my-6">
+                <div className="h-[1px] flex-1 bg-primary/30"></div>
+                <div className="w-2 h-2 rotate-45 bg-primary"></div>
+                <div className="h-[1px] flex-1 bg-primary/30"></div>
+              </div>
+              <h2 className="text-primary text-sm md:text-base font-bold uppercase tracking-[0.2em]">
+                CONNECTING INDIAN ENTERPRISE<br />WITH GLOBAL OPPORTUNITIES
+              </h2>
+            </motion.div>
+
+            {/* Letter Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-6 text-slate-300 font-light text-sm md:text-base leading-relaxed"
+            >
+              <p className="font-serif italic text-3xl md:text-4xl text-primary mb-6">
+                Welcome to AECCI
+              </p>
+              <p>
+                At AECCI, we believe that international trade is built on trust, integrity, innovation, and collaboration. Our mission is to empower exporters, manufacturers, entrepreneurs, and professionals by providing world-class business support, legal guidance, market intelligence, and global networking opportunities.
+              </p>
+              <p>
+                We are committed to strengthening India's position in international trade through strategic partnerships, digital transformation, and sustainable business practices.
+              </p>
+              <p>
+                Together, we can create new opportunities, expand global markets, and contribute to India's economic growth.
+              </p>
+              <p>
+                I warmly invite exporters, industrialists, startups, and business leaders to become part of the AECCI family and join us in building a stronger global business community.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Banner Strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="w-full bg-primary py-4 px-8 text-center"
+          >
+            <p className="text-slate-900 font-black uppercase text-xs md:text-sm tracking-[0.15em]">
+              TOGETHER WE <span className="text-white">CONNECT</span>.
+              TOGETHER WE <span className="text-white">GROW</span>.
+              TOGETHER WE <span className="text-white">SUCCEED</span>.
+            </p>
+          </motion.div>
+
+          {/* Signature Area */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="px-8 py-10 md:px-16 text-center"
+          >
+            <div className="font-serif italic text-4xl text-primary mb-4 opacity-90" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+              Shri Jaheer Bukhari
+            </div>
+            <h4 className="text-white font-bold tracking-widest text-sm mb-1">CHAIRMAN</h4>
+            <p className="text-slate-400 text-xs tracking-wider uppercase leading-relaxed">
+              ASIAN EXPORTERS' CHAMBER<br />OF COMMERCE & INDUSTRY<br />
+              <span className="text-primary font-bold">(AECCI)</span>
+            </p>
+          </motion.div>
+
+        </div>
+      </div>
+
+      {/* GLOBAL FOOTER BAR - Now correctly placed outside the flex-row columns */}
+      <div className="max-w-7xl mx-auto w-full bg-slate-950 border-t border-primary/20 py-4 px-8 flex flex-col md:flex-row items-center justify-between text-xs tracking-widest">
+        <div className="flex items-center gap-2 text-slate-400 hover:text-primary transition-colors cursor-pointer mb-3 md:mb-0">
+          <Globe className="w-4 h-4" />
+          <span>www.aecci.org.in</span>
+        </div>
+
+        <div className="text-primary font-bold uppercase mb-3 md:mb-0">
+          SOURCING ENTERPRISE
+        </div>
+      </div>
+
     </div>
   );
 }

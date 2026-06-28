@@ -8,6 +8,9 @@ import babel from "@rolldown/plugin-babel";
 export default defineConfig({
   server: {
     allowedHosts: ["test.aecci.org.in"],
+    watch: {
+      ignored: ['**/*.pdf']
+    }
   },
   plugins: [
     react(),
