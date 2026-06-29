@@ -155,7 +155,8 @@ export default function LiveDealRoomPage() {
         showScreenSharingButton: true,
         showTextChat: true,
         showUserList: true,
-        showVirtualBackgroundButton: true,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...(({ showVirtualBackgroundButton: true } as any)),
         maxUsers: 50,
         layout: "Auto",
         showLayoutButton: true,
