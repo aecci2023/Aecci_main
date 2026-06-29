@@ -153,10 +153,6 @@ export const routes: RouteObject[] = [
               },
               { path: "sessions/past", element: <PartnerPastSessionsPage /> },
               {
-                path: "sessions/host",
-                element: <PartnerPlaceholder title="Host New Session" />,
-              },
-              {
                 path: "sessions/:id/summary",
                 element: <PartnerSubmitSummaryPage />,
               },
@@ -180,26 +176,10 @@ export const routes: RouteObject[] = [
                 path: "content/opportunity-reports",
                 element: <PartnerPlaceholder title="Opportunity Reports" />,
               },
-              {
-                path: "earnings/overview",
-                element: <PartnerPlaceholder title="Earnings Overview" />,
-              },
-              {
-                path: "earnings/invoices",
-                element: <PartnerPlaceholder title="Invoices & Payouts" />,
-              },
               { path: "profile", element: <PartnerProfilePage /> },
-              {
-                path: "resources/training",
-                element: <PartnerPlaceholder title="Training & Guidelines" />,
-              },
               {
                 path: "resources/availability",
                 element: <PartnerAvailabilityPage />,
-              },
-              {
-                path: "resources/documents",
-                element: <PartnerPlaceholder title="Resources & Documents" />,
               },
               {
                 path: "support/messages",

@@ -3,18 +3,13 @@ import {
   CalendarDays,
   CalendarClock,
   History,
-  PlusCircle,
   MessageSquare,
   Users,
   UserCheck,
   Globe,
   FileText,
-  DollarSign,
-  CreditCard,
   User,
-  BookOpen,
   Settings,
-  FolderOpen,
   LifeBuoy,
 } from "lucide-react";
 
@@ -53,11 +48,6 @@ export const partnerSidebarData = {
           title: "Past Sessions",
           url: "/partner/sessions/past",
           icon: History,
-        },
-        {
-          title: "Host New Session",
-          url: "/partner/sessions/host",
-          icon: PlusCircle,
         },
       ],
     },
@@ -98,22 +88,7 @@ export const partnerSidebarData = {
       ],
     },
     {
-      title: "Earnings",
-      items: [
-        {
-          title: "Earnings Overview",
-          url: "/partner/earnings/overview",
-          icon: DollarSign,
-        },
-        {
-          title: "Invoices & Payouts",
-          url: "/partner/earnings/invoices",
-          icon: CreditCard,
-        },
-      ],
-    },
-    {
-      title: "Profile & Resources",
+      title: "Profile & Settings",
       items: [
         {
           title: "My Profile",
@@ -121,19 +96,9 @@ export const partnerSidebarData = {
           icon: User,
         },
         {
-          title: "Training & Guidelines",
-          url: "/partner/resources/training",
-          icon: BookOpen,
-        },
-        {
           title: "Availability Settings",
           url: "/partner/resources/availability",
           icon: Settings,
-        },
-        {
-          title: "Resources & Documents",
-          url: "/partner/resources/documents",
-          icon: FolderOpen,
         },
       ],
     },

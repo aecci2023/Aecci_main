@@ -193,6 +193,10 @@ export const adminApi = createApi({
         userId ? `partners/profiles/${userId}` : `partners/me`,
       providesTags: ["Users"],
     }),
+    getMyPartnerProfile: builder.query<any, void>({
+      query: () => `partners/me`,
+      providesTags: ["Users"],
+    }),
     setupPartnerProfile: builder.mutation<any, any>({
       query: (body) => ({
         url: `partners/setup`,
@@ -216,6 +220,7 @@ export const {
   useGetPartnerProfilesQuery,
   useUpdatePartnerStatusMutation,
   useGetPartnerProfileQuery,
+  useGetMyPartnerProfileQuery,
   useSetupPartnerProfileMutation,
   useCreatePartnerManuallyMutation,
   useCreateSubscriptionOrderMutation,

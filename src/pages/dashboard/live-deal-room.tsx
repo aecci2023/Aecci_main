@@ -155,6 +155,7 @@ export default function LiveDealRoomPage() {
         showScreenSharingButton: true,
         showTextChat: true,
         showUserList: true,
+        showVirtualBackgroundButton: true,
         maxUsers: 50,
         layout: "Auto",
         showLayoutButton: true,

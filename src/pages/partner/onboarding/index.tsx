@@ -1,167 +1,190 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Badge } from "@/components/ui/badge";
-import {
-  CheckCircle2,
-  User,
-  Globe,
-  Calendar,
-  ChevronRight,
-  ChevronLeft,
-  Loader2,
-} from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { MultiSelect } from "@/components/ui/multi-select";
+import { CheckCircle2, ChevronRight, ChevronLeft, Loader2, Upload, User, Calendar as CalendarIcon, FileText, X } from "lucide-react";
 import { toast } from "sonner";
+import { useGetMyPartnerProfileQuery, useSetupPartnerProfileMutation } from "@/store/api/adminApi";
+import { useUploadFileMutation } from "@/store/api/authApi";
+import { format } from "date-fns";
+
+const LANGUAGE_OPTIONS = [
+  "Afrikaans", "Albanian", "Amharic", "Arabic", "Armenian", "Azerbaijani",
+  "Basque", "Belarusian", "Bengali", "Bosnian", "Bulgarian", "Burmese",
+  "Catalan", "Chinese (Mandarin)", "Chinese (Cantonese)", "Croatian", "Czech",
+  "Danish", "Dutch", "English", "Estonian", "Finnish", "French", "Galician",
+  "Georgian", "German", "Greek", "Gujarati", "Haitian Creole", "Hausa",
+  "Hebrew", "Hindi", "Hungarian", "Icelandic", "Igbo", "Indonesian", "Irish",
+  "Italian", "Japanese", "Javanese", "Kannada", "Kazakh", "Khmer", "Korean",
+  "Kurdish", "Kyrgyz", "Lao", "Latvian", "Lithuanian", "Macedonian", "Malay",
+  "Malayalam", "Maltese", "Marathi", "Mongolian", "Nepali", "Norwegian",
+  "Pashto", "Persian (Farsi)", "Polish", "Portuguese", "Punjabi", "Romanian",
+  "Russian", "Serbian", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Somali",
+  "Spanish", "Swahili", "Swedish", "Tagalog", "Tajik", "Tamil", "Telugu",
+  "Thai", "Turkish", "Turkmen", "Ukrainian", "Urdu", "Uzbek", "Vietnamese",
+  "Welsh", "Xhosa", "Yoruba", "Zulu",
+].map(lang => ({ label: lang, value: lang }));
 
 const STEPS = [
-  {
-    title: "Personal Profile",
-    description: "Tell clients about yourself",
-    icon: User,
-  },
-  {
-    title: "Expertise & Focus",
-    description: "Countries and sectors you specialise in",
-    icon: Globe,
-  },
-  {
-    title: "Availability",
-    description: "Set your weekly schedule",
-    icon: Calendar,
-  },
+  { label: "Partner Brief", icon: User },
+  { label: "Availability", icon: CalendarIcon },
+  { label: "Agreement", icon: FileText },
 ];
 
-const step1Schema = z.object({
-  organization: z.string().min(2, "Organisation name is required").max(200),
-  professionalTitle: z
-    .string()
-    .min(2, "Professional title is required")
-    .max(150),
-  bio: z.string().min(50, "Bio must be at least 50 characters").max(1500),
-  linkedinUrl: z
-    .string()
-    .url("Enter a valid LinkedIn URL")
-    .or(z.literal(""))
-    .optional(),
-});
-
-const step2Schema = z.object({
-  expertiseCountriesRaw: z.string().min(2, "Add at least one country"),
-  expertiseSectorsRaw: z.string().min(2, "Add at least one sector"),
-  yearsOfExperience: z.string().min(1, "Required"),
-});
-
-const step3Schema = z.object({
-  availabilityNotes: z.string().max(500).optional(),
-});
-
-type Step1 = z.infer<typeof step1Schema>;
-type Step2 = z.infer<typeof step2Schema>;
-type Step3 = z.infer<typeof step3Schema>;
-
-const DAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+interface SlotTime {
+  start: string;
+  end: string;
+}
 
 export default function PartnerOnboardingPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
-  const [selectedDays, setSelectedDays] = useState<string[]>([]);
 
-  const [s1Data, setS1Data] = useState<Step1 | null>(null);
-  const [s2Data, setS2Data] = useState<Step2 | null>(null);
+  // Step 1 state
+  const [profilePicture, setProfilePicture] = useState<string>("");
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [bio, setBio] = useState("");
 
-  const form1 = useForm<Step1>({ resolver: zodResolver(step1Schema) });
-  const form2 = useForm<Step2>({ resolver: zodResolver(step2Schema) });
-  const form3 = useForm<Step3>({ resolver: zodResolver(step3Schema) });
+  // Step 2 state
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const [slotTimes, setSlotTimes] = useState<Record<string, SlotTime>>({});
 
-  const handleStep1 = (values: Step1) => {
-    setS1Data(values);
-    setStep(1);
-  };
+  // Step 3 state
+  const [agreed, setAgreed] = useState(false);
 
-  const handleStep2 = (values: Step2) => {
-    setS2Data(values);
-    setStep(2);
-  };
+  const { data: profileData, isLoading: isProfileLoading } = useGetMyPartnerProfileQuery();
+  const [setupProfile] = useSetupPartnerProfileMutation();
+  const [uploadFile] = useUploadFileMutation();
 
-  const handleStep3 = async (values: Step3) => {
-    if (!s1Data || !s2Data) return;
-    setSubmitting(true);
+  const [prevProfileData, setPrevProfileData] = useState(profileData);
+  if (profileData !== prevProfileData) {
+    setPrevProfileData(profileData);
+    if (profileData?.data) {
+      const p = profileData.data;
+      const u = p.user;
+      if (u?.profilePicture) setProfilePicture(u.profilePicture);
+      if (u?.languagesSpoken?.length) setLanguages(u.languagesSpoken as string[]);
+      if (p.bio) setBio(p.bio);
+    }
+  }
+  if (isProfileLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-muted/20">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <p className="text-sm text-muted-foreground">Loading your profile…</p>
+        </div>
+      </div>
+    );
+  }
 
-    const payload = {
-      organization: s1Data.organization,
-      bio: s1Data.bio,
-      linkedinUrl: s1Data.linkedinUrl || undefined,
-      expertiseCountries: s2Data.expertiseCountriesRaw
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-      expertiseSectors: s2Data.expertiseSectorsRaw
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-      yearsOfExperience: s2Data.yearsOfExperience,
-      availableDays: selectedDays,
-      availabilityNotes: values.availabilityNotes || "",
-    };
-
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Photo must be under 5 MB");
+      return;
+    }
+    setUploadingPhoto(true);
     try {
-      const token = localStorage.getItem("accessToken");
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/partners/setup`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(payload),
-        },
-      );
-      const data = await res.json();
-      if (data.success) {
-        setStep(3);
-      } else {
-        toast.error(data.message || "Failed to save profile");
-      }
+      const result = await uploadFile({ file, folder: "partner-avatars" }).unwrap();
+      setProfilePicture(result.data.url);
+      toast.success("Photo uploaded");
     } catch {
-      toast.error("Network error. Please try again.");
+      toast.error("Upload failed");
     } finally {
-      setSubmitting(false);
+      setUploadingPhoto(false);
     }
   };
 
-  const toggleDay = (day: string) => {
-    setSelectedDays((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day],
-    );
+  const handleDateSelect = (dates: Date[] | undefined) => {
+    const next = dates || [];
+    setSelectedDates(next);
+    // Init slot times for newly added dates
+    const nextTimes = { ...slotTimes };
+    next.forEach((d) => {
+      const key = format(d, "yyyy-MM-dd");
+      if (!nextTimes[key]) nextTimes[key] = { start: "09:00", end: "17:00" };
+    });
+    // Remove times for deselected dates
+    Object.keys(nextTimes).forEach((k) => {
+      if (!next.find((d) => format(d, "yyyy-MM-dd") === k)) delete nextTimes[k];
+    });
+    setSlotTimes(nextTimes);
+  };
+
+  const handleTimeChange = (dateKey: string, type: "start" | "end", value: string) => {
+    setSlotTimes((prev) => ({
+      ...prev,
+      [dateKey]: { ...prev[dateKey], [type]: value },
+    }));
+  };
+
+  const removeDate = (dateKey: string) => {
+    setSelectedDates((prev) => prev.filter((d) => format(d, "yyyy-MM-dd") !== dateKey));
+    setSlotTimes((prev) => {
+      const next = { ...prev };
+      delete next[dateKey];
+      return next;
+    });
+  };
+
+  const handleNext = () => {
+    if (step === 0) {
+      if (!bio.trim() || bio.trim().length < 50) {
+        toast.error("Bio must be at least 50 characters");
+        return;
+      }
+      if (languages.length === 0) {
+        toast.error("Select at least one language");
+        return;
+      }
+    }
+    if (step === 1) {
+      for (const dateKey of Object.keys(slotTimes)) {
+        const s = slotTimes[dateKey];
+        if (s.start >= s.end) {
+          toast.error(`Invalid time range for ${dateKey} — start must be before end`);
+          return;
+        }
+      }
+    }
+    setStep((p) => p + 1);
+  };
+
+  const handleSubmit = async () => {
+    if (!agreed) {
+      toast.error("You must agree to the terms before proceeding");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const slots = Object.entries(slotTimes).map(([date, times]) => ({
+        date,
+        start: times.start,
+        end: times.end,
+      }));
+      await setupProfile({
+        bio: bio.trim(),
+        profilePicture,
+        languagesSpoken: languages,
+        signedAgreement: true,
+        availability: { slots },
+      }).unwrap();
+      setStep(3);
+    } catch {
+      toast.error("Failed to save profile. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (step === 3) {
@@ -170,15 +193,11 @@ export default function PartnerOnboardingPage() {
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-10 pb-8 space-y-4">
             <CheckCircle2 className="h-16 w-16 text-emerald-500 mx-auto" />
-            <h2 className="text-2xl font-bold">Profile Complete!</h2>
+            <h2 className="text-2xl font-bold">You're All Set!</h2>
             <p className="text-muted-foreground text-sm">
-              Your partner profile is set up. You can now start accepting client
-              sessions and grow your practice through AECCI Global Deal Room.
+              Your Partner Brief is live and your availability is published. Clients can now discover and book sessions with you.
             </p>
-            <Button
-              className="w-full"
-              onClick={() => navigate("/partner/dashboard")}
-            >
+            <Button className="w-full" onClick={() => navigate("/partner/dashboard")}>
               Go to Dashboard
             </Button>
           </CardContent>
@@ -189,18 +208,16 @@ export default function PartnerOnboardingPage() {
 
   return (
     <div className="min-h-screen bg-muted/20 p-6">
-      <div className="max-w-xl mx-auto space-y-6">
+      <div className="max-w-3xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight">
-            Welcome to AECCI Global Deal Room
-          </h1>
+          <h1 className="text-2xl font-bold tracking-tight">Complete Your Profile Setup</h1>
           <p className="text-muted-foreground text-sm">
-            Complete your partner profile to start working with clients
+            Please build your Partner Brief and availability settings to host Deal Room sessions.
           </p>
         </div>
 
-        {/* Progress */}
+        {/* Step indicators */}
         <div className="flex items-center gap-2">
           {STEPS.map((s, i) => (
             <div key={i} className="flex items-center flex-1 last:flex-none">
@@ -211,303 +228,251 @@ export default function PartnerOnboardingPage() {
                 {i < step ? <CheckCircle2 className="h-4 w-4" /> : i + 1}
               </div>
               <div className="ml-2 hidden sm:block">
-                <p
-                  className={`text-xs font-medium ${i === step ? "text-foreground" : "text-muted-foreground"}`}
-                >
-                  {s.title}
+                <p className={`text-xs font-medium ${i === step ? "text-foreground" : "text-muted-foreground"}`}>
+                  {s.label}
                 </p>
               </div>
               {i < STEPS.length - 1 && (
-                <div
-                  className={`h-px flex-1 mx-3 ${i < step ? "bg-emerald-500" : "bg-border"}`}
-                />
+                <div className={`h-px flex-1 mx-3 ${i < step ? "bg-emerald-500" : "bg-border"}`} />
               )}
             </div>
           ))}
         </div>
 
-        {/* Step 1 */}
+        {/* ── Step 1: Partner Brief ── */}
         {step === 0 && (
           <Card>
             <CardHeader>
-              <CardTitle>Personal Profile</CardTitle>
+              <CardTitle>1. Partner Brief (Public Profile)</CardTitle>
               <CardDescription>
-                This information is visible to clients when they browse partners
+                This information is shown on your marketplace card and to clients booking sessions.
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Form {...form1}>
-                <form
-                  onSubmit={form1.handleSubmit(handleStep1)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={form1.control}
-                    name="organization"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Organisation / Company Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e.g. Global Trade Advisors Pvt Ltd"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form1.control}
-                    name="professionalTitle"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Professional Title</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e.g. Senior Trade Consultant"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form1.control}
-                    name="bio"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Professional Biography</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Describe your background, expertise, and what value you offer to exporters..."
-                            className="min-h-36 resize-y"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form1.control}
-                    name="linkedinUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          LinkedIn URL{" "}
-                          <span className="text-muted-foreground font-normal">
-                            (optional)
-                          </span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="https://linkedin.com/in/yourprofile"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <div className="flex justify-end pt-2">
-                    <Button type="submit" className="gap-2">
-                      Next <ChevronRight className="h-4 w-4" />
-                    </Button>
+            <CardContent className="space-y-6">
+              {/* Photo */}
+              <div className="space-y-2">
+                <Label>Company Logo / Profile Photo</Label>
+                <div className="flex items-center gap-4">
+                  {profilePicture ? (
+                    <img
+                      src={profilePicture}
+                      alt="Profile"
+                      className="w-20 h-20 rounded-full object-cover border border-border"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center border border-border">
+                      <User className="w-8 h-8 text-muted-foreground" />
+                    </div>
+                  )}
+                  <div>
+                    <Label
+                      htmlFor="photo-upload"
+                      className="flex items-center gap-2 cursor-pointer bg-muted hover:bg-muted/80 text-sm px-4 py-2 rounded-md border transition-colors"
+                    >
+                      {uploadingPhoto ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Upload className="w-4 h-4" />
+                      )}
+                      {uploadingPhoto ? "Uploading…" : "Select Photo"}
+                    </Label>
+                    <input
+                      id="photo-upload"
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      onChange={handlePhotoChange}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">JPG, PNG or WebP · max 5 MB</p>
                   </div>
-                </form>
-              </Form>
+                </div>
+              </div>
+
+              {/* Languages */}
+              <div className="space-y-2">
+                <Label>Languages Spoken</Label>
+                <MultiSelect
+                  options={LANGUAGE_OPTIONS}
+                  selected={languages}
+                  onChange={setLanguages}
+                  placeholder="e.g. English, Hindi, Arabic"
+                />
+                <p className="text-xs text-muted-foreground">Select all languages you can conduct sessions in</p>
+              </div>
+
+              {/* Bio */}
+              <div className="space-y-2">
+                <Label>Professional Biography</Label>
+                <Textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  placeholder="Briefly describe your trade experience, focus markets, and the legal/compliance advisory services you offer..."
+                  className="min-h-36 resize-y"
+                />
+                <p className={`text-xs ${bio.length < 50 ? "text-muted-foreground" : "text-emerald-600"}`}>
+                  {bio.length} / 1500 characters {bio.length < 50 ? `(${50 - bio.length} more needed)` : "✓"}
+                </p>
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <Button onClick={handleNext} className="gap-2">
+                  Next <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         )}
 
-        {/* Step 2 */}
+        {/* ── Step 2: Availability ── */}
         {step === 1 && (
           <Card>
             <CardHeader>
-              <CardTitle>Expertise &amp; Focus Areas</CardTitle>
+              <CardTitle>2. Weekly Availability Schedule</CardTitle>
               <CardDescription>
-                Clients filter partners by country and sector — be specific
+                Select the days you are available to host sessions and define your active hours.
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Form {...form2}>
-                <form
-                  onSubmit={form2.handleSubmit(handleStep2)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={form2.control}
-                    name="expertiseCountriesRaw"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Expertise Countries</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e.g. UAE, Saudi Arabia, Germany (comma-separated)"
-                            {...field}
-                          />
-                        </FormControl>
-                        <p className="text-xs text-muted-foreground">
-                          Separate multiple countries with commas
-                        </p>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+            <CardContent className="space-y-6">
+              <div className="flex flex-col lg:flex-row gap-6">
+                {/* Calendar */}
+                <div className="flex flex-col items-center">
+                  <Calendar
+                    mode="multiple"
+                    selected={selectedDates}
+                    onSelect={handleDateSelect}
+                    className="rounded-md border bg-card"
+                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                   />
-                  <FormField
-                    control={form2.control}
-                    name="expertiseSectorsRaw"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Expertise Sectors</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e.g. Pharmaceuticals, Textiles, IT Services"
-                            {...field}
-                          />
-                        </FormControl>
-                        <p className="text-xs text-muted-foreground">
-                          Separate multiple sectors with commas
-                        </p>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form2.control}
-                    name="yearsOfExperience"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Years of International Trade Experience
-                        </FormLabel>
-                        <FormControl>
-                          <select
-                            {...field}
-                            className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  <p className="text-xs text-muted-foreground mt-2 text-center">
+                    Click dates to toggle availability. Past dates are disabled.
+                  </p>
+                </div>
+
+                {/* Slot list */}
+                <div className="flex-1 space-y-3 min-w-0">
+                  {selectedDates.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-full min-h-[200px] text-center text-muted-foreground border border-dashed rounded-lg p-6">
+                      <CalendarIcon className="w-8 h-8 mb-2 opacity-40" />
+                      <p className="text-sm">No dates selected yet.</p>
+                      <p className="text-xs mt-1">Click dates on the calendar to set your availability.</p>
+                    </div>
+                  ) : (
+                    [...selectedDates]
+                      .sort((a, b) => a.getTime() - b.getTime())
+                      .map((date) => {
+                        const key = format(date, "yyyy-MM-dd");
+                        const slot = slotTimes[key] || { start: "09:00", end: "17:00" };
+                        return (
+                          <div
+                            key={key}
+                            className="flex items-center gap-3 p-3 border rounded-lg bg-muted/20 hover:bg-muted/30 transition-colors"
                           >
-                            <option value="">Select years...</option>
-                            <option value="1-3">1–3 years</option>
-                            <option value="3-5">3–5 years</option>
-                            <option value="5-10">5–10 years</option>
-                            <option value="10+">10+ years</option>
-                          </select>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <div className="flex justify-between pt-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="gap-2"
-                      onClick={() => setStep(0)}
-                    >
-                      <ChevronLeft className="h-4 w-4" /> Back
-                    </Button>
-                    <Button type="submit" className="gap-2">
-                      Next <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </form>
-              </Form>
+                            <div className="min-w-[110px]">
+                              <p className="text-sm font-medium">{format(date, "EEE, MMM d")}</p>
+                              <p className="text-xs text-muted-foreground">{format(date, "yyyy")}</p>
+                            </div>
+                            <div className="flex items-center gap-2 flex-1 text-sm flex-wrap">
+                              <span className="text-muted-foreground text-xs">From</span>
+                              <Input
+                                type="time"
+                                value={slot.start}
+                                onChange={(e) => handleTimeChange(key, "start", e.target.value)}
+                                className="w-28 h-8 text-sm text-center"
+                              />
+                              <span className="text-muted-foreground text-xs">to</span>
+                              <Input
+                                type="time"
+                                value={slot.end}
+                                onChange={(e) => handleTimeChange(key, "end", e.target.value)}
+                                className="w-28 h-8 text-sm text-center"
+                              />
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7 text-muted-foreground hover:text-destructive"
+                              onClick={() => removeDate(key)}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        );
+                      })
+                  )}
+                  {selectedDates.length > 0 && (
+                    <p className="text-xs text-muted-foreground">
+                      {selectedDates.length} date{selectedDates.length !== 1 ? "s" : ""} selected
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-2">
+                <Button variant="outline" onClick={() => setStep(0)} className="gap-2">
+                  <ChevronLeft className="h-4 w-4" /> Back
+                </Button>
+                <Button onClick={handleNext} className="gap-2">
+                  Next <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         )}
 
-        {/* Step 3 */}
+        {/* ── Step 3: Agreement ── */}
         {step === 2 && (
           <Card>
             <CardHeader>
-              <CardTitle>Availability</CardTitle>
-              <CardDescription>
-                Let clients know when you are typically available for sessions
-              </CardDescription>
+              <CardTitle>3. Digital Agreement</CardTitle>
+              <CardDescription>AECCI Partner Terms &amp; Code of Conduct</CardDescription>
             </CardHeader>
-            <CardContent>
-              <Form {...form3}>
-                <form
-                  onSubmit={form3.handleSubmit(handleStep3)}
-                  className="space-y-4"
+            <CardContent className="space-y-6">
+              <div className="bg-muted/30 border rounded-lg p-5 space-y-3 text-sm text-muted-foreground leading-relaxed">
+                <p className="text-foreground font-medium">By signing this digital agreement, you commit to:</p>
+                <ul className="space-y-2 list-none">
+                  {[
+                    "Maintaining absolute confidentiality of all member information, trade documents, and business briefs shared.",
+                    "Providing verified, accurate trade compliance guidance, import/export rules, and localized market insights.",
+                    "Conducting live video sessions on-time with suitable networking environments (high bandwidth).",
+                    "Avoiding direct communication or business routing off-platform with clients met via the platform.",
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex items-start gap-3 p-4 border rounded-lg">
+                <Checkbox
+                  id="agree"
+                  checked={agreed}
+                  onCheckedChange={(v) => setAgreed(v === true)}
+                  className="mt-0.5"
+                />
+                <Label htmlFor="agree" className="cursor-pointer leading-relaxed text-sm">
+                  I have read and agree to the AECCI Partner Terms &amp; Code of Conduct. I understand that violations may result in suspension of my partner account.
+                </Label>
+              </div>
+
+              <div className="flex justify-between pt-2">
+                <Button variant="outline" onClick={() => setStep(1)} className="gap-2">
+                  <ChevronLeft className="h-4 w-4" /> Back
+                </Button>
+                <Button
+                  onClick={handleSubmit}
+                  disabled={!agreed || submitting}
+                  className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white"
                 >
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium">Available Days</p>
-                    <div className="flex flex-wrap gap-2">
-                      {DAYS.map((day) => (
-                        <button
-                          key={day}
-                          type="button"
-                          onClick={() => toggleDay(day)}
-                          className="focus:outline-none"
-                        >
-                          <Badge
-                            variant={
-                              selectedDays.includes(day) ? "default" : "outline"
-                            }
-                            className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                          >
-                            {day}
-                          </Badge>
-                        </button>
-                      ))}
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      {selectedDays.length === 0
-                        ? "No days selected"
-                        : `${selectedDays.length} day(s) selected`}
-                    </p>
-                  </div>
-
-                  <FormField
-                    control={form3.control}
-                    name="availabilityNotes"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Additional Notes{" "}
-                          <span className="text-muted-foreground font-normal">
-                            (optional)
-                          </span>
-                        </FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="e.g. Available mornings IST, prefer 1-hour slots, public holidays excluded..."
-                            className="min-h-24"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="flex justify-between pt-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="gap-2"
-                      onClick={() => setStep(1)}
-                    >
-                      <ChevronLeft className="h-4 w-4" /> Back
-                    </Button>
-                    <Button
-                      type="submit"
-                      disabled={submitting}
-                      className="gap-2"
-                    >
-                      {submitting ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <CheckCircle2 className="h-4 w-4" />
-                      )}
-                      Complete Setup
-                    </Button>
-                  </div>
-                </form>
-              </Form>
+                  {submitting ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <CheckCircle2 className="h-4 w-4" />
+                  )}
+                  Complete Setup &amp; Activate Dashboard
+                </Button>
+              </div>
             </CardContent>
           </Card>
         )}
