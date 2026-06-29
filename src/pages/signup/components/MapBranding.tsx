@@ -1,33 +1,31 @@
 import { motion } from "framer-motion";
-import { SpinningGlobe } from "@/components/portal/SpinningGlobe";
+import AnimatedWorldMap from "@/components/portal/AnimatedWorldMap";
 
 export default function MapBranding() {
   return (
     <div className="w-full h-full flex flex-col justify-between p-12 relative overflow-hidden bg-black text-white">
-      {/* Background Map Graphic or subtle dot grid */}
-      <div className="absolute inset-0 z-0 opacity-[0.15]">
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      {/* Animated world map — centered, low opacity */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-10">
+        <AnimatedWorldMap />
       </div>
+
+      {/* Subtle primary glow */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 70% 30%, color-mix(in oklch, var(--primary) 15%, transparent) 0%, transparent 60%)",
+        }}
+      />
 
       {/* Foreground Content */}
       <div className="relative z-10 flex flex-col items-start gap-4">
-        <img
-          src="/arccilogoWithText.png"
-          alt="AECCI"
-          className="h-16 w-auto brightness-0 invert"
-        />
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-12 text-white">
           AECCI Global Deal Room
         </h1>
         <p className="text-lg text-white/70 max-w-sm">
           Connect, trade, and expand your business footprint across borders.
         </p>
-      </div>
-
-      <div className="relative z-10 flex flex-col items-center mt-8">
-        <div className="scale-75 md:scale-90 origin-top">
-          <SpinningGlobe />
-        </div>
       </div>
 
       <div className="relative z-10">

@@ -89,6 +89,13 @@ export const authApi = createApi({
         body: userData,
       }),
     }),
+    partnerSignup: builder.mutation<any, any>({
+      query: (userData) => ({
+        url: "auth/partner-signup",
+        method: "POST",
+        body: userData,
+      }),
+    }),
     login: builder.mutation<any, any>({
       query: (userData) => ({
         url: "auth/login",
@@ -145,6 +152,7 @@ export const {
   useUploadFileMutation,
   useSendOtpMutation,
   useSignupMutation,
+  usePartnerSignupMutation,
   useLoginMutation,
   useVerifyOtpMutation,
   useUpdateProfileMutation,

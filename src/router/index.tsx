@@ -64,6 +64,7 @@ import UserInvoicesPage from "@/pages/dashboard/invoices";
 import AdminAuditLogsPage from "@/pages/admin/audit-logs";
 import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
 import AdminSettingsPage from "@/pages/admin/settings";
+import PartnerRegisterPage from "@/pages/partner/register";
 import PartnerOnboardingPage from "@/pages/partner/onboarding";
 import SponsorshipPage from "@/pages/events/sponsorship";
 import AdvertiseWithUsPage from "@/pages/events/advertise-with-us";
@@ -130,6 +131,7 @@ export const routes: RouteObject[] = [
     path: "/partner",
     children: [
       { path: "apply", element: <BecomePartnerPage /> },
+      { path: "register", element: <PartnerRegisterPage /> },
       { path: "onboarding", element: <PartnerOnboardingPage /> },
       {
         path: "",
