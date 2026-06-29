@@ -179,12 +179,12 @@ export const adminApi = createApi({
     }),
     updatePartnerStatus: builder.mutation<
       any,
-      { userId: string; status: string; tier?: string }
+      { userId: string; status: string; tier?: string; reason?: string }
     >({
-      query: ({ userId, status, tier }) => ({
+      query: ({ userId, status, tier, reason }) => ({
         url: `partners/profiles/${userId}/status`,
         method: "PUT",
-        body: { status, tier },
+        body: { status, tier, reason },
       }),
       invalidatesTags: ["Users"],
     }),

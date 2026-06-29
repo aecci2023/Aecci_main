@@ -84,7 +84,6 @@ export default function LoginPage() {
       }
 
       if (result.success) {
-        toast.success("Logged in successfully");
         const { accessToken, refreshToken, user } = result.data;
 
         localStorage.setItem("accessToken", accessToken);
@@ -92,10 +91,25 @@ export default function LoginPage() {
         localStorage.setItem("user", JSON.stringify(user));
 
         if (user.role === "admin") {
+          toast.success("Logged in successfully");
           navigate("/admin/dashboard");
         } else if (user.role === "partner") {
+          if (user.kycStatus === "pending_verification") {
+            toast.warning("Your application is under review. We'll notify you once approved.");
+            return;
+          }
+          toast.success("Logged in successfully");
           navigate("/partner/dashboard");
         } else {
+          if (user.kycStatus === "pending_verification") {
+            toast.warning("Your account is under review. You'll be notified once approved.");
+            return;
+          }
+          if (user.kycStatus === "rejected") {
+            navigate("/dashboard/rejected");
+            return;
+          }
+          toast.success("Logged in successfully");
           navigate("/dashboard");
         }
       }

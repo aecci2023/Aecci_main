@@ -45,6 +45,7 @@ export default function AdminVerificationDetailsPage() {
     useUpdateKycStatusMutation();
 
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
+  const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
 
   const user = data?.data;
@@ -167,7 +168,7 @@ export default function AdminVerificationDetailsPage() {
               <Button
                 className="bg-emerald-600 hover:bg-emerald-700 text-white"
                 disabled={isUpdating}
-                onClick={() => handleUpdateStatus("approved")}
+                onClick={() => setIsApproveDialogOpen(true)}
               >
                 <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC
               </Button>
@@ -505,6 +506,33 @@ export default function AdminVerificationDetailsPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Approve Dialog */}
+      <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Approve KYC Application</DialogTitle>
+            <DialogDescription>
+              The user will receive an approval email and gain full access to their account immediately.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsApproveDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+              onClick={() => {
+                setIsApproveDialogOpen(false);
+                handleUpdateStatus("approved");
+              }}
+              disabled={isUpdating}
+            >
+              <CheckCircle2 className="w-4 h-4 mr-2" /> Confirm Approval
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Reject Dialog */}
       <Dialog open={isRejectDialogOpen} onOpenChange={setIsRejectDialogOpen}>

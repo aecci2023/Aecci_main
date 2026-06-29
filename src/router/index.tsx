@@ -39,6 +39,7 @@ import AdminIndividualsPage from "@/pages/admin/individuals";
 import AdminPartnersPage from "@/pages/admin/partners";
 import AdminVerificationsPage from "@/pages/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
+import AdminPartnerVerificationDetailsPage from "@/pages/admin/verifications/partner-details";
 import AdminDocumentsPage from "@/pages/admin/documents";
 import AdminPartnerOnboardingPage from "@/pages/admin/partner-onboarding";
 import AdminSessionsPage from "@/pages/admin/sessions";
@@ -233,6 +234,10 @@ export const routes: RouteObject[] = [
           {
             path: "verifications/:id",
             element: <AdminVerificationDetailsPage />,
+          },
+          {
+            path: "verifications/partner/:id",
+            element: <AdminPartnerVerificationDetailsPage />,
           },
           {
             path: "users",
