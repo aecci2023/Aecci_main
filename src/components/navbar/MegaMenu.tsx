@@ -120,52 +120,9 @@ export default function MegaMenu({
           })}
         </div>
 
-        {/* ── MIDDLE: Dynamic 3rd Column for Sub-items ── */}
-        <AnimatePresence>
-          {showThirdColumn && (
-            <motion.div
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
-              transition={{ duration: 0.2 }}
-              className="w-[32%] flex flex-col px-8 border-r border-black/[0.06] dark:border-white/[0.07]"
-            >
-              <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-primary mb-3">
-                {activeSubItems.title}
-              </span>
-              <div className="flex flex-col gap-[2px]">
-                {activeSubItems.items.map((subItem, idx) => {
-                  const isActive = currentPath === subItem.href;
-                  return subItem.href.startsWith("http") ? (
-                    <a
-                      key={idx}
-                      href={subItem.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={onClose}
-                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "bg-primary/5 text-primary" : "text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"}`}
-                    >
-                      {subItem.title}
-                    </a>
-                  ) : (
-                    <Link
-                      key={idx}
-                      to={subItem.href}
-                      onClick={onClose}
-                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "bg-primary/5 text-primary" : "text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"}`}
-                    >
-                      {subItem.title}
-                    </Link>
-                  );
-                })}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* ── RIGHT: Explore & Resources ── */}
+        {/* ── MIDDLE: Explore & Resources ── */}
         <div
-          className={`flex flex-col pl-0 md:pl-8 transition-all duration-300 ${showThirdColumn ? "w-[30%]" : "w-[45%] pl-0 md:pl-8"}`}
+          className={`flex flex-col pl-0 md:pl-8 transition-all duration-300 ${showThirdColumn ? "w-[30%] border-r border-black/[0.06] dark:border-white/[0.07] pr-8 mr-8" : "w-[45%] pl-0 md:pl-8"}`}
         >
           {section.quickLinks && section.quickLinks.length > 0 && (
             <div className="mb-6">
@@ -295,6 +252,49 @@ export default function MegaMenu({
             </div>
           )}
         </div>
+
+        {/* ── RIGHT: Dynamic 3rd Column for Sub-items ── */}
+        <AnimatePresence>
+          {showThirdColumn && (
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.2 }}
+              className="w-[32%] flex flex-col pl-0"
+            >
+              <span className="block uppercase text-[9px] font-semibold tracking-[2px] text-primary mb-3">
+                {activeSubItems.title}
+              </span>
+              <div className="flex flex-col gap-[2px]">
+                {activeSubItems.items.map((subItem, idx) => {
+                  const isActive = currentPath === subItem.href;
+                  return subItem.href.startsWith("http") ? (
+                    <a
+                      key={idx}
+                      href={subItem.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={onClose}
+                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "bg-primary/5 text-primary" : "text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"}`}
+                    >
+                      {subItem.title}
+                    </a>
+                  ) : (
+                    <Link
+                      key={idx}
+                      to={subItem.href}
+                      onClick={onClose}
+                      className={`block py-1.5 px-3 -ml-3 rounded-md text-[13px] font-[400] transition-colors duration-150 no-underline ${isActive ? "bg-primary/5 text-primary" : "text-foreground/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"}`}
+                    >
+                      {subItem.title}
+                    </Link>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );

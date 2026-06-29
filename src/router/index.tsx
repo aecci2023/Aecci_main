@@ -85,6 +85,12 @@ import StrategicPartnersPage from "@/pages/about/strategic-partners";
 import AboutChamberPage from "@/pages/about/AboutChamber";
 import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
 import OurHistoryPage from "@/pages/about/OurHistory";
+import EPlatformInformationPage from "@/pages/e-platform/e-platform-information";
+import FormalitiesGuidelinesPage from "@/pages/e-platform/formalities-guidelines";
+import InformationForEServicesPage from "@/pages/e-platform/formalities-guidelines/information-for-e-services";
+import CooFormatPage from "@/pages/e-platform/formalities-guidelines/coo-format";
+import IndemnityBondFormatPage from "@/pages/e-platform/formalities-guidelines/indemnity-bond-format";
+import AttestationFeesInformationPage from "@/pages/e-platform/formalities-guidelines/attestation-fees-information";
 import ChamberPolicyPage from "@/pages/about/ChamberPolicy";
 import OfficeBearersPage from "@/pages/about/OfficeBearers";
 import RolesResponsibilityPage from "@/pages/about/RolesResponsibility";
@@ -712,10 +718,7 @@ export const routes: RouteObject[] = [
     path: "/ways-means/annual-report",
     element: <NotFound />,
   },
-  {
-    path: "/ways-means/commercial-directory",
-    element: <NotFound />,
-  },
+
   {
     path: "/ways-means/export-promotion-council",
     element: <NotFound />,
@@ -807,31 +810,31 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/e-platform/e-platform-information",
-    element: <NotFound />,
+    element: <EPlatformInformationPage />,
+  },
+  {
+    path: "/e-platform/information",
+    element: <EPlatformInformationPage />,
   },
   {
     path: "/e-platform/formalities-guidelines",
-    element: <NotFound />,
+    element: <FormalitiesGuidelinesPage />,
   },
   {
     path: "/e-platform/formalities-guidelines/information-for-e-services",
-    element: <NotFound />,
+    element: <InformationForEServicesPage />,
   },
   {
     path: "/e-platform/formalities-guidelines/indemnity-bond-format",
-    element: <NotFound />,
+    element: <IndemnityBondFormatPage />,
   },
   {
     path: "/e-platform/formalities-guidelines/coo-format",
-    element: <NotFound />,
+    element: <CooFormatPage />,
   },
   {
     path: "/e-platform/formalities-guidelines/attestation-fees-information",
-    element: <NotFound />,
-  },
-  {
-    path: "/e-platform/formalities-guidelines/authorized-chamber-card",
-    element: <NotFound />,
+    element: <AttestationFeesInformationPage />,
   },
   {
     path: "/trade-assistant-centre",

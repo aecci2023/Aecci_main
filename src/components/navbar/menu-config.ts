@@ -328,7 +328,7 @@ export const menuConfig: MegaMenuSection[] = [
       },
       {
         title: "Document Verification",
-        href: "/e-platform/document-verification",
+        href: "https://e-platform.aecci.org.in/e-co-verification",
         description:
           "Verify Certificates of Origin instantly with blockchain-grade trust.",
       },
@@ -355,13 +355,8 @@ export const menuConfig: MegaMenuSection[] = [
             title: "Attestation Fees information",
             href: "/e-platform/formalities-guidelines/attestation-fees-information",
           },
-          {
-            title: "Authorized Chamber Card",
-            href: "/e-platform/formalities-guidelines/authorized-chamber-card",
-          },
         ],
       },
-      { title: "Commercial Directory", href: "#" },
     ],
     resources: [], // Moved the sub items to Formalities & Guidelines
     mobileMenu: [
@@ -391,15 +386,11 @@ export const menuConfig: MegaMenuSection[] = [
             title: "Attestation Fees information",
             href: "/e-platform/formalities-guidelines/attestation-fees-information",
           },
-          {
-            title: "Authorized Chamber Card",
-            href: "/e-platform/formalities-guidelines/authorized-chamber-card",
-          },
         ],
       },
       {
         title: "Document Verification",
-        href: "/e-platform/document-verification",
+        href: "https://e-platform.aecci.org.in/e-co-verification",
       },
     ],
   },
