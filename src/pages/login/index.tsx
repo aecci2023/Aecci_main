@@ -204,10 +204,11 @@ export default function LoginPage() {
     if (view === "login") {
       return (
         <>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">
+          <img src="/arccilogoWithText.png" alt="AECCI" className="h-24 w-auto object-contain mb-6 mx-auto" />
+          <h1 className="text-3xl font-bold tracking-tight mb-2 text-center w-full">
             {requiresAdminOtp ? "Verify Admin Login" : "Welcome Back"}
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-center w-full">
             {requiresAdminOtp
               ? "Enter the 6-digit code sent to your email to access the admin portal."
               : "Sign in to your AECCI Global Deal Room account"}
@@ -519,7 +520,7 @@ export default function LoginPage() {
       {/* Right Form Section */}
       <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col relative bg-background overflow-y-auto h-screen">
         <div className="flex-1 w-full max-w-xl mx-auto px-6 py-12 md:px-12 flex flex-col justify-center">
-          <div className="flex flex-col items-start mb-8">{renderHeader()}</div>
+          <div className="flex flex-col items-center mb-8 w-full">{renderHeader()}</div>
 
           {renderForm()}
 

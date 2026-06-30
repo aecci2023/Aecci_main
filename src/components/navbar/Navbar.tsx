@@ -189,23 +189,21 @@ export default function Navbar() {
               ].join(" ")}
             >
               {/* Auth */}
-              <a
-                href="https://e-platform.aecci.org.in/login"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/login"
+                onClick={handleClose}
                 className="inline-flex items-center justify-center h-8 px-3 text-[12px] font-[400] text-foreground/65 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
               >
-                Member Login
-              </a>
+                Login
+              </Link>
 
-              <a
-                href="https://e-platform.aecci.org.in/register"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/signup"
+                onClick={handleClose}
                 className="inline-flex items-center justify-center h-8 px-4 text-[12px] font-[500] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
               >
-                Become Member
-              </a>
+                Join Now
+              </Link>
             </div>
           </div>
         </div>

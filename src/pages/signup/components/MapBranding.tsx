@@ -5,18 +5,9 @@ export default function MapBranding() {
   return (
     <div className="w-full h-full flex flex-col justify-between p-12 relative overflow-hidden bg-black text-white">
       {/* Animated world map — centered, low opacity */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-10">
+      <div className="absolute inset-0 z-0 pointer-events-none [&>div]:!translate-x-0">
         <AnimatedWorldMap />
       </div>
-
-      {/* Subtle primary glow */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 70% 30%, color-mix(in oklch, var(--primary) 15%, transparent) 0%, transparent 60%)",
-        }}
-      />
 
       {/* Foreground Content */}
       <div className="relative z-10 flex flex-col items-start gap-4">
