@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { MagazinesSection } from "@/components/MagazinesSection";
+import { motion } from "framer-motion";
 
 const videos = [
   {
@@ -166,8 +165,7 @@ export default function MediaCenterPage() {
         </div>
       </section>
 
-      {/* Magazines Section */}
-      <MagazinesSection />
+      
 
       {/* Video Grid */}
       <section className="py-20 md:py-24 bg-muted/30">

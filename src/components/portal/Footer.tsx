@@ -1,13 +1,13 @@
 // import { ThemeSelector } from "@/components/themes/theme-selector"
+import { ThemeSelector } from "@/components/themes/theme-selector";
 import {
   FacebookLogo,
+  InstagramLogo,
+  LinkedinLogo,
   TwitterLogo,
   YoutubeLogo,
-  LinkedinLogo,
-  InstagramLogo,
 } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
-import { ThemeSelector } from "@/components/themes/theme-selector";
 
 const footerSections = [
   {
@@ -36,7 +36,6 @@ const footerSections = [
   {
     title: "AECCI Spotlight",
     links: [
-      { label: "Upcoming events", href: "/events/upcoming-events" },
       { label: "Sponsorship", href: "/events/sponsorship" },
       { label: "Past Events", href: "/events/past-events" },
       { label: "Advertise With Us", href: "/events/advertise-with-us" },
@@ -98,8 +97,7 @@ export default function Footer() {
               </p>
               <p className="mt-1">
                 604 | 6th floor | Hilton Center | Plot no.66 | Sector No.11 |
-              </p>
-              <p>CBD Belapur | Navi Mumbai-400614 | Maharashtra-India</p>
+                CBD Belapur | Navi Mumbai-400614 | Maharashtra-India</p>
             </div>
           </div>
 

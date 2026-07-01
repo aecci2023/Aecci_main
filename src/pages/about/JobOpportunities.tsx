@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
-import { Mail, Users, TrendingUp, Award, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { motion } from "framer-motion";
+import { ArrowRight, Award, Mail, TrendingUp, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const perks = [
   {
@@ -153,6 +153,109 @@ export default function JobOpportunities() {
         </div>
       </section>
 
+      {/* Perks */}
+<section className="py-20 md:py-24 bg-muted/30">
+  <div className="max-w-7xl mx-auto px-6 md:px-12">
+
+
+
+    {/* Current Opening */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="mb-16"
+    >
+      <Card className="border-primary/20 shadow-sm overflow-hidden">
+        <CardContent className="p-0">
+
+          <div className="bg-primary px-8 py-6">
+            <span className="text-primary-foreground/80 text-xs uppercase tracking-widest font-semibold">
+              Current Opening
+            </span>
+
+            <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground mt-2">
+              Event Sales & Marketing Executive
+            </h2>
+          </div>
+
+          <div className="p-8 md:p-10">
+
+            <p className="text-muted-foreground leading-7 mb-8">
+              Are you passionate about sales and skilled at convincing people?
+              We're looking for a dynamic professional to maximize participation
+              in business events and connect Indian businesses with global
+              opportunities.
+            </p>
+
+            <div className="grid lg:grid-cols-2 gap-10">
+
+              <div>
+                <h3 className="font-bold text-lg mb-5">
+                  Key Responsibilities
+                </h3>
+
+                <ul className="space-y-4">
+                  <li>• Identify and connect with Indian exporters, manufacturers and MSMEs.</li>
+                  <li>• Generate leads through calls, emails and outreach channels.</li>
+                  <li>• Build strong relationships and convert leads into registrations.</li>
+                  <li>• Follow up consistently and achieve sales targets.</li>
+                  <li>• Coordinate with marketing and event teams to maximize participation.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-lg mb-5">
+                  Preferred Experience
+                </h3>
+
+                <ul className="space-y-4">
+                  <li>• 2+ years in Event Sales, B2B Sales or Corporate Marketing.</li>
+                  <li>• Familiarity with India's export ecosystem is an added advantage.</li>
+                  <li>• Strong communication and relationship-building skills.</li>
+                  <li>• Ability to influence decisions and drive event participation.</li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div className="mt-10 rounded-xl bg-muted p-6 border">
+              <p className="font-medium mb-5">
+                If you have the ability to build relationships, influence decisions
+                and drive event participation, we'd be glad to hear from you.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="mailto:hr@aecci.org.in"
+                  className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-semibold"
+                >
+                  Apply Now
+                </a>
+
+                <a
+                  href="tel:8433720996"
+                  className="border px-6 py-3 rounded-full font-semibold"
+                >
+                  📞 8433720996
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+
+    {/* Submit CV Card */}
+    <motion.div>
+      ...
+    </motion.div>
+
+  </div>
+</section>
+
       {/* CTA */}
       <section className="relative py-20 bg-foreground overflow-hidden">
         <div className="absolute inset-0 bg-primary/10 blur-[120px] pointer-events-none" />
@@ -185,6 +288,7 @@ export default function JobOpportunities() {
           </motion.div>
         </div>
       </section>
+      
     </div>
   );
 }

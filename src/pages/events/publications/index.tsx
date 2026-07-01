@@ -1,25 +1,25 @@
-import { motion } from "framer-motion";
-import { BookOpen, Phone, ArrowRight, FileText } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from "@/components/ui/accordion";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { ArrowRight, BookOpen, FileText, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
-import aiMagazineCover from "@/assets/magzines/AI-IN-INTERNATIONAL-TRADE-VOL-V.png";
-import pharmaMagazineCover from "@/assets/magzines/ASIAN-PHARMA-CHEMICAL-OUTLOOK-2022-23.png";
-import tradeMagazineCover from "@/assets/magzines/AM-II-Trade-Assistance-Guidelines.png";
-import globalMagazineCover from "@/assets/magzines/Global-Perspective-2017-18.png";
 import agroMagazineCover from "@/assets/magzines/AECCI_AM20-21_web-version-2.png";
+import aiMagazineCover from "@/assets/magzines/AI-IN-INTERNATIONAL-TRADE-VOL-V.png";
+import tradeMagazineCover from "@/assets/magzines/AM-II-Trade-Assistance-Guidelines.png";
+import pharmaMagazineCover from "@/assets/magzines/ASIAN-PHARMA-CHEMICAL-OUTLOOK-2022-23.png";
+import globalMagazineCover from "@/assets/magzines/Global-Perspective-2017-18.png";
 
-import aiMagazinePdf from "@/assets/magzines/AI-IN-INTERNATIONAL-TRADE-VOL-V.pdf";
-import pharmaMagazinePdf from "@/assets/magzines/ASIAN-PHARMA-CHEMICAL-OUTLOOK-2022-23.pdf";
-import tradeMagazinePdf from "@/assets/magzines/AM-II-Trade-Assistance-Guidelines.pdf";
-import globalMagazinePdf from "@/assets/magzines/Global-Perspective-2017-18.pdf";
 import agroMagazinePdf from "@/assets/magzines/AECCI_AM20-21_web-version-2.pdf";
+import aiMagazinePdf from "@/assets/magzines/AI-IN-INTERNATIONAL-TRADE-VOL-V.pdf";
+import tradeMagazinePdf from "@/assets/magzines/AM-II-Trade-Assistance-Guidelines.pdf";
+import pharmaMagazinePdf from "@/assets/magzines/ASIAN-PHARMA-CHEMICAL-OUTLOOK-2022-23.pdf";
+import globalMagazinePdf from "@/assets/magzines/Global-Perspective-2017-18.pdf";
 
 const magazines = [
   {

@@ -1,10 +1,10 @@
-import * as React from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { User } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
 
-import { useLocation, Link } from "react-router-dom";
-import { menuConfig } from "./menu-config";
+import { Link, useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
+import { menuConfig } from "./menu-config";
 import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
@@ -191,7 +191,7 @@ export default function Navbar() {
               {/* Auth */}
               <a
                 href="https://e-platform.aecci.org.in/login"
-                target="_blank"
+                target="_self"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center h-8 px-3 text-[12px] font-[400] text-foreground/65 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
               >
@@ -200,7 +200,7 @@ export default function Navbar() {
 
               <a
                 href="https://e-platform.aecci.org.in/register"
-                target="_blank"
+                target="_self"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center h-8 px-4 text-[12px] font-[500] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
               >

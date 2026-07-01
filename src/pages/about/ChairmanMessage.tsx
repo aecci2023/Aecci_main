@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { Handshake, Globe, TrendingUp, Shield } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { motion } from "framer-motion";
+import { Globe, Handshake, Shield, TrendingUp } from "lucide-react";
 import chairmanBg from "../../assets/images/image.png";
 
 const pillars = [
@@ -67,9 +67,8 @@ export default function ChairmanMessage() {
                 <div className="h-px flex-1 bg-primary/30" />
               </div>
               <p className="text-primary text-xs md:text-sm font-bold uppercase tracking-[0.2em]">
-                CONNECTING INDIAN ENTERPRISE
-                <br />
-                WITH GLOBAL OPPORTUNITIES
+                Building Global Connections. Creating New Opportunities.
+              
               </p>
             </motion.div>
 
@@ -86,27 +85,15 @@ export default function ChairmanMessage() {
                 Welcome to AECCI
               </p>
               <p>
-                At AECCI, we believe that international trade is built on trust,
-                integrity, innovation, and collaboration. Our mission is to
-                empower exporters, manufacturers, entrepreneurs, and
-                professionals by providing world-class business support, legal
-                guidance, market intelligence, and global networking
-                opportunities.
+                At AECCI, our mission is to empower Indian businesses by connecting them with global opportunities, trusted experts, and strategic international partners. Through our Global Deal Room, we provide a platform for exporters, manufacturers, entrepreneurs, and investors to build meaningful business relationships, access new markets, and receive expert guidance.
               </p>
               <p>
-                We are committed to strengthening India's position in
-                international trade through strategic partnerships, digital
-                transformation, and sustainable business practices.
+                By fostering collaboration with government bodies, trade organizations, and international business networks, we are committed to helping Indian enterprises grow confidently in the global marketplace.
               </p>
               <p>
-                Together, we can create new opportunities, expand global
-                markets, and contribute to India's economic growth.
+                We invite you to join AECCI and become part of a dynamic global network shaping the future of international trade.
               </p>
-              <p>
-                I warmly invite exporters, industrialists, startups, and
-                business leaders to become part of the AECCI family and join us
-                in building a stronger global business community.
-              </p>
+              
             </motion.div>
           </div>
 

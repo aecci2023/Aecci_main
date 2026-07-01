@@ -92,10 +92,10 @@ export const menuConfig: MegaMenuSection[] = [
         description:
           "Exclusive access to premium tools, discounts, and trade networks.",
         items: [
-          {
-            title: "Patron Membership",
-            href: "/services/membership/patron-membership",
-          },
+          // {
+          //   title: "Patron Membership",
+          //   href: "/services/membership/patron-membership",
+          // },
           {
             title: "Membership & its benefits",
             href: "/services/membership/benefits",
@@ -131,11 +131,11 @@ export const menuConfig: MegaMenuSection[] = [
       {
         title: "Membership",
         href: "/services/membership",
-        items: [
-          {
-            title: "Patron Membership",
-            href: "/services/membership/patron-membership",
-          },
+        items: [  
+          // {
+          //   title: "Patron Membership",
+          //   href: "/services/membership/patron-membership",
+          // },
           {
             title: "Membership & its benefits",
             href: "/services/membership/benefits",
@@ -271,12 +271,7 @@ export const menuConfig: MegaMenuSection[] = [
     href: "#",
     hasDropdown: true,
     featured: [
-      {
-        title: "Upcoming events",
-        href: "/events/upcoming-events",
-        description:
-          "Key meetings, roundtables, and governmental policy discussions.",
-      },
+
       {
         title: "Sponsorship",
         href: "/events/sponsorship",
@@ -296,7 +291,6 @@ export const menuConfig: MegaMenuSection[] = [
       { title: "Publications", href: "/events/publications" },
     ],
     mobileMenu: [
-      { title: "Upcoming events", href: "/events/upcoming-events" },
       { title: "Past Events", href: "/events/past-events" },
       { title: "Sponsorship", href: "/events/sponsorship" },
       { title: "Advertise With Us", href: "/events/advertise-with-us" },

@@ -1,24 +1,24 @@
 import { motion } from "framer-motion";
 import {
-  ShieldCheck,
-  Clock,
-  BarChart,
   ArrowRight,
-  Play,
-  Globe2,
-  Users,
-  Handshake,
-  Globe,
-  Rocket,
-  Lock,
+  BarChart,
   Box,
-  CheckCircle,
   Briefcase,
+  CheckCircle,
+  Clock,
+  Globe,
+  Globe2,
+  Handshake,
+  Lock,
+  Play,
+  Rocket,
+  ShieldCheck,
+  Users,
 } from "lucide-react";
 
+import { QRCodeSVG } from "qrcode.react";
 import { Link } from "react-router-dom";
 import AnimatedWorldMap from "./AnimatedWorldMap";
-import { QRCodeSVG } from "qrcode.react";
 
 export default function GlobalLanding() {
   return (
@@ -246,8 +246,7 @@ export default function GlobalLanding() {
                   Become A Collaboration Partner
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  Expand your global reach and create stronger trade connections
-                  with Indian exporters.
+                  Expand your global reach and create stronger trade <br />connections with Indian exporters.
                 </p>
 
                 <div className="grid grid-cols-2 gap-4 text-sm font-medium">
@@ -336,7 +335,7 @@ export default function GlobalLanding() {
             <div className="flex items-center gap-4 px-4">
               <Globe className="w-10 h-10 text-primary shrink-0" />
               <div>
-                <h3 className="text-3xl font-bold text-foreground">45+</h3>
+                <h3 className="text-3xl font-bold text-foreground">50+</h3>
                 <p className="text-xs text-muted-foreground uppercase tracking-wide font-semibold mt-1">
                   Countries Covered
                 </p>
