@@ -36,7 +36,7 @@ export default function ApprovalPage() {
         <Card className="border-emerald-500/20 bg-emerald-500/5 text-center shadow-md">
           <CardHeader className="pt-8 pb-4">
             <CheckCircle2 className="size-16 text-emerald-500 mx-auto" />
-            <CardTitle className="text-2xl mt-4">Screening Approved!</CardTitle>
+            <CardTitle className="text-2xl mt-4">Verification Approved!</CardTitle>
             <CardDescription>
               Your organization has been successfully verified.
             </CardDescription>

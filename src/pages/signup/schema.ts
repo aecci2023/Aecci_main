@@ -3,9 +3,9 @@ import * as z from "zod";
 const fileSchema = z.custom<File>(
   (val) =>
     val instanceof File &&
-    val.type === "application/pdf" &&
+    (val.type === "application/pdf" || val.type.startsWith("image/")) &&
     val.size <= 5 * 1024 * 1024,
-  "Must be a PDF file under 5MB",
+  "Must be a PDF or Image file under 5MB",
 );
 
 const fileOrUrlSchema = z.union([

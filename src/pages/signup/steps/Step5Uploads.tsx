@@ -10,7 +10,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { UploadCloud, FileText, X, AlertCircle } from "lucide-react";
+import { UploadCloud, FileText, X, AlertCircle, CheckCircle2, XCircle, RefreshCw } from "lucide-react";
 import { useState } from "react";
 
 interface Props {
@@ -30,6 +30,18 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
 
   const [fileErrors, setFileErrors] = useState<Record<string, string>>({});
 
+  const [num1, setNum1] = useState(() => Math.floor(Math.random() * 10) + 1);
+  const [num2, setNum2] = useState(() => Math.floor(Math.random() * 10) + 1);
+  const [captchaInput, setCaptchaInput] = useState("");
+  
+  const generateCaptcha = () => {
+    setNum1(Math.floor(Math.random() * 10) + 1);
+    setNum2(Math.floor(Math.random() * 10) + 1);
+    setCaptchaInput("");
+  };
+
+  const isCaptchaValid = parseInt(captchaInput) === num1 + num2;
+
   const getFileName = (file: File | string) => {
     if (file instanceof File) return file.name;
     try {
@@ -45,8 +57,8 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
     let errorMsg = "";
 
     for (const file of files) {
-      if (file.type !== "application/pdf") {
-        errorMsg = "Only PDF files are allowed.";
+      if (file.type !== "application/pdf" && !file.type.startsWith("image/")) {
+        errorMsg = "Only PDF and Image files are allowed.";
       } else if (file.size > MAX_FILE_SIZE) {
         errorMsg = "File size must be less than 5MB.";
       } else {
@@ -72,8 +84,7 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
           Upload Documents
         </h1>
         <p className="text-muted-foreground text-sm">
-          Please provide required compliance documents for verification. PDF
-          only, Max 5MB per file.
+          Please provide required compliance documents for verification. PDF and Image files allowed, Max 5MB per file.
         </p>
       </div>
 
@@ -140,13 +151,13 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
                         Drag & drop files here
                       </p>
                       <p className="text-xs text-muted-foreground mb-4">
-                        PDF only (Max 5MB each)
+                        PDF and Images (Max 5MB each)
                       </p>
                       <div className="mt-2 w-full max-w-xs relative">
                         <Input
                           type="file"
                           multiple
-                          accept="application/pdf"
+                          accept="application/pdf, image/*"
                           onChange={(e) => {
                             if (e.target.files) {
                               const validFiles = validateFiles(
@@ -244,13 +255,13 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
                         Upload your brochure
                       </p>
                       <p className="text-xs text-muted-foreground mb-4">
-                        PDF only (Max 5MB each)
+                        PDF and Images (Max 5MB each)
                       </p>
                       <div className="mt-2 w-full max-w-xs relative">
                         <Input
                           type="file"
                           multiple
-                          accept="application/pdf"
+                          accept="application/pdf, image/*"
                           onChange={(e) => {
                             if (e.target.files) {
                               const validFiles = validateFiles(
@@ -308,6 +319,39 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
         />
       </div>
 
+      <div className="mt-8 p-4 bg-muted/30 rounded-lg border border-border/50">
+        <label className="text-sm font-medium mb-3 block">
+          Security Check <span className="text-red-500">*</span>
+        </label>
+        <div className="flex items-center gap-4">
+          <div className="bg-background px-4 py-2 rounded border border-border font-mono text-lg font-bold tracking-wider select-none">
+            {num1} + {num2} = ?
+          </div>
+          <Input 
+            type="text" 
+            placeholder="Enter result" 
+            className="w-32"
+            value={captchaInput}
+            onChange={(e) => setCaptchaInput(e.target.value)}
+          />
+          {captchaInput && (
+            <span className={isCaptchaValid ? "text-green-500" : "text-red-500"}>
+              {isCaptchaValid ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+            </span>
+          )}
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={generateCaptcha}
+            className="text-muted-foreground hover:text-foreground"
+            title="Refresh Captcha"
+          >
+            <RefreshCw className="w-5 h-5" />
+          </Button>
+        </div>
+      </div>
+
       <div className="mt-8">
         <FormField
           control={control}
@@ -345,7 +389,7 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
             nextStep();
           }}
           type="button"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isCaptchaValid}
         >
           {isSubmitting ? (
             <>

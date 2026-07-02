@@ -27,7 +27,7 @@ export default function SessionDetailsPage() {
   const session = data?.data;
 
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [step, setStep] = useState(1); // 1: Screening Approved, 2: Terms Acceptance, 3: Payment Checkout
+  const [step, setStep] = useState(1); // 1: Verification Approved, 2: Terms Acceptance, 3: Payment Checkout
 
   if (isLoading || !session) {
     return (
@@ -111,8 +111,8 @@ export default function SessionDetailsPage() {
               </CardHeader>
               <CardContent className="text-xs space-y-2 text-muted-foreground">
                 <p>
-                  <strong>Registration & Screening:</strong> Non-refundable once
-                  document screening begins.
+                  <strong>Registration & Verification:</strong> Non-refundable once
+                  document verification begins.
                 </p>
                 <p>
                   <strong>Collaboration Partner No-Show:</strong> In case the
@@ -148,7 +148,7 @@ export default function SessionDetailsPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-semibold">
-                        1. Compliance Screening
+                        1. Compliance Verification
                       </h4>
                       <p className="text-xs text-muted-foreground">
                         Company profile & IEC/GST verified by Secretariat.

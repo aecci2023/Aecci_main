@@ -36,7 +36,7 @@ import PartnerBriefPage from "@/pages/dashboard/partner-brief";
 import PaymentPage from "@/pages/dashboard/payment";
 import PaymentSuccessPage from "@/pages/dashboard/payment-success";
 import RejectedApplicationPage from "@/pages/dashboard/rejected";
-import ScreeningPage from "@/pages/dashboard/screening";
+import VerificationPage from "@/pages/dashboard/verification";
 import ServicePurchasePage from "@/pages/dashboard/service-purchase";
 import SessionDetailsPage from "@/pages/dashboard/session-details";
 import SessionSummaryPage from "@/pages/dashboard/session-summary";
@@ -386,8 +386,8 @@ export const routes: RouteObject[] = [
             element: <ApplicationPage />,
           },
           {
-            path: "screening",
-            element: <ScreeningPage />,
+            path: "verification",
+            element: <VerificationPage />,
           },
           {
             path: "approval",

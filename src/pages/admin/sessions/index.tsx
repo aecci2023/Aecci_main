@@ -147,7 +147,7 @@ export default function AdminSessionsPage() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Statuses</SelectItem>
-            <SelectItem value="pending">Pending Screening</SelectItem>
+            <SelectItem value="pending">Pending Verification</SelectItem>
             <SelectItem value="approved">Approved</SelectItem>
             <SelectItem value="rejected">Rejected</SelectItem>
           </SelectContent>
@@ -216,7 +216,7 @@ export default function AdminSessionsPage() {
                   </TableCell>
                   <TableCell>
                     <Badge className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 text-[10px] font-semibold">
-                      Pending Screening
+                      Pending Verification
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">

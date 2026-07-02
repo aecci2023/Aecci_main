@@ -15,6 +15,7 @@ import {
 
 import Step1Registration from "../steps/Step1Registration";
 import Step2OTP from "../steps/Step2OTP";
+import { parsePhoneNumber } from "react-phone-number-input";
 
 import { Progress } from "@/components/ui/progress";
 import Step3Profile from "../steps/Step3Profile";
@@ -173,29 +174,32 @@ export default function SignupWizard() {
           const uploadFiles = async (
             files: (File | string)[],
             folder: string,
+            fileType: string,
           ) => {
-            const urls: string[] = [];
+            const uploaded: { name: string; url: string; type: string }[] = [];
             for (const file of files) {
               if (typeof file === "string") {
-                urls.push(file);
+                uploaded.push({ name: file.split('/').pop() || 'file', url: file, type: fileType });
               } else {
                 const res = await uploadFile({ file, folder }).unwrap();
                 if (res.success) {
-                  urls.push(res.data.url);
+                  uploaded.push({ name: file.name, url: res.data.url, type: fileType });
                 }
               }
             }
-            return urls;
+            return uploaded;
           };
 
           const uploadedDocuments =
             data.documents && data.documents.length > 0
-              ? await uploadFiles(data.documents, "documents")
-              : undefined;
+              ? await uploadFiles(data.documents, "documents", "document")
+              : [];
           const uploadedCatalogue =
             data.productCatalogue && data.productCatalogue.length > 0
-              ? await uploadFiles(data.productCatalogue, "catalog")
-              : undefined;
+              ? await uploadFiles(data.productCatalogue, "catalog", "product_catalogue")
+              : [];
+
+          const allUploadedFiles = [...uploadedDocuments, ...uploadedCatalogue];
 
           // Map the rest of the profile data
           const profileData: Record<string, any> = { ...data };
@@ -207,12 +211,27 @@ export default function SignupWizard() {
           // Map mobile to mobileNumber for backend compatibility
           const mobileNumber = profileData.mobile;
           delete profileData.mobile;
+          
+          let countryCode = "";
+          let cleanMobile = mobileNumber;
+          try {
+            if (mobileNumber) {
+              const parsed = parsePhoneNumber(mobileNumber);
+              if (parsed) {
+                countryCode = `+${parsed.countryCallingCode}`;
+                cleanMobile = parsed.nationalNumber;
+              }
+            }
+          } catch (e) {
+            // fallback
+            console.log(e)
+          }
 
           const submitData = {
             ...profileData,
-            mobileNumber,
-            documents: uploadedDocuments,
-            productCatalogue: uploadedCatalogue,
+            mobileNumber: cleanMobile,
+            countryCode,
+            uploadedFiles: allUploadedFiles,
           };
 
           if (isResubmit) {

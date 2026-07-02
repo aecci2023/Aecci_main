@@ -29,7 +29,7 @@ export default function Step6Complete() {
           <Clock className="size-6 text-primary shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-foreground mb-1">
-              Pending Screening Review
+              Pending Verification Review
             </h3>
             <p className="text-sm text-muted-foreground">
               Our compliance team is currently reviewing your profile to ensure

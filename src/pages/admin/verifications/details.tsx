@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   XCircle,
   FileText,
-  Download,
   ArrowLeft,
   Building2,
 } from "lucide-react";
@@ -34,6 +33,8 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 
+import { DocumentViewerModal } from "@/components/common/DocumentViewerModal";
+
 export default function AdminVerificationDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ export default function AdminVerificationDetailsPage() {
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
   const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
+  const [viewDocument, setViewDocument] = useState<{ url: string; label: string } | null>(null);
 
   const user = data?.data;
 
@@ -124,15 +126,13 @@ export default function AdminVerificationDetailsPage() {
               <FileText className="w-5 h-5 text-primary" />
               <CardTitle className="text-base font-medium">{label}</CardTitle>
             </div>
-            <Button variant="outline" size="sm" asChild>
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2"
-              >
-                <Download className="w-4 h-4" /> View Document
-              </a>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setViewDocument({ url, label })}
+              className="flex items-center gap-2"
+            >
+              <FileText className="w-4 h-4" /> View Document
             </Button>
           </div>
         </CardHeader>
@@ -192,35 +192,59 @@ export default function AdminVerificationDetailsPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Account Information */}
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>Account Information</CardTitle>
-            <CardDescription>
-              Primary details submitted during registration.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>User Profile & Verification Details</CardTitle>
+          <CardDescription>
+            Comprehensive overview of all submitted registration data.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-10">
+          
+          {/* Data Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 gap-x-4">
+            
+            {user.applicationNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Application Number</p>
+                <p className="font-medium">{user.applicationNumber}</p>
+              </div>
+            )}
+
+            {user.createdAt && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Registered On</p>
+                <p className="font-medium">{new Date(user.createdAt).toLocaleString()}</p>
+              </div>
+            )}
+            
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Account Type
-              </p>
-              <p className="capitalize font-medium">{user.userType}</p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Account Type</p>
+              <p className="font-medium capitalize">{user.userType}</p>
             </div>
-            <Separator />
+            
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Full Name
-              </p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">System Role</p>
+              <p className="font-medium capitalize">{user.role || "user"}</p>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Plan Status</p>
+              <div>
+                <Badge variant={user.planActive ? "default" : "secondary"}>
+                  {user.planActive ? "Active" : "Inactive"}
+                </Badge>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Full Name</p>
               <p className="font-medium">{user.fullName || "N/A"}</p>
             </div>
-            <Separator />
+
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Email Address
-              </p>
-              <div className="flex items-center justify-between">
+              <p className="text-sm text-muted-foreground font-medium mb-1">Email Address</p>
+              <div className="flex items-center gap-2">
                 <p className="font-medium">{user.email}</p>
                 <Badge
                   variant="outline"
@@ -234,278 +258,260 @@ export default function AdminVerificationDetailsPage() {
                 </Badge>
               </div>
             </div>
-            <Separator />
+
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Mobile Number
+              <p className="text-sm text-muted-foreground font-medium mb-1">Mobile Number</p>
+              <p className="font-medium">
+                {user.countryCode ? `${user.countryCode} ` : ""}
+                {user.mobileNumber || "N/A"}
               </p>
-              <p className="font-medium">{user.mobileNumber || "N/A"}</p>
             </div>
-            <Separator />
+
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Country
-              </p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Country</p>
               <p className="font-medium">{user.country || "N/A"}</p>
             </div>
+
             {user.companyName && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    Company Name
-                  </p>
-                  <p className="font-medium">{user.companyName}</p>
-                </div>
-              </>
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Company Name</p>
+                <p className="font-medium">{user.companyName}</p>
+              </div>
             )}
+
             {user.businessAddress && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    Business Address
-                  </p>
-                  <p className="font-medium">{user.businessAddress}</p>
-                </div>
-              </>
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Business Address</p>
+                <p className="font-medium">{user.businessAddress}</p>
+              </div>
             )}
-          </CardContent>
-        </Card>
-
-        {/* Roles & Markets */}
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>Roles & Markets</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+            
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Business Roles
-              </p>
-              <div className="flex flex-wrap gap-2 mt-1">
-                {user.businessRole && user.businessRole.length > 0
-                  ? user.businessRole.map((role: string) => (
-                      <Badge key={role} variant="secondary">
-                        {role}
-                      </Badge>
-                    ))
-                  : "N/A"}
-              </div>
-            </div>
-            <Separator />
-            <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Target Markets
-              </p>
-              <div className="flex flex-wrap gap-2 mt-1">
-                {user.targetMarkets && user.targetMarkets.length > 0
-                  ? user.targetMarkets.map((market: string) => (
-                      <Badge key={market} variant="secondary">
-                        {market}
-                      </Badge>
-                    ))
-                  : "N/A"}
-              </div>
-            </div>
-            <Separator />
-            <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Products
-              </p>
-              <div className="flex flex-wrap gap-2 mt-1">
-                {user.products && user.products.length > 0
-                  ? user.products.map((product: string) => (
-                      <Badge key={product} variant="outline">
-                        {product}
-                      </Badge>
-                    ))
-                  : "N/A"}
-              </div>
-            </div>
-            {user.experience && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    Experience Level
-                  </p>
-                  <p className="font-medium">{user.experience}</p>
-                </div>
-              </>
-            )}
-            {user.objective && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    Business Objective
-                  </p>
-                  <p className="font-medium whitespace-pre-wrap">
-                    {user.objective}
-                  </p>
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Verification Documents */}
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>Verification Documents</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {(user.internationalBusinessIds?.length > 0 ||
-              user.internationalIds?.length > 0) && (
-              <div className="space-y-4 mb-4">
-                <h3 className="text-lg font-medium border-b pb-2">
-                  International Identifications
-                </h3>
-                {user.internationalBusinessIds
-                  ?.filter((o: any) => o.type || o.idNumber)
-                  .map((idObj: any, idx: number) => (
-                    <Card key={`biz-${idx}`} className="bg-muted/10">
-                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                        <span className="font-medium">
-                          {idObj.type || "Business ID"}
-                        </span>
-                        <Badge variant="outline" className="w-fit">
-                          {idObj.idNumber}
-                        </Badge>
-                      </CardContent>
-                    </Card>
-                  ))}
-                {user.internationalIds
-                  ?.filter((o: any) => o.type || o.idNumber)
-                  .map((idObj: any, idx: number) => (
-                    <Card key={`doc-${idx}`} className="bg-muted/10">
-                      <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                        <span className="font-medium">
-                          {idObj.type || "Personal ID"}
-                        </span>
-                        <Badge variant="outline" className="w-fit">
-                          {idObj.idNumber}
-                        </Badge>
-                      </CardContent>
-                    </Card>
-                  ))}
-              </div>
-            )}
-
-            <h3 className="text-lg font-medium border-b pb-2 mt-4">
-              Required Documents
-            </h3>
-            {user.documents && user.documents.length > 0 ? (
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                {user.documents.map((doc: string, idx: number) => (
-                  <React.Fragment key={`doc-doc-${idx}`}>
-                    {renderDocumentCard(`Document ${idx + 1}`, doc)}
-                  </React.Fragment>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                No documents uploaded.
-              </p>
-            )}
-
-            {user.productCatalogue && user.productCatalogue.length > 0 && (
-              <div className="space-y-4 mt-8">
-                <h3 className="text-lg font-medium border-b pb-2">
-                  Product Catalogues
-                </h3>
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                  {user.productCatalogue.map((doc: string, idx: number) => (
-                    <React.Fragment key={`cat-doc-${idx}`}>
-                      {renderDocumentCard(`Product Catalogue ${idx + 1}`, doc)}
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Business Overview */}
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>Business Overview</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Industry
-              </p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Industry</p>
               <p className="font-medium">{user.industrySector || "N/A"}</p>
             </div>
-            <Separator />
+
+            {user.iecNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">IEC Number</p>
+                <p className="font-medium">{user.iecNumber}</p>
+              </div>
+            )}
+
+            {user.gstNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">GST Number</p>
+                <p className="font-medium">{user.gstNumber}</p>
+              </div>
+            )}
+
+            {user.panNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">PAN Number</p>
+                <p className="font-medium">{user.panNumber}</p>
+              </div>
+            )}
+            
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Company Size
-              </p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Company Size</p>
               <p className="font-medium">{user.companySize || "N/A"}</p>
             </div>
-            <Separator />
+
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Turnover
-              </p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Turnover</p>
               <p className="font-medium">{user.turnover || "N/A"}</p>
             </div>
-            <Separator />
+
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Legal Structure
-              </p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Legal Structure</p>
               <p className="font-medium">{user.legalStructure || "N/A"}</p>
             </div>
-            <Separator />
+
             <div>
-              <p className="text-sm text-muted-foreground font-medium">
-                Est. Year
-              </p>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Est. Year</p>
               <p className="font-medium">{user.yearEstablished || "N/A"}</p>
             </div>
+
+            {user.experience && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Experience Level</p>
+                <p className="font-medium">{user.experience}</p>
+              </div>
+            )}
+            
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Total Slots</p>
+              <p className="font-medium">{user.slotsTotal ?? 0}</p>
+            </div>
+            
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Remaining Slots</p>
+              <p className="font-medium">{user.slotsRemaining ?? 0}</p>
+            </div>
+            
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Reports Used</p>
+              <p className="font-medium">{user.reportsUsed ?? 0}</p>
+            </div>
+            
             {user.websiteUrl && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    Website
-                  </p>
-                  <a
-                    href={user.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-primary hover:underline block truncate"
-                  >
-                    {user.websiteUrl}
-                  </a>
-                </div>
-              </>
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Website</p>
+                <a
+                  href={user.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary hover:underline block truncate"
+                >
+                  {user.websiteUrl}
+                </a>
+              </div>
             )}
+            
             {user.linkedinUrl && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    LinkedIn Profile
-                  </p>
-                  <a
-                    href={user.linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-primary hover:underline block truncate"
-                  >
-                    {user.linkedinUrl}
-                  </a>
-                </div>
-              </>
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">LinkedIn Profile</p>
+                <a
+                  href={user.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary hover:underline block truncate"
+                >
+                  {user.linkedinUrl}
+                </a>
+              </div>
             )}
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+
+          <Separator />
+
+          {/* Tags & Lists */}
+          <div className="space-y-6">
+            {user.objective && (
+              <div>
+                <h3 className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">
+                  Business Objective
+                </h3>
+                <p className="font-medium whitespace-pre-wrap">{user.objective}</p>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-2">Business Roles</p>
+                <div className="flex flex-wrap gap-2">
+                  {user.businessRole && user.businessRole.length > 0
+                    ? user.businessRole.map((role: string) => (
+                        <Badge key={role} variant="secondary">
+                          {role}
+                        </Badge>
+                      ))
+                    : "N/A"}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-2">Target Markets</p>
+                <div className="flex flex-wrap gap-2">
+                  {user.targetMarkets && user.targetMarkets.length > 0
+                    ? user.targetMarkets.map((market: string) => (
+                        <Badge key={market} variant="secondary">
+                          {market}
+                        </Badge>
+                      ))
+                    : "N/A"}
+                </div>
+              </div>
+
+              <div className="md:col-span-2">
+                <p className="text-sm text-muted-foreground font-medium mb-2">Products</p>
+                <div className="flex flex-col gap-2">
+                  {user.products && user.products.length > 0
+                    ? user.products.map((product: string, idx: number) => (
+                        <p key={idx} className="text-sm font-medium whitespace-pre-wrap">
+                          {product}
+                        </p>
+                      ))
+                    : <p className="text-sm text-muted-foreground">N/A</p>}
+                </div>
+              </div>
+
+              {user.keyCertifications && user.keyCertifications.length > 0 && (
+                <div className="md:col-span-2">
+                  <p className="text-sm text-muted-foreground font-medium mb-2">Key Certifications</p>
+                  <div className="flex flex-wrap gap-2">
+                    {user.keyCertifications.map((cert: string) => (
+                      <Badge key={cert} variant="outline">
+                        {cert}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Verification Documents */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold">Documents & Identifications</h2>
+
+            {(user.internationalBusinessIds?.length > 0 || user.internationalIds?.length > 0) && (
+              <div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {user.internationalBusinessIds
+                    ?.filter((o: any) => o.type || o.idNumber)
+                    .map((idObj: any, idx: number) => (
+                      <Card key={`biz-${idx}`} className="bg-muted/10">
+                        <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                          <span className="font-medium">{idObj.type || "Business ID"}</span>
+                          <Badge variant="outline" className="w-fit">
+                            {idObj.idNumber}
+                          </Badge>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  {user.internationalIds
+                    ?.filter((o: any) => o.type || o.idNumber)
+                    .map((idObj: any, idx: number) => (
+                      <Card key={`doc-${idx}`} className="bg-muted/10">
+                        <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                          <span className="font-medium">{idObj.type || "Personal ID"}</span>
+                          <Badge variant="outline" className="w-fit">
+                            {idObj.idNumber}
+                          </Badge>
+                        </CardContent>
+                      </Card>
+                    ))}
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-4 mt-4">
+              <h3 className="text-lg font-medium border-b pb-2">Uploaded Files</h3>
+              {user.uploadedFiles && user.uploadedFiles.length > 0 ? (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {user.uploadedFiles.map((fileObj: any, idx: number) => {
+                    const label =
+                      fileObj.type === "product_catalogue"
+                        ? `Product Catalogue: ${fileObj.name}`
+                        : `Document: ${fileObj.name}`;
+                    return (
+                      <React.Fragment key={`file-${idx}`}>
+                        {renderDocumentCard(label, fileObj.url)}
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No files uploaded.</p>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Approve Dialog */}
       <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
@@ -569,6 +575,14 @@ export default function AdminVerificationDetailsPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Document Viewer Dialog */}
+      <DocumentViewerModal
+        isOpen={!!viewDocument}
+        onClose={() => setViewDocument(null)}
+        url={viewDocument?.url || null}
+        label={viewDocument?.label || null}
+      />
     </Main>
   );
 }

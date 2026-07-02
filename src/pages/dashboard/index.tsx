@@ -71,7 +71,7 @@ export default function DashboardPage() {
               Welcome Back, AECCI Member
             </h1>
             <p className="text-muted-foreground text-sm mt-1">
-              Track your screening, access active deal rooms, and explore
+              Track your verification, access active deal rooms, and explore
               country briefs.
             </p>
           </div>

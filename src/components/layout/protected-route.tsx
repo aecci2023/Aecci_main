@@ -26,9 +26,9 @@ export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
   if (user.role !== "admin") {
     if (
       user.verificationStatus === "pending_verification" &&
-      window.location.pathname !== "/dashboard/screening"
+      window.location.pathname !== "/dashboard/verification"
     ) {
-      return <Navigate to="/dashboard/screening" replace />;
+      return <Navigate to="/dashboard/verification" replace />;
     }
     if (
       user.verificationStatus === "rejected" &&

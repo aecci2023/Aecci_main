@@ -41,6 +41,7 @@ export default function MySessionsPage() {
         }) + " IST"
       );
     } catch (e) {
+      console.log(e)
       return dateString;
     }
   };
@@ -87,7 +88,7 @@ export default function MySessionsPage() {
     let statusColor = "bg-muted text-muted-foreground border-muted";
 
     if (isPending) {
-      statusLabel = "In Screening";
+      statusLabel = "In Review";
       statusColor =
         "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20";
     } else if (isUpcoming) {
@@ -228,7 +229,7 @@ export default function MySessionsPage() {
               My B2B Deal Room Sessions
             </h1>
             <p className="text-muted-foreground text-sm mt-1">
-              Manage your booked matchmaking slots, view screening progress, and
+              Manage your booked matchmaking slots, view verification progress, and
               download reports.
             </p>
           </div>
@@ -264,8 +265,8 @@ export default function MySessionsPage() {
               <TabsTrigger value="upcoming">
                 Upcoming ({upcomingSessions.length})
               </TabsTrigger>
-              <TabsTrigger value="screening">
-                In Screening ({pendingSessions.length})
+              <TabsTrigger value="review">
+                In Review ({pendingSessions.length})
               </TabsTrigger>
               <TabsTrigger value="completed">
                 Completed ({completedSessions.length})
@@ -288,11 +289,11 @@ export default function MySessionsPage() {
                   )}
             </TabsContent>
 
-            <TabsContent value="screening" className="space-y-4">
+            <TabsContent value="review" className="space-y-4">
               {pendingSessions.length > 0
                 ? pendingSessions.map((s: any) => renderSessionCard(s))
                 : renderEmptyState(
-                    "There are currently no sessions undergoing screening. Book a partner to initiate matching verification.",
+                    "There are currently no sessions undergoing verification. Book a partner to initiate matching verification.",
                   )}
             </TabsContent>
 

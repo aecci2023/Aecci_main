@@ -468,7 +468,7 @@ export default function GlobalLanding() {
                   Transparent Process
                 </h4>
                 <p className="text-xs text-slate-500 mt-1">
-                  Clear screening, verified partners
+                  Clear verification, verified partners
                   <br />& honest engagements
                 </p>
               </div>
