@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Main } from "@/components/layout/main";
 import { DataTable } from "@/components/ui/data-table";
 import { userColumns } from "./columns";
@@ -7,7 +8,10 @@ import { Users } from "lucide-react";
 export default function AdminUsersPage() {
   const { data, isLoading, error } = useGetUsersQuery({});
 
-  const users = data?.data || [];
+  const users = useMemo(
+    () => (data?.data || []).filter((u: any) => u.role !== "admin"),
+    [data]
+  );
 
   return (
     <Main fluid className="space-y-6">
@@ -31,7 +35,7 @@ export default function AdminUsersPage() {
           <p className="text-destructive">Failed to load users.</p>
         </div>
       ) : (
-        <DataTable columns={userColumns} data={users} searchKey="name" />
+        <DataTable columns={userColumns} data={users} searchKey="name" pageSize={15} />
       )}
     </Main>
   );
