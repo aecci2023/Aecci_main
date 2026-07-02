@@ -1,4 +1,3 @@
-import { Main } from "@/components/layout/main";
 import {
   useGetPartnerProfileQuery,
   useSetupPartnerProfileMutation,
@@ -119,19 +118,20 @@ export default function PartnerAvailabilityPage() {
 
   if (isProfileLoading) {
     return (
-      <Main fluid className="flex justify-center p-10">
+      <div className="flex justify-center p-10 w-full">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
           <p className="text-muted-foreground animate-pulse text-sm">
             Loading availability...
           </p>
         </div>
-      </Main>
+      </div>
     );
   }
 
   return (
-    <Main fluid className="space-y-6 max-w-4xl mx-auto py-6">
+    <div className="h-full w-full overflow-y-auto pe-2">
+      <div className="space-y-6 max-w-4xl mx-auto py-6 w-full">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">
@@ -226,6 +226,7 @@ export default function PartnerAvailabilityPage() {
           </div>
         </CardContent>
       </Card>
-    </Main>
+      </div>
+    </div>
   );
 }

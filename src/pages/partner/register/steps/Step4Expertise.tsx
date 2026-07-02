@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { MultiSelect } from "@/components/ui/multi-select";
-import { COUNTRIES } from "@/lib/countries";
+import { COUNTRY_OPTIONS, SECTOR_OPTIONS } from "@/components/data/form-options";
 import {
   FormField,
   FormItem,
@@ -18,25 +18,6 @@ interface Props {
   nextStep: () => void;
 }
 
-const SECTOR_OPTIONS = [
-  { label: "Legal Services", value: "Legal Services" },
-  { label: "Trade Advisory", value: "Trade Advisory" },
-  { label: "Export Consulting", value: "Export Consulting" },
-  { label: "Market Entry", value: "Market Entry" },
-  { label: "Pharmaceuticals", value: "Pharmaceuticals" },
-  { label: "Agriculture & Food", value: "Agriculture & Food" },
-  { label: "Textiles & Apparel", value: "Textiles & Apparel" },
-  { label: "Technology & IT", value: "Technology & IT" },
-  { label: "Manufacturing", value: "Manufacturing" },
-  { label: "Finance & Banking", value: "Finance & Banking" },
-  { label: "Real Estate", value: "Real Estate" },
-  { label: "Energy & Mining", value: "Energy & Mining" },
-  { label: "Logistics & Supply Chain", value: "Logistics & Supply Chain" },
-  { label: "FMCG", value: "FMCG" },
-  { label: "Automotive", value: "Automotive" },
-  { label: "Arbitration", value: "Arbitration" },
-  { label: "Other", value: "Other" },
-];
 
 export default function Step4Expertise({ nextStep }: Props) {
   const { control } = useFormContext<PartnerSignupFormData>();
@@ -63,10 +44,7 @@ export default function Step4Expertise({ nextStep }: Props) {
               </FormLabel>
               <FormControl>
                 <MultiSelect
-                  options={COUNTRIES.map((c) => ({
-                    label: c.name,
-                    value: c.name,
-                  }))}
+                  options={COUNTRY_OPTIONS}
                   selected={field.value || []}
                   onChange={field.onChange}
                   placeholder="Select countries you cover..."

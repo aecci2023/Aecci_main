@@ -48,9 +48,14 @@ export function NavUser({ user: fallback }: NavUserProps) {
   const initials = name.split(" ").filter(Boolean).slice(0, 2).map((n: string) => n[0].toUpperCase()).join("");
 
   const profileLink =
-    role === "partner" ? "/partner/profile" :
+    role === "partner" ? "/partner/settings" :
     role === "admin" ? "/admin/settings" :
     "/dashboard/settings";
+
+  const notificationsLink =
+    role === "partner" ? "/partner/notifications" :
+    role === "admin" ? "/admin/notifications" :
+    "/dashboard/notifications";
 
   return (
     <>
@@ -108,20 +113,20 @@ export function NavUser({ user: fallback }: NavUserProps) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to={profileLink} className="flex items-center gap-2">
+                  <Link to={`${profileLink}/account`} className="flex items-center gap-2">
                     <BadgeCheck className="size-4" />
                     Account
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to={profileLink} className="flex items-center gap-2">
+                  <Link to={`${profileLink}`} className="flex items-center gap-2">
                     <Settings className="size-4" />
                     Settings
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link
-                    to="/dashboard/messages"
+                    to={notificationsLink}
                     className="flex items-center gap-2"
                   >
                     <Bell className="size-4" />

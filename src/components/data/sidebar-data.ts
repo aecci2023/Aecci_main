@@ -17,6 +17,7 @@ import {
   UserCog,
   Wrench,
   Palette,
+  BellRing,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
@@ -114,6 +115,11 @@ export const sidebarData: SidebarData = {
       title: "Other",
       items: [
         {
+          title: "System Alerts",
+          url: "/dashboard/notifications",
+          icon: BellRing,
+        },
+        {
           title: "Settings",
           icon: Settings,
           items: [
@@ -134,7 +140,7 @@ export const sidebarData: SidebarData = {
             },
             {
               title: "Notifications",
-              url: "/dashboard/notifications",
+              url: "/dashboard/settings/notifications",
               icon: Bell,
             },
           ],

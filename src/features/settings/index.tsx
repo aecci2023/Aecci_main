@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Monitor, Bell, Palette, Wrench, UserCog } from "lucide-react";
+import { Bell, Palette, Wrench, UserCog, Clock } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/layout/header";
 import { Main } from "@/components/layout/main";
@@ -34,15 +34,18 @@ export function Settings() {
     },
     {
       title: "Notifications",
-      href: `${basePath}/notifications`,
+      href: `${basePath}/settings/notifications`,
       icon: <Bell size={18} />,
     },
-    {
-      title: "Display",
-      href: `${basePath}/settings/display`,
-      icon: <Monitor size={18} />,
-    },
   ];
+
+  if (basePath === "/partner") {
+    sidebarNavItems.splice(1, 0, {
+      title: "Availability",
+      href: `${basePath}/settings/availability`,
+      icon: <Clock size={18} />,
+    });
+  }
 
   const isUserPortal = basePath === "/dashboard";
 

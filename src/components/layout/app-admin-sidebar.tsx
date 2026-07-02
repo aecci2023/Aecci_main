@@ -70,6 +70,12 @@ export function AppAdminSidebar() {
       items: groups[gIdx].items.map((item: any, iIdx: number) => ({
         ...item,
         icon: originalGroup.items[iIdx].icon,
+        items: item.items
+          ? item.items.map((subItem: any, subIdx: number) => ({
+              ...subItem,
+              icon: (originalGroup.items[iIdx] as any).items?.[subIdx]?.icon,
+            }))
+          : undefined,
       })),
     }));
   }, [usersResponse]);

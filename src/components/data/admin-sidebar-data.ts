@@ -17,6 +17,7 @@ import {
   UserCog,
   Wrench,
   Palette,
+  BellRing,
 } from "lucide-react";
 
 export const adminSidebarData = {
@@ -132,6 +133,11 @@ export const adminSidebarData = {
       title: "Other",
       items: [
         {
+          title: "System Alerts",
+          url: "/admin/notifications",
+          icon: BellRing,
+        },
+        {
           title: "Settings",
           icon: Settings,
           items: [
@@ -152,7 +158,7 @@ export const adminSidebarData = {
             },
             {
               title: "Notifications",
-              url: "/admin/notifications",
+              url: "/admin/settings/notifications",
               icon: Bell,
             },
           ],

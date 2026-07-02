@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useTheme } from "@/context/theme-provider";
+import { ThemeSelector } from "@/components/themes/theme-selector";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -114,6 +115,14 @@ export function AppearanceForm() {
             </FormItem>
           )}
         />
+
+        <div className="space-y-4">
+          <div>
+            <h3 className="mb-1 text-sm font-medium">Color Theme</h3>
+            <p className="text-[0.8rem] text-muted-foreground">Select the primary color theme for the dashboard.</p>
+          </div>
+          <ThemeSelector />
+        </div>
 
         <Button type="submit">Update preferences</Button>
       </form>

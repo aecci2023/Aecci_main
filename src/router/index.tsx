@@ -5,7 +5,6 @@ import { Chats } from "@/features/chats";
 import { Settings } from "@/features/settings";
 import { SettingsAccount } from "@/features/settings/account";
 import { SettingsAppearance } from "@/features/settings/appearance";
-import { SettingsDisplay } from "@/features/settings/display";
 import { SettingsNotifications } from "@/features/settings/notifications";
 import { SettingsProfile } from "@/features/settings/profile";
 import AdminAnnouncementsPage from "@/pages/admin/announcements";
@@ -175,11 +174,7 @@ export const routes: RouteObject[] = [
                 path: "content/opportunity-reports",
                 element: <PartnerPlaceholder title="Opportunity Reports" />,
               },
-              { path: "profile", element: <PartnerProfilePage /> },
-              {
-                path: "resources/availability",
-                element: <PartnerAvailabilityPage />,
-              },
+
               {
                 path: "support/messages",
                 element: <PartnerPlaceholder title="Messages" />,
@@ -192,11 +187,11 @@ export const routes: RouteObject[] = [
                 path: "settings",
                 element: <Settings />,
                 children: [
-                  { index: true, element: <SettingsProfile /> },
+                  { index: true, element: <PartnerProfilePage /> },
+                  { path: "availability", element: <PartnerAvailabilityPage /> },
                   { path: "account", element: <SettingsAccount /> },
                   { path: "appearance", element: <SettingsAppearance /> },
                   { path: "notifications", element: <SettingsNotifications /> },
-                  { path: "display", element: <SettingsDisplay /> },
                 ],
               },
               {
@@ -293,7 +288,6 @@ export const routes: RouteObject[] = [
               { path: "account", element: <SettingsAccount /> },
               { path: "appearance", element: <SettingsAppearance /> },
               { path: "notifications", element: <SettingsNotifications /> },
-              { path: "display", element: <SettingsDisplay /> },
             ],
           },
           {
@@ -376,7 +370,6 @@ export const routes: RouteObject[] = [
               { path: "account", element: <SettingsAccount /> },
               { path: "appearance", element: <SettingsAppearance /> },
               { path: "notifications", element: <SettingsNotifications /> },
-              { path: "display", element: <SettingsDisplay /> },
             ],
           },
           {

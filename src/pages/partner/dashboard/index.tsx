@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
+import { Progress } from "@/components/ui/progress";
 import {
   CalendarClock,
   History,
@@ -24,7 +25,6 @@ import {
   Clock,
   CheckCircle2,
   ArrowRight,
-  Star,
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -84,6 +84,22 @@ export default function PartnerDashboard() {
 
   const pendingSummary = past.filter((s) => !s.postSessionSummary);
 
+  const completionItems = [
+    { label: "Full Name", isComplete: !!user?.fullName },
+    { label: "Mobile Number", isComplete: !!user?.mobileNumber },
+    { label: "Country", isComplete: !!user?.country },
+    { label: "Profile Picture", isComplete: !!user?.profilePicture },
+    { label: "Bio", isComplete: !!profile?.bio },
+    { label: "Organization", isComplete: !!profile?.organization },
+    { label: "Expertise Countries", isComplete: !!(profile?.expertiseCountries as string[])?.length },
+    { label: "Expertise Sectors", isComplete: !!(profile?.expertiseSectors as string[])?.length },
+    { label: "Availability", isComplete: !!profile?.availability },
+  ];
+
+  const completedCount = completionItems.filter((item) => item.isComplete).length;
+  const completionPercentage = Math.round((completedCount / completionItems.length) * 100);
+  const pendingItems = completionItems.filter((item) => !item.isComplete);
+
   if (isProfileLoading || isSessionsLoading) {
     return (
       <Main fluid className="space-y-6">
@@ -108,11 +124,6 @@ export default function PartnerDashboard() {
     );
   }
 
-  const tierColor: Record<string, string> = {
-    Standard: "bg-blue-500/10 text-blue-600 border-blue-500/20",
-    Premium: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-    Specialist: "bg-purple-500/10 text-purple-600 border-purple-500/20",
-  };
 
   return (
     <Main fluid className="space-y-6 pb-10">
@@ -127,15 +138,6 @@ export default function PartnerDashboard() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          {profile?.tier && (
-            <Badge
-              variant="outline"
-              className={tierColor[profile.tier] || ""}
-            >
-              <Star className="size-3 mr-1" />
-              {profile.tier} Partner
-            </Badge>
-          )}
           <Badge
             variant="outline"
             className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
@@ -204,6 +206,28 @@ export default function PartnerDashboard() {
 
             <Separator />
 
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-medium text-muted-foreground">Profile Completion</span>
+                <span className="font-bold">{completionPercentage}%</span>
+              </div>
+              <Progress value={completionPercentage} className="h-2" />
+              {pendingItems.length > 0 && (
+                <div className="pt-2">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold mb-1">Pending Actions</p>
+                  <div className="flex flex-wrap gap-1">
+                    {pendingItems.map(item => (
+                      <Badge key={item.label} variant="outline" className="text-[10px] text-amber-600 bg-amber-500/10 border-amber-500/20">
+                        + {item.label}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <Separator />
+
             {profile?.bio && (
               <p className="text-xs text-muted-foreground leading-relaxed line-clamp-4">
                 {profile.bio}
@@ -263,7 +287,7 @@ export default function PartnerDashboard() {
               className="w-full"
               asChild
             >
-              <Link to="/partner/profile">
+              <Link to="/partner/settings">
                 Edit Profile <ArrowRight className="size-3 ml-1" />
               </Link>
             </Button>

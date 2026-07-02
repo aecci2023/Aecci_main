@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Main } from "@/components/layout/main";
 import {
   Card,
   CardContent,
@@ -36,6 +35,7 @@ import { toast } from "sonner";
 import { useGetMyPartnerProfileQuery, useSetupPartnerProfileMutation } from "@/store/api/adminApi";
 import { useUploadFileMutation } from "@/store/api/authApi";
 import { COUNTRIES } from "@/lib/countries";
+import { LANGUAGE_OPTIONS, SECTOR_OPTIONS, COUNTRY_OPTIONS } from "@/components/data/form-options";
 import {
   Save,
   Camera,
@@ -44,34 +44,12 @@ import {
   Briefcase,
   Globe,
   Link as LinkIcon,
-  Star,
   CheckCircle2,
   Clock,
 } from "lucide-react";
+import { PhoneInput } from "@/components/ui/phone-input";
 
-const LANGUAGE_OPTIONS = [
-  "Afrikaans","Albanian","Amharic","Arabic","Armenian","Azerbaijani","Basque",
-  "Belarusian","Bengali","Bosnian","Bulgarian","Burmese","Catalan","Cebuano",
-  "Chinese (Cantonese)","Chinese (Mandarin)","Croatian","Czech","Danish","Dutch",
-  "English","Esperanto","Estonian","Finnish","French","Galician","Georgian",
-  "German","Greek","Gujarati","Haitian Creole","Hausa","Hebrew","Hindi",
-  "Hungarian","Icelandic","Igbo","Indonesian","Irish","Italian","Japanese",
-  "Javanese","Kannada","Kazakh","Khmer","Korean","Kurdish","Kyrgyz","Lao",
-  "Latin","Latvian","Lithuanian","Luxembourgish","Macedonian","Malagasy","Malay",
-  "Malayalam","Maltese","Maori","Marathi","Mongolian","Nepali","Norwegian","Odia",
-  "Pashto","Persian (Farsi)","Polish","Portuguese","Punjabi","Romanian","Russian",
-  "Samoan","Serbian","Sinhalese","Slovak","Slovenian","Somali","Spanish","Swahili",
-  "Swedish","Tagalog","Tajik","Tamil","Tatar","Telugu","Thai","Tibetan","Turkish",
-  "Turkmen","Ukrainian","Urdu","Uzbek","Vietnamese","Welsh","Xhosa","Yiddish",
-  "Yoruba","Zulu",
-].map((l) => ({ label: l, value: l }));
 
-const SECTOR_OPTIONS = [
-  "Legal Services","Trade Advisory","Export Consulting","Market Entry",
-  "Pharmaceuticals","Agriculture & Food","Textiles & Apparel","Technology & IT",
-  "Manufacturing","Finance & Banking","Real Estate","Energy & Mining",
-  "Logistics & Supply Chain","FMCG","Automotive","Arbitration","Other",
-].map((s) => ({ label: s, value: s }));
 
 const schema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -93,20 +71,11 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-const COUNTRY_OPTIONS = COUNTRIES.map((c) => ({
-  label: c.name,
-  value: c.name,
-}));
-
 function getInitials(name: string) {
   return name.split(" ").filter(Boolean).slice(0, 2).map((n) => n[0].toUpperCase()).join("");
 }
 
-const tierColor: Record<string, string> = {
-  Standard: "bg-blue-500/10 text-blue-600 border-blue-500/20",
-  Premium: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-  Specialist: "bg-purple-500/10 text-purple-600 border-purple-500/20",
-};
+
 
 export default function PartnerProfilePage() {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
@@ -216,12 +185,12 @@ export default function PartnerProfilePage() {
 
   if (isLoading) {
     return (
-      <Main fluid className="space-y-6">
+      <div className="space-y-6 w-full h-full overflow-y-auto pe-2">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <Skeleton className="h-80 rounded-xl" />
           <Skeleton className="h-80 lg:col-span-3 rounded-xl" />
         </div>
-      </Main>
+      </div>
     );
   }
 
@@ -232,7 +201,7 @@ export default function PartnerProfilePage() {
   const displayName = form.watch("fullName") || user?.fullName || "Partner";
 
   return (
-    <Main fluid className="pb-10">
+    <div className="h-full w-full overflow-y-auto pb-10 pe-2">
       <div className="mb-6">
         <h1 className="text-3xl font-bold tracking-tight">My Profile</h1>
         <p className="text-muted-foreground text-sm mt-1">
@@ -280,12 +249,6 @@ export default function PartnerProfilePage() {
                   </div>
 
                   <div className="flex flex-wrap justify-center gap-1.5">
-                    {profile?.tier && (
-                      <Badge variant="outline" className={tierColor[profile.tier] || ""}>
-                        <Star className="size-3 mr-1" />
-                        {profile.tier}
-                      </Badge>
-                    )}
                     <Badge
                       variant="outline"
                       className={
@@ -316,11 +279,8 @@ export default function PartnerProfilePage() {
                     <span className="text-muted-foreground">Email</span>
                     <span className="font-medium truncate ml-2 max-w-[130px]">{user?.email}</span>
                   </div>
+
                   <Separator />
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Tier</span>
-                    <span className="font-medium">{profile?.tier || "—"}</span>
-                  </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Status</span>
                     <span className="font-medium capitalize">{profile?.status || "—"}</span>
@@ -360,7 +320,10 @@ export default function PartnerProfilePage() {
                         <FormItem>
                           <FormLabel>Mobile Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="+1 234 567 8900" {...field} value={field.value || ""} />
+                            <PhoneInput
+                              placeholder="Enter mobile number"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -374,7 +337,7 @@ export default function PartnerProfilePage() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Country</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value || ""}>
+                          <Select onValueChange={field.onChange} value={field.value || undefined}>
                             <FormControl>
                               <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select country" />
@@ -396,7 +359,7 @@ export default function PartnerProfilePage() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Nationality</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value || ""}>
+                          <Select onValueChange={field.onChange} value={field.value || undefined}>
                             <FormControl>
                               <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select nationality" />
@@ -661,6 +624,6 @@ export default function PartnerProfilePage() {
           </div>
         </form>
       </Form>
-    </Main>
+    </div>
   );
 }

@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { COUNTRIES } from "@/lib/countries";
+import { LANGUAGE_OPTIONS } from "@/components/data/form-options";
 import {
   Select,
   SelectContent,
@@ -24,23 +25,6 @@ interface Props {
   nextStep: () => void;
 }
 
-const LANGUAGE_OPTIONS = [
-  "Afrikaans", "Albanian", "Amharic", "Arabic", "Armenian", "Azerbaijani",
-  "Basque", "Belarusian", "Bengali", "Bosnian", "Bulgarian", "Burmese",
-  "Catalan", "Cebuano", "Chinese (Cantonese)", "Chinese (Mandarin)", "Croatian",
-  "Czech", "Danish", "Dutch", "English", "Esperanto", "Estonian", "Finnish",
-  "French", "Galician", "Georgian", "German", "Greek", "Gujarati", "Haitian Creole",
-  "Hausa", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Igbo", "Indonesian",
-  "Irish", "Italian", "Japanese", "Javanese", "Kannada", "Kazakh", "Khmer",
-  "Korean", "Kurdish", "Kyrgyz", "Lao", "Latin", "Latvian", "Lithuanian",
-  "Luxembourgish", "Macedonian", "Malagasy", "Malay", "Malayalam", "Maltese",
-  "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Odia", "Pashto",
-  "Persian (Farsi)", "Polish", "Portuguese", "Punjabi", "Romanian", "Russian",
-  "Samoan", "Serbian", "Sinhalese", "Slovak", "Slovenian", "Somali", "Spanish",
-  "Swahili", "Swedish", "Tagalog", "Tajik", "Tamil", "Tatar", "Telugu", "Thai",
-  "Tibetan", "Turkish", "Turkmen", "Ukrainian", "Urdu", "Uzbek", "Vietnamese",
-  "Welsh", "Xhosa", "Yiddish", "Yoruba", "Zulu",
-].map((l) => ({ label: l, value: l }));
 
 export default function Step3Profile({ nextStep }: Props) {
   const { control } = useFormContext<PartnerSignupFormData>();

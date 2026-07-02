@@ -8,13 +8,13 @@ import {
   UserCheck,
   Globe,
   FileText,
-  User,
   Settings,
   LifeBuoy,
   UserCog,
   Wrench,
   Palette,
   Bell,
+  BellRing,
 } from "lucide-react";
 
 export const partnerSidebarData = {
@@ -85,21 +85,7 @@ export const partnerSidebarData = {
         },
       ],
     },
-    {
-      title: "Profile & Settings",
-      items: [
-        {
-          title: "My Profile",
-          url: "/partner/profile",
-          icon: User,
-        },
-        {
-          title: "Availability Settings",
-          url: "/partner/resources/availability",
-          icon: Settings,
-        },
-      ],
-    },
+
     {
       title: "Support",
       items: [
@@ -119,6 +105,11 @@ export const partnerSidebarData = {
       title: "Other",
       items: [
         {
+          title: "System Alerts",
+          url: "/partner/notifications",
+          icon: BellRing,
+        },
+        {
           title: "Settings",
           icon: Settings,
           items: [
@@ -126,6 +117,11 @@ export const partnerSidebarData = {
               title: "Profile",
               url: "/partner/settings",
               icon: UserCog,
+            },
+            {
+              title: "Availability",
+              url: "/partner/settings/availability",
+              icon: CalendarClock,
             },
             {
               title: "Account",
@@ -139,7 +135,7 @@ export const partnerSidebarData = {
             },
             {
               title: "Notifications",
-              url: "/partner/notifications",
+              url: "/partner/settings/notifications",
               icon: Bell,
             },
           ],

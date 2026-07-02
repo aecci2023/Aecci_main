@@ -46,10 +46,17 @@ export function ProfileDropdown() {
 
   const profileLink =
     role === "partner"
-      ? "/partner/profile"
+      ? "/partner/settings"
       : role === "admin"
         ? "/admin/settings"
         : "/dashboard/settings";
+
+  const notificationsLink =
+    role === "partner"
+      ? "/partner/notifications"
+      : role === "admin"
+        ? "/admin/notifications"
+        : "/dashboard/notifications";
 
   return (
     <>
@@ -85,19 +92,19 @@ export function ProfileDropdown() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to={profileLink} className="flex items-center gap-2">
+                <Link to={`${profileLink}/account`} className="flex items-center gap-2">
                   <BadgeCheck className="size-4" />
                   Account
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to={profileLink} className="flex items-center gap-2">
+                <Link to={`${profileLink}`} className="flex items-center gap-2">
                   <Settings className="size-4" />
                   Settings
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/dashboard/messages" className="flex items-center gap-2">
+                <Link to={notificationsLink} className="flex items-center gap-2">
                   <Bell className="size-4" />
                   Notifications
                 </Link>

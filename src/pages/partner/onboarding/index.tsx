@@ -13,23 +13,9 @@ import { toast } from "sonner";
 import { useGetMyPartnerProfileQuery, useSetupPartnerProfileMutation } from "@/store/api/adminApi";
 import { useUploadFileMutation } from "@/store/api/authApi";
 import { format } from "date-fns";
+import { LANGUAGE_OPTIONS } from "@/components/data/form-options";
 
-const LANGUAGE_OPTIONS = [
-  "Afrikaans", "Albanian", "Amharic", "Arabic", "Armenian", "Azerbaijani",
-  "Basque", "Belarusian", "Bengali", "Bosnian", "Bulgarian", "Burmese",
-  "Catalan", "Chinese (Mandarin)", "Chinese (Cantonese)", "Croatian", "Czech",
-  "Danish", "Dutch", "English", "Estonian", "Finnish", "French", "Galician",
-  "Georgian", "German", "Greek", "Gujarati", "Haitian Creole", "Hausa",
-  "Hebrew", "Hindi", "Hungarian", "Icelandic", "Igbo", "Indonesian", "Irish",
-  "Italian", "Japanese", "Javanese", "Kannada", "Kazakh", "Khmer", "Korean",
-  "Kurdish", "Kyrgyz", "Lao", "Latvian", "Lithuanian", "Macedonian", "Malay",
-  "Malayalam", "Maltese", "Marathi", "Mongolian", "Nepali", "Norwegian",
-  "Pashto", "Persian (Farsi)", "Polish", "Portuguese", "Punjabi", "Romanian",
-  "Russian", "Serbian", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Somali",
-  "Spanish", "Swahili", "Swedish", "Tagalog", "Tajik", "Tamil", "Telugu",
-  "Thai", "Turkish", "Turkmen", "Ukrainian", "Urdu", "Uzbek", "Vietnamese",
-  "Welsh", "Xhosa", "Yoruba", "Zulu",
-].map(lang => ({ label: lang, value: lang }));
+
 
 const STEPS = [
   { label: "Partner Brief", icon: User },
