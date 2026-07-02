@@ -280,6 +280,7 @@ export const menuConfig: MegaMenuSection[] = [
       },
     ],
     quickLinks: [
+      { title: "Upcoming Events", href: "/events/upcoming-events" },
       { title: "Past Events", href: "/events/past-events" },
       { title: "Advertise With Us", href: "/events/advertise-with-us" },
       {
@@ -289,8 +290,9 @@ export const menuConfig: MegaMenuSection[] = [
       // { title: "World conference Information", href: "/events/world-conference-information" },
       { title: "Media Center", href: "/events/media-center" },
       { title: "Publications", href: "/events/publications" },
-    ],
+    ],  
     mobileMenu: [
+      { title: "Upcoming Events", href: "/events/upcoming-events" },
       { title: "Past Events", href: "/events/past-events" },
       { title: "Sponsorship", href: "/events/sponsorship" },
       { title: "Advertise With Us", href: "/events/advertise-with-us" },
