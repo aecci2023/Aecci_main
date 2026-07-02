@@ -14,16 +14,16 @@ import AdminCountryIntelligencePage from "@/pages/admin/country-intelligence";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminIndividualsPage from "@/pages/admin/individuals";
 import AdminInvoicesPage from "@/pages/admin/invoices";
+import AdminMarketplacePage from "@/pages/admin/marketplace";
 import AdminPartnersPage from "@/pages/admin/partners";
+import AdminQuestionsPage from "@/pages/admin/questions";
+import AdminReportsPage from "@/pages/admin/reports";
+import AdminSessionsPage from "@/pages/admin/sessions";
+import AdminTransactionsPage from "@/pages/admin/transactions";
+import AdminUsersPage from "@/pages/admin/users";
 import AdminVerificationsPage from "@/pages/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/admin/verifications/partner-details";
-import AdminSessionsPage from "@/pages/admin/sessions";
-import AdminMarketplacePage from "@/pages/admin/marketplace";
-import AdminQuestionsPage from "@/pages/admin/questions";
-import AdminReportsPage from "@/pages/admin/reports";
-import AdminTransactionsPage from "@/pages/admin/transactions";
-import AdminUsersPage from "@/pages/admin/users";
 import DashboardPage from "@/pages/dashboard";
 import ApplicationPage from "@/pages/dashboard/application";
 import ApprovalPage from "@/pages/dashboard/approval";
@@ -51,22 +51,22 @@ import type { RouteObject } from "react-router-dom";
 
 import { PartnerLayout } from "@/components/layout/partner-layout";
 
-import PartnerQuestionsPage from "@/pages/partner/questions";
-import PartnerAvailabilityPage from "@/pages/partner/availability";
-import PartnerUpcomingSessionsPage from "@/pages/partner/sessions/upcoming";
-import PartnerPastSessionsPage from "@/pages/partner/sessions/past";
-import PartnerSubmitSummaryPage from "@/pages/partner/sessions/submit-summary";
-import PartnerProfilePage from "@/pages/partner/profile";
-import UserInvoicesPage from "@/pages/dashboard/invoices";
 import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
-import NotificationsPage from "@/pages/notifications";
-import PartnerRegisterPage from "@/pages/partner/register";
-import PartnerOnboardingPage from "@/pages/partner/onboarding";
-import SponsorshipPage from "@/pages/events/sponsorship";
-import BecomePartnerPage from "@/pages/partner/apply";
-import PartnerDashboard from "@/pages/partner/dashboard";
+import UserInvoicesPage from "@/pages/dashboard/invoices";
 import AdvertiseWithUsPage from "@/pages/events/advertise-with-us";
 import PublicationsPage from "@/pages/events/publications";
+import SponsorshipPage from "@/pages/events/sponsorship";
+import NotificationsPage from "@/pages/notifications";
+import BecomePartnerPage from "@/pages/partner/apply";
+import PartnerAvailabilityPage from "@/pages/partner/availability";
+import PartnerDashboard from "@/pages/partner/dashboard";
+import PartnerOnboardingPage from "@/pages/partner/onboarding";
+import PartnerProfilePage from "@/pages/partner/profile";
+import PartnerQuestionsPage from "@/pages/partner/questions";
+import PartnerRegisterPage from "@/pages/partner/register";
+import PartnerPastSessionsPage from "@/pages/partner/sessions/past";
+import PartnerSubmitSummaryPage from "@/pages/partner/sessions/submit-summary";
+import PartnerUpcomingSessionsPage from "@/pages/partner/sessions/upcoming";
 
 import AboutChamberPage from "@/pages/about/AboutChamber";
 import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
@@ -91,6 +91,7 @@ import AttestationFeesInformationPage from "@/pages/e-platform/formalities-guide
 import CooFormatPage from "@/pages/e-platform/formalities-guidelines/coo-format";
 import IndemnityBondFormatPage from "@/pages/e-platform/formalities-guidelines/indemnity-bond-format";
 import InformationForEServicesPage from "@/pages/e-platform/formalities-guidelines/information-for-e-services";
+import PastEventsPage from "@/pages/events/past-events";
 import InternationalCollaborationPage from "@/pages/international-collaboration";
 import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/international-collaboration/partnerships/index";
 import PartnerDetailPage from "@/pages/international-collaboration/partnerships/PartnerDetail";
@@ -99,9 +100,9 @@ import EnrollmentOffers from "@/pages/services/membership/EnrollmentOffers";
 import FeeFormsGuidelines from "@/pages/services/membership/FeeFormsGuidelines";
 import Membership from "@/pages/services/membership/Membership";
 import MembershipBenefits from "@/pages/services/membership/MembershipBenefits";
+import PatronMembership from "@/pages/services/membership/patron-membership";
 import RenewMembership from "@/pages/services/membership/RenewMembership";
 import VisaRecommendation from "@/pages/services/membership/VisaRecommendation";
-import PatronMembership from "@/pages/services/membership/patron-membership";
 import UpcomingEventsPage from "@/pages/upcoming-events";
 
 // Generic placeholder for partner routes
@@ -766,11 +767,11 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/events/upcoming-events",
-    element: <UpcomingEventsPage />,
+    element: <UpcomingEventsPage />,  
   },
   {
     path: "/events/past-events",
-    element: <NotFound />,
+    element: <PastEventsPage />,
   },
   {
     path: "/aecci-iac-virtual-b2b-forum",
