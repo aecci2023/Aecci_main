@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Play, XIcon } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 
 import { cn } from "@/lib/utils";

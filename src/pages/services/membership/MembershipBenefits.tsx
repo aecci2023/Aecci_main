@@ -1,16 +1,16 @@
-import { motion } from "framer-motion";
-import { CheckCircle2, Download, UserPlus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { motion } from "framer-motion";
+import { CheckCircle2, Download, UserPlus } from "lucide-react";
 
+import membershipBrochurePdf from "@/assets/images/membership/AECCI-Membership-Brochure.pdf";
 import corporateImg from "@/assets/images/membership/corporate.png";
 import corporatePlusImg from "@/assets/images/membership/corportateplus.png";
+import membershipFormPdf from "@/assets/images/membership/MEMBERSHIP-FORM-.pdf";
 import nonprofitImg from "@/assets/images/membership/nonprofit.png";
 import overseasImg from "@/assets/images/membership/overseas.png";
 import smallbusinessImg from "@/assets/images/membership/smallbusiness.png";
 import startupImg from "@/assets/images/membership/startup.png";
-import membershipBrochurePdf from "@/assets/images/membership/AECCI-Membership-Brochure.pdf";
-import membershipFormPdf from "@/assets/images/membership/MEMBERSHIP-FORM-.pdf";
 
 const membershipTiers = [
   {

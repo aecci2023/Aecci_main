@@ -1,10 +1,10 @@
-import * as React from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { User } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
 
-import { useLocation, Link } from "react-router-dom";
-import { menuConfig } from "./menu-config";
+import { Link, useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
+import { menuConfig } from "./menu-config";
 import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {

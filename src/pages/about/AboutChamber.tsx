@@ -1,21 +1,20 @@
-import { motion } from "framer-motion";
-import {
-  Users,
-  Target,
-  Shield,
-  Zap,
-  TrendingUp,
-  Lightbulb,
-  Award,
-  Heart,
-  Star,
-  CheckCircle2,
-  Globe,
-} from "lucide-react";
 import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { motion } from "framer-motion";
+import {
+  Award,
+  CheckCircle2,
+  Globe,
+  Heart,
+  Lightbulb,
+  Shield,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
+  Zap,
+} from "lucide-react";
 
 const sampleMarkers: GlobeMarker[] = [
   {
@@ -407,125 +406,202 @@ export default function AboutChamber() {
               <span className="text-primary">Global Opportunities</span>
             </h1>
             <p className="text-background/70 text-base md:text-lg leading-relaxed mb-6">
-              The Asian Exporters' Chamber of Commerce &amp; Industry (AECCI),
-              recognized by the Ministry of Commerce and Industry, Govt of
-              India, is one of the most dynamic and well-established non-profit
-              organizations devoted to the cause of promoting the private sector
-              contribution to the economy.
+              The Asian Exporters' Chamber of Commerce & Industry (AECCI) is a Government of India
+              recognized Chamber under the Ministry of Commerce & Industry, committed to
+              transforming the way Indian businesses connect with the world.
             </p>
             <p className="text-background/70 text-base md:text-lg leading-relaxed">
-              The Chamber is registered with the largest chambers network
-              globally "World Chambers Network" i.e. the Official Global
-              Chambers directory, and has devised several promotional and
-              developmental services to provide support to the private sector
-              initiatives in industry, trade and services to the Asian
-              community.
+              More than a traditional chamber, AECCI is building a Global Deal Room- a digital ecosystem
+              where Indian exporters, manufacturers, startups and service providers can directly engage
+              with international trade experts, legal advisors, investment consultants and business
+              organizations from across the globe. Through the Global Deal Room, Indian exporters can
+              engage directly with international buyers, distribution partners, trade representatives, and
+              sourcing agents to explore new business opportunities worldwide.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Digital Ecosystem */}
-      <section className="py-20 md:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge
-              variant="outline"
-              className="mb-6 gap-1.5 px-3 py-1 text-sm border-primary/30 text-primary"
-            >
-              <Zap className="w-3.5 h-3.5" />
-              The Digital Trade Ecosystem
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              A Global Deal Room
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-4">
-              More than a traditional chamber, AECCI is building a Global Deal
-              Room — a digital ecosystem where Indian exporters, manufacturers,
-              startups and service providers can directly engage with
-              international trade experts, legal advisors, investment
-              consultants and business organizations from across the globe.
-            </p>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
-              Through the Global Deal Room, Indian exporters can engage directly
-              with international buyers, distribution partners, trade
-              representatives, and sourcing agents to explore new business
-              opportunities worldwide.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="border-border shadow-sm">
-                <CardContent className="p-4 flex items-start gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
-                    <Users className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">
-                      Direct Engagement
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Connect with buyers &amp; partners
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="border-border shadow-sm">
-                <CardContent className="p-4 flex items-start gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
-                    <Target className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">
-                      Expert Consultation
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Legal &amp; trade advice
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </motion.div>
+      {/* Our Mission */}
+<section className="relative py-24 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
+  <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 blur-[120px] rounded-full" />
+  <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/10 blur-[100px] rounded-full" />
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="aspect-square md:aspect-video lg:aspect-square bg-muted rounded-3xl overflow-hidden shadow-xl border border-border flex items-center justify-center p-8 relative">
-              <div className="w-full h-full bg-card rounded-2xl shadow-sm border border-border p-6 flex flex-col gap-4 relative z-10">
-                <div className="h-8 bg-muted rounded-md w-1/3 mb-4" />
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="h-24 bg-primary/10 rounded-xl" />
-                  <div className="h-24 bg-primary/10 rounded-xl" />
-                  <div className="h-24 bg-primary/10 rounded-xl" />
-                </div>
-                <div className="h-32 bg-muted rounded-xl w-full border border-border mt-2" />
-                <div className="h-8 bg-muted rounded-md w-1/4 mt-auto" />
-              </div>
-              <div className="absolute -bottom-6 -left-6 md:-left-12 p-4 bg-card rounded-xl shadow-lg border border-border flex items-center gap-3 z-20">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                  <TrendingUp className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    Trade Ecosystem
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    Expanding Network
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+  <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+
+    <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+      {/* Left */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+      >
+        <span className="text-primary uppercase tracking-[4px] text-sm font-semibold">
+          Our Mission
+        </span>
+
+        <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-8">
+          Our mission is
+          <span className="text-primary"> simple:</span>
+        </h2>
+
+        <div className="border-l-4 border-primary pl-6 mb-8">
+          
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            To make global business connections faster,
+            smarter and more accessible for every Indian
+            enterprise.
+          </p>
         </div>
-      </section>
+
+        <p className="text-muted-foreground leading-8 text-lg mb-6">
+          Through strategic international collaborations and
+          industry experts spanning over <span className="font-semibold text-primary">
+          50 countries</span>, AECCI creates meaningful
+          opportunities that help businesses expand into
+          international markets with confidence.
+        </p>
+
+        <p className="text-muted-foreground leading-8 text-lg">
+          Whether you are looking to enter a new market,
+          understand foreign regulations, identify trusted
+          partners or negotiate international deals, AECCI
+          provides the platform, expertise and global network
+          to make it happen.
+        </p>
+      </motion.div>
+
+      {/* Right Cards */}
+
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="grid grid-cols-2 gap-6"
+      >
+
+        {[
+          {
+            title: "50+ Countries",
+            desc: "Global Expert Network",
+            icon: Globe,
+          },
+          {
+            title: "Trusted Partners",
+            desc: "Verified International Connections",
+            icon: Shield,
+          },
+          {
+            title: "Market Expansion",
+            desc: "Access New Global Opportunities",
+            icon: TrendingUp,
+          },
+          {
+            title: "Business Support",
+            desc: "Regulations • Deals • Strategy",
+            icon: Users,
+          },
+        ].map((item, index) => (
+          <Card
+            key={index}
+            className="rounded-3xl border-primary/20 hover:border-primary hover:shadow-2xl transition-all duration-300 bg-background/80 backdrop-blur"
+          >
+            <CardContent className="p-8">
+
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                <item.icon className="w-8 h-8 text-primary" />
+              </div>
+
+              <h4 className="font-bold text-xl mb-3">
+                {item.title}
+              </h4>
+
+              <p className="text-muted-foreground">
+                {item.desc}
+              </p>
+
+            </CardContent>
+          </Card>
+        ))}
+
+      </motion.div>
+
+    </div>
+
+  </div>
+</section>
+
+  {/* Global Deal Room */}
+<section className="py-20 bg-background">
+  <div className="max-w-6xl mx-auto px-6 md:px-12">
+
+    <div className="text-center mb-12">
+      <span className="text-primary uppercase tracking-widest text-sm font-semibold">
+        The Global Deal Room
+      </span>
+
+      <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-4">
+        Where Global Business Meets
+      </h2>
+
+      <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-8">
+        The AECCI Global Deal Room is designed to simplify international
+        business development through one integrated platform.
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-10 items-start">
+
+      {/* Left Content */}
+      <div>
+        <h3 className="text-xl font-semibold mb-6">
+          It enables members to:
+        </h3>
+
+        <ul className="space-y-4">
+          {[
+            "Connect with verified international trade and legal experts.",
+            "Schedule one-to-one and group virtual business meetings.",
+            "Explore new export markets and investment opportunities.",
+            "Receive market entry and regulatory guidance.",
+            "Build partnerships with overseas chambers and business organizations.",
+            "Access cross-border legal, compliance, taxation and trade advisory.",
+            "Discover international buyers, distributors and strategic partners."
+          ].map((item, index) => (
+            <li key={index} className="flex items-start gap-3">
+              <CheckCircle2 className="w-5 h-5 text-primary mt-1 shrink-0" />
+              <span className="text-muted-foreground leading-7">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Right Highlight Card */}
+      <Card className="border-primary/20 shadow-sm">
+        <CardContent className="p-8">
+          <Globe className="w-12 h-12 text-primary mb-6" />
+
+          <h3 className="text-2xl font-bold mb-4">
+            Real Business Outcomes
+          </h3>
+
+          <p className="text-muted-foreground leading-8">
+            The Global Deal Room is not just about networking—it is about
+            creating real business outcomes through trusted global
+            connections. AECCI helps businesses discover opportunities,
+            connect with the right partners, and confidently expand into
+            international markets.
+          </p>
+        </CardContent>
+      </Card>
+
+    </div>
+
+  </div>
+</section>
 
       {/* Strategic Mission */}
       <section className="py-20 md:py-28 bg-foreground overflow-hidden">
@@ -571,17 +647,11 @@ export default function AboutChamber() {
                 Our Mission
               </h3>
               <p className="text-background/70 text-base md:text-lg leading-relaxed mb-4">
-                To bridge the gap between Indian businesses and the global
-                marketplace by providing seamless access to international
-                expertise, strategic partnerships, business intelligence and
-                cross-border opportunities through a single digital platform.
+              To bridge the gap between Indian businesses and the global marketplace by providing
+              seamless access to international expertise, strategic partnerships, business intelligence and
+              cross-border opportunities through a single digital platform.
               </p>
-              <p className="text-background/70 text-base md:text-lg leading-relaxed">
-                The Chamber's mission is to lead the overall development, to
-                ensure future prosperity via a pro-business climate, to
-                represent the unified voice of the trade community and to reduce
-                the business frictions through well-functioning networks.
-              </p>
+              
             </div>
 
             {/* Mission Icon */}
@@ -604,87 +674,99 @@ export default function AboutChamber() {
                 Our Vision
               </h3>
               <p className="text-primary-foreground/90 text-base md:text-lg leading-relaxed mb-4">
-                To become Asia's most trusted digital trade ecosystem that
-                empowers businesses to build international partnerships,
-                accelerate exports and unlock global growth through technology,
+                To become Asia's most trusted digital trade ecosystem that empowers businesses to build
+                international partnerships, accelerate exports and unlock global growth through technology,
                 collaboration and expert guidance.
               </p>
-              <p className="text-primary-foreground/90 text-base md:text-lg leading-relaxed">
-                The Chamber's Vision is to see a voluntary partnership of
-                businesses and professionals working together to build a healthy
-                and prosperous economy with improved quality of life in the
-                community.
-              </p>
+              
             </div>
           </div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="py-20 md:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-12">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
-              What We Stand For
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our Core Values
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-              The foundation of everything we do is built upon these guiding
-              principles.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {coreValues.map((value, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08 }}
-              >
-                <Card className="h-full border-border hover:border-primary/40 transition-colors group">
-                  <CardContent className="p-6 flex flex-col gap-4">
-                    <div className="w-12 h-12 bg-muted group-hover:bg-primary/10 rounded-xl flex items-center justify-center text-muted-foreground group-hover:text-primary transition-colors">
-                      <value.icon className="w-6 h-6" />
-                    </div>
-                    <p className="font-semibold text-foreground">
-                      {value.title}
-                    </p>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {value.desc}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+     {/* Core Values */}
+<section className="py-20 bg-muted/30">
+  <div className="max-w-7xl mx-auto px-6 md:px-12">
 
-      {/* Closing Quote */}
-      <section className="py-20 md:py-28 bg-foreground">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <p className="italic text-background/70 text-base md:text-lg leading-loose">
-              "We want to create something worth creating that will endure the
-              test of time. Independency and neutrality, honesty in managing
-              arbitrations, preserving the rights of the client, secrecy and
-              confidentiality, prompt &amp; responsible affiliation, distinction
-              in performance and working with the spirit of one team. We do this
-              by relentlessly focusing on our customer's success, building
-              high-quality systems and planning for a long-term scale."
+    <div className="text-center mb-14">
+      <span className="text-primary uppercase tracking-widest text-sm font-semibold">
+        Our Core Values
+      </span>
+
+      <h2 className="text-3xl md:text-4xl font-bold mt-3">
+        Values That Guide Everything We Do
+      </h2>
+
+      <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
+        Our commitment to trust, innovation and global collaboration drives every
+        partnership we build and every opportunity we create.
+      </p>
+    </div>
+
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      {[
+        {
+          icon: Shield,
+          title: "Trust",
+          desc: "Every connection on our platform is built on transparency, professionalism and credibility.",
+        },
+        {
+          icon: Globe,
+          title: "Global Collaboration",
+          desc: "We believe meaningful partnerships create sustainable business growth across borders.",
+        },
+        {
+          icon: Zap,
+          title: "Innovation",
+          desc: "We leverage technology to make international business meetings and trade facilitation more efficient than ever before.",
+        },
+        {
+          icon: Award,
+          title: "Business Excellence",
+          desc: "We deliver world-class support that enables businesses to compete confidently in global markets.",
+        },
+        {
+          icon: CheckCircle2,
+          title: "Integrity",
+          desc: "We uphold the highest standards of ethics, confidentiality and impartiality in every interaction.",
+        },
+        {
+          icon: Heart,
+          title: "Member Success",
+          desc: "Our success is measured by the growth, partnerships and achievements of our members.",
+        },
+        {
+          icon: Star,
+          title: "Future Ready",
+          desc: "We continuously evolve to meet the changing needs of global commerce and digital trade.",
+        },
+      ].map((value, index) => (
+        <Card
+          key={index}
+          className="border hover:border-primary transition-all duration-300 hover:shadow-md"
+        >
+          <CardContent className="p-6">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+              <value.icon className="w-6 h-6 text-primary" />
+            </div>
+
+            <h3 className="text-lg font-semibold mb-3">
+              {value.title}
+            </h3>
+
+            <p className="text-muted-foreground text-sm leading-7">
+              {value.desc}
             </p>
-            <div className="mt-8 w-16 h-1 bg-primary mx-auto rounded-full" />
-          </motion.div>
-        </div>
-      </section>
+          </CardContent>
+        </Card>
+      ))}
+
+    </div>
+
+  </div>
+</section>
     </div>
   );
 }
