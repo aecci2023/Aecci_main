@@ -75,7 +75,7 @@ export default function PartnerDashboard() {
   }
 
   const upcoming = sessions
-    .filter((s) => s.status === "upcoming")
+    .filter((s) => s.status === "upcoming" || s.status === "pending_approval")
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   const past = sessions.filter(
@@ -335,13 +335,17 @@ export default function PartnerDashboard() {
                           {format(new Date(session.date), "MMM d, yyyy · h:mm a")}
                         </p>
                       </div>
-                      <Button size="sm" className="shrink-0 ml-3 gap-1.5" asChild>
-                        <Link
-                          to={`/partner/waiting-room?sessionId=${session.id}`}
-                        >
-                          <Video className="size-3.5" /> Join
-                        </Link>
-                      </Button>
+                      {session.status === "upcoming" ? (
+                        <Button size="sm" className="shrink-0 ml-3 gap-1.5" asChild>
+                          <Link
+                            to={`/partner/waiting-room?sessionId=${session.id}`}
+                          >
+                            <Video className="size-3.5" /> Join
+                          </Link>
+                        </Button>
+                      ) : (
+                        <Badge variant="secondary" className="shrink-0 ml-3">Pending</Badge>
+                      )}
                     </div>
                   ))}
                 </div>
