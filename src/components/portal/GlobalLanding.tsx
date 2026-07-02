@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   BarChart,
@@ -14,14 +15,21 @@ import {
   Rocket,
   ShieldCheck,
   Users,
+  XIcon,
 } from "lucide-react";
 
 import { QRCodeSVG } from "qrcode.react";
 import { Link } from "react-router-dom";
+import { createPortal } from "react-dom";
 import AnimatedWorldMap from "./AnimatedWorldMap";
+import { QRCodeSVG } from "qrcode.react";
+import videoSrc from "@/assets/videos/globalconnect.mp4";
 
 export default function GlobalLanding() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
   return (
+    <>
     <div className="dark w-full font-sans">
       {/* 1. HERO SECTION */}
       <section className="relative w-full bg-background text-foreground overflow-hidden pt-24 pb-32">
@@ -118,10 +126,16 @@ export default function GlobalLanding() {
               transition={{ delay: 0.4 }}
               className="flex flex-wrap items-center gap-4 pt-6"
             >
-              <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 px-8 rounded flex items-center gap-2 transition-colors">
+              <Link
+                to="/login"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 px-8 rounded flex items-center gap-2 transition-colors"
+              >
                 Explore Deal Rooms <ArrowRight className="w-5 h-5" />
-              </button>
-              <button className="bg-transparent hover:bg-foreground/5 border border-border text-foreground font-semibold py-3.5 px-8 rounded flex items-center gap-2 transition-colors">
+              </Link>
+              <button
+                onClick={() => setIsVideoOpen(true)}
+                className="bg-transparent hover:bg-foreground/5 border border-border text-foreground font-semibold py-3.5 px-8 rounded flex items-center gap-2 transition-colors"
+              >
                 <Play className="w-4 h-4 fill-current text-primary" /> How It
                 Works
               </button>
@@ -317,7 +331,7 @@ export default function GlobalLanding() {
                 </div>
 
                 <Link
-                  to="/signup"
+                  to="/partner/register"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 px-6 rounded-lg flex items-center gap-2 transition-colors w-max"
                 >
                   Register to Participate <ArrowRight className="w-4 h-4" />
@@ -503,5 +517,54 @@ export default function GlobalLanding() {
         </div>
       </section>
     </div>
+
+      {/* Video Modal */}
+      {typeof window !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {isVideoOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                role="button"
+                tabIndex={0}
+                onClick={() => setIsVideoOpen(false)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape" || e.key === "Enter" || e.key === " ")
+                    setIsVideoOpen(false);
+                }}
+                className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-md"
+              >
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                  className="relative mx-4 aspect-video w-full max-w-4xl md:mx-0"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    className="absolute -top-16 right-0 rounded-full bg-neutral-900/50 p-2 text-xl text-white ring-1 backdrop-blur-md cursor-pointer hover:bg-neutral-900/80 transition-colors"
+                    onClick={() => setIsVideoOpen(false)}
+                  >
+                    <XIcon className="size-5" />
+                  </button>
+                  <div className="relative isolate z-1 size-full overflow-hidden rounded-2xl border-2 border-white bg-black">
+                    <video
+                      src={videoSrc}
+                      className="size-full rounded-2xl object-contain"
+                      autoPlay
+                      controls
+                      playsInline
+                    />
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
+    </>
   );
 }
