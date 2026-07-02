@@ -105,6 +105,7 @@ import MembershipBenefits from "@/pages/services/membership/MembershipBenefits";
 import RenewMembership from "@/pages/services/membership/RenewMembership";
 import VisaRecommendation from "@/pages/services/membership/VisaRecommendation";
 import PatronMembership from "@/pages/services/membership/patron-membership";
+import UpcomingEventsPage from "@/pages/upcoming-events";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -749,8 +750,8 @@ export const routes: RouteObject[] = [
     element: <NotFound />,
   },
   {
-    path: "/upcoming-events",
-    element: <NotFound />,
+    path: "/events/upcoming-events",
+    element: <UpcomingEventsPage />,
   },
   {
     path: "/events/past-events",

@@ -18,7 +18,6 @@ import {
   XIcon,
 } from "lucide-react";
 
-import { QRCodeSVG } from "qrcode.react";
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import AnimatedWorldMap from "./AnimatedWorldMap";
