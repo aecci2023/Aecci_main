@@ -8,7 +8,7 @@ export interface AppNotification {
   link?: string;
   createdAt: string;
   read: boolean;
-  // Admin specific fields for KYC
+  // Admin specific fields for verification
   fullName?: string | null;
   companyName?: string | null;
   userType?: string | null;

@@ -106,7 +106,7 @@ export function NotificationBell() {
                           )}
                         />
                       )}
-                      {n.type === "new-verification" ? "New KYC Submission" : (n.title || "Notification")}
+                      {n.type === "new-verification" ? "New User Registration" : (n.title || "Notification")}
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
                       {n.type === "new-verification" 

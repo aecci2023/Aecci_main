@@ -64,7 +64,7 @@ export const signupSchema = z
     nationality: z.string().optional(),
     linkedinProfileUrl: z.string().optional(),
     yearsOfExperience: z.string().optional(),
-    internationalKycIds: z
+    internationalIds: z
       .array(
         z.object({
           type: z.string().min(1, "Required"),
@@ -181,11 +181,11 @@ export const signupSchema = z
   .refine(
     (data) => {
       if (data.userType === "individual" && data.country !== "India") {
-        return data.internationalKycIds && data.internationalKycIds.length > 0;
+        return data.internationalIds && data.internationalIds.length > 0;
       }
       return true;
     },
-    { message: "At least one ID is required", path: ["internationalKycIds"] },
+    { message: "At least one ID is required", path: ["internationalIds"] },
   )
 
   // Step 4 Business requires fields
@@ -297,5 +297,5 @@ export const initialFormData: Partial<SignupFormData> = {
   productCatalogue: [],
   targetMarkets: [],
   internationalBusinessIds: [{ type: "", idNumber: "" }],
-  internationalKycIds: [{ type: "", idNumber: "" }],
+  internationalIds: [{ type: "", idNumber: "" }],
 };

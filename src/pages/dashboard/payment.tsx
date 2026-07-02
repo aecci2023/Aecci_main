@@ -211,8 +211,8 @@ export default function PaymentPage() {
               // Sync local storage user state
               const updatedUser = {
                 ...currentUser,
-                kycStatus:
-                  dbUser.kycStatus === "approved" ? "active" : dbUser.kycStatus,
+                verificationStatus:
+                  dbUser.verificationStatus === "approved" ? "active" : dbUser.verificationStatus,
                 planName: planId,
                 planActive: true,
               };

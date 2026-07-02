@@ -112,7 +112,7 @@ export default function NotificationsPage() {
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <h4 className="font-semibold text-base leading-none">
-                          {n.type === "new-verification" ? "New KYC Submission" : (n.title || "Notification")}
+                          {n.type === "new-verification" ? "New User Registration" : (n.title || "Notification")}
                         </h4>
                         {!n.read && (
                           <span className={cn("h-2 w-2 rounded-full", typeDot[n.type] ?? "bg-primary")} />

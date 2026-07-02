@@ -45,8 +45,7 @@ export default function MapBranding() {
 
           <ul className="space-y-3 text-sm text-white/70">
             <li className="flex items-center gap-2">
-              <div className="size-1.5 rounded-full bg-primary" /> Simplified
-              KYC & Onboarding
+              <div className="size-1.5 rounded-full bg-primary" /> Simplified Onboarding
             </li>
             <li className="flex items-center gap-2">
               <div className="size-1.5 rounded-full bg-primary" /> Personalized

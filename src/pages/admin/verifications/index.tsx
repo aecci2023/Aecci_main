@@ -27,7 +27,7 @@ export default function AdminVerificationsPage() {
   const navigate = useNavigate();
 
   const { data: usersData, isLoading: usersLoading } = useGetUsersQuery({
-    kycStatus: "pending_verification",
+    verificationStatus: "pending_verification",
     role: "user",
   });
 
@@ -179,7 +179,7 @@ export default function AdminVerificationsPage() {
             <ShieldAlert className="size-8 text-amber-500" /> Pending Verifications
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Review submitted KYC documents and partner applications.
+            Review submitted documents and partner applications.
           </p>
         </div>
         {rows.length > 0 && (

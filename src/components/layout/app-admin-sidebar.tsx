@@ -29,7 +29,7 @@ export function AppAdminSidebar() {
     ).length;
     const pendingVerifications = users.filter(
       (u: any) =>
-        u.kycStatus === "pending" || u.kycStatus === "pending_verification",
+        u.verificationStatus === "pending" || u.verificationStatus === "pending_verification",
     ).length;
 
     // Deep copy to avoid mutating the exported constant

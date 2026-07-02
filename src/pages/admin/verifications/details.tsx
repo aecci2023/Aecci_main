@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Main } from "@/components/layout/main";
 import {
   useGetUserByIdQuery,
-  useUpdateKycStatusMutation,
+  useUpdateVerificationStatusMutation,
 } from "@/store/api/adminApi";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,8 +41,8 @@ export default function AdminVerificationDetailsPage() {
   const { data, isLoading, error } = useGetUserByIdQuery(id as string, {
     skip: !id,
   });
-  const [updateKycStatus, { isLoading: isUpdating }] =
-    useUpdateKycStatusMutation();
+  const [updateVerificationStatus, { isLoading: isUpdating }] =
+    useUpdateVerificationStatusMutation();
 
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
   const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
@@ -79,20 +79,20 @@ export default function AdminVerificationDetailsPage() {
 
   const handleUpdateStatus = async (status: string, reason?: string) => {
     try {
-      await updateKycStatus({
+      await updateVerificationStatus({
         id: user.id,
-        kycStatus: status,
+        verificationStatus: status,
         reason,
       }).unwrap();
-      toast.success("KYC status updated successfully.");
+      toast.success("status updated successfully.");
       if (status === "rejected") {
         setIsRejectDialogOpen(false);
         setRejectionReason("");
       }
       navigate("/admin/verifications");
     } catch (err) {
-      console.error("KYC Update Error:", err);
-      toast.error("Failed to update KYC status.");
+      console.error("Update Error:", err);
+      toast.error("Failed to update status.");
     }
   };
 
@@ -141,7 +141,7 @@ export default function AdminVerificationDetailsPage() {
   };
 
   const isPending =
-    user.kycStatus === "pending" || user.kycStatus === "pending_verification";
+    user.verificationStatus === "pending" || user.verificationStatus === "pending_verification";
 
   return (
     <Main fluid className="space-y-6 w-full pb-10">
@@ -170,12 +170,12 @@ export default function AdminVerificationDetailsPage() {
                 disabled={isUpdating}
                 onClick={() => setIsApproveDialogOpen(true)}
               >
-                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve KYC
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve
               </Button>
             </>
           ) : (
             <Badge className="bg-primary/10 text-primary hover:bg-primary/20 capitalize">
-              Status: {user.kycStatus.replace(/_/g, " ")}
+              Status: {user.verificationStatus.replace(/_/g, " ")}
             </Badge>
           )}
         </div>
@@ -188,7 +188,7 @@ export default function AdminVerificationDetailsPage() {
           {user.companyName || user.fullName}
         </h1>
         <p className="text-muted-foreground mt-2">
-          Review the KYC information and verify the uploaded documents below.
+          Review the information and verify the uploaded documents below.
         </p>
       </div>
 
@@ -357,7 +357,7 @@ export default function AdminVerificationDetailsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {(user.internationalBusinessIds?.length > 0 ||
-              user.internationalKycIds?.length > 0) && (
+              user.internationalIds?.length > 0) && (
               <div className="space-y-4 mb-4">
                 <h3 className="text-lg font-medium border-b pb-2">
                   International Identifications
@@ -376,13 +376,13 @@ export default function AdminVerificationDetailsPage() {
                       </CardContent>
                     </Card>
                   ))}
-                {user.internationalKycIds
+                {user.internationalIds
                   ?.filter((o: any) => o.type || o.idNumber)
                   .map((idObj: any, idx: number) => (
-                    <Card key={`kyc-${idx}`} className="bg-muted/10">
+                    <Card key={`doc-${idx}`} className="bg-muted/10">
                       <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
                         <span className="font-medium">
-                          {idObj.type || "Personal KYC ID"}
+                          {idObj.type || "Personal ID"}
                         </span>
                         <Badge variant="outline" className="w-fit">
                           {idObj.idNumber}
@@ -399,14 +399,14 @@ export default function AdminVerificationDetailsPage() {
             {user.documents && user.documents.length > 0 ? (
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                 {user.documents.map((doc: string, idx: number) => (
-                  <React.Fragment key={`kyc-doc-${idx}`}>
-                    {renderDocumentCard(`KYC Document ${idx + 1}`, doc)}
+                  <React.Fragment key={`doc-doc-${idx}`}>
+                    {renderDocumentCard(`Document ${idx + 1}`, doc)}
                   </React.Fragment>
                 ))}
               </div>
             ) : (
               <p className="text-sm text-muted-foreground">
-                No KYC documents uploaded.
+                No documents uploaded.
               </p>
             )}
 
@@ -511,7 +511,7 @@ export default function AdminVerificationDetailsPage() {
       <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Approve KYC Application</DialogTitle>
+            <DialogTitle>Approve Application</DialogTitle>
             <DialogDescription>
               The user will receive an approval email and gain full access to their account immediately.
             </DialogDescription>

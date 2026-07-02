@@ -74,7 +74,7 @@ export function useNotificationsSocket() {
             addNotification({
               id: `${payload.userId}-${Date.now()}`,
               type: "new-verification",
-              title: "New KYC Submission",
+              title: "New User Registration",
               message: `${payload.companyName || payload.fullName || "A user"} submitted for verification.`,
               link: "/admin/verifications",
               read: false,
@@ -91,5 +91,5 @@ export function useNotificationsSocket() {
     };
   }, [dispatch]);
 
-  return socketRef.current;
+  return socketRef;
 }

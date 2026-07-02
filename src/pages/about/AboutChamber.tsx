@@ -325,44 +325,6 @@ const sampleMarkers: GlobeMarker[] = [
   },
 ];
 
-const coreValues = [
-  {
-    title: "Trust",
-    icon: Shield,
-    desc: "Built on transparency, professionalism and credibility.",
-  },
-  {
-    title: "Global Collaboration",
-    icon: Globe,
-    desc: "Meaningful partnerships create sustainable growth.",
-  },
-  {
-    title: "Innovation",
-    icon: Zap,
-    desc: "Leveraging technology for efficient trade facilitation.",
-  },
-  {
-    title: "Business Excellence",
-    icon: Award,
-    desc: "World-class support to compete in global markets.",
-  },
-  {
-    title: "Integrity",
-    icon: CheckCircle2,
-    desc: "Highest standards of ethics, confidentiality and impartiality.",
-  },
-  {
-    title: "Member Success",
-    icon: Heart,
-    desc: "Measured by the growth and achievements of our members.",
-  },
-  {
-    title: "Future Ready",
-    icon: Star,
-    desc: "Evolving to meet the changing needs of global commerce.",
-  },
-];
-
 export default function AboutChamber() {
   return (
     <div className="w-full bg-background text-foreground">

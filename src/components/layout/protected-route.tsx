@@ -25,13 +25,13 @@ export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
 
   if (user.role !== "admin") {
     if (
-      user.kycStatus === "pending_verification" &&
+      user.verificationStatus === "pending_verification" &&
       window.location.pathname !== "/dashboard/screening"
     ) {
       return <Navigate to="/dashboard/screening" replace />;
     }
     if (
-      user.kycStatus === "rejected" &&
+      user.verificationStatus === "rejected" &&
       window.location.pathname !== "/dashboard/rejected"
     ) {
       return <Navigate to="/dashboard/rejected" replace />;

@@ -125,7 +125,7 @@ export default function DashboardPage() {
             <CardContent>
               <div className="text-2xl font-bold">4 / 4</div>
               <p className="text-xs text-muted-foreground mt-1">
-                KYC & Compliance complete
+                 Compliance complete
               </p>
             </CardContent>
           </Card>

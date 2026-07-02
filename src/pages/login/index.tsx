@@ -94,18 +94,18 @@ export default function LoginPage() {
           toast.success("Logged in successfully");
           navigate("/admin/dashboard");
         } else if (user.role === "partner") {
-          if (user.kycStatus === "pending_verification") {
+          if (user.verificationStatus === "pending_verification") {
             toast.warning("Your application is under review. We'll notify you once approved.");
             return;
           }
           toast.success("Logged in successfully");
           navigate("/partner/dashboard");
         } else {
-          if (user.kycStatus === "pending_verification") {
+          if (user.verificationStatus === "pending_verification") {
             toast.warning("Your account is under review. You'll be notified once approved.");
             return;
           }
-          if (user.kycStatus === "rejected") {
+          if (user.verificationStatus === "rejected") {
             navigate("/dashboard/rejected");
             return;
           }

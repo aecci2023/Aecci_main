@@ -28,7 +28,7 @@ import {
 import { Link } from "react-router-dom";
 import {
   useGetAdminDashboardStatsQuery,
-  useUpdateKycStatusMutation,
+  useUpdateVerificationStatusMutation,
 } from "@/store/api/adminApi";
 import { formatDistanceToNow, format } from "date-fns";
 import { toast } from "sonner";
@@ -61,7 +61,7 @@ const planChartConfig: ChartConfig = {
 
 export default function AdminDashboard() {
   const { data, isLoading, refetch } = useGetAdminDashboardStatsQuery();
-  const [updateKyc, { isLoading: isUpdating }] = useUpdateKycStatusMutation();
+  const [updateVerification, { isLoading: isUpdating }] = useUpdateVerificationStatusMutation();
 
   const stats = data?.data?.stats;
   const verifications: any[] = data?.data?.recentVerifications || [];
@@ -73,8 +73,8 @@ export default function AdminDashboard() {
 
   const handleApprove = async (id: string) => {
     try {
-      await updateKyc({ id, kycStatus: "approved" }).unwrap();
-      toast.success("KYC approved");
+      await updateVerification({ id, verificationStatus: "approved" }).unwrap();
+      toast.success("User approved");
       refetch();
     } catch {
       toast.error("Failed to approve");
@@ -494,13 +494,13 @@ export default function AdminDashboard() {
         </Card>
       </div>
 
-      {/* Pending KYC + Recent Reports */}
+      {/* Pending Verifications + Recent Reports */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2 border-amber-500/20">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
               <CardTitle className="flex items-center gap-2 text-base">
-                <ShieldAlert className="size-4 text-amber-500" /> Pending KYC
+                <ShieldAlert className="size-4 text-amber-500" /> Pending Verifications
                 Approvals
               </CardTitle>
               <CardDescription>

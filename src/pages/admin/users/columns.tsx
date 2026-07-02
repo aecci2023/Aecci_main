@@ -11,7 +11,7 @@ export type UserRow = {
   userType: string | null;
   country: string | null;
   isEmailVerified: boolean;
-  kycStatus: string;
+  verificationStatus: string;
   industrySector?: string;
   mobileNumber?: string;
   iecDocument?: string;

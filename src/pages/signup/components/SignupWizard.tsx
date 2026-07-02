@@ -65,7 +65,7 @@ const getFieldsForStep = (
           "yearsOfExperience",
           ...(country === "India"
             ? ["aadharNumber", "panNumber"]
-            : ["internationalKycIds"]),
+            : ["internationalIds"]),
         ] as (keyof SignupFormData)[];
       }
     case 4:
@@ -229,7 +229,7 @@ export default function SignupWizard() {
                   JSON.stringify({
                     ...user,
                     ...res.data,
-                    kycStatus: "pending_verification",
+                    verificationStatus: "pending_verification",
                   }),
                 );
               }

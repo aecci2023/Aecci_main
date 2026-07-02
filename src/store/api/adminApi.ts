@@ -21,7 +21,7 @@ export const adminApi = createApi({
       {
         role?: string;
         userType?: string;
-        kycStatus?: string;
+        verificationStatus?: string;
         partnerId?: string;
       }
     >({
@@ -30,14 +30,14 @@ export const adminApi = createApi({
         if (
           params.role ||
           params.userType ||
-          params.kycStatus ||
+          params.verificationStatus ||
           params.partnerId
         ) {
           const searchParams = new URLSearchParams();
           if (params.role) searchParams.append("role", params.role);
           if (params.userType) searchParams.append("userType", params.userType);
-          if (params.kycStatus)
-            searchParams.append("kycStatus", params.kycStatus);
+          if (params.verificationStatus)
+            searchParams.append("verificationStatus", params.verificationStatus);
           if (params.partnerId)
             searchParams.append("partnerId", params.partnerId);
           queryString = `?${searchParams.toString()}`;
@@ -50,11 +50,11 @@ export const adminApi = createApi({
       query: (id) => `users/${id}`,
       providesTags: (_result, _error, id) => [{ type: "Users", id }],
     }),
-    updateKycStatus: builder.mutation<
+    updateVerificationStatus: builder.mutation<
       any,
       {
         id: string;
-        kycStatus: string;
+        verificationStatus: string;
         reason?: string;
         partnerId?: string;
         assignedPartnerFee?: number | string;
@@ -62,7 +62,7 @@ export const adminApi = createApi({
       }
     >({
       query: ({ id, ...body }) => ({
-        url: `users/${id}/kyc`,
+        url: `users/${id}/verification`,
         method: "PATCH",
         body,
       }),
@@ -211,7 +211,7 @@ export const adminApi = createApi({
 export const {
   useGetUsersQuery,
   useGetUserByIdQuery,
-  useUpdateKycStatusMutation,
+  useUpdateVerificationStatusMutation,
   useAssignPartnerMutation,
   useSetPricingMutation,
   useProcessPaymentMutation,

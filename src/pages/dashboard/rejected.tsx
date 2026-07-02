@@ -58,7 +58,7 @@ export default function RejectedApplicationPage() {
                 Reason for Rejection
               </h4>
               <p className="text-foreground whitespace-pre-wrap">
-                {user?.kycRejectionReason ||
+                {user?.rejectionReason ||
                   "Does not meet the criteria. Please ensure all your details are correct."}
               </p>
             </div>

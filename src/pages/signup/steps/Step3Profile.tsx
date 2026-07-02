@@ -42,12 +42,12 @@ export default function Step3Profile({ nextStep }: Props) {
   });
 
   const {
-    fields: kycIds,
-    append: appendKycId,
-    remove: removeKycId,
+    fields: internationalIdsArray,
+    append: appendId,
+    remove: removeId,
   } = useFieldArray({
     control,
-    name: "internationalKycIds",
+    name: "internationalIds",
   });
 
   return (
@@ -553,7 +553,7 @@ export default function Step3Profile({ nextStep }: Props) {
 
             {isIndia ? (
               <div className="p-4 bg-muted/50 rounded-lg space-y-4 border border-border">
-                <h3 className="font-medium text-sm">India KYC Details</h3>
+                <h3 className="font-medium text-sm">India Details</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={control}
@@ -597,7 +597,7 @@ export default function Step3Profile({ nextStep }: Props) {
             ) : (
               <div className="p-4 bg-muted/50 rounded-lg space-y-4 border border-border">
                 <h3 className="font-medium text-sm">
-                  International KYC Details{" "}
+                  International Details{" "}
                   <span className="text-red-500">*</span>
                 </h3>
                 <p className="text-xs text-muted-foreground mb-4">
@@ -605,14 +605,14 @@ export default function Step3Profile({ nextStep }: Props) {
                   document.
                 </p>
 
-                {kycIds.map((item, index) => (
+                {internationalIdsArray.map((item, index) => (
                   <div
                     key={item.id}
                     className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 items-end bg-background p-3 rounded-md border border-border mb-3"
                   >
                     <FormField
                       control={control}
-                      name={`internationalKycIds.${index}.type`}
+                      name={`internationalIds.${index}.type`}
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>ID Type</FormLabel>
@@ -645,7 +645,7 @@ export default function Step3Profile({ nextStep }: Props) {
                     />
                     <FormField
                       control={control}
-                      name={`internationalKycIds.${index}.idNumber`}
+                      name={`internationalIds.${index}.idNumber`}
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>ID Number</FormLabel>
@@ -665,8 +665,8 @@ export default function Step3Profile({ nextStep }: Props) {
                       variant="ghost"
                       size="icon"
                       className="text-muted-foreground hover:text-destructive"
-                      onClick={() => removeKycId(index)}
-                      disabled={kycIds.length === 1}
+                      onClick={() => removeId(index)}
+                      disabled={internationalIdsArray.length === 1}
                     >
                       <Trash2 className="size-4" />
                     </Button>
@@ -678,7 +678,7 @@ export default function Step3Profile({ nextStep }: Props) {
                   variant="outline"
                   size="sm"
                   className="w-full mt-2"
-                  onClick={() => appendKycId({ type: "", idNumber: "" })}
+                  onClick={() => appendId({ type: "", idNumber: "" })}
                 >
                   <Plus className="size-4 mr-2" /> Add Another ID
                 </Button>

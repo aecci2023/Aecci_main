@@ -114,7 +114,7 @@ export function AdminNotificationBell() {
                     {n.companyName || n.fullName || "New user"}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {n.userType || "User"} submitted for KYC verification
+                    {n.userType || "User"} submitted for verification
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {formatDistanceToNow(new Date(n.createdAt), {
