@@ -49,6 +49,7 @@ const PLANS = [
     price: "₹3,999",
     priceVal: 3999,
     slots: "1 Deal Room Session Slot",
+    slotsNum: 1,
     validity: "30 Days Validity",
     popular: false,
     color: "from-blue-600 to-indigo-600",
@@ -66,6 +67,7 @@ const PLANS = [
     price: "₹14,999",
     priceVal: 14999,
     slots: "4 Deal Room Session Slots",
+    slotsNum: 4,
     validity: "90 Days Validity",
     popular: true,
     color: "from-emerald-600 to-teal-600",
@@ -84,6 +86,7 @@ const PLANS = [
     price: "₹44,999",
     priceVal: 44999,
     slots: "8 Deal Room Session Slots",
+    slotsNum: 8,
     validity: "180 Days Validity",
     popular: false,
     color: "from-purple-600 to-indigo-600",
@@ -102,6 +105,7 @@ const PLANS = [
     price: "₹1,50,000",
     priceVal: 150000,
     slots: "Unlimited Slots",
+    slotsNum: 9999,
     validity: "365 Days Validity",
     popular: false,
     color: "from-rose-600 to-pink-600",
@@ -131,15 +135,17 @@ export default function PaymentPage() {
     return null;
   });
 
-  const { data: userData } = useGetUserByIdQuery(currentUser?.id as string, {
-    skip: !currentUser?.id,
+  const userId = currentUser?.id || currentUser?._id;
+
+  const { data: userData } = useGetUserByIdQuery(userId as string, {
+    skip: !userId,
   });
 
   const dbUser = userData?.data;
 
   const { data: historyData, isLoading: isHistoryLoading } =
     useGetSubscriptionHistoryQuery(undefined, {
-      skip: !currentUser?.id,
+      skip: !userId,
     });
 
   const [createOrder, { isLoading: isCreating }] =
@@ -162,7 +168,7 @@ export default function PaymentPage() {
   };
 
   const handleBuyPlan = async (planId: string) => {
-    if (!dbUser?.id) {
+    if (!userId) {
       toast.error("Please log in to purchase a plan.");
       return;
     }
@@ -189,7 +195,7 @@ export default function PaymentPage() {
 
       // 3. Open Razorpay Widget
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_YourKeyId",
+        key: "rzp_test_T8jvkGKGDzwH6S", // Hardcoded to prevent stale env overrides
         amount: orderResponse.amount,
         currency: orderResponse.currency,
         name: "AECCI Global",
@@ -209,12 +215,17 @@ export default function PaymentPage() {
               toast.success("Subscription activated successfully!");
 
               // Sync local storage user state
+              const currentStatus = dbUser?.verificationStatus || currentUser?.verificationStatus;
+              const addedSlots = PLANS.find((p) => p.id === planId)?.slotsNum || 0;
+              const currentSlots = dbUser?.slotsRemaining || currentUser?.slotsRemaining || 0;
+              
               const updatedUser = {
                 ...currentUser,
                 verificationStatus:
-                  dbUser.verificationStatus === "approved" ? "active" : dbUser.verificationStatus,
+                  currentStatus === "approved" ? "active" : currentStatus,
                 planName: planId,
                 planActive: true,
+                slotsRemaining: Math.max(currentSlots + addedSlots, addedSlots),
               };
               localStorage.setItem("user", JSON.stringify(updatedUser));
 
@@ -228,9 +239,9 @@ export default function PaymentPage() {
           }
         },
         prefill: {
-          name: dbUser.fullName || "",
-          email: dbUser.email || "",
-          contact: dbUser.mobileNumber || "",
+          name: dbUser?.fullName || currentUser?.fullName || "",
+          email: dbUser?.email || currentUser?.email || "",
+          contact: dbUser?.mobileNumber || currentUser?.mobileNumber || "",
         },
         theme: {
           color: "#16a34a", // Emerald green theme

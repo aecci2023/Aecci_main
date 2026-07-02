@@ -32,6 +32,10 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
     location.pathname === "/partner/onboarding" ||
     location.pathname === "/partner/onboarding/";
 
+  const isOnRoomPage =
+    location.pathname.includes("/waiting-room") ||
+    location.pathname.includes("/live-deal-room");
+
   if (needsSetup && !isOnboarding) {
     return <Navigate to="/partner/onboarding" replace />;
   }
@@ -49,17 +53,19 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
               "peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]",
             )}
           >
-            <Header fixed>
-              <div className="flex items-center space-x-2">
-                <span className="font-semibold text-sm text-muted-foreground">
-                  AECCI Partner Portal
-                </span>
-              </div>
-              <div className="ml-auto flex items-center space-x-4">
-                <Search />
-                <ProfileDropdown />
-              </div>
-            </Header>
+            {!isOnRoomPage && (
+              <Header fixed>
+                <div className="flex items-center space-x-2">
+                  <span className="font-semibold text-sm text-muted-foreground">
+                    AECCI Partner Portal
+                  </span>
+                </div>
+                <div className="ml-auto flex items-center space-x-4">
+                  <Search />
+                  <ProfileDropdown />
+                </div>
+              </Header>
+            )}
             {children ?? <Outlet />}
           </SidebarInset>
         </SidebarProvider>

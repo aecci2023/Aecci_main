@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { Header } from "@/components/layout/header";
 import { Main } from "@/components/layout/main";
@@ -15,6 +15,7 @@ import { io, Socket } from "socket.io-client";
 export default function LiveDealRoomPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("sessionId") || "";
 
@@ -44,7 +45,7 @@ export default function LiveDealRoomPage() {
   const userStr = localStorage.getItem("user");
   const user = userStr ? JSON.parse(userStr) : null;
   const userName = user?.fullName || "Guest";
-  const userId = user?.id || Date.now().toString();
+  const userId = user?.id;
 
   // Handle countdown logic
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function LiveDealRoomPage() {
 
     newSocket.on("connect", () => {
       newSocket.emit("join-room", { sessionId, userId, userName });
+      setSocket(newSocket);
     });
 
     newSocket.on(
@@ -104,8 +106,6 @@ export default function LiveDealRoomPage() {
     newSocket.on("hand-lowered", (data: { userId: string }) => {
       setRaisedHands((prev) => prev.filter((h) => h.userId !== data.userId));
     });
-
-    setSocket(newSocket);
 
     return () => {
       newSocket.emit("leave-room", sessionId);
@@ -161,7 +161,7 @@ export default function LiveDealRoomPage() {
         layout: "Auto",
         showLayoutButton: true,
         onLeaveRoom: () => {
-          navigate("/dashboard");
+          navigate(location.pathname.startsWith('/partner') ? "/partner/dashboard" : "/dashboard");
         },
       });
     };
@@ -276,7 +276,7 @@ export default function LiveDealRoomPage() {
               <Button
                 variant="outline"
                 className="w-full"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate(location.pathname.startsWith('/partner') ? "/partner/dashboard" : "/dashboard")}
               >
                 Return to Dashboard
               </Button>

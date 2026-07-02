@@ -12,21 +12,73 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { ShieldCheck, Video, Mic, Wifi } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ShieldCheck, Video, Mic, Wifi, Loader2 } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useGetSessionByIdQuery } from "@/store/api/sessionApi";
 
 export default function WaitingRoomPage() {
   const [agreed, setAgreed] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(10); // 10 seconds demo countdown
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const sessionId = queryParams.get("sessionId");
+
+  const { data: sessionData, isLoading } = useGetSessionByIdQuery(sessionId as string, {
+    skip: !sessionId
+  });
+  
+  const session = sessionData?.data;
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (secondsLeft <= 0) return;
-    const timer = setInterval(() => {
-      setSecondsLeft((prev) => prev - 1);
-    }, 1000);
+    if (!session?.date) return;
+    
+    const calculateTimeLeft = () => {
+      const difference = new Date(session.date).getTime() - new Date().getTime();
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+        setIsReady(false);
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsReady(true);
+      }
+    };
+    
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, [session?.date]);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loader2 className="size-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center gap-4 text-center p-4">
+        <h2 className="text-2xl font-bold">Session Not Found</h2>
+        <p className="text-muted-foreground">The requested Deal Room session could not be found or is unavailable.</p>
+        <Button asChild><Link to="/dashboard">Return to Dashboard</Link></Button>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -50,7 +102,7 @@ export default function WaitingRoomPage() {
             B2B Virtual Waiting Room
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
-            India-Kenya Textile Round (AECCI-2026-06B)
+            {session.title || `B2B Consultative Session - ${session.country}`} (ID: {session.id.substring(session.id.length - 8).toUpperCase()})
           </p>
         </div>
 
@@ -61,13 +113,16 @@ export default function WaitingRoomPage() {
               Session Opening Status
             </span>
 
-            {secondsLeft > 0 ? (
+            {!isReady ? (
               <>
-                <div className="text-5xl font-mono font-bold text-primary">
-                  00:00:{secondsLeft.toString().padStart(2, "0")}
+                <div className="text-5xl font-mono font-bold text-primary flex justify-center gap-2">
+                  {timeLeft.days > 0 && <span>{timeLeft.days.toString().padStart(2, "0")}:</span>}
+                  <span>{timeLeft.hours.toString().padStart(2, "0")}:</span>
+                  <span>{timeLeft.minutes.toString().padStart(2, "0")}:</span>
+                  <span>{timeLeft.seconds.toString().padStart(2, "0")}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Preparing secure connection desks. Please do not close this
+                  Waiting for scheduled time. Please do not close this
                   window.
                 </p>
               </>
@@ -186,15 +241,15 @@ export default function WaitingRoomPage() {
         <div className="flex justify-center pt-2">
           <Button
             asChild
-            disabled={secondsLeft > 0 || !agreed}
+            disabled={!isReady || !agreed}
             size="lg"
             className="w-full md:w-64 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base"
           >
-            {secondsLeft > 0 || !agreed ? (
+            {!isReady || !agreed ? (
               <span>Locked (Complete checklist)</span>
             ) : (
               <Link
-                to="/dashboard/live-deal-room"
+                to={`${location.pathname.startsWith('/partner') ? '/partner' : '/dashboard'}/live-deal-room?sessionId=${session.id}`}
                 className="flex items-center gap-2"
               >
                 Enter Live Deal Room <Video className="size-5" />

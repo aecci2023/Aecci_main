@@ -1,50 +1,22 @@
-import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, User, Video } from "lucide-react";
+import { Calendar, Clock, User, Video, Loader2 } from "lucide-react";
 import { format } from "date-fns";
-
-interface Session {
-  id: string;
-  title: string;
-  country: string;
-  date: string;
-  durationMinutes: number;
-  status: string;
-  questionnaire: string | null;
-  client: {
-    fullName: string | null;
-    companyName: string | null;
-    country: string | null;
-  } | null;
-}
+import { Link } from "react-router-dom";
+import { useGetMySessionsQuery } from "@/store/api/sessionApi";
 
 export default function PartnerUpcomingSessionsPage() {
-  const [sessions, setSessions] = useState<Session[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: sessionData, isLoading } = useGetMySessionsQuery();
+  
+  const sessions = (sessionData?.data || []).filter(
+    (s: any) => s.status === "upcoming" || s.status === "pending_approval"
+  ).sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    fetch(`${import.meta.env.VITE_API_URL}/api/sessions/my-sessions`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.success) {
-          const upcoming = (data.data as Session[]).filter(
-            (s) => s.status === "upcoming" || s.status === "pending_approval",
-          );
-          setSessions(upcoming);
-        }
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+        <Loader2 className="animate-spin text-primary size-8" />
       </div>
     );
   }
@@ -70,11 +42,11 @@ export default function PartnerUpcomingSessionsPage() {
         </Card>
       ) : (
         <div className="grid gap-4">
-          {sessions.map((session) => (
+          {sessions.map((session: any) => (
             <Card key={session.id}>
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
-                  <CardTitle className="text-lg">{session.title}</CardTitle>
+                  <CardTitle className="text-lg">{session.title || `B2B Consultative Session - ${session.country}`}</CardTitle>
                   <Badge
                     variant={
                       session.status === "upcoming" ? "default" : "secondary"
@@ -125,9 +97,11 @@ export default function PartnerUpcomingSessionsPage() {
                 )}
 
                 {session.status === "upcoming" && (
-                  <Button size="sm" className="gap-2">
-                    <Video className="h-4 w-4" />
-                    Join Room
+                  <Button asChild size="sm" className="gap-2">
+                    <Link to={`/partner/waiting-room?sessionId=${session.id}`}>
+                      <Video className="h-4 w-4" />
+                      Join Room
+                    </Link>
                   </Button>
                 )}
               </CardContent>

@@ -72,10 +72,11 @@ export default function PartnerBriefPage() {
   const partner = partnerData?.data;
   const userDetails = partner?.user || {};
 
-  const { data: userData } = useGetUserByIdQuery(currentUser?.id as string, {
-    skip: !currentUser?.id,
+  const userId = currentUser?.id || currentUser?._id;
+  const { data: userData } = useGetUserByIdQuery(userId as string, {
+    skip: !userId,
   });
-  const dbUser = userData?.data;
+  const dbUser = userData?.data || currentUser;
 
   // Mutations
   const [requestSession, { isLoading: isBooking }] =
@@ -100,8 +101,11 @@ export default function PartnerBriefPage() {
     : "PA";
 
   const handleSlotSelect = (dayName: string) => {
-    // 1. Paywall Check
-    const hasSlots = dbUser?.planActive && dbUser?.slotsRemaining > 0;
+    // 1. Paywall Check (Check both db and local session to avoid RTK cache race conditions)
+    const isPlanActive = dbUser?.planActive || currentUser?.planActive;
+    const remainingSlots = Math.max(dbUser?.slotsRemaining || 0, currentUser?.slotsRemaining || 0);
+    const hasSlots = isPlanActive && remainingSlots > 0;
+    
     if (!hasSlots) {
       setIsPaywallOpen(true);
       return;

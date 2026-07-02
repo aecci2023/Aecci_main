@@ -160,6 +160,14 @@ export const routes: RouteObject[] = [
                 element: <PartnerQuestionsPage />,
               },
               {
+                path: "waiting-room",
+                element: <WaitingRoomPage />,
+              },
+              {
+                path: "live-deal-room",
+                element: <LiveDealRoomPage />,
+              },
+              {
                 path: "engagement/active",
                 element: <PartnerPlaceholder title="Active Clients" />,
               },

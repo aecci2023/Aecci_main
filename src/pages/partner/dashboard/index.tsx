@@ -337,7 +337,7 @@ export default function PartnerDashboard() {
                       </div>
                       <Button size="sm" className="shrink-0 ml-3 gap-1.5" asChild>
                         <Link
-                          to={`/dashboard/live-deal-room?sessionId=${session.id}`}
+                          to={`/partner/waiting-room?sessionId=${session.id}`}
                         >
                           <Video className="size-3.5" /> Join
                         </Link>

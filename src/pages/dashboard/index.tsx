@@ -15,36 +15,65 @@ import {
   Calendar,
   ArrowRight,
   Globe,
-  MessageSquare,
   FileText,
   TrendingUp,
   ShieldCheck,
+  ShieldAlert,
   Download,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useGetUserByIdQuery } from "@/store/api/adminApi";
+import { useGetMySessionsQuery } from "@/store/api/sessionApi";
 
 export default function DashboardPage() {
+  const [currentUser] = useState<any>(() => {
+    const userStr = localStorage.getItem("user");
+    return userStr ? JSON.parse(userStr) : null;
+  });
+
+  const userId = currentUser?.id || currentUser?._id;
+  const { data: userData } = useGetUserByIdQuery(userId as string, {
+    skip: !userId,
+  });
+  const dbUser = userData?.data || currentUser;
+
+  const { data: sessionsData } = useGetMySessionsQuery();
+  const sessions = sessionsData?.data || [];
+  
+  const upcomingSessions = sessions.filter((s: any) => s.status === 'upcoming').sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const pendingSessions = sessions.filter((s: any) => s.status === 'pending_approval');
+  
+  const nextSession = upcomingSessions[0] || null;
+
   const [timeLeft, setTimeLeft] = useState({
-    hours: 14,
-    minutes: 32,
-    seconds: 45,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0)
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        if (prev.hours > 0)
-          return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        clearInterval(timer);
-        return prev;
-      });
-    }, 1000);
+    if (!nextSession?.date) return;
+    
+    const calculateTimeLeft = () => {
+      const difference = new Date(nextSession.date).getTime() - new Date().getTime();
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+    
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [nextSession?.date]);
 
   return (
     <>
@@ -68,7 +97,7 @@ export default function DashboardPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary via-emerald-600 to-teal-500 bg-clip-text text-transparent">
-              Welcome Back, AECCI Member
+              Welcome Back, {dbUser?.fullName || "Member"}
             </h1>
             <p className="text-muted-foreground text-sm mt-1">
               Track your verification, access active deal rooms, and explore
@@ -76,12 +105,21 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <Badge
-              variant="outline"
-              className="px-3 py-1 flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
-            >
-              <ShieldCheck className="size-4" /> Verified Account
-            </Badge>
+            {dbUser?.verificationStatus === "active" ? (
+              <Badge
+                variant="outline"
+                className="px-3 py-1 flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
+              >
+                <ShieldCheck className="size-4" /> Verified Account
+              </Badge>
+            ) : (
+              <Badge
+                variant="outline"
+                className="px-3 py-1 flex items-center gap-1.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20"
+              >
+                <ShieldAlert className="size-4" /> Pending Verification
+              </Badge>
+            )}
           </div>
         </div>
 
@@ -95,23 +133,23 @@ export default function DashboardPage() {
               <Calendar className="size-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">2</div>
+              <div className="text-2xl font-bold">{upcomingSessions.length + pendingSessions.length}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                1 Upcoming, 1 In Review
+                {upcomingSessions.length} Upcoming, {pendingSessions.length} In Review
               </p>
             </CardContent>
           </Card>
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                Unread Messages
+                Remaining Slots
               </CardTitle>
-              <MessageSquare className="size-4 text-amber-500" />
+              <Calendar className="size-4 text-amber-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">3</div>
+              <div className="text-2xl font-bold">{dbUser?.slotsRemaining || 0}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                From Partner Desk
+                Book more Deal Rooms
               </p>
             </CardContent>
           </Card>
@@ -146,88 +184,108 @@ export default function DashboardPage() {
         </div>
 
         {/* Live Deal Room Hero Countdown */}
-        <Card className="border-2 border-primary/20 relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-teal-500/5 dark:from-primary/10 dark:to-teal-500/10">
-          <div className="absolute right-0 top-0 w-[30%] h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
-          <CardHeader className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <Badge className="bg-primary hover:bg-primary/95 text-primary-foreground animate-pulse">
-                  Live Session Coming Up
-                </Badge>
-                <span className="text-xs text-muted-foreground">
-                  ID: AECCI-2026-06B
-                </span>
-              </div>
-              <CardTitle className="text-xl md:text-2xl">
-                India-Kenya Bilateral Textile & Garment Matchmaking
-              </CardTitle>
-              <CardDescription className="max-w-2xl mt-1">
-                Pitch directly to retail distributors and trade commissioners in
-                Nairobi. Ensure your product catalogue is updated.
-              </CardDescription>
-            </div>
-            <div className="flex flex-col items-center md:items-end">
-              <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-                Countdown
-              </span>
-              <div className="flex items-center gap-2 mt-1.5">
-                <div className="bg-background border border-border px-2.5 py-1.5 rounded-lg shadow-sm font-mono text-lg font-bold">
-                  {timeLeft.hours.toString().padStart(2, "0")}h
-                </div>
-                <span className="text-muted-foreground font-bold">:</span>
-                <div className="bg-background border border-border px-2.5 py-1.5 rounded-lg shadow-sm font-mono text-lg font-bold">
-                  {timeLeft.minutes.toString().padStart(2, "0")}m
-                </div>
-                <span className="text-muted-foreground font-bold">:</span>
-                <div className="bg-background border border-border px-2.5 py-1.5 rounded-lg shadow-sm font-mono text-lg font-bold">
-                  {timeLeft.seconds.toString().padStart(2, "0")}s
-                </div>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="flex flex-col md:flex-row gap-6 md:items-center justify-between border-t border-border/50 pt-6 mt-2">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+        {nextSession ? (
+          <Card className="border-2 border-primary/20 relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-teal-500/5 dark:from-primary/10 dark:to-teal-500/10">
+            <div className="absolute right-0 top-0 w-[30%] h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
+            <CardHeader className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <span className="text-xs text-muted-foreground block mb-0.5">
-                  Moderator
-                </span>
-                <span className="text-sm font-medium">
-                  AECCI International Trade Desk
-                </span>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Badge className="bg-primary hover:bg-primary/95 text-primary-foreground animate-pulse">
+                    Live Session Coming Up
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">
+                    ID: {nextSession.id.substring(nextSession.id.length - 8).toUpperCase()}
+                  </span>
+                </div>
+                <CardTitle className="text-xl md:text-2xl">
+                  {nextSession.title || `B2B Consultative Session - ${nextSession.country}`}
+                </CardTitle>
+                <CardDescription className="max-w-2xl mt-1 line-clamp-2">
+                  {nextSession.questionnaire}
+                </CardDescription>
               </div>
-              <div>
-                <span className="text-xs text-muted-foreground block mb-0.5">
-                  Country Partner
+              <div className="flex flex-col items-center md:items-end">
+                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                  Countdown
                 </span>
-                <span className="text-sm font-medium">
-                  Kenya Chamber of Commerce (KNCCI)
-                </span>
+                <div className="flex items-center gap-2 mt-1.5">
+                  {timeLeft.days > 0 && (
+                    <>
+                      <div className="bg-background border border-border px-2.5 py-1.5 rounded-lg shadow-sm font-mono text-lg font-bold">
+                        {timeLeft.days.toString().padStart(2, "0")}d
+                      </div>
+                      <span className="text-muted-foreground font-bold">:</span>
+                    </>
+                  )}
+                  <div className="bg-background border border-border px-2.5 py-1.5 rounded-lg shadow-sm font-mono text-lg font-bold">
+                    {timeLeft.hours.toString().padStart(2, "0")}h
+                  </div>
+                  <span className="text-muted-foreground font-bold">:</span>
+                  <div className="bg-background border border-border px-2.5 py-1.5 rounded-lg shadow-sm font-mono text-lg font-bold">
+                    {timeLeft.minutes.toString().padStart(2, "0")}m
+                  </div>
+                  <span className="text-muted-foreground font-bold">:</span>
+                  <div className="bg-background border border-border px-2.5 py-1.5 rounded-lg shadow-sm font-mono text-lg font-bold">
+                    {timeLeft.seconds.toString().padStart(2, "0")}s
+                  </div>
+                </div>
               </div>
-              <div className="col-span-2 md:col-span-1">
-                <span className="text-xs text-muted-foreground block mb-0.5">
-                  Scheduled Time
-                </span>
-                <span className="text-sm font-medium">
-                  June 15, 2026 at 14:00 IST
-                </span>
+            </CardHeader>
+            <CardContent className="flex flex-col md:flex-row gap-6 md:items-center justify-between border-t border-border/50 pt-6 mt-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div>
+                  <span className="text-xs text-muted-foreground block mb-0.5">
+                    Client/Exporter
+                  </span>
+                  <span className="text-sm font-medium">
+                    {nextSession.client?.fullName || "Member"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-xs text-muted-foreground block mb-0.5">
+                    Country Partner
+                  </span>
+                  <span className="text-sm font-medium">
+                    {nextSession.partner?.fullName || "Partner"}
+                  </span>
+                </div>
+                <div className="col-span-2 md:col-span-1">
+                  <span className="text-xs text-muted-foreground block mb-0.5">
+                    Scheduled Time
+                  </span>
+                  <span className="text-sm font-medium">
+                    {new Date(nextSession.date).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })} IST
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button
-                asChild
-                size="lg"
-                className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground transition-colors"
-              >
-                <Link
-                  to="/dashboard/waiting-room"
-                  className="flex items-center gap-2"
+              <div className="flex items-center gap-2">
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground transition-colors"
                 >
-                  Join Waiting Room <ArrowRight className="size-4" />
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                  <Link
+                    to={`/dashboard/waiting-room?sessionId=${nextSession.id}`}
+                    className="flex items-center gap-2"
+                  >
+                    Join Waiting Room <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card className="border-dashed border-2 flex flex-col items-center justify-center py-12">
+            <Calendar className="size-10 text-muted-foreground/30 mb-3" />
+            <h3 className="text-lg font-semibold">No Upcoming Sessions</h3>
+            <p className="text-sm text-muted-foreground mt-1 max-w-sm text-center">
+              You do not have any approved live Deal Room sessions. Book a partner from the Marketplace to get started.
+            </p>
+            <Button asChild className="mt-4" size="sm">
+              <Link to="/dashboard/marketplace">Explore Marketplace</Link>
+            </Button>
+          </Card>
+        )}
 
         {/* Lower Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -107,7 +107,7 @@ export default function AdminSessionsPage() {
   };
 
   return (
-    <Main fluid className="space-y-6 max-w-7xl mx-auto py-6">
+    <Main fluid className="space-y-6 w-full py-6">
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">
           Deal Room Verification Desk
@@ -300,7 +300,7 @@ export default function AdminSessionsPage() {
             <Button
               variant="outline"
               className="text-destructive hover:bg-destructive/10 border-destructive/20 h-9 text-xs font-semibold"
-              onClick={() => handleReject(selectedRequest.id)}
+              onClick={() => selectedRequest && handleReject(selectedRequest.id)}
               disabled={isApproving || isRejecting}
             >
               <XCircle className="w-4 h-4 mr-1.5" /> Reject Request
@@ -311,7 +311,7 @@ export default function AdminSessionsPage() {
               </Button>
               <Button
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-9 text-xs"
-                onClick={() => handleApprove(selectedRequest.id)}
+                onClick={() => selectedRequest && handleApprove(selectedRequest.id)}
                 disabled={isApproving || isRejecting}
               >
                 {isApproving ? (
