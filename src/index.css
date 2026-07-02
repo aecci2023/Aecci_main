@@ -349,3 +349,9 @@
 .animate-dash {
   animation: dash 1.5s linear infinite;
 }
+
+/* Hide collect-chat on dashboard and other specific pages */
+body.hide-collect-chat #collect-chat-launcher-container,
+body.hide-collect-chat iframe[src*="collect.chat"] {
+  display: none !important;
+}

@@ -157,8 +157,9 @@ export const adminApi = createApi({
     getMarketplacePartners: builder.query<any, { country?: string } | void>({
       query: (params) => {
         let queryString = "";
-        if (params?.country) {
-          queryString = `?country=${encodeURIComponent(params.country)}`;
+        const country = (params as { country?: string })?.country;
+        if (country) {
+          queryString = `?country=${encodeURIComponent(country)}`;
         }
         return `partners/marketplace/list${queryString}`;
       },

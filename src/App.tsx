@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRoutes, useLocation } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/navbar/Navbar";
@@ -22,6 +23,14 @@ export default function App() {
     isLoginPage ||
     isAdminPage ||
     isPartnerPage;
+
+  useEffect(() => {
+    if (hideChrome) {
+      document.body.classList.add("hide-collect-chat");
+    } else {
+      document.body.classList.remove("hide-collect-chat");
+    }
+  }, [hideChrome]);
 
   return (
     <ActiveThemeProvider>

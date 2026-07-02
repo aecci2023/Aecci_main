@@ -37,7 +37,6 @@ import { useUploadFileMutation } from "@/store/api/authApi";
 import { COUNTRIES } from "@/lib/countries";
 import { LANGUAGE_OPTIONS, SECTOR_OPTIONS, COUNTRY_OPTIONS } from "@/components/data/form-options";
 import {
-  Save,
   Camera,
   Loader2,
   User,
@@ -610,14 +609,9 @@ export default function PartnerProfilePage() {
                 </CardContent>
               </Card>
 
-              <div className="flex justify-end">
-                <Button type="submit" disabled={isSaving} className="gap-2 min-w-32">
-                  {isSaving ? (
-                    <Loader2 className="size-4 animate-spin" />
-                  ) : (
-                    <Save className="size-4" />
-                  )}
-                  {isSaving ? "Saving..." : "Save Changes"}
+              <div>
+                <Button type="submit" disabled={isSaving}>
+                  {isSaving ? "Updating..." : "Update preferences"}
                 </Button>
               </div>
             </div>

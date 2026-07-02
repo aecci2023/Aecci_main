@@ -13,9 +13,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
-import { Calendar, Clock, Save, Loader2 } from "lucide-react";
+import { Calendar, Clock, Loader2 } from "lucide-react";
 
 const DAYS_OF_WEEK = [
   "Monday",
@@ -55,7 +55,10 @@ export default function PartnerAvailabilityPage() {
     Sunday: { enabled: false, start: "09:00", end: "17:00" },
   });
 
-  useEffect(() => {
+  const [prevProfile, setPrevProfile] = useState(partnerProfile);
+
+  if (partnerProfile !== prevProfile) {
+    setPrevProfile(partnerProfile);
     if (partnerProfile?.availability?.weekly) {
       // Merge saved settings with default weeklySchedule keys to ensure type safety
       const savedWeekly = partnerProfile.availability.weekly;
@@ -69,7 +72,7 @@ export default function PartnerAvailabilityPage() {
       });
       setWeeklySchedule(merged);
     }
-  }, [partnerProfile]);
+  }
 
   const handleScheduleToggle = (day: string, checked: boolean) => {
     setWeeklySchedule((prev) => ({
@@ -131,7 +134,7 @@ export default function PartnerAvailabilityPage() {
 
   return (
     <div className="h-full w-full overflow-y-auto pe-2">
-      <div className="space-y-6 max-w-4xl mx-auto py-6 w-full">
+      <div className="space-y-6 w-full py-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">
@@ -139,21 +142,9 @@ export default function PartnerAvailabilityPage() {
           </h1>
           <p className="text-muted-foreground mt-1">
             Define your weekly working hours and time slots for hosting Live
-            Deal Room sessions.
+            Deal Room sessions. All times should be specified in <strong>Indian Standard Time (IST)</strong>.
           </p>
         </div>
-        <Button
-          onClick={handleSave}
-          disabled={isSaving}
-          className="w-full md:w-auto self-start"
-        >
-          {isSaving ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Save className="mr-2 h-4 w-4" />
-          )}
-          Save Changes
-        </Button>
       </div>
 
       <Card className="shadow-md border-border">
@@ -226,6 +217,16 @@ export default function PartnerAvailabilityPage() {
           </div>
         </CardContent>
       </Card>
+      
+      <div className="mt-6 pb-6">
+        <Button
+          onClick={handleSave}
+          disabled={isSaving}
+          type="submit"
+        >
+          {isSaving ? "Updating..." : "Update preferences"}
+        </Button>
+      </div>
       </div>
     </div>
   );
