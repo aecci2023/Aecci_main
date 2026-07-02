@@ -22,7 +22,7 @@ type SidebarNavProps = React.HTMLAttributes<HTMLElement> & {
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [val, setVal] = useState(pathname ?? "/dashboard/profile-settings");
+  const [val, setVal] = useState(pathname);
 
   const handleSelect = (e: string) => {
     setVal(e);

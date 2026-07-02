@@ -5,8 +5,10 @@ import Footer from "@/components/portal/Footer";
 import { routes } from "@/router";
 import { ActiveThemeProvider } from "@/components/themes/active-theme";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useNotificationsSocket } from "@/hooks/useNotificationsSocket";
 
 export default function App() {
+  useNotificationsSocket();
   const element = useRoutes(routes);
   const location = useLocation();
   const isSignupPage = location.pathname.startsWith("/signup");

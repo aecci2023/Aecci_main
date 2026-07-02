@@ -40,8 +40,6 @@ import AdminPartnersPage from "@/pages/admin/partners";
 import AdminVerificationsPage from "@/pages/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/admin/verifications/partner-details";
-import AdminDocumentsPage from "@/pages/admin/documents";
-import AdminPartnerOnboardingPage from "@/pages/admin/partner-onboarding";
 import AdminSessionsPage from "@/pages/admin/sessions";
 import AdminMarketplacePage from "@/pages/admin/marketplace";
 import AdminQuestionsPage from "@/pages/admin/questions";
@@ -62,9 +60,8 @@ import PartnerPastSessionsPage from "@/pages/partner/sessions/past";
 import PartnerSubmitSummaryPage from "@/pages/partner/sessions/submit-summary";
 import PartnerProfilePage from "@/pages/partner/profile";
 import UserInvoicesPage from "@/pages/dashboard/invoices";
-import AdminAuditLogsPage from "@/pages/admin/audit-logs";
 import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
-import AdminSettingsPage from "@/pages/admin/settings";
+import NotificationsPage from "@/pages/notifications";
 import PartnerRegisterPage from "@/pages/partner/register";
 import PartnerOnboardingPage from "@/pages/partner/onboarding";
 import SponsorshipPage from "@/pages/events/sponsorship";
@@ -189,6 +186,21 @@ export const routes: RouteObject[] = [
                 path: "support/help",
                 element: <PartnerPlaceholder title="Help & Support" />,
               },
+              {
+                path: "settings",
+                element: <Settings />,
+                children: [
+                  { index: true, element: <SettingsProfile /> },
+                  { path: "account", element: <SettingsAccount /> },
+                  { path: "appearance", element: <SettingsAppearance /> },
+                  { path: "notifications", element: <SettingsNotifications /> },
+                  { path: "display", element: <SettingsDisplay /> },
+                ],
+              },
+              {
+                path: "notifications",
+                element: <NotificationsPage />,
+              },
             ],
           },
         ],
@@ -236,14 +248,6 @@ export const routes: RouteObject[] = [
             element: <AdminPartnersPage />,
           },
           {
-            path: "documents",
-            element: <AdminDocumentsPage />,
-          },
-          {
-            path: "partner-onboarding",
-            element: <AdminPartnerOnboardingPage />,
-          },
-          {
             path: "sessions",
             element: <AdminSessionsPage />,
           },
@@ -276,16 +280,23 @@ export const routes: RouteObject[] = [
             element: <AdminInvoicesPage />,
           },
           {
-            path: "audit-logs",
-            element: <AdminAuditLogsPage />,
-          },
-          {
             path: "subscriptions",
             element: <AdminSubscriptionsPage />,
           },
           {
             path: "settings",
-            element: <AdminSettingsPage />,
+            element: <Settings />,
+            children: [
+              { index: true, element: <SettingsProfile /> },
+              { path: "account", element: <SettingsAccount /> },
+              { path: "appearance", element: <SettingsAppearance /> },
+              { path: "notifications", element: <SettingsNotifications /> },
+              { path: "display", element: <SettingsDisplay /> },
+            ],
+          },
+          {
+            path: "notifications",
+            element: <NotificationsPage />,
           },
           {
             path: "*",
@@ -397,6 +408,10 @@ export const routes: RouteObject[] = [
           {
             path: "invoices",
             element: <UserInvoicesPage />,
+          },
+          {
+            path: "notifications",
+            element: <NotificationsPage />,
           },
         ],
       },

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Monitor, Bell, Palette, Wrench, UserCog } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/layout/header";
@@ -8,43 +8,54 @@ import { Search } from "@/components/search";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { SidebarNav } from "./components/sidebar-nav";
 
-const sidebarNavItems = [
-  {
-    title: "Profile",
-    href: "/dashboard/profile-settings",
-    icon: <UserCog size={18} />,
-  },
-  {
-    title: "Account",
-    href: "/dashboard/profile-settings/account",
-    icon: <Wrench size={18} />,
-  },
-  {
-    title: "Appearance",
-    href: "/dashboard/profile-settings/appearance",
-    icon: <Palette size={18} />,
-  },
-  {
-    title: "Notifications",
-    href: "/dashboard/profile-settings/notifications",
-    icon: <Bell size={18} />,
-  },
-  {
-    title: "Display",
-    href: "/dashboard/profile-settings/display",
-    icon: <Monitor size={18} />,
-  },
-];
-
 export function Settings() {
+  const location = useLocation();
+  const basePath = location.pathname.startsWith("/admin") 
+    ? "/admin" 
+    : location.pathname.startsWith("/partner") 
+      ? "/partner" 
+      : "/dashboard";
+      
+  const sidebarNavItems = [
+    {
+      title: "Profile",
+      href: `${basePath}/settings`,
+      icon: <UserCog size={18} />,
+    },
+    {
+      title: "Account",
+      href: `${basePath}/settings/account`,
+      icon: <Wrench size={18} />,
+    },
+    {
+      title: "Appearance",
+      href: `${basePath}/settings/appearance`,
+      icon: <Palette size={18} />,
+    },
+    {
+      title: "Notifications",
+      href: `${basePath}/notifications`,
+      icon: <Bell size={18} />,
+    },
+    {
+      title: "Display",
+      href: `${basePath}/settings/display`,
+      icon: <Monitor size={18} />,
+    },
+  ];
+
+  const isUserPortal = basePath === "/dashboard";
+
   return (
     <>
       {/* ===== Top Heading ===== */}
-      <Header>
-        <Search className="me-auto" />
-        <ThemeSwitch />
-        <ProfileDropdown />
-      </Header>
+      {isUserPortal && (
+        <Header>
+          <Search className="me-auto" />
+          <ThemeSwitch />
+          <ProfileDropdown />
+        </Header>
+      )}
 
       <Main fixed fluid>
         <div className="space-y-0.5">

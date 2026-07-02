@@ -24,7 +24,7 @@ export function AppSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={sidebarData.user} />
+        <NavUser user={{ name: "", email: "", avatar: "" }} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

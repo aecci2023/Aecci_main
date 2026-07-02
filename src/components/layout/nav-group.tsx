@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useState, isValidElement } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import {
@@ -72,6 +72,12 @@ export function NavGroup({ title, items }: NavGroupProps) {
   );
 }
 
+function RenderIcon({ icon: Icon }: { icon: any }) {
+  if (!Icon) return null;
+  if (typeof Icon === "object" && isValidElement(Icon)) return Icon;
+  return <Icon />;
+}
+
 function NavBadge({ children }: { children: ReactNode }) {
   const variantClass =
     children === "3"
@@ -105,7 +111,7 @@ function SidebarMenuLink({ item, href }: { item: NavLink; href: string }) {
               }}
               className="w-full flex items-center text-left"
             >
-              {item.icon && <item.icon />}
+              <RenderIcon icon={item.icon} />
               <span className="flex-1 truncate">{item.title}</span>
               {item.badge && <NavBadge>{item.badge}</NavBadge>}
             </button>
@@ -124,7 +130,7 @@ function SidebarMenuLink({ item, href }: { item: NavLink; href: string }) {
         tooltip={item.title}
       >
         <Link to={item.url} onClick={() => setOpenMobile(false)}>
-          {item.icon && <item.icon />}
+          <RenderIcon icon={item.icon} />
           <span className="flex-1 truncate">{item.title}</span>
           {item.badge && <NavBadge>{item.badge}</NavBadge>}
         </Link>
@@ -150,7 +156,7 @@ function SidebarMenuCollapsible({
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
           <SidebarMenuButton tooltip={item.title}>
-            {item.icon && <item.icon />}
+            <RenderIcon icon={item.icon} />
             <span className="flex-1 truncate">{item.title}</span>
             {item.badge && <NavBadge>{item.badge}</NavBadge>}
             <ChevronRight className="ms-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180" />
@@ -165,7 +171,7 @@ function SidebarMenuCollapsible({
                   isActive={checkIsActive(href, subItem)}
                 >
                   <Link to={subItem.url} onClick={() => setOpenMobile(false)}>
-                    {subItem.icon && <subItem.icon />}
+                    <RenderIcon icon={subItem.icon} />
                     <span className="flex-1 truncate">{subItem.title}</span>
                     {subItem.badge && <NavBadge>{subItem.badge}</NavBadge>}
                   </Link>
@@ -194,7 +200,7 @@ function SidebarMenuCollapsedDropdown({
             tooltip={item.title}
             isActive={checkIsActive(href, item)}
           >
-            {item.icon && <item.icon />}
+            <RenderIcon icon={item.icon} />
             <span className="flex-1 truncate">{item.title}</span>
             {item.badge && <NavBadge>{item.badge}</NavBadge>}
             <ChevronRight className="ms-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -211,7 +217,7 @@ function SidebarMenuCollapsedDropdown({
                 to={sub.url}
                 className={`${checkIsActive(href, sub) ? "bg-secondary" : ""}`}
               >
-                {sub.icon && <sub.icon />}
+                <RenderIcon icon={sub.icon} />
                 <span className="max-w-52 text-wrap">{sub.title}</span>
                 {sub.badge && (
                   <span className="ms-auto text-xs">{sub.badge}</span>

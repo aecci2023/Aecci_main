@@ -4,6 +4,7 @@ import { adminApi } from "./api/adminApi";
 import { sessionApi } from "./api/sessionApi";
 import { countryIntelligenceApi } from "./api/countryIntelligenceApi";
 import { questionApi } from "./api/questionApi";
+import notificationsReducer from "./slices/notificationsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [sessionApi.reducerPath]: sessionApi.reducer,
     [countryIntelligenceApi.reducerPath]: countryIntelligenceApi.reducer,
     [questionApi.reducerPath]: questionApi.reducer,
+    notifications: notificationsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

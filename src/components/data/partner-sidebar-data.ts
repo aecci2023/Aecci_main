@@ -11,15 +11,13 @@ import {
   User,
   Settings,
   LifeBuoy,
+  UserCog,
+  Wrench,
+  Palette,
+  Bell,
 } from "lucide-react";
 
 export const partnerSidebarData = {
-  user: {
-    name: "Partner",
-    email: "partner@aecci.org.in",
-    avatar: "",
-  },
-  teams: [],
   navGroups: [
     {
       title: "Overview",
@@ -114,6 +112,37 @@ export const partnerSidebarData = {
           title: "Help & Support",
           url: "/partner/support/help",
           icon: LifeBuoy,
+        },
+      ],
+    },
+    {
+      title: "Other",
+      items: [
+        {
+          title: "Settings",
+          icon: Settings,
+          items: [
+            {
+              title: "Profile",
+              url: "/partner/settings",
+              icon: UserCog,
+            },
+            {
+              title: "Account",
+              url: "/partner/settings/account",
+              icon: Wrench,
+            },
+            {
+              title: "Appearance",
+              url: "/partner/settings/appearance",
+              icon: Palette,
+            },
+            {
+              title: "Notifications",
+              url: "/partner/notifications",
+              icon: Bell,
+            },
+          ],
         },
       ],
     },

@@ -1,17 +1,5 @@
 import type { LinkProps } from "react-router-dom";
 
-type User = {
-  name: string;
-  email: string;
-  avatar: string;
-};
-
-type Team = {
-  name: string;
-  logo: any;
-  plan: string;
-};
-
 type BaseNavItem = {
   title: string;
   badge?: string;
@@ -36,8 +24,6 @@ type NavGroup = {
 };
 
 type SidebarData = {
-  user: User;
-  teams: Team[];
   navGroups: NavGroup[];
 };
 

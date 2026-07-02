@@ -11,19 +11,15 @@ import {
   FileText,
   DollarSign,
   CreditCard,
-  Settings,
   Bell,
-  History,
   Award,
+  Settings,
+  UserCog,
+  Wrench,
+  Palette,
 } from "lucide-react";
 
 export const adminSidebarData = {
-  user: {
-    name: "System Admin",
-    email: "admin@aecci.org.in",
-    avatar: "",
-  },
-  teams: [],
   navGroups: [
     {
       title: "Overview",
@@ -69,16 +65,6 @@ export const adminSidebarData = {
           url: "/admin/verifications",
           icon: ShieldCheck,
           badge: "18",
-        },
-        {
-          title: "Document Review",
-          url: "/admin/documents",
-          icon: FileText,
-        },
-        {
-          title: "Partner Onboarding",
-          url: "/admin/partner-onboarding",
-          icon: Award,
         },
       ],
     },
@@ -143,22 +129,33 @@ export const adminSidebarData = {
       ],
     },
     {
-      title: "System & Logs",
+      title: "Other",
       items: [
         {
-          title: "Global Settings",
-          url: "/admin/settings",
+          title: "Settings",
           icon: Settings,
-        },
-        {
-          title: "Audit Logs",
-          url: "/admin/audit-logs",
-          icon: History,
-        },
-        {
-          title: "Roles & Permissions",
-          url: "/admin/roles",
-          icon: ShieldCheck,
+          items: [
+            {
+              title: "Profile",
+              url: "/admin/settings",
+              icon: UserCog,
+            },
+            {
+              title: "Account",
+              url: "/admin/settings/account",
+              icon: Wrench,
+            },
+            {
+              title: "Appearance",
+              url: "/admin/settings/appearance",
+              icon: Palette,
+            },
+            {
+              title: "Notifications",
+              url: "/admin/notifications",
+              icon: Bell,
+            },
+          ],
         },
       ],
     },

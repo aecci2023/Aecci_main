@@ -12,16 +12,15 @@ import {
   Briefcase,
   Receipt,
   Store,
+  Bell,
+  Settings,
+  UserCog,
+  Wrench,
+  Palette,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
 export const sidebarData: SidebarData = {
-  user: {
-    name: "AECCI Member",
-    email: "member@aecci.org.in",
-    avatar: "",
-  },
-  teams: [],
   navGroups: [
     {
       title: "Main",
@@ -108,6 +107,37 @@ export const sidebarData: SidebarData = {
           title: "Invoices & Payments",
           url: "/dashboard/invoices",
           icon: Receipt,
+        },
+      ],
+    },
+    {
+      title: "Other",
+      items: [
+        {
+          title: "Settings",
+          icon: Settings,
+          items: [
+            {
+              title: "Profile",
+              url: "/dashboard/settings",
+              icon: UserCog,
+            },
+            {
+              title: "Account",
+              url: "/dashboard/settings/account",
+              icon: Wrench,
+            },
+            {
+              title: "Appearance",
+              url: "/dashboard/settings/appearance",
+              icon: Palette,
+            },
+            {
+              title: "Notifications",
+              url: "/dashboard/notifications",
+              icon: Bell,
+            },
+          ],
         },
       ],
     },

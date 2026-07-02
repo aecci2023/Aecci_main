@@ -2,14 +2,12 @@ import { useLayout } from "@/context/layout-provider";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { AppTitle } from "./app-title";
 import { adminSidebarData } from "../data/admin-sidebar-data";
 import { NavGroup } from "./nav-group";
-import { NavUser } from "./nav-user";
 import { useGetUsersQuery } from "@/store/api/adminApi";
 import { useMemo } from "react";
 
@@ -86,9 +84,6 @@ export function AppAdminSidebar() {
           <NavGroup key={props.title} {...props} />
         ))}
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={adminSidebarData.user} />
-      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
