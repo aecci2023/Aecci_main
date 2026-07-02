@@ -1,6 +1,8 @@
+// src/pages/UpcomingEventsPage.tsx
+
 import Navbar from "@/components/navbar/Navbar";
 
-export default function Page() {
+export default function UpcomingEventsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
@@ -10,25 +12,8 @@ export default function Page() {
             Upcoming Events
           </h1>
 
-          <div className="flex-grow w-full border rounded-xl overflow-hidden shadow-sm bg-white">
-            <iframe
-              src="https://www.aecci.org.in/upcoming-events/"
-              className="w-full h-full min-h-[70vh] border-0"
-              title="Upcoming Events"
-            />
-          </div>
-
-          <div className="mt-8 text-sm text-muted-foreground text-center">
-            Source:{" "}
-            <a
-              href="https://www.aecci.org.in/upcoming-events/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              https://www.aecci.org.in/upcoming-events/
-            </a>
-          </div>
+          {/* Event cards here */}
+          {/* ... your event content */}
         </div>
       </main>
     </div>
