@@ -11,7 +11,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { UploadCloud, FileText, ImageIcon, X, AlertCircle } from "lucide-react";
+import { UploadCloud, FileText, ImageIcon, X, AlertCircle, CheckCircle2, XCircle, RefreshCw } from "lucide-react";
 
 interface Props {
   nextStep: () => void;
@@ -25,6 +25,18 @@ export default function Step5Documents({ nextStep, isSubmitting }: Props) {
   const { control, setValue, watch } = useFormContext<PartnerSignupFormData>();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const [num1, setNum1] = useState(() => Math.floor(Math.random() * 10) + 1);
+  const [num2, setNum2] = useState(() => Math.floor(Math.random() * 10) + 1);
+  const [captchaInput, setCaptchaInput] = useState("");
+  
+  const generateCaptcha = () => {
+    setNum1(Math.floor(Math.random() * 10) + 1);
+    setNum2(Math.floor(Math.random() * 10) + 1);
+    setCaptchaInput("");
+  };
+
+  const isCaptchaValid = parseInt(captchaInput) === num1 + num2;
+
   const profilePic = watch("profilePicture");
   const govId = watch("governmentId");
   const profCert = watch("professionalCert");
@@ -35,8 +47,10 @@ export default function Step5Documents({ nextStep, isSubmitting }: Props) {
     setTimeout(() => setErrors((p) => ({ ...p, [field]: "" })), 4000);
   };
 
-  const validatePdf = (file: File, field: string): boolean => {
-    if (file.type !== "application/pdf") { setError(field, "Only PDF files are allowed."); return false; }
+  const validateDoc = (file: File, field: string): boolean => {
+    const isImage = IMAGE_TYPES.includes(file.type);
+    const isPdf = file.type === "application/pdf";
+    if (!isImage && !isPdf) { setError(field, "Only PDF, JPG, PNG, or WebP files are allowed."); return false; }
     if (file.size > MAX_SIZE) { setError(field, "File size must be less than 5MB."); return false; }
     return true;
   };
@@ -53,21 +67,25 @@ export default function Step5Documents({ nextStep, isSubmitting }: Props) {
     try { return decodeURIComponent(f.split("/").pop() || "Uploaded File"); } catch { return "Uploaded File"; }
   };
 
-  const ImageUploadField = ({
+  const renderImageUploadField = ({
     label,
     fieldName,
     value,
+    required,
   }: {
     label: string;
     fieldName: "profilePicture";
     value: File | string | null | undefined;
+    required?: boolean;
   }) => (
     <FormField
       control={control}
       name={fieldName}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel>
+            {label} {required && <span className="text-red-500">*</span>}
+          </FormLabel>
           <FormControl>
             <div>
               {value ? (
@@ -124,7 +142,7 @@ export default function Step5Documents({ nextStep, isSubmitting }: Props) {
     />
   );
 
-  const FileUploadField = ({
+  const renderFileUploadField = ({
     label,
     fieldName,
     required,
@@ -162,14 +180,14 @@ export default function Step5Documents({ nextStep, isSubmitting }: Props) {
               ) : (
                 <div className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center text-center hover:bg-muted/30 transition-colors">
                   <UploadCloud className="size-8 text-muted-foreground mb-2" />
-                  <p className="text-xs text-muted-foreground mb-3">PDF only (Max 5MB)</p>
+                  <p className="text-xs text-muted-foreground mb-3">PDF or Image (Max 5MB)</p>
                   <Input
                     type="file"
-                    accept="application/pdf"
+                    accept="application/pdf,image/jpeg,image/png,image/webp"
                     className="max-w-xs"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      if (file && validatePdf(file, fieldName)) field.onChange(file);
+                      if (file && validateDoc(file, fieldName)) field.onChange(file);
                     }}
                   />
                 </div>
@@ -202,35 +220,75 @@ export default function Step5Documents({ nextStep, isSubmitting }: Props) {
         <div className="bg-muted/30 border border-border p-4 rounded-lg">
           <h3 className="text-sm font-medium mb-2">What to upload</h3>
           <ul className="text-xs text-muted-foreground list-disc pl-4 space-y-1">
-            <li>Company logo — shown on your Partner Brief card (JPG/PNG/WebP)</li>
-            <li>Government-issued ID — Passport, National ID, or Driving License (PDF, required)</li>
-            <li>Professional Certificate or Bar/Trade License (PDF, optional)</li>
-            <li>Business Registration Proof (PDF, optional)</li>
+            <li>Company logo — shown on your Partner Brief card (JPG/PNG/WebP, required)</li>
+            <li>Government-issued ID — Passport, National ID, or Driving License (PDF/Image, required)</li>
+            <li>Professional Certificate or Bar/Trade License (PDF/Image, optional)</li>
+            <li>Business Registration Proof (PDF/Image, optional)</li>
           </ul>
         </div>
 
-        <ImageUploadField
-          label="Company Logo"
-          fieldName="profilePicture"
-          value={profilePic}
-        />
+        {renderImageUploadField({
+          label: "Company Logo",
+          fieldName: "profilePicture",
+          value: profilePic,
+          required: true,
+        })}
 
-        <FileUploadField
-          label="Government ID"
-          fieldName="governmentId"
-          required
-          value={govId}
-        />
-        <FileUploadField
-          label="Professional Certificate / License"
-          fieldName="professionalCert"
-          value={profCert}
-        />
-        <FileUploadField
-          label="Business Registration Proof"
-          fieldName="businessProof"
-          value={bizProof}
-        />
+        {renderFileUploadField({
+          label: "Government ID",
+          fieldName: "governmentId",
+          required: true,
+          value: govId,
+        })}
+        {renderFileUploadField({
+          label: "Professional Certificate / License",
+          fieldName: "professionalCert",
+          value: profCert,
+        })}
+        {renderFileUploadField({
+          label: "Business Registration Proof",
+          fieldName: "businessProof",
+          value: bizProof,
+        })}
+      </div>
+
+      <div className="mt-8 space-y-3">
+        <p className="text-sm font-medium mb-1">Human Verification</p>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 bg-muted/50 p-2 rounded-lg border">
+            <span className="font-semibold text-lg w-6 text-center">{num1}</span>
+            <span className="font-medium text-muted-foreground">+</span>
+            <span className="font-semibold text-lg w-6 text-center">{num2}</span>
+            <span className="font-medium text-muted-foreground">=</span>
+          </div>
+          
+          <div className="relative w-24">
+            <Input
+              type="text"
+              inputMode="numeric"
+              maxLength={2}
+              value={captchaInput}
+              onChange={(e) => setCaptchaInput(e.target.value)}
+              className="pr-8 text-center font-semibold"
+            />
+          </div>
+          {captchaInput && (
+            <span className={isCaptchaValid ? "text-green-500" : "text-red-500"}>
+              {isCaptchaValid ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+            </span>
+          )}
+
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={generateCaptcha}
+            className="text-muted-foreground hover:text-foreground"
+            title="Refresh Captcha"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </Button>
+        </div>
       </div>
 
       <div className="mt-6">
@@ -267,7 +325,7 @@ export default function Step5Documents({ nextStep, isSubmitting }: Props) {
             nextStep();
           }}
           type="button"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isCaptchaValid}
         >
           {isSubmitting ? (
             <>

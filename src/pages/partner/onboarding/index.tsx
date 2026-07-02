@@ -56,9 +56,30 @@ export default function PartnerOnboardingPage() {
     if (profileData?.data) {
       const p = profileData.data;
       const u = p.user;
-      if (u?.profilePicture) setProfilePicture(u.profilePicture);
-      if (u?.languagesSpoken?.length) setLanguages(u.languagesSpoken as string[]);
-      if (p.bio) setBio(p.bio);
+      let step1Complete = true;
+
+      if (u?.profilePicture) {
+        setProfilePicture(u.profilePicture);
+      } else {
+        step1Complete = false;
+      }
+
+      if (u?.languagesSpoken?.length) {
+        setLanguages(u.languagesSpoken as string[]);
+      } else {
+        step1Complete = false;
+      }
+
+      if (p.bio) {
+        setBio(p.bio);
+        if (p.bio.length < 50) step1Complete = false;
+      } else {
+        step1Complete = false;
+      }
+
+      if (step1Complete && step === 0) {
+        setStep(1);
+      }
     }
   }
   if (isProfileLoading) {
@@ -181,7 +202,7 @@ export default function PartnerOnboardingPage() {
             <CheckCircle2 className="h-16 w-16 text-emerald-500 mx-auto" />
             <h2 className="text-2xl font-bold">You're All Set!</h2>
             <p className="text-muted-foreground text-sm">
-              Your Partner Brief is live and your availability is published. Clients can now discover and book sessions with you.
+              Your Partner Brief is live and your availability is published. Users can now discover and book sessions with you.
             </p>
             <Button className="w-full" onClick={() => navigate("/partner/dashboard")}>
               Go to Dashboard
@@ -193,8 +214,8 @@ export default function PartnerOnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/20 p-6">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen bg-muted/20 p-4 sm:p-6 md:p-10 lg:p-12">
+      <div className="w-full max-w-[1300px] mx-auto space-y-6 md:space-y-8">
         {/* Header */}
         <div className="text-center space-y-1">
           <h1 className="text-2xl font-bold tracking-tight">Complete Your Profile Setup</h1>
@@ -315,7 +336,8 @@ export default function PartnerOnboardingPage() {
             <CardHeader>
               <CardTitle>2. Weekly Availability Schedule</CardTitle>
               <CardDescription>
-                Select the days you are available to host sessions and define your active hours.
+                Select the days you are available to host sessions and define your active hours. 
+                <span className="font-semibold text-foreground ml-1">Please select timings according to IST (Indian Standard Time).</span>
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -343,47 +365,52 @@ export default function PartnerOnboardingPage() {
                       <p className="text-xs mt-1">Click dates on the calendar to set your availability.</p>
                     </div>
                   ) : (
-                    [...selectedDates]
-                      .sort((a, b) => a.getTime() - b.getTime())
-                      .map((date) => {
-                        const key = format(date, "yyyy-MM-dd");
-                        const slot = slotTimes[key] || { start: "09:00", end: "17:00" };
-                        return (
-                          <div
-                            key={key}
-                            className="flex items-center gap-3 p-3 border rounded-lg bg-muted/20 hover:bg-muted/30 transition-colors"
-                          >
-                            <div className="min-w-[110px]">
-                              <p className="text-sm font-medium">{format(date, "EEE, MMM d")}</p>
-                              <p className="text-xs text-muted-foreground">{format(date, "yyyy")}</p>
-                            </div>
-                            <div className="flex items-center gap-2 flex-1 text-sm flex-wrap">
-                              <span className="text-muted-foreground text-xs">From</span>
-                              <Input
-                                type="time"
-                                value={slot.start}
-                                onChange={(e) => handleTimeChange(key, "start", e.target.value)}
-                                className="w-28 h-8 text-sm text-center"
-                              />
-                              <span className="text-muted-foreground text-xs">to</span>
-                              <Input
-                                type="time"
-                                value={slot.end}
-                                onChange={(e) => handleTimeChange(key, "end", e.target.value)}
-                                className="w-28 h-8 text-sm text-center"
-                              />
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-7 w-7 text-muted-foreground hover:text-destructive"
-                              onClick={() => removeDate(key)}
+                    <div className="max-h-[350px] overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent">
+                      {[...selectedDates]
+                        .sort((a, b) => b.getTime() - a.getTime())
+                        .map((date) => {
+                          const key = format(date, "yyyy-MM-dd");
+                          const slot = slotTimes[key] || { start: "09:00", end: "17:00" };
+                          return (
+                            <div
+                              key={key}
+                              className="flex items-center gap-3 p-3 border rounded-lg bg-muted/20 hover:bg-muted/30 transition-colors"
                             >
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        );
-                      })
+                              <div className="min-w-[110px]">
+                                <p className="text-sm font-medium">{format(date, "EEE, MMM d")}</p>
+                                <p className="text-xs text-muted-foreground">{format(date, "yyyy")}</p>
+                              </div>
+                              <div className="flex items-center gap-2 flex-1 text-sm flex-wrap">
+                                <span className="text-muted-foreground text-xs">From</span>
+                                <Input
+                                  type="time"
+                                  value={slot.start}
+                                  onChange={(e) => handleTimeChange(key, "start", e.target.value)}
+                                  className="w-28 h-8 text-sm text-center"
+                                />
+                                <span className="text-muted-foreground text-xs">to</span>
+                                <div className="flex items-center gap-1.5">
+                                  <Input
+                                    type="time"
+                                    value={slot.end}
+                                    onChange={(e) => handleTimeChange(key, "end", e.target.value)}
+                                    className="w-28 h-8 text-sm text-center"
+                                  />
+                                  <span className="text-muted-foreground text-xs font-semibold bg-muted px-1.5 py-0.5 rounded border">IST</span>
+                                </div>
+                              </div>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-7 w-7 text-muted-foreground hover:text-destructive"
+                                onClick={() => removeDate(key)}
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          );
+                        })}
+                    </div>
                   )}
                   {selectedDates.length > 0 && (
                     <p className="text-xs text-muted-foreground">

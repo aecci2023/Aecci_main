@@ -6,7 +6,7 @@ import { useGetUsersQuery } from "@/store/api/adminApi";
 import { Users } from "lucide-react";
 
 export default function AdminUsersPage() {
-  const { data, isLoading, error } = useGetUsersQuery({});
+  const { data, isLoading, error } = useGetUsersQuery({ verificationStatus: "approved" });
 
   const users = useMemo(
     () => (data?.data || []).filter((u: any) => u.role !== "admin"),

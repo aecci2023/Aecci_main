@@ -86,7 +86,7 @@ export default function AdminVerificationDetailsPage() {
         verificationStatus: status,
         reason,
       }).unwrap();
-      toast.success("status updated successfully.");
+      toast.success("Approved successfully.");
       if (status === "rejected") {
         setIsRejectDialogOpen(false);
         setRejectionReason("");
@@ -286,10 +286,12 @@ export default function AdminVerificationDetailsPage() {
               </div>
             )}
             
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Industry</p>
-              <p className="font-medium">{user.industrySector || "N/A"}</p>
-            </div>
+            {user.role !== 'partner' && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Industry</p>
+                <p className="font-medium">{user.industrySector || "N/A"}</p>
+              </div>
+            )}
 
             {user.iecNumber && (
               <div>
@@ -312,25 +314,29 @@ export default function AdminVerificationDetailsPage() {
               </div>
             )}
             
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Company Size</p>
-              <p className="font-medium">{user.companySize || "N/A"}</p>
-            </div>
+            {user.role !== 'partner' && (
+              <>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Company Size</p>
+                  <p className="font-medium">{user.companySize || "N/A"}</p>
+                </div>
 
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Turnover</p>
-              <p className="font-medium">{user.turnover || "N/A"}</p>
-            </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Turnover</p>
+                  <p className="font-medium">{user.turnover || "N/A"}</p>
+                </div>
 
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Legal Structure</p>
-              <p className="font-medium">{user.legalStructure || "N/A"}</p>
-            </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Legal Structure</p>
+                  <p className="font-medium">{user.legalStructure || "N/A"}</p>
+                </div>
 
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Est. Year</p>
-              <p className="font-medium">{user.yearEstablished || "N/A"}</p>
-            </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Est. Year</p>
+                  <p className="font-medium">{user.yearEstablished || "N/A"}</p>
+                </div>
+              </>
+            )}
 
             {user.experience && (
               <div>
@@ -339,20 +345,24 @@ export default function AdminVerificationDetailsPage() {
               </div>
             )}
             
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Total Slots</p>
-              <p className="font-medium">{user.slotsTotal ?? 0}</p>
-            </div>
-            
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Remaining Slots</p>
-              <p className="font-medium">{user.slotsRemaining ?? 0}</p>
-            </div>
-            
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-1">Reports Used</p>
-              <p className="font-medium">{user.reportsUsed ?? 0}</p>
-            </div>
+            {user.role !== 'partner' && (
+              <>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Total Slots</p>
+                  <p className="font-medium">{user.slotsTotal ?? 0}</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Remaining Slots</p>
+                  <p className="font-medium">{user.slotsRemaining ?? 0}</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Reports Used</p>
+                  <p className="font-medium">{user.reportsUsed ?? 0}</p>
+                </div>
+              </>
+            )}
             
             {user.websiteUrl && (
               <div>
@@ -381,6 +391,35 @@ export default function AdminVerificationDetailsPage() {
                 </a>
               </div>
             )}
+
+            {user.role === 'partner' && (
+              <>
+                {user.professionalTitle && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Professional Title</p>
+                    <p className="font-medium">{user.professionalTitle}</p>
+                  </div>
+                )}
+                {user.nationality && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Nationality</p>
+                    <p className="font-medium">{user.nationality}</p>
+                  </div>
+                )}
+                {user.yearsOfExperience && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Years of Experience</p>
+                    <p className="font-medium">{user.yearsOfExperience}</p>
+                  </div>
+                )}
+                {user.partnerProfile?.organization && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Organization</p>
+                    <p className="font-medium">{user.partnerProfile.organization}</p>
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           <Separator />
@@ -397,44 +436,48 @@ export default function AdminVerificationDetailsPage() {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <p className="text-sm text-muted-foreground font-medium mb-2">Business Roles</p>
-                <div className="flex flex-wrap gap-2">
-                  {user.businessRole && user.businessRole.length > 0
-                    ? user.businessRole.map((role: string) => (
-                        <Badge key={role} variant="secondary">
-                          {role}
-                        </Badge>
-                      ))
-                    : "N/A"}
-                </div>
-              </div>
+              {user.role !== 'partner' && (
+                <>
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-2">Business Roles</p>
+                    <div className="flex flex-wrap gap-2">
+                      {user.businessRole && user.businessRole.length > 0
+                        ? user.businessRole.map((role: string) => (
+                            <Badge key={role} variant="secondary">
+                              {role}
+                            </Badge>
+                          ))
+                        : "N/A"}
+                    </div>
+                  </div>
 
-              <div>
-                <p className="text-sm text-muted-foreground font-medium mb-2">Target Markets</p>
-                <div className="flex flex-wrap gap-2">
-                  {user.targetMarkets && user.targetMarkets.length > 0
-                    ? user.targetMarkets.map((market: string) => (
-                        <Badge key={market} variant="secondary">
-                          {market}
-                        </Badge>
-                      ))
-                    : "N/A"}
-                </div>
-              </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-2">Target Markets</p>
+                    <div className="flex flex-wrap gap-2">
+                      {user.targetMarkets && user.targetMarkets.length > 0
+                        ? user.targetMarkets.map((market: string) => (
+                            <Badge key={market} variant="secondary">
+                              {market}
+                            </Badge>
+                          ))
+                        : "N/A"}
+                    </div>
+                  </div>
 
-              <div className="md:col-span-2">
-                <p className="text-sm text-muted-foreground font-medium mb-2">Products</p>
-                <div className="flex flex-col gap-2">
-                  {user.products && user.products.length > 0
-                    ? user.products.map((product: string, idx: number) => (
-                        <p key={idx} className="text-sm font-medium whitespace-pre-wrap">
-                          {product}
-                        </p>
-                      ))
-                    : <p className="text-sm text-muted-foreground">N/A</p>}
-                </div>
-              </div>
+                  <div className="md:col-span-2">
+                    <p className="text-sm text-muted-foreground font-medium mb-2">Products</p>
+                    <div className="flex flex-col gap-2">
+                      {user.products && user.products.length > 0
+                        ? user.products.map((product: string, idx: number) => (
+                            <p key={idx} className="text-sm font-medium whitespace-pre-wrap">
+                              {product}
+                            </p>
+                          ))
+                        : <p className="text-sm text-muted-foreground">N/A</p>}
+                    </div>
+                  </div>
+                </>
+              )}
 
               {user.keyCertifications && user.keyCertifications.length > 0 && (
                 <div className="md:col-span-2">
@@ -447,6 +490,59 @@ export default function AdminVerificationDetailsPage() {
                     ))}
                   </div>
                 </div>
+              )}
+
+              {user.role === 'partner' && (
+                <>
+                  {user.languagesSpoken && user.languagesSpoken.length > 0 && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2">Languages Spoken</p>
+                      <div className="flex flex-wrap gap-2">
+                        {user.languagesSpoken.map((lang: string) => (
+                          <Badge key={lang} variant="secondary">{lang}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {user.partnerProfile?.expertiseCountries && user.partnerProfile.expertiseCountries.length > 0 && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2">Expertise Countries</p>
+                      <div className="flex flex-wrap gap-2">
+                        {user.partnerProfile.expertiseCountries.map((country: string) => (
+                          <Badge key={country} variant="outline">{country}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {user.partnerProfile?.expertiseSectors && user.partnerProfile.expertiseSectors.length > 0 && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2">Expertise Sectors</p>
+                      <div className="flex flex-wrap gap-2">
+                        {user.partnerProfile.expertiseSectors.map((sector: string) => (
+                          <Badge key={sector} variant="outline">{sector}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {user.partnerProfile?.bio && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">Bio</p>
+                      <p className="font-medium whitespace-pre-wrap">{user.partnerProfile.bio}</p>
+                    </div>
+                  )}
+                  {user.partnerProfile?.motivation && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">Motivation</p>
+                      <p className="font-medium whitespace-pre-wrap">{user.partnerProfile.motivation}</p>
+                    </div>
+                  )}
+                  {user.partnerProfile?.references && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">References</p>
+                      <p className="font-medium whitespace-pre-wrap">{user.partnerProfile.references}</p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -489,26 +585,40 @@ export default function AdminVerificationDetailsPage() {
               </div>
             )}
 
-            <div className="space-y-4 mt-4">
-              <h3 className="text-lg font-medium border-b pb-2">Uploaded Files</h3>
-              {user.uploadedFiles && user.uploadedFiles.length > 0 ? (
+            {user.role !== 'partner' && (
+              <div className="space-y-4 mt-4">
+                <h3 className="text-lg font-medium border-b pb-2">Uploaded Files</h3>
+                {user.uploadedFiles && user.uploadedFiles.length > 0 ? (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {user.uploadedFiles.map((fileObj: any, idx: number) => {
+                      const label =
+                        fileObj.type === "product_catalogue"
+                          ? `Product Catalogue: ${fileObj.name}`
+                          : `Document: ${fileObj.name}`;
+                      return (
+                        <React.Fragment key={`file-${idx}`}>
+                          {renderDocumentCard(label, fileObj.url)}
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">No files uploaded.</p>
+                )}
+              </div>
+            )}
+
+            {user.role === 'partner' && (
+              <div className="space-y-4 mt-8">
+                <h3 className="text-lg font-medium border-b pb-2">Partner Verification Documents</h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {user.uploadedFiles.map((fileObj: any, idx: number) => {
-                    const label =
-                      fileObj.type === "product_catalogue"
-                        ? `Product Catalogue: ${fileObj.name}`
-                        : `Document: ${fileObj.name}`;
-                    return (
-                      <React.Fragment key={`file-${idx}`}>
-                        {renderDocumentCard(label, fileObj.url)}
-                      </React.Fragment>
-                    );
-                  })}
+                  {renderDocumentCard("Profile Picture", user.profilePicture)}
+                  {renderDocumentCard("Government ID", user.partnerProfile?.governmentId)}
+                  {renderDocumentCard("Professional Certificate", user.partnerProfile?.professionalCert)}
+                  {renderDocumentCard("Business Proof", user.partnerProfile?.businessProof)}
                 </div>
-              ) : (
-                <p className="text-sm text-muted-foreground">No files uploaded.</p>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>

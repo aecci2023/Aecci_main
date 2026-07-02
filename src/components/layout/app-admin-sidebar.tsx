@@ -17,12 +17,12 @@ export function AppAdminSidebar() {
 
   const dynamicNavGroups = useMemo(() => {
     const users = usersResponse?.data || [];
-    const totalUsers = users.length;
+    const totalUsers = users.filter((u: any) => u.role !== "admin").length;
     const businessAccounts = users.filter(
-      (u: any) => u.userType === "business",
+      (u: any) => u.userType === "business" && u.role === "user",
     ).length;
     const individualAccounts = users.filter(
-      (u: any) => u.userType === "individual",
+      (u: any) => u.userType === "individual" && u.role === "user",
     ).length;
     const globalPartners = users.filter(
       (u: any) => u.role === "partner",

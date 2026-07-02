@@ -2,8 +2,11 @@ import * as z from "zod";
 
 const fileOrUrlSchema = z.union([
   z.custom<File>(
-    (val) => val instanceof File && val.type === "application/pdf" && val.size <= 5 * 1024 * 1024,
-    "Must be a PDF file under 5MB",
+    (val) =>
+      val instanceof File &&
+      (val.type === "application/pdf" || ["image/jpeg", "image/png", "image/webp"].includes(val.type)) &&
+      val.size <= 5 * 1024 * 1024,
+    "Must be a PDF, JPG, PNG or WebP file under 5MB",
   ),
   z.string().url("Must be a valid URL"),
 ]);
@@ -65,6 +68,13 @@ export const partnerSignupSchema = z
     {
       message: "Government ID document is required",
       path: ["governmentId"],
+    },
+  )
+  .refine(
+    (data) => data.profilePicture !== undefined && data.profilePicture !== null,
+    {
+      message: "Company logo is required",
+      path: ["profilePicture"],
     },
   );
 

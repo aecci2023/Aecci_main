@@ -5,9 +5,13 @@ import { useGetUsersQuery } from "@/store/api/adminApi";
 import { Globe } from "lucide-react";
 
 export default function AdminPartnersPage() {
-  const { data, isLoading, error } = useGetUsersQuery({ role: "partner" });
+  const { data, isLoading, error } = useGetUsersQuery({ role: "partner", verificationStatus: "active" });
 
   const users = data?.data || [];
+
+  const partnerColumns = userColumns.filter(
+    (col) => (col as any).accessorKey !== "userType"
+  );
 
   return (
     <Main fluid className="space-y-6">
@@ -31,7 +35,7 @@ export default function AdminPartnersPage() {
           <p className="text-destructive">Failed to load partners.</p>
         </div>
       ) : (
-        <DataTable columns={userColumns} data={users} searchKey="name" />
+        <DataTable columns={partnerColumns} data={users} searchKey="name" />
       )}
     </Main>
   );

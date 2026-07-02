@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Main } from "@/components/layout/main";
 import {
-  useGetPartnerProfileQuery,
+  useGetUserByIdQuery,
   useUpdatePartnerStatusMutation,
 } from "@/store/api/adminApi";
 import { Button } from "@/components/ui/button";
@@ -9,15 +9,11 @@ import {
   CheckCircle2,
   XCircle,
   FileText,
-  Download,
   ArrowLeft,
-  Globe,
-  Briefcase,
-  User,
+  Building2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,
   CardContent,
@@ -26,7 +22,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -37,108 +33,75 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 
-function PartnerDetailsSkeleton() {
-  return (
-    <Main fluid className="space-y-6 w-full pb-10">
-      <div className="flex items-center justify-between">
-        <Skeleton className="h-9 w-32" />
-        <div className="flex gap-3">
-          <Skeleton className="h-9 w-24" />
-          <Skeleton className="h-9 w-36" />
-        </div>
-      </div>
-      <div className="flex items-start gap-4">
-        <Skeleton className="size-16 rounded-lg shrink-0" />
-        <div className="space-y-2">
-          <Skeleton className="h-8 w-64" />
-          <Skeleton className="h-4 w-48" />
-          <Skeleton className="h-6 w-36 rounded-full" />
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <Card key={i} className={i === 2 ? "md:col-span-2" : ""}>
-            <CardHeader>
-              <Skeleton className="h-5 w-40" />
-              <Skeleton className="h-4 w-56 mt-1" />
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {Array.from({ length: 5 }).map((_, j) => (
-                <div key={j}>
-                  <Skeleton className="h-3 w-24 mb-1" />
-                  <Skeleton className="h-4 w-48" />
-                  <Separator className="mt-3" />
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </Main>
-  );
-}
+import { DocumentViewerModal } from "@/components/common/DocumentViewerModal";
 
 export default function AdminPartnerVerificationDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useGetPartnerProfileQuery(id as string, {
+  const { data, isLoading, error } = useGetUserByIdQuery(id as string, {
     skip: !id,
   });
-  const [updatePartnerStatus, { isLoading: isUpdating }] = useUpdatePartnerStatusMutation();
+  const [updatePartnerStatus, { isLoading: isUpdating }] =
+    useUpdatePartnerStatusMutation();
 
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
   const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
+  const [viewDocument, setViewDocument] = useState<{ url: string; label: string } | null>(null);
 
-  const profile = data?.data;
-  const user = profile?.user;
+  const user = data?.data;
 
-  if (isLoading) return <PartnerDetailsSkeleton />;
-
-  if (error || !profile) {
+  if (isLoading) {
     return (
-      <Main fluid className="flex items-center justify-center h-screen flex-col gap-4">
-        <p className="text-destructive">Failed to load partner details.</p>
-        <Button variant="outline" onClick={() => navigate("/admin/verifications")}>
+      <Main fluid className="flex items-center justify-center h-screen">
+        <p className="text-muted-foreground animate-pulse">
+          Loading verification details...
+        </p>
+      </Main>
+    );
+  }
+
+  if (error || !user) {
+    return (
+      <Main
+        fluid
+        className="flex items-center justify-center h-screen flex-col gap-4"
+      >
+        <p className="text-destructive">Failed to load user details.</p>
+        <Button
+          variant="outline"
+          onClick={() => navigate("/admin/verifications")}
+        >
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Verifications
         </Button>
       </Main>
     );
   }
 
-  const handleApprove = async () => {
+  const handleUpdateStatus = async (status: string, reason?: string) => {
     try {
       await updatePartnerStatus({
-        userId: profile.userId,
-        status: "active",
+        userId: user.id,
+        status: status === 'approved' ? 'active' : 'suspended',
+        reason,
       }).unwrap();
-      toast.success("Partner approved and activated.");
-      setIsApproveDialogOpen(false);
+      toast.success("Approved successfully.");
+      if (status === "rejected") {
+        setIsRejectDialogOpen(false);
+        setRejectionReason("");
+      }
       navigate("/admin/verifications");
-    } catch {
-      toast.error("Failed to approve partner.");
+    } catch (err) {
+      console.error("Update Error:", err);
+      toast.error("Failed to update status.");
     }
   };
 
-  const handleReject = async () => {
-    if (!rejectionReason.trim()) return;
-    try {
-      await updatePartnerStatus({
-        userId: profile.userId,
-        status: "suspended",
-        reason: rejectionReason.trim(),
-      }).unwrap();
-      toast.success("Partner application rejected.");
-      setIsRejectDialogOpen(false);
-      setRejectionReason("");
-      navigate("/admin/verifications");
-    } catch {
-      toast.error("Failed to reject partner.");
-    }
-  };
-
-  const renderDocCard = (label: string, url: string | undefined | null) => {
+  const renderDocumentCard = (
+    label: string,
+    url: string | undefined | null,
+  ) => {
     if (!url) {
       return (
         <Card className="bg-muted/10 border-dashed">
@@ -154,6 +117,7 @@ export default function AdminPartnerVerificationDetailsPage() {
         </Card>
       );
     }
+
     return (
       <Card className="hover:border-primary/50 transition-colors">
         <CardHeader className="py-4">
@@ -162,10 +126,13 @@ export default function AdminPartnerVerificationDetailsPage() {
               <FileText className="w-5 h-5 text-primary" />
               <CardTitle className="text-base font-medium">{label}</CardTitle>
             </div>
-            <Button variant="outline" size="sm" asChild>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                <Download className="w-4 h-4" /> View
-              </a>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setViewDocument({ url, label })}
+              className="flex items-center gap-2"
+            >
+              <FileText className="w-4 h-4" /> View Document
             </Button>
           </div>
         </CardHeader>
@@ -173,7 +140,8 @@ export default function AdminPartnerVerificationDetailsPage() {
     );
   };
 
-  const isPending = profile.status === "pending_review";
+  const isPending =
+    user.partnerProfile?.status === "pending_review";
 
   return (
     <Main fluid className="space-y-6 w-full pb-10">
@@ -202,202 +170,466 @@ export default function AdminPartnerVerificationDetailsPage() {
                 disabled={isUpdating}
                 onClick={() => setIsApproveDialogOpen(true)}
               >
-                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve Partner
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve
               </Button>
             </>
           ) : (
             <Badge className="bg-primary/10 text-primary hover:bg-primary/20 capitalize">
-              Status: {profile.status.replace(/_/g, " ")}
+              Status: {user.partnerProfile?.status?.replace(/_/g, " ") || "Unknown"}
             </Badge>
           )}
         </div>
       </div>
 
       {/* Title */}
-      <div className="flex items-start gap-4">
-        {user?.profilePicture ? (
-          <img
-            src={user.profilePicture}
-            alt={user.fullName || "Logo"}
-            className="size-16 rounded-lg object-cover border border-border shrink-0"
-          />
-        ) : (
-          <div className="size-16 rounded-lg bg-muted flex items-center justify-center shrink-0">
-            <Briefcase className="size-7 text-muted-foreground" />
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight flex items-center gap-3">
+          <Building2 className="size-8 text-primary" />
+          {user.companyName || user.fullName}
+        </h1>
+        <p className="text-muted-foreground mt-2">
+          Review the information and verify the uploaded documents below.
+        </p>
+      </div>
+
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>User Profile & Verification Details</CardTitle>
+          <CardDescription>
+            Comprehensive overview of all submitted registration data.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-10">
+          
+          {/* Data Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 gap-x-4">
+            
+            {user.applicationNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Application Number</p>
+                <p className="font-medium">{user.applicationNumber}</p>
+              </div>
+            )}
+
+            {user.createdAt && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Registered On</p>
+                <p className="font-medium">{new Date(user.createdAt).toLocaleString()}</p>
+              </div>
+            )}
+            
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Account Type</p>
+              <p className="font-medium capitalize">{user.userType}</p>
+            </div>
+            
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">System Role</p>
+              <p className="font-medium capitalize">{user.role || "user"}</p>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Plan Status</p>
+              <div>
+                <Badge variant={user.planActive ? "default" : "secondary"}>
+                  {user.planActive ? "Active" : "Inactive"}
+                </Badge>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Full Name</p>
+              <p className="font-medium">{user.fullName || "N/A"}</p>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Email Address</p>
+              <div className="flex items-center gap-2">
+                <p className="font-medium">{user.email}</p>
+                <Badge
+                  variant="outline"
+                  className={
+                    user.isEmailVerified
+                      ? "text-emerald-500 border-emerald-500/20 bg-emerald-500/10"
+                      : "text-amber-500 border-amber-500/20 bg-amber-500/10"
+                  }
+                >
+                  {user.isEmailVerified ? "Verified" : "Pending"}
+                </Badge>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Mobile Number</p>
+              <p className="font-medium">
+                {user.countryCode ? `${user.countryCode} ` : ""}
+                {user.mobileNumber || "N/A"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground font-medium mb-1">Country</p>
+              <p className="font-medium">{user.country || "N/A"}</p>
+            </div>
+
+            {user.companyName && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Company Name</p>
+                <p className="font-medium">{user.companyName}</p>
+              </div>
+            )}
+
+            {user.businessAddress && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Business Address</p>
+                <p className="font-medium">{user.businessAddress}</p>
+              </div>
+            )}
+            
+            {user.role !== 'partner' && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Industry</p>
+                <p className="font-medium">{user.industrySector || "N/A"}</p>
+              </div>
+            )}
+
+            {user.iecNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">IEC Number</p>
+                <p className="font-medium">{user.iecNumber}</p>
+              </div>
+            )}
+
+            {user.gstNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">GST Number</p>
+                <p className="font-medium">{user.gstNumber}</p>
+              </div>
+            )}
+
+            {user.panNumber && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">PAN Number</p>
+                <p className="font-medium">{user.panNumber}</p>
+              </div>
+            )}
+            
+            {user.role !== 'partner' && (
+              <>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Company Size</p>
+                  <p className="font-medium">{user.companySize || "N/A"}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Turnover</p>
+                  <p className="font-medium">{user.turnover || "N/A"}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Legal Structure</p>
+                  <p className="font-medium">{user.legalStructure || "N/A"}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Est. Year</p>
+                  <p className="font-medium">{user.yearEstablished || "N/A"}</p>
+                </div>
+              </>
+            )}
+
+            {user.experience && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Experience Level</p>
+                <p className="font-medium">{user.experience}</p>
+              </div>
+            )}
+            
+            {user.role !== 'partner' && (
+              <>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Total Slots</p>
+                  <p className="font-medium">{user.slotsTotal ?? 0}</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Remaining Slots</p>
+                  <p className="font-medium">{user.slotsRemaining ?? 0}</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-1">Reports Used</p>
+                  <p className="font-medium">{user.reportsUsed ?? 0}</p>
+                </div>
+              </>
+            )}
+            
+            {user.websiteUrl && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">Website</p>
+                <a
+                  href={user.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary hover:underline block truncate"
+                >
+                  {user.websiteUrl}
+                </a>
+              </div>
+            )}
+            
+            {user.linkedinUrl && (
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-1">LinkedIn Profile</p>
+                <a
+                  href={user.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary hover:underline block truncate"
+                >
+                  {user.linkedinUrl}
+                </a>
+              </div>
+            )}
+
+            {user.role === 'partner' && (
+              <>
+                {user.professionalTitle && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Professional Title</p>
+                    <p className="font-medium">{user.professionalTitle}</p>
+                  </div>
+                )}
+                {user.nationality && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Nationality</p>
+                    <p className="font-medium">{user.nationality}</p>
+                  </div>
+                )}
+                {user.yearsOfExperience && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Years of Experience</p>
+                    <p className="font-medium">{user.yearsOfExperience}</p>
+                  </div>
+                )}
+                {user.partnerProfile?.organization && (
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">Organization</p>
+                    <p className="font-medium">{user.partnerProfile.organization}</p>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-        )}
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            {user?.fullName || "Partner Application"}
-          </h1>
-          <p className="text-muted-foreground mt-1">
-            {profile.organization}{user?.country ? ` — ${user.country}` : ""}
-          </p>
-          <Badge className="mt-2" variant="outline">
-            {user?.applicationNumber || "No Application Number"}
-          </Badge>
-        </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Personal Info */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <User className="size-4" /> Personal Information
-            </CardTitle>
-            <CardDescription>Identity and contact details.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {(
-              [
-                ["Full Name", user?.fullName],
-                ["Email", user?.email],
-                ["Mobile", user?.mobileNumber],
-                ["Country", user?.country],
-                ["Nationality", user?.nationality],
-                ["Professional Title", user?.professionalTitle],
-                ["Years of Experience", user?.yearsOfExperience],
-              ] as [string, string | undefined][]
-            )
-              .filter(([, v]) => v)
-              .map(([label, value], idx, arr) => (
-                <div key={label}>
-                  <p className="text-sm text-muted-foreground font-medium">{label}</p>
-                  <p className="font-medium">{value}</p>
-                  {idx < arr.length - 1 && <Separator className="mt-3" />}
-                </div>
-              ))}
-            {user?.linkedinProfileUrl && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">LinkedIn</p>
-                  <a
-                    href={user.linkedinProfileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-primary hover:underline truncate block"
-                  >
-                    {user.linkedinProfileUrl}
-                  </a>
-                </div>
-              </>
-            )}
-            {user?.websiteUrl && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">Website</p>
-                  <a
-                    href={user.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-primary hover:underline truncate block"
-                  >
-                    {user.websiteUrl}
-                  </a>
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
+          <Separator />
 
-        {/* Professional Profile */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Globe className="size-4" /> Professional Profile
-            </CardTitle>
-            <CardDescription>Organisation, expertise, and motivation.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <p className="text-sm text-muted-foreground font-medium">Organisation</p>
-              <p className="font-medium">{profile.organization || "N/A"}</p>
-              <Separator className="mt-3" />
-            </div>
-
-            {profile.bio && (
+          {/* Tags & Lists */}
+          <div className="space-y-6">
+            {user.objective && (
               <div>
-                <p className="text-sm text-muted-foreground font-medium">Professional Biography</p>
-                <p className="text-sm whitespace-pre-wrap">{profile.bio}</p>
-                <Separator className="mt-3" />
+                <h3 className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">
+                  Business Objective
+                </h3>
+                <p className="font-medium whitespace-pre-wrap">{user.objective}</p>
               </div>
             )}
 
-            {profile.motivation && (
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Motivation</p>
-                <p className="text-sm whitespace-pre-wrap">{profile.motivation}</p>
-                <Separator className="mt-3" />
-              </div>
-            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {user.role !== 'partner' && (
+                <>
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-2">Business Roles</p>
+                    <div className="flex flex-wrap gap-2">
+                      {user.businessRole && user.businessRole.length > 0
+                        ? user.businessRole.map((role: string) => (
+                            <Badge key={role} variant="secondary">
+                              {role}
+                            </Badge>
+                          ))
+                        : "N/A"}
+                    </div>
+                  </div>
 
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-2">Languages Spoken</p>
-              <div className="flex flex-wrap gap-1">
-                {(user?.languagesSpoken || []).length > 0
-                  ? (user!.languagesSpoken as string[]).map((l) => (
-                      <Badge key={l} variant="secondary" className="text-xs">{l}</Badge>
-                    ))
-                  : <span className="text-sm text-muted-foreground">N/A</span>}
-              </div>
-              <Separator className="mt-3" />
-            </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-2">Target Markets</p>
+                    <div className="flex flex-wrap gap-2">
+                      {user.targetMarkets && user.targetMarkets.length > 0
+                        ? user.targetMarkets.map((market: string) => (
+                            <Badge key={market} variant="secondary">
+                              {market}
+                            </Badge>
+                          ))
+                        : "N/A"}
+                    </div>
+                  </div>
 
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-2">Countries of Expertise</p>
-              <div className="flex flex-wrap gap-1">
-                {(profile.expertiseCountries as string[] || []).map((c) => (
-                  <Badge key={c} variant="outline" className="text-xs">{c}</Badge>
-                ))}
-              </div>
-              <Separator className="mt-3" />
-            </div>
+                  <div className="md:col-span-2">
+                    <p className="text-sm text-muted-foreground font-medium mb-2">Products</p>
+                    <div className="flex flex-col gap-2">
+                      {user.products && user.products.length > 0
+                        ? user.products.map((product: string, idx: number) => (
+                            <p key={idx} className="text-sm font-medium whitespace-pre-wrap">
+                              {product}
+                            </p>
+                          ))
+                        : <p className="text-sm text-muted-foreground">N/A</p>}
+                    </div>
+                  </div>
+                </>
+              )}
 
-            <div>
-              <p className="text-sm text-muted-foreground font-medium mb-2">Sectors of Expertise</p>
-              <div className="flex flex-wrap gap-1">
-                {(profile.expertiseSectors as string[] || []).map((s) => (
-                  <Badge key={s} variant="secondary" className="text-xs">{s}</Badge>
-                ))}
-              </div>
-            </div>
-
-            {profile.references && (
-              <>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">References</p>
-                  <p className="text-sm whitespace-pre-wrap">{profile.references}</p>
+              {user.keyCertifications && user.keyCertifications.length > 0 && (
+                <div className="md:col-span-2">
+                  <p className="text-sm text-muted-foreground font-medium mb-2">Key Certifications</p>
+                  <div className="flex flex-wrap gap-2">
+                    {user.keyCertifications.map((cert: string) => (
+                      <Badge key={cert} variant="outline">
+                        {cert}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
+              )}
 
-        {/* Documents */}
-        <Card className="md:col-span-2">
-          <CardHeader>
-            <CardTitle>Verification Documents</CardTitle>
-            <CardDescription>Review uploaded credentials and identity documents.</CardDescription>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {renderDocCard("Government ID", profile.governmentId)}
-            {renderDocCard("Professional Certificate / License", profile.professionalCert)}
-            {renderDocCard("Business Registration Proof", profile.businessProof)}
-          </CardContent>
-        </Card>
-      </div>
+              {user.role === 'partner' && (
+                <>
+                  {user.languagesSpoken && user.languagesSpoken.length > 0 && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2">Languages Spoken</p>
+                      <div className="flex flex-wrap gap-2">
+                        {user.languagesSpoken.map((lang: string) => (
+                          <Badge key={lang} variant="secondary">{lang}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {user.partnerProfile?.expertiseCountries && user.partnerProfile.expertiseCountries.length > 0 && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2">Expertise Countries</p>
+                      <div className="flex flex-wrap gap-2">
+                        {user.partnerProfile.expertiseCountries.map((country: string) => (
+                          <Badge key={country} variant="outline">{country}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {user.partnerProfile?.expertiseSectors && user.partnerProfile.expertiseSectors.length > 0 && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2">Expertise Sectors</p>
+                      <div className="flex flex-wrap gap-2">
+                        {user.partnerProfile.expertiseSectors.map((sector: string) => (
+                          <Badge key={sector} variant="outline">{sector}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {user.partnerProfile?.bio && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">Bio</p>
+                      <p className="font-medium whitespace-pre-wrap">{user.partnerProfile.bio}</p>
+                    </div>
+                  )}
+                  {user.partnerProfile?.motivation && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">Motivation</p>
+                      <p className="font-medium whitespace-pre-wrap">{user.partnerProfile.motivation}</p>
+                    </div>
+                  )}
+                  {user.partnerProfile?.references && (
+                    <div className="md:col-span-2">
+                      <p className="text-sm text-muted-foreground font-medium mb-2 border-b pb-1">References</p>
+                      <p className="font-medium whitespace-pre-wrap">{user.partnerProfile.references}</p>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Verification Documents */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold">Documents & Identifications</h2>
+
+            {(user.internationalBusinessIds?.length > 0 || user.internationalIds?.length > 0) && (
+              <div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {user.internationalBusinessIds
+                    ?.filter((o: any) => o.type || o.idNumber)
+                    .map((idObj: any, idx: number) => (
+                      <Card key={`biz-${idx}`} className="bg-muted/10">
+                        <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                          <span className="font-medium">{idObj.type || "Business ID"}</span>
+                          <Badge variant="outline" className="w-fit">
+                            {idObj.idNumber}
+                          </Badge>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  {user.internationalIds
+                    ?.filter((o: any) => o.type || o.idNumber)
+                    .map((idObj: any, idx: number) => (
+                      <Card key={`doc-${idx}`} className="bg-muted/10">
+                        <CardContent className="py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                          <span className="font-medium">{idObj.type || "Personal ID"}</span>
+                          <Badge variant="outline" className="w-fit">
+                            {idObj.idNumber}
+                          </Badge>
+                        </CardContent>
+                      </Card>
+                    ))}
+                </div>
+              </div>
+            )}
+
+            {user.role !== 'partner' && (
+              <div className="space-y-4 mt-4">
+                <h3 className="text-lg font-medium border-b pb-2">Uploaded Files</h3>
+                {user.uploadedFiles && user.uploadedFiles.length > 0 ? (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {user.uploadedFiles.map((fileObj: any, idx: number) => {
+                      const label =
+                        fileObj.type === "product_catalogue"
+                          ? `Product Catalogue: ${fileObj.name}`
+                          : `Document: ${fileObj.name}`;
+                      return (
+                        <React.Fragment key={`file-${idx}`}>
+                          {renderDocumentCard(label, fileObj.url)}
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">No files uploaded.</p>
+                )}
+              </div>
+            )}
+
+            {user.role === 'partner' && (
+              <div className="space-y-4 mt-8">
+                <h3 className="text-lg font-medium border-b pb-2">Partner Verification Documents</h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {renderDocumentCard("Profile Picture", user.profilePicture)}
+                  {renderDocumentCard("Government ID", user.partnerProfile?.governmentId)}
+                  {renderDocumentCard("Professional Certificate", user.partnerProfile?.professionalCert)}
+                  {renderDocumentCard("Business Proof", user.partnerProfile?.businessProof)}
+                </div>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Approve Dialog */}
       <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Approve Partner Application</DialogTitle>
+            <DialogTitle>Approve Application</DialogTitle>
             <DialogDescription>
-              The partner will receive an approval email and gain access to their dashboard immediately.
+              The user will receive an approval email and gain full access to their account immediately.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -406,7 +638,10 @@ export default function AdminPartnerVerificationDetailsPage() {
             </Button>
             <Button
               className="bg-emerald-600 hover:bg-emerald-700 text-white"
-              onClick={handleApprove}
+              onClick={() => {
+                setIsApproveDialogOpen(false);
+                handleUpdateStatus("approved");
+              }}
               disabled={isUpdating}
             >
               <CheckCircle2 className="w-4 h-4 mr-2" /> Confirm Approval
@@ -419,9 +654,10 @@ export default function AdminPartnerVerificationDetailsPage() {
       <Dialog open={isRejectDialogOpen} onOpenChange={setIsRejectDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reject Partner Application</DialogTitle>
+            <DialogTitle>Reject Application</DialogTitle>
             <DialogDescription>
-              Provide a reason. This will be recorded against the application.
+              Provide a reason for rejection. This will be sent to the user via
+              email.
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
@@ -433,12 +669,15 @@ export default function AdminPartnerVerificationDetailsPage() {
             />
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsRejectDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsRejectDialogOpen(false)}
+            >
               Cancel
             </Button>
             <Button
               variant="destructive"
-              onClick={handleReject}
+              onClick={() => handleUpdateStatus("rejected", rejectionReason)}
               disabled={isUpdating || !rejectionReason.trim()}
             >
               Confirm Rejection
@@ -446,6 +685,14 @@ export default function AdminPartnerVerificationDetailsPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Document Viewer Dialog */}
+      <DocumentViewerModal
+        isOpen={!!viewDocument}
+        onClose={() => setViewDocument(null)}
+        url={viewDocument?.url || null}
+        label={viewDocument?.label || null}
+      />
     </Main>
   );
 }

@@ -47,6 +47,7 @@ import {
   Clock,
 } from "lucide-react";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { parsePhoneNumber } from "react-phone-number-input";
 
 
 
@@ -80,7 +81,7 @@ export default function PartnerProfilePage() {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
 
-  const { data: profileData, isLoading } = useGetMyPartnerProfileQuery();
+  const { data: profileData, isLoading, refetch } = useGetMyPartnerProfileQuery();
   const [setupProfile, { isLoading: isSaving }] = useSetupPartnerProfileMutation();
   const [uploadFile] = useUploadFileMutation();
 
@@ -96,7 +97,7 @@ export default function PartnerProfilePage() {
       if (u.profilePicture) setProfilePicture(u.profilePicture);
       form.reset({
         fullName: u.fullName || "",
-        mobile: u.mobile || "",
+        mobile: (u.countryCode && u.mobileNumber) ? `${u.countryCode}${u.mobileNumber}` : (u.mobileNumber || u.mobile || ""),
         country: u.country || "",
         nationality: u.nationality || "",
         professionalTitle: u.professionalTitle || "",
@@ -143,7 +144,6 @@ export default function PartnerProfilePage() {
       if (url) {
         setProfilePicture(url);
         await setupProfile({ profilePicture: url }).unwrap();
-        // update localStorage so header reflects new photo
         const stored = localStorage.getItem("user");
         if (stored) {
           try {
@@ -154,6 +154,7 @@ export default function PartnerProfilePage() {
           }
         }
         toast.success("Photo updated");
+        refetch();
       }
     } catch {
       toast.error("Photo upload failed");
@@ -165,18 +166,38 @@ export default function PartnerProfilePage() {
 
   const onSubmit = async (values: FormValues) => {
     try {
-      await setupProfile({ ...values, profilePicture }).unwrap();
-      // sync fullName to localStorage
+      const payload: any = { ...values, profilePicture };
+      
+      if (values.mobile) {
+        try {
+          const parsed = parsePhoneNumber(values.mobile);
+          if (parsed) {
+            payload.countryCode = `+${parsed.countryCallingCode}`;
+            payload.mobileNumber = parsed.nationalNumber;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      delete payload.mobile;
+
+      await setupProfile(payload).unwrap();
       const stored = localStorage.getItem("user");
       if (stored) {
         try {
           const u = JSON.parse(stored);
-          localStorage.setItem("user", JSON.stringify({ ...u, fullName: values.fullName }));
+          localStorage.setItem("user", JSON.stringify({ 
+            ...u, 
+            fullName: values.fullName,
+            countryCode: payload.countryCode || u.countryCode,
+            mobileNumber: payload.mobileNumber || u.mobileNumber
+          }));
         } catch {
           toast.error("Failed to update profile");
         }
       }
       toast.success("Profile saved successfully");
+      refetch();
     } catch {
       toast.error("Failed to save profile");
     }

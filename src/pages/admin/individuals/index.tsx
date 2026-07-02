@@ -7,6 +7,8 @@ import { User } from "lucide-react";
 export default function AdminIndividualsPage() {
   const { data, isLoading, error } = useGetUsersQuery({
     userType: "individual",
+    role: "user",
+    verificationStatus: "approved",
   });
 
   const users = data?.data || [];

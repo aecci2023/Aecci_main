@@ -27,12 +27,13 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
     !isLoading &&
     partnerProfile &&
     (!partnerProfile.bio || !partnerProfile.signedAgreement);
-  const isOnDashboard =
-    location.pathname === "/partner/dashboard" ||
-    location.pathname === "/partner/dashboard/";
+  
+  const isOnboarding =
+    location.pathname === "/partner/onboarding" ||
+    location.pathname === "/partner/onboarding/";
 
-  if (needsSetup && !isOnDashboard) {
-    return <Navigate to="/partner/dashboard" replace />;
+  if (needsSetup && !isOnboarding) {
+    return <Navigate to="/partner/onboarding" replace />;
   }
 
   return (

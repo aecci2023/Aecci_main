@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { partnerSignupSchema, type PartnerSignupFormData, initialPartnerFormData } from "./schema";
 import { Progress } from "@/components/ui/progress";
 import { useSendOtpMutation, useUploadFileMutation, usePartnerSignupMutation } from "@/store/api/authApi";
+import { parsePhoneNumber } from "react-phone-number-input";
 
 import Step1Account from "./steps/Step1Account";
 import Step2OTP from "./steps/Step2OTP";
@@ -79,25 +80,58 @@ export default function PartnerRegisterWizard() {
       try {
         const data = methods.getValues();
 
-        const uploadSingle = async (file: File | string | null | undefined, folder: string) => {
+        const uploadSingleStr = async (file: File | string | null | undefined, folder: string) => {
           if (!file) return undefined;
           if (typeof file === "string") return file;
           const res = await uploadFile({ file, folder }).unwrap();
           return res.success ? res.data.url : undefined;
         };
 
-        const [profilePictureUrl, governmentIdUrl, professionalCertUrl, businessProofUrl] = await Promise.all([
-          uploadSingle(data.profilePicture, "partner-avatars"),
-          uploadSingle(data.governmentId, "partner-docs"),
-          uploadSingle(data.professionalCert, "partner-docs"),
-          uploadSingle(data.businessProof, "partner-docs"),
+        const uploadFileObj = async (file: File | string | null | undefined, folder: string, typeName: string) => {
+          if (!file) return undefined;
+          let fileName: string;
+          let url: string;
+          if (typeof file === "string") {
+            url = file;
+            fileName = file.split('/').pop() || 'file';
+          } else {
+            const res = await uploadFile({ file, folder }).unwrap();
+            if (!res.success) return undefined;
+            url = res.data.url;
+            fileName = file.name;
+          }
+          return { name: fileName, url, type: typeName };
+        };
+
+        const [profilePictureUrl, govIdObj, profCertObj, bizProofObj] = await Promise.all([
+          uploadSingleStr(data.profilePicture, "partner-avatars"),
+          uploadFileObj(data.governmentId, "partner-docs", "governmentId"),
+          uploadFileObj(data.professionalCert, "partner-docs", "professionalCert"),
+          uploadFileObj(data.businessProof, "partner-docs", "businessProof"),
         ]);
+
+        const uploadedFiles = [govIdObj, profCertObj, bizProofObj].filter(Boolean);
+
+        let countryCode = "";
+        let cleanMobile = data.mobile;
+        try {
+          if (data.mobile) {
+            const parsed = parsePhoneNumber(data.mobile);
+            if (parsed) {
+              countryCode = `+${parsed.countryCallingCode}`;
+              cleanMobile = parsed.nationalNumber;
+            }
+          }
+        } catch (e) {
+          console.log(e);
+        }
 
         const res = await partnerSignup({
           email: data.email,
           password: data.password,
           fullName: data.fullName,
-          mobileNumber: data.mobile,
+          mobileNumber: cleanMobile,
+          countryCode: countryCode,
           country: data.country,
           nationality: data.nationality,
           professionalTitle: data.professionalTitle,
@@ -112,9 +146,10 @@ export default function PartnerRegisterWizard() {
           websiteUrl: data.websiteUrl,
           references: data.references,
           profilePicture: profilePictureUrl,
-          governmentId: governmentIdUrl,
-          professionalCert: professionalCertUrl,
-          businessProof: businessProofUrl,
+          governmentId: govIdObj?.url,
+          professionalCert: profCertObj?.url,
+          businessProof: bizProofObj?.url,
+          uploadedFiles: uploadedFiles,
         }).unwrap();
 
         if (res.success) {
