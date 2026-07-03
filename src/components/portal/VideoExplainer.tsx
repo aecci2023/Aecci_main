@@ -31,7 +31,7 @@ export default function VideoExplainer() {
             videoSrc={videoSrc}
             thumbnailSrc={videoThumb}
             thumbnailAlt="AECCI Global Deal Room Explainer"
-            defaultOpen={true}
+            defaultOpen={false}
           />
         </div>
       </div>
