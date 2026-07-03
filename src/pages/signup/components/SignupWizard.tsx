@@ -147,9 +147,27 @@ export default function SignupWizard() {
         setIsSubmitting(true);
         try {
           const data = methods.getValues();
+          
+          let countryCode = "";
+          let cleanMobile = data.mobile;
+          try {
+            const { parsePhoneNumber } = await import("react-phone-number-input");
+            if (data.mobile) {
+              const parsed = parsePhoneNumber(data.mobile);
+              if (parsed) {
+                countryCode = `+${parsed.countryCallingCode}`;
+                cleanMobile = parsed.nationalNumber;
+              }
+            }
+          } catch (e) {
+            console.log(e);
+          }
+
           const submitData = {
             email: data.email,
             fullName: data.fullName,
+            mobileNumber: cleanMobile,
+            countryCode,
           };
           const res = await sendOtp(submitData).unwrap();
           if (res.success) {

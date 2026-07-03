@@ -4,16 +4,14 @@ import {
   ArrowRight,
   BarChart,
   Box,
-  Briefcase,
-  CheckCircle,
   Clock,
   Globe,
-  Globe2,
   Handshake,
-  Lock,
   Play,
   Rocket,
   ShieldCheck,
+  User,
+  UserCheck,
   Users,
   XIcon,
 } from "lucide-react";
@@ -22,10 +20,10 @@ import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import AnimatedWorldMap from "./AnimatedWorldMap";
 import { QRCodeSVG } from "qrcode.react";
-import videoSrc from "@/assets/videos/globalconnect.mp4";
+import videoSrc from "@/assets/videos/globalroomwork_v2.mp4";
 
 export default function GlobalLanding() {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(true);
 
   return (
     <>
@@ -223,119 +221,72 @@ export default function GlobalLanding() {
         </div>
       </section>
 
-      {/* 2. COLLABORATION SECTION */}
-      <section className="bg-white py-24 relative overflow-hidden border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 uppercase tracking-tight mb-4">
-              Collaborate. Partner. Grow Together.
+      {/* 2. REGISTRATION ROLES SECTION */}
+      <section className="bg-white py-16 relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+          <div className="flex items-center gap-6 mb-12">
+            <div className="h-px bg-gray-300 flex-1"></div>
+            <h2 className="text-sm md:text-lg font-bold text-gray-900 uppercase tracking-[0.2em] text-center whitespace-nowrap">
+              CONNECT YOURSELF TO AECCI GLOBAL DEAL ROOM
             </h2>
-            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              AECCI invites organizations, institutions & businesses worldwide
-              to collaborate, partner and participate in our global platform.
-            </p>
+            <div className="h-px bg-gray-300 flex-1"></div>
           </div>
 
-          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-24 items-center">
-            {/* Center Handshake Graphic */}
-            <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 z-20 items-center justify-center">
-              <div className="relative w-full h-full rounded-full border-4 border-border shadow-2xl bg-card flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,color-mix(in_oklch,var(--primary)_20%,transparent)_0%,transparent_70%)]" />
-                <Globe className="absolute w-[140%] h-[140%] text-primary/20 opacity-50 animate-[spin_60s_linear_infinite]" />
-                <Handshake className="w-24 h-24 text-primary relative z-10 drop-shadow-[0_0_15px_color-mix(in_oklch,var(--primary)_50%,transparent)]" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1: Partner */}
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-blue-500/20 hover:border-blue-500/50 transition-colors flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full border border-blue-500/30 flex items-center justify-center bg-blue-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.blue.500)_30%,transparent)]">
+                <Handshake className="w-10 h-10 text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
               </div>
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Collaboration Partner</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1">
+                For organizations, chambers, institutions & businesses who want to collaborate with AECCI globally.
+              </p>
+              <Link to="/partner/register" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
+                Register as Partner <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
-            {/* Left Card: Become a Partner */}
-            <div className="bg-card rounded-3xl p-8 lg:p-12 text-foreground relative overflow-hidden shadow-2xl border border-border">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/4" />
-              <div className="absolute left-8 top-12 w-20 h-20 rounded-full border border-primary/30 flex items-center justify-center bg-primary/10 mb-8 shadow-[0_0_30px_color-mix(in_oklch,var(--primary)_30%,transparent)]">
-                <Globe2 className="w-10 h-10 text-primary" />
+            {/* Card 2: Participant */}
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-emerald-500/20 hover:border-emerald-500/50 transition-colors flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full border border-emerald-500/30 flex items-center justify-center bg-emerald-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.emerald.500)_30%,transparent)]">
+                <Users className="w-10 h-10 text-emerald-500 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
               </div>
-
-              <div className="mt-28 space-y-6 relative z-10">
-                <h3 className="text-2xl font-bold uppercase">
-                  Become A Collaboration Partner
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Expand your global reach and create stronger trade <br />connections with Indian exporters.
-                </p>
-
-                <div className="grid grid-cols-2 gap-4 text-sm font-medium">
-                  <div className="flex items-center gap-2">
-                    <Globe className="w-4 h-4 text-primary" /> Global Visibility
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-primary" /> Business
-                    Networking
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Handshake className="w-4 h-4 text-primary" /> Joint
-                    Initiatives
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <BarChart className="w-4 h-4 text-primary" /> Market Access
-                  </div>
-                </div>
-
-                <Link
-                  to="/signup"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 px-6 rounded-lg flex items-center gap-2 transition-colors w-max"
-                >
-                  Partner With AECCI <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Participant</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1">
+                For businesses, exporters & professionals who want to participate in deal rooms and grow globally.
+              </p>
+              <Link to="/signup" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
+                Register as Participant <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
-            {/* Right Card: Participate */}
-            <div className="bg-card rounded-3xl p-8 lg:p-12 text-foreground relative overflow-hidden shadow-2xl border border-border">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/4" />
-              <div className="absolute right-8 top-12 w-20 h-20 rounded-full border border-primary/30 flex items-center justify-center bg-primary/10 mb-8 shadow-[0_0_30px_color-mix(in_oklch,var(--primary)_30%,transparent)] lg:right-12">
-                <Users className="w-10 h-10 text-primary" />
+            {/* Card 3: Importer */}
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-purple-500/20 hover:border-purple-500/50 transition-colors flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full border border-purple-500/30 flex items-center justify-center bg-purple-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.purple.500)_30%,transparent)]">
+                <User className="w-10 h-10 text-purple-500 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
               </div>
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Importer</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1">
+                For global importers looking to connect with verified Indian exporters through deal rooms.
+              </p>
+              <Link to="/importer/register" className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
+                Register as Importer <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
-              <div className="mt-28 space-y-6 relative z-10 lg:pl-12">
-                <h3 className="text-2xl font-bold uppercase">
-                  Participate In AECCI Global
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Join as a country, organization or business to showcase
-                  opportunities and connect globally.
-                </p>
-
-                <div className="space-y-4 text-sm font-medium">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary shrink-0" />
-                    <div>
-                      <span className="block text-foreground">
-                        Showcase Opportunities
-                      </span>
-                      <span className="text-muted-foreground text-xs font-normal">
-                        Access Indian Exporters
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary shrink-0" />
-                    <div>
-                      <span className="block text-foreground">
-                        Structured Engagements
-                      </span>
-                      <span className="text-muted-foreground text-xs font-normal">
-                        Long-term Collaboration
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <Link
-                  to="/partner/register"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 px-6 rounded-lg flex items-center gap-2 transition-colors w-max"
-                >
-                  Register to Participate <ArrowRight className="w-4 h-4" />
-                </Link>
+            {/* Card 4: Intending Agent */}
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-orange-500/20 hover:border-orange-500/50 transition-colors flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full border border-orange-500/30 flex items-center justify-center bg-orange-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.orange.500)_30%,transparent)]">
+                <UserCheck className="w-10 h-10 text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]" />
               </div>
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Intending Agent</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1">
+                For trade agents, brokers & representatives who want to explore business opportunities in India.
+              </p>
+              <Link to="/agent/register" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
+                Register as Agent <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>
@@ -401,21 +352,21 @@ export default function GlobalLanding() {
       {/* 4. CTA & TRUST BADGES */}
       <section className="bg-white py-20 overflow-hidden relative border-t border-gray-200">
         <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-          {/* Main CTA Box — dark */}
-          <div className="bg-background text-foreground rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 shadow-2xl mb-16 relative overflow-hidden">
+          {/* Main CTA Box */}
+          <div className="bg-gray-950 text-white rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 shadow-2xl mb-16 relative overflow-hidden border border-gray-800">
             {/* Glow inside box */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[600px] h-[200px] bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
 
             <div className="flex items-center gap-6 z-10">
-              <div className="w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center shrink-0">
+              <div className="w-16 h-16 rounded-full border border-primary/30 flex items-center justify-center shrink-0">
                 <Rocket className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2 text-foreground">
+                <h2 className="text-2xl md:text-3xl font-bold mb-2 text-white">
                   Your Next Global Opportunity is One Registration Away
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-gray-400">
                   Join AECCI Global Deal Room and connect with the right
                   partners, faster.
                 </p>
@@ -423,11 +374,11 @@ export default function GlobalLanding() {
             </div>
 
             <div className="flex items-center gap-6 z-10 shrink-0">
-              <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg flex items-center gap-2 transition-colors shadow-lg shadow-primary/20 text-lg">
+              <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded flex items-center gap-2 transition-colors shadow-lg shadow-primary/20 text-lg">
                 Register Now <ArrowRight className="w-5 h-5" />
               </button>
               {/* QR Code */}
-              <div className="hidden sm:flex flex-col items-center bg-white p-2 rounded-lg shadow-inner border border-gray-100">
+              <div className="hidden sm:flex flex-col items-center bg-white p-2 rounded shadow-inner border border-gray-100">
                 <QRCodeSVG
                   value="https://www.aecci.org.in/signup"
                   size={80}
@@ -441,17 +392,17 @@ export default function GlobalLanding() {
             </div>
           </div>
 
-          {/* Trust Features — light */}
+          {/* Trust Features */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="flex items-start gap-4">
-              <div className="p-3 bg-gray-100 rounded-lg border border-gray-200 shrink-0">
-                <Lock className="w-6 h-6 text-primary" />
+              <div className="p-3 bg-gray-50 rounded border border-gray-200 shrink-0">
+                <ShieldCheck className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h4 className="font-bold text-sm text-gray-900">
                   Secure & Trusted Platform
                 </h4>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   Enterprise-grade security
                   <br />
                   for your business data
@@ -460,29 +411,29 @@ export default function GlobalLanding() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="p-3 bg-gray-100 rounded-lg border border-gray-200 shrink-0">
+              <div className="p-3 bg-gray-50 rounded border border-gray-200 shrink-0">
                 <Box className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h4 className="font-bold text-sm text-gray-900">
                   Transparent Process
                 </h4>
-                <p className="text-xs text-slate-500 mt-1">
-                  Clear verification, verified partners
+                <p className="text-xs text-gray-500 mt-1">
+                  Clear screening, verified partners
                   <br />& honest engagements
                 </p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="p-3 bg-gray-100 rounded-lg border border-gray-200 shrink-0">
-                <ShieldCheck className="w-6 h-6 text-primary" />
+              <div className="p-3 bg-gray-50 rounded border border-gray-200 shrink-0">
+                <Handshake className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h4 className="font-bold text-sm text-gray-900">
                   No Commitment Until You Choose
                 </h4>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   You decide where, when
                   <br />& how to engage
                 </p>
@@ -490,14 +441,14 @@ export default function GlobalLanding() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="p-3 bg-gray-100 rounded-lg border border-gray-200 shrink-0">
-                <Briefcase className="w-6 h-6 text-primary" />
+              <div className="p-3 bg-gray-50 rounded border border-gray-200 shrink-0">
+                <Globe className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h4 className="font-bold text-sm text-gray-900">
-                  Built for Exporters
+                  Built for Global Trade
                 </h4>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   Designed by exporters,
                   <br />
                   for exporters like you
@@ -507,10 +458,10 @@ export default function GlobalLanding() {
           </div>
 
           {/* Tagline Footer */}
-          <div className="mt-20 text-center border-t border-gray-200 pt-10">
-            <p className="text-xl font-medium text-slate-600 tracking-wide">
-              <span className="text-primary">Trusted</span> by Exporters.{" "}
-              <span className="text-gray-900">Connected</span> to the World.
+          <div className="mt-20 text-center border-t border-gray-200 pt-10 pb-10">
+            <p className="text-xl font-medium text-gray-600 tracking-wide">
+              <span className="text-gray-900 font-bold">Trusted</span> by Exporters.{" "}
+              <span className="text-gray-900 font-bold">Connected</span> to the World.
             </p>
           </div>
         </div>

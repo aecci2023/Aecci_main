@@ -17,12 +17,16 @@ export default function App() {
   const isLoginPage = location.pathname.startsWith("/login");
   const isAdminPage = location.pathname.startsWith("/admin");
   const isPartnerPage = location.pathname.startsWith("/partner");
+  const isImporterPage = location.pathname.startsWith("/importer");
+  const isRegisterPage = location.pathname.startsWith("/register");
   const hideChrome =
     isSignupPage ||
     isDashboardPage ||
     isLoginPage ||
     isAdminPage ||
-    isPartnerPage;
+    isPartnerPage ||
+    isImporterPage ||
+    isRegisterPage;
 
   useEffect(() => {
     if (hideChrome) {

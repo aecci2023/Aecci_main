@@ -66,6 +66,8 @@ import PartnerRegisterPage from "@/pages/partner/register";
 import PartnerPastSessionsPage from "@/pages/partner/sessions/past";
 import PartnerSubmitSummaryPage from "@/pages/partner/sessions/submit-summary";
 import PartnerUpcomingSessionsPage from "@/pages/partner/sessions/upcoming";
+import ImporterRegisterPage from "@/pages/importer/register";
+import RegisterRoleSelection from "@/pages/register";
 
 import AboutChamberPage from "@/pages/about/AboutChamber";
 import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
@@ -124,8 +126,18 @@ export const routes: RouteObject[] = [
     element: <SignupPage />,
   },
   {
+    path: "/register",
+    element: <RegisterRoleSelection />,
+  },
+  {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/importer",
+    children: [
+      { path: "register", element: <ImporterRegisterPage /> },
+    ],
   },
   {
     path: "/partner",

@@ -2,7 +2,7 @@ import { Film } from "lucide-react";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
 
 import videoThumb from "@/assets/videos/thumbnail.png";
-import videoSrc from "@/assets/videos/globalconnect.mp4";
+import videoSrc from "@/assets/videos/globalconnect_new.mp4";
 
 export default function VideoExplainer() {
   return (

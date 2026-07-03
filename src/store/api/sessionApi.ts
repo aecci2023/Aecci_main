@@ -30,6 +30,20 @@ export const sessionApi = createApi({
       },
       providesTags: ["Sessions"],
     }),
+    getPublicSessions: builder.query<any, Record<string, any> | void>({
+      query: (params) => {
+        let queryString = "";
+        if (params) {
+          const searchParams = new URLSearchParams();
+          Object.keys(params).forEach((key) => {
+            if (params[key]) searchParams.append(key, params[key]);
+          });
+          queryString = `?${searchParams.toString()}`;
+        }
+        return `sessions/public${queryString}`;
+      },
+      providesTags: ["Sessions"],
+    }),
     getSessionById: builder.query<any, string>({
       query: (id) => `sessions/${id}`,
       providesTags: (_result, _error, id) => [{ type: "Sessions", id }],
@@ -137,6 +151,7 @@ export const sessionApi = createApi({
 
 export const {
   useGetSessionsQuery,
+  useGetPublicSessionsQuery,
   useGetSessionByIdQuery,
   useCreateSessionMutation,
   useBookSessionMutation,

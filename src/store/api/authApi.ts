@@ -96,6 +96,13 @@ export const authApi = createApi({
         body: userData,
       }),
     }),
+    importerSignup: builder.mutation<any, any>({
+      query: (userData) => ({
+        url: "auth/importer-signup",
+        method: "POST",
+        body: userData,
+      }),
+    }),
     login: builder.mutation<any, any>({
       query: (userData) => ({
         url: "auth/login",
@@ -153,6 +160,7 @@ export const {
   useSendOtpMutation,
   useSignupMutation,
   usePartnerSignupMutation,
+  useImporterSignupMutation,
   useLoginMutation,
   useVerifyOtpMutation,
   useUpdateProfileMutation,
