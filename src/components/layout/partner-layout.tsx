@@ -10,6 +10,7 @@ import { Header } from "@/components/layout/header";
 import { ProfileDropdown } from "@/components/profile-dropdown";
 import { Search } from "@/components/search";
 import { useGetPartnerProfileQuery } from "@/store/api/adminApi";
+import { RoleTour } from "@/components/tour/RoleTour";
 
 type PartnerLayoutProps = {
   children?: React.ReactNode;
@@ -67,6 +68,7 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
               </Header>
             )}
             {children ?? <Outlet />}
+            <RoleTour role="partner" />
           </SidebarInset>
         </SidebarProvider>
       </LayoutProvider>

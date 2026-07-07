@@ -9,6 +9,7 @@ import { SkipToMain } from "@/components/skip-to-main";
 import { Header } from "@/components/layout/header";
 import { ProfileDropdown } from "@/components/profile-dropdown";
 import { Search } from "@/components/search";
+import { RoleTour } from "@/components/tour/RoleTour";
 
 type AdminLayoutProps = {
   children?: React.ReactNode;
@@ -48,6 +49,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               </div>
             </Header>
             {children ?? <Outlet />}
+            <RoleTour role="admin" />
           </SidebarInset>
         </SidebarProvider>
       </LayoutProvider>
