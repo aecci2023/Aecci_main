@@ -36,11 +36,11 @@ import PartnerBriefPage from "@/pages/dashboard/partner-brief";
 import PaymentPage from "@/pages/dashboard/payment";
 import PaymentSuccessPage from "@/pages/dashboard/payment-success";
 import RejectedApplicationPage from "@/pages/dashboard/rejected";
-import VerificationPage from "@/pages/dashboard/verification";
 import ServicePurchasePage from "@/pages/dashboard/service-purchase";
 import SessionDetailsPage from "@/pages/dashboard/session-details";
 import SessionSummaryPage from "@/pages/dashboard/session-summary";
 import SubmitQuestionsPage from "@/pages/dashboard/submit-questions";
+import VerificationPage from "@/pages/dashboard/verification";
 import WaitingRoomPage from "@/pages/dashboard/waiting-room";
 import Home from "@/pages/Home";
 import LoginPage from "@/pages/login";
@@ -55,6 +55,7 @@ import UserInvoicesPage from "@/pages/dashboard/invoices";
 import AdvertiseWithUsPage from "@/pages/events/advertise-with-us";
 import PublicationsPage from "@/pages/events/publications";
 import SponsorshipPage from "@/pages/events/sponsorship";
+import ImporterRegisterPage from "@/pages/importer/register";
 import NotificationsPage from "@/pages/notifications";
 import BecomePartnerPage from "@/pages/partner/apply";
 import PartnerAvailabilityPage from "@/pages/partner/availability";
@@ -66,7 +67,6 @@ import PartnerRegisterPage from "@/pages/partner/register";
 import PartnerPastSessionsPage from "@/pages/partner/sessions/past";
 import PartnerSubmitSummaryPage from "@/pages/partner/sessions/submit-summary";
 import PartnerUpcomingSessionsPage from "@/pages/partner/sessions/upcoming";
-import ImporterRegisterPage from "@/pages/importer/register";
 import RegisterRoleSelection from "@/pages/register";
 
 import AboutChamberPage from "@/pages/about/AboutChamber";
@@ -97,6 +97,7 @@ import InternationalCollaborationPage from "@/pages/international-collaboration"
 import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/international-collaboration/partnerships/index";
 import PartnerDetailPage from "@/pages/international-collaboration/partnerships/PartnerDetail";
 import MediaCenterPage from "@/pages/media/media-center";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import EnrollmentOffers from "@/pages/services/membership/EnrollmentOffers";
 import FeeFormsGuidelines from "@/pages/services/membership/FeeFormsGuidelines";
 import Membership from "@/pages/services/membership/Membership";
@@ -104,6 +105,7 @@ import MembershipBenefits from "@/pages/services/membership/MembershipBenefits";
 import PatronMembership from "@/pages/services/membership/patron-membership";
 import RenewMembership from "@/pages/services/membership/RenewMembership";
 import VisaRecommendation from "@/pages/services/membership/VisaRecommendation";
+import TermsConditions from "@/pages/TermsConditions";
 import UpcomingEventsPage from "@/pages/upcoming-events";
 
 // Generic placeholder for partner routes
@@ -890,6 +892,14 @@ export const routes: RouteObject[] = [
     path: "/contact-us/aecci-international-hub",
     element: <NotFound />,
   },
+  { 
+  path: "/terms-conditions",
+  element: <TermsConditions />,
+},
+{
+  path: "/privacy-policy",
+  element: <PrivacyPolicy />,
+},
   {
     path: "*",
     element: <NotFound />,
