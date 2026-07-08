@@ -240,17 +240,19 @@ export default function Step3Business({ nextStep, isSubmitting }: Props) {
                   <p className="text-sm text-muted-foreground">
                     By submitting this form, I agree to the{" "}
                     <a
-                      href="#"
-                      className="text-primary hover:underline underline-offset-4"
+                      href="https://www.aecci.org.in/terms-conditions"
+                      className="text-primary hover:underline underline-offset-4 font-medium"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Terms and Conditions
                     </a>{" "}
                     and{" "}
                     <a
-                      href="#"
-                      className="text-primary hover:underline underline-offset-4"
+                      href="https://www.aecci.org.in/privacy-policy"
+                      className="text-primary hover:underline underline-offset-4 font-medium"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Privacy Policy
                     </a>{" "}

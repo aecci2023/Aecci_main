@@ -29,11 +29,11 @@ const footerSections = [
     title: "Our Services",
     links: [
       { label: "Membership", href: "/services/membership" },
-      { label: "Membership & its benefits", href: "services/membership/benefits" },
-      { label: "Fee, Forms & Guidelines", href: "services/membership/fee-forms-guidelines" },
-      { label: "Enrollment Offers", href: "services/membership/enrollment-offers" },
-      { label: "Visa Recommendation", href: "services/membership/visa-recommendation" },
-      { label: "Renew Membership", href: "services/membership/renew" },
+      { label: "Membership & its benefits", href: "/services/membership/benefits" },
+      { label: "Fee, Forms & Guidelines", href: "/services/membership/fee-forms-guidelines" },
+      { label: "Enrollment Offers", href: "/services/membership/enrollment-offers" },
+      { label: "Visa Recommendation", href: "/services/membership/visa-recommendation" },
+      { label: "Renew Membership", href: "/services/membership/renew" },
     ],
   },
 
@@ -176,21 +176,21 @@ export default function Footer() {
           {/* Right */}
           <div className="flex flex-col items-start gap-2 md:items-end">
             <div className="flex flex-wrap items-center gap-2 text-[13px] font-medium">
-              <a href="/terms-conditions" className="hover:text-primary">
+              <Link to="/terms-conditions" className="hover:text-primary">
                 Terms & Conditions
-              </a>
+              </Link>
 
               <span>|</span>
 
-              <a href="/privacy-policy" className="hover:text-primary">
+              <Link to="/privacy-policy" className="hover:text-primary">
                 Privacy Policy
-              </a>
+              </Link>
 
               <span>|</span>
 
-              <a href="sitemap" className="hover:text-primary">
+              <Link to="/sitemap" className="hover:text-primary">
                 Sitemap
-              </a>
+              </Link>
 
               <span>|</span>
 

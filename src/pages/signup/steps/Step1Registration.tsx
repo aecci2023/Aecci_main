@@ -98,11 +98,10 @@ export default function Step1Registration({ nextStep }: Props) {
                 <div className="grid grid-cols-2 gap-4">
                   <div
                     onClick={() => field.onChange("business")}
-                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                      field.value === "business"
+                    className={`p-4 border rounded-lg cursor-pointer transition-all ${field.value === "business"
                         ? "border-primary bg-primary/5 ring-1 ring-primary"
                         : "border-border hover:border-primary/50"
-                    }`}
+                      }`}
                   >
                     <h3 className="font-semibold text-sm mb-1">Business</h3>
                     <p className="text-xs text-muted-foreground">
@@ -111,11 +110,10 @@ export default function Step1Registration({ nextStep }: Props) {
                   </div>
                   <div
                     onClick={() => field.onChange("individual")}
-                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                      field.value === "individual"
+                    className={`p-4 border rounded-lg cursor-pointer transition-all ${field.value === "individual"
                         ? "border-primary bg-primary/5 ring-1 ring-primary"
                         : "border-border hover:border-primary/50"
-                    }`}
+                      }`}
                   >
                     <h3 className="font-semibold text-sm mb-1">Individual</h3>
                     <p className="text-xs text-muted-foreground">
@@ -274,24 +272,22 @@ export default function Step1Registration({ nextStep }: Props) {
                         {[1, 2, 3, 4].map((level) => (
                           <div
                             key={level}
-                            className={`h-1.5 w-full rounded-full transition-colors ${
-                              level <= passwordStrength
+                            className={`h-1.5 w-full rounded-full transition-colors ${level <= passwordStrength
                                 ? getStrengthColor(passwordStrength)
                                 : "bg-border"
-                            }`}
+                              }`}
                           />
                         ))}
                       </div>
                       <span
-                        className={`text-xs font-medium ${
-                          passwordStrength <= 1
+                        className={`text-xs font-medium ${passwordStrength <= 1
                             ? "text-red-500"
                             : passwordStrength === 2
                               ? "text-orange-500"
                               : passwordStrength === 3
                                 ? "text-yellow-500"
                                 : "text-green-500"
-                        }`}
+                          }`}
                       >
                         {getStrengthText(passwordStrength)}
                       </span>

@@ -147,7 +147,7 @@ export default function SignupWizard() {
         setIsSubmitting(true);
         try {
           const data = methods.getValues();
-          
+
           let countryCode = "";
           let cleanMobile = data.mobile;
           try {
@@ -229,7 +229,7 @@ export default function SignupWizard() {
           // Map mobile to mobileNumber for backend compatibility
           const mobileNumber = profileData.mobile;
           delete profileData.mobile;
-          
+
           let countryCode = "";
           let cleanMobile = mobileNumber;
           try {
@@ -290,7 +290,7 @@ export default function SignupWizard() {
           console.error("Registration failed:", error);
           toast.error(
             error.data?.message ||
-              "An error occurred during final registration",
+            "An error occurred during final registration",
           );
         } finally {
           setIsSubmitting(false);
