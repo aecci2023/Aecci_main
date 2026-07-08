@@ -29,7 +29,11 @@ const footerSections = [
     title: "Our Services",
     links: [
       { label: "Membership", href: "/services/membership" },
-      // { label: "Arbitration Center", href: "/arbitration-center" },
+      { label: "Membership & its benefits", href: "services/membership/benefits" },
+      { label: "Fee, Forms & Guidelines", href: "services/membership/fee-forms-guidelines" },
+      { label: "Enrollment Offers", href: "services/membership/enrollment-offers" },
+      { label: "Visa Recommendation", href: "services/membership/visa-recommendation" },
+      { label: "Renew Membership", href: "services/membership/renew" },
     ],
   },
 
@@ -172,19 +176,19 @@ export default function Footer() {
           {/* Right */}
           <div className="flex flex-col items-start gap-2 md:items-end">
             <div className="flex flex-wrap items-center gap-2 text-[13px] font-medium">
-              <a href="#" className="hover:text-primary">
+              <a href="/terms-conditions" className="hover:text-primary">
                 Terms & Conditions
               </a>
 
               <span>|</span>
 
-              <a href="#" className="hover:text-primary">
+              <a href="/privacy-policy" className="hover:text-primary">
                 Privacy Policy
               </a>
 
               <span>|</span>
 
-              <a href="#" className="hover:text-primary">
+              <a href="sitemap" className="hover:text-primary">
                 Sitemap
               </a>
 
