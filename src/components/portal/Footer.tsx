@@ -56,10 +56,10 @@ const footerSections = [
     title: "Contact Us",
     links: [
       { label: "AECCI Head Office", href: "/contact-us/head-office" },
-      {
-        label: "AECCI International Hub",
-        href: "/contact-us/international-hub",
-      },
+      // {
+      //   label: "AECCI International Hub",
+      //   href: "/contact-us/international-hub",
+      // },
     ],
   },
 ];

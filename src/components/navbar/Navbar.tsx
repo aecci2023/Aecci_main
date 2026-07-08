@@ -81,12 +81,12 @@ export default function Navbar() {
               to="/"
               onClick={handleClose}
               className="flex items-center gap-3 group no-underline"
-              aria-label="AECCI Home"
+              aria-label="AECCI Home" 
             >
               <img
-                src="/aecci-logo.png"
+                src="/aecci-logo-horizontal.png"
                 alt="AECCI"
-                className="h-[58px] w-auto object-contain "
+                className="h-[70px] w-auto object-contain "
               />
             </Link>
           </div>

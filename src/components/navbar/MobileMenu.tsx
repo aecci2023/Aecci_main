@@ -1,16 +1,16 @@
-import * as React from "react";
-import { useLocation, Link } from "react-router-dom";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
-import { List, CaretDown } from "@phosphor-icons/react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CaretDown, List } from "@phosphor-icons/react";
+import * as React from "react";
+import { Link, useLocation } from "react-router-dom";
 
+import { AnimatePresence, motion } from "framer-motion";
 import {
   menuConfig,
-  type MenuCategory,
   type MegaMenuSection,
+  type MenuCategory,
   type SubMenuItem,
 } from "./menu-config";
-import { AnimatePresence, motion } from "framer-motion";
 
 function NestedCategory({
   category,

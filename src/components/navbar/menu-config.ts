@@ -401,19 +401,19 @@ export const menuConfig: MegaMenuSection[] = [
         description:
           "Reach out to our main offices, helpline, or specialized desks.",
       },
-      {
-        title: "AECCI International Hub",
-        href: "/contact-us/international-hub",
-        description:
-          "Connect with our international trade facilitation branches.",
-      },
+      // {
+      //   title: "AECCI International Hub",
+      //   href: "/contact-us/international-hub",
+      //   description:
+      //     "Connect with our international trade facilitation branches.",
+      // },
     ],
     mobileMenu: [
       { title: "AECCI Head Office", href: "/contact-us/head-office" },
-      {
-        title: "AECCI International Hub",
-        href: "/contact-us/international-hub",
-      },
+      // {
+      //   title: "AECCI International Hub",
+      //   href: "/contact-us/international-hub",
+      // },
     ],
   },
 ];
