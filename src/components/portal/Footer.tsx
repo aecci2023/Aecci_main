@@ -1,5 +1,4 @@
-// import { ThemeSelector } from "@/components/themes/theme-selector"
-import { ThemeSelector } from "@/components/themes/theme-selector";
+// import { ThemeSelector } from "@/components/themes/theme-selector";
 import {
   FacebookLogo,
   InstagramLogo,
@@ -9,7 +8,9 @@ import {
 } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
-const footerSections = [
+type FooterLink = { label: string; href: string; badge?: string };
+
+const footerSections: { title: string; links: FooterLink[] }[] = [
   {
     title: "About Us",
     links: [
@@ -28,6 +29,7 @@ const footerSections = [
   {
     title: "Our Services",
     links: [
+      { label: "Global Connect", href: "/global-connect", badge: "New" },
       { label: "Membership", href: "/services/membership" },
       { label: "Membership & its benefits", href: "/services/membership/benefits" },
       { label: "Fee, Forms & Guidelines", href: "/services/membership/fee-forms-guidelines" },
@@ -56,10 +58,6 @@ const footerSections = [
     title: "Contact Us",
     links: [
       { label: "AECCI Head Office", href: "/contact-us/head-office" },
-      {
-        label: "AECCI International Hub",
-        href: "/contact-us/international-hub",
-      },
     ],
   },
 ];
@@ -118,9 +116,14 @@ export default function Footer() {
                     <li key={link.label}>
                       <Link
                         to={link.href}
-                        className="text-[14px] text-muted-foreground transition-colors duration-200 hover:text-primary"
+                        className="text-[14px] text-muted-foreground transition-colors duration-200 hover:text-primary flex items-center gap-1.5"
                       >
                         {link.label}
+                        {link.badge && (
+                          <span className="inline-flex items-center justify-center rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary leading-none uppercase tracking-wider">
+                            {link.badge}
+                          </span>
+                        )}
                       </Link>
                     </li>
                   ))}
@@ -170,7 +173,7 @@ export default function Footer() {
                 Asian Exporters' Chamber of Commerce and Industry
               </span>
             </p>
-            <ThemeSelector />
+            {/* <ThemeSelector /> */}
           </div>
 
           {/* Right */}
@@ -194,7 +197,7 @@ export default function Footer() {
 
               <span>|</span>
 
-              <span>Site maintained by AECCI.</span>
+              <span>Site maintained and Developed by AECCI.</span>
             </div>
 
             <p className="text-[12px] text-muted-foreground">

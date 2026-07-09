@@ -234,58 +234,58 @@ export default function GlobalLanding() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Card 1: Partner */}
-            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-blue-500/20 hover:border-blue-500/50 transition-colors flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full border border-blue-500/30 flex items-center justify-center bg-blue-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.blue.500)_30%,transparent)]">
-                <Handshake className="w-10 h-10 text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-blue-500/20 hover:border-blue-500/60 transition-all duration-300 flex flex-col items-center group cursor-pointer hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(59,130,246,0.3)]">
+              <div className="w-20 h-20 rounded-full border border-blue-500/30 flex items-center justify-center bg-blue-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.blue.500)_30%,transparent)] transition-transform duration-300 group-hover:scale-110 group-hover:bg-blue-500/20">
+                <Handshake className="w-10 h-10 text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Collaboration Partner</h3>
-              <p className="text-sm text-gray-400 mb-8 flex-1">
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center transition-colors duration-300 group-hover:text-blue-100">Register as<br/>Collaboration Partner</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1 transition-colors duration-300 group-hover:text-gray-300">
                 For organizations, chambers, institutions & businesses who want to collaborate with AECCI globally.
               </p>
-              <Link to="/partner/register" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
-                Register as Partner <ArrowRight className="w-4 h-4" />
+              <Link to="/partner/register" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
+                Register as Partner <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
 
             {/* Card 2: Participant */}
-            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-emerald-500/20 hover:border-emerald-500/50 transition-colors flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full border border-emerald-500/30 flex items-center justify-center bg-emerald-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.emerald.500)_30%,transparent)]">
-                <Users className="w-10 h-10 text-emerald-500 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-emerald-500/20 hover:border-emerald-500/60 transition-all duration-300 flex flex-col items-center group cursor-pointer hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(16,185,129,0.3)]">
+              <div className="w-20 h-20 rounded-full border border-emerald-500/30 flex items-center justify-center bg-emerald-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.emerald.500)_30%,transparent)] transition-transform duration-300 group-hover:scale-110 group-hover:bg-emerald-500/20">
+                <Users className="w-10 h-10 text-emerald-500 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)] transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Participant</h3>
-              <p className="text-sm text-gray-400 mb-8 flex-1">
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center transition-colors duration-300 group-hover:text-emerald-100">Register as<br/>Participant</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1 transition-colors duration-300 group-hover:text-gray-300">
                 For businesses, exporters & professionals who want to participate in deal rooms and grow globally.
               </p>
-              <Link to="/signup" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
-                Register as Participant <ArrowRight className="w-4 h-4" />
+              <Link to="/signup" className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
+                Register as Participant <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
 
             {/* Card 3: Importer */}
-            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-purple-500/20 hover:border-purple-500/50 transition-colors flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full border border-purple-500/30 flex items-center justify-center bg-purple-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.purple.500)_30%,transparent)]">
-                <User className="w-10 h-10 text-purple-500 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-purple-500/20 hover:border-purple-500/60 transition-all duration-300 flex flex-col items-center group cursor-pointer hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(168,85,247,0.3)]">
+              <div className="w-20 h-20 rounded-full border border-purple-500/30 flex items-center justify-center bg-purple-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.purple.500)_30%,transparent)] transition-transform duration-300 group-hover:scale-110 group-hover:bg-purple-500/20">
+                <User className="w-10 h-10 text-purple-500 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Importer</h3>
-              <p className="text-sm text-gray-400 mb-8 flex-1">
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center transition-colors duration-300 group-hover:text-purple-100">Register as<br/>Importer</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1 transition-colors duration-300 group-hover:text-gray-300">
                 For global importers looking to connect with verified Indian exporters through deal rooms.
               </p>
-              <Link to="/importer/register" className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
-                Register as Importer <ArrowRight className="w-4 h-4" />
+              <Link to="/importer/register" className="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
+                Register as Importer <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
 
             {/* Card 4: Intending Agent */}
-            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-orange-500/20 hover:border-orange-500/50 transition-colors flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full border border-orange-500/30 flex items-center justify-center bg-orange-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.orange.500)_30%,transparent)]">
-                <UserCheck className="w-10 h-10 text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]" />
+            <div className="bg-gray-950 text-white rounded-2xl p-6 text-center border border-orange-500/20 hover:border-orange-500/60 transition-all duration-300 flex flex-col items-center group cursor-pointer hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(249,115,22,0.3)]">
+              <div className="w-20 h-20 rounded-full border border-orange-500/30 flex items-center justify-center bg-orange-500/10 mb-6 shadow-[0_0_30px_color-mix(in_oklch,theme(colors.orange.500)_30%,transparent)] transition-transform duration-300 group-hover:scale-110 group-hover:bg-orange-500/20">
+                <UserCheck className="w-10 h-10 text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.5)] transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center">Register as<br/>Intending Agent</h3>
-              <p className="text-sm text-gray-400 mb-8 flex-1">
+              <h3 className="text-lg font-bold mb-4 min-h-[56px] flex items-center justify-center transition-colors duration-300 group-hover:text-orange-100">Register as<br/>Intending Agent</h3>
+              <p className="text-sm text-gray-400 mb-8 flex-1 transition-colors duration-300 group-hover:text-gray-300">
                 For trade agents, brokers & representatives who want to explore business opportunities in India.
               </p>
-              <Link to="/agent/register" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2">
-                Register as Agent <ArrowRight className="w-4 h-4" />
+              <Link to="/agent/register" className="w-full bg-orange-500 hover:bg-orange-400 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
+                Register as Agent <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>

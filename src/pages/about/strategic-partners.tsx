@@ -135,7 +135,7 @@ export default function StrategicPartners() {
               Our Partners
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-              Trusted Collaborations
+              Strategic Sponsors
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base leading-relaxed">
               These organizations share AECCI's commitment to excellence,

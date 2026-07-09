@@ -65,33 +65,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 lg:top-[-72px] z-50 w-full transition-colors duration-300">
-        {/* ─────────────────────────────────────── */}
-        {/* Brand Bar — desktop only, hides on scroll */}
-        {/* ─────────────────────────────────────── */}
-        <div
-          className={[
-            "hidden lg:block w-full overflow-hidden h-[72px] transition-colors duration-300",
-            glassBg,
-            "border-b border-black/[0.06] dark:border-white/[0.06]",
-          ].join(" ")}
-        >
-          <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-center px-6">
-            <Link
-              to="/"
-              onClick={handleClose}
-              className="flex items-center gap-3 group no-underline"
-              aria-label="AECCI Home"
-            >
-              <img
-                src="/aecci-logo.png"
-                alt="AECCI"
-                className="h-[58px] w-auto object-contain "
-              />
-            </Link>
-          </div>
-        </div>
-
+      <header className="sticky top-0 z-50 w-full transition-colors duration-300">
         {/* ─────────────────────────────────────── */}
         {/* Main Nav Row */}
         {/* ─────────────────────────────────────── */}
@@ -104,7 +78,7 @@ export default function Navbar() {
               : "",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[54px] lg:h-[44px] max-w-7xl items-center justify-between px-4 lg:px-6 relative">
+          <div className="mx-auto flex h-[64px] lg:h-[84px] max-w-7xl items-center justify-between px-4 lg:px-6 relative">
             {/* Mobile: Hamburger */}
             <div className="flex lg:hidden items-center w-1/3">
               <MobileMenu />
@@ -116,7 +90,7 @@ export default function Navbar() {
                 <img
                   src="/aecci-logoonly.png"
                   alt="AECCI"
-                  className="h-[34px] w-auto object-contain"
+                  className="h-[40px] w-auto object-contain"
                 />
               </Link>
             </div>
@@ -136,6 +110,17 @@ export default function Navbar() {
               >
                 <User className="size-[18px]" />
               </a>
+            </div>
+
+            {/* Desktop: Logo Left */}
+            <div className="hidden lg:flex items-center flex-none">
+              <Link to="/" onClick={handleClose} className="group">
+                <img
+                  src="/aecci-logoonly.png"
+                  alt="AECCI"
+                  className="h-[64px] w-auto object-contain"
+                />
+              </Link>
             </div>
 
             {/* Desktop: Nav links centered */}
@@ -166,8 +151,8 @@ export default function Navbar() {
                     }}
                     className={[
                       "cursor-pointer select-none no-underline",
-                      "px-[11px] py-2",
-                      "text-[12.5px] font-[600] tracking-wide",
+                      "px-2 xl:px-3 py-2.5 whitespace-nowrap",
+                      "text-[14px] font-[600] tracking-wide",
                       "transition-all duration-200",
                       activeSection === item.title || isActivePath
                         ? "text-primary opacity-100 font-bold"
@@ -183,7 +168,7 @@ export default function Navbar() {
             {/* Desktop: Right actions */}
             <div
               className={[
-                "hidden lg:flex items-center gap-2",
+                "hidden lg:flex items-center justify-end flex-none gap-2",
                 "transition-opacity duration-200",
                 "opacity-100",
               ].join(" ")}
@@ -192,7 +177,7 @@ export default function Navbar() {
               <Link
                 to="/login"
                 onClick={handleClose}
-                className="inline-flex items-center justify-center h-8 px-3 text-[12px] font-[400] text-foreground/65 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
+                className="inline-flex items-center justify-center h-10 px-4 text-[14px] font-[500] text-foreground/75 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
               >
                 Login
               </Link>
@@ -200,7 +185,7 @@ export default function Navbar() {
               <Link
                 to="/signup"
                 onClick={handleClose}
-                className="inline-flex items-center justify-center h-8 px-4 text-[12px] font-[500] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
+                className="inline-flex items-center justify-center h-10 px-6 text-[14px] font-[600] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
               >
                 Join Now
               </Link>

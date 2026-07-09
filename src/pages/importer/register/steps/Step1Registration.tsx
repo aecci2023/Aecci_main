@@ -55,8 +55,6 @@ const getStrengthText = (score: number) => {
 export default function Step1Registration({ nextStep }: Props) {
   const { control } = useFormContext<ImporterSignupFormData>();
 
-  const userType = useWatch({ control, name: "userType" });
-  const isBusiness = userType === "business";
   const country = useWatch({ control, name: "country" });
   const password = useWatch({ control, name: "password" });
 
@@ -85,51 +83,8 @@ export default function Step1Registration({ nextStep }: Props) {
       </div>
 
       <div className="space-y-6">
-        {/* User Type Selection */}
-        <FormField
-          control={control}
-          name="userType"
-          render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>I am joining as a:</FormLabel>
-              <FormControl>
-                <div className="grid grid-cols-2 gap-4">
-                  <div
-                    onClick={() => field.onChange("business")}
-                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                      field.value === "business"
-                        ? "border-primary bg-primary/5 ring-1 ring-primary"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                  >
-                    <h3 className="font-semibold text-sm mb-1">Business</h3>
-                    <p className="text-xs text-muted-foreground">
-                      Companies, enterprises, corporate entities.
-                    </p>
-                  </div>
-                  <div
-                    onClick={() => field.onChange("individual")}
-                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                      field.value === "individual"
-                        ? "border-primary bg-primary/5 ring-1 ring-primary"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                  >
-                    <h3 className="font-semibold text-sm mb-1">Individual</h3>
-                    <p className="text-xs text-muted-foreground">
-                      Solo buyers, independent consultants.
-                    </p>
-                  </div>
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {isBusiness && (
               <FormField
                 control={control}
                 name="companyName"
@@ -145,7 +100,6 @@ export default function Step1Registration({ nextStep }: Props) {
                   </FormItem>
                 )}
               />
-            )}
 
             <FormField
               control={control}
