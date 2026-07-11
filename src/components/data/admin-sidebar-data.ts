@@ -18,6 +18,7 @@ import {
   Wrench,
   Palette,
   BellRing,
+  Briefcase,
 } from "lucide-react";
 
 export const adminSidebarData = {
@@ -66,6 +67,11 @@ export const adminSidebarData = {
           url: "/admin/verifications",
           icon: ShieldCheck,
           badge: "18",
+        },
+        {
+          title: "Job Applications",
+          url: "/admin/job-applications",
+          icon: Briefcase,
         },
       ],
     },

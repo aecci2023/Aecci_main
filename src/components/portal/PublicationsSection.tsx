@@ -43,9 +43,9 @@ const PUBLICATIONS_DATA: Publication[] = [
   {
     id: "pub-2",
     title: "Exporters Chronicle - May 2026",
-    desc: "A monthly digest of customs regulations, digital attestation guidelines, and policy briefs from India's Ministry of Commerce.",
+    desc: "A quarterly digest of customs regulations, digital attestation guidelines, and policy briefs from India's Ministry of Commerce.",
     type: "newsletter",
-    categoryLabel: "Monthly Newsletter",
+    categoryLabel: "Quarterly E-Newsletter",
     date: "May 2026",
     coverImage:
       "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600",
@@ -81,7 +81,7 @@ const PUBLICATIONS_DATA: Publication[] = [
     title: "Exporters Chronicle - April 2026",
     desc: "Updates on shipping container logistics, digital certification protocols, and cross-border currency settlement policies.",
     type: "newsletter",
-    categoryLabel: "Monthly Newsletter",
+    categoryLabel: "Quarterly E-Newsletter",
     date: "April 2026",
     coverImage:
       "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=600",
@@ -144,11 +144,12 @@ export default function PublicationsSection() {
               Publications & Insights
             </span>
             <h2 className="font-heading font-black text-3xl md:text-5xl text-foreground tracking-tight">
-              Knowledge Centre
+              Knowledge Center
             </h2>
-            <p className="font-body text-sm md:text-base text-muted-foreground mt-4 max-w-xl leading-relaxed">
-              Explore our latest journals, monthly newsletters, and data-driven
-              trade research reports covering Asian commerce and policies.
+            <p className="text-muted-foreground text-sm md:text-base max-w-2xl mt-4 leading-relaxed">
+              Explore our latest journals, quarterly e-newsletters, and data-driven
+              reports to stay ahead of international trade policies, compliance,
+              and market opportunities.
             </p>
           </div>
 
@@ -284,12 +285,12 @@ export default function PublicationsSection() {
                 <EnvelopeSimple className="size-4" />
                 <span>Stay Informed</span>
               </div>
-              <h3 className="font-heading font-black text-2xl md:text-3xl text-foreground mb-3">
-                Subscribe to Chronicle Updates
+              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+                Subscribe to Our Insights
               </h3>
-              <p className="font-body text-xs md:text-sm text-muted-foreground leading-relaxed max-w-xl">
-                Get our monthly digests, compliance newsletters, and upcoming
-                event invitations delivered directly to your inbox. No spam,
+              <p className="text-muted-foreground text-sm md:text-base mb-6 leading-relaxed">
+                Get our quarterly digests, compliance updates, and upcoming
+                events delivered straight to your inbox. No spam,
                 unsubscribe anytime.
               </p>
             </div>

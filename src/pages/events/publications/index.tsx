@@ -256,7 +256,7 @@ export default function PublicationsPage() {
               E-Newsletters
             </h2>
             <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-              Our monthly Newsletter brings insight into all developments,
+              Our Quarterly E-Newsletter brings insight into all developments,
               facilitation, business procedural amendments from customs and the
               Directorate General of Foreign Trade. Specialized and relevant
               information with comments from industry experts is made available

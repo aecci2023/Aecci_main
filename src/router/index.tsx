@@ -23,6 +23,7 @@ import AdminUsersPage from "@/pages/admin/users";
 import AdminVerificationsPage from "@/pages/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/admin/verifications/partner-details";
+import AdminJobApplicationsPage from "@/pages/admin/job-applications";
 import DashboardPage from "@/pages/dashboard";
 import ApplicationPage from "@/pages/dashboard/application";
 import ApprovalPage from "@/pages/dashboard/approval";
@@ -255,6 +256,10 @@ export const routes: RouteObject[] = [
           {
             path: "verifications/partner/:id",
             element: <AdminPartnerVerificationDetailsPage />,
+          },
+          {
+            path: "job-applications",
+            element: <AdminJobApplicationsPage />,
           },
           {
             path: "users",
