@@ -87,6 +87,12 @@ export const menuConfig: MegaMenuSection[] = [
     hasDropdown: true,
     featured: [
       {
+        title: "Global Connect",
+        href: "/global-connect",
+        description: "Your gateway to international trade and networking.",
+        badge: "New",
+      },
+      {
         title: "Membership",
         href: "/services/membership",
         description:
@@ -128,6 +134,10 @@ export const menuConfig: MegaMenuSection[] = [
     // ],
     resources: [], // Moved the wings here before, now they are in featured -> items
     mobileMenu: [
+      {
+        title: "Global Connect",
+        href: "/global-connect",
+      },
       {
         title: "Membership",
         href: "/services/membership",
@@ -401,19 +411,9 @@ export const menuConfig: MegaMenuSection[] = [
         description:
           "Reach out to our main offices, helpline, or specialized desks.",
       },
-      // {
-      //   title: "AECCI International Hub",
-      //   href: "/contact-us/international-hub",
-      //   description:
-      //     "Connect with our international trade facilitation branches.",
-      // },
     ],
     mobileMenu: [
       { title: "AECCI Head Office", href: "/contact-us/head-office" },
-      // {
-      //   title: "AECCI International Hub",
-      //   href: "/contact-us/international-hub",
-      // },
     ],
   },
 ];

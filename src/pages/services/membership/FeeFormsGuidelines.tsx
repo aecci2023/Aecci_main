@@ -215,7 +215,7 @@ export default function FeeFormsGuidelines() {
                   <CardContent className="p-6 flex flex-col gap-6 flex-1">
                     {/* Investment */}
                     <div>
-                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">
+                      <p className="text-sm font-bold text-foreground/80 tracking-wider uppercase mb-3">
                         Investment Schedule
                       </p>
                       <div className="bg-muted/50 rounded-xl p-4 border border-border space-y-2">
@@ -246,7 +246,7 @@ export default function FeeFormsGuidelines() {
 
                     {/* Forms */}
                     <div>
-                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">
+                      <p className="text-sm font-bold text-foreground/80 tracking-wider uppercase mb-3">
                         Forms
                       </p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -261,7 +261,7 @@ export default function FeeFormsGuidelines() {
                             <div className="bg-muted p-1.5 rounded-md group-hover:bg-primary/10 transition-colors shrink-0">
                               <Download className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary" />
                             </div>
-                            <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors truncate">
+                            <span className="text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors truncate">
                               {form.name}
                             </span>
                           </a>
@@ -271,12 +271,12 @@ export default function FeeFormsGuidelines() {
 
                     {/* Guidelines */}
                     <div className="flex-1">
-                      <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-3">
+                      <p className="text-sm font-bold text-foreground/80 tracking-wider uppercase mb-3">
                         Guidelines
                       </p>
                       <div className="space-y-4">
                         <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
-                          <span className="block text-[10px] font-bold text-primary tracking-wider uppercase mb-1">
+                          <span className="block text-xs font-bold text-primary tracking-wider uppercase mb-1">
                             Business Category
                           </span>
                           <p className="text-foreground text-sm font-medium leading-relaxed">
@@ -284,14 +284,14 @@ export default function FeeFormsGuidelines() {
                           </p>
                         </div>
                         <div>
-                          <span className="block text-[10px] font-bold text-muted-foreground tracking-wider uppercase mb-2">
+                          <span className="block text-xs font-bold text-foreground/70 tracking-wider uppercase mb-2">
                             Details Required
                           </span>
                           <ul className="space-y-2">
                             {item.guidelines.details.map((detail, dIdx) => (
                               <li key={dIdx} className="flex items-start gap-2">
                                 <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                                <span className="text-muted-foreground text-xs leading-relaxed">
+                                <span className="text-foreground/80 text-sm leading-relaxed">
                                   {detail}
                                 </span>
                               </li>

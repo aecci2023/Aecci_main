@@ -1,8 +1,16 @@
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
 import { ArrowRight, Award, Mail, TrendingUp, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { useUploadFileMutation } from "@/store/api/authApi";
+import { useCreateJobApplicationMutation } from "@/store/api/jobApplicationApi";
+import { toast } from "sonner";
 
 const perks = [
   {
@@ -23,6 +31,62 @@ const perks = [
 ];
 
 export default function JobOpportunities() {
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    basicQualification: "",
+    positionAppliedFor: "",
+    address: "",
+    phoneNumber: "",
+  });
+  const [cvFile, setCvFile] = useState<File | null>(null);
+
+  const [uploadFile, { isLoading: isUploading }] = useUploadFileMutation();
+  const [createJobApplication, { isLoading: isSubmitting }] = useCreateJobApplicationMutation();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCvFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!cvFile) {
+      toast.error("Please attach your CV");
+      return;
+    }
+
+    try {
+      // 1. Upload CV
+      const uploadRes = await uploadFile({ file: cvFile, folder: "cvs" }).unwrap();
+      const cvUrl = uploadRes.data.url;
+
+      // 2. Submit application
+      await createJobApplication({
+        ...formData,
+        cvUrl,
+      }).unwrap();
+
+      toast.success("Job application submitted successfully!");
+      setOpen(false);
+      setFormData({
+        name: "",
+        basicQualification: "",
+        positionAppliedFor: "",
+        address: "",
+        phoneNumber: "",
+      });
+      setCvFile(null);
+    } catch (error: any) {
+      toast.error(error.data?.message || "Failed to submit application");
+    }
+  };
+
   return (
     <div className="w-full bg-background text-foreground">
       {/* Hero */}
@@ -227,16 +291,100 @@ export default function JobOpportunities() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <a
-                  href="mailto:hr@aecci.org.in"
-                  className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-semibold"
-                >
-                  Apply Now
-                </a>
+                <Dialog open={open} onOpenChange={setOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      className="bg-primary text-primary-foreground px-6 py-6 rounded-full font-semibold"
+                    >
+                      Apply Now
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[500px]">
+                    <DialogHeader>
+                      <DialogTitle>Apply for Position</DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={handleSubmit} className="space-y-4 py-4">
+                      <div className="grid gap-2">
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          placeholder="Your Full Name"
+                        />
+                      </div>
+                      <div className="grid gap-2">
+                        <Label htmlFor="basicQualification">Basic Qualification</Label>
+                        <Input
+                          id="basicQualification"
+                          name="basicQualification"
+                          required
+                          value={formData.basicQualification}
+                          onChange={handleInputChange}
+                          placeholder="e.g. B.Sc, MBA"
+                        />
+                      </div>
+                      <div className="grid gap-2">
+                        <Label htmlFor="positionAppliedFor">Position Applied For</Label>
+                        <Input
+                          id="positionAppliedFor"
+                          name="positionAppliedFor"
+                          required
+                          value={formData.positionAppliedFor}
+                          onChange={handleInputChange}
+                          placeholder="e.g. Event Sales & Marketing Executive"
+                        />
+                      </div>
+                      <div className="grid gap-2">
+                        <Label htmlFor="address">Address</Label>
+                        <Input
+                          id="address"
+                          name="address"
+                          required
+                          value={formData.address}
+                          onChange={handleInputChange}
+                          placeholder="Your Address"
+                        />
+                      </div>
+                      <div className="grid gap-2">
+                        <Label htmlFor="phoneNumber">Phone Number</Label>
+                        <Input
+                          id="phoneNumber"
+                          name="phoneNumber"
+                          required
+                          value={formData.phoneNumber}
+                          onChange={handleInputChange}
+                          placeholder="Your Phone Number"
+                        />
+                      </div>
+                      <div className="grid gap-2">
+                        <Label htmlFor="cv">Attach CV</Label>
+                        <Input
+                          id="cv"
+                          name="cv"
+                          type="file"
+                          accept=".pdf,.doc,.docx"
+                          required
+                          onChange={handleFileChange}
+                        />
+                      </div>
+                      <div className="flex justify-end pt-4">
+                        <Button
+                          type="submit"
+                          disabled={isUploading || isSubmitting}
+                        >
+                          {isUploading || isSubmitting ? "Submitting..." : "Submit Application"}
+                        </Button>
+                      </div>
+                    </form>
+                  </DialogContent>
+                </Dialog>
 
                 <a
                   href="tel:8433720996"
-                  className="border px-6 py-3 rounded-full font-semibold"
+                  className="border px-6 py-3 rounded-full font-semibold flex items-center justify-center"
                 >
                   📞 8433720996
                 </a>

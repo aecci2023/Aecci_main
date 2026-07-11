@@ -177,9 +177,8 @@ export default function MediaCenterPage() {
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
               Watch Our Latest Videos
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              Explore our library of webinars, AMA sessions, and trade insights
-              from AECCI's global network of experts.
+            <p className="text-muted-foreground max-w-2xl mt-3 text-lg leading-relaxed">
+              Explore the AECCI library of webinars, AMA sessions, and trade insights from AECCI's global network of experts.
             </p>
           </div>
 

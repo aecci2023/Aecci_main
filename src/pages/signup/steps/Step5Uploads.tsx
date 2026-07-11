@@ -370,7 +370,24 @@ export default function Step5Uploads({ nextStep, isSubmitting }: Props) {
                   htmlFor="terms"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  I agree to the Terms and Conditions and Privacy Policy{" "}
+                  I agree to the{" "}
+                  <a
+                    href="https://www.aecci.org.in/terms-conditions"
+                    className="text-primary hover:underline underline-offset-4 font-medium"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Terms and Conditions
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="https://www.aecci.org.in/privacy-policy"
+                    className="text-primary hover:underline underline-offset-4 font-medium"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Privacy Policy
+                  </a>{" "}
                   <span className="text-red-500">*</span>
                 </label>
               </div>

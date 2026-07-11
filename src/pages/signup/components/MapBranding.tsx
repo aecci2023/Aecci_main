@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import AnimatedWorldMap from "@/components/portal/AnimatedWorldMap";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { PlayCircle } from "lucide-react";
+import globalConnectVideo from "@/assets/videos/globalroomwork_v2.mp4";
 
 export default function MapBranding() {
   return (
@@ -17,6 +20,23 @@ export default function MapBranding() {
         <p className="text-lg text-white/70 max-w-sm">
           Connect, trade, and expand your business footprint across borders.
         </p>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full font-medium transition-colors mt-2 text-sm border border-white/10">
+              <PlayCircle className="w-5 h-5 text-primary" />
+              Watch Introduction
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-none rounded-2xl">
+            <video
+              src={globalConnectVideo}
+              className="w-full aspect-video outline-none"
+              controls
+              autoPlay
+            />
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="relative z-10">

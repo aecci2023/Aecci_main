@@ -1,5 +1,4 @@
-// import { ThemeSelector } from "@/components/themes/theme-selector"
-import { ThemeSelector } from "@/components/themes/theme-selector";
+// import { ThemeSelector } from "@/components/themes/theme-selector";
 import {
   FacebookLogo,
   InstagramLogo,
@@ -9,7 +8,9 @@ import {
 } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
-const footerSections = [
+type FooterLink = { label: string; href: string; badge?: string };
+
+const footerSections: { title: string; links: FooterLink[] }[] = [
   {
     title: "About Us",
     links: [
@@ -28,12 +29,13 @@ const footerSections = [
   {
     title: "Our Services",
     links: [
+      { label: "Global Connect", href: "/global-connect", badge: "New" },
       { label: "Membership", href: "/services/membership" },
-      { label: "Membership & its benefits", href: "services/membership/benefits" },
-      { label: "Fee, Forms & Guidelines", href: "services/membership/fee-forms-guidelines" },
-      { label: "Enrollment Offers", href: "services/membership/enrollment-offers" },
-      { label: "Visa Recommendation", href: "services/membership/visa-recommendation" },
-      { label: "Renew Membership", href: "services/membership/renew" },
+      { label: "Membership & its benefits", href: "/services/membership/benefits" },
+      { label: "Fee, Forms & Guidelines", href: "/services/membership/fee-forms-guidelines" },
+      { label: "Enrollment Offers", href: "/services/membership/enrollment-offers" },
+      { label: "Visa Recommendation", href: "/services/membership/visa-recommendation" },
+      { label: "Renew Membership", href: "/services/membership/renew" },
     ],
   },
 
@@ -56,10 +58,6 @@ const footerSections = [
     title: "Contact Us",
     links: [
       { label: "AECCI Head Office", href: "/contact-us/head-office" },
-      // {
-      //   label: "AECCI International Hub",
-      //   href: "/contact-us/international-hub",
-      // },
     ],
   },
 ];
@@ -67,7 +65,7 @@ const footerSections = [
 const socialLinks = [
   { label: "Facebook", icon: FacebookLogo, href: "#" },
   { label: "Twitter", icon: TwitterLogo, href: "#" },
-  { label: "YouTube", icon: YoutubeLogo, href: "#" },
+  { label: "YouTube", icon: YoutubeLogo, href: "#" }, 
   { label: "LinkedIn", icon: LinkedinLogo, href: "#" },
   { label: "Instagram", icon: InstagramLogo, href: "#" },
 ];
@@ -85,9 +83,9 @@ export default function Footer() {
           <div className="md:col-span-3 flex flex-col items-start">
             <Link to="/" className="block cursor-pointer">
               <img
-                src="/arccilogoWithText.png"
+                src="/aecci-logo-horizontal.png"
                 alt="AECCI"
-                className="h-24 mx-auto w-auto object-contain"
+                className="h-16 md:h-20 w-auto object-contain"
               />
             </Link>
 
@@ -118,9 +116,14 @@ export default function Footer() {
                     <li key={link.label}>
                       <Link
                         to={link.href}
-                        className="text-[14px] text-muted-foreground transition-colors duration-200 hover:text-primary"
+                        className="text-[14px] text-muted-foreground transition-colors duration-200 hover:text-primary flex items-center gap-1.5"
                       >
                         {link.label}
+                        {link.badge && (
+                          <span className="inline-flex items-center justify-center rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary leading-none uppercase tracking-wider">
+                            {link.badge}
+                          </span>
+                        )}
                       </Link>
                     </li>
                   ))}
@@ -170,31 +173,31 @@ export default function Footer() {
                 Asian Exporters' Chamber of Commerce and Industry
               </span>
             </p>
-            <ThemeSelector />
+            {/* <ThemeSelector /> */}
           </div>
 
           {/* Right */}
           <div className="flex flex-col items-start gap-2 md:items-end">
             <div className="flex flex-wrap items-center gap-2 text-[13px] font-medium">
-              <a href="/terms-conditions" className="hover:text-primary">
+              <Link to="/terms-conditions" className="hover:text-primary">
                 Terms & Conditions
-              </a>
+              </Link>
 
               <span>|</span>
 
-              <a href="/privacy-policy" className="hover:text-primary">
+              <Link to="/privacy-policy" className="hover:text-primary">
                 Privacy Policy
-              </a>
+              </Link>
 
               <span>|</span>
 
-              <a href="sitemap" className="hover:text-primary">
+              <Link to="/sitemap" className="hover:text-primary">
                 Sitemap
-              </a>
+              </Link>
 
               <span>|</span>
 
-              <span>Site maintained by AECCI.</span>
+              <span>Site maintained and Developed by AECCI.</span>
             </div>
 
             <p className="text-[12px] text-muted-foreground">

@@ -2,6 +2,9 @@ import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
 import { Globe, Handshake, Shield, TrendingUp } from "lucide-react";
 import chairmanBg from "../../assets/images/image.png";
+import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
+import videoThumb from "../../assets/videos/thumbnail.png";
+import videoSrc from "../../assets/videos/globalconnect_new.mp4";
 
 const pillars = [
   { icon: Handshake, label: "Trust", sub: "Building Relationships" },
@@ -137,6 +140,7 @@ export default function ChairmanMessage() {
         </div>
       </div>
 
+
       {/* Footer bar */}
       <div className="max-w-7xl mx-auto w-full bg-foreground border-t border-primary/20 py-4 px-8 flex flex-col sm:flex-row items-center justify-between text-xs tracking-widest gap-3">
         <div className="flex items-center gap-2 text-background/50 hover:text-primary transition-colors cursor-pointer">
@@ -147,6 +151,29 @@ export default function ChairmanMessage() {
           SOURCING ENTERPRISE
         </div>
       </div>
+
+      {/* Chairman Video Section (Separate) */}
+      <section className="w-full bg-background py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,hsl(var(--primary)/0.04),transparent)] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-[1.1] mb-4">
+              Hear from our <span className="text-primary">Chairman</span>
+            </h2>
+          </div>
+          <div className="relative mx-auto max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-primary/20">
+            <HeroVideoDialog
+              className="block"
+              animationStyle="from-center"
+              videoSrc={videoSrc}
+              thumbnailSrc={videoThumb}
+              thumbnailAlt="Chairman Message Video"
+              defaultOpen={false}
+            />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import babel from "@rolldown/plugin-babel";
 // https://vite.dev/config/
 export default defineConfig({
   server: {
-    allowedHosts: ["test.aecci.org.in"],
+    allowedHosts: ["test.aecci.org.in", "www.aecci.org.in", "aecci.org.in"],
     watch: {
       ignored: ["**/*.pdf"],
     },

@@ -36,6 +36,10 @@ export default function App() {
     }
   }, [hideChrome]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <ActiveThemeProvider>
       <TooltipProvider>

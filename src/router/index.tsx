@@ -23,6 +23,7 @@ import AdminUsersPage from "@/pages/admin/users";
 import AdminVerificationsPage from "@/pages/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/admin/verifications/partner-details";
+import AdminJobApplicationsPage from "@/pages/admin/job-applications";
 import DashboardPage from "@/pages/dashboard";
 import ApplicationPage from "@/pages/dashboard/application";
 import ApprovalPage from "@/pages/dashboard/approval";
@@ -42,6 +43,7 @@ import SessionSummaryPage from "@/pages/dashboard/session-summary";
 import SubmitQuestionsPage from "@/pages/dashboard/submit-questions";
 import VerificationPage from "@/pages/dashboard/verification";
 import WaitingRoomPage from "@/pages/dashboard/waiting-room";
+import MainHomepage from "@/pages/MainHomepage";
 import Home from "@/pages/Home";
 import LoginPage from "@/pages/login";
 import { NotFound } from "@/pages/not-found";
@@ -121,6 +123,10 @@ const PartnerPlaceholder = ({ title }: { title: string }) => (
 export const routes: RouteObject[] = [
   {
     path: "/",
+    element: <MainHomepage />,
+  },
+  {
+    path: "/global-connect",
     element: <Home />,
   },
   {
@@ -250,6 +256,10 @@ export const routes: RouteObject[] = [
           {
             path: "verifications/partner/:id",
             element: <AdminPartnerVerificationDetailsPage />,
+          },
+          {
+            path: "job-applications",
+            element: <AdminJobApplicationsPage />,
           },
           {
             path: "users",

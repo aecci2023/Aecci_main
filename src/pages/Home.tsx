@@ -7,8 +7,6 @@ import VideoExplainer from "@/components/portal/VideoExplainer";
 import AccessPlans from "@/components/portal/AccessPlans";
 import TradeRadar from "@/components/portal/TradeRadar";
 import MemberTestimonials from "@/components/testimonials-columns-1";
-import ArbitrationHero from "@/components/portal/ArbitrationHero";
-import PromoRow from "@/components/portal/PromoRow";
 
 export default function Home() {
   return (
@@ -39,12 +37,6 @@ export default function Home() {
 
       {/* Exporter Testimonials marquee */}
       <MemberTestimonials />
-
-      {/* Legal & Dispute Resolution Hero */}
-      <ArbitrationHero />
-
-      {/* Join the Chamber / Book Country Slot Callout */}
-      <PromoRow />
     </main>
   );
 }

@@ -66,7 +66,7 @@ export default function ImporterRegisterWizard() {
       setIsSubmitting(true);
       try {
         const data = methods.getValues();
-        
+
         let countryCode = "";
         let cleanMobile = data.mobileNumber;
         try {
@@ -84,13 +84,13 @@ export default function ImporterRegisterWizard() {
           console.log(e);
         }
 
-        const res = await sendOtp({ 
-          email: data.email, 
+        const res = await sendOtp({
+          email: data.email,
           fullName: data.fullName,
           mobileNumber: cleanMobile,
           countryCode
         }).unwrap();
-        
+
         if (res.success) {
           toast.success(res.message || "OTP sent to your email!");
           setStep(2);
