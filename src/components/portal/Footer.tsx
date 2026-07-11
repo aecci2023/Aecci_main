@@ -83,9 +83,9 @@ export default function Footer() {
           <div className="md:col-span-3 flex flex-col items-start">
             <Link to="/" className="block cursor-pointer">
               <img
-                src="/arccilogoWithText.png"
+                src="/aecci-logo-horizontal.png"
                 alt="AECCI"
-                className="h-24 mx-auto w-auto object-contain"
+                className="h-16 md:h-20 w-auto object-contain"
               />
             </Link>
 

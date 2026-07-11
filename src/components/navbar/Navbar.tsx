@@ -78,7 +78,7 @@ export default function Navbar() {
               : "",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[64px] lg:h-[84px] max-w-7xl items-center justify-between px-4 lg:px-6 relative">
+          <div className="mx-auto flex h-[84px] lg:h-[100px] w-full max-w-[95%] 2xl:max-w-[1600px] items-center justify-between px-4 lg:px-6 relative">
             {/* Mobile: Hamburger */}
             <div className="flex lg:hidden items-center w-1/3">
               <MobileMenu />
@@ -88,9 +88,9 @@ export default function Navbar() {
             <div className="flex lg:hidden items-center justify-center w-1/3">
               <Link to="/" onClick={handleClose} className="group">
                 <img
-                  src="/aecci-logoonly.png"
+                  src="/aecci-logo-horizontal.png"
                   alt="AECCI"
-                  className="h-[40px] w-auto object-contain"
+                  className="h-[60px] sm:h-[68px] w-auto object-contain"
                 />
               </Link>
             </div>
@@ -116,9 +116,9 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center flex-none">
               <Link to="/" onClick={handleClose} className="group">
                 <img
-                  src="/aecci-logoonly.png"
+                  src="/aecci-logo-horizontal.png"
                   alt="AECCI"
-                  className="h-[64px] w-auto object-contain"
+                  className="h-[72px] xl:h-[80px] w-auto object-contain"
                 />
               </Link>
             </div>
