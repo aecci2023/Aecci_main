@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Globe, Users, Briefcase, ArrowRight, PlayCircle, Handshake } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { motion,  type Variants } from "framer-motion";
+import Navbar from "@/components/navbar/Navbar";
+import Footer  from "@/components/portal/Footer";
 
 import globalConnectVideo from "../../assets/videos/globalroomwork_v2.mp4";
 
@@ -63,14 +65,16 @@ const cardVariants: Variants = {
 
 export default function RegisterRoleSelection() {
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-white flex flex-col">
+      <Navbar />
       
-      {/* Header text from user prompt */}
-      <div className="absolute top-8 text-center w-full z-10">
-        <p className="text-sm font-bold tracking-widest text-zinc-500 uppercase">
-          Connect Yourself To AECCI Global Deal Room
-        </p>
-      </div>
+      <main className="flex-1 flex flex-col justify-center items-center p-6 relative overflow-hidden py-24">
+        {/* Header text from user prompt */}
+        <div className="absolute top-8 text-center w-full z-10">
+          <p className="text-sm font-bold tracking-widest text-zinc-500 uppercase">
+            Connect Yourself To AECCI Global Deal Room
+          </p>
+        </div>
 
       <div className="relative z-10 w-full max-w-6xl mt-12">
         <div className="text-center mb-16">
@@ -145,6 +149,9 @@ export default function RegisterRoleSelection() {
           Already have an account? <Link to="/login" className="text-blue-600 hover:underline">Log in</Link>
         </div>
       </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

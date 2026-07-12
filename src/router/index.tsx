@@ -43,7 +43,8 @@ import SessionSummaryPage from "@/pages/dashboard/session-summary";
 import SubmitQuestionsPage from "@/pages/dashboard/submit-questions";
 import VerificationPage from "@/pages/dashboard/verification";
 import WaitingRoomPage from "@/pages/dashboard/waiting-room";
-import MainHomepage from "@/pages/MainHomepage";
+// import MainHomepage from "@/pages/MainHomepage"; //old homepage
+import LandingPage from "@/pages/LandingPage";
 import Home from "@/pages/Home";
 import LoginPage from "@/pages/login";
 import { NotFound } from "@/pages/not-found";
@@ -123,7 +124,7 @@ const PartnerPlaceholder = ({ title }: { title: string }) => (
 export const routes: RouteObject[] = [
   {
     path: "/",
-    element: <MainHomepage />,
+    element: <LandingPage />,
   },
   {
     path: "/global-connect",
