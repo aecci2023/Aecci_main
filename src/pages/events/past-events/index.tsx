@@ -1,8 +1,8 @@
-import { MapPin, User, FileBarChart } from "lucide-react";
+import { MapPin, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 
 // You can move this data to a separate file (e.g., data/events.js) later
 const pastEvents = [
@@ -77,7 +77,7 @@ export default function PastEventsPage() {
                       <th className="p-5 font-semibold text-muted-foreground text-sm tracking-wider uppercase">Dated</th>
                       <th className="p-5 font-semibold text-muted-foreground text-sm tracking-wider uppercase">Topic</th>
                       <th className="p-5 font-semibold text-muted-foreground text-sm tracking-wider uppercase">Guest</th>
-                      <th className="p-5 font-semibold text-muted-foreground text-sm tracking-wider uppercase">Brief Report</th>
+                      {/* <th className="p-5 font-semibold text-muted-foreground text-sm tracking-wider uppercase">Brief Report</th> */}
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border bg-card">
@@ -103,7 +103,7 @@ export default function PastEventsPage() {
                             <span>{event.guest}</span>
                           </div>
                         </td>
-                        <td className="p-5">
+                        {/* <td className="p-5">
                           <a
                             href={event.reportUrl}
                             target="_blank"
@@ -113,7 +113,7 @@ export default function PastEventsPage() {
                             <FileBarChart className="w-3.5 h-3.5" />
                             View PDF
                           </a>
-                        </td>
+                        </td> */}
                       </motion.tr>
                     ))}
                   </tbody>
@@ -160,7 +160,7 @@ export default function PastEventsPage() {
                       </div>
                     </div>
                     
-                    <Separator className="bg-border mb-4" />
+                    {/* <Separator className="bg-border mb-4" />
                     
                     <a
                       href={event.reportUrl}
@@ -170,7 +170,7 @@ export default function PastEventsPage() {
                     >
                       <FileBarChart className="w-4 h-4" />
                       View PDF Report
-                    </a>
+                    </a> */}
                   </CardContent>
                 </Card>
               </motion.div>

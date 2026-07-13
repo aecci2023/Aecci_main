@@ -7,6 +7,7 @@ import { routes } from "@/router";
 import { ActiveThemeProvider } from "@/components/themes/active-theme";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useNotificationsSocket } from "@/hooks/useNotificationsSocket";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export default function App() {
   useNotificationsSocket();
@@ -56,6 +57,8 @@ export default function App() {
 
           <div className="flex-1">{element}</div>
           {!hideChrome && <Footer />}
+          
+          <ScrollToTop />
         </div>
       </TooltipProvider>
     </ActiveThemeProvider>

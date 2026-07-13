@@ -284,7 +284,7 @@ export default function GlobalLanding() {
               <p className="text-sm text-gray-400 mb-8 flex-1 transition-colors duration-300 group-hover:text-gray-300">
                 For trade agents, brokers & representatives who want to explore business opportunities in India.
               </p>
-              <Link to="/agent/register" className="w-full bg-orange-500 hover:bg-orange-400 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
+              <Link to="/signup" className="w-full bg-orange-500 hover:bg-orange-400 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
                 Register as Agent <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
@@ -374,9 +374,9 @@ export default function GlobalLanding() {
             </div>
 
             <div className="flex items-center gap-6 z-10 shrink-0">
-              <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded flex items-center gap-2 transition-colors shadow-lg shadow-primary/20 text-lg">
+              <Link to="/register" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded flex items-center gap-2 transition-colors shadow-lg shadow-primary/20 text-lg">
                 Register Now <ArrowRight className="w-5 h-5" />
-              </button>
+              </Link>
               {/* QR Code */}
               <div className="hidden sm:flex flex-col items-center bg-white p-2 rounded shadow-inner border border-gray-100">
                 <QRCodeSVG

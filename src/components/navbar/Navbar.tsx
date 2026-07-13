@@ -152,7 +152,7 @@ export default function Navbar() {
                     className={[
                       "cursor-pointer select-none no-underline",
                       "px-2 xl:px-3 py-2.5 whitespace-nowrap",
-                      "text-[14px] font-[600] tracking-wide",
+                      "text-[14px] font-bold tracking-wide",
                       "transition-all duration-200",
                       activeSection === item.title || isActivePath
                         ? "text-primary opacity-100 font-bold"

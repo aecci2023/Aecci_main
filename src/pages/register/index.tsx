@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/portal/Footer";
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import {
   ArrowRight,
   BadgeCheck,
@@ -30,7 +30,7 @@ import { Link } from 'react-router-dom';
 // ============================================
 // ANIMATION VARIANTS
 // ============================================
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: { 
     opacity: 1, 
@@ -43,7 +43,7 @@ const fadeUp = {
   }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -256,7 +256,7 @@ const roles = [
     title: 'Participant',
     desc: 'For businesses, exporters & professionals who want to participate in deal rooms and grow globally.',
     button: 'Register as Participant',
-    link: '/register?role=participant',
+    link: '/signup',
     gradient: 'from-purple-500 to-purple-600'
   },
   {
@@ -266,7 +266,7 @@ const roles = [
     title: 'Importer',
     desc: 'For global importers looking to connect with verified Indian exporters through deal rooms.',
     button: 'Register as Importer',
-    link: '/register?role=importer',
+    link: '/importer/register',
     gradient: 'from-blue-500 to-blue-600'
   },
   {
@@ -276,7 +276,7 @@ const roles = [
     title: 'Intending Agent',
     desc: 'For trade agents, brokers & representatives who want to explore business opportunities in India.',
     button: 'Register as Agent',
-    link: '/register?role=agent',
+    link: '/signup',
     gradient: 'from-amber-500 to-amber-600'
   }
 ];
@@ -616,7 +616,7 @@ const JourneyTimeline: React.FC = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <Link
-              to="/register"
+              to="/signup"
               className="inline-flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold px-10 py-4 rounded-full transition-all shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 text-lg relative overflow-hidden group"
             >
               <Sparkles className="w-5 h-5" />

@@ -106,7 +106,7 @@ function MobileTopLevelItem({
       <button
         onClick={onToggle}
         className={[
-          "flex items-center justify-between w-full text-left text-[14px] font-medium py-3.5 px-0 !no-underline hover:!no-underline !border-none transition-colors duration-150",
+          "flex items-center justify-between w-full text-left text-[14px] font-bold py-3.5 px-0 !no-underline hover:!no-underline !border-none transition-colors duration-150",
           isItemActive ? "text-primary" : "text-foreground hover:text-primary",
         ].join(" ")}
       >
