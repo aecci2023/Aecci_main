@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Users, Globe, Building2, ShieldCheck, Handshake, ChevronLeft, ChevronRight } from "lucide-react";
 import AnimatedWorldMap from "@/components/portal/AnimatedWorldMap";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import ArbitrationHero from "@/components/portal/ArbitrationHero";
 import PromoRow from "@/components/portal/PromoRow";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Building2, ChevronLeft, ChevronRight, Globe, Handshake, ShieldCheck, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const slides = [
   {
@@ -200,7 +200,7 @@ export default function MainHomepage() {
               <div className="flex items-center gap-4 px-2">
                 <Globe className="w-8 h-8 text-primary" />
                 <div>
-                  <h4 className="text-lg font-bold text-foreground">40+</h4>
+                  <h4 className="text-lg font-bold text-foreground">50+</h4>
                   <p className="text-xs text-muted-foreground leading-tight font-medium uppercase tracking-wide">Countries<br />Connected</p>
                 </div>
               </div>

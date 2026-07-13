@@ -1,55 +1,64 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import {
+  BadgeCheck,
+  BriefcaseBusiness,
+  Building2,
+  Check,
+  CircleCheckBig,
+  Factory,
+  Globe2,
+  Handshake,
+  Rocket,
+  TrendingUp,
+  UsersRound
+} from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { 
-  BriefcaseBusiness, 
-  Factory, 
-  Globe2, 
-  UsersRound, 
-  Building2, 
-  Handshake, 
-  Check, 
-  BadgeCheck, 
-  Rocket, 
-  TrendingUp,
-  CircleCheckBig
-} from "lucide-react";
-import * as Icons from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 export const audienceCards = [
   {
     title: "Global Buyers / Importers",
-    text: "Source quality Indian products and connect with verified businesses.",
-    cta: "Join as Buyer",
+    text: "Supply chain risk reduction and compliance.",
+    cta: "Join as Buyer →",
     link: "/register?role=business",
     tone: "text-blue-600",
-    icon: "briefcase"
+    icon: "briefcase",
+    image: "/images/buyer.png",
+    color: "blue"
   },
   {
     title: "Intending Agents / Representatives",
-    text: "Represent your country and connect business opportunities with India.",
-    cta: "Join as Agent",
+    text: "Representing your customers and suppliers.",
+    cta: "Join as Agent →",
     link: "/partner/apply",
     tone: "text-emerald-600",
-    icon: "globe"
+    icon: "globe",
+    image: "/images/agent.png",
+    color: "emerald"
   },
   {
     title: "International Collaborators",
-    text: "Share expertise, provide market insights and expand your global network.",
-    cta: "Join as Collaborator",
+    text: "Bring expertise, process, market insight and know-how.",
+    cta: "Join as Collaborator →",
     link: "/register?role=individual",
     tone: "text-purple-600",
-    icon: "users"
+    icon: "users",
+    image: "/images/collaborator.png",
+    color: "purple"
   },
   {
     title: "Indian Exporters / Manufacturers",
-    text: "Expand your business internationally and reach global markets.",
-    cta: "Join as Exporter",
+    text: "Expand your business and reach new global markets.",
+    cta: "Join as Exporter →",
     link: "/register?role=business",
     tone: "text-amber-500",
-    icon: "factory"
+    icon: "factory",
+    image: "/images/exporter.png",
+    color: "amber"
   }
 ];
 
@@ -106,7 +115,7 @@ export const plans = [
 ];
 
 const metrics = [
-  ["40+", "Countries"],
+  ["50+", "Countries"],
   ["5000+", "Businesses"],
   ["2500+", "Deal Rooms"],
   ["1500+", "Global Partners"]
@@ -117,7 +126,12 @@ function Hero() {
     <section className="relative overflow-hidden bg-gradient-to-br from-[#05111f] via-[#071b32] to-[#071526] text-white" id="global-deal-room">
       <div className="mx-auto w-full max-w-[95%] 2xl:max-w-[1600px] px-4 lg:px-6">
         <div className="grid min-h-[460px] grid-cols-1 lg:grid-cols-[47%_53%] py-[40px] lg:pt-[54px] lg:pb-[34px]">
-          <div className="z-10 self-center max-w-[560px] lg:max-w-[650px]">
+          <motion.div 
+            className="z-10 self-center max-w-[560px] lg:max-w-[650px]"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <span className="mb-[18px] inline-block text-[12px] font-extrabold tracking-[0.05em] text-[#f2b43b]">
               AECCI GLOBAL DEAL ROOM
             </span>
@@ -131,40 +145,63 @@ function Hero() {
             </p>
 
             <div className="my-[24px] flex flex-col lg:flex-row gap-[12px] lg:gap-[28px]">
-              <div className="flex items-center gap-[9px] text-[#e8ab32]">
+              <motion.div 
+                className="flex items-center gap-[9px] text-[#e8ab32]"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Building2 size={19} />
                 <span>
                   <b className="block text-[12px] text-white">Trusted Chamber</b>
                   <small className="block text-[10px] text-[#aab9ca]">of Commerce</small>
                 </span>
-              </div>
-              <div className="flex items-center gap-[9px] text-[#e8ab32]">
+              </motion.div>
+              <motion.div 
+                className="flex items-center gap-[9px] text-[#e8ab32]"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Globe2 size={19} />
                 <span>
                   <b className="block text-[12px] text-white">Global Reach</b>
-                  <small className="block text-[10px] text-[#aab9ca]">40+ Countries</small>
+                  <small className="block text-[10px] text-[#aab9ca]">50+ Countries</small>
                 </span>
-              </div>
-              <div className="flex items-center gap-[9px] text-[#e8ab32]">
+              </motion.div>
+              <motion.div 
+                className="flex items-center gap-[9px] text-[#e8ab32]"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Handshake size={19} />
                 <span>
                   <b className="block text-[12px] text-white">Meaningful</b>
                   <small className="block text-[10px] text-[#aab9ca]">Business Connections</small>
                 </span>
-              </div>
+              </motion.div>
             </div>
 
             <div className="mt-[26px] flex gap-[14px]">
-              <Button asChild className="bg-gradient-to-br from-[#ffc75b] to-[#e9aa2d] font-bold text-[#101722] hover:opacity-90 shadow-[0_8px_24px_rgba(230,166,40,0.25)] border-transparent h-[42px] px-[20px] rounded-[6px]">
-                <Link to="/register">Join AECCI Today →</Link>
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button asChild className="bg-gradient-to-br from-[#ffc75b] to-[#e9aa2d] font-bold text-[#101722] hover:opacity-90 shadow-[0_8px_24px_rgba(230,166,40,0.25)] border-transparent h-[42px] px-[20px] rounded-[6px]">
+                  <Link to="/register">Join AECCI Today →</Link>
+                </Button>
+              </motion.div>
               <Button asChild variant="outline" className="hidden lg:flex border-[#66809e] bg-[#061426]/64 text-white hover:bg-[#061426]/80 hover:text-white h-[42px] px-[20px] rounded-[6px]">
                 <a href="#plans">Explore Deal Room</a>
               </Button>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative min-h-[340px] lg:min-h-[360px]" aria-hidden="true">
+          <motion.div 
+            className="relative min-h-[340px] lg:min-h-[360px]" 
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <div className="absolute top-[42px] right-[-110px] h-[285px] w-[740px] -rotate-[18deg] rounded-full border border-[#ffba3b]/50" />
             <div className="absolute top-[120px] right-[-110px] h-[285px] w-[740px] rotate-[14deg] rounded-full border border-[#ffba3b]/50" />
             <div className="absolute top-[205px] right-[-110px] h-[285px] w-[740px] -rotate-[5deg] rounded-full border border-[#ffba3b]/50" />
@@ -175,24 +212,94 @@ function Hero() {
               <div className="absolute right-[65px] top-[190px] h-[110px] w-[170px] rotate-[5deg] rounded-[65%_35%_52%_48%] bg-gradient-to-br from-[#5684b5] to-[#1d4c82] opacity-80 drop-shadow-[0_0_8px_rgba(255,190,69,0.24)]" />
               <div className="absolute bottom-[90px] right-[140px] h-[120px] w-[85px] rounded-[45%_55%_60%_40%] bg-gradient-to-br from-[#5684b5] to-[#1d4c82] opacity-80 drop-shadow-[0_0_8px_rgba(255,190,69,0.24)]" />
               
-              <span className="absolute left-[205px] top-[210px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]" />
-              <span className="absolute left-[360px] top-[285px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]" />
-              <span className="absolute right-[140px] top-[220px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]" />
-              <span className="absolute bottom-[125px] left-[280px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]" />
-              <span className="absolute bottom-[160px] right-[80px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]" />
+              <motion.span 
+                className="absolute left-[205px] top-[210px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]"
+                animate={{ 
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.5, 1]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />
+              <motion.span 
+                className="absolute left-[360px] top-[285px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]"
+                animate={{ 
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.5, 1]
+                }}
+                transition={{ 
+                  duration: 2,
+                  delay: 0.5,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />
+              <motion.span 
+                className="absolute right-[140px] top-[220px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]"
+                animate={{ 
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.5, 1]
+                }}
+                transition={{ 
+                  duration: 2,
+                  delay: 1,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />
+              <motion.span 
+                className="absolute bottom-[125px] left-[280px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]"
+                animate={{ 
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.5, 1]
+                }}
+                transition={{ 
+                  duration: 2,
+                  delay: 1.5,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />
+              <motion.span 
+                className="absolute bottom-[160px] right-[80px] h-[9px] w-[9px] rounded-full bg-[#ffd36c] shadow-[0_0_20px_#ffc149]"
+                animate={{ 
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.5, 1]
+                }}
+                transition={{ 
+                  duration: 2,
+                  delay: 0.8,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />
             </div>
             
-            <div className="absolute right-[10px] lg:right-0 top-[70px] z-20 w-[210px] rounded-[12px] border border-[#ffbe49]/35 bg-[#020d1a]/80 p-[22px_24px] backdrop-blur-[12px] shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
+            <motion.div 
+              className="absolute right-[10px] lg:right-0 top-[70px] z-20 w-[210px] rounded-[12px] border border-[#ffbe49]/35 bg-[#020d1a]/80 p-[22px_24px] backdrop-blur-[12px] shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <h3 className="text-[16px] m-0 font-bold">Global Connectivity</h3>
               <p className="mt-[4px] mb-[15px] text-[12px] text-[#d1dae5]">Endless Opportunities</p>
               {metrics.map(([value, label]) => (
-                <div className="my-[10px] flex items-baseline gap-[9px]" key={label}>
+                <motion.div 
+                  className="my-[10px] flex items-baseline gap-[9px]" 
+                  key={label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.6 + metrics.indexOf([value, label]) * 0.1 }}
+                >
                   <strong className="text-[25px] text-[#f4b33a]">{value}</strong>
                   <span className="text-[12px]">{label}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
       <div className="h-[35px] translate-y-[1px] rounded-t-[55%_55%] lg:rounded-t-[55%_55%_0_0_/_100%_100%_0_0] bg-white" />
@@ -200,47 +307,107 @@ function Hero() {
   );
 }
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
-  briefcase: BriefcaseBusiness,
-  globe: Globe2,
-  users: UsersRound,
-  factory: Factory
-};
-
 function Audience() {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const imageVariants = {
+    hover: { 
+      scale: 1.2,
+      rotate: 10,
+      transition: { 
+        type: "spring",
+        stiffness: 300
+      }
+    }
+  };
+
+  const iconColors = {
+    blue: "bg-blue-100 text-blue-600",
+    emerald: "bg-emerald-100 text-emerald-600",
+    purple: "bg-purple-100 text-purple-600",
+    amber: "bg-amber-100 text-amber-600"
+  };
+
   return (
     <section className="bg-white py-[24px] pb-[30px]">
       <div className="mx-auto w-full max-w-[95%] 2xl:max-w-[1600px] px-4 lg:px-6">
-        <div className="mb-[22px] text-center">
+        <motion.div 
+          className="mb-[22px] text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-[24px] text-[#14253b] font-bold">Who Can Join AECCI Global Deal Room?</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[18px]">
-          {audienceCards.map((item) => {
-            const Icon = iconMap[item.icon];
-            return (
-              <Card 
-                key={item.title} 
-                className={`group relative min-h-[162px] overflow-hidden border-[#d9e2ec] bg-gradient-to-br from-white to-[#f6f9fc] ${item.tone} shadow-none`}
-              >
-                <div className="absolute inset-x-0 bottom-0 h-[4px] bg-current opacity-75" />
-                <div className="grid grid-cols-[42%_58%] h-full">
-                  <div className="flex items-center justify-center bg-gradient-to-br from-[#eef4fb] to-[#dfe8f2] text-current">
-                    <Icon size={40} strokeWidth={1.6} />
-                  </div>
-                  <CardContent className="p-[18px_12px_12px] text-[#132239]">
-                    <div className="mb-[9px] flex h-[31px] w-[31px] items-center justify-center rounded-full bg-current text-white">
-                      <Icon size={19} />
+        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {audienceCards.map((item, index) => (
+            <motion.div
+              key={index}
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ 
+                y: -10,
+                transition: { type: "spring", stiffness: 300 }
+              }}
+            >
+              <Card className="group rounded-2xl border border-gray-200 hover:shadow-2xl transition-all duration-300 overflow-hidden h-full">
+                <CardContent className="p-6">
+                  {/* Top Icon with Animation */}
+                  <motion.div
+                    className={`w-14 h-14 rounded-full flex items-center justify-center mb-4 ${iconColors[item.color as keyof typeof iconColors]}`}
+                    whileHover={{ 
+                      rotate: 360,
+                      transition: { duration: 0.6 }
+                    }}
+                  >
+                    {item.icon === "briefcase" && <BriefcaseBusiness size={24} />}
+                    {item.icon === "globe" && <Globe2 size={24} />}
+                    {item.icon === "users" && <UsersRound size={24} />}
+                    {item.icon === "factory" && <Factory size={24} />}
+                  </motion.div>
+
+                  {/* Content + Large Image */}
+                  <div className="flex items-start gap-4">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg leading-6">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                        {item.text}
+                      </p>
+                      <motion.div
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <Link
+                          to={item.link}
+                          className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+                        >
+                          {item.cta}
+                        </Link>
+                      </motion.div>
                     </div>
-                    <h3 className="mb-[8px] text-[14px] font-bold leading-[1.25]">{item.title}</h3>
-                    <p className="mb-[10px] text-[10px] leading-[1.45] text-[#677688]">{item.text}</p>
-                    <Link to={item.link} className="text-[10px] font-extrabold text-current hover:underline">
-                      {item.cta} →
-                    </Link>
-                  </CardContent>
-                </div>
+                    <motion.div 
+                      className="flex-shrink-0 w-40 h-48 relative"
+                      variants={imageVariants}
+                      whileHover="hover"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-contain"
+                      />
+                    </motion.div>
+                  </div>
+                </CardContent>
               </Card>
-            );
-          })}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -248,23 +415,52 @@ function Audience() {
 }
 
 function Benefits() {
+  const benefitVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 }
+  };
+
   return (
     <section className="bg-white pt-[16px] pb-[34px]">
       <div className="mx-auto w-full max-w-[95%] 2xl:max-w-[1600px] px-4 lg:px-6">
-        <div className="mb-[22px] text-center">
+        <motion.div 
+          className="mb-[22px] text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-[24px] text-[#14253b] font-bold">Why AECCI Global Deal Room?</h2>
-        </div>
+        </motion.div>
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-[25px]">
-          {benefits.map(([iconName, title, text]) => {
+          {benefits.map(([iconName, title, text], index) => {
             const Icon = (Icons as any)[iconName] || CircleCheckBig;
             return (
-              <div key={title} className="text-center">
-                <div className="mx-auto mb-[10px] flex h-[54px] w-[54px] items-center justify-center rounded-full bg-[#eef5f8] text-[#117f9a]">
+              <motion.div 
+                key={title} 
+                className="text-center"
+                initial="hidden"
+                animate="visible"
+                variants={benefitVariants}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ 
+                  y: -5,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+              >
+                <motion.div 
+                  className="mx-auto mb-[10px] flex h-[54px] w-[54px] items-center justify-center rounded-full bg-[#eef5f8] text-[#117f9a]"
+                  whileHover={{ 
+                    rotate: 360,
+                    backgroundColor: "#117f9a",
+                    color: "white",
+                    transition: { duration: 0.6 }
+                  }}
+                >
                   <Icon size={28} />
-                </div>
+                </motion.div>
                 <h3 className="mb-[6px] text-[13px] font-bold">{title}</h3>
                 <p className="m-0 text-[10px] leading-[1.5] text-[#6f7c8b]">{text}</p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -274,44 +470,82 @@ function Benefits() {
 }
 
 function Plans() {
+  const planVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
     <section className="bg-gradient-to-br from-[#051322] to-[#061a2d] text-white py-[24px] pb-[28px]" id="plans">
       <div className="mx-auto w-full max-w-[95%] 2xl:max-w-[1600px] px-4 lg:px-6">
-        <div className="mb-[22px] text-center">
+        <motion.div 
+          className="mb-[22px] text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-[24px] text-white font-bold">Access Plans & Memberships</h2>
           <p className="mt-[7px] text-[12px] text-[#8ea0b5]">Choose the right plan to grow your global business.</p>
-        </div>
+        </motion.div>
         <div className="mx-auto grid max-w-[1260px] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[18px]">
-          {plans.map((plan) => (
-            <Card 
-              key={plan.name} 
-              className={`relative min-h-[205px] overflow-visible border ${plan.border} bg-gradient-to-b from-[#112a43]/80 to-[#041221]/90 p-[16px_18px] text-white ${plan.shadow} rounded-[10px]`}
+          {plans.map((plan, index) => (
+            <motion.div
+              key={plan.name}
+              initial="hidden"
+              animate="visible"
+              variants={planVariants}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ 
+                scale: 1.03,
+                transition: { type: "spring", stiffness: 300 }
+              }}
             >
-              {plan.recommended && (
-                <Badge className="absolute left-1/2 top-[-11px] -translate-x-1/2 whitespace-nowrap bg-[#14ad6e] px-[10px] py-[4px] text-[8px] font-extrabold hover:bg-[#14ad6e] text-white">
-                  MOST POPULAR
-                </Badge>
-              )}
-              <CardContent className="p-0">
-                <h3 className="mb-[8px] text-center text-[11px] font-bold tracking-[0.06em] text-[#ced8e4] uppercase">
-                  {plan.name}
-                </h3>
-                <div className="mb-[12px] text-center text-[20px] font-extrabold">
-                  {plan.price} <small className="text-[9px] font-medium text-[#9aa8b7]">{plan.cadence}</small>
-                </div>
-                <ul className="m-0 mb-[16px] p-0 list-none">
-                  {plan.features.map((f) => (
-                    <li key={f} className="my-[7px] flex items-center gap-[7px] text-[10px] text-[#d8e1eb]">
-                      <Check size={15} className="text-[#22d98b]" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild variant="outline" className="w-full h-auto p-[9px] border-current bg-transparent text-[10px] font-extrabold text-[#e1e9f2] hover:bg-white/10 hover:text-white rounded-[5px]">
-                  <Link to={plan.link}>{plan.cta} →</Link>
-                </Button>
-              </CardContent>
-            </Card>
+              <Card 
+                className={`relative min-h-[205px] overflow-visible border ${plan.border} bg-gradient-to-b from-[#112a43]/80 to-[#041221]/90 p-[16px_18px] text-white ${plan.shadow} rounded-[10px]`}
+              >
+                {plan.recommended && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <Badge className="absolute left-1/2 top-[-11px] -translate-x-1/2 whitespace-nowrap bg-[#14ad6e] px-[10px] py-[4px] text-[8px] font-extrabold hover:bg-[#14ad6e] text-white">
+                      MOST POPULAR
+                    </Badge>
+                  </motion.div>
+                )}
+                <CardContent className="p-0">
+                  <h3 className="mb-[8px] text-center text-[11px] font-bold tracking-[0.06em] text-[#ced8e4] uppercase">
+                    {plan.name}
+                  </h3>
+                  <div className="mb-[12px] text-center text-[20px] font-extrabold">
+                    {plan.price} <small className="text-[9px] font-medium text-[#9aa8b7]">{plan.cadence}</small>
+                  </div>
+                  <ul className="m-0 mb-[16px] p-0 list-none">
+                    {plan.features.map((f) => (
+                      <motion.li 
+                        key={f} 
+                        className="my-[7px] flex items-center gap-[7px] text-[10px] text-[#d8e1eb]"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
+                      >
+                        <Check size={15} className="text-[#22d98b]" />
+                        {f}
+                      </motion.li>
+                    ))}
+                  </ul>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button asChild variant="outline" className="w-full h-auto p-[9px] border-current bg-transparent text-[10px] font-extrabold text-[#e1e9f2] hover:bg-white/10 hover:text-white rounded-[5px]">
+                      <Link to={plan.link}>{plan.cta} →</Link>
+                    </Button>
+                  </motion.div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -331,19 +565,42 @@ function Journey() {
     <section className="bg-gradient-to-r from-[#e8a929] to-[#ffc857] text-[#192130] py-[15px]">
       <div className="mx-auto w-full max-w-[95%] 2xl:max-w-[1600px] px-4 lg:px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-[18px] lg:gap-0 w-full overflow-auto lg:overflow-visible">
-          <div className="rounded-[8px] bg-[#0d253c] p-[11px_18px] text-[13px] text-white">
+          <motion.div 
+            className="rounded-[8px] bg-[#0d253c] p-[11px_18px] text-[13px] text-white"
+            whileHover={{ scale: 1.05 }}
+          >
             <strong>Your Global Business<br />Journey Starts Here!</strong>
-          </div>
+          </motion.div>
           {steps.map(([Icon, title, text], index) => (
             <React.Fragment key={title as string}>
-              <div className="flex items-center gap-[8px]">
+              <motion.div 
+                className="flex items-center gap-[8px]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.1 }}
+              >
                 <Icon size={23} />
                 <span>
                   <b className="block text-[11px]">{title}</b>
                   <small className="block text-[8px]">{text}</small>
                 </span>
-              </div>
-              {index < steps.length - 1 && <span className="hidden lg:block text-[20px]">→</span>}
+              </motion.div>
+              {index < steps.length - 1 && (
+                <motion.span 
+                  className="hidden lg:block text-[20px]"
+                  animate={{ 
+                    x: [0, 10, 0],
+                  }}
+                  transition={{ 
+                    duration: 1,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >
+                  →
+                </motion.span>
+              )}
             </React.Fragment>
           ))}
         </div>
