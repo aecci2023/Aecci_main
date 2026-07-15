@@ -165,7 +165,7 @@ const FAQSection: React.FC = () => {
           viewport={{ once: true }}
           className="space-y-3"
         >
-          {faqData.map((item, index) => (
+          {faqData.map((item) => (
             <motion.div
               key={item.id}
               variants={fadeUp}
@@ -255,7 +255,6 @@ const FAQSection: React.FC = () => {
 // ============================================
 const GlobalNetwork: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -264,7 +263,6 @@ const GlobalNetwork: React.FC = () => {
       const rect = containerRef.current.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      setMousePosition({ x, y });
       setRotation({
         x: y * 10,
         y: x * 10,

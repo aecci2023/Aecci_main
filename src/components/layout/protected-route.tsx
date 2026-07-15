@@ -24,17 +24,21 @@ export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
   }
 
   if (user.role !== "admin") {
+    const isImporter = user.role === "importer";
+    const verificationPath = isImporter ? "/importer/verification" : "/dashboard/verification";
+    const rejectedPath = isImporter ? "/importer/rejected" : "/dashboard/rejected";
+
     if (
       user.verificationStatus === "pending_verification" &&
-      window.location.pathname !== "/dashboard/verification"
+      window.location.pathname !== verificationPath
     ) {
-      return <Navigate to="/dashboard/verification" replace />;
+      return <Navigate to={verificationPath} replace />;
     }
     if (
       user.verificationStatus === "rejected" &&
-      window.location.pathname !== "/dashboard/rejected"
+      window.location.pathname !== rejectedPath
     ) {
-      return <Navigate to="/dashboard/rejected" replace />;
+      return <Navigate to={rejectedPath} replace />;
     }
   }
 

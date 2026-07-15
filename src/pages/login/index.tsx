@@ -100,6 +100,17 @@ export default function LoginPage() {
           }
           toast.success("Logged in successfully");
           navigate("/partner/dashboard");
+        } else if (user.role === "importer") {
+          if (user.verificationStatus === "pending_verification") {
+            toast.warning("Your application is under review. We'll notify you once approved.");
+            return;
+          }
+          if (user.verificationStatus === "rejected") {
+            navigate("/importer/rejected");
+            return;
+          }
+          toast.success("Logged in successfully");
+          navigate("/importer/dashboard");
         } else {
           if (user.verificationStatus === "pending_verification") {
             toast.warning("Your account is under review. You'll be notified once approved.");
