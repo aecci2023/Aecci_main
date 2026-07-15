@@ -113,12 +113,12 @@ export default function Navbar() {
             </div>
 
             {/* Desktop: Logo Left */}
-            <div className="hidden lg:flex items-center flex-none">
+            <div className="hidden lg:flex items-center flex-none ">
               <Link to="/" onClick={handleClose} className="group">
                 <img
                   src="/aecci-logo-horizontal.png"
                   alt="AECCI"
-                  className="h-[72px] xl:h-[80px] w-auto object-contain"
+                  className="h-[60px] xl:h-[70px] w-auto object-contain"
                 />
               </Link>
             </div>

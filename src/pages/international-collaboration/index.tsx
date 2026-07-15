@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, Globe, Handshake, Mail, Phone } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
+import { ArrowRight, Globe, Handshake, Mail, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import { partners } from "./partnerships/data";
 
 const countries = [
@@ -98,38 +98,38 @@ export default function InternationalCollaboration() {
   return (
     <div className="w-full bg-background text-foreground">
       {/* Hero */}
-      <section className="relative w-full py-16 md:py-24 bg-foreground overflow-hidden flex items-center">
+      <section className="relative w-full py-12 md:py-16 bg-foreground overflow-hidden flex items-center">
         <div className="absolute right-0 top-0 w-1/2 h-full bg-primary/20 blur-[100px] pointer-events-none rounded-full translate-x-1/3 -translate-y-1/4 z-0" />
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-2 block">
               International Collaboration
             </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-background mb-6 leading-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-background mb-4 leading-tight">
               Connecting India to the World Through{" "}
               <span className="text-primary">55+ Global Partnerships</span>
             </h1>
-            <p className="text-background/70 text-base md:text-lg leading-relaxed mb-8">
+            <p className="text-background/70 text-sm md:text-base leading-relaxed mb-6">
               Our strategic partnerships with over 55 international trade and
               law experts power the AECCI Global Deal Room, creating trusted
               pathways for cross-border partnerships, business matchmaking and
               international trade opportunities.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center">
               <Link
-                to="/global-deal-room"
-                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
+                to="/global-connect"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
               >
                 Enter Global Deal Room <ArrowRight className="size-4" />
               </Link>
               <a
-                href="mailto:info@aecci.org.in"
-                className="inline-flex items-center gap-2 bg-background/10 border border-background/20 text-background px-8 py-3 rounded-full font-semibold text-sm hover:bg-background/20 transition-colors"
+                href="/partner/register"
+                className="inline-flex items-center gap-2 bg-background/10 border border-background/20 text-background px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-background/20 transition-colors"
               >
                 Become a Collaborator
               </a>
@@ -139,34 +139,34 @@ export default function InternationalCollaboration() {
       </section>
 
       {/* About */}
-      <section className="py-20 md:py-24 bg-background border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-12 md:py-16 bg-background border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+              <span className="text-xs font-bold text-primary uppercase tracking-widest mb-2 block">
                 About
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
                 A Trusted Global Ecosystem for Indian Businesses
               </h2>
-              <p className="text-muted-foreground text-base leading-relaxed mb-4">
+              <p className="text-muted-foreground text-sm leading-relaxed mb-3">
                 The Asian Exporters' Chamber of Commerce & Industry (AECCI) is
                 committed to building a trusted global ecosystem that empowers
                 Indian businesses to expand beyond borders.
               </p>
-              <p className="text-muted-foreground text-base leading-relaxed mb-4">
+              <p className="text-muted-foreground text-sm leading-relaxed mb-3">
                 As a recognized trade body under the Ministry of Commerce &
                 Industry, Government of India, AECCI has established a strong
                 international network spanning 50+ countries, supported by 55+
                 collaborations with leading trade experts, international law
                 firms, and business associations.
               </p>
-              <p className="text-muted-foreground text-base leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 These strategic collaborations are the driving force behind the
                 AECCI Global Deal Room — an innovative platform that facilitates
                 cross-border business by connecting Indian exporters with
@@ -181,7 +181,7 @@ export default function InternationalCollaboration() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 {[
                   { value: "55+", label: "Global Collaborations" },
                   { value: "50+", label: "Countries Covered" },
@@ -189,11 +189,11 @@ export default function InternationalCollaboration() {
                   { value: "2,000+", label: "Chamber Members" },
                 ].map((stat) => (
                   <Card key={stat.label} className="border-border">
-                    <CardContent className="p-6 text-center">
-                      <p className="text-3xl font-black text-primary mb-1">
+                    <CardContent className="p-4 text-center">
+                      <p className="text-2xl font-black text-primary mb-0.5">
                         {stat.value}
                       </p>
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
                         {stat.label}
                       </p>
                     </CardContent>
@@ -206,22 +206,22 @@ export default function InternationalCollaboration() {
       </section>
 
       {/* How We Help */}
-      <section className="py-20 md:py-24 bg-muted/30 border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-12">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+      <section className="py-12 md:py-16 bg-muted/30 border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-8">
+            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-2 block">
               Our Role
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
               How We Can Help?
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+            <p className="text-muted-foreground max-w-xl mx-auto text-sm leading-relaxed">
               A Trusted and Recognized Trade Organization Supporting Businesses
               Across Every Industry and Sector, All Consolidated within a
               Unified Platform.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {howWeHelp.map((item, idx) => (
               <motion.div
                 key={idx}
@@ -231,14 +231,14 @@ export default function InternationalCollaboration() {
                 transition={{ delay: idx * 0.08, duration: 0.4 }}
               >
                 <Card className="h-full border-border hover:border-primary/40 transition-colors group">
-                  <CardContent className="p-6 flex flex-col gap-3">
-                    <div className="p-2.5 bg-primary/10 rounded-lg text-primary w-fit group-hover:bg-primary/20 transition-colors">
-                      <Handshake className="w-5 h-5" />
+                  <CardContent className="p-4 flex flex-col gap-2">
+                    <div className="p-2 bg-primary/10 rounded-lg text-primary w-fit group-hover:bg-primary/20 transition-colors">
+                      <Handshake className="w-4 h-4" />
                     </div>
-                    <h3 className="text-base font-bold text-foreground">
+                    <h3 className="text-sm font-bold text-foreground">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-xs text-muted-foreground leading-relaxed">
                       {item.desc}
                     </p>
                   </CardContent>
@@ -250,16 +250,16 @@ export default function InternationalCollaboration() {
       </section>
 
       {/* 50 Countries */}
-      <section className="py-20 md:py-24 bg-background border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-12">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+      <section className="py-12 md:py-16 bg-background border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-8">
+            <span className="text-xs font-bold text-primary uppercase tracking-widest mb-2 block">
               Global Reach
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
               Our Network Spans 50+ Countries
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+            <p className="text-muted-foreground max-w-xl mx-auto text-sm leading-relaxed">
               AECCI's active participation in international exhibitions, trade
               missions, B2B forums, and global business events strengthens
               relationships across these regions.
@@ -270,7 +270,7 @@ export default function InternationalCollaboration() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-wrap gap-3 justify-center"
+            className="flex flex-wrap gap-2 justify-center"
           >
             {countries.map((country, idx) => {
               const partner = partners.find((p) => p.country === country);
@@ -293,7 +293,7 @@ export default function InternationalCollaboration() {
                   >
                     <Badge
                       variant="outline"
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border-border hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-semibold border-border hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer"
                     >
                       <Globe className="size-3 text-primary" />
                       {country}
@@ -303,10 +303,10 @@ export default function InternationalCollaboration() {
               );
             })}
           </motion.div>
-          <div className="text-center mt-10">
+          <div className="text-center mt-8">
             <Link
               to="/events/international-collaboration/partnerships"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
             >
               View All Partnership Details <ArrowRight className="size-4" />
             </Link>
@@ -315,22 +315,22 @@ export default function InternationalCollaboration() {
       </section>
 
       {/* Global Deal Room CTA + Contact */}
-      <section className="py-20 md:py-24 bg-muted/30 border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <section className="py-12 md:py-16 bg-muted/30 border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
+              <span className="text-xs font-bold text-primary uppercase tracking-widest mb-2 block">
                 Global Deal Room
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
                 Access the Global Deal Room
               </h2>
-              <p className="text-muted-foreground text-base leading-relaxed mb-6">
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                 AECCI works closely with international experts, law firms, trade
                 organizations, industry associations and leading businesses to
                 create meaningful opportunities for Indian enterprises. Through
@@ -340,7 +340,7 @@ export default function InternationalCollaboration() {
               </p>
               <Link
                 to="/global-deal-room"
-                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
               >
                 Enter Global Deal Room <ArrowRight className="size-4" />
               </Link>
@@ -353,20 +353,20 @@ export default function InternationalCollaboration() {
               transition={{ duration: 0.6 }}
             >
               <Card className="border-border">
-                <CardContent className="p-8 flex flex-col gap-5">
-                  <h3 className="text-lg font-bold text-foreground">
+                <CardContent className="p-6 flex flex-col gap-4">
+                  <h3 className="text-base font-bold text-foreground">
                     Contact Us
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     Interested in partnering with AECCI or exploring
                     collaboration opportunities? Reach out to us.
                   </p>
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
-                      <Phone className="w-5 h-5" />
+                  <div className="flex items-start gap-3">
+                    <div className="p-1.5 bg-primary/10 rounded-lg text-primary shrink-0">
+                      <Phone className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-semibold text-foreground text-sm mb-0.5">
+                      <p className="font-semibold text-foreground text-xs mb-0.5">
                         Call Us
                       </p>
                       <a
@@ -377,12 +377,12 @@ export default function InternationalCollaboration() {
                       </a>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
-                      <Mail className="w-5 h-5" />
+                  <div className="flex items-start gap-3">
+                    <div className="p-1.5 bg-primary/10 rounded-lg text-primary shrink-0">
+                      <Mail className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-semibold text-foreground text-sm mb-0.5">
+                      <p className="font-semibold text-foreground text-xs mb-0.5">
                         Email Us
                       </p>
                       <a
@@ -394,7 +394,7 @@ export default function InternationalCollaboration() {
                     </div>
                   </div>
                   <Separator className="bg-border" />
-                  <p className="text-xs text-muted-foreground leading-relaxed">
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
                     Hilton Towers, 604, 6th Floor, Plot No.66, Sector 11, CBD
                     Belapur, Navi Mumbai, Maharashtra 400614
                   </p>
@@ -406,9 +406,9 @@ export default function InternationalCollaboration() {
       </section>
 
       {/* CTA */}
-      <section className="relative py-20 bg-foreground overflow-hidden">
+      <section className="relative py-12 bg-foreground overflow-hidden">
         <div className="absolute inset-0 bg-primary/10 blur-[120px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -419,31 +419,31 @@ export default function InternationalCollaboration() {
             <img
               src="/arccilogoWithText.png"
               alt="AECCI Logo"
-              className="w-32 h-auto object-contain mb-6"
+              className="w-24 h-auto object-contain mb-4"
             />
-            <h2 className="text-3xl md:text-4xl font-bold text-background mb-4 uppercase tracking-wide">
+            <h2 className="text-2xl md:text-3xl font-bold text-background mb-3 uppercase tracking-wide">
               Come Grow With Us!
             </h2>
-            <p className="text-background/60 text-base max-w-xl mb-8">
+            <p className="text-background/60 text-sm max-w-xl mb-6">
               Our active participation in international exhibitions, trade
               missions, B2B forums, and global business events enables Indian
               businesses to access new markets, build trusted partnerships, and
               expand their global footprint.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center">
               <a
-                href="mailto:info@aecci.org.in"
-                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors"
+                href="/partner/register"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors"
               >
                 Become a Collaborator <ArrowRight className="size-4" />
               </a>
               <Link
                 to="/services/membership"
-                className="inline-flex items-center gap-2 bg-background/10 border border-background/20 text-background px-8 py-3 rounded-full font-semibold text-sm hover:bg-background/20 transition-colors"
+                className="inline-flex items-center gap-2 bg-background/10 border border-background/20 text-background px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-background/20 transition-colors"
               >
                 Find Out More About Our Services
               </Link>
-            </div>
+            </div>  
           </motion.div>
         </div>
       </section>
