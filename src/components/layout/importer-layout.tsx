@@ -50,7 +50,7 @@ export function ImporterLayout({ children }: ImporterLayoutProps) {
               </Header>
             )}
             {children ?? <Outlet />}
-            <RoleTour role="user" />
+            <RoleTour role="importer" />
           </SidebarInset>
         </SidebarProvider>
       </LayoutProvider>

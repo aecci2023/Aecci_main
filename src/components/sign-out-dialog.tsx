@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 
 interface SignOutDialogProps {
@@ -7,10 +6,12 @@ interface SignOutDialogProps {
 }
 
 export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
-  const navigate = useNavigate();
 
   const handleSignOut = () => {
-    navigate("/");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    window.location.href = "/";
   };
 
   return (

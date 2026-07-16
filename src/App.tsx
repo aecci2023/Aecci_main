@@ -20,6 +20,7 @@ export default function App() {
   const isPartnerPage = location.pathname.startsWith("/partner");
   const isImporterPage = location.pathname.startsWith("/importer");
   const isRegisterPage = location.pathname.startsWith("/register");
+  const isAgentPage = location.pathname.startsWith("/agent");
   const hideChrome =
     isSignupPage ||
     isDashboardPage ||
@@ -27,7 +28,8 @@ export default function App() {
     isAdminPage ||
     isPartnerPage ||
     isImporterPage ||
-    isRegisterPage;
+    isRegisterPage ||
+    isAgentPage;
 
   useEffect(() => {
     if (hideChrome) {

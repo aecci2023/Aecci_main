@@ -1,5 +1,6 @@
 import { AdminLayout } from "@/components/layout/admin-layout";
 import { AuthenticatedLayout } from "@/components/layout/authenticated-layout";
+import { AgentLayout } from "@/components/layout/agent-layout";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { Chats } from "@/features/chats";
 import { Settings } from "@/features/settings";
@@ -7,111 +8,112 @@ import { SettingsAccount } from "@/features/settings/account";
 import { SettingsAppearance } from "@/features/settings/appearance";
 import { SettingsNotifications } from "@/features/settings/notifications";
 import { SettingsProfile } from "@/features/settings/profile";
-import AdminAnnouncementsPage from "@/pages/admin/announcements";
-import AdminBusinessesPage from "@/pages/admin/businesses";
-import AdminCountryIntelligencePage from "@/pages/admin/country-intelligence";
-import AdminDashboard from "@/pages/admin/dashboard";
-import AdminIndividualsPage from "@/pages/admin/individuals";
-import AdminInvoicesPage from "@/pages/admin/invoices";
-import AdminJobApplicationsPage from "@/pages/admin/job-applications";
-import AdminMarketplacePage from "@/pages/admin/marketplace";
-import AdminPartnersPage from "@/pages/admin/partners";
-import AdminQuestionsPage from "@/pages/admin/questions";
-import AdminReportsPage from "@/pages/admin/reports";
-import AdminSessionsPage from "@/pages/admin/sessions";
-import AdminTransactionsPage from "@/pages/admin/transactions";
-import AdminUsersPage from "@/pages/admin/users";
-import AdminVerificationsPage from "@/pages/admin/verifications";
-import AdminVerificationDetailsPage from "@/pages/admin/verifications/details";
-import AdminPartnerVerificationDetailsPage from "@/pages/admin/verifications/partner-details";
-import DashboardPage from "@/pages/dashboard";
-import ApplicationPage from "@/pages/dashboard/application";
-import ApprovalPage from "@/pages/dashboard/approval";
-import FollowUpServicesPage from "@/pages/dashboard/follow-up-services";
-import IntelligencePage from "@/pages/dashboard/intelligence";
-import LiveDealRoomPage from "@/pages/dashboard/live-deal-room";
-import MarketplacePage from "@/pages/dashboard/marketplace";
-import MySessionsPage from "@/pages/dashboard/my-sessions";
-import OpportunityReportPage from "@/pages/dashboard/opportunity-report";
-import PartnerBriefPage from "@/pages/dashboard/partner-brief";
-import PaymentPage from "@/pages/dashboard/payment";
-import PaymentSuccessPage from "@/pages/dashboard/payment-success";
-import RejectedApplicationPage from "@/pages/dashboard/rejected";
-import ServicePurchasePage from "@/pages/dashboard/service-purchase";
-import SessionDetailsPage from "@/pages/dashboard/session-details";
-import SessionSummaryPage from "@/pages/dashboard/session-summary";
-import SubmitQuestionsPage from "@/pages/dashboard/submit-questions";
-import VerificationPage from "@/pages/dashboard/verification";
-import WaitingRoomPage from "@/pages/dashboard/waiting-room";
-// import MainHomepage from "@/pages/MainHomepage"; //old homepage
-import Home from "@/pages/Home";
-import LandingPage from "@/pages/LandingPage";
-import LoginPage from "@/pages/login";
+import AdminAnnouncementsPage from "@/pages/dashboard/admin/announcements";
+import AdminBusinessesPage from "@/pages/dashboard/admin/businesses";
+import AdminCountryIntelligencePage from "@/pages/dashboard/admin/country-intelligence";
+import AdminDashboard from "@/pages/dashboard/admin/dashboard";
+import AdminIndividualsPage from "@/pages/dashboard/admin/individuals";
+import AdminInvoicesPage from "@/pages/dashboard/admin/invoices";
+import AdminJobApplicationsPage from "@/pages/dashboard/admin/job-applications";
+import AdminMarketplacePage from "@/pages/dashboard/admin/marketplace";
+import AdminPartnersPage from "@/pages/dashboard/admin/partners";
+import AdminQuestionsPage from "@/pages/dashboard/admin/questions";
+import AdminReportsPage from "@/pages/dashboard/admin/reports";
+import AdminSessionsPage from "@/pages/dashboard/admin/sessions";
+import AdminTransactionsPage from "@/pages/dashboard/admin/transactions";
+import AdminUsersPage from "@/pages/dashboard/admin/users";
+import AdminVerificationsPage from "@/pages/dashboard/admin/verifications";
+import AdminVerificationDetailsPage from "@/pages/dashboard/admin/verifications/details";
+import AdminPartnerVerificationDetailsPage from "@/pages/dashboard/admin/verifications/partner-details";
+import AgentDashboard from "@/pages/dashboard/agent/index";
+import DashboardPage from "@/pages/dashboard/exporter";
+import ApplicationPage from "@/pages/dashboard/exporter/application";
+import ApprovalPage from "@/pages/dashboard/exporter/approval";
+import FollowUpServicesPage from "@/pages/dashboard/exporter/follow-up-services";
+import IntelligencePage from "@/pages/dashboard/exporter/intelligence";
+import LiveDealRoomPage from "@/pages/dashboard/exporter/live-deal-room";
+import MarketplacePage from "@/pages/dashboard/exporter/marketplace";
+import MySessionsPage from "@/pages/dashboard/exporter/my-sessions";
+import OpportunityReportPage from "@/pages/dashboard/exporter/opportunity-report";
+import PartnerBriefPage from "@/pages/dashboard/exporter/partner-brief";
+import PaymentPage from "@/pages/dashboard/exporter/payment";
+import PaymentSuccessPage from "@/pages/dashboard/exporter/payment-success";
+import RejectedApplicationPage from "@/pages/dashboard/exporter/rejected";
+import ServicePurchasePage from "@/pages/dashboard/exporter/service-purchase";
+import SessionDetailsPage from "@/pages/dashboard/exporter/session-details";
+import SessionSummaryPage from "@/pages/dashboard/exporter/session-summary";
+import SubmitQuestionsPage from "@/pages/dashboard/exporter/submit-questions";
+import VerificationPage from "@/pages/dashboard/exporter/verification";
+import WaitingRoomPage from "@/pages/dashboard/exporter/waiting-room";
+// import MainHomepage from "@/pages/public/MainHomepage"; //old homepage
+import Home from "@/pages/public/Home";
+import LandingPage from "@/pages/public/LandingPage";
+import LoginPage from "@/pages/auth/login";
 import { NotFound } from "@/pages/not-found";
-import SignupPage from "@/pages/signup";
+import SignupPage from "@/pages/auth/signup";
 import type { RouteObject } from "react-router-dom";
 
 import { PartnerLayout } from "@/components/layout/partner-layout";
 
-import AdminSubscriptionsPage from "@/pages/admin/subscriptions";
-import UserInvoicesPage from "@/pages/dashboard/invoices";
-import AdvertiseWithUsPage from "@/pages/events/advertise-with-us";
-import PublicationsPage from "@/pages/events/publications";
-import SponsorshipPage from "@/pages/events/sponsorship";
-import ImporterRegisterPage from "@/pages/importer/register";
-import ImporterDashboard from "@/pages/importer/dashboard";
+import AdminSubscriptionsPage from "@/pages/dashboard/admin/subscriptions";
+import UserInvoicesPage from "@/pages/dashboard/exporter/invoices";
+import AdvertiseWithUsPage from "@/pages/public/events/advertise-with-us";
+import PublicationsPage from "@/pages/public/events/publications";
+import SponsorshipPage from "@/pages/public/events/sponsorship";
+import ImporterRegisterPage from "@/pages/dashboard/importer/register";
+import ImporterDashboard from "@/pages/dashboard/importer/dashboard";
 import { ImporterLayout } from "@/components/layout/importer-layout";
 import NotificationsPage from "@/pages/notifications";
-import BecomePartnerPage from "@/pages/partner/apply";
-import PartnerAvailabilityPage from "@/pages/partner/availability";
-import PartnerDashboard from "@/pages/partner/dashboard";
-import PartnerOnboardingPage from "@/pages/partner/onboarding";
-import PartnerProfilePage from "@/pages/partner/profile";
-import PartnerQuestionsPage from "@/pages/partner/questions";
-import PartnerRegisterPage from "@/pages/partner/register";
-import PartnerPastSessionsPage from "@/pages/partner/sessions/past";
-import PartnerSubmitSummaryPage from "@/pages/partner/sessions/submit-summary";
-import PartnerUpcomingSessionsPage from "@/pages/partner/sessions/upcoming";
-import RegisterRoleSelection from "@/pages/register";
+import BecomePartnerPage from "@/pages/dashboard/partner/apply";
+import PartnerAvailabilityPage from "@/pages/dashboard/partner/availability";
+import PartnerDashboard from "@/pages/dashboard/partner/dashboard";
+import PartnerOnboardingPage from "@/pages/dashboard/partner/onboarding";
+import PartnerProfilePage from "@/pages/dashboard/partner/profile";
+import PartnerQuestionsPage from "@/pages/dashboard/partner/questions";
+import PartnerRegisterPage from "@/pages/dashboard/partner/register";
+import PartnerPastSessionsPage from "@/pages/dashboard/partner/sessions/past";
+import PartnerSubmitSummaryPage from "@/pages/dashboard/partner/sessions/submit-summary";
+import PartnerUpcomingSessionsPage from "@/pages/dashboard/partner/sessions/upcoming";
+import RegisterRoleSelection from "@/pages/auth/register";
 
-import AboutChamberPage from "@/pages/about/AboutChamber";
-import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
-import ChamberDynamicsPage from "@/pages/about/ChamberDynamics";
-import ChamberPolicyPage from "@/pages/about/ChamberPolicy";
-import JobOpportunitiesPage from "@/pages/about/JobOpportunities";
-import OfficeBearersPage from "@/pages/about/OfficeBearers";
-import OurHistoryPage from "@/pages/about/OurHistory";
-import RolesResponsibilityPage from "@/pages/about/RolesResponsibility";
-import StrategicPartnersPage from "@/pages/about/strategic-partners";
-import AecciIacPanelPage from "@/pages/arbitration-center/aecci-iac-panel";
-import AecciIacFaqPage from "@/pages/arbitration-center/faq";
-import ModelClausePage from "@/pages/arbitration-center/model-clause";
-import RulesAndPoliciesPage from "@/pages/arbitration-center/rules-and-policies";
-import ScheduleFeesPage from "@/pages/arbitration-center/schedule-fees";
-import WhyAecciIacPage from "@/pages/arbitration-center/why-aecci-iac";
-import HeadOfficePage from "@/pages/contact-us/head-office";
-import InternationalHubPage from "@/pages/contact-us/international-hub";
-import EPlatformInformationPage from "@/pages/e-platform/e-platform-information";
-import FormalitiesGuidelinesPage from "@/pages/e-platform/formalities-guidelines";
-import AttestationFeesInformationPage from "@/pages/e-platform/formalities-guidelines/attestation-fees-information";
-import CooFormatPage from "@/pages/e-platform/formalities-guidelines/coo-format";
-import IndemnityBondFormatPage from "@/pages/e-platform/formalities-guidelines/indemnity-bond-format";
-import InformationForEServicesPage from "@/pages/e-platform/formalities-guidelines/information-for-e-services";
-import PastEventsPage from "@/pages/events/past-events";
-import InternationalCollaborationPage from "@/pages/international-collaboration";
-import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/international-collaboration/partnerships/index";
-import PartnerDetailPage from "@/pages/international-collaboration/partnerships/PartnerDetail";
-import MediaCenterPage from "@/pages/media/media-center";
-import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import EnrollmentOffers from "@/pages/services/membership/EnrollmentOffers";
-import FeeFormsGuidelines from "@/pages/services/membership/FeeFormsGuidelines";
-import Membership from "@/pages/services/membership/Membership";
-import MembershipBenefits from "@/pages/services/membership/MembershipBenefits";
-import PatronMembership from "@/pages/services/membership/patron-membership";
-import RenewMembership from "@/pages/services/membership/RenewMembership";
-import VisaRecommendation from "@/pages/services/membership/VisaRecommendation";
-import TermsConditions from "@/pages/TermsConditions";
-import UpcomingEventsPage from "@/pages/upcoming-events";
+import AboutChamberPage from "@/pages/public/about/AboutChamber";
+import ChairmanMessagePage from "@/pages/public/about/ChairmanMessage";
+import ChamberDynamicsPage from "@/pages/public/about/ChamberDynamics";
+import ChamberPolicyPage from "@/pages/public/about/ChamberPolicy";
+import JobOpportunitiesPage from "@/pages/public/about/JobOpportunities";
+import OfficeBearersPage from "@/pages/public/about/OfficeBearers";
+import OurHistoryPage from "@/pages/public/about/OurHistory";
+import RolesResponsibilityPage from "@/pages/public/about/RolesResponsibility";
+import StrategicPartnersPage from "@/pages/public/about/strategic-partners";
+import AecciIacPanelPage from "@/pages/public/arbitration-center/aecci-iac-panel";
+import AecciIacFaqPage from "@/pages/public/arbitration-center/faq";
+import ModelClausePage from "@/pages/public/arbitration-center/model-clause";
+import RulesAndPoliciesPage from "@/pages/public/arbitration-center/rules-and-policies";
+import ScheduleFeesPage from "@/pages/public/arbitration-center/schedule-fees";
+import WhyAecciIacPage from "@/pages/public/arbitration-center/why-aecci-iac";
+import HeadOfficePage from "@/pages/public/contact-us/head-office";
+import InternationalHubPage from "@/pages/public/contact-us/international-hub";
+import EPlatformInformationPage from "@/pages/public/e-platform/e-platform-information";
+import FormalitiesGuidelinesPage from "@/pages/public/e-platform/formalities-guidelines";
+import AttestationFeesInformationPage from "@/pages/public/e-platform/formalities-guidelines/attestation-fees-information";
+import CooFormatPage from "@/pages/public/e-platform/formalities-guidelines/coo-format";
+import IndemnityBondFormatPage from "@/pages/public/e-platform/formalities-guidelines/indemnity-bond-format";
+import InformationForEServicesPage from "@/pages/public/e-platform/formalities-guidelines/information-for-e-services";
+import PastEventsPage from "@/pages/public/events/past-events";
+import InternationalCollaborationPage from "@/pages/public/international-collaboration";
+import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/public/international-collaboration/partnerships/index";
+import PartnerDetailPage from "@/pages/public/international-collaboration/partnerships/PartnerDetail";
+import MediaCenterPage from "@/pages/public/media/media-center";
+import PrivacyPolicy from "@/pages/public/PrivacyPolicy";
+import EnrollmentOffers from "@/pages/public/services/membership/EnrollmentOffers";
+import FeeFormsGuidelines from "@/pages/public/services/membership/FeeFormsGuidelines";
+import Membership from "@/pages/public/services/membership/Membership";
+import MembershipBenefits from "@/pages/public/services/membership/MembershipBenefits";
+import PatronMembership from "@/pages/public/services/membership/patron-membership";
+import RenewMembership from "@/pages/public/services/membership/RenewMembership";
+import VisaRecommendation from "@/pages/public/services/membership/VisaRecommendation";
+import TermsConditions from "@/pages/public/TermsConditions";
+import UpcomingEventsPage from "@/pages/public/upcoming-events";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -352,8 +354,38 @@ export const routes: RouteObject[] = [
     ],
   },
   {
+    path: "/agent",
+    element: <ProtectedRoute allowedRoles={["agent"]} />,
+    children: [
+      {
+        path: "",
+        element: <AgentLayout />,
+        children: [
+          {
+            path: "dashboard",
+            element: <AgentDashboard />,
+          },
+          {
+            path: "messages",
+            element: <Chats />,
+          },
+          {
+            path: "settings",
+            element: <Settings />,
+            children: [
+              { index: true, element: <SettingsProfile /> },
+              { path: "account", element: <SettingsAccount /> },
+              { path: "appearance", element: <SettingsAppearance /> },
+              { path: "notifications", element: <SettingsNotifications /> },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: "/dashboard",
-    element: <ProtectedRoute allowedRoles={["user"]} />,
+    element: <ProtectedRoute allowedRoles={["exporter"]} />,
     children: [
       {
         path: "rejected",

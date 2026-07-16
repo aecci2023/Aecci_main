@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SignOutDialog } from "@/components/sign-out-dialog";
-import { User, Settings, BadgeCheck, LogOut, Bell } from "lucide-react";
+import { User, Settings, BadgeCheck, LogOut, Bell, Home } from "lucide-react";
 import { NotificationBell } from "@/components/notification-bell";
 
 function getInitials(name: string) {
@@ -24,7 +24,7 @@ function getInitials(name: string) {
     .join("");
 }
 
-export function ProfileDropdown() {
+export function ProfileDropdown({ hideNotifications, isOutside }: { hideNotifications?: boolean; isOutside?: boolean } = {}) {
   const [open, setOpen] = useDialogState();
 
   const userStr = localStorage.getItem("user");
@@ -58,15 +58,26 @@ export function ProfileDropdown() {
         ? "/admin/notifications"
         : "/dashboard/notifications";
 
+  const dashboardLink =
+    role === "admin"
+      ? "/admin/dashboard"
+      : role === "partner"
+      ? "/partner/dashboard"
+      : role === "importer"
+      ? "/importer/dashboard"
+      : role === "agent"
+      ? "/agent/dashboard"
+      : "/dashboard";
+
   return (
     <>
       <div className="flex items-center gap-3">
-        <NotificationBell />
+        {!hideNotifications && <NotificationBell />}
 
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-              <Avatar className="h-8 w-8">
+            <Button variant="ghost" className={`relative rounded-full ${isOutside ? 'h-10 w-10' : 'h-8 w-8'}`}>
+              <Avatar className={isOutside ? 'h-10 w-10' : 'h-8 w-8'}>
                 <AvatarImage src={avatar} alt={displayName} />
                 <AvatarFallback className="bg-primary/10 text-primary font-bold text-xs">
                   {initials}
@@ -85,30 +96,47 @@ export function ProfileDropdown() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <Link to={profileLink} className="flex items-center gap-2">
-                  <User className="size-4" />
-                  Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to={`${profileLink}/account`} className="flex items-center gap-2">
-                  <BadgeCheck className="size-4" />
-                  Account
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to={`${profileLink}`} className="flex items-center gap-2">
-                  <Settings className="size-4" />
-                  Settings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to={notificationsLink} className="flex items-center gap-2">
-                  <Bell className="size-4" />
-                  Notifications
-                </Link>
-              </DropdownMenuItem>
+              {isOutside ? (
+                <DropdownMenuItem asChild>
+                  <Link to={dashboardLink} className="flex items-center gap-2">
+                    <Home className="size-4" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+              ) : (
+                <>
+                  <DropdownMenuItem asChild>
+                    <Link to="/" className="flex items-center gap-2">
+                      <Home className="size-4" />
+                      Home
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to={profileLink} className="flex items-center gap-2">
+                      <User className="size-4" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to={`${profileLink}/account`} className="flex items-center gap-2">
+                      <BadgeCheck className="size-4" />
+                      Account
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to={`${profileLink}`} className="flex items-center gap-2">
+                      <Settings className="size-4" />
+                      Settings
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to={notificationsLink} className="flex items-center gap-2">
+                      <Bell className="size-4" />
+                      Notifications
+                    </Link>
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem

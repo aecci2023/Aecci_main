@@ -6,8 +6,11 @@ import { Link, useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
 import { menuConfig } from "./menu-config";
 import MobileMenu from "./MobileMenu";
+import { useAuth } from "@/hooks/useAuth";
+import { ProfileDropdown } from "@/components/profile-dropdown";
 
 export default function Navbar() {
+  const { isAuthenticated } = useAuth();
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
   const [brandVisible, setBrandVisible] = React.useState(true);
@@ -97,19 +100,22 @@ export default function Navbar() {
 
             {/* Mobile: User icon right */}
             <div className="flex lg:hidden items-center justify-end w-1/3">
-              <a
-                href="https://e-platform.aecci.org.in/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={[
-                  "flex size-9 items-center justify-center rounded-full p-0",
-                  "bg-black/[0.04] dark:bg-white/[0.06]",
-                  "border border-black/[0.08] dark:border-white/[0.08]",
-                  "text-foreground hover:text-primary transition-all duration-200",
-                ].join(" ")}
-              >
-                <User className="size-[18px]" />
-              </a>
+              {isAuthenticated ? (
+                <ProfileDropdown hideNotifications isOutside />
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={handleClose}
+                  className={[
+                    "flex size-9 items-center justify-center rounded-full p-0",
+                    "bg-black/[0.04] dark:bg-white/[0.06]",
+                    "border border-black/[0.08] dark:border-white/[0.08]",
+                    "text-foreground hover:text-primary transition-all duration-200",
+                  ].join(" ")}
+                >
+                  <User className="size-[18px]" />
+                </Link>
+              )}
             </div>
 
             {/* Desktop: Logo Left */}
@@ -173,22 +179,28 @@ export default function Navbar() {
                 "opacity-100",
               ].join(" ")}
             >
-              {/* Auth */}
-              <Link
-                to="/login"
-                onClick={handleClose}
-                className="inline-flex items-center justify-center h-10 px-4 text-[14px] font-[500] text-foreground/75 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
-              >
-                Login
-              </Link>
+              {isAuthenticated ? (
+                <ProfileDropdown hideNotifications isOutside />
+              ) : (
+                <>
+                  {/* Auth */}
+                  <Link
+                    to="/login"
+                    onClick={handleClose}
+                    className="inline-flex items-center justify-center h-10 px-4 text-[14px] font-[500] text-foreground/75 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
+                  >
+                    Login
+                  </Link>
 
-              <Link
-                to="/signup"
-                onClick={handleClose}
-                className="inline-flex items-center justify-center h-10 px-6 text-[14px] font-[600] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
-              >
-                Join Now
-              </Link>
+                  <Link
+                    to="/signup"
+                    onClick={handleClose}
+                    className="inline-flex items-center justify-center h-10 px-6 text-[14px] font-[600] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
+                  >
+                    Join Now
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

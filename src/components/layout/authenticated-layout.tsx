@@ -28,7 +28,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
             )}
           >
             {children ?? <Outlet />}
-            <RoleTour role="user" />
+            <RoleTour role="exporter" />
           </SidebarInset>
         </SidebarProvider>
       </LayoutProvider>

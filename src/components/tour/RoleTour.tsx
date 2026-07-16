@@ -4,12 +4,39 @@ import "driver.js/dist/driver.css";
 import { useAuth } from "@/hooks/useAuth";
 
 type RoleTourProps = {
-  role: "user" | "admin" | "partner";
+  role: "exporter" | "admin" | "partner" | "agent" | "importer";
 };
 
 export function RoleTour({ role }: RoleTourProps) {
   const { user } = useAuth();
   const hasRun = useRef(false);
+
+  const completeTourInBackend = async () => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      if (!token) return;
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:8000"}/api/users/complete-tour`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Update local storage user object so it doesn't re-trigger
+        const userStr = localStorage.getItem("user");
+        if (userStr) {
+          const userObj = JSON.parse(userStr);
+          userObj.hasCompletedTour = true;
+          localStorage.setItem("user", JSON.stringify(userObj));
+        }
+      }
+    } catch (error) {
+      console.error("Failed to mark tour as complete", error);
+    }
+  };
 
   useEffect(() => {
     // Only run if the user hasn't completed the tour and it hasn't run in this session
@@ -19,7 +46,7 @@ export function RoleTour({ role }: RoleTourProps) {
 
     // Determine steps based on role
     let steps: any[] = [];
-    if (role === "user") {
+    if (role === "exporter") {
       steps = [
         {
           element: '[data-sidebar="sidebar"]', // Highlighting the generic sidebar container
@@ -128,33 +155,6 @@ export function RoleTour({ role }: RoleTourProps) {
       }, 500);
     }
   }, [role, user]);
-
-  const completeTourInBackend = async () => {
-    try {
-      const token = localStorage.getItem("accessToken");
-      if (!token) return;
-
-      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:8000"}/api/users/complete-tour`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        // Update local storage user object so it doesn't re-trigger
-        const userStr = localStorage.getItem("user");
-        if (userStr) {
-          const userObj = JSON.parse(userStr);
-          userObj.hasCompletedTour = true;
-          localStorage.setItem("user", JSON.stringify(userObj));
-        }
-      }
-    } catch (error) {
-      console.error("Failed to mark tour as complete", error);
-    }
-  };
 
   return null; // This component doesn't render any UI itself
 }
