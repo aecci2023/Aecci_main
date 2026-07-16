@@ -711,7 +711,7 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full py-4 md:py-6 z-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full py-4 md:py-4 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <motion.div
             variants={staggerContainer}
@@ -778,26 +778,13 @@ const Hero: React.FC = () => {
             <motion.div
               variants={fadeUp}
               className="mt-8 flex flex-wrap gap-4"
-            >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Link
-                  to="/register"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F5B942] to-[#F59E0B] text-[#071B38] font-semibold px-6 py-3 rounded-full shadow-lg shadow-[#F5B942]/30 hover:shadow-[#F5B942]/50 transition-all"
-                >
-                  Get Started
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
+            >             
             </motion.div>
 
             {/* Stats */}
             <motion.div
               variants={fadeUp}
-              className="mt-8 flex gap-8"
+              className="mt-1 flex gap-8"
             >
               {[
                 { value: '2500+', label: 'Deal Rooms' },

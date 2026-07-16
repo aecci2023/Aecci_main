@@ -78,7 +78,7 @@ export default function Navbar() {
               : "",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[84px] lg:h-[100px] w-full max-w-[95%] 2xl:max-w-[1600px] items-center justify-between px-4 lg:px-6 relative">
+          <div className="mx-auto flex h-[84px] lg:h-[70px] w-full max-w-[95%] 2xl:max-w-[1600px] items-center justify-between px-4 lg:px-6 relative">
             {/* Mobile: Hamburger */}
             <div className="flex lg:hidden items-center w-1/3">
               <MobileMenu />
@@ -239,7 +239,7 @@ export default function Navbar() {
             style={{ top: 0 }}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence>  
     </>
   );
 }

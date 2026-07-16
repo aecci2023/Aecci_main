@@ -81,6 +81,7 @@ import OfficeBearersPage from "@/pages/about/OfficeBearers";
 import OurHistoryPage from "@/pages/about/OurHistory";
 import RolesResponsibilityPage from "@/pages/about/RolesResponsibility";
 import StrategicPartnersPage from "@/pages/about/strategic-partners";
+import AccessPlans from "@/pages/Access-plans";
 import AecciIacPanelPage from "@/pages/arbitration-center/aecci-iac-panel";
 import AecciIacFaqPage from "@/pages/arbitration-center/faq";
 import ModelClausePage from "@/pages/arbitration-center/model-clause";
@@ -96,6 +97,7 @@ import CooFormatPage from "@/pages/e-platform/formalities-guidelines/coo-format"
 import IndemnityBondFormatPage from "@/pages/e-platform/formalities-guidelines/indemnity-bond-format";
 import InformationForEServicesPage from "@/pages/e-platform/formalities-guidelines/information-for-e-services";
 import PastEventsPage from "@/pages/events/past-events";
+import Interest from "@/pages/Interest";
 import InternationalCollaborationPage from "@/pages/international-collaboration";
 import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/international-collaboration/partnerships/index";
 import PartnerDetailPage from "@/pages/international-collaboration/partnerships/PartnerDetail";
@@ -910,6 +912,14 @@ export const routes: RouteObject[] = [
 {
   path: "/privacy-policy",
   element: <PrivacyPolicy />,
+},
+{
+  path: "/Access-plans",
+  element: <AccessPlans />,
+},
+{
+  path: "/Interest",
+  element: <Interest />,
 },
   {
     path: "*",
