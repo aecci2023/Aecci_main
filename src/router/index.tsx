@@ -59,6 +59,8 @@ import AdvertiseWithUsPage from "@/pages/events/advertise-with-us";
 import PublicationsPage from "@/pages/events/publications";
 import SponsorshipPage from "@/pages/events/sponsorship";
 import ImporterRegisterPage from "@/pages/importer/register";
+import ImporterDashboard from "@/pages/importer/dashboard";
+import { ImporterLayout } from "@/components/layout/importer-layout";
 import NotificationsPage from "@/pages/notifications";
 import BecomePartnerPage from "@/pages/partner/apply";
 import PartnerAvailabilityPage from "@/pages/partner/availability";
@@ -148,6 +150,19 @@ export const routes: RouteObject[] = [
     path: "/importer",
     children: [
       { path: "register", element: <ImporterRegisterPage /> },
+      {
+        path: "",
+        element: <ProtectedRoute allowedRoles={["importer"]} />,
+        children: [
+          {
+            path: "",
+            element: <ImporterLayout />,
+            children: [
+              { path: "dashboard", element: <ImporterDashboard /> },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
