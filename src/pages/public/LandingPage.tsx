@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import * as Icons from "lucide-react";
 import {
   ArrowRight,
@@ -395,7 +396,6 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role, onClose }) =
   };
 
   const roleData = getRoleData();
-  const IconComponent = roleData.icon;
 
   const planVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -650,7 +650,7 @@ interface AudienceProps {
 }
 
 function Audience({ onRoleClick }: AudienceProps) {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
     hover: {

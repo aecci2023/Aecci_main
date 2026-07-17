@@ -1,7 +1,6 @@
 import {
     ArrowRight,
     Building2,
-    Check,
     ChevronDown,
     ChevronUp,
     FileText,
@@ -10,7 +9,6 @@ import {
     Info,
     Play,
     ShieldCheck,
-    Star,
     X,
     Zap,
     Factory,
