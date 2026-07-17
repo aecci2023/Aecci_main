@@ -114,6 +114,7 @@ import RenewMembership from "@/pages/public/services/membership/RenewMembership"
 import VisaRecommendation from "@/pages/public/services/membership/VisaRecommendation";
 import TermsConditions from "@/pages/public/TermsConditions";
 import UpcomingEventsPage from "@/pages/public/upcoming-events";
+import Interest from "@/pages/public/Exporter/interest-form";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -957,6 +958,10 @@ export const routes: RouteObject[] = [
 {
   path: "/privacy-policy",
   element: <PrivacyPolicy />,
+},
+{
+  path: "/interest-form",
+  element: <Interest />,
 },
   {
     path: "*",

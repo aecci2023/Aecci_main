@@ -65,7 +65,7 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
 const socialLinks = [
   { label: "Facebook", icon: FacebookLogo, href: "#" },
   { label: "Twitter", icon: TwitterLogo, href: "#" },
-  { label: "YouTube", icon: YoutubeLogo, href: "#" }, 
+  { label: "YouTube", icon: YoutubeLogo, href: "#" },
   { label: "LinkedIn", icon: LinkedinLogo, href: "#" },
   { label: "Instagram", icon: InstagramLogo, href: "#" },
 ];
@@ -83,7 +83,7 @@ export default function Footer() {
           <div className="md:col-span-3 flex flex-col items-start">
             <Link to="/" className="block cursor-pointer">
               <img
-                src="/aecci-logo-horizontal.png"
+                src="/aecci-logoonly.png"
                 alt="AECCI"
                 className="h-16 md:h-20 w-auto object-contain"
               />
@@ -94,10 +94,10 @@ export default function Footer() {
             </h3>
 
             <div className="mt-3 text-[12.5px] leading-relaxed text-muted-foreground font-light max-w-xs">
-              <p className="font-semibold text-foreground">
+              {/* <p className="font-semibold text-foreground">
                 Asian Exporters’ Chamber Of Commerce & Industry
-              </p>
-              <p className="mt-1">
+              </p> */}
+              <p className="mt-1 font-semibold">
                 604 | 6th floor | Hilton Center | Plot no.66 | Sector No.11 |
                 CBD Belapur | Navi Mumbai-400614 | Maharashtra-India</p>
             </div>
