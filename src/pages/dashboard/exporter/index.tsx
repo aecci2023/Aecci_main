@@ -12,14 +12,12 @@ import {
   ChevronRight,
   Crown,
   Eye,
-  FileText,
   Globe,
   Headphones,
   PenLine,
   Target,
   TrendingUp,
   Users,
-  User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
@@ -31,8 +29,47 @@ import usaImg from "@/assets/dashboard/exporter/usa.jpg";
 import saudiImg from "@/assets/dashboard/exporter/saudi.jpg";
 import kenyaImg from "@/assets/dashboard/exporter/kenya.jpg";
 import upgradeBanner from "@/assets/dashboard/exporter/upgrade-banner.png";
+import { ExporterCard } from "@/components/exporter/exporter-page-layout";
 
 const FLAG = (code: string) => `https://flagcdn.com/w80/${code}.png`;
+
+const DASHBOARD_QUICK_ACTIONS = [
+  {
+    label: "Book New Session",
+    sub: "Schedule a meeting",
+    to: "/dashboard/my-sessions",
+    icon: Calendar,
+    color: "text-[#175CD3] bg-[#EFF8FF]",
+  },
+  {
+    label: "Browse Countries",
+    sub: "Explore global markets",
+    to: "/dashboard/intelligence",
+    icon: Globe,
+    color: "text-[#175CD3] bg-[#EFF8FF]",
+  },
+  {
+    label: "My Meetings",
+    sub: "View your all meetings",
+    to: "/dashboard/my-sessions",
+    icon: Calendar,
+    color: "text-[#039855] bg-[#ECFDF3]",
+  },
+  {
+    label: "Post Requirement",
+    sub: "Get matched with buyers",
+    to: "/dashboard/my-requirements",
+    icon: PenLine,
+    color: "text-[#F79009] bg-[#FFFAEB]",
+  },
+];
+
+const DASHBOARD_DEAL_STEPS = [
+  { title: "Choose Country", desc: "Select a country you want to explore." },
+  { title: "Join Deal Room", desc: "Enter the deal room and submit your request." },
+  { title: "Connect", desc: "Get matched with verified buyers and partners." },
+  { title: "Grow Business", desc: "Close deals and expand globally." },
+];
 
 const FEATURED_COUNTRIES = [
   {
@@ -138,49 +175,6 @@ const FALLBACK_MEETINGS = [
   },
 ];
 
-const PLAN_FEATURES = [
-  "4 Private Deal Room Sessions",
-  "Access to 4 Target Countries",
-  "Buyer Matchmaking Support",
-  "Country Intelligence Reports",
-  "Priority Session Scheduling",
-  "Document Verification Support",
-  "Validity: 90 Days",
-];
-
-const QUICK_ACTIONS = [
-  {
-    label: "Browse Countries",
-    icon: Globe,
-    to: "/dashboard/intelligence",
-    color: "text-[#2563EB] bg-[#EFF6FF]",
-  },
-  {
-    label: "View All Sessions",
-    icon: Calendar,
-    to: "/dashboard/my-sessions",
-    color: "text-[#7C3AED] bg-[#F5F3FF]",
-  },
-  {
-    label: "Post Requirement",
-    icon: PenLine,
-    to: "/dashboard/opportunity-report",
-    color: "text-[#D97706] bg-[#FFFBEB]",
-  },
-  {
-    label: "My Profile",
-    icon: User,
-    to: "/dashboard/settings",
-    color: "text-[#059669] bg-[#ECFDF5]",
-  },
-  {
-    label: "Documents",
-    icon: FileText,
-    to: "/dashboard/verification",
-    color: "text-[#64748B] bg-[#F1F5F9]",
-  },
-];
-
 function countryFlagCode(country?: string) {
   if (!country) return "in";
   const map: Record<string, string> = {
@@ -221,17 +215,17 @@ function KpiCard({
   sub: string;
 }) {
   return (
-    <div className="rounded-xl border border-[#E4E7EC] bg-white px-4 py-3.5 shadow-[0_1px_2px_rgba(16,24,40,0.05)]">
-      <div className="mb-2.5 flex items-start justify-between gap-2">
-        <p className="text-[11px] font-medium text-[#98A2B3]">{label}</p>
+    <div className="rounded-xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)]">
+      <div className="flex items-start justify-between gap-2">
+        <p className="text-[10px] font-medium text-[#98A2B3]">{label}</p>
         <span
-          className={`flex size-[26px] shrink-0 items-center justify-center rounded-full ${iconBg}`}
+          className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${iconBg}`}
         >
           {icon}
         </span>
       </div>
-      <div>{children}</div>
-      <p className="mt-1 text-[11px] text-[#98A2B3]">{sub}</p>
+      <div className="mt-2">{children}</div>
+      <p className="mt-1 text-[10px] text-[#98A2B3]">{sub}</p>
     </div>
   );
 }
@@ -435,18 +429,18 @@ export default function DashboardPage() {
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
               <KpiCard
                 label="Active Plan"
-                icon={<Crown className="size-3.5 text-[#444CE7]" />}
-                iconBg="bg-[#EEF4FF]"
+                icon={<Crown className="size-4 text-[#175CD3]" />}
+                iconBg="bg-[#EFF8FF]"
                 sub="Valid till 20 Sep 2025"
               >
-                <p className="text-[14px] font-bold leading-snug text-[#2563EB]">
+                <p className="text-[14px] font-bold leading-snug text-[#175CD3]">
                   Global Growth Plan
                 </p>
               </KpiCard>
 
               <KpiCard
                 label="Meetings Remaining"
-                icon={<Users className="size-3.5 text-[#039855]" />}
+                icon={<Users className="size-4 text-[#039855]" />}
                 iconBg="bg-[#ECFDF3]"
                 sub="This Plan"
               >
@@ -457,7 +451,7 @@ export default function DashboardPage() {
 
               <KpiCard
                 label="Countries Explored"
-                icon={<Globe className="size-3.5 text-[#7A5AF8]" />}
+                icon={<Globe className="size-4 text-[#7A5AF8]" />}
                 iconBg="bg-[#F4F3FF]"
                 sub="Out of 4"
               >
@@ -468,7 +462,7 @@ export default function DashboardPage() {
 
               <KpiCard
                 label="Profile Views"
-                icon={<Eye className="size-3.5 text-[#F79009]" />}
+                icon={<Eye className="size-4 text-[#F79009]" />}
                 iconBg="bg-[#FFFAEB]"
                 sub="Last 30 days"
               >
@@ -479,7 +473,7 @@ export default function DashboardPage() {
 
               <KpiCard
                 label="Opportunities"
-                icon={<Target className="size-3.5 text-[#039855]" />}
+                icon={<Target className="size-4 text-[#039855]" />}
                 iconBg="bg-[#ECFDF3]"
                 sub="New opportunities"
               >
@@ -775,86 +769,109 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          {/* Right Sidebar — starts beside stats cards */}
           <aside className="space-y-4 xl:sticky xl:top-4">
-            {/* Current Plan */}
-            <div className="rounded-2xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)]">
-              <p className="text-[12px] font-medium text-[#667085]">
-                Your Current Plan
-              </p>
-              <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                <h3 className="text-[15px] font-bold text-[#039855]">
-                  Global Growth Plan
-                </h3>
+            <ExporterCard>
+              <p className="text-[11px] font-medium text-[#667085]">Your Plan</p>
+              <div className="mt-1 flex flex-wrap items-center gap-2">
+                <h3 className="text-[15px] font-bold text-[#039855]">Global Growth Plan</h3>
                 <span className="rounded-full bg-[#ECFDF3] px-2 py-0.5 text-[9px] font-bold text-[#027A48]">
                   Active
                 </span>
               </div>
-
-              <ul className="mt-3.5 space-y-2">
-                {PLAN_FEATURES.map((f) => (
+              <ul className="mt-3 space-y-2">
+                {[
+                  "4 / 4 Deal Room Sessions",
+                  "20+ Countries Access",
+                  "Priority Support",
+                  "90 Days Validity",
+                ].map((feature) => (
                   <li
-                    key={f}
-                    className="flex items-start gap-2 text-[12px] leading-snug text-[#344054]"
+                    key={feature}
+                    className="flex items-start gap-2 text-[11px] leading-snug text-[#344054]"
                   >
                     <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-[#ECFDF3] text-[#039855]">
                       <Check className="size-2.5 stroke-3" />
                     </span>
-                    {f}
+                    {feature}
                   </li>
                 ))}
               </ul>
-
               <Button
                 asChild
-                className="mt-4 h-10 w-full rounded-xl border-0 bg-[#039855] text-[13px] font-semibold text-white shadow-none hover:bg-[#027A48]"
+                variant="outline"
+                className="mt-4 h-10 w-full rounded-xl border-[#175CD3] bg-white text-[12px] font-semibold text-[#175CD3] hover:bg-[#EFF8FF]"
               >
-                <Link to="/dashboard/payment">Upgrade Plan</Link>
+                <Link to="/dashboard/invoices">View Plan Details</Link>
               </Button>
-            </div>
+            </ExporterCard>
 
-            {/* Quick Actions */}
-            <div className="rounded-2xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)]">
-              <h3 className="mb-2 text-[14px] font-bold text-[#101828]">
-                Quick Actions
-              </h3>
-              <div>
-                {QUICK_ACTIONS.map((a, i) => (
+            <ExporterCard>
+              <h3 className="text-[14px] font-bold text-[#101828]">Quick Actions</h3>
+              <div className="mt-2 space-y-1">
+                {DASHBOARD_QUICK_ACTIONS.map((action) => (
                   <Link
-                    key={a.label}
-                    to={a.to}
-                    className={`flex items-center gap-2.5 py-2.5 transition hover:bg-[#F9FAFB] ${i > 0 ? "border-t border-[#F2F4F7]" : ""}`}
+                    key={action.label}
+                    to={action.to}
+                    className="flex items-center gap-2.5 rounded-lg px-1 py-2 transition hover:bg-[#F9FAFB]"
                   >
                     <span
-                      className={`flex size-7 items-center justify-center rounded-lg ${a.color}`}
+                      className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${action.color}`}
                     >
-                      <a.icon className="size-3.5" />
+                      <action.icon className="size-4" />
                     </span>
-                    <span className="text-[12px] font-medium text-[#344054]">
-                      {a.label}
-                    </span>
-                    <ChevronRight className="ml-auto size-3.5 text-[#D0D5DD]" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[12px] font-semibold text-[#101828]">{action.label}</p>
+                      <p className="text-[10px] text-[#98A2B3]">{action.sub}</p>
+                    </div>
                   </Link>
                 ))}
               </div>
-            </div>
+            </ExporterCard>
 
-            {/* Support */}
-            <div className="rounded-2xl bg-[#0B1F5C] p-4 text-white shadow-[0_1px_2px_rgba(16,24,40,0.05)]">
-              <div className="mb-2.5 flex size-9 items-center justify-center rounded-full bg-white/10">
-                <Headphones className="size-4" />
+            <ExporterCard>
+              <h3 className="text-[14px] font-bold text-[#101828]">How Deal Rooms Work?</h3>
+              <div className="relative mt-4 space-y-4 pl-1">
+                <div className="absolute bottom-2 left-[11px] top-2 w-px bg-[#D1E9FF]" />
+                {DASHBOARD_DEAL_STEPS.map((step, index) => (
+                  <div key={step.title} className="relative flex gap-3">
+                    <span className="relative z-10 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#175CD3] text-[10px] font-bold text-white">
+                      {index + 1}
+                    </span>
+                    <div>
+                      <p className="text-[11px] font-semibold text-[#101828]">{step.title}</p>
+                      <p className="text-[10px] leading-relaxed text-[#667085]">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <h3 className="text-[14px] font-bold">Need Assistance?</h3>
-              <p className="mt-1 text-[11px] leading-relaxed text-white/75">
-                Our global trade advisors are here to help you.
-              </p>
+              <button
+                type="button"
+                className="mt-3 text-[11px] font-semibold text-[#175CD3] hover:underline"
+              >
+                Learn More →
+              </button>
+            </ExporterCard>
+
+            <ExporterCard className="border-[#D1E9FF] bg-[#EFF8FF]">
+              <div className="flex items-start gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#D1E9FF]">
+                  <Headphones className="size-5 text-[#175CD3]" />
+                </div>
+                <div>
+                  <h3 className="text-[13px] font-bold text-[#101828]">Need Assistance?</h3>
+                  <p className="mt-1 text-[11px] leading-relaxed text-[#667085]">
+                    Our global trade advisors are here to help you.
+                  </p>
+                </div>
+              </div>
               <Button
                 asChild
-                className="mt-3 h-9 w-full rounded-lg border-0 bg-white text-[12px] font-semibold text-[#0B1F5C] shadow-none hover:bg-white/95"
+                variant="outline"
+                className="mt-4 h-9 w-full rounded-lg border-[#D0D5DD] bg-white text-[12px] font-semibold text-[#175CD3] shadow-sm"
               >
                 <Link to="/dashboard/submit-questions">Contact Support</Link>
               </Button>
-            </div>
+            </ExporterCard>
           </aside>
         </div>
       </Main>

@@ -27,6 +27,10 @@ import AdminVerificationDetailsPage from "@/pages/dashboard/admin/verifications/
 import AdminPartnerVerificationDetailsPage from "@/pages/dashboard/admin/verifications/partner-details";
 import AgentDashboard from "@/pages/dashboard/agent/index";
 import DashboardPage from "@/pages/dashboard/exporter";
+import MyProfilePage from "@/pages/dashboard/exporter/my-profile";
+import MyCompanyPage from "@/pages/dashboard/exporter/my-company";
+import MyRequirementsPage from "@/pages/dashboard/exporter/my-requirements";
+import DocumentsPage from "@/pages/dashboard/exporter/documents";
 import ApplicationPage from "@/pages/dashboard/exporter/application";
 import ApprovalPage from "@/pages/dashboard/exporter/approval";
 import FollowUpServicesPage from "@/pages/dashboard/exporter/follow-up-services";
@@ -34,7 +38,6 @@ import IntelligencePage from "@/pages/dashboard/exporter/intelligence";
 import LiveDealRoomPage from "@/pages/dashboard/exporter/live-deal-room";
 import MarketplacePage from "@/pages/dashboard/exporter/marketplace";
 import MySessionsPage from "@/pages/dashboard/exporter/my-sessions";
-import OpportunityReportPage from "@/pages/dashboard/exporter/opportunity-report";
 import PartnerBriefPage from "@/pages/dashboard/exporter/partner-brief";
 import PaymentPage from "@/pages/dashboard/exporter/payment";
 import PaymentSuccessPage from "@/pages/dashboard/exporter/payment-success";
@@ -43,7 +46,6 @@ import ServicePurchasePage from "@/pages/dashboard/exporter/service-purchase";
 import SessionDetailsPage from "@/pages/dashboard/exporter/session-details";
 import SessionSummaryPage from "@/pages/dashboard/exporter/session-summary";
 import SubmitQuestionsPage from "@/pages/dashboard/exporter/submit-questions";
-import VerificationPage from "@/pages/dashboard/exporter/verification";
 import WaitingRoomPage from "@/pages/dashboard/exporter/waiting-room";
 // import MainHomepage from "@/pages/public/MainHomepage"; //old homepage
 import Home from "@/pages/public/Home";
@@ -52,6 +54,7 @@ import LoginPage from "@/pages/auth/login";
 import { NotFound } from "@/pages/not-found";
 import SignupPage from "@/pages/auth/signup";
 import type { RouteObject } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import { PartnerLayout } from "@/components/layout/partner-layout";
 
@@ -157,9 +160,7 @@ export const routes: RouteObject[] = [
           {
             path: "",
             element: <ImporterLayout />,
-            children: [
-              { path: "dashboard", element: <ImporterDashboard /> },
-            ],
+            children: [{ path: "dashboard", element: <ImporterDashboard /> }],
           },
         ],
       },
@@ -235,7 +236,10 @@ export const routes: RouteObject[] = [
                 element: <Settings />,
                 children: [
                   { index: true, element: <PartnerProfilePage /> },
-                  { path: "availability", element: <PartnerAvailabilityPage /> },
+                  {
+                    path: "availability",
+                    element: <PartnerAvailabilityPage />,
+                  },
                   { path: "account", element: <SettingsAccount /> },
                   { path: "appearance", element: <SettingsAppearance /> },
                   { path: "notifications", element: <SettingsNotifications /> },
@@ -400,6 +404,22 @@ export const routes: RouteObject[] = [
             element: <DashboardPage />,
           },
           {
+            path: "my-profile",
+            element: <MyProfilePage />,
+          },
+          {
+            path: "my-company",
+            element: <MyCompanyPage />,
+          },
+          {
+            path: "my-requirements",
+            element: <MyRequirementsPage />,
+          },
+          {
+            path: "documents",
+            element: <DocumentsPage />,
+          },
+          {
             path: "intelligence",
             element: <IntelligencePage />,
           },
@@ -425,7 +445,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "opportunity-report",
-            element: <OpportunityReportPage />,
+            element: <Navigate to="/dashboard/my-requirements" replace />,
           },
           {
             path: "follow-up-services",
@@ -445,13 +465,19 @@ export const routes: RouteObject[] = [
           },
           {
             path: "settings",
-            element: <Settings />,
-            children: [
-              { index: true, element: <SettingsProfile /> },
-              { path: "account", element: <SettingsAccount /> },
-              { path: "appearance", element: <SettingsAppearance /> },
-              { path: "notifications", element: <SettingsNotifications /> },
-            ],
+            element: <Navigate to="/dashboard/my-profile" replace />,
+          },
+          {
+            path: "settings/account",
+            element: <Navigate to="/dashboard/my-company" replace />,
+          },
+          {
+            path: "settings/appearance",
+            element: <Navigate to="/dashboard/my-profile" replace />,
+          },
+          {
+            path: "settings/notifications",
+            element: <Navigate to="/dashboard/my-profile" replace />,
           },
           {
             path: "marketplace",
@@ -467,7 +493,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "verification",
-            element: <VerificationPage />,
+            element: <Navigate to="/dashboard/documents" replace />,
           },
           {
             path: "approval",
@@ -840,7 +866,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/events/upcoming-events",
-    element: <UpcomingEventsPage />,  
+    element: <UpcomingEventsPage />,
   },
   {
     path: "/events/past-events",
@@ -950,14 +976,14 @@ export const routes: RouteObject[] = [
     path: "/contact-us/aecci-international-hub",
     element: <NotFound />,
   },
-  { 
-  path: "/terms-conditions",
-  element: <TermsConditions />,
-},
-{
-  path: "/privacy-policy",
-  element: <PrivacyPolicy />,
-},
+  {
+    path: "/terms-conditions",
+    element: <TermsConditions />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
+  },
   {
     path: "*",
     element: <NotFound />,

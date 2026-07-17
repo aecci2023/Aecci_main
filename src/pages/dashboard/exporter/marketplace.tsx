@@ -1,332 +1,494 @@
-import { Header } from "@/components/layout/header";
-import { Main } from "@/components/layout/main";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { Search } from "@/components/search";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
-import {
-  MapPin,
-  ArrowRight,
-  Briefcase,
-  GraduationCap,
-  Loader2,
-  Search as SearchIcon,
+  Store,
   Globe,
-  Users,
+  Calendar,
+  Target,
+  Check,
+  Headphones,
+  PenLine,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useGetMarketplacePartnersQuery } from "@/store/api/adminApi";
-import { useState, useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  ExporterPageShell,
+  ExporterCard,
+} from "@/components/exporter/exporter-page-layout";
 
-const TIER_COLORS: Record<string, string> = {
-  Specialist: "bg-purple-500/10 text-purple-600 border-purple-500/20",
-  Premium: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-  Standard: "bg-primary/5 text-primary border-primary/10",
-};
+import uaeImg from "@/assets/dashboard/exporter/uae.jpg";
+import usaImg from "@/assets/dashboard/exporter/usa.jpg";
+import saudiImg from "@/assets/dashboard/exporter/saudi.jpg";
+import kenyaImg from "@/assets/dashboard/exporter/kenya.jpg";
+
+const FLAG = (code: string) => `https://flagcdn.com/w80/${code}.png`;
+
+const STATS = [
+  {
+    label: "Active Deal Rooms",
+    value: "24",
+    sub: "Join live sessions",
+    icon: Store,
+    color: "text-[#175CD3]",
+    bg: "bg-[#EFF8FF]",
+  },
+  {
+    label: "Countries Available",
+    value: "50+",
+    sub: "Global reach",
+    icon: Globe,
+    color: "text-[#039855]",
+    bg: "bg-[#ECFDF3]",
+  },
+  {
+    label: "Upcoming Sessions",
+    value: "18",
+    sub: "In next 7 days",
+    icon: Calendar,
+    color: "text-[#F79009]",
+    bg: "bg-[#FFFAEB]",
+  },
+  {
+    label: "New Opportunities",
+    value: "32",
+    sub: "This week",
+    icon: Target,
+    color: "text-[#7A5AF8]",
+    bg: "bg-[#F4F3FF]",
+  },
+];
+
+const FEATURED = [
+  {
+    name: "USA",
+    code: "us",
+    img: usaImg,
+    sessions: 8,
+    desc: "Textile & Apparel hub",
+  },
+  {
+    name: "UAE",
+    code: "ae",
+    img: uaeImg,
+    sessions: 6,
+    desc: "Construction & Trade",
+  },
+  {
+    name: "Saudi Arabia",
+    code: "sa",
+    img: saudiImg,
+    sessions: 5,
+    desc: "Energy & Infrastructure",
+  },
+  {
+    name: "United Kingdom",
+    code: "gb",
+    img: kenyaImg,
+    sessions: 4,
+    desc: "Premium Markets",
+  },
+];
+
+const DEAL_ROOMS = [
+  {
+    name: "USA Textile & Apparel Deal Room",
+    country: "us",
+    industry: "Textiles",
+    date: "20 May 2025, 11:00 AM",
+    status: "Live Now",
+    statusColor: "bg-[#ECFDF3] text-[#027A48]",
+  },
+  {
+    name: "UAE Construction Materials Forum",
+    country: "ae",
+    industry: "Construction",
+    date: "22 May 2025, 03:00 PM",
+    status: "Upcoming",
+    statusColor: "bg-[#EFF8FF] text-[#175CD3]",
+  },
+  {
+    name: "Saudi Energy & Infrastructure Session",
+    country: "sa",
+    industry: "Energy",
+    date: "25 May 2025, 10:00 AM",
+    status: "Upcoming",
+    statusColor: "bg-[#EFF8FF] text-[#175CD3]",
+  },
+  {
+    name: "UK Premium Markets Access",
+    country: "gb",
+    industry: "General Trade",
+    date: "28 May 2025, 02:00 PM",
+    status: "By Invitation",
+    statusColor: "bg-[#F4F3FF] text-[#7A5AF8]",
+  },
+  {
+    name: "Kenya Agriculture & Agro Products Deal Room",
+    country: "ke",
+    industry: "Agriculture",
+    date: "02 Jun 2025, 04:00 PM",
+    status: "By Invitation",
+    statusColor: "bg-[#F4F3FF] text-[#7A5AF8]",
+  },
+];
+
+const DEAL_ROOM_STEPS = [
+  {
+    title: "Choose Country",
+    desc: "Select a country you want to explore.",
+  },
+  {
+    title: "Join Deal Room",
+    desc: "Enter the deal room and submit your request.",
+  },
+  {
+    title: "Connect",
+    desc: "Get matched with verified buyers and partners.",
+  },
+  {
+    title: "Grow Business",
+    desc: "Close deals and expand globally.",
+  },
+];
+
+const QUICK_ACTIONS = [
+  {
+    label: "Book New Session",
+    sub: "Schedule a meeting",
+    to: "/dashboard/my-sessions",
+    icon: Calendar,
+    color: "text-[#175CD3] bg-[#EFF8FF]",
+  },
+  {
+    label: "Browse Countries",
+    sub: "Explore global markets",
+    to: "/dashboard/intelligence",
+    icon: Globe,
+    color: "text-[#175CD3] bg-[#EFF8FF]",
+  },
+  {
+    label: "My Meetings",
+    sub: "View your all meetings",
+    to: "/dashboard/my-sessions",
+    icon: Calendar,
+    color: "text-[#039855] bg-[#ECFDF3]",
+  },
+  {
+    label: "Post Requirement",
+    sub: "Get matched with buyers",
+    to: "/dashboard/my-requirements",
+    icon: PenLine,
+    color: "text-[#F79009] bg-[#FFFAEB]",
+  },
+];
+
+const FILTER_TABS = ["All", "Upcoming", "Live Now", "By Invitation"];
 
 export default function MarketplacePage() {
-  const navigate = useNavigate();
-  const [filterCountry, setFilterCountry] = useState<string>("");
-  const [search, setSearch] = useState("");
-
-  const { data, isLoading } = useGetMarketplacePartnersQuery(undefined);
-  const allPartners: any[] = data?.data || [];
-
-  // Derive unique countries from actual partner data
-  const countries = useMemo(() => {
-    const set = new Set<string>();
-    allPartners.forEach((p: any) => {
-      (p.expertiseCountries || []).forEach((c: string) => set.add(c));
-    });
-    return Array.from(set).sort();
-  }, [allPartners]);
-
-  // Filter by country + search
-  const partners = useMemo(() => {
-    let list = allPartners;
-    if (filterCountry) {
-      list = list.filter((p: any) =>
-        p.expertiseCountries?.includes(filterCountry),
-      );
-    }
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(
-        (p: any) =>
-          p.user?.fullName?.toLowerCase().includes(q) ||
-          p.organization?.toLowerCase().includes(q) ||
-          p.expertiseSectors?.some((s: string) =>
-            s.toLowerCase().includes(q),
-          ) ||
-          p.expertiseCountries?.some((c: string) =>
-            c.toLowerCase().includes(q),
-          ),
-      );
-    }
-    return list;
-  }, [allPartners, filterCountry, search]);
+  const [filterTab, setFilterTab] = useState("All");
 
   return (
-    <>
-      <Header>
-        <div className="flex items-center space-x-2">
-          <span className="font-semibold text-sm text-muted-foreground">
-            AECCI Hub
-          </span>
-          <span className="text-muted-foreground">/</span>
-          <span className="font-semibold text-sm">Marketplace</span>
-        </div>
-        <div className="ml-auto flex items-center space-x-4">
-          <Search />
-          <ProfileDropdown />
-        </div>
-      </Header>
-
-      <Main fluid className="space-y-6 py-6">
-        {/* Page header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-6">
+    <ExporterPageShell>
+      <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
+        <section className="min-w-0 space-y-5">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-emerald-600 bg-clip-text text-transparent">
-              Verified Partners Directory
+            <h1 className="text-[22px] font-bold text-[#101828] sm:text-[24px]">
+              Marketplace
             </h1>
-            <p className="text-muted-foreground text-sm mt-1">
-              Connect 1-on-1 with accredited trade officers, logistics experts,
-              and local chamber representatives.
+            <p className="mt-1 text-[13px] text-[#667085]">
+              Connect with global buyers, explore deal rooms, and grow your
+              export business.
             </p>
           </div>
-          {!isLoading && (
-            <div className="flex gap-4 shrink-0">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-primary">
-                  {allPartners.length}
-                </p>
-                <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  <Users className="size-3" /> Partners
-                </p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-emerald-600">
-                  {countries.length}
-                </p>
-                <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  <Globe className="size-3" /> Countries
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
 
-        {/* Search + filters */}
-        <div className="space-y-3">
-          <div className="relative max-w-sm">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input
-              placeholder="Search by name, sector, country..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-9"
-            />
-          </div>
-          <div>
-            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-2">
-              Filter by country of operation
-            </label>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant={filterCountry === "" ? "secondary" : "outline"}
-                size="sm"
-                onClick={() => setFilterCountry("")}
-                className={
-                  filterCountry === ""
-                    ? "bg-primary/10 text-primary hover:bg-primary/20 border-none"
-                    : "text-xs"
-                }
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {STATS.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)]"
               >
-                All Countries
-              </Button>
-              {countries.map((country) => (
-                <Button
-                  key={country}
-                  variant={filterCountry === country ? "secondary" : "outline"}
-                  size="sm"
-                  onClick={() =>
-                    setFilterCountry((c) => (c === country ? "" : country))
-                  }
-                  className={
-                    filterCountry === country
-                      ? "bg-primary/10 text-primary hover:bg-primary/20 border-none text-xs"
-                      : "text-xs"
-                  }
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-[10px] text-[#667085]">{s.label}</p>
+                    <p className="mt-1 text-[22px] font-bold text-[#101828]">
+                      {s.value}
+                    </p>
+                    <p className="text-[10px] text-[#98A2B3]">{s.sub}</p>
+                  </div>
+                  <span
+                    className={`flex size-8 items-center justify-center rounded-lg ${s.bg} ${s.color}`}
+                  >
+                    <s.icon className="size-4" />
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <ExporterCard>
+            <h3 className="text-[14px] font-bold text-[#101828]">
+              Find the Right Deal Room
+            </h3>
+            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                "Select Country",
+                "All Industries",
+                "All Types",
+                "Select Date",
+              ].map((label) => (
+                <select
+                  key={label}
+                  className="h-9 rounded-lg border border-[#D0D5DD] bg-white px-2 text-[12px] text-[#344054]"
                 >
-                  {country}
-                </Button>
+                  <option>{label}</option>
+                </select>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Grid */}
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center p-12 gap-2">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-muted-foreground animate-pulse text-sm">
-              Loading Verified Partners...
-            </p>
-          </div>
-        ) : partners.length === 0 ? (
-          <div className="flex flex-col items-center justify-center p-12 border rounded-xl bg-muted/10 text-center space-y-2">
-            <Briefcase className="size-8 text-muted-foreground/50" />
-            <p className="text-muted-foreground text-sm">
-              No verified partners found
-              {filterCountry ? ` for ${filterCountry}` : ""}
-              {search ? ` matching "${search}"` : ""}.
-            </p>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setFilterCountry("");
-                setSearch("");
-              }}
-            >
-              Clear filters
-            </Button>
-          </div>
-        ) : (
-          <>
-            <p className="text-xs text-muted-foreground">
-              Showing {partners.length} partner
-              {partners.length !== 1 ? "s" : ""}
-              {filterCountry ? ` in ${filterCountry}` : ""}
-              {search ? ` matching "${search}"` : ""}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {partners.map((partner: any) => {
-                const userDetails = partner.user || {};
-                const initials = userDetails.fullName
-                  ? userDetails.fullName
-                      .split(" ")
-                      .map((n: string) => n[0])
-                      .join("")
-                      .slice(0, 2)
-                      .toUpperCase()
-                  : "PA";
-                const tierClass =
-                  TIER_COLORS[partner.tier] || TIER_COLORS.Standard;
-
-                return (
-                  <Card
-                    key={partner.id}
-                    className="flex flex-col h-full hover:shadow-md transition-all duration-300 border hover:border-primary/20 group cursor-pointer"
-                    onClick={() =>
-                      navigate(
-                        `/dashboard/partner-brief?userId=${partner.userId}`,
-                      )
-                    }
-                  >
-                    <CardHeader className="pb-3 flex flex-row gap-4 items-start">
-                      <Avatar className="h-14 w-14 rounded-xl border-2 border-background shadow-sm shrink-0">
-                        {userDetails.profilePicture ? (
-                          <img
-                            src={userDetails.profilePicture}
-                            alt={userDetails.fullName}
-                            className="size-full object-cover rounded-xl"
-                          />
-                        ) : (
-                          <AvatarFallback className="bg-primary/10 text-primary font-bold text-base rounded-xl">
-                            {initials}
-                          </AvatarFallback>
-                        )}
-                      </Avatar>
-                      <div className="space-y-1 flex-1 min-w-0">
-                        <Badge
-                          className={`text-[10px] font-semibold px-2 border ${tierClass}`}
-                        >
-                          {partner.tier} Expert
-                        </Badge>
-                        <CardTitle className="text-base font-bold truncate group-hover:text-primary transition-colors">
-                          {userDetails.fullName || "Trade Representative"}
-                        </CardTitle>
-                        <CardDescription className="text-xs truncate font-medium text-foreground/80">
-                          {partner.organization || "Independent Advisory"}
-                        </CardDescription>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="flex-1 space-y-3 pt-0">
-                      <div className="flex items-start gap-1 text-[11px] text-muted-foreground">
-                        <MapPin className="size-3.5 text-primary shrink-0 mt-0.5" />
-                        <span>
-                          Operates in:{" "}
-                          <strong className="text-foreground/80">
-                            {partner.expertiseCountries?.slice(0, 4).join(", ")}
-                            {partner.expertiseCountries?.length > 4
-                              ? ` +${partner.expertiseCountries.length - 4} more`
-                              : ""}
-                          </strong>
-                        </span>
-                      </div>
-
-                      <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
-                        {partner.bio ||
-                          "This partner facilitates global trade compliance and buyer matchmaking."}
-                      </p>
-
-                      <div className="space-y-1 pt-1">
-                        <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
-                          Specialties
-                        </span>
-                        <div className="flex flex-wrap gap-1">
-                          {partner.expertiseSectors
-                            ?.slice(0, 3)
-                            .map((sector: string, idx: number) => (
-                              <Badge
-                                key={idx}
-                                variant="secondary"
-                                className="text-[10px] px-2 py-0"
-                              >
-                                {sector}
-                              </Badge>
-                            ))}
-                          {partner.expertiseSectors?.length > 3 && (
-                            <Badge
-                              variant="outline"
-                              className="text-[10px] px-1 py-0"
-                            >
-                              +{partner.expertiseSectors.length - 3} more
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    </CardContent>
-
-                    <CardFooter className="border-t border-border/50 pt-3 pb-3 bg-muted/10 justify-between items-center text-xs">
-                      <span className="text-muted-foreground text-[10px] flex items-center gap-1">
-                        <GraduationCap className="size-3.5" />
-                        {userDetails.languagesSpoken?.slice(0, 2).join(", ") ||
-                          "English"}
-                      </span>
-                      <span className="text-primary font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                        View Profile <ArrowRight className="size-3.5" />
-                      </span>
-                    </CardFooter>
-                  </Card>
-                );
-              })}
+            <div className="mt-3 flex items-center justify-between">
+              <button
+                type="button"
+                className="text-[12px] font-semibold text-[#175CD3]"
+              >
+                Reset Filters
+              </button>
+              <Button className="h-9 rounded-lg bg-[#175CD3] px-4 text-[12px] font-semibold hover:bg-[#1448B0]">
+                Search
+              </Button>
             </div>
-          </>
-        )}
-      </Main>
-    </>
+          </ExporterCard>
+
+          <ExporterCard>
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-[14px] font-bold text-[#101828]">
+                Featured Countries
+              </h3>
+              <Link
+                to="/dashboard/intelligence"
+                className="text-[12px] font-semibold text-[#175CD3]"
+              >
+                View All Countries →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+              {FEATURED.map((c) => (
+                <div
+                  key={c.name}
+                  className="overflow-hidden rounded-xl border border-[#E4E7EC]"
+                >
+                  <div className="relative h-20">
+                    <img
+                      src={c.img}
+                      alt={c.name}
+                      className="size-full object-cover"
+                    />
+                    <img
+                      src={FLAG(c.code)}
+                      alt=""
+                      className="absolute left-2 top-2 size-5 rounded-sm border border-white object-cover"
+                    />
+                  </div>
+                  <div className="p-2.5">
+                    <p className="text-[12px] font-bold text-[#101828]">
+                      {c.name}
+                    </p>
+                    <p className="text-[10px] text-[#667085]">{c.desc}</p>
+                    <p className="mt-1 text-[10px] text-[#98A2B3]">
+                      {c.sessions} upcoming sessions
+                    </p>
+                    <Button
+                      variant="outline"
+                      className="mt-2 h-7 w-full rounded-lg border-[#B2DDFF] text-[10px] font-semibold text-[#175CD3]"
+                    >
+                      Explore Deal Rooms
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ExporterCard>
+
+          <ExporterCard>
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex gap-1">
+                {FILTER_TABS.map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setFilterTab(tab)}
+                    className={`rounded-lg px-3 py-1.5 text-[11px] font-semibold ${
+                      filterTab === tab
+                        ? "bg-[#175CD3] text-white"
+                        : "text-[#667085] hover:bg-[#F2F4F7]"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+              <select className="h-8 rounded-lg border border-[#D0D5DD] px-2 text-[11px]">
+                <option>Sort by</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              {DEAL_ROOMS.map((room) => (
+                <div
+                  key={room.name}
+                  className="flex flex-wrap items-center gap-3 rounded-xl border border-[#E4E7EC] bg-[#F9FAFB] p-3"
+                >
+                  <img
+                    src={FLAG(room.country)}
+                    alt=""
+                    className="size-8 rounded-md border border-[#E4E7EC] object-cover"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[12px] font-semibold text-[#101828]">
+                      {room.name}
+                    </p>
+                    <p className="text-[10px] text-[#667085]">
+                      {room.industry} · {room.date}
+                    </p>
+                  </div>
+                  <span
+                    className={`rounded-full px-2.5 py-0.5 text-[9px] font-bold ${room.statusColor}`}
+                  >
+                    {room.status}
+                  </span>
+                  <Button
+                    variant="outline"
+                    className="h-7 rounded-lg border-[#B2DDFF] px-3 text-[10px] font-semibold text-[#175CD3]"
+                  >
+                    View Details
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <Link
+              to="/dashboard/my-sessions"
+              className="mt-3 flex h-9 items-center justify-center rounded-lg bg-[#EFF8FF] text-[11px] font-semibold text-[#175CD3] transition hover:bg-[#D1E9FF]"
+            >
+              View More Deal Rooms →
+            </Link>
+          </ExporterCard>
+        </section>
+
+        <aside className="space-y-4">
+          <ExporterCard>
+            <p className="text-[11px] font-medium text-[#667085]">Your Plan</p>
+            <div className="mt-1 flex flex-wrap items-center gap-2">
+              <h3 className="text-[15px] font-bold text-[#039855]">
+                Global Growth Plan
+              </h3>
+              <span className="rounded-full bg-[#ECFDF3] px-2 py-0.5 text-[9px] font-bold text-[#027A48]">
+                Active
+              </span>
+            </div>
+            <ul className="mt-3 space-y-2">
+              {[
+                "4 / 4 Deal Room Sessions",
+                "20+ Countries Access",
+                "Priority Support",
+                "90 Days Validity",
+              ].map((feature) => (
+                <li
+                  key={feature}
+                  className="flex items-start gap-2 text-[11px] leading-snug text-[#344054]"
+                >
+                  <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-[#ECFDF3] text-[#039855]">
+                    <Check className="size-2.5 stroke-3" />
+                  </span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <Button
+              asChild
+              variant="outline"
+              className="mt-4 h-10 w-full rounded-xl border-[#175CD3] bg-white text-[12px] font-semibold text-[#175CD3] hover:bg-[#EFF8FF]"
+            >
+              <Link to="/dashboard/invoices">View Plan Details</Link>
+            </Button>
+          </ExporterCard>
+
+          <ExporterCard>
+            <h3 className="text-[14px] font-bold text-[#101828]">
+              Quick Actions
+            </h3>
+            <div className="mt-2 space-y-1">
+              {QUICK_ACTIONS.map((action) => (
+                <Link
+                  key={action.label}
+                  to={action.to}
+                  className="flex items-center gap-2.5 rounded-lg px-1 py-2 transition hover:bg-[#F9FAFB]"
+                >
+                  <span
+                    className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${action.color}`}
+                  >
+                    <action.icon className="size-4" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[12px] font-semibold text-[#101828]">
+                      {action.label}
+                    </p>
+                    <p className="text-[10px] text-[#98A2B3]">{action.sub}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </ExporterCard>
+
+          <ExporterCard>
+            <h3 className="text-[14px] font-bold text-[#101828]">
+              How Deal Rooms Work?
+            </h3>
+            <div className="relative mt-4 space-y-4 pl-1">
+              <div className="absolute bottom-2 left-[11px] top-2 w-px bg-[#D1E9FF]" />
+              {DEAL_ROOM_STEPS.map((step, index) => (
+                <div key={step.title} className="relative flex gap-3">
+                  <span className="relative z-10 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#175CD3] text-[10px] font-bold text-white">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-semibold text-[#101828]">
+                      {step.title}
+                    </p>
+                    <p className="text-[10px] leading-relaxed text-[#667085]">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="mt-3 text-[11px] font-semibold text-[#175CD3] hover:underline"
+            >
+              Learn More →
+            </button>
+          </ExporterCard>
+
+          <ExporterCard className="border-[#D1E9FF] bg-[#EFF8FF]">
+            <div className="flex items-start gap-3">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#D1E9FF]">
+                <Headphones className="size-5 text-[#175CD3]" />
+              </div>
+              <div>
+                <h3 className="text-[13px] font-bold text-[#101828]">
+                  Need Assistance?
+                </h3>
+                <p className="mt-1 text-[11px] leading-relaxed text-[#667085]">
+                  Our global trade advisors are here to help you.
+                </p>
+              </div>
+            </div>
+            <Button
+              asChild
+              variant="outline"
+              className="mt-4 h-9 w-full rounded-lg border-[#D0D5DD] bg-white text-[12px] font-semibold text-[#175CD3] shadow-sm"
+            >
+              <Link to="/dashboard/submit-questions">Contact Support</Link>
+            </Button>
+          </ExporterCard>
+        </aside>
+      </div>
+    </ExporterPageShell>
   );
 }

@@ -35,23 +35,23 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: "My Profile",
-          url: "/dashboard/settings",
+          url: "/dashboard/my-profile",
           icon: User,
         },
         {
           title: "My Company",
-          url: "/dashboard/settings/account",
+          url: "/dashboard/my-company",
           icon: Building2,
         },
         {
           title: "My Requirements",
-          url: "/dashboard/opportunity-report",
+          url: "/dashboard/my-requirements",
           icon: ClipboardList,
           badge: "2",
         },
         {
           title: "Documents",
-          url: "/dashboard/verification",
+          url: "/dashboard/documents",
           icon: FileText,
         },
       ],
@@ -103,7 +103,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: "Market Reports",
-          url: "/dashboard/opportunity-report",
+          url: "/dashboard/my-requirements",
           icon: TrendingUp,
         },
         {
@@ -129,7 +129,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: "Settings",
-          url: "/dashboard/settings",
+          url: "/dashboard/my-profile",
           icon: Settings,
         },
         {
