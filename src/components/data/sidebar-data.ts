@@ -38,7 +38,7 @@ export const sidebarData: SidebarData = {
           badge: "2",
         },
         {
-          title: "Messages",
+          title: "Messagessss",
           url: "/dashboard/messages",
           icon: MessageSquare,
           badge: "3",

@@ -1,28 +1,30 @@
 import {
   LayoutDashboard,
-  Calendar,
-  MessageSquare,
-  Globe,
-  Clock,
-  Video,
+  User,
+  Building2,
+  ShoppingCart,
   FileText,
-  HelpCircle,
-  TrendingUp,
-  Receipt,
+  Search,
   Store,
-  Bell,
+  CalendarClock,
+  CalendarCheck,
+  Video,
+  ClipboardList,
+  Globe,
+  BarChart2,
+  Handshake,
+  CreditCard,
+  MessageSquare,
   Settings,
-  UserCog,
-  Wrench,
-  Palette,
-  BellRing,
+  HelpCircle,
+  PhoneCall,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
 export const importerSidebarData: SidebarData = {
   navGroups: [
     {
-      title: "Main",
+      title: "My Business",
       items: [
         {
           title: "Dashboard",
@@ -30,16 +32,24 @@ export const importerSidebarData: SidebarData = {
           icon: LayoutDashboard,
         },
         {
-          title: "My Sessions",
-          url: "/importer/my-sessions",
-          icon: Calendar,
-          badge: "2",
+          title: "My Profile",
+          url: "/importer/profile",
+          icon: User,
         },
         {
-          title: "Messages",
-          url: "/importer/messages",
-          icon: MessageSquare,
-          badge: "3",
+          title: "My Company",
+          url: "/importer/company",
+          icon: Building2,
+        },
+        {
+          title: "Sourcing Requirements",
+          url: "/importer/sourcing-requirements",
+          icon: ShoppingCart,
+        },
+        {
+          title: "Documents",
+          url: "/importer/documents",
+          icon: FileText,
         },
       ],
     },
@@ -47,24 +57,34 @@ export const importerSidebarData: SidebarData = {
       title: "Deal Room",
       items: [
         {
+          title: "Browse Exporters",
+          url: "/importer/browse-exporters",
+          icon: Search,
+        },
+        {
           title: "Marketplace",
           url: "/importer/marketplace",
           icon: Store,
         },
         {
-          title: "Waiting Room",
-          url: "/importer/waiting-room",
-          icon: Clock,
+          title: "Available Sessions",
+          url: "/importer/available-sessions",
+          icon: CalendarClock,
         },
         {
-          title: "Live Deal Room",
-          url: "/importer/live-deal-room",
+          title: "Meeting Requests",
+          url: "/importer/meeting-requests",
+          icon: CalendarCheck,
+        },
+        {
+          title: "My Meetings",
+          url: "/importer/my-meetings",
           icon: Video,
         },
         {
           title: "Session Summary",
           url: "/importer/session-summary",
-          icon: FileText,
+          icon: ClipboardList,
         },
       ],
     },
@@ -77,60 +97,49 @@ export const importerSidebarData: SidebarData = {
           icon: Globe,
         },
         {
-          title: "Submit Questions",
-          url: "/importer/submit-questions",
+          title: "Market Reports",
+          url: "/importer/market-reports",
+          icon: BarChart2,
+        },
+        {
+          title: "Partner Brief",
+          url: "/importer/partner-brief",
+          icon: Handshake,
+        },
+      ],
+    },
+    {
+      title: "Account",
+      items: [
+        {
+          title: "Billing & Plans",
+          url: "/importer/billing",
+          icon: CreditCard,
+        },
+        {
+          title: "Messages",
+          url: "/importer/messages",
+          icon: MessageSquare,
+        },
+        {
+          title: "Settings",
+          url: "/importer/settings",
+          icon: Settings,
+        },
+        {
+          title: "Help Center",
+          url: "/importer/help",
           icon: HelpCircle,
         },
       ],
     },
     {
-      title: "Reports & Services",
+      title: "Support",
       items: [
         {
-          title: "Opportunity Report",
-          url: "/importer/opportunity-report",
-          icon: TrendingUp,
-        },
-        {
-          title: "Invoices & Payments",
-          url: "/importer/invoices",
-          icon: Receipt,
-        },
-      ],
-    },
-    {
-      title: "Other",
-      items: [
-        {
-          title: "System Alerts",
-          url: "/importer/notifications",
-          icon: BellRing,
-        },
-        {
-          title: "Settings",
-          icon: Settings,
-          items: [
-            {
-              title: "Profile",
-              url: "/importer/settings",
-              icon: UserCog,
-            },
-            {
-              title: "Account",
-              url: "/importer/settings/account",
-              icon: Wrench,
-            },
-            {
-              title: "Appearance",
-              url: "/importer/settings/appearance",
-              icon: Palette,
-            },
-            {
-              title: "Notifications",
-              url: "/importer/settings/notifications",
-              icon: Bell,
-            },
-          ],
+          title: "Contact Support",
+          url: "/importer/contact-support",
+          icon: PhoneCall,
         },
       ],
     },
