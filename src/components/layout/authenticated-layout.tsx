@@ -18,12 +18,16 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
   return (
     <SearchProvider>
       <LayoutProvider>
-        <SidebarProvider defaultOpen={defaultOpen}>
+        <SidebarProvider
+          defaultOpen={defaultOpen}
+          className="min-h-svh items-stretch"
+        >
           <SkipToMain />
           <AppSidebar />
           <SidebarInset
             className={cn(
               "@container/content",
+              "min-w-0 overflow-x-hidden",
               "has-data-[layout=fixed]:h-svh",
               "peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]",
             )}

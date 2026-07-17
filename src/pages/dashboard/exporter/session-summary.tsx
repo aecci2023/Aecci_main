@@ -1,243 +1,293 @@
-import { Header } from "@/components/layout/header";
-import { Main } from "@/components/layout/main";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { Search } from "@/components/search";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
-import {
-  Check,
-  ClipboardList,
-  ShieldAlert,
-  Download,
-  Briefcase,
-} from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Calendar,
+  UserCheck,
+  Clock,
+  Timer,
+  Search,
+  BarChart3,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  ExporterPageShell,
+  ExporterCard,
+  ExporterBreadcrumb,
+  ExporterStatCard,
+  ExporterTabs,
+  FieldLabel,
+  FieldInput,
+  FieldSelect,
+} from "@/components/exporter/exporter-page-layout";
+
+const FLAG = (code: string) => `https://flagcdn.com/w40/${code}.png`;
+
+const STATS = [
+  { label: "Total Sessions", value: "32", icon: Calendar, color: "text-[#175CD3]", bg: "bg-[#EFF8FF]" },
+  { label: "Attended", value: "18", icon: UserCheck, color: "text-[#039855]", bg: "bg-[#ECFDF3]" },
+  { label: "Upcoming", value: "8", icon: Clock, color: "text-[#F79009]", bg: "bg-[#FFFAEB]" },
+  { label: "Total Hours", value: "27h 45m", icon: Timer, color: "text-[#7A5AF8]", bg: "bg-[#F4F3FF]" },
+];
+
+const TABS = ["All", "Attended", "Upcoming", "Missed"];
+
+const SESSION_ROWS = [
+  {
+    date: "20 May 2025",
+    code: "us",
+    title: "USA Textile & Apparel Deal Room",
+    tags: ["Textiles", "Deal Room"],
+    participants: 24,
+    status: "Attended",
+    statusClass: "bg-[#ECFDF3] text-[#027A48]",
+  },
+  {
+    date: "15 May 2025",
+    code: "ke",
+    title: "Kenya Agriculture Matchmaking",
+    tags: ["Agriculture", "Open Session"],
+    participants: 18,
+    status: "Attended",
+    statusClass: "bg-[#ECFDF3] text-[#027A48]",
+  },
+  {
+    date: "22 May 2025",
+    code: "ae",
+    title: "UAE Construction Materials Forum",
+    tags: ["Construction", "Upcoming"],
+    participants: 0,
+    status: "Upcoming",
+    statusClass: "bg-[#EFF8FF] text-[#175CD3]",
+  },
+  {
+    date: "08 May 2025",
+    code: "gb",
+    title: "UK Premium Markets Briefing",
+    tags: ["General Trade", "Invitation"],
+    participants: 12,
+    status: "Missed",
+    statusClass: "bg-[#FEF3F2] text-[#D92D20]",
+  },
+];
+
+const INTEREST_BARS = [
+  { label: "Home Textiles", pct: 92 },
+  { label: "Bath Linen", pct: 78 },
+  { label: "Engineering Goods", pct: 65 },
+  { label: "Agro Products", pct: 48 },
+];
 
 export default function SessionSummaryPage() {
-  useNavigate();
-  const [agreed, setAgreed] = useState(false);
-  const [accepted, setAccepted] = useState(false);
-
-  const handleAgreementSubmit = () => {
-    setAccepted(true);
-  };
+  const [activeTab, setActiveTab] = useState("All");
 
   return (
-    <>
-      <Header>
-        <div className="flex items-center space-x-2">
-          <span className="font-semibold text-sm text-muted-foreground">
-            AECCI Hub
-          </span>
-          <span className="text-muted-foreground">/</span>
-          <span className="font-semibold text-sm">Session Summary</span>
-        </div>
-        <div className="ml-auto flex items-center space-x-4">
-          <Search />
-          <ProfileDropdown />
-        </div>
-      </Header>
+    <ExporterPageShell>
+      <div>
+        <ExporterBreadcrumb
+          items={[
+            { label: "Marketplace", to: "/dashboard/marketplace" },
+            { label: "Session Summary" },
+          ]}
+        />
+        <h1 className="mt-2 text-[22px] font-bold text-[#101828] sm:text-[24px]">
+          Session Summary
+        </h1>
+        <p className="mt-1 text-[13px] text-[#667085]">
+          Review attendance, engagement, and highlights across all your deal
+          room sessions.
+        </p>
+      </div>
 
-      <Main fluid className="space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              Session Summary & Highlights
-            </h1>
-            <p className="text-muted-foreground text-sm mt-1">
-              India-Kenya Bilateral Textile Matchmaking (AECCI-2026-06B)
-            </p>
+      <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
+        <section className="min-w-0 space-y-5">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {STATS.map((s) => (
+              <ExporterStatCard key={s.label} {...s} />
+            ))}
           </div>
-          <Badge className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 px-3 py-1 flex items-center gap-1">
-            <Check className="size-4" /> Session Concluded
-          </Badge>
-        </div>
 
-        {/* Highlights & Insights Card */}
-        <Card className="hover:shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <ClipboardList className="size-5 text-primary" /> Key Matchmaking
-              Insights
-            </CardTitle>
-            <CardDescription>
-              Consolidated trade requirements discussed during the session.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 bg-muted/40 rounded-lg border border-border">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider block font-bold">
-                  Price Target
-                </span>
-                <p className="text-lg font-bold text-foreground mt-1">
-                  USD 4.50 - 5.20
-                </p>
-                <span className="text-xs text-muted-foreground block mt-0.5">
-                  Per meter CIF Mombasa
-                </span>
+          <ExporterCard>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div>
+                <FieldLabel>Date Range</FieldLabel>
+                <FieldSelect defaultValue="Last 90 days" options={["Last 90 days", "This Month", "This Year"]} />
               </div>
-              <div className="p-4 bg-muted/40 rounded-lg border border-border">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider block font-bold">
-                  Preferred Spec
-                </span>
-                <p className="text-lg font-bold text-foreground mt-1">
-                  Cotton-Synthetic
-                </p>
-                <span className="text-xs text-muted-foreground block mt-0.5">
-                  Blends, 220-250 GSM
-                </span>
+              <div>
+                <FieldLabel>Country</FieldLabel>
+                <FieldSelect defaultValue="All Countries" options={["All Countries", "USA", "Kenya", "UAE"]} />
               </div>
-              <div className="p-4 bg-muted/40 rounded-lg border border-border">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider block font-bold font-bold">
-                  Delivery Window
-                </span>
-                <p className="text-lg font-bold text-primary mt-1">
-                  Early July 2026
-                </p>
-                <span className="text-xs text-muted-foreground block mt-0.5">
-                  For first sample shipment
-                </span>
+              <div>
+                <FieldLabel>Industry</FieldLabel>
+                <FieldSelect defaultValue="All Industries" options={["All Industries", "Textiles", "Agriculture"]} />
+              </div>
+              <div>
+                <FieldLabel>Type</FieldLabel>
+                <FieldSelect defaultValue="All Types" options={["All Types", "Deal Room", "Open Session"]} />
               </div>
             </div>
-
-            <div className="space-y-2">
-              <h4 className="font-semibold text-sm">
-                Recommended Action Items
-              </h4>
-              <ul className="text-xs text-muted-foreground space-y-2 list-disc pl-5">
-                <li>
-                  Submit official CIF pricing sheets and fabric certifications
-                  to Nairobi buyers.
-                </li>
-                <li>
-                  Finalize sample packaging configurations according to East
-                  African Standards (KEBS).
-                </li>
-                <li>
-                  Secure the AECCI Country Opportunity report to analyze
-                  competing supplier pricing from East Asia.
-                </li>
-              </ul>
+            <div className="mt-3">
+              <FieldLabel>Search</FieldLabel>
+              <div className="relative max-w-md">
+                <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#98A2B3]" />
+                <FieldInput placeholder="Search sessions..." className="pl-9" />
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </ExporterCard>
 
-        {/* Non-Circumvention Legal Layer */}
-        <Card
-          className={`border-2 transition-colors duration-300 ${accepted ? "border-emerald-500/20 bg-emerald-500/5" : "border-amber-500/20 bg-amber-500/5"}`}
-        >
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              {accepted ? (
-                <Check className="size-5 text-emerald-500 shrink-0" />
-              ) : (
-                <ShieldAlert className="size-5 text-amber-500 shrink-0" />
-              )}
-              <CardTitle className="text-lg">
-                Layer 4: Post-Session Non-Circumvention Agreement
-              </CardTitle>
+          <ExporterCard className="p-0">
+            <div className="px-4 pt-4 sm:px-5">
+              <ExporterTabs tabs={TABS} active={activeTab} onChange={setActiveTab} />
             </div>
-            <CardDescription>
-              Please accept the non-circumvention terms to initiate direct
-              business intros with Nairobi buyers.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="text-xs text-muted-foreground max-h-40 overflow-y-auto space-y-2 bg-background p-3.5 rounded-lg border border-border/80 pr-2 leading-relaxed">
-              <p>
-                <strong>1. Introduction Protection:</strong> Any buyers or local
-                partners introduced to you during this matchmaking session
-                remain proprietary introductions facilitated by the Chamber
-                (AECCI).
-              </p>
-              <p>
-                <strong>2. Direct Circumvention Bar:</strong> You agree not to
-                bypass AECCI to contract directly or conduct business with the
-                introduced partners outside of AECCI's advisory desk for 24
-                months.
-              </p>
-              <p>
-                <strong>3. Advisory Engagements:</strong> For any structured
-                business or trade deals resulting from this session, you must
-                first report and notify AECCI before final execution.
-              </p>
-            </div>
-
-            {!accepted ? (
-              <div className="space-y-4">
-                <div className="flex items-start gap-2.5">
-                  <Checkbox
-                    id="non-circ"
-                    checked={agreed}
-                    onCheckedChange={(checked) => setAgreed(checked === true)}
-                    className="mt-0.5"
-                  />
-                  <label
-                    htmlFor="non-circ"
-                    className="text-xs font-semibold text-muted-foreground leading-tight cursor-pointer"
-                  >
-                    I agree to the Post-Session Non-Circumvention Agreement{" "}
-                    <span className="text-red-500">*</span>
-                  </label>
-                </div>
-
-                <Button
-                  disabled={!agreed}
-                  onClick={handleAgreementSubmit}
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground text-xs px-4"
-                  size="sm"
+            <div className="space-y-2 p-4 pt-3 sm:p-5">
+              {SESSION_ROWS.map((row) => (
+                <div
+                  key={row.title}
+                  className="flex flex-wrap items-center gap-3 rounded-xl border border-[#E4E7EC] bg-[#F9FAFB] p-3"
                 >
-                  Accept & Activate Introductions
-                </Button>
-              </div>
-            ) : (
-              <div className="p-2.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs rounded-md font-medium">
-                Agreement Signed Digitally. Direct trade introductions are now
-                activated. AECCI Desk will email the buyer contact details.
-              </div>
-            )}
-          </CardContent>
-        </Card>
+                  <div className="min-w-[72px] text-[10px] font-semibold text-[#667085]">
+                    {row.date}
+                  </div>
+                  <img src={FLAG(row.code)} alt="" className="size-8 rounded-md object-cover" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[12px] font-semibold text-[#101828]">{row.title}</p>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {row.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-md bg-white px-1.5 py-0.5 text-[9px] text-[#667085] ring-1 ring-[#E4E7EC]"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mt-1 text-[10px] text-[#667085]">
+                      {row.participants > 0
+                        ? `${row.participants} participants`
+                        : "Registration open"}
+                    </p>
+                  </div>
+                  <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-bold ${row.statusClass}`}>
+                    {row.status}
+                  </span>
+                  <Button
+                    variant="outline"
+                    asChild
+                    className="h-7 rounded-lg border-[#B2DDFF] px-3 text-[10px] font-semibold text-[#175CD3]"
+                  >
+                    <Link to="/dashboard/opportunity-report">View Summary</Link>
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </ExporterCard>
 
-        {/* Next Step Actions Buttons */}
-        <div className="flex flex-col md:flex-row gap-4 pt-2">
-          <Button
-            asChild
-            size="lg"
-            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-          >
-            <Link
-              to="/dashboard/opportunity-report"
-              className="flex items-center justify-center gap-2"
-            >
-              Download Opportunity Report <Download className="size-5" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="flex-1 font-semibold"
-          >
-            <Link
-              to="/dashboard/follow-up-services"
-              className="flex items-center justify-center gap-2"
-            >
-              Go to Follow-Up Services <Briefcase className="size-5" />
-            </Link>
-          </Button>
-        </div>
-      </Main>
-    </>
+          <div className="rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-5 py-5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#039855]" />
+                  <p className="text-[14px] font-bold text-[#101828]">
+                    Make the Most of Your Sessions
+                  </p>
+                </div>
+                <p className="mt-1 text-[11px] text-[#667085]">
+                  Book follow-up meetings and post requirements while buyer interest
+                  is highest.
+                </p>
+              </div>
+              <Button
+                asChild
+                className="h-9 shrink-0 rounded-lg bg-[#039855] text-[12px] font-semibold hover:bg-[#027A48]"
+              >
+                <Link to="/dashboard/my-meetings">
+                  Schedule Follow-ups
+                  <ArrowRight className="ml-1 size-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <aside className="space-y-4">
+          <ExporterCard>
+            <h3 className="text-[14px] font-bold text-[#101828]">Participation Overview</h3>
+            <div className="mt-4 flex justify-center">
+              <div className="relative size-28">
+                <svg className="size-28 -rotate-90" viewBox="0 0 36 36">
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="#E4E7EC" strokeWidth="3" />
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="#039855" strokeWidth="3" strokeDasharray="50 88" />
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="#175CD3" strokeWidth="3" strokeDasharray="22 88" strokeDashoffset="-50" />
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="#D92D20" strokeWidth="3" strokeDasharray="16 88" strokeDashoffset="-72" />
+                </svg>
+                <span className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-[14px] font-bold text-[#101828]">56%</span>
+                  <span className="text-[8px] text-[#667085]">attended</span>
+                </span>
+              </div>
+            </div>
+            <div className="mt-2 flex justify-center gap-3 text-[9px] text-[#667085]">
+              <span>Attended</span>
+              <span>Upcoming</span>
+              <span>Missed</span>
+            </div>
+          </ExporterCard>
+
+          <ExporterCard>
+            <h3 className="text-[14px] font-bold text-[#101828]">Engagement Insights</h3>
+            <ul className="mt-3 space-y-2 text-[11px] text-[#344054]">
+              <li className="flex items-start gap-2">
+                <BarChart3 className="mt-0.5 size-3.5 shrink-0 text-[#175CD3]" />
+                Average session duration: 52 minutes
+              </li>
+              <li className="flex items-start gap-2">
+                <BarChart3 className="mt-0.5 size-3.5 shrink-0 text-[#175CD3]" />
+                14 meeting requests generated from last 5 sessions
+              </li>
+              <li className="flex items-start gap-2">
+                <BarChart3 className="mt-0.5 size-3.5 shrink-0 text-[#175CD3]" />
+                Best attendance: Tuesday 10–12 AM IST
+              </li>
+            </ul>
+          </ExporterCard>
+
+          <ExporterCard>
+            <h3 className="text-[14px] font-bold text-[#101828]">Top Interest Areas</h3>
+            <div className="mt-3 space-y-3">
+              {INTEREST_BARS.map((bar) => (
+                <div key={bar.label}>
+                  <div className="flex justify-between text-[10px]">
+                    <span className="font-medium text-[#344054]">{bar.label}</span>
+                    <span className="text-[#667085]">{bar.pct}%</span>
+                  </div>
+                  <div className="mt-1 h-2 overflow-hidden rounded-full bg-[#F2F4F7]">
+                    <div
+                      className="h-full rounded-full bg-[#175CD3]"
+                      style={{ width: `${bar.pct}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ExporterCard>
+
+          <ExporterCard>
+            <h3 className="text-[14px] font-bold text-[#101828]">Quick Actions</h3>
+            <div className="mt-2 space-y-2">
+              <Button asChild variant="outline" className="h-9 w-full justify-start rounded-lg text-[12px]">
+                <Link to="/dashboard/sessions">Browse Upcoming Sessions</Link>
+              </Button>
+              <Button asChild variant="outline" className="h-9 w-full justify-start rounded-lg text-[12px]">
+                <Link to="/dashboard/my-requirements">Update Requirements</Link>
+              </Button>
+              <Button asChild className="h-9 w-full rounded-lg bg-[#175CD3] text-[12px] font-semibold">
+                <Link to="/dashboard/opportunity-report">Download Report</Link>
+              </Button>
+            </div>
+          </ExporterCard>
+        </aside>
+      </div>
+    </ExporterPageShell>
   );
 }

@@ -36,7 +36,6 @@ export default function ImporterDashboard() {
   const sessions = sessionsData?.data || [];
 
   const upcomingSessions = sessions.filter((s: any) => s.status === 'upcoming').sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  const nextSession = upcomingSessions[0] || null;
 
   const [showScroll, setShowScroll] = useState(false);
 
@@ -64,6 +63,7 @@ export default function ImporterDashboard() {
       const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
       return { day, month };
     } catch (e) {
+      console.log(e)
       return { day: "24", month: "OCT" };
     }
   };
