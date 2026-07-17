@@ -21,12 +21,12 @@ export function AppImporterSidebar() {
   const storedUser = localStorage.getItem("user");
   const user = storedUser
     ? (() => {
-        try {
-          return JSON.parse(storedUser);
-        } catch {
-          return null;
-        }
-      })()
+      try {
+        return JSON.parse(storedUser);
+      } catch {
+        return null;
+      }
+    })()
     : null;
 
   const name = user?.fullName || user?.companyName || "AECCI Member";
@@ -37,17 +37,20 @@ export function AppImporterSidebar() {
   return (
     <Sidebar
       collapsible="none"
-      className="border-0 bg-[#061A33] text-white"
-      style={{ "--sidebar-width": "240px" } as React.CSSProperties}
+      className="border-0 bg-[#061A33] text-white h-full"
+      style={{ 
+        "--sidebar-width": "240px",
+        "--sidebar": "#061A33"
+      } as React.CSSProperties}
     >
-      <SidebarContent className="flex min-h-full flex-1 flex-col bg-[#061A33] px-4 py-4">
+      <SidebarContent className="flex flex-col bg-[#061A33] px-4 py-4 h-full">
         <Link
           to="/importer/dashboard"
           onClick={() => setOpenMobile(false)}
           className="mb-5 flex items-center gap-2.5"
         >
           <img
-            src="/aecci-logoonly.png"
+            src="/apple-touch-icon.png"
             alt="AECCI"
             className="size-9 shrink-0 object-contain"
           />
@@ -104,11 +107,10 @@ export function AppImporterSidebar() {
                       key={`${link.title}-${link.url}`}
                       to={link.url}
                       onClick={() => setOpenMobile(false)}
-                      className={`group flex h-9 items-center gap-3 rounded-lg px-3 text-[13px] font-semibold transition ${
-                        active
+                      className={`group flex h-9 items-center gap-3 rounded-lg px-3 text-[13px] font-semibold transition ${active
                           ? "bg-[#174CFF] text-white shadow-[0_8px_18px_rgba(23,76,255,0.35)]"
                           : "text-white/76 hover:bg-white/[0.07] hover:text-white"
-                      }`}
+                        }`}
                     >
                       {Icon && <Icon className="size-4 shrink-0" />}
                       <span className="min-w-0 flex-1 truncate">
