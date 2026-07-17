@@ -1,23 +1,22 @@
 import {
   LayoutDashboard,
-  User,
-  Building2,
-  ShoppingCart,
+  Calendar,
+  MessageSquare,
+  Globe,
   FileText,
   Search,
   Store,
-  CalendarClock,
-  CalendarCheck,
-  Video,
-  ClipboardList,
-  Globe,
-  BarChart2,
-  Handshake,
-  CreditCard,
-  MessageSquare,
   Settings,
+  User,
+  Building2,
+  ClipboardList,
+  Handshake,
+  BadgeCheck,
+  Users,
+  Headphones,
+  TrendingUp,
+  Receipt,
   HelpCircle,
-  PhoneCall,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
@@ -43,12 +42,12 @@ export const importerSidebarData: SidebarData = {
         },
         {
           title: "Sourcing Requirements",
-          url: "/importer/sourcing-requirements",
-          icon: ShoppingCart,
+          url: "/importer/opportunity-report",
+          icon: ClipboardList,
         },
         {
           title: "Documents",
-          url: "/importer/documents",
+          url: "/importer/verification",
           icon: FileText,
         },
       ],
@@ -59,7 +58,7 @@ export const importerSidebarData: SidebarData = {
         {
           title: "Browse Exporters",
           url: "/importer/browse-exporters",
-          icon: Search,
+          icon: Users,
         },
         {
           title: "Marketplace",
@@ -68,18 +67,18 @@ export const importerSidebarData: SidebarData = {
         },
         {
           title: "Available Sessions",
-          url: "/importer/available-sessions",
-          icon: CalendarClock,
+          url: "/importer/my-sessions",
+          icon: Calendar,
         },
         {
           title: "Meeting Requests",
-          url: "/importer/meeting-requests",
-          icon: CalendarCheck,
+          url: "/importer/waiting-room",
+          icon: Handshake,
         },
         {
           title: "My Meetings",
           url: "/importer/my-meetings",
-          icon: Video,
+          icon: Calendar,
         },
         {
           title: "Session Summary",
@@ -98,13 +97,13 @@ export const importerSidebarData: SidebarData = {
         },
         {
           title: "Market Reports",
-          url: "/importer/market-reports",
-          icon: BarChart2,
+          url: "/importer/opportunity-report",
+          icon: TrendingUp,
         },
         {
           title: "Partner Brief",
           url: "/importer/partner-brief",
-          icon: Handshake,
+          icon: BadgeCheck,
         },
       ],
     },
@@ -113,8 +112,8 @@ export const importerSidebarData: SidebarData = {
       items: [
         {
           title: "Billing & Plans",
-          url: "/importer/billing",
-          icon: CreditCard,
+          url: "/importer/invoices",
+          icon: Receipt,
         },
         {
           title: "Messages",
@@ -128,7 +127,7 @@ export const importerSidebarData: SidebarData = {
         },
         {
           title: "Help Center",
-          url: "/importer/help",
+          url: "/importer/submit-questions",
           icon: HelpCircle,
         },
       ],
@@ -138,8 +137,8 @@ export const importerSidebarData: SidebarData = {
       items: [
         {
           title: "Contact Support",
-          url: "/importer/contact-support",
-          icon: PhoneCall,
+          url: "/importer/submit-questions",
+          icon: Headphones,
         },
       ],
     },

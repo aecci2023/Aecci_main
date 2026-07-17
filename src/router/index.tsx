@@ -62,6 +62,13 @@ import PublicationsPage from "@/pages/public/events/publications";
 import SponsorshipPage from "@/pages/public/events/sponsorship";
 import ImporterRegisterPage from "@/pages/dashboard/importer/register";
 import ImporterDashboard from "@/pages/dashboard/importer/dashboard";
+import ImporterMyProfilePage from "@/pages/dashboard/importer/profile";
+import ImporterMyCompanyPage from "@/pages/dashboard/importer/company";
+import ImporterMarketplacePage from "@/pages/dashboard/importer/marketplace";
+import ImporterDocumentsPage from "@/pages/dashboard/importer/documents";
+import ImporterAvailableSessionsPage from "@/pages/dashboard/importer/sessions";
+import ImporterMyMeetingsPage from "@/pages/dashboard/importer/my-meetings";
+import ImporterMeetingRequestsPage from "@/pages/dashboard/importer/meeting-requests";
 import { ImporterLayout } from "@/components/layout/importer-layout";
 import NotificationsPage from "@/pages/notifications";
 import BecomePartnerPage from "@/pages/dashboard/partner/apply";
@@ -159,6 +166,14 @@ export const routes: RouteObject[] = [
             element: <ImporterLayout />,
             children: [
               { path: "dashboard", element: <ImporterDashboard /> },
+              { path: "profile", element: <ImporterMyProfilePage /> },
+              { path: "company", element: <ImporterMyCompanyPage /> },
+              { path: "marketplace", element: <ImporterMarketplacePage /> },
+              { path: "verification", element: <ImporterDocumentsPage /> },
+              { path: "waiting-room", element: <ImporterMeetingRequestsPage /> },
+              { path: "my-sessions", element: <ImporterAvailableSessionsPage /> },
+              { path: "my-meetings", element: <ImporterMyMeetingsPage /> },
+              { path: "settings", element: <ImporterMyProfilePage /> },
             ],
           },
         ],
