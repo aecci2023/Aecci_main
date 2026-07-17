@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Main } from "@/components/layout/main";
 import {
   Globe,
-  TrendingUp,
   FileText,
   Bookmark,
   Download,
@@ -168,7 +167,7 @@ export default function ImporterOpportunityReportPage() {
   const [selectedTimeframe, setSelectedTimeframe] = useState("Last 12 Months");
 
   const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
-  const [reports, setReports] = useState(INITIAL_REPORTS);
+  const [reports] = useState(INITIAL_REPORTS);
   const [filteredReports, setFilteredReports] = useState(INITIAL_REPORTS);
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 1024 : true);
 

@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   ExternalLink,
   ShieldCheck,
-  Calendar,
   ArrowRight,
   Handshake,
   DollarSign,

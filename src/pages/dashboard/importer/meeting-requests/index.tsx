@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Handshake,
   Send,
   Clock,
   CheckCircle2,
@@ -12,8 +11,6 @@ import {
   MoreVertical,
   MapPin,
   Tag,
-  Calendar,
-  AlertCircle,
   HelpCircle,
   FileText,
   BadgeCheck,

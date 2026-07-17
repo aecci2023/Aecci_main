@@ -11,10 +11,8 @@ import {
   CreditCard,
   Plus,
   MoreVertical,
-  Shield,
   ShieldCheck,
   HelpCircle,
-  Sparkles,
 } from "lucide-react";
 
 export default function ImporterBillingPlansPage() {

@@ -4,7 +4,6 @@ import {
   MessageSquare,
   Globe,
   FileText,
-  Search,
   Store,
   Settings,
   User,

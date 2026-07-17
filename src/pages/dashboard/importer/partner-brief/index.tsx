@@ -12,7 +12,6 @@ import {
   RotateCcw,
   Filter,
   Calendar,
-  Building2,
   ArrowRight,
   Handshake,
   TrendingUp,
@@ -155,7 +154,7 @@ export default function ImporterPartnerBriefPage() {
   const [selectedIndustry, setSelectedIndustry] = useState("All Industries");
   const [selectedType, setSelectedType] = useState("All Partnership Types");
 
-  const [partners, setPartners] = useState(INITIAL_PARTNERS);
+  const [partners] = useState(INITIAL_PARTNERS);
   const [filteredPartners, setFilteredPartners] = useState(INITIAL_PARTNERS);
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 1024 : true);
 
