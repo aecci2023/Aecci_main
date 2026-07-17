@@ -66,7 +66,9 @@ export function ProfileDropdown({
       ? "/partner/settings"
       : role === "admin"
         ? "/admin/settings"
-        : "/dashboard/settings";
+        : role === "exporter"
+          ? "/dashboard/my-profile"
+          : "/dashboard/settings";
 
   const notificationsLink =
     role === "partner"

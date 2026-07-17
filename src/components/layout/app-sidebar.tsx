@@ -36,11 +36,11 @@ export function AppSidebar() {
 
   return (
     <Sidebar
-      collapsible="none"
+      collapsible="offcanvas"
       className="border-0 bg-[#061A33] text-white"
       style={{ "--sidebar-width": "240px" } as React.CSSProperties}
     >
-      <SidebarContent className="flex h-full flex-col bg-[#061A33] px-4 py-4">
+      <SidebarContent className="flex min-h-full flex-1 flex-col overflow-y-auto bg-[#061A33] px-4 py-4">
         <Link
           to="/dashboard"
           onClick={() => setOpenMobile(false)}
@@ -115,7 +115,13 @@ export function AppSidebar() {
                         {link.title}
                       </span>
                       {link.badge && (
-                        <span className="flex min-w-5 items-center justify-center rounded-full bg-[#174CFF] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                        <span
+                          className={`flex min-w-5 items-center justify-center rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                            active
+                              ? "bg-white text-[#174CFF]"
+                              : "bg-[#174CFF] text-white"
+                          }`}
+                        >
                           {link.badge}
                         </span>
                       )}
@@ -129,7 +135,8 @@ export function AppSidebar() {
 
         <div className="mt-auto pt-6">
           <Link
-            to="/dashboard/submit-questions"
+            to="/dashboard/need-help"
+            onClick={() => setOpenMobile(false)}
             className="flex items-center gap-3 rounded-xl bg-[#174CFF] px-3 py-3 text-white shadow-[0_12px_24px_rgba(23,76,255,0.28)]"
           >
             <span className="flex size-9 items-center justify-center rounded-full border border-white/20 bg-white/10">
