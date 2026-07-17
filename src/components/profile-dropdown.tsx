@@ -12,7 +12,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SignOutDialog } from "@/components/sign-out-dialog";
-import { User, Settings, BadgeCheck, LogOut, Bell, Home } from "lucide-react";
+import {
+  User,
+  Settings,
+  BadgeCheck,
+  LogOut,
+  Bell,
+  Home,
+  ChevronDown,
+} from "lucide-react";
 import { NotificationBell } from "@/components/notification-bell";
 
 function getInitials(name: string) {
@@ -24,7 +32,15 @@ function getInitials(name: string) {
     .join("");
 }
 
-export function ProfileDropdown({ hideNotifications, isOutside }: { hideNotifications?: boolean; isOutside?: boolean } = {}) {
+export function ProfileDropdown({
+  hideNotifications,
+  isOutside,
+  exporterHeader,
+}: {
+  hideNotifications?: boolean;
+  isOutside?: boolean;
+  exporterHeader?: boolean;
+} = {}) {
   const [open, setOpen] = useDialogState();
 
   const userStr = localStorage.getItem("user");
@@ -38,11 +54,12 @@ export function ProfileDropdown({ hideNotifications, isOutside }: { hideNotifica
       })()
     : null;
 
-  const displayName = user?.companyName || user?.fullName || "AECCI Member";
+  const displayName = user?.fullName || user?.companyName || "Swarn Dhiman";
   const displayEmail = user?.email || "member@aecci.org.in";
   const avatar = user?.profilePicture || "";
-  const initials = getInitials(displayName);
-  const role = user?.role || "user";
+  const initials = getInitials(displayName) || "SD";
+  const role = user?.role || "exporter";
+  const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
 
   const profileLink =
     role === "partner"
@@ -62,28 +79,73 @@ export function ProfileDropdown({ hideNotifications, isOutside }: { hideNotifica
     role === "admin"
       ? "/admin/dashboard"
       : role === "partner"
-      ? "/partner/dashboard"
-      : role === "importer"
-      ? "/importer/dashboard"
-      : role === "agent"
-      ? "/agent/dashboard"
-      : "/dashboard";
+        ? "/partner/dashboard"
+        : role === "importer"
+          ? "/importer/dashboard"
+          : role === "agent"
+            ? "/agent/dashboard"
+            : "/dashboard";
 
   return (
     <>
       <div className="flex items-center gap-3">
-        {!hideNotifications && <NotificationBell />}
+        {!hideNotifications && !exporterHeader && <NotificationBell />}
 
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className={`relative rounded-full ${isOutside ? 'h-10 w-10' : 'h-8 w-8'}`}>
-              <Avatar className={isOutside ? 'h-10 w-10' : 'h-8 w-8'}>
-                <AvatarImage src={avatar} alt={displayName} />
-                <AvatarFallback className="bg-primary/10 text-primary font-bold text-xs">
-                  {initials}
-                </AvatarFallback>
-              </Avatar>
-            </Button>
+            {exporterHeader ? (
+              <Button
+                variant="ghost"
+                className="relative h-11 gap-2.5 rounded-full px-1.5 pr-1.5 text-left hover:bg-[#F8FAFC]"
+              >
+                <Avatar className="size-9">
+                  <AvatarImage src={avatar} alt={displayName} />
+                  <AvatarFallback className="bg-[#0EA5A6] text-xs font-bold text-white">
+                    {initials}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="hidden min-w-0 flex-col leading-tight sm:flex">
+                  <span className="max-w-[140px] truncate text-[13px] font-bold text-[#101828]">
+                    {displayName}
+                  </span>
+                  <span className="text-[11px] font-medium text-[#667085]">
+                    {roleLabel}
+                  </span>
+                </div>
+                <span className="flex size-6 items-center justify-center rounded-full border border-[#E4E7EC] bg-[#F9FAFB]">
+                  <ChevronDown className="size-3.5 text-[#667085]" />
+                </span>
+              </Button>
+            ) : (
+              <Button
+                variant="ghost"
+                className={
+                  isOutside
+                    ? "relative h-10 w-10 rounded-full p-0"
+                    : "relative h-11 gap-2 rounded-full px-1.5 pr-2 text-left hover:bg-[#F8FAFC]"
+                }
+              >
+                <Avatar className={isOutside ? "h-10 w-10" : "h-9 w-9"}>
+                  <AvatarImage src={avatar} alt={displayName} />
+                  <AvatarFallback className="bg-[#0EA5A6] text-xs font-bold text-white">
+                    {initials}
+                  </AvatarFallback>
+                </Avatar>
+                {!isOutside && (
+                  <>
+                    <div className="hidden min-w-0 flex-col leading-tight sm:flex">
+                      <span className="max-w-32 truncate text-[13px] font-bold text-[#101828]">
+                        {displayName}
+                      </span>
+                      <span className="text-[10px] font-medium capitalize text-[#667085]">
+                        {roleLabel}
+                      </span>
+                    </div>
+                    <ChevronDown className="size-4 text-[#98A2B3]" />
+                  </>
+                )}
+              </Button>
+            )}
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
@@ -118,19 +180,25 @@ export function ProfileDropdown({ hideNotifications, isOutside }: { hideNotifica
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to={`${profileLink}/account`} className="flex items-center gap-2">
+                    <Link
+                      to={`${profileLink}/account`}
+                      className="flex items-center gap-2"
+                    >
                       <BadgeCheck className="size-4" />
                       Account
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to={`${profileLink}`} className="flex items-center gap-2">
+                    <Link to={profileLink} className="flex items-center gap-2">
                       <Settings className="size-4" />
                       Settings
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to={notificationsLink} className="flex items-center gap-2">
+                    <Link
+                      to={notificationsLink}
+                      className="flex items-center gap-2"
+                    >
                       <Bell className="size-4" />
                       Notifications
                     </Link>
