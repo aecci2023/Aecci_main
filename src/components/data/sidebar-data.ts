@@ -12,9 +12,9 @@ import {
   User,
   Building2,
   ClipboardList,
-  CircleDollarSign,
   Handshake,
   BadgeCheck,
+  Users,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
@@ -66,23 +66,23 @@ export const sidebarData: SidebarData = {
         },
         {
           title: "Browse Countries",
-          url: "/dashboard/intelligence",
+          url: "/dashboard/browse-countries",
           icon: Globe,
         },
         {
           title: "Sessions",
-          url: "/dashboard/my-sessions",
+          url: "/dashboard/sessions",
           icon: Calendar,
         },
         {
           title: "My Meetings",
-          url: "/dashboard/my-sessions",
-          icon: Calendar,
+          url: "/dashboard/my-meetings",
+          icon: Users,
           badge: "3",
         },
         {
           title: "Meeting Requests",
-          url: "/dashboard/waiting-room",
+          url: "/dashboard/meeting-requests",
           icon: Handshake,
           badge: "1",
         },
@@ -98,12 +98,12 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: "Country Intelligence",
-          url: "/dashboard/intelligence",
+          url: "/dashboard/country-intelligence",
           icon: Globe,
         },
         {
           title: "Market Reports",
-          url: "/dashboard/my-requirements",
+          url: "/dashboard/market-reports",
           icon: TrendingUp,
         },
         {
@@ -118,7 +118,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: "Billing & Plans",
-          url: "/dashboard/invoices",
+          url: "/dashboard/billing",
           icon: Receipt,
         },
         {
@@ -129,18 +129,13 @@ export const sidebarData: SidebarData = {
         },
         {
           title: "Settings",
-          url: "/dashboard/my-profile",
+          url: "/dashboard/settings",
           icon: Settings,
         },
         {
           title: "Help Center",
-          url: "/dashboard/submit-questions",
+          url: "/dashboard/help-center",
           icon: HelpCircle,
-        },
-        {
-          title: "Payments",
-          url: "/dashboard/payment",
-          icon: CircleDollarSign,
         },
       ],
     },

@@ -87,7 +87,7 @@ export default function MyCompanyPage() {
       <ExporterTabs tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
       <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <ExporterCard>
             <h2 className="text-[15px] font-bold text-[#101828]">
               Company Information
@@ -198,7 +198,7 @@ export default function MyCompanyPage() {
           </ExporterCard>
         </div>
 
-        <aside className="space-y-4 xl:sticky xl:top-4">
+        <aside className="space-y-4">
           <ExporterCard>
             <h3 className="text-[14px] font-bold text-[#101828]">Company Profile Strength</h3>
             <div className="mt-4 flex items-start gap-3">

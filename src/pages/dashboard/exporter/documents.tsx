@@ -136,32 +136,33 @@ export default function DocumentsPage() {
 
       <ExporterTabs tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
-        {STATS.map((s) => (
-          <div
-            key={s.label}
-            className="rounded-xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)]"
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-[10px] text-[#667085]">{s.label}</p>
-                <p className="mt-1 text-[22px] font-bold text-[#101828]">
-                  {s.value}
-                </p>
-              </div>
-              <span
-                className={`flex size-8 items-center justify-center rounded-lg ${s.bg} ${s.color}`}
+      <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
+        <section className="min-w-0 space-y-5">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+            {STATS.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)]"
               >
-                <s.icon className="size-4" />
-              </span>
-            </div>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-[10px] text-[#667085]">{s.label}</p>
+                    <p className="mt-1 text-[22px] font-bold text-[#101828]">
+                      {s.value}
+                    </p>
+                  </div>
+                  <span
+                    className={`flex size-8 items-center justify-center rounded-lg ${s.bg} ${s.color}`}
+                  >
+                    <s.icon className="size-4" />
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_280px]">
-        <ExporterCard className="overflow-hidden p-0">
-          <div className="overflow-x-auto">
+          <ExporterCard className="overflow-hidden p-0">
+          <div className="overflow-x-auto -mx-1">
             <table className="w-full min-w-[640px] text-left text-[12px]">
               <thead className="border-b border-[#E4E7EC] bg-[#F9FAFB] text-[10px] font-bold uppercase tracking-wide text-[#667085]">
                 <tr>
@@ -210,7 +211,20 @@ export default function DocumentsPage() {
           </div>
         </ExporterCard>
 
-        <aside className="space-y-4 xl:sticky xl:top-4">
+          <div className="flex flex-col gap-3 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+            <p className="text-[14px] font-bold text-[#027A48]">
+              Why Documents are Important?
+            </p>
+            <Button
+              variant="outline"
+              className="h-9 w-full rounded-lg border-[#039855] text-[12px] font-semibold text-[#027A48] sm:w-auto"
+            >
+              Learn More
+            </Button>
+          </div>
+        </section>
+
+        <aside className="space-y-4">
           <ExporterCard>
             <h3 className="text-[14px] font-bold text-[#101828]">Upload New Document</h3>
             <div className="mt-3 rounded-xl border-2 border-dashed border-[#D0D5DD] bg-[#F9FAFB] px-4 py-6 text-center">
@@ -263,18 +277,6 @@ export default function DocumentsPage() {
             </Button>
           </ExporterCard>
         </aside>
-      </div>
-
-      <div className="flex items-center justify-between rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-5 py-4">
-        <p className="text-[14px] font-bold text-[#027A48]">
-          Why Documents are Important?
-        </p>
-        <Button
-          variant="outline"
-          className="h-9 rounded-lg border-[#039855] text-[12px] font-semibold text-[#027A48]"
-        >
-          Learn More
-        </Button>
       </div>
     </ExporterPageShell>
   );

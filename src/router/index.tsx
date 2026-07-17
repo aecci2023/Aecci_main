@@ -34,10 +34,8 @@ import DocumentsPage from "@/pages/dashboard/exporter/documents";
 import ApplicationPage from "@/pages/dashboard/exporter/application";
 import ApprovalPage from "@/pages/dashboard/exporter/approval";
 import FollowUpServicesPage from "@/pages/dashboard/exporter/follow-up-services";
-import IntelligencePage from "@/pages/dashboard/exporter/intelligence";
 import LiveDealRoomPage from "@/pages/dashboard/exporter/live-deal-room";
 import MarketplacePage from "@/pages/dashboard/exporter/marketplace";
-import MySessionsPage from "@/pages/dashboard/exporter/my-sessions";
 import PartnerBriefPage from "@/pages/dashboard/exporter/partner-brief";
 import PaymentPage from "@/pages/dashboard/exporter/payment";
 import PaymentSuccessPage from "@/pages/dashboard/exporter/payment-success";
@@ -45,7 +43,17 @@ import RejectedApplicationPage from "@/pages/dashboard/exporter/rejected";
 import ServicePurchasePage from "@/pages/dashboard/exporter/service-purchase";
 import SessionDetailsPage from "@/pages/dashboard/exporter/session-details";
 import SessionSummaryPage from "@/pages/dashboard/exporter/session-summary";
-import SubmitQuestionsPage from "@/pages/dashboard/exporter/submit-questions";
+import BrowseCountriesPage from "@/pages/dashboard/exporter/browse-countries";
+import ExporterSessionsPage from "@/pages/dashboard/exporter/sessions";
+import MyMeetingsPage from "@/pages/dashboard/exporter/my-meetings";
+import MeetingRequestsPage from "@/pages/dashboard/exporter/meeting-requests";
+import CountryIntelligenceExporterPage from "@/pages/dashboard/exporter/country-intelligence";
+import MarketReportsPage from "@/pages/dashboard/exporter/market-reports";
+import BillingPage from "@/pages/dashboard/exporter/billing";
+import ExporterSettingsPage from "@/pages/dashboard/exporter/settings-page";
+import HelpCenterPage from "@/pages/dashboard/exporter/help-center";
+import NeedHelpPage from "@/pages/dashboard/exporter/need-help";
+import ExporterMessagesPage from "@/pages/dashboard/exporter/messages-page";
 import WaitingRoomPage from "@/pages/dashboard/exporter/waiting-room";
 // import MainHomepage from "@/pages/public/MainHomepage"; //old homepage
 import Home from "@/pages/public/Home";
@@ -59,7 +67,6 @@ import { Navigate } from "react-router-dom";
 import { PartnerLayout } from "@/components/layout/partner-layout";
 
 import AdminSubscriptionsPage from "@/pages/dashboard/admin/subscriptions";
-import UserInvoicesPage from "@/pages/dashboard/exporter/invoices";
 import AdvertiseWithUsPage from "@/pages/public/events/advertise-with-us";
 import PublicationsPage from "@/pages/public/events/publications";
 import SponsorshipPage from "@/pages/public/events/sponsorship";
@@ -421,7 +428,43 @@ export const routes: RouteObject[] = [
           },
           {
             path: "intelligence",
-            element: <IntelligencePage />,
+            element: <Navigate to="/dashboard/country-intelligence" replace />,
+          },
+          {
+            path: "browse-countries",
+            element: <BrowseCountriesPage />,
+          },
+          {
+            path: "sessions",
+            element: <ExporterSessionsPage />,
+          },
+          {
+            path: "my-meetings",
+            element: <MyMeetingsPage />,
+          },
+          {
+            path: "meeting-requests",
+            element: <MeetingRequestsPage />,
+          },
+          {
+            path: "country-intelligence",
+            element: <CountryIntelligenceExporterPage />,
+          },
+          {
+            path: "market-reports",
+            element: <MarketReportsPage />,
+          },
+          {
+            path: "billing",
+            element: <BillingPage />,
+          },
+          {
+            path: "help-center",
+            element: <HelpCenterPage />,
+          },
+          {
+            path: "need-help",
+            element: <NeedHelpPage />,
           },
           {
             path: "partner-brief",
@@ -429,11 +472,11 @@ export const routes: RouteObject[] = [
           },
           {
             path: "submit-questions",
-            element: <SubmitQuestionsPage />,
+            element: <Navigate to="/dashboard/need-help" replace />,
           },
           {
             path: "waiting-room",
-            element: <WaitingRoomPage />,
+            element: <Navigate to="/dashboard/meeting-requests" replace />,
           },
           {
             path: "live-deal-room",
@@ -457,27 +500,27 @@ export const routes: RouteObject[] = [
           },
           {
             path: "my-sessions",
-            element: <MySessionsPage />,
+            element: <Navigate to="/dashboard/sessions" replace />,
           },
           {
             path: "messages",
-            element: <Chats />,
+            element: <ExporterMessagesPage />,
           },
           {
             path: "settings",
-            element: <Navigate to="/dashboard/my-profile" replace />,
+            element: <ExporterSettingsPage />,
           },
           {
             path: "settings/account",
-            element: <Navigate to="/dashboard/my-company" replace />,
+            element: <Navigate to="/dashboard/settings" replace />,
           },
           {
             path: "settings/appearance",
-            element: <Navigate to="/dashboard/my-profile" replace />,
+            element: <Navigate to="/dashboard/settings" replace />,
           },
           {
             path: "settings/notifications",
-            element: <Navigate to="/dashboard/my-profile" replace />,
+            element: <Navigate to="/dashboard/settings" replace />,
           },
           {
             path: "marketplace",
@@ -509,7 +552,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "invoices",
-            element: <UserInvoicesPage />,
+            element: <Navigate to="/dashboard/billing" replace />,
           },
           {
             path: "notifications",

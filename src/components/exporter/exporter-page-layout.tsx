@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Main } from "@/components/layout/main";
 import { Button } from "@/components/ui/button";
 import { Check, AlertCircle, Headphones } from "lucide-react";
-import type { ReactNode } from "react";
+import type { ReactNode, ComponentType } from "react";
 
 export function ExporterPageShell({
   children,
@@ -12,9 +12,70 @@ export function ExporterPageShell({
   className?: string;
 }) {
   return (
-    <Main fluid className={`space-y-5 bg-[#F8FAFC]! pb-8 ${className}`}>
+    <Main
+      fluid
+      className={`space-y-5 overflow-x-hidden bg-[#F8FAFC]! px-3 pb-8 sm:px-5 ${className}`}
+    >
       {children}
     </Main>
+  );
+}
+
+export function ExporterBreadcrumb({
+  items,
+}: {
+  items: { label: string; to?: string }[];
+}) {
+  return (
+    <nav className="flex flex-wrap items-center gap-1.5 text-[11px] text-[#98A2B3]">
+      {items.map((item, i) => (
+        <span key={`${item.label}-${i}`} className="flex items-center gap-1.5">
+          {i > 0 && <span>/</span>}
+          {item.to ? (
+            <Link to={item.to} className="hover:text-[#175CD3]">
+              {item.label}
+            </Link>
+          ) : (
+            <span className="font-medium text-[#667085]">{item.label}</span>
+          )}
+        </span>
+      ))}
+    </nav>
+  );
+}
+
+export function ExporterStatCard({
+  label,
+  value,
+  sub,
+  icon: Icon,
+  color,
+  bg,
+}: {
+  label: string;
+  value: string;
+  sub?: string;
+  icon: ComponentType<{ className?: string }>;
+  color: string;
+  bg: string;
+}) {
+  return (
+    <div className="rounded-xl border border-[#E4E7EC] bg-white p-3 shadow-[0_1px_2px_rgba(16,24,40,0.05)] sm:p-4">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <p className="text-[10px] text-[#667085]">{label}</p>
+          <p className="mt-1 text-[20px] font-bold leading-none text-[#101828] sm:text-[22px]">
+            {value}
+          </p>
+          {sub && <p className="mt-1 text-[10px] text-[#98A2B3]">{sub}</p>}
+        </div>
+        <span
+          className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${bg} ${color}`}
+        >
+          <Icon className="size-4" />
+        </span>
+      </div>
+    </div>
   );
 }
 
@@ -43,12 +104,12 @@ export function ExporterPageHeader({
           {subtitle}
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
         {secondaryAction && (
           <Button
             asChild
             variant="outline"
-            className="h-9 rounded-lg border-[#B2DDFF] bg-white text-[12px] font-semibold text-[#175CD3] hover:bg-[#EFF8FF]"
+            className="h-9 w-full rounded-lg border-[#B2DDFF] bg-white text-[12px] font-semibold text-[#175CD3] hover:bg-[#EFF8FF] sm:w-auto"
           >
             <Link to={secondaryAction.to || "#"}>{secondaryAction.label}</Link>
           </Button>
@@ -88,7 +149,7 @@ export function ExporterPageHeader({
         {primaryAction && (
           <Button
             asChild
-            className="h-9 rounded-lg bg-[#175CD3] text-[12px] font-semibold text-white hover:bg-[#1448B0]"
+            className="h-9 w-full rounded-lg bg-[#175CD3] text-[12px] font-semibold text-white hover:bg-[#1448B0] sm:w-auto"
           >
             <Link to={primaryAction.to || "#"}>{primaryAction.label}</Link>
           </Button>
@@ -108,13 +169,13 @@ export function ExporterTabs({
   onChange?: (tab: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-1 border-b border-[#E4E7EC]">
+    <div className="flex flex-nowrap gap-1 overflow-x-auto border-b border-[#E4E7EC] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {tabs.map((tab) => (
         <button
           key={tab}
           type="button"
           onClick={() => onChange?.(tab)}
-          className={`border-b-2 px-3 py-2.5 text-[12px] font-semibold transition ${
+          className={`shrink-0 whitespace-nowrap border-b-2 px-3 py-2.5 text-[12px] font-semibold transition ${
             active === tab
               ? "border-[#175CD3] text-[#175CD3]"
               : "border-transparent text-[#667085] hover:text-[#344054]"
@@ -136,7 +197,7 @@ export function ExporterCard({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-[#E4E7EC] bg-white p-5 shadow-[0_1px_2px_rgba(16,24,40,0.05)] ${className}`}
+      className={`rounded-2xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)] sm:p-5 ${className}`}
     >
       {children}
     </div>

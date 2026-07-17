@@ -108,11 +108,11 @@ export default function MyRequirementsPage() {
       <ExporterTabs tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
       <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <div className="rounded-xl border border-[#B2DDFF] bg-[#EFF8FF] px-4 py-3">
-            <div className="flex items-start gap-2">
-              <Lightbulb className="mt-0.5 size-4 text-[#175CD3]" />
-              <div className="flex-1">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
+              <Lightbulb className="mt-0.5 size-4 shrink-0 text-[#175CD3]" />
+              <div className="min-w-0 flex-1">
                 <p className="text-[12px] font-semibold text-[#175CD3]">
                   Better Requirements = Better Matches
                 </p>
@@ -123,7 +123,7 @@ export default function MyRequirementsPage() {
               </div>
               <button
                 type="button"
-                className="text-[11px] font-semibold text-[#175CD3]"
+                className="shrink-0 self-start text-[11px] font-semibold text-[#175CD3] sm:self-center"
               >
                 View Tips
               </button>
@@ -226,7 +226,7 @@ export default function MyRequirementsPage() {
           </ExporterCard>
         </div>
 
-        <aside className="space-y-4 xl:sticky xl:top-4">
+        <aside className="space-y-4">
           <ExporterCard>
             <h3 className="text-[14px] font-bold text-[#101828]">
               Requirement Profile Strength

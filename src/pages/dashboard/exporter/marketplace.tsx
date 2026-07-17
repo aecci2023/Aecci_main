@@ -188,19 +188,19 @@ export default function MarketplacePage() {
 
   return (
     <ExporterPageShell>
+      <div>
+        <h1 className="text-[22px] font-bold text-[#101828] sm:text-[24px]">
+          Marketplace
+        </h1>
+        <p className="mt-1 text-[13px] text-[#667085]">
+          Connect with global buyers, explore deal rooms, and grow your
+          export business.
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
         <section className="min-w-0 space-y-5">
-          <div>
-            <h1 className="text-[22px] font-bold text-[#101828] sm:text-[24px]">
-              Marketplace
-            </h1>
-            <p className="mt-1 text-[13px] text-[#667085]">
-              Connect with global buyers, explore deal rooms, and grow your
-              export business.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((s) => (
               <div
                 key={s.label}
@@ -228,7 +228,7 @@ export default function MarketplacePage() {
             <h3 className="text-[14px] font-bold text-[#101828]">
               Find the Right Deal Room
             </h3>
-            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 "Select Country",
                 "All Industries",
@@ -243,14 +243,14 @@ export default function MarketplacePage() {
                 </select>
               ))}
             </div>
-            <div className="mt-3 flex items-center justify-between">
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="button"
                 className="text-[12px] font-semibold text-[#175CD3]"
               >
                 Reset Filters
               </button>
-              <Button className="h-9 rounded-lg bg-[#175CD3] px-4 text-[12px] font-semibold hover:bg-[#1448B0]">
+              <Button className="h-9 w-full rounded-lg bg-[#175CD3] px-4 text-[12px] font-semibold hover:bg-[#1448B0] sm:w-auto">
                 Search
               </Button>
             </div>
@@ -268,7 +268,7 @@ export default function MarketplacePage() {
                 View All Countries →
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {FEATURED.map((c) => (
                 <div
                   key={c.name}

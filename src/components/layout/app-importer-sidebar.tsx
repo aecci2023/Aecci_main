@@ -40,7 +40,7 @@ export function AppImporterSidebar() {
       className="border-0 bg-[#061A33] text-white"
       style={{ "--sidebar-width": "240px" } as React.CSSProperties}
     >
-      <SidebarContent className="flex h-full flex-col bg-[#061A33] px-4 py-4">
+      <SidebarContent className="flex min-h-full flex-1 flex-col bg-[#061A33] px-4 py-4">
         <Link
           to="/importer/dashboard"
           onClick={() => setOpenMobile(false)}

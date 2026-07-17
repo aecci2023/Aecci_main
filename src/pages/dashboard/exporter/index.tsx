@@ -403,7 +403,7 @@ export default function DashboardPage() {
         </div>
       </Header>
 
-      <Main fluid className="space-y-4 bg-[#F8FAFC]! pb-6">
+      <Main fluid className="space-y-4 overflow-x-hidden bg-[#F8FAFC]! px-3 pb-6 sm:px-5">
         {/* Welcome */}
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div>
