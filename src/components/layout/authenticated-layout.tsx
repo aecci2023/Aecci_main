@@ -5,6 +5,7 @@ import { LayoutProvider } from "@/context/layout-provider";
 import { SearchProvider } from "@/context/search-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { ExporterHeader } from "@/components/layout/exporter-header";
 import { SkipToMain } from "@/components/skip-to-main";
 import { RoleTour } from "@/components/tour/RoleTour";
 
@@ -27,6 +28,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
               "peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]",
             )}
           >
+            <ExporterHeader />
             {children ?? <Outlet />}
             <RoleTour role="exporter" />
           </SidebarInset>
