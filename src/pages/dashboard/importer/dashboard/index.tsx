@@ -5,7 +5,6 @@ import {
   Globe,
   FileText,
   Clock,
-  Award,
   Check,
   Plus,
   Users,
@@ -37,18 +36,7 @@ export default function ImporterDashboard() {
   const sessions = sessionsData?.data || [];
 
   const upcomingSessions = sessions.filter((s: any) => s.status === 'upcoming').sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  const pendingSessions = sessions.filter((s: any) => s.status === 'pending_approval');
-
   const nextSession = upcomingSessions[0] || null;
-
-
-
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
 
   const [showScroll, setShowScroll] = useState(false);
 
@@ -67,28 +55,6 @@ export default function ImporterDashboard() {
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  useEffect(() => {
-    if (!nextSession?.date) return;
-
-    const calculateTimeLeft = () => {
-      const difference = new Date(nextSession.date).getTime() - new Date().getTime();
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        });
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-    return () => clearInterval(timer);
-  }, [nextSession?.date]);
 
   const formatSessionDate = (dateStr: string) => {
     if (!dateStr) return { day: "24", month: "OCT" };
@@ -439,7 +405,7 @@ export default function ImporterDashboard() {
             {/* Left: Sessions list */}
             <div className="lg:col-span-2 relative flex items-stretch">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                {displaySessions.map((session) => {
+                {displaySessions.map((session: any) => {
                   const isReserved = session.id === "mock-1" || session.isLive;
                   const badgeBg = isReserved ? "bg-[#0B1B3D] text-white" : "bg-[#EFF3F8] text-[#0B1B3D]";
                   const monthColor = isReserved ? "text-gray-300" : "text-[#475569]";

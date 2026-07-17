@@ -1,11 +1,6 @@
 import { useState } from "react";
 import {
   Search,
-  Users,
-  Briefcase,
-  Globe,
-  Settings,
-  Tv,
   Scissors,
   Home,
   Sprout,
@@ -18,7 +13,6 @@ import {
   ChevronLeft,
   ChevronRight,
   FileText,
-  Video,
   Download,
   PlusSquare,
   BadgeCheck,

@@ -36,7 +36,7 @@ type TabId = (typeof TABS)[number]["id"];
 interface SectionAccordion {
   id: string;
   label: string;
-  icon: React.ElementType;
+  icon: any;
   description: string;
   completed: number;
   total: number;

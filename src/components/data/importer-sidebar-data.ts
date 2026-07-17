@@ -4,7 +4,6 @@ import {
   MessageSquare,
   Globe,
   FileText,
-  Search,
   Store,
   Settings,
   User,
@@ -112,7 +111,7 @@ export const importerSidebarData: SidebarData = {
       items: [
         {
           title: "Billing & Plans",
-          url: "/importer/invoices",
+          url: "/importer/billing",
           icon: Receipt,
         },
         {

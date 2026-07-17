@@ -9,7 +9,6 @@ import {
   ChevronDown,
   Download,
   MoreVertical,
-  HelpCircle,
   ShieldCheck,
   Plus,
   BookOpen,
@@ -316,7 +315,6 @@ export default function ImporterDocumentsPage() {
                     documents.map((doc, idx) => {
                       const isPdf = doc.ext === "PDF";
                       const isPng = doc.ext === "PNG";
-                      const isJpg = doc.ext === "JPG";
                       
                       const iconBg = isPdf 
                         ? "bg-[#FEF2F2] text-[#EF4444]" 

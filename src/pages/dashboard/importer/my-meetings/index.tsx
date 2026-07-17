@@ -1,16 +1,7 @@
-import { useState } from "react";
 import {
   Calendar,
   Clock,
-  Users,
   Video,
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  CheckCircle2,
-  AlertCircle,
-  MapPin,
-  ExternalLink,
   MessageSquare,
 } from "lucide-react";
 
@@ -40,8 +31,6 @@ const BOOKED_MEETINGS = [
 ];
 
 export default function ImporterMyMeetingsPage() {
-  const [activeTab, setActiveTab] = useState("all");
-
   return (
     <div className="min-h-full bg-[#F4F6FA] px-6 py-6 text-left">
       {/* ── Breadcrumb ── */}
@@ -65,7 +54,6 @@ export default function ImporterMyMeetingsPage() {
       <div className="bg-white border border-[#E5E7EB] rounded-xl mb-6 overflow-x-auto shadow-sm">
         <div className="flex min-w-max">
           {["All Meetings", "Confirmed", "Pending", "Past"].map((tab, idx) => {
-            const tabId = tab.toLowerCase().replace(" all meetings", "all");
             const active = idx === 0;
             return (
               <button
