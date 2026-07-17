@@ -6,15 +6,12 @@ import { Link, useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
 import { menuConfig } from "./menu-config";
 import MobileMenu from "./MobileMenu";
-import { useAuth } from "@/hooks/useAuth";
-import { ProfileDropdown } from "@/components/profile-dropdown";
 
 export default function Navbar() {
-  const { isAuthenticated } = useAuth();
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
   const [brandVisible, setBrandVisible] = React.useState(true);
-  const closeTimeoutRef = React.useRef<number | null>(null);
+
 
   // ── Scroll: collapse brand bar after 40px ──
   React.useEffect(() => {
@@ -31,30 +28,8 @@ export default function Navbar() {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
-      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     };
   }, []);
-
-  const clearClose = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-  };
-
-  const handleMouseEnter = (title: string) => {
-    clearClose();
-    setActiveSection(title);
-  };
-
-  const handleMouseLeave = () => {
-    clearClose();
-    closeTimeoutRef.current = window.setTimeout(() => {
-      setActiveSection(null);
-    }, 160);
-  };
-
-  const handleDropdownMouseEnter = () => clearClose();
 
   const handleClose = () => setActiveSection(null);
 
@@ -81,7 +56,7 @@ export default function Navbar() {
               : "",
           ].join(" ")}
         >
-          <div className="mx-auto flex h-[84px] lg:h-[100px] w-full max-w-[95%] 2xl:max-w-[1600px] items-center justify-between px-4 lg:px-6 relative">
+          <div className="mx-auto flex h-[84px] lg:h-[70px] w-full max-w-[95%] 2xl:max-w-[1600px] items-center justify-between px-4 lg:px-6 relative">
             {/* Mobile: Hamburger */}
             <div className="flex lg:hidden items-center w-1/3">
               <MobileMenu />
@@ -100,22 +75,19 @@ export default function Navbar() {
 
             {/* Mobile: User icon right */}
             <div className="flex lg:hidden items-center justify-end w-1/3">
-              {isAuthenticated ? (
-                <ProfileDropdown hideNotifications isOutside />
-              ) : (
-                <Link
-                  to="/login"
-                  onClick={handleClose}
-                  className={[
-                    "flex size-9 items-center justify-center rounded-full p-0",
-                    "bg-black/[0.04] dark:bg-white/[0.06]",
-                    "border border-black/[0.08] dark:border-white/[0.08]",
-                    "text-foreground hover:text-primary transition-all duration-200",
-                  ].join(" ")}
-                >
-                  <User className="size-[18px]" />
-                </Link>
-              )}
+              <a
+                href="https://e-platform.aecci.org.in/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={[
+                  "flex size-9 items-center justify-center rounded-full p-0",
+                  "bg-black/[0.04] dark:bg-white/[0.06]",
+                  "border border-black/[0.08] dark:border-white/[0.08]",
+                  "text-foreground hover:text-primary transition-all duration-200",
+                ].join(" ")}
+              >
+                <User className="size-[18px]" />
+              </a>
             </div>
 
             {/* Desktop: Logo Left */}
@@ -130,10 +102,7 @@ export default function Navbar() {
             </div>
 
             {/* Desktop: Nav links centered */}
-            <nav
-              className="hidden lg:flex items-center justify-center gap-0 flex-1"
-              onMouseLeave={handleMouseLeave}
-            >
+            <nav className="hidden lg:flex items-center justify-center gap-0 flex-1">
               {menuConfig.map((item, idx) => {
                 const isActivePath = location.pathname.startsWith(item.href);
 
@@ -141,15 +110,13 @@ export default function Navbar() {
                   <Link
                     key={idx}
                     to={item.href}
-                    onMouseEnter={() => handleMouseEnter(item.title)}
-                    onMouseLeave={handleMouseLeave}
                     onClick={(e) => {
                       if (item.hasDropdown) {
                         e.preventDefault();
                         if (activeSection === item.title) {
                           handleClose();
                         } else {
-                          handleMouseEnter(item.title);
+                          setActiveSection(item.title);
                         }
                       } else {
                         handleClose();
@@ -179,28 +146,22 @@ export default function Navbar() {
                 "opacity-100",
               ].join(" ")}
             >
-              {isAuthenticated ? (
-                <ProfileDropdown hideNotifications isOutside />
-              ) : (
-                <>
-                  {/* Auth */}
-                  <Link
-                    to="/login"
-                    onClick={handleClose}
-                    className="inline-flex items-center justify-center h-10 px-4 text-[14px] font-[500] text-foreground/75 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
-                  >
-                    Login
-                  </Link>
+              {/* Auth */}
+              <Link
+                to="/login"
+                onClick={handleClose}
+                className="inline-flex items-center justify-center h-10 px-4 text-[14px] font-[500] text-foreground/75 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.05] cursor-pointer rounded-full transition-all duration-200"
+              >
+                Login
+              </Link>
 
-                  <Link
-                    to="/signup"
-                    onClick={handleClose}
-                    className="inline-flex items-center justify-center h-10 px-6 text-[14px] font-[600] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
-                  >
-                    Join Now
-                  </Link>
-                </>
-              )}
+              <Link
+                to="/signup"
+                onClick={handleClose}
+                className="inline-flex items-center justify-center h-10 px-6 text-[14px] font-[600] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
+              >
+                Join Now
+              </Link>
             </div>
           </div>
         </div>
@@ -210,11 +171,7 @@ export default function Navbar() {
         {/* ─────────────────────────────────────── */}
         <AnimatePresence>
           {activeSectionConfig && (
-            <div
-              className="absolute left-0 right-0 top-full z-50"
-              onMouseEnter={handleDropdownMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
+            <div className="absolute left-0 right-0 top-full z-50">
               {/* Panel frosted background */}
               <div
                 className={[
@@ -226,9 +183,9 @@ export default function Navbar() {
               <div className="relative">
                 <MegaMenu
                   section={activeSectionConfig}
-                  onMouseEnter={handleDropdownMouseEnter}
-                  onMouseLeave={handleMouseLeave}
                   onClose={handleClose}
+                  onMouseEnter={() => {}}
+                  onMouseLeave={() => {}}
                 />
               </div>
             </div>

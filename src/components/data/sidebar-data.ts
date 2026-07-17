@@ -3,45 +3,56 @@ import {
   Calendar,
   MessageSquare,
   Globe,
-  Clock,
-  Video,
   FileText,
-  Users,
   HelpCircle,
   TrendingUp,
-  Briefcase,
   Receipt,
   Store,
-  Bell,
   Settings,
-  UserCog,
-  Wrench,
-  Palette,
-  BellRing,
+  User,
+  Building2,
+  ClipboardList,
+  Handshake,
+  BadgeCheck,
+  Users,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
 export const sidebarData: SidebarData = {
   navGroups: [
     {
-      title: "Main",
+      title: "",
       items: [
         {
           title: "Dashboard",
           url: "/dashboard",
           icon: LayoutDashboard,
         },
+      ],
+    },
+    {
+      title: "My Business",
+      items: [
         {
-          title: "My Sessions",
-          url: "/dashboard/my-sessions",
-          icon: Calendar,
+          title: "My Profile",
+          url: "/dashboard/my-profile",
+          icon: User,
+        },
+        {
+          title: "My Company",
+          url: "/dashboard/my-company",
+          icon: Building2,
+        },
+        {
+          title: "My Requirements",
+          url: "/dashboard/my-requirements",
+          icon: ClipboardList,
           badge: "2",
         },
         {
-          title: "Messages",
-          url: "/dashboard/messages",
-          icon: MessageSquare,
-          badge: "3",
+          title: "Documents",
+          url: "/dashboard/documents",
+          icon: FileText,
         },
       ],
     },
@@ -54,14 +65,26 @@ export const sidebarData: SidebarData = {
           icon: Store,
         },
         {
-          title: "Waiting Room",
-          url: "/dashboard/waiting-room",
-          icon: Clock,
+          title: "Browse Countries",
+          url: "/dashboard/browse-countries",
+          icon: Globe,
         },
         {
-          title: "Live Deal Room",
-          url: "/dashboard/live-deal-room",
-          icon: Video,
+          title: "Sessions",
+          url: "/dashboard/sessions",
+          icon: Calendar,
+        },
+        {
+          title: "My Meetings",
+          url: "/dashboard/my-meetings",
+          icon: Users,
+          badge: "3",
+        },
+        {
+          title: "Meeting Requests",
+          url: "/dashboard/meeting-requests",
+          icon: Handshake,
+          badge: "1",
         },
         {
           title: "Session Summary",
@@ -75,75 +98,44 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: "Country Intelligence",
-          url: "/dashboard/intelligence",
+          url: "/dashboard/country-intelligence",
           icon: Globe,
+        },
+        {
+          title: "Market Reports",
+          url: "/dashboard/market-reports",
+          icon: TrendingUp,
         },
         {
           title: "Partner Brief",
           url: "/dashboard/partner-brief",
-          icon: Users,
-        },
-        {
-          title: "Submit Questions",
-          url: "/dashboard/submit-questions",
-          icon: HelpCircle,
+          icon: BadgeCheck,
         },
       ],
     },
     {
-      title: "Reports & Services",
+      title: "Account",
       items: [
         {
-          title: "Opportunity Report",
-          url: "/dashboard/opportunity-report",
-          icon: TrendingUp,
-        },
-        {
-          title: "Follow-Up Services",
-          url: "/dashboard/follow-up-services",
-          icon: Briefcase,
-          badge: "New",
-        },
-        {
-          title: "Invoices & Payments",
-          url: "/dashboard/invoices",
+          title: "Billing & Plans",
+          url: "/dashboard/billing",
           icon: Receipt,
         },
-      ],
-    },
-    {
-      title: "Other",
-      items: [
         {
-          title: "System Alerts",
-          url: "/dashboard/notifications",
-          icon: BellRing,
+          title: "Messages",
+          url: "/dashboard/messages",
+          icon: MessageSquare,
+          badge: "3",
         },
         {
           title: "Settings",
+          url: "/dashboard/settings",
           icon: Settings,
-          items: [
-            {
-              title: "Profile",
-              url: "/dashboard/settings",
-              icon: UserCog,
-            },
-            {
-              title: "Account",
-              url: "/dashboard/settings/account",
-              icon: Wrench,
-            },
-            {
-              title: "Appearance",
-              url: "/dashboard/settings/appearance",
-              icon: Palette,
-            },
-            {
-              title: "Notifications",
-              url: "/dashboard/settings/notifications",
-              icon: Bell,
-            },
-          ],
+        },
+        {
+          title: "Help Center",
+          url: "/dashboard/help-center",
+          icon: HelpCircle,
         },
       ],
     },

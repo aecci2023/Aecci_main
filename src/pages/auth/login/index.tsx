@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import {
   useLoginMutation,
@@ -10,8 +9,17 @@ import {
   useVerifyResetOtpMutation,
   useResetPasswordMutation,
 } from "@/store/api/authApi";
-import MapBranding from "@/pages/auth/signup/components/MapBranding";
-import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  ArrowLeft,
+  Mail,
+  Lock,
+  Globe,
+  TrendingUp,
+  ShieldCheck,
+  Headphones
+} from "lucide-react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -225,53 +233,46 @@ export default function LoginPage() {
   const renderHeader = () => {
     if (view === "login") {
       return (
-        <>
-          <img src="/arccilogoWithText.png" alt="AECCI" className="h-24 w-auto object-contain mb-6 mx-auto" />
-          <h1 className="text-3xl font-bold tracking-tight mb-2 text-center w-full">
-            {requiresAdminOtp ? "Verify Admin Login" : "Welcome Back"}
-          </h1>
-          <p className="text-muted-foreground text-center w-full">
+        <div className="text-center mb-1">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+            {requiresAdminOtp ? "Verify Admin Login" : "Login to Your Account"}
+          </h2>
+          <p className="text-slate-500 text-xs mt-1.5 font-medium">
             {requiresAdminOtp
               ? "Enter the 6-digit code sent to your email to access the admin portal."
-              : "Sign in to your AECCI Global Deal Room account"}
+              : "Enter your credentials to continue"}
           </p>
-        </>
+        </div>
       );
     }
     if (view === "forgot-email") {
       return (
-        <>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">
-            Reset Password
-          </h1>
-          <p className="text-muted-foreground">
+        <div className="text-center mb-1">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Reset Password</h2>
+          <p className="text-slate-500 text-xs mt-1.5 font-medium">
             Enter your email and we'll send you an OTP.
           </p>
-        </>
+        </div>
       );
     }
     if (view === "forgot-otp") {
       return (
-        <>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">
-            Verify Reset OTP
-          </h1>
-          <p className="text-muted-foreground">
+        <div className="text-center mb-1">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Verify Reset OTP</h2>
+          <p className="text-slate-500 text-xs mt-1.5 font-medium">
             Enter the 6-digit code sent to {formData.email}
           </p>
-        </>
+        </div>
       );
     }
     if (view === "reset-password") {
       return (
-        <>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">
-            Create New Password
-          </h1>
-          <p className="text-muted-foreground">
+        <div className="text-center mb-1">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Create New Password</h2>
+          <p className="text-slate-500 text-xs mt-1.5 font-medium">
             Please choose a strong, secure password.
           </p>
-        </>
+        </div>
       );
     }
   };
@@ -279,76 +280,94 @@ export default function LoginPage() {
   const renderForm = () => {
     if (view === "login") {
       return (
-        <form onSubmit={handleLoginSubmit} className="space-y-6">
+        <form onSubmit={handleLoginSubmit} className="space-y-3.5">
           {!requiresAdminOtp ? (
             <>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <button
-                    type="button"
-                    onClick={() => setView("forgot-email")}
-                    className="text-xs text-primary hover:underline"
-                  >
-                    Forgot password?
-                  </button>
-                </div>
+              {/* Email Address */}
+              <div className="text-left">
+                <label className="text-[13px] font-semibold text-slate-700 block mb-1">Email Address</label>
                 <div className="relative">
-                  <Input
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                    <Mail size={16} />
+                  </span>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition text-slate-800 bg-white placeholder:text-slate-400"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Password */}
+              <div className="text-left">
+                <label className="text-[13px] font-semibold text-slate-700 block mb-1">Password</label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                    <Lock size={16} />
+                  </span>
+                  <input
                     id="password"
                     name="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
+                    placeholder="Enter your password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="pr-10"
+                    className="w-full pl-10 pr-10 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition text-slate-800 bg-white placeholder:text-slate-400"
                     required
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
               </div>
+
+              {/* Remember Me & Forgot Password */}
+              <div className="flex items-center justify-between text-xs pt-1">
+                <label className="flex items-center gap-2 text-slate-600 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 rounded border-slate-300 text-[#0A1A3A] focus:ring-[#0A1A3A]/20"
+                  />
+                  Remember me
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setView("forgot-email")}
+                  className="text-blue-600 hover:text-blue-800 font-bold hover:underline"
+                >
+                  Forgot Password?
+                </button>
+              </div>
             </>
           ) : (
-            <div className="space-y-4 flex flex-col items-center">
+            /* Admin OTP Verification */
+            <div className="space-y-4 flex flex-col items-center py-4 bg-gray-50 rounded-2xl border border-gray-100">
               <InputOTP
                 maxLength={6}
                 value={adminOtp}
                 onChange={(val) => setAdminOtp(val)}
               >
                 <InputOTPGroup>
-                  <InputOTPSlot index={0} />
-                  <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
-                  <InputOTPSlot index={3} />
-                  <InputOTPSlot index={4} />
-                  <InputOTPSlot index={5} />
+                  <InputOTPSlot index={0} className="bg-white" />
+                  <InputOTPSlot index={1} className="bg-white" />
+                  <InputOTPSlot index={2} className="bg-white" />
+                  <InputOTPSlot index={3} className="bg-white" />
+                  <InputOTPSlot index={4} className="bg-white" />
+                  <InputOTPSlot index={5} className="bg-white" />
                 </InputOTPGroup>
               </InputOTP>
-              <div className="text-sm mt-4">
+              <div className="text-xs mt-2">
                 {timer > 0 ? (
-                  <span className="text-muted-foreground">
+                  <span className="text-gray-500 font-medium">
                     Resend OTP in {Math.floor(timer / 60)}:
                     {(timer % 60).toString().padStart(2, "0")}
                   </span>
@@ -357,7 +376,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={handleResendOtp}
                     disabled={isLoading}
-                    className="text-primary font-medium hover:underline focus:outline-none"
+                    className="text-blue-600 font-bold hover:underline focus:outline-none"
                   >
                     Resend OTP
                   </button>
@@ -366,28 +385,34 @@ export default function LoginPage() {
             </div>
           )}
 
-          <div className="flex flex-col space-y-4 pt-2">
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading
-                ? "Please wait..."
-                : requiresAdminOtp
-                  ? "Verify & Sign In"
-                  : "Sign in"}
-            </Button>
+          <div className="flex flex-col space-y-3 pt-2">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm disabled:opacity-50"
+            >
+              {isLoading ? (
+                "Please wait..."
+              ) : (
+                <>
+                  <Lock size={16} className="text-white shrink-0" />
+                  {requiresAdminOtp ? "Verify & Sign In" : "Login"}
+                </>
+              )}
+            </button>
 
             {requiresAdminOtp && (
-              <Button
+              <button
                 type="button"
-                variant="ghost"
                 onClick={() => {
                   setRequiresAdminOtp(false);
                   setAdminOtp("");
                 }}
-                className="w-full text-muted-foreground"
+                className="w-full py-2.5 text-gray-500 hover:text-gray-800 text-xs font-semibold flex items-center justify-center gap-1 hover:bg-gray-50 rounded-xl transition"
               >
-                <ArrowLeft className="mr-2 h-4 w-4" />
+                <ArrowLeft size={14} />
                 Back to login
-              </Button>
+              </button>
             )}
           </div>
         </form>
@@ -396,32 +421,41 @@ export default function LoginPage() {
 
     if (view === "forgot-email") {
       return (
-        <form onSubmit={handleForgotEmailSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+        <form onSubmit={handleForgotEmailSubmit} className="space-y-3.5">
+          <div className="space-y-1 text-left">
+            <label className="text-xs font-semibold text-gray-700 block">Email Address</label>
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
+                <Mail size={16} />
+              </span>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email address"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition text-slate-800 bg-white placeholder:text-slate-400"
+                required
+              />
+            </div>
           </div>
-          <div className="flex flex-col space-y-4 pt-2">
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Sending..." : "Send OTP"}
-            </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => setView("login")}
-              className="w-full text-muted-foreground"
+          <div className="flex flex-col space-y-3 pt-2">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-sm disabled:opacity-50"
             >
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              {isLoading ? "Sending..." : "Send OTP"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setView("login")}
+              className="w-full py-2.5 text-gray-500 hover:text-gray-800 text-xs font-semibold flex items-center justify-center gap-1 hover:bg-gray-50 rounded-xl transition"
+            >
+              <ArrowLeft size={14} />
               Back to login
-            </Button>
+            </button>
           </div>
         </form>
       );
@@ -429,39 +463,42 @@ export default function LoginPage() {
 
     if (view === "forgot-otp") {
       return (
-        <form onSubmit={handleForgotOtpSubmit} className="space-y-6">
-          <div className="space-y-4 flex flex-col items-center">
+        <form onSubmit={handleForgotOtpSubmit} className="space-y-4">
+          <div className="space-y-4 flex flex-col items-center py-4 bg-gray-50 rounded-2xl border border-gray-100">
             <InputOTP
               maxLength={6}
               value={resetOtp}
               onChange={(val) => setResetOtp(val)}
             >
               <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
+                <InputOTPSlot index={0} className="bg-white" />
+                <InputOTPSlot index={1} className="bg-white" />
+                <InputOTPSlot index={2} className="bg-white" />
+                <InputOTPSlot index={3} className="bg-white" />
+                <InputOTPSlot index={4} className="bg-white" />
+                <InputOTPSlot index={5} className="bg-white" />
               </InputOTPGroup>
             </InputOTP>
           </div>
-          <div className="flex flex-col space-y-4 pt-2">
-            <Button type="submit" className="w-full" disabled={isLoading}>
+          <div className="flex flex-col space-y-3 pt-2">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-sm disabled:opacity-50"
+            >
               {isLoading ? "Verifying..." : "Verify OTP"}
-            </Button>
-            <Button
+            </button>
+            <button
               type="button"
-              variant="ghost"
               onClick={() => {
                 setView("forgot-email");
                 setResetOtp("");
               }}
-              className="w-full text-muted-foreground"
+              className="w-full py-2.5 text-gray-500 hover:text-gray-800 text-xs font-semibold flex items-center justify-center gap-1 hover:bg-gray-50 rounded-xl transition"
             >
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <ArrowLeft size={14} />
               Use a different email
-            </Button>
+            </button>
           </div>
         </form>
       );
@@ -469,97 +506,288 @@ export default function LoginPage() {
 
     if (view === "reset-password") {
       return (
-        <form onSubmit={handleResetPasswordSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="newPassword">New Password</Label>
+        <form onSubmit={handleResetPasswordSubmit} className="space-y-3.5">
+          <div className="space-y-1 text-left">
+            <label className="text-[13px] font-semibold text-slate-700 block mb-1">New Password</label>
             <div className="relative">
-              <Input
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                <Lock size={16} />
+              </span>
+              <input
                 id="newPassword"
                 name="newPassword"
                 type={showNewPassword ? "text" : "password"}
-                placeholder="••••••••"
+                placeholder="Enter new password"
                 value={formData.newPassword}
                 onChange={handleChange}
-                className="pr-10"
+                className="w-full pl-10 pr-10 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition text-slate-800 bg-white placeholder:text-slate-400"
                 required
               />
               <button
                 type="button"
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-gray-600"
                 onClick={() => setShowNewPassword(!showNewPassword)}
               >
-                {showNewPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
+          <div className="space-y-1 text-left">
+            <label className="text-[13px] font-semibold text-slate-700 block mb-1">Confirm Password</label>
             <div className="relative">
-              <Input
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                <Lock size={16} />
+              </span>
+              <input
                 id="confirmPassword"
                 name="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="••••••••"
+                placeholder="Confirm new password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="pr-10"
+                className="w-full pl-10 pr-10 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition text-slate-800 bg-white placeholder:text-slate-400"
                 required
               />
               <button
                 type="button"
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-gray-600"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {showConfirmPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
           </div>
-          <div className="flex flex-col space-y-4 pt-2">
-            <Button type="submit" className="w-full" disabled={isLoading}>
+          <div className="flex flex-col space-y-3 pt-2">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-sm disabled:opacity-50"
+            >
               {isLoading ? "Resetting..." : "Reset Password"}
-            </Button>
+            </button>
           </div>
         </form>
       );
     }
   };
 
+  const staggerContainer: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.15
+      }
+    }
+  };
+
+  const staggerItem: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } }
+  };
+
   return (
-    <div className="min-h-screen bg-background flex flex-col md:flex-row w-full overflow-hidden">
-      {/* Left Branding / Map Section - Hidden on mobile */}
-      <div className="hidden md:flex md:w-5/12 lg:w-1/2 bg-zinc-950 text-white relative">
-        <MapBranding />
-      </div>
+    <div
+      className="relative min-h-screen flex items-center justify-center py-6 bg-[#040D1A] overflow-y-auto"
+      style={{
+        backgroundImage: `url('/login_earth_background.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-slate-950/45 z-0" />
 
-      {/* Right Form Section */}
-      <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col relative bg-background overflow-y-auto h-screen">
-        <div className="flex-1 w-full max-w-xl mx-auto px-6 py-12 md:px-12 flex flex-col justify-center">
-          <div className="flex flex-col items-center mb-8 w-full">{renderHeader()}</div>
+      {/* Grid Container */}
+      <div className="max-w-7xl w-full mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
 
-          {renderForm()}
+        {/* Left Column - Welcome and Benefits */}
+        <div className="lg:col-span-7 text-left space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2 leading-tight">
+              Welcome Back to
+            </h1>
+            <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 bg-clip-text text-transparent block text-3xl md:text-5xl font-extrabold tracking-tight">
+              AECCI Global Deal Room
+            </span>
+            <p className="text-slate-300 text-sm md:text-base max-w-xl mt-4 leading-relaxed">
+              Login to your account to connect with global businesses, access deal rooms, insights and growth opportunities.
+            </p>
+          </motion.div>
 
-          {view === "login" && !requiresAdminOtp && (
-            <div className="mt-8 text-center text-sm">
-              <span className="text-muted-foreground">
-                Don't have an account?{" "}
-              </span>
-              <button
-                onClick={() => navigate("/signup")}
-                className="text-primary font-medium hover:underline"
-              >
-                Sign up
-              </button>
+          {/* Benefits Grid */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4"
+          >
+            {/* Benefit 1 */}
+            <motion.div
+              variants={staggerItem}
+              whileHover={{ x: 6, scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="flex items-start gap-3 p-3 rounded-2xl hover:bg-white/5 transition-colors cursor-default"
+            >
+              <div className="bg-[#4c9dff]/10 p-3 rounded-full border border-[#4c9dff]/25 text-[#4c9dff] flex-shrink-0">
+                <Globe size={18} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Global Network</h4>
+                <p className="text-slate-400 text-xs mt-0.5 leading-normal">
+                  Connect with verified businesses in 50+ countries
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Benefit 2 */}
+            <motion.div
+              variants={staggerItem}
+              whileHover={{ x: 6, scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="flex items-start gap-3 p-3 rounded-2xl hover:bg-white/5 transition-colors cursor-default"
+            >
+              <div className="bg-emerald-500/10 p-3 rounded-full border border-emerald-500/25 text-emerald-400 flex-shrink-0">
+                <TrendingUp size={18} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Business Growth</h4>
+                <p className="text-slate-400 text-xs mt-0.5 leading-normal">
+                  Discover new markets and opportunities
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Benefit 3 */}
+            <motion.div
+              variants={staggerItem}
+              whileHover={{ x: 6, scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="flex items-start gap-3 p-3 rounded-2xl hover:bg-white/5 transition-colors cursor-default"
+            >
+              <div className="bg-purple-500/10 p-3 rounded-full border border-purple-500/25 text-purple-400 flex-shrink-0">
+                <ShieldCheck size={18} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Secure &amp; Trusted</h4>
+                <p className="text-slate-400 text-xs mt-0.5 leading-normal">
+                  Your data and business interests are protected
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Benefit 4 */}
+            <motion.div
+              variants={staggerItem}
+              whileHover={{ x: 6, scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="flex items-start gap-3 p-3 rounded-2xl hover:bg-white/5 transition-colors cursor-default"
+            >
+              <div className="bg-amber-500/10 p-3 rounded-full border border-amber-500/25 text-amber-400 flex-shrink-0">
+                <Headphones size={18} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Dedicated Support</h4>
+                <p className="text-slate-400 text-xs mt-0.5 leading-normal">
+                  Our team is here to support your global journey
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Secure Platform Banner */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.02, y: -2 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="pt-6 cursor-default"
+          >
+            <div className="bg-[#051426]/60 backdrop-blur-md border border-[#1e2d42]/60 hover:border-[#4c9dff]/30 rounded-2xl p-5 max-w-md flex items-start gap-4 shadow-lg transition-all duration-300">
+              <div className="bg-[#4c9dff]/10 p-3 rounded-xl border border-[#4c9dff]/20 text-[#4c9dff] flex-shrink-0">
+                <ShieldCheck size={24} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Secure Platform</h4>
+                <p className="text-slate-400 text-xs mt-1 leading-normal">
+                  AECCI Global Deal Room is a secure, trusted platform for international business collaboration.
+                </p>
+                <div className="flex items-center gap-2 mt-3 text-[10px]">
+                  <span className="text-emerald-400 font-semibold bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10">100% Verified Members</span>
+                  <span className="text-slate-600">•</span>
+                  <span className="text-sky-400 font-semibold bg-sky-500/5 px-2 py-0.5 rounded border border-sky-500/10">Confidential &amp; Safe</span>
+                </div>
+              </div>
             </div>
-          )}
+          </motion.div>
         </div>
+
+        {/* Right Column - Form Card */}
+        <motion.div
+          initial={{ opacity: 0, x: 25, scale: 0.98 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="lg:col-span-5 flex justify-center w-full"
+        >
+          <div className="bg-white rounded-3xl p-6 md:p-8 shadow-[0_25px_50px_rgba(0,0,0,0.35)] border border-gray-100 flex flex-col gap-4 w-full max-w-md relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={view + (requiresAdminOtp ? "-otp" : "")}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                className="flex flex-col gap-4 w-full"
+              >
+                {/* Header */}
+                {renderHeader()}
+
+                {/* Form */}
+                {renderForm()}
+
+                {/* Social Logins, signup links & help desk - only for login view */}
+                {view === "login" && !requiresAdminOtp && (
+                  <>
+
+
+                    {/* Create Account Link */}
+                    <div className="text-center text-xs text-slate-500 font-semibold pt-0.5">
+                      New to AECCI Global Deal Room?{" "}
+                      <button
+                        onClick={() => navigate("/signup")}
+                        className="text-[#2563eb] hover:text-[#1d4ed8] font-bold hover:underline inline-flex items-center gap-0.5"
+                      >
+                        Create your account &rarr;
+                      </button>
+                    </div>
+
+                    {/* Support Banner */}
+                    <div className="bg-[#f0f6fc] border border-[#e1eefc] rounded-2xl p-3 flex items-center gap-3 shadow-sm text-left">
+                      <div className="text-blue-600 bg-blue-50 p-2 rounded-xl flex-shrink-0">
+                        <Headphones size={18} />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-slate-800 text-[11px] leading-none">Need help logging in?</h5>
+                        <p className="text-[10px] text-slate-500 mt-1">
+                          Contact our support team at{" "}
+                          <a href="mailto:support@aecci.global" className="text-[#2563eb] font-bold hover:underline">
+                            support@aecci.global
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
