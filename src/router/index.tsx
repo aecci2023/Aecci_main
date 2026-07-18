@@ -46,7 +46,6 @@ import SubmitQuestionsPage from "@/pages/dashboard/exporter/submit-questions";
 import VerificationPage from "@/pages/dashboard/exporter/verification";
 import WaitingRoomPage from "@/pages/dashboard/exporter/waiting-room";
 // import MainHomepage from "@/pages/public/MainHomepage"; //old homepage
-import Home from "@/pages/public/Home";
 import LandingPage from "@/pages/public/LandingPage";
 import LoginPage from "@/pages/auth/login";
 import { NotFound } from "@/pages/not-found";
@@ -130,10 +129,6 @@ export const routes: RouteObject[] = [
   {
     path: "/",
     element: <LandingPage />,
-  },
-  {
-    path: "/global-connect",
-    element: <Home />,
   },
   {
     path: "/signup",

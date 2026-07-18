@@ -29,7 +29,6 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
   {
     title: "Our Services",
     links: [
-      { label: "Global Connect", href: "/global-connect", badge: "New" },
       { label: "Membership", href: "/services/membership" },
       { label: "Membership & its benefits", href: "/services/membership/benefits" },
       { label: "Fee, Forms & Guidelines", href: "/services/membership/fee-forms-guidelines" },

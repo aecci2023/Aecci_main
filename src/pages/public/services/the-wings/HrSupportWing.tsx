@@ -112,7 +112,8 @@ export default function HrSupportWing() {
               </h3>
               <p className="text-sm">
                 <span className="font-bold text-foreground">Email:</span>{" "}
-                info@aecci.org.in, hr@aecci.org.in
+                <a href="mailto:info@aecci.org.in" className="text-primary hover:underline font-semibold">info@aecci.org.in</a>,{" "}
+                <a href="mailto:hraecci@gmail.com" className="text-primary hover:underline font-semibold">hraecci@gmail.com</a>
               </p>
               <p className="text-sm">
                 <span className="font-bold text-foreground">Board lines:</span>{" "}

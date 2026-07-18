@@ -206,10 +206,10 @@ export default function HeadOfficePage() {
                 <li>
                   <strong className="text-foreground block">HR Support:</strong>{" "}
                   <a
-                    href="mailto:hr@aecci.org.in"
+                    href="mailto:hraecci@gmail.com"
                     className="hover:text-primary transition-colors"
                   >
-                    hr@aecci.org.in
+                    hraecci@gmail.com
                   </a>
                 </li>
                 <li>

@@ -27,7 +27,7 @@ const slides = [
         <Link to="/signup" className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3.5 rounded-lg transition-colors">
           Join AECCI Today <ArrowRight className="ml-2 w-5 h-5" />
         </Link>
-        <Link to="/global-connect" className="inline-flex items-center justify-center bg-transparent border border-border hover:bg-foreground/5 text-foreground font-semibold px-8 py-3.5 rounded-lg transition-colors">
+        <Link to="/services" className="inline-flex items-center justify-center bg-transparent border border-border hover:bg-foreground/5 text-foreground font-semibold px-8 py-3.5 rounded-lg transition-colors">
           Explore Services
         </Link>
       </>
@@ -51,7 +51,7 @@ const slides = [
     ),
     buttons: (
       <>
-        <Link to="/global-connect" className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3.5 rounded-lg transition-colors">
+        <Link to="/services" className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3.5 rounded-lg transition-colors">
           View All Services <ArrowRight className="ml-2 w-5 h-5" />
         </Link>
       </>
@@ -246,7 +246,7 @@ export default function MainHomepage() {
                   End-to-end support for exporters, manufacturers and service providers
                 </p>
               </div>
-              <Link to="/global-connect" className="inline-flex items-center justify-center px-4 py-2 mt-6 rounded-full border border-border text-xs font-semibold hover:bg-muted/40 text-foreground transition-colors w-fit relative z-10">
+              <Link to="/services" className="inline-flex items-center justify-center px-4 py-2 mt-6 rounded-full border border-border text-xs font-semibold hover:bg-muted/40 text-foreground transition-colors w-fit relative z-10">
                 Explore Services <ArrowRight className="w-3 h-3 ml-2" />
               </Link>
             </div>
@@ -260,7 +260,7 @@ export default function MainHomepage() {
                   Connect, collaborate and close deals with global buyers
                 </p>
               </div>
-              <Link to="/global-connect" className="inline-flex items-center justify-center px-4 py-2 mt-6 rounded-full border border-border text-xs font-semibold hover:bg-muted/40 text-foreground transition-colors w-fit relative z-10">
+              <Link to="/interest-form" className="inline-flex items-center justify-center px-4 py-2 mt-6 rounded-full border border-border text-xs font-semibold hover:bg-muted/40 text-foreground transition-colors w-fit relative z-10">
                 Enter Deal Room <ArrowRight className="w-3 h-3 ml-2" />
               </Link>
             </div>

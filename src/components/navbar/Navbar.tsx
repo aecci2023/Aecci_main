@@ -7,6 +7,47 @@ import MegaMenu from "./MegaMenu";
 import { menuConfig } from "./menu-config";
 import MobileMenu from "./MobileMenu";
 
+function isMenuCategoryActive(item: any, currentPath: string): boolean {
+  if (item.href && item.href !== "#" && currentPath.startsWith(item.href)) {
+    return true;
+  }
+
+  const checkLink = (href: string) => {
+    if (!href || href === "#" || href.startsWith("http")) return false;
+    return currentPath === href || currentPath.startsWith(href);
+  };
+
+  if (item.featured) {
+    for (const f of item.featured) {
+      if (checkLink(f.href)) return true;
+      if (f.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  if (item.quickLinks) {
+    for (const q of item.quickLinks) {
+      if (checkLink(q.href)) return true;
+      if (q.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  if (item.resources) {
+    for (const r of item.resources) {
+      if (checkLink(r.href)) return true;
+      if (r.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  if (item.mobileMenu) {
+    for (const m of item.mobileMenu) {
+      if (checkLink(m.href)) return true;
+      if (m.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  return false;
+}
+
 export default function Navbar() {
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
@@ -126,7 +167,7 @@ export default function Navbar() {
             {/* Desktop: Nav links centered */}
             <nav className="hidden lg:flex items-center justify-center gap-0 flex-1">
               {menuConfig.map((item, idx) => {
-                const isActivePath = location.pathname.startsWith(item.href);
+                const isActivePath = isMenuCategoryActive(item, location.pathname);
 
                 return (
                   <Link

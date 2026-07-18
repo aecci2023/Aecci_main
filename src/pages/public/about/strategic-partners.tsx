@@ -5,6 +5,46 @@ import { Card, CardContent } from "@/components/ui/card";
 import egcLogo from "@/assets/images/partnerimg/egc.png";
 import econsLogo from "@/assets/images/partnerimg/econs.png";
 import elsplLogo from "@/assets/images/partnerimg/elspl.png";
+import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe";
+
+const sampleMarkers: GlobeMarker[] = [
+  {
+    lat: 19.076,
+    lng: 72.8777,
+    size: 0.1,
+    src: "https://flagcdn.com/w80/in.png",
+    label: "India",
+  },
+  {
+    lat: 35.6762,
+    lng: 139.6503,
+    size: 0.08,
+    src: "https://flagcdn.com/w80/jp.png",
+    label: "Japan",
+  },
+  {
+    lat: 51.5074,
+    lng: -0.1278,
+    size: 0.08,
+    src: "https://flagcdn.com/w80/gb.png",
+    label: "United Kingdom",
+  },
+  {
+    lat: 40.7128,
+    lng: -74.006,
+    size: 0.08,
+    src: "https://flagcdn.com/w80/us.png",
+    label: "United States",
+  },
+  {
+    lat: 25.2048,
+    lng: 55.2708,
+    size: 0.08,
+    src: "https://flagcdn.com/w80/ae.png",
+    label: "UAE",
+  },
+];
+
 
 const partners = [
   {
@@ -103,22 +143,47 @@ export default function StrategicPartners() {
   return (
     <div className="w-full bg-background text-foreground">
       {/* Hero */}
-      <section className="relative w-full py-16 md:py-24 bg-foreground overflow-hidden flex items-center">
+      <section className="relative w-full py-8 md:py-12 bg-[#0a1628] overflow-hidden flex items-center">
+        {/* Glow backdrop */}
         <div className="absolute right-0 top-0 w-1/2 h-full bg-primary/20 blur-[100px] pointer-events-none rounded-full translate-x-1/3 -translate-y-1/4 z-0" />
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
+
+        {/* 3D Globe Animation Container */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-[45%] z-0 w-[600px] h-[600px] md:w-[750px] md:h-[750px] lg:w-[950px] lg:h-[950px] pointer-events-none md:pointer-events-auto"
+        >
+          <div className="absolute inset-0 z-10">
+            <Globe3D
+              className="h-full w-full"
+              markers={sampleMarkers}
+              config={{
+                atmosphereColor: "#2bb17b",
+                atmosphereIntensity: 25,
+                bumpScale: 5,
+                autoRotateSpeed: 0.8,
+              }}
+            />
+          </div>
+          <div className="absolute inset-20 bg-primary/20 blur-[80px] rounded-full pointer-events-none z-0" />
+        </motion.div>
+
+        {/* Left Column Content */}
+        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 w-full">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center"
+            className="relative z-20 pointer-events-auto max-w-xl lg:max-w-3xl"
           >
             <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
               Global Network
             </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-background mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
               Strategic <span className="text-primary">Partners</span>
             </h1>
-            <p className="text-background/70 text-base md:text-lg leading-relaxed">
+            <p className="text-white/70 text-base md:text-lg leading-relaxed">
               AECCI's strategic partnerships bring together industry leaders
               across trade, legal, and export services — creating a robust
               global network that empowers businesses to grow beyond borders.
@@ -128,8 +193,8 @@ export default function StrategicPartners() {
       </section>
 
       {/* Partners */}
-      <section className="py-20 md:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section className="py-6 md:py-10 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <span className="text-xs font-bold text-primary uppercase tracking-widest mb-3 block">
               Our Partners
@@ -137,25 +202,27 @@ export default function StrategicPartners() {
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
               Strategic Sponsors
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              These organizations share AECCI's commitment to excellence,
-              transparency, and fostering international trade.
+            <p className="text-muted-foreground max-w-3xl mx-auto text-sm md:text-base leading-relaxed md:whitespace-nowrap">
+              These organizations share AECCI's commitment to excellence, transparency, and fostering international trade.
             </p>
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6">
             {partners.map((partner, idx) => {
               const logoBlock = (
-                <div className="md:col-span-4 flex items-center justify-center py-4">
+                <div className="md:col-span-4 flex items-center justify-center py-4 [transform:translateZ(40px)] transition-transform duration-500">
                   <img
                     src={partner.logo}
                     alt={partner.logoAlt}
-                    className="w-full max-w-[200px] h-auto object-contain"
+                    className="w-full max-w-[200px] h-auto object-contain drop-shadow-md"
                   />
                 </div>
               );
               const textBlock = (
-                <div className="md:col-span-8 flex flex-col justify-center gap-4 text-sm text-muted-foreground leading-relaxed">
+                <div className="md:col-span-8 flex flex-col justify-center gap-4 text-sm text-muted-foreground leading-relaxed [transform:translateZ(20px)] transition-transform duration-500">
+                  <h3 className="text-xl font-bold text-foreground mb-1">
+                    {partner.name}
+                  </h3>
                   {partner.paragraphs.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
@@ -184,39 +251,47 @@ export default function StrategicPartners() {
               );
 
               return (
-                <motion.div
-                  key={partner.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.5 }}
-                >
-                  <Card className="border-border hover:border-primary/40 transition-colors shadow-sm overflow-hidden">
-                    <CardContent className="p-8 md:p-10">
-                      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-                        {partner.logoLeft ? (
-                          <>
-                            {logoBlock}
-                            {textBlock}
-                          </>
-                        ) : (
-                          <>
-                            <div className="md:col-span-8 order-2 md:order-1">
+                <div key={partner.name} className="[perspective:1000px] w-full">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.15, duration: 0.6 }}
+                    whileHover={{
+                      rotateX: 3,
+                      rotateY: -3,
+                      scale: 1.015,
+                      y: -6,
+                    }}
+                    className="w-full origin-center [transform-style:preserve-3d]"
+                  >
+                    <Card className="border border-border shadow-md hover:shadow-2xl hover:border-primary/30 transition-all duration-500 overflow-hidden bg-white [transform-style:preserve-3d]">
+                      <CardContent className="p-5 relative">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
+                          {partner.logoLeft ? (
+                            <>
+                              {logoBlock}
                               {textBlock}
-                            </div>
-                            <div className="md:col-span-4 order-1 md:order-2 flex items-center justify-center py-4">
-                              <img
-                                src={partner.logo}
-                                alt={partner.logoAlt}
-                                className="w-full max-w-[200px] h-auto object-contain"
-                              />
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="md:col-span-8 order-2 md:order-1">
+                                {textBlock}
+                              </div>
+                              <div className="md:col-span-4 order-1 md:order-2 flex items-center justify-center py-4 [transform:translateZ(40px)] transition-transform duration-500">
+                                <img
+                                  src={partner.logo}
+                                  alt={partner.logoAlt}
+                                  className="w-full max-w-[200px] h-auto object-contain drop-shadow-md"
+                                />
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </div>
               );
             })}
           </div>
@@ -224,9 +299,9 @@ export default function StrategicPartners() {
       </section>
 
       {/* CTA */}
-      <section className="relative py-20 bg-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-primary/10 blur-[120px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <section className="relative py-6 md:py-10 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden border-t border-gray-100">
+        <div className="absolute inset-0 bg-primary/5 blur-[120px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -237,18 +312,18 @@ export default function StrategicPartners() {
             <img
               src="/arccilogoWithText.png"
               alt="AECCI Logo"
-              className="w-32 h-auto object-contain mb-6"
+              className="w-32 h-auto object-contain mb-6 drop-shadow-sm"
             />
-            <h2 className="text-3xl md:text-4xl font-bold text-background mb-4 uppercase tracking-wide">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 uppercase tracking-wide">
               Grow With Our Network
             </h2>
-            <p className="text-background/60 text-base max-w-xl mb-8">
+            <p className="text-gray-600 text-base max-w-xl mb-8">
               Join AECCI and gain access to a trusted global ecosystem of
               strategic partners, trade experts, and business opportunities.
             </p>
             <Link
               to="/about/about-chamber"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/20 hover:scale-105"
             >
               About AECCI <ArrowRight className="size-4" />
             </Link>

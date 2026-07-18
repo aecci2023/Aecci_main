@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
-import { Globe, Handshake, Shield, TrendingUp } from "lucide-react";
+import { Globe, Handshake, Shield, TrendingUp, Quote } from "lucide-react";
 import chairmanBg from "@/assets/images/image.png";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
 import videoThumb from "@/assets/videos/thumbnail.png";
@@ -13,78 +13,114 @@ const pillars = [
   { icon: Shield, label: "Integrity", sub: "Delivering Excellence" },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
+
 export default function ChairmanMessage() {
   return (
-    <div className="w-full bg-background text-foreground">
-      {/* Two-column layout */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row w-full bg-foreground min-h-screen">
-        {/* LEFT: Image + pillars */}
-        <div className="w-full md:w-1/2 relative flex flex-col items-center pt-12 pb-24 px-6 min-h-[400px] md:min-h-[600px]">
-          <div
-            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${chairmanBg})` }}
-          />
-          <div className="hidden md:block absolute inset-0 z-0 bg-gradient-to-t from-foreground via-transparent to-transparent opacity-90" />
+    <div className="w-full min-h-screen bg-[#050b14] text-white py-10 md:py-16 px-4 md:px-8 relative overflow-hidden flex flex-col justify-between">
+      {/* Premium Glow Elements */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 blur-[150px] pointer-events-none rounded-full" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/5 blur-[150px] pointer-events-none rounded-full" />
 
-          <div className="relative z-10 hidden md:flex flex-col items-center h-full w-full justify-end">
+      {/* Main Grid Content */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 relative z-10 w-full flex-1 items-stretch"
+      >
+        {/* LEFT COLUMN: Framed Image and Pillars */}
+        <div className="lg:col-span-5 flex flex-col justify-between h-full">
+          {/* Framed Image */}
+          <motion.div variants={itemVariants} className="flex flex-col items-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="w-full mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 text-center"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="w-full aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group bg-[#0d1625]"
             >
-              {pillars.map(({ icon: Icon, label, sub }) => (
-                <div key={label} className="flex flex-col items-center">
-                  <div className="w-10 h-10 flex items-center justify-center text-primary mb-2 bg-background/10 backdrop-blur-sm rounded-lg border border-primary/20">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <p className="text-background font-bold text-[10px] uppercase tracking-wider mb-1">
+              <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat group-hover:scale-105 transition-transform duration-700"
+                style={{ backgroundImage: `url(${chairmanBg})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050b14] via-[#050b14]/10 to-transparent opacity-60" />
+            </motion.div>
+            <div className="text-center mt-6">
+              <h2 className="text-2xl md:text-3xl font-bold font-serif text-primary">Shri Jaheer Bukhari</h2>
+              <p className="text-white/50 text-xs tracking-widest uppercase mt-1">Chairman, AECCI</p>
+            </div>
+          </motion.div>
+
+          {/* Pillars Cards */}
+          <motion.div
+            variants={itemVariants}
+            className="grid grid-cols-2 gap-4 mt-8 w-full"
+          >
+            {pillars.map(({ icon: Icon, label, sub }) => (
+              <motion.div
+                key={label}
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="p-4 rounded-2xl bg-[#0b1424]/80 border border-white/5 hover:border-primary/20 transition-all duration-300 flex items-center gap-3 shadow-md group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-300 shrink-0">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-white group-hover:text-primary transition-colors">
                     {label}
-                  </p>
-                  <p className="text-background/50 text-[8px] leading-tight">
-                    {sub.replace(" ", "\n")}
+                  </h4>
+                  <p className="text-[10px] text-white/50 leading-tight">
+                    {sub}
                   </p>
                 </div>
-              ))}
-            </motion.div>
-          </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
-        {/* RIGHT: Message */}
-        <div className="w-full md:w-1/2 bg-foreground relative z-10 -mt-12 rounded-t-[60px] md:mt-0 md:-ml-8 md:rounded-t-none md:rounded-l-[80px] lg:rounded-l-[120px] shadow-2xl flex flex-col justify-between">
-          <div className="px-8 py-16 md:px-14 md:py-20 lg:px-20 flex-1">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-10 text-center"
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-none text-primary">
-                CHAIRMAN'S
-                <br />
-                <span className="text-background">MESSAGE</span>
-              </h1>
-              <div className="flex items-center justify-center gap-4 my-6">
-                <div className="h-px flex-1 bg-primary/30" />
-                <div className="w-2 h-2 rotate-45 bg-primary" />
-                <div className="h-px flex-1 bg-primary/30" />
-              </div>
-              <p className="text-primary text-xs md:text-sm font-bold uppercase tracking-[0.2em]">
-                Building Global Connections. Creating New Opportunities.
-              
-              </p>
-            </motion.div>
+        {/* RIGHT COLUMN: Message Content */}
+        <motion.div
+          variants={itemVariants}
+          className="lg:col-span-7 bg-[#0b1424]/60 backdrop-blur border border-white/5 rounded-3xl p-6 md:p-10 lg:p-12 shadow-2xl flex flex-col justify-between relative overflow-hidden h-full"
+        >
+          <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl pointer-events-none rounded-full" />
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-5 text-background/70 text-sm md:text-base leading-relaxed"
-            >
-              <p
-                className="italic text-3xl md:text-4xl text-primary mb-4"
-                style={{ fontFamily: "Georgia, serif" }}
-              >
+          <div>
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-xs font-bold text-primary uppercase tracking-widest">Leadership Perspective</span>
+              <div className="h-px flex-1 bg-white/10" />
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15] text-white mb-6">
+              CHAIRMAN'S <span className="text-primary">MESSAGE</span>
+            </h1>
+
+            <div className="relative text-white/80 space-y-5 text-sm md:text-base leading-relaxed">
+              <div className="absolute -left-6 -top-4 text-primary/10 pointer-events-none select-none">
+                <Quote className="w-12 h-12 rotate-180" />
+              </div>
+              <p className="text-xl md:text-2xl text-primary font-serif italic mb-4">
                 Welcome to AECCI
               </p>
               <p>
@@ -96,84 +132,86 @@ export default function ChairmanMessage() {
               <p>
                 We invite you to join AECCI and become part of a dynamic global network shaping the future of international trade.
               </p>
-              
-            </motion.div>
+
+              {/* Highlight Callout Box to fill empty space */}
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 rounded-2xl bg-[#050b14]/50 border border-white/5 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-xl pointer-events-none rounded-full" />
+                <div className="space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-primary tracking-widest">Active Footprint</span>
+                  <h5 className="font-bold text-sm text-white">50+ Countries Connected</h5>
+                  <p className="text-[10px] text-white/50 leading-relaxed">
+                    Partnering with global chambers and trade offices to establish verified routes for exporters.
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-primary tracking-widest">Digital Solutions</span>
+                  <h5 className="font-bold text-sm text-white">Global Deal Room</h5>
+                  <p className="text-[10px] text-white/50 leading-relaxed">
+                    A digital-first platform connecting Indian suppliers directly to international distribution pathways.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Banner */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full bg-primary py-4 px-8 text-center"
-          >
-            <p className="text-primary-foreground font-bold uppercase text-xs md:text-sm tracking-[0.15em]">
-              TOGETHER WE CONNECT. TOGETHER WE GROW. TOGETHER WE SUCCEED.
-            </p>
-          </motion.div>
+          {/* Signature and motto */}
+          <div className="mt-8 border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="text-center sm:text-left">
+              <p className="text-white/50 text-[10px] tracking-[0.2em] uppercase mb-1">
+                Together we connect. Together we grow.
+              </p>
+              <h4 className="text-primary font-bold text-xs uppercase tracking-wider">
+                Together we succeed.
+              </h4>
+            </div>
 
-          {/* Signature */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="px-8 py-10 md:px-14 text-center"
-          >
-            <p
-              className="italic text-4xl text-primary mb-4 opacity-90"
-              style={{ fontFamily: "Georgia, serif" }}
-            >
-              Shri Jaheer Bukhari
-            </p>
-            <Separator className="w-12 mx-auto mb-4 bg-primary/30" />
-            <p className="text-background font-bold tracking-widest text-sm mb-1">
-              CHAIRMAN
-            </p>
-            <p className="text-background/50 text-xs tracking-wider uppercase leading-relaxed">
-              ASIAN EXPORTERS' CHAMBER
-              <br />
-              OF COMMERCE &amp; INDUSTRY
-              <br />
-              <span className="text-primary font-bold">(AECCI)</span>
-            </p>
-          </motion.div>
+            <div className="text-center sm:text-right">
+              <p className="font-serif italic text-2xl text-primary mb-1">Shri Jaheer Bukhari</p>
+              <p className="text-[10px] text-white/50 tracking-widest uppercase">Chairman, AECCI</p>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Chairman Video Section (Separate) */}
+      <section className="max-w-7xl mx-auto mt-16 md:mt-20 px-4 relative z-10 w-full">
+        <div className="text-center max-w-2xl mx-auto mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-2">
+            Hear from our <span className="text-primary">Chairman</span>
+          </h2>
+          <p className="text-white/50 text-sm">Watch the video address to learn more about our strategic global objectives.</p>
         </div>
-      </div>
-
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="relative mx-auto max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-[#0d1625]/50 backdrop-blur p-2"
+        >
+          <HeroVideoDialog
+            className="block"
+            animationStyle="from-center"
+            videoSrc={videoSrc}
+            thumbnailSrc={videoThumb}
+            thumbnailAlt="Chairman Message Video"
+            defaultOpen={false}
+          />
+        </motion.div>
+      </section>
 
       {/* Footer bar */}
-      <div className="max-w-7xl mx-auto w-full bg-foreground border-t border-primary/20 py-4 px-8 flex flex-col sm:flex-row items-center justify-between text-xs tracking-widest gap-3">
-        <div className="flex items-center gap-2 text-background/50 hover:text-primary transition-colors cursor-pointer">
+      <div className="max-w-7xl mx-auto w-full border-t border-white/5 mt-12 pt-6 pb-2 flex flex-col sm:flex-row items-center justify-between text-xs tracking-widest gap-3 relative z-10">
+        <a
+          href="https://www.aecci.org.in"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-white/50 hover:text-primary transition-colors cursor-pointer"
+        >
           <Globe className="w-4 h-4" />
           <span>www.aecci.org.in</span>
-        </div>
+        </a>
         <div className="text-primary font-bold uppercase">
           SOURCING ENTERPRISE
         </div>
       </div>
-
-      {/* Chairman Video Section (Separate) */}
-      <section className="w-full bg-background py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,hsl(var(--primary)/0.04),transparent)] pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-[1.1] mb-4">
-              Hear from our <span className="text-primary">Chairman</span>
-            </h2>
-          </div>
-          <div className="relative mx-auto max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-primary/20">
-            <HeroVideoDialog
-              className="block"
-              animationStyle="from-center"
-              videoSrc={videoSrc}
-              thumbnailSrc={videoThumb}
-              thumbnailAlt="Chairman Message Video"
-              defaultOpen={false}
-            />
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

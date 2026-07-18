@@ -67,22 +67,6 @@ export const audienceCards = [
     ctaColor: "text-amber-600 hover:text-amber-800"
   },
   {
-    title: "Intending Agents / Representatives",
-    text: "Represent your country and connect business opportunities with India.",
-    cta: "Join as Agent →",
-    link: "#",
-    tone: "text-emerald-600",
-    icon: "globe",
-    image: "/images/agent.png",
-    color: "emerald",
-    role: "agent" as const,
-    bgGradient: "from-emerald-50/40 via-emerald-50/10 to-white hover:from-emerald-50/70 hover:to-white",
-    borderColor: "border-emerald-100/60 hover:border-emerald-300/40",
-    iconBg: "bg-emerald-700 text-white",
-    shadowGlow: "hover:shadow-[0_15px_30px_rgba(16,185,129,0.1)]",
-    ctaColor: "text-emerald-600 hover:text-emerald-800"
-  },
-  {
     title: "International Collaborators",
     text: "Share expertise, provide market insights and expand your global network.",
     cta: "Join as Collaborator →",
@@ -97,6 +81,22 @@ export const audienceCards = [
     iconBg: "bg-purple-800 text-white",
     shadowGlow: "hover:shadow-[0_15px_30px_rgba(139,92,246,0.1)]",
     ctaColor: "text-purple-600 hover:text-purple-800"
+  },
+  {
+    title: "Intending Agents / Representatives",
+    text: "Represent your country and connect business opportunities with India.",
+    cta: "Join as Agent →",
+    link: "#",
+    tone: "text-emerald-600",
+    icon: "globe",
+    image: "/images/agent.png",
+    color: "emerald",
+    role: "agent" as const,
+    bgGradient: "from-emerald-50/40 via-emerald-50/10 to-white hover:from-emerald-50/70 hover:to-white",
+    borderColor: "border-emerald-100/60 hover:border-emerald-300/40",
+    iconBg: "bg-emerald-700 text-white",
+    shadowGlow: "hover:shadow-[0_15px_30px_rgba(16,185,129,0.1)]",
+    ctaColor: "text-emerald-600 hover:text-emerald-800"
   },
   {
     title: "Global Buyers / Importers",
@@ -863,7 +863,7 @@ const JourneyTimeline: React.FC = () => {
         <div className="relative">
           <div className="hidden md:block">
             <div className="flex justify-between items-start relative">
-              <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200" />
+              <div className="absolute top-5 left-[10%] right-[10%] h-0.5 bg-gray-200" />
               {journeySteps.map((step, index) => (
                 <motion.div
                   key={index}

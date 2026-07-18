@@ -49,6 +49,7 @@ export default function AdminJobApplicationsPage() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
+                    <TableHead>Email ID</TableHead>
                     <TableHead>Position</TableHead>
                     <TableHead>Qualification</TableHead>
                     <TableHead>Phone</TableHead>
@@ -60,6 +61,7 @@ export default function AdminJobApplicationsPage() {
                   {applications.map((app: any) => (
                     <TableRow key={app.id}>
                       <TableCell className="font-medium">{app.name}</TableCell>
+                      <TableCell>{app.email || "N/A"}</TableCell>
                       <TableCell>{app.positionAppliedFor}</TableCell>
                       <TableCell>{app.basicQualification}</TableCell>
                       <TableCell>{app.phoneNumber}</TableCell>
