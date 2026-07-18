@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import {
   Upload,
   ChevronDown,
+  ArrowRight,
   Check,
+  Info,
   User,
-  Phone,
   Building2,
   Package,
+  Award,
+  Landmark,
+  Users,
   Settings,
-  Share2,
-  FileText,
-  Target,
-  TrendingUp,
-  Shield,
+  Lightbulb,
   Headphones,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,21 +27,23 @@ import {
   FieldSelect,
 } from "@/components/exporter/exporter-page-layout";
 
+const FLAG_IN = "https://flagcdn.com/w40/in.png";
+
 const PROFILE_ITEMS = [
-  { label: "Basic information", fraction: "5/5", status: "done" as const, icon: User },
-  { label: "Contact Details", fraction: "3/5", status: "partial" as const, icon: Phone },
-  { label: "Business Details", fraction: "2/5", status: "partial" as const, icon: Building2 },
-  { label: "Products / Services", fraction: "2/5", status: "partial" as const, icon: Package },
-  { label: "Preferences", fraction: "1/5", status: "empty" as const, icon: Settings },
-  { label: "Social Links", fraction: "0/3", status: "empty" as const, icon: Share2 },
-  { label: "Documents", fraction: "1/3", status: "empty" as const, icon: FileText },
+  { label: "Basic Information", fraction: "5/6", status: "done" as const, icon: User },
+  { label: "Business Details", fraction: "3/5", status: "partial" as const, icon: Building2 },
+  { label: "Products & Services", fraction: "2/4", status: "partial" as const, icon: Package },
+  { label: "Certifications", fraction: "0/3", status: "empty" as const, icon: Award },
+  { label: "Banking Details", fraction: "0/3", status: "empty" as const, icon: Landmark },
+  { label: "Team Members", fraction: "1/3", status: "partial" as const, icon: Users },
+  { label: "Preferences", fraction: "1/2", status: "partial" as const, icon: Settings },
 ];
 
-const WHY_COMPLETE = [
-  { icon: Target, text: "Get discovered by verified buyers" },
-  { icon: Phone, text: "Receive relevant meeting invites" },
-  { icon: TrendingUp, text: "Increase your profile visibility" },
-  { icon: Shield, text: "Build trust and credibility" },
+const PROFILE_TIPS = [
+  "Add 5 or more products",
+  "Upload company logo",
+  "Add valid certifications",
+  "Add team members",
 ];
 
 function StatusDot({ status }: { status: "done" | "partial" | "empty" }) {
@@ -54,31 +56,36 @@ function StatusDot({ status }: { status: "done" | "partial" | "empty" }) {
   }
   if (status === "partial") {
     return (
-      <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-[#F79009] text-[9px] font-bold text-white">
-        !
-      </span>
+      <span className="size-4 shrink-0 rounded-full border-2 border-[#F79009]" />
     );
   }
   return <span className="size-4 shrink-0 rounded-full border-2 border-[#D0D5DD]" />;
 }
 
+function PhoneInput({ defaultValue }: { defaultValue: string }) {
+  return (
+    <div className="flex h-10 w-full items-center overflow-hidden rounded-lg border border-[#D0D5DD] bg-white focus-within:border-[#175CD3] focus-within:ring-1 focus-within:ring-[#175CD3]">
+      <span className="flex h-full shrink-0 items-center gap-1 border-r border-[#E4E7EC] bg-[#F9FAFB] px-2.5">
+        <img src={FLAG_IN} alt="IN" className="h-3.5 w-5 rounded-sm object-cover" />
+        <ChevronDown className="size-3 text-[#98A2B3]" />
+      </span>
+      <input
+        defaultValue={defaultValue}
+        className="h-full w-full min-w-0 px-3 text-[13px] text-[#101828] outline-none"
+      />
+    </div>
+  );
+}
+
 const TABS = [
   "Basic Information",
-  "Contact Details",
   "Business Details",
-  "Products / Services",
+  "Products & Services",
+  "Certifications",
+  "Banking Details",
+  "Team Members",
   "Preferences",
-  "Social Links",
-  "Preview",
-];
-
-const ACCORDION = [
-  { title: "Contact Details", progress: "1/5 Completed" },
-  { title: "Business Details", progress: "0/5 Completed" },
-  { title: "Products / Services", progress: "0/4 Completed" },
-  { title: "Preferences", progress: "0/3 Completed" },
-  { title: "Social Links", progress: "0/2 Completed" },
-  { title: "Documents", progress: "2/4 Completed" },
+  "Preview Profile",
 ];
 
 export default function MyProfilePage() {
@@ -88,10 +95,9 @@ export default function MyProfilePage() {
     <ExporterPageShell>
       <ExporterPageHeader
         title="My Profile"
-        subtitle="Complete your profile to get better visibility and more relevant opportunities."
-        completion={65}
+        subtitle="Complete your profile to increase visibility and get better matched opportunities."
         secondaryAction={{
-          label: "Preview Public Profile",
+          label: "View My Public Profile",
           to: "/dashboard/my-profile",
         }}
       />
@@ -101,109 +107,150 @@ export default function MyProfilePage() {
       <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
         <div className="min-w-0 space-y-4">
           <ExporterCard>
-            <h2 className="text-[15px] font-bold text-[#101828]">
-              Basic Information
-            </h2>
-            <div className="mt-4 grid grid-cols-1 gap-5 lg:grid-cols-[140px_1fr]">
-              <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#D0D5DD] bg-[#F9FAFB] p-4 text-center">
-                <Upload className="size-8 text-[#98A2B3]" />
-                <p className="mt-2 text-[11px] font-semibold text-[#344054]">
-                  Upload Photo
-                </p>
-                <p className="text-[10px] text-[#98A2B3]">JPG, PNG (Max 2MB)</p>
+            <h2 className="text-[15px] font-bold text-[#101828]">Basic Information</h2>
+            <div className="mt-4 grid grid-cols-1 gap-5 lg:grid-cols-[180px_1fr]">
+              {/* Logo column */}
+              <div className="space-y-3">
+                <div>
+                  <FieldLabel>Profile Photo / Logo</FieldLabel>
+                  <div className="flex min-h-[150px] w-full flex-col items-center justify-center rounded-xl border border-[#D0D5DD] bg-white p-4 text-center">
+                    <span className="text-[36px] font-black leading-none tracking-tight text-[#0B2545]">
+                      A<span className="text-[#175CD3]">BC</span>
+                    </span>
+                    <span className="mt-1 h-0.5 w-10 rounded-full bg-[#D92D20]" />
+                    <span className="mt-2 text-[10px] font-bold tracking-wide text-[#0B2545]">
+                      ABC EXPORTS PVT. LTD.
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="flex w-full flex-col items-center justify-center rounded-xl border border-[#D0D5DD] bg-white px-3 py-2.5 text-center transition hover:border-[#175CD3] hover:bg-[#F9FAFB]"
+                >
+                  <span className="flex items-center gap-1.5 text-[12px] font-semibold text-[#344054]">
+                    <Upload className="size-3.5 text-[#475467]" />
+                    Upload New Logo
+                  </span>
+                  <span className="mt-0.5 text-[10px] text-[#98A2B3]">
+                    JPG, PNG or SVG (Max 2MB)
+                  </span>
+                </button>
               </div>
+
+              {/* Fields */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <FieldLabel>Full Name</FieldLabel>
-                  <FieldInput defaultValue="Amit Raj" />
+                  <FieldLabel required>Company / Business Name</FieldLabel>
+                  <FieldInput defaultValue="ABC Exports Pvt. Ltd." />
                 </div>
                 <div>
-                  <FieldLabel>Designation</FieldLabel>
-                  <FieldInput defaultValue="Export Manager" />
-                </div>
-                <div>
-                  <FieldLabel>Business Type</FieldLabel>
+                  <FieldLabel required>Business Type</FieldLabel>
                   <FieldSelect
-                    defaultValue="Exporter"
-                    options={["Exporter", "Importer", "Both"]}
+                    defaultValue="Manufacturer"
+                    options={["Manufacturer", "Exporter", "Trader"]}
                   />
                 </div>
                 <div>
-                  <FieldLabel>Industry</FieldLabel>
+                  <FieldLabel required>Year Established</FieldLabel>
+                  <FieldInput defaultValue="2015" />
+                </div>
+                <div>
+                  <FieldLabel required>Legal Structure</FieldLabel>
                   <FieldSelect
-                    defaultValue="Textiles & Apparel"
-                    options={[
-                      "Textiles & Apparel",
-                      "Food & Beverages",
-                      "Construction",
-                    ]}
+                    defaultValue="Private Limited"
+                    options={["Private Limited", "LLP", "Partnership", "Proprietorship"]}
                   />
                 </div>
                 <div>
-                  <FieldLabel>Years in Business</FieldLabel>
-                  <FieldSelect
-                    defaultValue="5-10 Years"
-                    options={["1-3 Years", "5-10 Years", "10+ Years"]}
-                  />
+                  <FieldLabel>Website</FieldLabel>
+                  <FieldInput defaultValue="www.abcexports.com" />
                 </div>
                 <div>
-                  <FieldLabel>Number of Employees</FieldLabel>
-                  <FieldSelect
-                    defaultValue="11 - 50"
-                    options={["1-10", "11 - 50", "51 - 200"]}
-                  />
+                  <FieldLabel required>Email</FieldLabel>
+                  <FieldInput defaultValue="info@abcexports.com" />
                 </div>
-                <div className="sm:col-span-2">
-                  <FieldLabel>About Yourself / Company</FieldLabel>
-                  <textarea
-                    defaultValue="We are a leading textile exporter specializing in home textiles and apparel. With over 8 years of experience, we serve clients across 15+ countries."
-                    className="min-h-[90px] w-full rounded-lg border border-[#D0D5DD] bg-white px-3 py-2 text-[13px] text-[#101828] outline-none focus:border-[#175CD3]"
-                  />
+                <div>
+                  <FieldLabel required>Phone</FieldLabel>
+                  <PhoneInput defaultValue="+91 98765 43210" />
                 </div>
               </div>
             </div>
-            <div className="mt-5 flex justify-end">
-              <Button className="h-10 rounded-lg bg-[#175CD3] px-5 text-[13px] font-semibold hover:bg-[#1448B0]">
+
+            <div className="mt-5 flex flex-col-reverse justify-end gap-2 sm:flex-row">
+              <Button
+                variant="outline"
+                className="h-10 w-full rounded-lg border-[#D0D5DD] bg-white text-[13px] font-semibold text-[#344054] sm:w-auto"
+              >
+                Cancel
+              </Button>
+              <Button className="h-10 w-full rounded-lg bg-[#175CD3] px-5 text-[13px] font-semibold hover:bg-[#1448B0] sm:w-auto">
                 Save & Continue
               </Button>
             </div>
           </ExporterCard>
 
-          <div className="space-y-2">
-            {ACCORDION.map((item) => (
-              <div
-                key={item.title}
-                className="flex items-center justify-between rounded-xl border border-[#E4E7EC] bg-white px-4 py-3"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="flex size-8 items-center justify-center rounded-lg bg-[#EFF8FF] text-[#175CD3]">
-                    <Check className="size-4" />
-                  </span>
-                  <span className="text-[13px] font-semibold text-[#101828]">
-                    {item.title}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-[11px] text-[#667085]">
-                  {item.progress}
-                  <ChevronDown className="size-4" />
-                </div>
+          <ExporterCard>
+            <h2 className="text-[15px] font-bold text-[#101828]">Registered Address</h2>
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <FieldLabel required>Address Line 1</FieldLabel>
+                <FieldInput defaultValue="Plot No. 123, Industrial Area, Phase 2" />
               </div>
-            ))}
-          </div>
-
-          <div className="flex items-center justify-between rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-5 py-4">
-            <div>
-              <p className="text-[14px] font-bold text-[#027A48]">
-                Complete Your Profile & Grow Globally
-              </p>
-              <p className="text-[12px] text-[#039855]">
-                Finish remaining sections to unlock better matches
-              </p>
+              <div>
+                <FieldLabel>Address Line 2</FieldLabel>
+                <FieldInput defaultValue="Near Export Hub" />
+              </div>
             </div>
-            <Button className="h-9 rounded-lg bg-[#039855] text-[12px] font-semibold hover:bg-[#027A48]">
-              Continue Profiling
-            </Button>
-          </div>
+            <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
+              <div>
+                <FieldLabel required>Country</FieldLabel>
+                <FieldSelect defaultValue="India" options={["India", "UAE", "USA"]} />
+              </div>
+              <div>
+                <FieldLabel required>State</FieldLabel>
+                <FieldSelect
+                  defaultValue="Maharashtra"
+                  options={["Maharashtra", "Gujarat", "Delhi"]}
+                />
+              </div>
+              <div>
+                <FieldLabel required>City</FieldLabel>
+                <FieldSelect defaultValue="Mumbai" options={["Mumbai", "Pune", "Nagpur"]} />
+              </div>
+              <div>
+                <FieldLabel required>PIN Code</FieldLabel>
+                <FieldInput defaultValue="400701" />
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <span className="flex items-center gap-1.5 text-[14px] font-bold text-[#101828]">
+                Communication Address
+                <Info className="size-3.5 text-[#98A2B3]" />
+              </span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked="true"
+                className="relative h-5 w-9 shrink-0 rounded-full bg-[#039855]"
+              >
+                <span className="absolute top-0.5 left-[18px] size-4 rounded-full bg-white shadow" />
+              </button>
+              <span className="text-[12px] text-[#667085]">Same as Registered Address</span>
+            </div>
+
+            <div className="mt-6 flex flex-col justify-center gap-2 sm:flex-row">
+              <Button className="h-10 w-full rounded-lg bg-[#175CD3] px-6 text-[13px] font-semibold hover:bg-[#1448B0] sm:w-auto">
+                Save & Continue
+              </Button>
+              <Button
+                variant="outline"
+                className="h-10 w-full rounded-lg border-[#D0D5DD] bg-white px-6 text-[13px] font-semibold text-[#344054] sm:w-auto"
+              >
+                Save as Draft
+              </Button>
+            </div>
+          </ExporterCard>
         </div>
 
         <aside className="space-y-4">
@@ -218,18 +265,18 @@ export default function MyProfilePage() {
                     cy="18"
                     r="14"
                     fill="none"
-                    stroke="#2DD4BF"
+                    stroke="#039855"
                     strokeWidth="3"
                     strokeDasharray="57 88"
                     strokeLinecap="round"
                   />
                 </svg>
-                <span className="absolute text-[15px] font-bold text-[#101828]">65%</span>
+                <span className="absolute text-[15px] font-bold text-[#039855]">65%</span>
               </div>
               <div>
                 <p className="text-[13px] font-bold text-[#101828]">Almost there!</p>
                 <p className="mt-0.5 text-[11px] leading-relaxed text-[#667085]">
-                  Complete your profile to unlock more features and opportunities.
+                  Complete your profile to get better matched opportunities.
                 </p>
               </div>
             </div>
@@ -237,7 +284,7 @@ export default function MyProfilePage() {
               {PROFILE_ITEMS.map((item) => (
                 <li key={item.label} className="flex items-center gap-2">
                   <item.icon
-                    className={`size-3.5 shrink-0 ${item.status === "empty" ? "text-[#98A2B3]" : "text-[#2DD4BF]"}`}
+                    className={`size-3.5 shrink-0 ${item.status === "empty" ? "text-[#98A2B3]" : "text-[#475467]"}`}
                   />
                   <span className="min-w-0 flex-1 truncate text-[11px] text-[#344054]">
                     {item.label}
@@ -250,30 +297,41 @@ export default function MyProfilePage() {
           </ExporterCard>
 
           <ExporterCard className="border-[#D1E9FF] bg-[#EFF8FF]">
-            <h3 className="text-[13px] font-bold text-[#101828]">
-              Why Complete Your Profile?
-            </h3>
-            <ul className="mt-3 space-y-2.5">
-              {WHY_COMPLETE.map((item) => (
-                <li key={item.text} className="flex items-start gap-2.5">
-                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded border border-[#84CAFF] bg-white">
-                    <item.icon className="size-3 text-[#175CD3]" />
+            <div className="flex items-center gap-2">
+              <Lightbulb className="size-4 text-[#175CD3]" />
+              <h3 className="text-[13px] font-bold text-[#101828]">Profile Tips</h3>
+            </div>
+            <p className="mt-1.5 text-[11px] leading-relaxed text-[#667085]">
+              A complete profile increases your visibility and boosts meeting requests.
+            </p>
+            <ul className="mt-3 space-y-2">
+              {PROFILE_TIPS.map((tip) => (
+                <li key={tip} className="flex items-center gap-2">
+                  <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-[#039855]">
+                    <Check className="size-2.5 text-white stroke-3" />
                   </span>
-                  <span className="text-[11px] leading-relaxed text-[#344054]">{item.text}</span>
+                  <span className="text-[11px] text-[#344054]">{tip}</span>
                 </li>
               ))}
             </ul>
+            <button
+              type="button"
+              className="mt-3 flex items-center gap-1 text-[11px] font-semibold text-[#175CD3] hover:underline"
+            >
+              View All Tips
+              <ArrowRight className="size-3" />
+            </button>
           </ExporterCard>
 
           <ExporterCard className="border-[#E4E7EC] bg-[#F9FAFB]">
             <div className="flex items-start gap-3">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#EFF8FF]">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white">
                 <Headphones className="size-5 text-[#175CD3]" />
               </div>
               <div>
                 <h3 className="text-[13px] font-bold text-[#101828]">Need Assistance?</h3>
                 <p className="mt-1 text-[11px] leading-relaxed text-[#667085]">
-                  Our global trade advisors are here to help you set up your profile.
+                  Our team is here to help you complete your profile.
                 </p>
               </div>
             </div>
@@ -282,7 +340,7 @@ export default function MyProfilePage() {
               variant="outline"
               className="mt-4 h-9 w-full rounded-lg border-[#D0D5DD] bg-white text-[12px] font-semibold text-[#175CD3] shadow-sm hover:bg-white"
             >
-              <Link to="/dashboard/submit-questions">Contact Support</Link>
+              <Link to="/dashboard/need-help">Contact Support</Link>
             </Button>
           </ExporterCard>
         </aside>

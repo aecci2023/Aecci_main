@@ -8,7 +8,7 @@ export function ExporterHeader() {
   const { setOpen } = useSearch();
 
   return (
-    <header className="sticky top-0 z-50 flex h-[64px] shrink-0 items-center border-b border-[#E4E7EC] bg-white">
+    <header className="sticky top-0 z-30 flex h-[64px] shrink-0 items-center border-b border-[#E4E7EC] bg-white">
       <div className="flex h-full w-full items-center gap-4 px-4 sm:px-5">
         <SidebarTrigger
           variant="outline"
