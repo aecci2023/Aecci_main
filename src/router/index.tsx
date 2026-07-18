@@ -76,6 +76,7 @@ import ImporterMyProfilePage from "@/pages/dashboard/importer/profile";
 import ImporterMyCompanyPage from "@/pages/dashboard/importer/company";
 import ImporterMarketplacePage from "@/pages/dashboard/importer/marketplace";
 import ImporterDocumentsPage from "@/pages/dashboard/importer/documents";
+import ImporterSourcingRequirementsPage from "@/pages/dashboard/importer/sourcing-requirements";
 import ImporterAvailableSessionsPage from "@/pages/dashboard/importer/sessions";
 import ImporterMyMeetingsPage from "@/pages/dashboard/importer/my-meetings";
 import ImporterMeetingRequestsPage from "@/pages/dashboard/importer/meeting-requests";
@@ -186,6 +187,7 @@ export const routes: RouteObject[] = [
               { path: "company", element: <ImporterMyCompanyPage /> },
               { path: "marketplace", element: <ImporterMarketplacePage /> },
               { path: "verification", element: <ImporterDocumentsPage /> },
+              { path: "sourcing-requirements", element: <ImporterSourcingRequirementsPage /> },
               { path: "waiting-room", element: <ImporterMeetingRequestsPage /> },
               { path: "my-sessions", element: <ImporterAvailableSessionsPage /> },
               { path: "my-meetings", element: <ImporterMyMeetingsPage /> },
