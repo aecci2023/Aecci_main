@@ -72,6 +72,18 @@ import PublicationsPage from "@/pages/public/events/publications";
 import SponsorshipPage from "@/pages/public/events/sponsorship";
 import ImporterRegisterPage from "@/pages/dashboard/importer/register";
 import ImporterDashboard from "@/pages/dashboard/importer/dashboard";
+import ImporterMyProfilePage from "@/pages/dashboard/importer/profile";
+import ImporterMyCompanyPage from "@/pages/dashboard/importer/company";
+import ImporterMarketplacePage from "@/pages/dashboard/importer/marketplace";
+import ImporterDocumentsPage from "@/pages/dashboard/importer/documents";
+import ImporterAvailableSessionsPage from "@/pages/dashboard/importer/sessions";
+import ImporterMyMeetingsPage from "@/pages/dashboard/importer/my-meetings";
+import ImporterMeetingRequestsPage from "@/pages/dashboard/importer/meeting-requests";
+import ImporterSessionSummaryPage from "@/pages/dashboard/importer/session-summary";
+import ImporterIntelligencePage from "@/pages/dashboard/importer/intelligence";
+import ImporterOpportunityReportPage from "@/pages/dashboard/importer/opportunity-report";
+import ImporterPartnerBriefPage from "@/pages/dashboard/importer/partner-brief";
+import ImporterBillingPlansPage from "@/pages/dashboard/importer/billing";
 import { ImporterLayout } from "@/components/layout/importer-layout";
 import NotificationsPage from "@/pages/notifications";
 import BecomePartnerPage from "@/pages/dashboard/partner/apply";
@@ -124,6 +136,7 @@ import RenewMembership from "@/pages/public/services/membership/RenewMembership"
 import VisaRecommendation from "@/pages/public/services/membership/VisaRecommendation";
 import TermsConditions from "@/pages/public/TermsConditions";
 import UpcomingEventsPage from "@/pages/public/upcoming-events";
+import Interest from "@/pages/public/Exporter/interest-form";
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -167,7 +180,22 @@ export const routes: RouteObject[] = [
           {
             path: "",
             element: <ImporterLayout />,
-            children: [{ path: "dashboard", element: <ImporterDashboard /> }],
+            children: [
+              { path: "dashboard", element: <ImporterDashboard /> },
+              { path: "profile", element: <ImporterMyProfilePage /> },
+              { path: "company", element: <ImporterMyCompanyPage /> },
+              { path: "marketplace", element: <ImporterMarketplacePage /> },
+              { path: "verification", element: <ImporterDocumentsPage /> },
+              { path: "waiting-room", element: <ImporterMeetingRequestsPage /> },
+              { path: "my-sessions", element: <ImporterAvailableSessionsPage /> },
+              { path: "my-meetings", element: <ImporterMyMeetingsPage /> },
+              { path: "session-summary", element: <ImporterSessionSummaryPage /> },
+              { path: "intelligence", element: <ImporterIntelligencePage /> },
+              { path: "opportunity-report", element: <ImporterOpportunityReportPage /> },
+              { path: "partner-brief", element: <ImporterPartnerBriefPage /> },
+              { path: "billing", element: <ImporterBillingPlansPage /> },
+              { path: "settings", element: <ImporterMyProfilePage /> },
+            ],
           },
         ],
       },
@@ -1019,14 +1047,18 @@ export const routes: RouteObject[] = [
     path: "/contact-us/aecci-international-hub",
     element: <NotFound />,
   },
-  {
-    path: "/terms-conditions",
-    element: <TermsConditions />,
-  },
-  {
-    path: "/privacy-policy",
-    element: <PrivacyPolicy />,
-  },
+  { 
+  path: "/terms-conditions",
+  element: <TermsConditions />,
+},
+{
+  path: "/privacy-policy",
+  element: <PrivacyPolicy />,
+},
+{
+  path: "/interest-form",
+  element: <Interest />,
+},
   {
     path: "*",
     element: <NotFound />,

@@ -4,9 +4,6 @@ import {
   MessageSquare,
   Globe,
   FileText,
-  HelpCircle,
-  TrendingUp,
-  Receipt,
   Store,
   Settings,
   User,
@@ -16,6 +13,9 @@ import {
   BadgeCheck,
   Users,
   Headphones,
+  TrendingUp,
+  Receipt,
+  HelpCircle,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
@@ -31,12 +31,12 @@ export const importerSidebarData: SidebarData = {
         },
         {
           title: "My Profile",
-          url: "/importer/settings",
+          url: "/importer/profile",
           icon: User,
         },
         {
           title: "My Company",
-          url: "/importer/settings/account",
+          url: "/importer/company",
           icon: Building2,
         },
         {
@@ -76,13 +76,13 @@ export const importerSidebarData: SidebarData = {
         },
         {
           title: "My Meetings",
-          url: "/importer/my-sessions",
+          url: "/importer/my-meetings",
           icon: Calendar,
         },
         {
           title: "Session Summary",
           url: "/importer/session-summary",
-          icon: FileText,
+          icon: ClipboardList,
         },
       ],
     },
@@ -111,7 +111,7 @@ export const importerSidebarData: SidebarData = {
       items: [
         {
           title: "Billing & Plans",
-          url: "/importer/invoices",
+          url: "/importer/billing",
           icon: Receipt,
         },
         {
