@@ -14,6 +14,9 @@ import {
   Tag,
   ChevronRight,
   ArrowUp,
+  Monitor,
+  BarChart2,
+  ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -679,32 +682,60 @@ export default function ImporterDashboard() {
           </div>
         </div>
 
-        {/* 7. QUICK ACTIONS ROW */}
-        <div className="flex flex-wrap md:flex-nowrap items-center justify-around gap-6 py-8 w-full border-t border-gray-100 mt-4">
-          {[
-            { label: "Browse Directory", icon: Users, bgColor: "bg-[#EFF6FF]", iconColor: "text-[#3B82F6]", link: "/importer/marketplace" },
-            { label: "Post Requirement", icon: Plus, bgColor: "bg-[#ECFDF5]", iconColor: "text-[#10B981]", link: "/importer/marketplace" },
-            { label: "Market Intelligence", icon: Globe, bgColor: "bg-[#ECFDF5]", iconColor: "text-[#14B8A6]", link: "/importer/intelligence" },
-            { label: "Opportunity Reports", icon: FileText, bgColor: "bg-[#F5F3FF]", iconColor: "text-[#8B5CF6]", link: "/importer/opportunity-report" },
-            { label: "Contact Support", icon: MessageSquare, bgColor: "bg-[#FFF7ED]", iconColor: "text-[#F97316]", link: "/importer/messages" },
-          ].map((action, idx) => {
-            const IconComp = action.icon;
-            return (
-              <Link
-                key={idx}
-                to={action.link}
-                className="flex flex-col items-center text-center group cursor-pointer"
-              >
-                <div className={`w-12 h-12 rounded-full ${action.bgColor} ${action.iconColor} flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-110 shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0`}>
-                  <IconComp className="size-5 stroke-[1.8px]" />
-                </div>
-                <span className="text-[13px] font-semibold text-[#0F172A] group-hover:text-[#2563EB] transition-colors whitespace-nowrap">
-                  {action.label}
-                </span>
-              </Link>
-            );
-          })}
+        {/* 7. QUICK ACTIONS SECTION */}
+        <div className="w-full border-t border-gray-100 mt-8 pt-8 pb-0 text-left">
+          <h3 className="text-[17px] font-bold text-[#0B1B3D] mb-5">Quick Actions</h3>
+          <div className="flex flex-wrap items-center justify-between gap-y-5 gap-x-6 w-full">
+            {[
+              { label: "Browse Exporters", icon: Users, link: "/importer/marketplace" },
+              { label: "Submit Requirement", icon: ClipboardCheck, link: "/importer/marketplace" },
+              { label: "Book a Meeting", icon: Calendar, link: "/importer/waiting-room" },
+              { label: "Available Sessions", icon: Monitor, link: "/importer/my-sessions" },
+              { label: "Market Reports", icon: BarChart2, link: "/importer/opportunity-report" },
+              { label: "Messages", icon: MessageSquare, link: "/importer/messages" },
+            ].map((action, idx) => {
+              const IconComp = action.icon;
+              return (
+                <Link
+                  key={idx}
+                  to={action.link}
+                  className="flex items-center gap-3 group cursor-pointer"
+                >
+                  <div className="w-11 h-11 rounded-full bg-[#EFF6FF] border border-[#DBEAFE]/40 text-[#2563EB] flex items-center justify-center transition-all duration-300 group-hover:scale-105 shadow-sm shrink-0">
+                    <IconComp className="size-5.5 stroke-[1.8px]" />
+                  </div>
+                  <span className="text-[13.5px] font-bold text-[#0B1B3D] group-hover:text-[#2563EB] transition-colors whitespace-nowrap">
+                    {action.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
+
+        {/* ── FOOTER DISCLAIMER BAR ── */}
+        <footer className="w-full border-t border-gray-100 mt-4 pt-4 pb-2 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] text-[#64748B]">
+          {/* Left: AECCI Disclaimer with Shield Check Icon */}
+          <div className="flex items-center gap-2 max-w-[600px] text-center md:text-left leading-relaxed">
+            <ShieldCheck className="size-4.5 text-[#10B981] shrink-0" />
+            <span>
+              <strong className="text-[#0B1B3D]">AECCI Global Deal Room</strong> – A structured B2B business facilitation platform. AECCI does not guarantee transactions, contracts, payments or commercial outcomes.
+            </span>
+          </div>
+
+          {/* Right: Copyright & Policy Links */}
+          <div className="flex items-center flex-wrap justify-center gap-x-3 gap-y-1 font-semibold">
+            <span>&copy; 2026 AECCI Global Deal Room. All rights reserved.</span>
+            <span className="text-gray-300">|</span>
+            <Link to="/terms-conditions" className="hover:text-[#2563EB] transition-colors">
+              Terms & Conditions
+            </Link>
+            <span className="text-gray-300">|</span>
+            <Link to="/privacy-policy" className="hover:text-[#2563EB] transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
+        </footer>
 
       </Main>
 
