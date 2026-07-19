@@ -85,7 +85,7 @@ export function NavUser({ user: fallback }: NavUserProps) {
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                className="data-[state=open]:bg-white/10 data-[state=open]:text-white"
               >
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={avatar} alt={name} />
@@ -95,7 +95,7 @@ export function NavUser({ user: fallback }: NavUserProps) {
                 </Avatar>
                 <div className="grid flex-1 text-start text-sm leading-tight">
                   <span className="truncate font-semibold">{name}</span>
-                  <span className="truncate text-xs text-muted-foreground">
+                  <span className="truncate text-xs text-white/70">
                     {email}
                   </span>
                 </div>
@@ -118,7 +118,7 @@ export function NavUser({ user: fallback }: NavUserProps) {
                   </Avatar>
                   <div className="grid flex-1 text-start text-sm leading-tight">
                     <span className="truncate font-semibold">{name}</span>
-                    <span className="truncate text-xs text-muted-foreground">
+                    <span className="truncate text-xs text-white/70">
                       {email}
                     </span>
                   </div>

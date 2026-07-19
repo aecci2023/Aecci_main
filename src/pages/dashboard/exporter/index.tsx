@@ -1,7 +1,7 @@
 import { Main } from "@/components/layout/main";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-// Dashboard uses shared ExporterHeader from AuthenticatedLayout (no local Header/Search)
+// Dashboard uses shared ExporterHeader from ExporterLayout (no local Header/Search)
 import {
   BarChart3,
   Building2,

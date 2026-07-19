@@ -1,20 +1,20 @@
-import { ExporterHeader } from "@/components/layout/exporter-header";
+import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { cn } from "@/lib/utils";
 
 type HeaderProps = React.HTMLAttributes<HTMLElement> & {
   fixed?: boolean;
   ref?: React.Ref<HTMLElement>;
-  /** When true, skip rendering — layout already shows ExporterHeader */
+  /** When true, skip rendering — layout already shows DashboardHeader */
   skip?: boolean;
 };
 
 /**
  * Pages historically rendered their own Header.
- * AuthenticatedLayout now mounts one shared ExporterHeader,
+ * ExporterLayout now mounts one shared DashboardHeader,
  * so this component is a no-op to avoid duplicate headers.
  */
 export function Header({ className, fixed, children, skip, ...props }: HeaderProps) {
-  // Shared layout header is the single source of truth for exporter shell.
+  // Shared layout header is the single source of truth for shell.
   // Keep the component exported so existing pages don't break.
   void className;
   void fixed;
@@ -28,7 +28,7 @@ export function Header({ className, fixed, children, skip, ...props }: HeaderPro
 export function SharedExporterHeader({ className }: { className?: string }) {
   return (
     <div className={cn(className)}>
-      <ExporterHeader />
+      <DashboardHeader />
     </div>
   );
 }

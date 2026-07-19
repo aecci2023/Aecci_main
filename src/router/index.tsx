@@ -1,5 +1,5 @@
 import { AdminLayout } from "@/components/layout/admin-layout";
-import { AuthenticatedLayout } from "@/components/layout/authenticated-layout";
+import { ExporterLayout } from "@/components/layout/exporter-layout";
 import { AgentLayout } from "@/components/layout/agent-layout";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { Chats } from "@/features/chats";
@@ -434,7 +434,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: "",
-        element: <AuthenticatedLayout />,
+        element: <ExporterLayout />,
         children: [
           {
             path: "",

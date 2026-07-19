@@ -6,9 +6,7 @@ import { SearchProvider } from "@/context/search-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppAgentSidebar } from "@/components/layout/app-agent-sidebar";
 import { SkipToMain } from "@/components/skip-to-main";
-import { Header } from "@/components/layout/header";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { Search } from "@/components/search";
+import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { RoleTour } from "@/components/tour/RoleTour";
 
 type AgentLayoutProps = {
@@ -26,31 +24,22 @@ export function AgentLayout({ children }: AgentLayoutProps) {
   return (
     <SearchProvider>
       <LayoutProvider>
-        <SidebarProvider defaultOpen={defaultOpen}>
+        <SidebarProvider defaultOpen={defaultOpen} className="h-svh overflow-hidden items-stretch">
           <SkipToMain />
           <AppAgentSidebar />
           <SidebarInset
             className={cn(
               "@container/content",
-              "has-data-[layout=fixed]:h-svh",
-              "peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]",
+              "min-w-0 flex flex-col",
             )}
           >
             {!isOnRoomPage && (
-              <Header fixed>
-                <div className="flex items-center space-x-2">
-                  <span className="font-semibold text-sm text-muted-foreground">
-                    AECCI Agent Portal
-                  </span>
-                </div>
-                <div className="ml-auto flex items-center space-x-4">
-                  <Search />
-                  <ProfileDropdown />
-                </div>
-              </Header>
+              <DashboardHeader />
             )}
-            {children ?? <Outlet />}
-            <RoleTour role="agent" />
+            <div className="flex-1 overflow-y-auto relative">
+              {children ?? <Outlet />}
+              <RoleTour role="agent" />
+            </div>
           </SidebarInset>
         </SidebarProvider>
       </LayoutProvider>

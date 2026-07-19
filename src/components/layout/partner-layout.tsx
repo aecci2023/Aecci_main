@@ -6,9 +6,7 @@ import { SearchProvider } from "@/context/search-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppPartnerSidebar } from "@/components/layout/app-partner-sidebar";
 import { SkipToMain } from "@/components/skip-to-main";
-import { Header } from "@/components/layout/header";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { Search } from "@/components/search";
+import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { useGetPartnerProfileQuery } from "@/store/api/adminApi";
 import { RoleTour } from "@/components/tour/RoleTour";
 
@@ -44,31 +42,22 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
   return (
     <SearchProvider>
       <LayoutProvider>
-        <SidebarProvider defaultOpen={defaultOpen}>
+        <SidebarProvider defaultOpen={defaultOpen} className="h-svh overflow-hidden items-stretch">
           <SkipToMain />
           <AppPartnerSidebar />
           <SidebarInset
             className={cn(
               "@container/content",
-              "has-data-[layout=fixed]:h-svh",
-              "peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]",
+              "min-w-0 flex flex-col",
             )}
           >
             {!isOnRoomPage && (
-              <Header fixed>
-                <div className="flex items-center space-x-2">
-                  <span className="font-semibold text-sm text-muted-foreground">
-                    AECCI Partner Portal
-                  </span>
-                </div>
-                <div className="ml-auto flex items-center space-x-4">
-                  <Search />
-                  <ProfileDropdown />
-                </div>
-              </Header>
+              <DashboardHeader />
             )}
-            {children ?? <Outlet />}
-            <RoleTour role="partner" />
+            <div className="flex-1 overflow-y-auto relative">
+              {children ?? <Outlet />}
+              <RoleTour role="partner" />
+            </div>
           </SidebarInset>
         </SidebarProvider>
       </LayoutProvider>
