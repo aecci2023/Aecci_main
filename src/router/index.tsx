@@ -25,6 +25,7 @@ import AdminUsersPage from "@/pages/dashboard/admin/users";
 import AdminVerificationsPage from "@/pages/dashboard/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/dashboard/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/dashboard/admin/verifications/partner-details";
+import AdminInterestsPage from "@/pages/dashboard/admin/interests";
 import AgentDashboard from "@/pages/dashboard/agent/index";
 import DashboardPage from "@/pages/dashboard/exporter";
 import MyProfilePage from "@/pages/dashboard/exporter/my-profile";
@@ -371,6 +372,10 @@ export const routes: RouteObject[] = [
           {
             path: "subscriptions",
             element: <AdminSubscriptionsPage />,
+          },
+          {
+            path: "interests",
+            element: <AdminInterestsPage />,
           },
           {
             path: "settings",

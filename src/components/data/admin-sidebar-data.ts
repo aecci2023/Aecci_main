@@ -43,6 +43,11 @@ export const adminSidebarData = {
           badge: "245",
         },
         {
+          title: "Interests",
+          url: "/admin/interests",
+          icon: Users,
+        },
+        {
           title: "Business Accounts",
           url: "/admin/businesses",
           icon: Building2,
