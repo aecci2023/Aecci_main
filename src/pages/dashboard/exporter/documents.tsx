@@ -8,6 +8,8 @@ import {
   Download,
   CloudUpload,
   Headphones,
+  Upload,
+  AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -65,41 +67,63 @@ const STATS = [
   },
 ];
 
+/** Matches Figma Required Documents table */
 const DOCUMENTS = [
+  {
+    name: "Business Registration Certificate",
+    desc: "Certificate of incorporation / registration",
+    mandatory: true,
+    status: "Missing",
+    date: "—",
+    action: "upload" as const,
+  },
   {
     name: "GST Registration Certificate",
     desc: "Valid GST registration document",
+    mandatory: true,
     status: "Verified",
     date: "12 Mar 2025",
-    action: "download",
+    action: "download" as const,
   },
   {
-    name: "Import Export Code (IEC)",
+    name: "IEC Certificate",
     desc: "Valid IEC certificate from DGFT",
+    mandatory: true,
     status: "Verified",
     date: "12 Mar 2025",
-    action: "download",
+    action: "download" as const,
   },
   {
-    name: "Company Registration Certificate",
-    desc: "Certificate of incorporation",
-    status: "Pending",
-    date: "15 Mar 2025",
-    action: "upload",
+    name: "PAN Card",
+    desc: "Company / proprietor PAN card",
+    mandatory: true,
+    status: "Missing",
+    date: "—",
+    action: "upload" as const,
   },
   {
-    name: "Bank Account Statement",
+    name: "Cancelled Cheque",
+    desc: "Cancelled cheque of company bank account",
+    mandatory: true,
+    status: "Missing",
+    date: "—",
+    action: "upload" as const,
+  },
+  {
+    name: "Bank Statement (6 Months)",
     desc: "Last 6 months bank statement",
-    status: "Pending",
-    date: "15 Mar 2025",
-    action: "upload",
+    mandatory: true,
+    status: "Missing",
+    date: "—",
+    action: "upload" as const,
   },
   {
-    name: "Product Catalog",
-    desc: "Company product catalog PDF",
-    status: "Rejected",
-    date: "10 Mar 2025",
-    action: "reupload",
+    name: "Company Profile / Brochure",
+    desc: "Company profile or product brochure PDF",
+    mandatory: false,
+    status: "Missing",
+    date: "—",
+    action: "upload" as const,
   },
 ];
 
@@ -108,11 +132,13 @@ function StatusBadge({ status }: { status: string }) {
     Verified: "bg-[#ECFDF3] text-[#027A48]",
     Pending: "bg-[#FFFAEB] text-[#B54708]",
     Rejected: "bg-[#FEF3F2] text-[#D92D20]",
+    Missing: "bg-[#F2F4F7] text-[#667085]",
   };
   return (
     <span
-      className={`inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${styles[status] || ""}`}
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${styles[status] || ""}`}
     >
+      {status === "Missing" && <AlertCircle className="size-3" />}
       {status}
     </span>
   );
@@ -130,7 +156,7 @@ export default function DocumentsPage() {
         completionLabel="Documents Completion"
         secondaryAction={{
           label: "Document Guidelines",
-          to: "/dashboard/verification",
+          to: "/dashboard/documents",
         }}
       />
 
@@ -142,17 +168,17 @@ export default function DocumentsPage() {
             {STATS.map((s) => (
               <div
                 key={s.label}
-                className="rounded-xl border border-[#E4E7EC] bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.05)]"
+                className="rounded-xl border border-[#E4E7EC] bg-white p-3 shadow-[0_1px_2px_rgba(16,24,40,0.05)] sm:p-4"
               >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-[10px] text-[#667085]">{s.label}</p>
-                    <p className="mt-1 text-[22px] font-bold text-[#101828]">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-[10px] leading-tight text-[#667085]">{s.label}</p>
+                    <p className="mt-1 text-[20px] font-bold text-[#101828] sm:text-[22px]">
                       {s.value}
                     </p>
                   </div>
                   <span
-                    className={`flex size-8 items-center justify-center rounded-lg ${s.bg} ${s.color}`}
+                    className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${s.bg} ${s.color}`}
                   >
                     <s.icon className="size-4" />
                   </span>
@@ -162,65 +188,87 @@ export default function DocumentsPage() {
           </div>
 
           <ExporterCard className="overflow-hidden p-0">
-          <div className="overflow-x-auto -mx-1">
-            <table className="w-full min-w-[640px] text-left text-[12px]">
-              <thead className="border-b border-[#E4E7EC] bg-[#F9FAFB] text-[10px] font-bold uppercase tracking-wide text-[#667085]">
-                <tr>
-                  <th className="px-4 py-3">Document Name</th>
-                  <th className="px-4 py-3">Description</th>
-                  <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3">Uploaded On</th>
-                  <th className="px-4 py-3">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {DOCUMENTS.map((doc) => (
-                  <tr
-                    key={doc.name}
-                    className="border-b border-[#F2F4F7] last:border-0"
-                  >
-                    <td className="px-4 py-3 font-semibold text-[#101828]">
-                      {doc.name}
-                    </td>
-                    <td className="px-4 py-3 text-[#667085]">{doc.desc}</td>
-                    <td className="px-4 py-3">
-                      <StatusBadge status={doc.status} />
-                    </td>
-                    <td className="px-4 py-3 text-[#667085]">{doc.date}</td>
-                    <td className="px-4 py-3">
-                      {doc.action === "download" ? (
-                        <button
-                          type="button"
-                          className="flex size-7 items-center justify-center rounded-lg border border-[#E4E7EC] text-[#175CD3]"
-                        >
-                          <Download className="size-3.5" />
-                        </button>
-                      ) : (
-                        <button
-                          type="button"
-                          className="text-[11px] font-semibold text-[#175CD3]"
-                        >
-                          {doc.action === "reupload" ? "Re-upload" : "Upload"}
-                        </button>
-                      )}
-                    </td>
+            <div className="border-b border-[#E4E7EC] px-4 py-3 sm:px-5">
+              <h2 className="text-[15px] font-bold text-[#101828]">Required Documents</h2>
+              <p className="mt-0.5 text-[11px] text-[#667085]">
+                Upload all mandatory documents to complete verification.
+              </p>
+            </div>
+            <div className="-mx-1 overflow-x-auto">
+              <table className="w-full min-w-[720px] text-left text-[12px]">
+                <thead className="border-b border-[#E4E7EC] bg-[#F9FAFB] text-[10px] font-bold uppercase tracking-wide text-[#667085]">
+                  <tr>
+                    <th className="px-4 py-3">Document Name</th>
+                    <th className="px-4 py-3">Description</th>
+                    <th className="px-4 py-3">Status</th>
+                    <th className="px-4 py-3">Uploaded On</th>
+                    <th className="px-4 py-3">Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </ExporterCard>
+                </thead>
+                <tbody>
+                  {DOCUMENTS.map((doc) => (
+                    <tr
+                      key={doc.name}
+                      className="border-b border-[#F2F4F7] last:border-0"
+                    >
+                      <td className="px-4 py-3">
+                        <p className="font-semibold text-[#101828]">{doc.name}</p>
+                        {doc.mandatory && (
+                          <span className="mt-0.5 inline-block text-[9px] font-semibold text-[#D92D20]">
+                            Mandatory
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-[#667085]">{doc.desc}</td>
+                      <td className="px-4 py-3">
+                        <StatusBadge status={doc.status} />
+                      </td>
+                      <td className="px-4 py-3 text-[#667085]">{doc.date}</td>
+                      <td className="px-4 py-3">
+                        {doc.action === "download" ? (
+                          <button
+                            type="button"
+                            className="flex size-7 items-center justify-center rounded-lg border border-[#E4E7EC] text-[#175CD3]"
+                            aria-label="Download"
+                          >
+                            <Download className="size-3.5" />
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#175CD3]"
+                          >
+                            <Upload className="size-3.5" />
+                            Upload
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </ExporterCard>
 
-          <div className="flex flex-col gap-3 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-            <p className="text-[14px] font-bold text-[#027A48]">
-              Why Documents are Important?
-            </p>
-            <Button
-              variant="outline"
-              className="h-9 w-full rounded-lg border-[#039855] text-[12px] font-semibold text-[#027A48] sm:w-auto"
-            >
-              Learn More
-            </Button>
+          <div className="rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-4 py-4 sm:px-5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <p className="text-[14px] font-bold text-[#027A48]">
+                  Why Documents are Important?
+                </p>
+                <p className="mt-1 max-w-2xl text-[12px] leading-relaxed text-[#027A48]/85">
+                  Verified documents help build trust with global buyers, unlock premium deal
+                  rooms, and speed up partner matching. Complete your uploads to get verified
+                  faster.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="h-9 w-full shrink-0 rounded-lg border-[#039855] bg-white text-[12px] font-semibold text-[#027A48] sm:w-auto"
+              >
+                Learn More
+              </Button>
+            </div>
           </div>
         </section>
 
@@ -273,7 +321,7 @@ export default function DocumentsPage() {
               variant="outline"
               className="mt-4 h-9 w-full rounded-lg border-[#D0D5DD] bg-white text-[12px] font-semibold text-[#175CD3] shadow-sm"
             >
-              <Link to="/dashboard/submit-questions">Contact Support</Link>
+              <Link to="/dashboard/need-help">Contact Support</Link>
             </Button>
           </ExporterCard>
         </aside>

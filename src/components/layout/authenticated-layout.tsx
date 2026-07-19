@@ -1,3 +1,4 @@
+import type React from "react";
 import { Outlet } from "react-router-dom";
 import { getCookie } from "@/lib/cookies";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
         <SidebarProvider
           defaultOpen={defaultOpen}
           className="min-h-svh items-stretch"
+          style={{ "--sidebar-width": "256px" } as React.CSSProperties}
         >
           <SkipToMain />
           <AppSidebar />
