@@ -97,7 +97,7 @@ export function AppSidebar() {
                   const Icon = link.icon;
                   const active =
                     pathname === link.url ||
-                    (link.url !== "/dashboard" && pathname.startsWith(link.url));
+                    (typeof link.url === "string" && link.url !== "/dashboard" && pathname.startsWith(link.url));
 
                   return (
                     <Link

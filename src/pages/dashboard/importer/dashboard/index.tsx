@@ -3,10 +3,8 @@ import { Button } from "@/components/ui/button";
 import {
   Calendar,
   Globe,
-  FileText,
   Clock,
   Check,
-  Plus,
   Users,
   MessageSquare,
   ArrowRight,
