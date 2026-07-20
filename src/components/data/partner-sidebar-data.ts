@@ -1,146 +1,109 @@
 import {
   LayoutDashboard,
-  CalendarDays,
-  CalendarClock,
-  History,
+  User,
+  Award,
+  Lock,
   MessageSquare,
+  Scale,
+  Building2,
+  TrendingUp,
   Users,
-  UserCheck,
-  Globe,
+  Calendar,
   FileText,
-  Settings,
-  LifeBuoy,
-  UserCog,
+  BookOpen,
   Wrench,
-  Palette,
-  Bell,
-  BellRing,
+  Headphones,
+  Settings,
 } from "lucide-react";
+import { type SidebarData } from "../layout/types";
 
-export const partnerSidebarData = {
+export const partnerSidebarData: SidebarData = {
   navGroups: [
     {
-      title: "Overview",
+      title: "MAIN",
       items: [
         {
           title: "Dashboard",
           url: "/partner/dashboard",
           icon: LayoutDashboard,
         },
-      ],
-    },
-    {
-      title: "Sessions",
-      items: [
         {
-          title: "My Schedule",
-          url: "/partner/sessions/schedule",
-          icon: CalendarDays,
+          title: "My Profile",
+          url: "/partner/profile",
+          icon: User,
         },
         {
-          title: "Upcoming Sessions",
-          url: "/partner/sessions/upcoming",
-          icon: CalendarClock,
+          title: "My Expertise",
+          url: "/partner/expertise",
+          icon: Award,
         },
         {
-          title: "Past Sessions",
-          url: "/partner/sessions/past",
-          icon: History,
+          title: "Deal Rooms",
+          url: "/partner/deal-rooms",
+          icon: Lock,
         },
-      ],
-    },
-    {
-      title: "Client Engagement",
-      items: [
         {
-          title: "Pending Questions",
-          url: "/partner/engagement/questions",
+          title: "Consultations",
+          url: "/partner/consultations",
           icon: MessageSquare,
-          badge: "3",
         },
         {
-          title: "Active Clients",
-          url: "/partner/engagement/active",
+          title: "Legal Compliance",
+          url: "/partner/legal-compliance",
+          icon: Scale,
+        },
+        {
+          title: "Trade Establishment",
+          url: "/partner/trade-establishment",
+          icon: Building2,
+        },
+        {
+          title: "Opportunities",
+          url: "/partner/opportunities",
+          icon: TrendingUp,
+        },
+        {
+          title: "Partner Network",
+          url: "/partner/network",
           icon: Users,
         },
         {
-          title: "Client Assignments",
-          url: "/partner/engagement/assignments",
-          icon: UserCheck,
-        },
-      ],
-    },
-    {
-      title: "Content & Intelligence",
-      items: [
-        {
-          title: "Country Briefs",
-          url: "/partner/content/country-briefs",
-          icon: Globe,
+          title: "Meetings",
+          url: "/partner/meetings",
+          icon: Calendar,
         },
         {
-          title: "Opportunity Reports",
-          url: "/partner/content/opportunity-reports",
+          title: "Reports & Insights",
+          url: "/partner/reports",
           icon: FileText,
         },
-      ],
-    },
-
-    {
-      title: "Support",
-      items: [
         {
-          title: "Messages",
-          url: "/partner/support/messages",
+          title: "Communications",
+          url: "/partner/communications",
           icon: MessageSquare,
         },
         {
-          title: "Help & Support",
-          url: "/partner/support/help",
-          icon: LifeBuoy,
-        },
-      ],
-    },
-    {
-      title: "Other",
-      items: [
-        {
-          title: "System Alerts",
-          url: "/partner/notifications",
-          icon: BellRing,
+          title: "Resources",
+          url: "/partner/resources",
+          icon: BookOpen,
         },
         {
-          title: "Settings",
+          title: "AECCI Services",
+          url: "/partner/services",
+          icon: Wrench,
+        },
+        {
+          title: "Support Center",
+          url: "/partner/support",
+          icon: Headphones,
+        },
+        {
+          title: "Account Settings",
+          url: "/partner/settings",
           icon: Settings,
-          items: [
-            {
-              title: "Profile",
-              url: "/partner/settings",
-              icon: UserCog,
-            },
-            {
-              title: "Availability",
-              url: "/partner/settings/availability",
-              icon: CalendarClock,
-            },
-            {
-              title: "Account",
-              url: "/partner/settings/account",
-              icon: Wrench,
-            },
-            {
-              title: "Appearance",
-              url: "/partner/settings/appearance",
-              icon: Palette,
-            },
-            {
-              title: "Notifications",
-              url: "/partner/settings/notifications",
-              icon: Bell,
-            },
-          ],
         },
       ],
     },
   ],
 };
+
