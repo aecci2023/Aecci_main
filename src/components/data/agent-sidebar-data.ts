@@ -1,19 +1,24 @@
 import {
   LayoutDashboard,
+  User,
+  Globe,
+  Users,
+  Briefcase,
+  Handshake,
+  Calendar,
+  UserPlus,
   MessageSquare,
-  Settings,
-  UserCog,
-  Wrench,
-  Palette,
-  Bell,
-  BellRing,
+  FileText,
+  Building,
+  HelpCircle,
+  Settings
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
 export const agentSidebarData: SidebarData = {
   navGroups: [
     {
-      title: "Main",
+      title: "My Business",
       items: [
         {
           title: "Dashboard",
@@ -21,45 +26,84 @@ export const agentSidebarData: SidebarData = {
           icon: LayoutDashboard,
         },
         {
-          title: "Messages",
-          url: "/agent/messages",
+          title: "My Profile",
+          url: "/agent/profile",
+          icon: User,
+        },
+        {
+          title: "Represented Markets",
+          url: "/agent/represented-markets",
+          icon: Globe,
+        },
+      ],
+    },
+    {
+      title: "Deal Room",
+      items: [
+        {
+          title: "Business Connections",
+          url: "/agent/business-connections",
+          icon: Users,
+        },
+        {
+          title: "Opportunities",
+          url: "/agent/opportunities",
+          icon: Briefcase,
+        },
+        {
+          title: "Deal Room",
+          url: "/agent/deal-room",
+          icon: Handshake,
+        },
+        {
+          title: "Meetings",
+          url: "/agent/meetings",
+          icon: Calendar,
+        },
+      ],
+    },
+    {
+      title: "Network & Communication",
+      items: [
+        {
+          title: "Referrals",
+          url: "/agent/referrals",
+          icon: UserPlus,
+        },
+        {
+          title: "Communications",
+          url: "/agent/communications",
           icon: MessageSquare,
         },
       ],
     },
     {
-      title: "Other",
+      title: "Intelligence & Services",
       items: [
         {
-          title: "System Alerts",
-          url: "/agent/notifications",
-          icon: BellRing,
+          title: "Resources & Reports",
+          url: "/agent/resources",
+          icon: FileText,
         },
         {
-          title: "Settings",
+          title: "AECCI Services",
+          url: "/agent/aecci-services",
+          icon: Building,
+        },
+      ],
+    },
+    {
+      title: "Account & Support",
+      items: [
+        {
+          title: "Account Settings",
+          url: "/agent/settings",
           icon: Settings,
-          items: [
-            {
-              title: "Profile",
-              url: "/agent/settings",
-              icon: UserCog,
-            },
-            {
-              title: "Account",
-              url: "/agent/settings/account",
-              icon: Wrench,
-            },
-            {
-              title: "Appearance",
-              url: "/agent/settings/appearance",
-              icon: Palette,
-            },
-            {
-              title: "Notifications",
-              url: "/agent/settings/notifications",
-              icon: Bell,
-            },
-          ],
+        },
+        {
+          title: "Support Center",
+          url: "/agent/support",
+          icon: HelpCircle,
         },
       ],
     },

@@ -58,7 +58,7 @@ export default function PartnerDashboard() {
   return (
     <Main fluid className="p-0 sm:p-0 bg-[#F9FAFB] min-h-screen">
       {/* 1. TOP HERO CONTAINER */}
-      <div className="max-w-[1600px] mx-auto pl-0 pr-4 pt-0 pb-0 sm:pl-0 sm:pr-6 sm:pt-0 sm:pb-0">
+      <div className="w-full pl-0 pr-4 pt-0 pb-0 sm:pl-0 sm:pr-6 sm:pt-0 sm:pb-0">
 
         {/* Master Grid: Left Area (75% width) and Right Area (25% width) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
@@ -235,7 +235,7 @@ export default function PartnerDashboard() {
       </div>
 
       {/* 2. BOTTOM MAIN CONTAINER (Light Grey/White Background) */}
-      <div className="max-w-[1600px] mx-auto px-4 py-8 sm:px-8 space-y-10">
+      <div className="w-full px-4 py-8 sm:px-8 space-y-10">
 
         {/* Section Title: Your Role in AECCI Global Deal Room */}
         <div className="space-y-1">
