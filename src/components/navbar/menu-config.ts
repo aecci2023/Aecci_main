@@ -92,10 +92,10 @@ export const menuConfig: MegaMenuSection[] = [
         description:
           "Exclusive access to premium tools, discounts, and trade networks.",
         items: [
-          // {
-          //   title: "Patron Membership",
-          //   href: "/services/membership/patron-membership",
-          // },
+          {
+            title: "Patron Membership",
+            href: "/services/membership/patron-membership",
+          },
           {
             title: "Membership & its benefits",
             href: "/services/membership/benefits",
@@ -132,10 +132,10 @@ export const menuConfig: MegaMenuSection[] = [
         title: "Membership",
         href: "/services/membership",
         items: [
-          // {
-          //   title: "Patron Membership",
-          //   href: "/services/membership/patron-membership",
-          // },
+          {
+            title: "Patron Membership",
+            href: "/services/membership/patron-membership",
+          },
           {
             title: "Membership & its benefits",
             href: "/services/membership/benefits",

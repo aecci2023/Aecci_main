@@ -1,5 +1,5 @@
-import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { Globe, Handshake, Shield, TrendingUp, Quote } from "lucide-react";
 import chairmanBg from "@/assets/images/image.png";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
@@ -23,7 +23,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
