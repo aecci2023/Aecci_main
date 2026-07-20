@@ -1,27 +1,34 @@
+import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 
 type HeaderProps = React.HTMLAttributes<HTMLElement> & {
   fixed?: boolean;
   ref?: React.Ref<HTMLElement>;
+  /** When true, skip rendering — layout already shows DashboardHeader */
+  skip?: boolean;
 };
 
-export function Header({ className, fixed, children, ...props }: HeaderProps) {
+/**
+ * Pages historically rendered their own Header.
+ * ExporterLayout now mounts one shared DashboardHeader,
+ * so this component is a no-op to avoid duplicate headers.
+ */
+export function Header({ className, fixed, children, skip, ...props }: HeaderProps) {
+  // Shared layout header is the single source of truth for shell.
+  // Keep the component exported so existing pages don't break.
+  void className;
+  void fixed;
+  void children;
+  void skip;
+  void props;
+  return null;
+}
+
+/** Explicit shared header alias if a page needs to force-render it */
+export function SharedExporterHeader({ className }: { className?: string }) {
   return (
-    <header
-      className={cn(
-        "z-50 h-16 bg-background border-b",
-        fixed && "header-fixed peer/header sticky top-0 w-[inherit]",
-        className,
-      )}
-      {...props}
-    >
-      <div className="relative flex h-full items-center gap-3 p-4 sm:gap-4">
-        <SidebarTrigger variant="outline" className="max-md:scale-125" />
-        <Separator orientation="vertical" className="h-6" />
-        {children}
-      </div>
-    </header>
+    <div className={cn(className)}>
+      <DashboardHeader />
+    </div>
   );
 }

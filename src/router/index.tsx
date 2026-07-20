@@ -1,5 +1,5 @@
 import { AdminLayout } from "@/components/layout/admin-layout";
-import { AuthenticatedLayout } from "@/components/layout/authenticated-layout";
+import { ExporterLayout } from "@/components/layout/exporter-layout";
 import { AgentLayout } from "@/components/layout/agent-layout";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { Chats } from "@/features/chats";
@@ -25,16 +25,18 @@ import AdminUsersPage from "@/pages/dashboard/admin/users";
 import AdminVerificationsPage from "@/pages/dashboard/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/dashboard/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/dashboard/admin/verifications/partner-details";
+import AdminInterestsPage from "@/pages/dashboard/admin/interests";
 import AgentDashboard from "@/pages/dashboard/agent/index";
 import DashboardPage from "@/pages/dashboard/exporter";
+import MyProfilePage from "@/pages/dashboard/exporter/my-profile";
+import MyCompanyPage from "@/pages/dashboard/exporter/my-company";
+import MyRequirementsPage from "@/pages/dashboard/exporter/my-requirements";
+import DocumentsPage from "@/pages/dashboard/exporter/documents";
 import ApplicationPage from "@/pages/dashboard/exporter/application";
 import ApprovalPage from "@/pages/dashboard/exporter/approval";
 import FollowUpServicesPage from "@/pages/dashboard/exporter/follow-up-services";
-import IntelligencePage from "@/pages/dashboard/exporter/intelligence";
 import LiveDealRoomPage from "@/pages/dashboard/exporter/live-deal-room";
 import MarketplacePage from "@/pages/dashboard/exporter/marketplace";
-import MySessionsPage from "@/pages/dashboard/exporter/my-sessions";
-import OpportunityReportPage from "@/pages/dashboard/exporter/opportunity-report";
 import PartnerBriefPage from "@/pages/dashboard/exporter/partner-brief";
 import PaymentPage from "@/pages/dashboard/exporter/payment";
 import PaymentSuccessPage from "@/pages/dashboard/exporter/payment-success";
@@ -42,8 +44,17 @@ import RejectedApplicationPage from "@/pages/dashboard/exporter/rejected";
 import ServicePurchasePage from "@/pages/dashboard/exporter/service-purchase";
 import SessionDetailsPage from "@/pages/dashboard/exporter/session-details";
 import SessionSummaryPage from "@/pages/dashboard/exporter/session-summary";
-import SubmitQuestionsPage from "@/pages/dashboard/exporter/submit-questions";
-import VerificationPage from "@/pages/dashboard/exporter/verification";
+import BrowseCountriesPage from "@/pages/dashboard/exporter/browse-countries";
+import ExporterSessionsPage from "@/pages/dashboard/exporter/sessions";
+import MyMeetingsPage from "@/pages/dashboard/exporter/my-meetings";
+import MeetingRequestsPage from "@/pages/dashboard/exporter/meeting-requests";
+import CountryIntelligenceExporterPage from "@/pages/dashboard/exporter/country-intelligence";
+import MarketReportsPage from "@/pages/dashboard/exporter/market-reports";
+import BillingPage from "@/pages/dashboard/exporter/billing";
+import ExporterSettingsPage from "@/pages/dashboard/exporter/settings-page";
+import HelpCenterPage from "@/pages/dashboard/exporter/help-center";
+import NeedHelpPage from "@/pages/dashboard/exporter/need-help";
+import ExporterMessagesPage from "@/pages/dashboard/exporter/messages-page";
 import WaitingRoomPage from "@/pages/dashboard/exporter/waiting-room";
 // import MainHomepage from "@/pages/public/MainHomepage"; //old homepage
 import LandingPage from "@/pages/public/LandingPage";
@@ -51,16 +62,29 @@ import LoginPage from "@/pages/auth/login";
 import { NotFound } from "@/pages/not-found";
 import SignupPage from "@/pages/auth/signup";
 import type { RouteObject } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import { PartnerLayout } from "@/components/layout/partner-layout";
 
 import AdminSubscriptionsPage from "@/pages/dashboard/admin/subscriptions";
-import UserInvoicesPage from "@/pages/dashboard/exporter/invoices";
 import AdvertiseWithUsPage from "@/pages/public/events/advertise-with-us";
 import PublicationsPage from "@/pages/public/events/publications";
 import SponsorshipPage from "@/pages/public/events/sponsorship";
 import ImporterRegisterPage from "@/pages/dashboard/importer/register";
 import ImporterDashboard from "@/pages/dashboard/importer/dashboard";
+import ImporterMyProfilePage from "@/pages/dashboard/importer/profile";
+import ImporterMyCompanyPage from "@/pages/dashboard/importer/company";
+import ImporterMarketplacePage from "@/pages/dashboard/importer/marketplace";
+import ImporterDocumentsPage from "@/pages/dashboard/importer/documents";
+import ImporterSourcingRequirementsPage from "@/pages/dashboard/importer/sourcing-requirements";
+import ImporterAvailableSessionsPage from "@/pages/dashboard/importer/sessions";
+import ImporterMyMeetingsPage from "@/pages/dashboard/importer/my-meetings";
+import ImporterMeetingRequestsPage from "@/pages/dashboard/importer/meeting-requests";
+import ImporterSessionSummaryPage from "@/pages/dashboard/importer/session-summary";
+import ImporterIntelligencePage from "@/pages/dashboard/importer/intelligence";
+import ImporterOpportunityReportPage from "@/pages/dashboard/importer/opportunity-report";
+import ImporterPartnerBriefPage from "@/pages/dashboard/importer/partner-brief";
+import ImporterBillingPlansPage from "@/pages/dashboard/importer/billing";
 import { ImporterLayout } from "@/components/layout/importer-layout";
 import NotificationsPage from "@/pages/notifications";
 import BecomePartnerPage from "@/pages/dashboard/partner/apply";
@@ -155,6 +179,20 @@ export const routes: RouteObject[] = [
             element: <ImporterLayout />,
             children: [
               { path: "dashboard", element: <ImporterDashboard /> },
+              { path: "profile", element: <ImporterMyProfilePage /> },
+              { path: "company", element: <ImporterMyCompanyPage /> },
+              { path: "marketplace", element: <ImporterMarketplacePage /> },
+              { path: "verification", element: <ImporterDocumentsPage /> },
+              { path: "sourcing-requirements", element: <ImporterSourcingRequirementsPage /> },
+              { path: "waiting-room", element: <ImporterMeetingRequestsPage /> },
+              { path: "my-sessions", element: <ImporterAvailableSessionsPage /> },
+              { path: "my-meetings", element: <ImporterMyMeetingsPage /> },
+              { path: "session-summary", element: <ImporterSessionSummaryPage /> },
+              { path: "intelligence", element: <ImporterIntelligencePage /> },
+              { path: "opportunity-report", element: <ImporterOpportunityReportPage /> },
+              { path: "partner-brief", element: <ImporterPartnerBriefPage /> },
+              { path: "billing", element: <ImporterBillingPlansPage /> },
+              { path: "settings", element: <ImporterMyProfilePage /> },
             ],
           },
         ],
@@ -231,7 +269,10 @@ export const routes: RouteObject[] = [
                 element: <Settings />,
                 children: [
                   { index: true, element: <PartnerProfilePage /> },
-                  { path: "availability", element: <PartnerAvailabilityPage /> },
+                  {
+                    path: "availability",
+                    element: <PartnerAvailabilityPage />,
+                  },
                   { path: "account", element: <SettingsAccount /> },
                   { path: "appearance", element: <SettingsAppearance /> },
                   { path: "notifications", element: <SettingsNotifications /> },
@@ -328,6 +369,10 @@ export const routes: RouteObject[] = [
             element: <AdminSubscriptionsPage />,
           },
           {
+            path: "interests",
+            element: <AdminInterestsPage />,
+          },
+          {
             path: "settings",
             element: <Settings />,
             children: [
@@ -389,15 +434,67 @@ export const routes: RouteObject[] = [
       },
       {
         path: "",
-        element: <AuthenticatedLayout />,
+        element: <ExporterLayout />,
         children: [
           {
             path: "",
             element: <DashboardPage />,
           },
           {
+            path: "my-profile",
+            element: <MyProfilePage />,
+          },
+          {
+            path: "my-company",
+            element: <MyCompanyPage />,
+          },
+          {
+            path: "my-requirements",
+            element: <MyRequirementsPage />,
+          },
+          {
+            path: "documents",
+            element: <DocumentsPage />,
+          },
+          {
             path: "intelligence",
-            element: <IntelligencePage />,
+            element: <Navigate to="/dashboard/country-intelligence" replace />,
+          },
+          {
+            path: "browse-countries",
+            element: <BrowseCountriesPage />,
+          },
+          {
+            path: "sessions",
+            element: <ExporterSessionsPage />,
+          },
+          {
+            path: "my-meetings",
+            element: <MyMeetingsPage />,
+          },
+          {
+            path: "meeting-requests",
+            element: <MeetingRequestsPage />,
+          },
+          {
+            path: "country-intelligence",
+            element: <CountryIntelligenceExporterPage />,
+          },
+          {
+            path: "market-reports",
+            element: <MarketReportsPage />,
+          },
+          {
+            path: "billing",
+            element: <BillingPage />,
+          },
+          {
+            path: "help-center",
+            element: <HelpCenterPage />,
+          },
+          {
+            path: "need-help",
+            element: <NeedHelpPage />,
           },
           {
             path: "partner-brief",
@@ -405,11 +502,11 @@ export const routes: RouteObject[] = [
           },
           {
             path: "submit-questions",
-            element: <SubmitQuestionsPage />,
+            element: <Navigate to="/dashboard/need-help" replace />,
           },
           {
             path: "waiting-room",
-            element: <WaitingRoomPage />,
+            element: <Navigate to="/dashboard/meeting-requests" replace />,
           },
           {
             path: "live-deal-room",
@@ -421,7 +518,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "opportunity-report",
-            element: <OpportunityReportPage />,
+            element: <Navigate to="/dashboard/my-requirements" replace />,
           },
           {
             path: "follow-up-services",
@@ -433,21 +530,27 @@ export const routes: RouteObject[] = [
           },
           {
             path: "my-sessions",
-            element: <MySessionsPage />,
+            element: <Navigate to="/dashboard/sessions" replace />,
           },
           {
             path: "messages",
-            element: <Chats />,
+            element: <ExporterMessagesPage />,
           },
           {
             path: "settings",
-            element: <Settings />,
-            children: [
-              { index: true, element: <SettingsProfile /> },
-              { path: "account", element: <SettingsAccount /> },
-              { path: "appearance", element: <SettingsAppearance /> },
-              { path: "notifications", element: <SettingsNotifications /> },
-            ],
+            element: <ExporterSettingsPage />,
+          },
+          {
+            path: "settings/account",
+            element: <Navigate to="/dashboard/settings" replace />,
+          },
+          {
+            path: "settings/appearance",
+            element: <Navigate to="/dashboard/settings" replace />,
+          },
+          {
+            path: "settings/notifications",
+            element: <Navigate to="/dashboard/settings" replace />,
           },
           {
             path: "marketplace",
@@ -463,7 +566,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "verification",
-            element: <VerificationPage />,
+            element: <Navigate to="/dashboard/documents" replace />,
           },
           {
             path: "approval",
@@ -479,7 +582,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "invoices",
-            element: <UserInvoicesPage />,
+            element: <Navigate to="/dashboard/billing" replace />,
           },
           {
             path: "notifications",
@@ -836,7 +939,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/events/upcoming-events",
-    element: <UpcomingEventsPage />,  
+    element: <UpcomingEventsPage />,
   },
   {
     path: "/events/past-events",

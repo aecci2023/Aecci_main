@@ -1,7 +1,6 @@
 import {
     ArrowRight,
     Building2,
-    Check,
     ChevronDown,
     ChevronUp,
     FileText,
@@ -10,15 +9,24 @@ import {
     Info,
     Play,
     ShieldCheck,
-    Star,
     X,
     Zap,
     Factory,
     Users,
     Briefcase,
     Clock,
-    Lock
+    Lock,
+    Loader2,
+    CheckCircle2
 } from 'lucide-react';
+import { Controller } from "react-hook-form";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { parsePhoneNumber, type Country } from "react-phone-number-input";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useSubmitInterestFormMutation } from "@/store/api/interestApi";
+import { toast } from "sonner";
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { COUNTRIES } from '@/lib/countries';
@@ -30,34 +38,95 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 
+
+const interestFormSchema = z.object({
+    companyName: z.string().min(1, "Company name is required"),
+    email: z.string().email("Valid email is required"),
+    yearEstablished: z.string().optional(),
+    country: z.string().optional(),
+    sector: z.string().optional(),
+    contactPerson: z.string().optional(),
+    fullName: z.string().optional(),
+    cityState: z.string().optional(),
+    emailAddress: z.string().optional(),
+    countryCode: z.string().optional(),
+    phoneWhatsapp: z.string().optional(),
+    yourCountry: z.string().optional(),
+    objectives: z.array(z.string()).optional(),
+    infoAccurate: z.boolean().optional(),
+    agreeTerms: z.boolean().optional(),
+    understandFacilitation: z.boolean().optional(),
+    shareInfo: z.boolean().optional(),
+});
+
 const Interest = () => {
-    const [formData, setFormData] = useState({
-        companyName: '',
-        email: '',
-        yearEstablished: '',
-        country: '',
-        sector: '',
-        contactPerson: '',
-        fullName: '',
-        cityState: '',
-        emailAddress: '',
-        phoneWhatsapp: '',
-        yourCountry: '',
-        objectives: [] as string[]
+    
+    const { register, control, handleSubmit: hookFormSubmit, watch, setValue } = useForm<z.infer<typeof interestFormSchema>>({
+        resolver: zodResolver(interestFormSchema),
+        defaultValues: { objectives: [], infoAccurate: false, agreeTerms: false, understandFacilitation: false, shareInfo: false }
     });
+    const [submitInterest, { isLoading: isSubmitting }] = useSubmitInterestFormMutation();
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    
+    const onSubmit = async (data: z.infer<typeof interestFormSchema>) => {
+        try {
+            // Extract country code from phoneWhatsapp
+            if (data.phoneWhatsapp) {
+                const parsed = parsePhoneNumber(data.phoneWhatsapp);
+                if (parsed) {
+                    data.countryCode = `+${parsed.countryCallingCode}`;
+                    data.phoneWhatsapp = parsed.nationalNumber;
+                }
+            }
+            await submitInterest(data).unwrap();
+            setIsSubmitted(true);
+            toast.success("Interest submitted successfully! We will notify you when Global Connect is open.");
+        } catch (error: any) {
+            const errorMessage = error?.data?.message || "Failed to submit interest. Please try again.";
+            toast.error(errorMessage);
+            console.error("Submit error:", error);
+        }
+    };
+    
+    const phoneWhatsapp = watch('phoneWhatsapp');
+    useEffect(() => {
+        if (phoneWhatsapp) {
+            try {
+                const parsed = parsePhoneNumber(phoneWhatsapp);
+                if (parsed?.country) {
+                    const countryObj = COUNTRIES.find(c => c.code === parsed.country);
+                    if (countryObj) {
+                        setValue('country', countryObj.name, { shouldValidate: true });
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+                // Ignore parse errors while typing
+            }
+        }
+    }, [phoneWhatsapp, setValue]);
+
+    const selectedCountryName = watch('country');
+    const selectedCountryObj = COUNTRIES.find(c => c.name === selectedCountryName);
+    const defaultCountryCode = (selectedCountryObj?.code || 'IN') as Country;
 
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
     const [activeSection, setActiveSection] = useState<number | null>(null);
-    const [legalAcceptance, setLegalAcceptance] = useState({
-        infoAccurate: false,
-        agreeTerms: false,
-        understandFacilitation: false,
-        shareInfo: false
-    });
+
+    const toggleSection = (id: number) => {
+        setActiveSection(prev => prev === id ? null : id);
+    };
+
+    const toggleFaq = (idx: number) => {
+        setActiveFaq(prev => prev === idx ? null : idx);
+    };
+
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isVideoPlaying2, setIsVideoPlaying2] = useState(false);
     const videoRef2 = useRef<HTMLVideoElement>(null);
+
     const [showTermsModal, setShowTermsModal] = useState(false);
     const [showRefundModal, setShowRefundModal] = useState(false);
 
@@ -108,44 +177,19 @@ const Interest = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
 
+    
     const handleObjectiveChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, checked } = e.target;
-        setFormData(prev => {
-            const currentObjectives = prev.objectives || [];
-            if (checked) {
-                if (currentObjectives.length >= 3) {
-                    return prev;
-                }
-                return { ...prev, objectives: [...currentObjectives, value] };
-            } else {
-                return { ...prev, objectives: currentObjectives.filter(item => item !== value) };
-            }
-        });
+        const currentObjectives = watch('objectives') || [];
+        if (checked) {
+            if (currentObjectives.length >= 3) return;
+            setValue('objectives', [...currentObjectives, value]);
+        } else {
+            setValue('objectives', currentObjectives.filter(item => item !== value));
+        }
     };
 
-    const handleLegalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, checked } = e.target;
-        setLegalAcceptance(prev => ({ ...prev, [name]: checked }));
-    };
-
-    const toggleFaq = (index: number) => {
-        setActiveFaq(activeFaq === index ? null : index);
-    };
-
-    const toggleSection = (sectionId: number) => {
-        setActiveSection(activeSection === sectionId ? null : sectionId);
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('Form submitted:', formData);
-        console.log('Legal Acceptance:', legalAcceptance);
-    };
 
     const toggleVideo = () => {
         if (videoRef.current) {
@@ -212,10 +256,8 @@ const Interest = () => {
                             <label className="block text-xs font-medium text-gray-700 mb-1">Company / Business Name <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
-                                name="companyName"
-                                value={formData.companyName}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                {...register('companyName')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter company name"
                                 required
                             />
@@ -224,10 +266,8 @@ const Interest = () => {
                             <label className="block text-xs font-medium text-gray-700 mb-1">Email <span className="text-red-500">*</span></label>
                             <input
                                 type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                {...register('email')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter email"
                                 required
                             />
@@ -236,20 +276,18 @@ const Interest = () => {
                             <label className="block text-xs font-medium text-gray-700 mb-1">Year of establishment</label>
                             <input
                                 type="text"
-                                name="yearEstablished"
-                                value={formData.yearEstablished}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                {...register('yearEstablished')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="YYYY"
                             />
                         </div>
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">Country / Region</label>
                             <Select
-                                value={formData.country}
-                                onValueChange={(value) => setFormData(prev => ({ ...prev, country: value }))}
+                                value={watch('country')}
+                                onValueChange={(value) => setValue('country', value)}
                             >
-                                <SelectTrigger className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition flex items-center justify-between text-sm text-gray-700">
+                                <SelectTrigger className="w-full !h-[42px] px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition flex items-center justify-between text-sm text-gray-700">
                                     <SelectValue placeholder="Select country" />
                                 </SelectTrigger>
                                 <SelectContent position="popper" className="max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-50">
@@ -265,23 +303,27 @@ const Interest = () => {
                             <label className="block text-xs font-medium text-gray-700 mb-1">Sector / Industry</label>
                             <input
                                 type="text"
-                                name="sector"
-                                value={formData.sector}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                {...register('sector')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter sector"
                             />
                         </div>
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">Phone No</label>
-                            <input
-                                type="text"
+                            
+                            <Controller
                                 name="contactPerson"
-                                value={formData.contactPerson}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
-                                placeholder="Enter phone number"
+                                control={control}
+                                render={({ field }) => (
+                                    <PhoneInput
+                                        placeholder="Enter phone number"
+                                        defaultCountry={defaultCountryCode}
+                                        className="h-[42px] rounded-lg border-gray-300 bg-transparent focus-within:ring-2 focus-within:ring-amber-400 focus-within:border-transparent"
+                                        {...field}
+                                    />
+                                )}
                             />
+
                         </div>
                     </div>
                     {/* Contact Person */}
@@ -291,10 +333,8 @@ const Interest = () => {
                             <label className="block text-xs font-medium text-gray-700 mb-1">Full Name <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
-                                name="fullName"
-                                value={formData.fullName}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                {...register('fullName')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter full name"
                                 required
                             />
@@ -303,10 +343,8 @@ const Interest = () => {
                             <label className="block text-xs font-medium text-gray-700 mb-1">City / State / Country</label>
                             <input
                                 type="text"
-                                name="cityState"
-                                value={formData.cityState}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                {...register('cityState')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter city, state, country"
                             />
                         </div>
@@ -314,24 +352,28 @@ const Interest = () => {
                             <label className="block text-xs font-medium text-gray-700 mb-1">Email Address <span className="text-red-500">*</span></label>
                             <input
                                 type="email"
-                                name="emailAddress"
-                                value={formData.emailAddress}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                {...register('emailAddress')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter email address"
                                 required
                             />
                         </div>
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">Phone / WhatsApp</label>
-                            <input
-                                type="text"
+                            
+                            <Controller
                                 name="phoneWhatsapp"
-                                value={formData.phoneWhatsapp}
-                                onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
-                                placeholder="Enter phone number"
+                                control={control}
+                                render={({ field }) => (
+                                    <PhoneInput
+                                        placeholder="Enter phone number"
+                                        defaultCountry={defaultCountryCode}
+                                        className="h-[42px] rounded-lg border-gray-300 bg-transparent focus-within:ring-2 focus-within:ring-amber-400 focus-within:border-transparent"
+                                        {...field}
+                                    />
+                                )}
                             />
+
                         </div>
                     </div>
                     {/* Your Objective Section */}
@@ -349,8 +391,8 @@ const Interest = () => {
                             'Strategic Collaboration',
                             'Other'
                         ].map((objective) => {
-                            const isChecked = formData.objectives?.includes(objective);
-                            const isMaxReached = (formData.objectives?.length || 0) >= 3;
+                            const isChecked = watch('objectives')?.includes(objective);
+                            const isMaxReached = (watch('objectives')?.length || 0) >= 3;
                             const isDisabled = isMaxReached && !isChecked;
 
                             return (
@@ -366,7 +408,7 @@ const Interest = () => {
                                         onChange={handleObjectiveChange}
                                         disabled={isDisabled}
                                         className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-                                        required={formData.objectives?.length === 0}
+                                        required={watch('objectives')?.length === 0}
                                     />
                                     {objective}
                                 </label>
@@ -382,9 +424,7 @@ const Interest = () => {
                                 <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
                                     <input
                                         type="checkbox"
-                                        name="infoAccurate"
-                                        checked={legalAcceptance.infoAccurate}
-                                        onChange={handleLegalChange}
+                                        {...register('infoAccurate')}
                                         className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
                                         required
                                     />
@@ -394,9 +434,7 @@ const Interest = () => {
                                 <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
                                     <input
                                         type="checkbox"
-                                        name="agreeTerms"
-                                        checked={legalAcceptance.agreeTerms}
-                                        onChange={handleLegalChange}
+                                        {...register('agreeTerms')}
                                         className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
                                         required
                                     />
@@ -406,9 +444,7 @@ const Interest = () => {
                                 <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
                                     <input
                                         type="checkbox"
-                                        name="understandFacilitation"
-                                        checked={legalAcceptance.understandFacilitation}
-                                        onChange={handleLegalChange}
+                                        {...register('understandFacilitation')}
                                         className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
                                         required
                                     />
@@ -418,9 +454,7 @@ const Interest = () => {
                                 <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
                                     <input
                                         type="checkbox"
-                                        name="shareInfo"
-                                        checked={legalAcceptance.shareInfo}
-                                        onChange={handleLegalChange}
+                                        {...register('shareInfo')}
                                         className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
                                         required
                                     />
@@ -466,10 +500,20 @@ const Interest = () => {
                         <div className="flex flex-col items-start gap-4 mt-6">
                             <button
                                 type="submit"
-                                className="bg-gradient-to-r from-amber-400 to-amber-500 text-[#0A1A3A] font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group"
+                                disabled={isSubmitting}
+                                className="bg-gradient-to-r from-amber-400 to-amber-500 text-[#0A1A3A] font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                             >
-                                Submit Interest & Continue
-                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                {isSubmitting ? (
+                                    <>
+                                        <Loader2 size={18} className="animate-spin" />
+                                        Submitting...
+                                    </>
+                                ) : (
+                                    <>
+                                        Submit Interest & Continue
+                                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                    </>
+                                )}
                             </button>
 
                         </div>
@@ -762,12 +806,37 @@ const Interest = () => {
                 </div>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={hookFormSubmit(onSubmit)}>
                 <div className="max-w-7xl mx-auto px-6 py-12">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Main Form - Left & Center */}
                         <div className="lg:col-span-2 space-y-4">
-                            {/* Accordion Sections */}
+                            {isSubmitted ? (
+                                <div className="py-20 text-center">
+                                    <motion.div 
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="bg-white rounded-3xl shadow-xl p-10 max-w-2xl mx-auto border border-gray-100 flex flex-col items-center justify-center space-y-6"
+                                    >
+                                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                                            <CheckCircle2 size={40} className="text-green-600" />
+                                        </div>
+                                        <h2 className="text-3xl font-extrabold text-[#0A1A3A]">Interest Submitted Successfully!</h2>
+                                        <p className="text-gray-600">
+                                            Thank you for your interest in AECCI Global Deal Room. We have received your details and will notify you when Global Connect is open.
+                                        </p>
+                                        <button
+                                            type="button"
+                                            onClick={() => window.location.reload()}
+                                            className="mt-4 px-8 py-3 bg-[#0A1A3A] text-white rounded-xl font-bold hover:bg-[#1a2d5c] transition-colors"
+                                        >
+                                            Return to Home
+                                        </button>
+                                    </motion.div>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* Accordion Sections */}
                             {sections.map((section) => {
                                 const Icon = section.icon;
                                 const isOpen = activeSection === section.id;
@@ -841,9 +910,11 @@ const Interest = () => {
                                     </div>
                                 </div>
                             )}
+                                </>
+                            )}
                         </div>
 
-                        {/* Right Sidebar */}
+                        {/* Right Sidebar - Info & Video */}
                         <div className="lg:col-span-1">
                             <div className="space-y-6 sticky top-6">
                                 {/* Video Section in Sidebar */}

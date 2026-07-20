@@ -52,7 +52,7 @@ export default function Navbar() {
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
   const [brandVisible, setBrandVisible] = React.useState(true);
-  const closeTimeoutRef = React.useRef<number | null>(null);
+
 
   // ── Scroll: collapse brand bar after 40px ──
   React.useEffect(() => {
@@ -69,30 +69,8 @@ export default function Navbar() {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
-      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     };
   }, []);
-
-  const clearClose = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-  };
-
-  const handleMouseEnter = (title: string) => {
-    clearClose();
-    setActiveSection(title);
-  };
-
-  const handleMouseLeave = () => {
-    clearClose();
-    closeTimeoutRef.current = window.setTimeout(() => {
-      setActiveSection(null);
-    }, 160);
-  };
-
-  const handleDropdownMouseEnter = () => clearClose();
 
   const handleClose = () => setActiveSection(null);
 
@@ -247,6 +225,8 @@ export default function Navbar() {
                 <MegaMenu
                   section={activeSectionConfig}
                   onClose={handleClose}
+                  onMouseEnter={() => {}}
+                  onMouseLeave={() => {}}
                 />
               </div>
             </div>

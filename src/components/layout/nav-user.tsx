@@ -39,23 +39,43 @@ export function NavUser({ user: fallback }: NavUserProps) {
   const [open, setOpen] = useDialogState();
 
   const stored = localStorage.getItem("user");
-  const lsUser = stored ? (() => { try { return JSON.parse(stored); } catch { return null; } })() : null;
+  const lsUser = stored
+    ? (() => {
+        try {
+          return JSON.parse(stored);
+        } catch {
+          return null;
+        }
+      })()
+    : null;
 
-  const name = lsUser?.companyName || lsUser?.fullName || fallback.name || "Member";
+  const name =
+    lsUser?.companyName || lsUser?.fullName || fallback.name || "Member";
   const email = lsUser?.email || fallback.email;
   const avatar = lsUser?.profilePicture || fallback.avatar || "";
   const role = lsUser?.role || "user";
-  const initials = name.split(" ").filter(Boolean).slice(0, 2).map((n: string) => n[0].toUpperCase()).join("");
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((n: string) => n[0].toUpperCase())
+    .join("");
 
   const profileLink =
-    role === "partner" ? "/partner/settings" :
-    role === "admin" ? "/admin/settings" :
-    "/dashboard/settings";
+    role === "partner"
+      ? "/partner/settings"
+      : role === "admin"
+        ? "/admin/settings"
+        : role === "exporter"
+          ? "/dashboard/my-profile"
+          : "/dashboard/settings";
 
   const notificationsLink =
-    role === "partner" ? "/partner/notifications" :
-    role === "admin" ? "/admin/notifications" :
-    "/dashboard/notifications";
+    role === "partner"
+      ? "/partner/notifications"
+      : role === "admin"
+        ? "/admin/notifications"
+        : "/dashboard/notifications";
 
   return (
     <>
@@ -65,7 +85,7 @@ export function NavUser({ user: fallback }: NavUserProps) {
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                className="data-[state=open]:bg-white/10 data-[state=open]:text-white"
               >
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={avatar} alt={name} />
@@ -75,7 +95,7 @@ export function NavUser({ user: fallback }: NavUserProps) {
                 </Avatar>
                 <div className="grid flex-1 text-start text-sm leading-tight">
                   <span className="truncate font-semibold">{name}</span>
-                  <span className="truncate text-xs text-muted-foreground">
+                  <span className="truncate text-xs text-white/70">
                     {email}
                   </span>
                 </div>
@@ -98,7 +118,7 @@ export function NavUser({ user: fallback }: NavUserProps) {
                   </Avatar>
                   <div className="grid flex-1 text-start text-sm leading-tight">
                     <span className="truncate font-semibold">{name}</span>
-                    <span className="truncate text-xs text-muted-foreground">
+                    <span className="truncate text-xs text-white/70">
                       {email}
                     </span>
                   </div>
@@ -113,13 +133,19 @@ export function NavUser({ user: fallback }: NavUserProps) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to={`${profileLink}/account`} className="flex items-center gap-2">
+                  <Link
+                    to={`${profileLink}/account`}
+                    className="flex items-center gap-2"
+                  >
                     <BadgeCheck className="size-4" />
                     Account
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to={`${profileLink}`} className="flex items-center gap-2">
+                  <Link
+                    to={`${profileLink}`}
+                    className="flex items-center gap-2"
+                  >
                     <Settings className="size-4" />
                     Settings
                   </Link>

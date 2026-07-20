@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
@@ -17,8 +18,7 @@ import {
   Globe,
   TrendingUp,
   ShieldCheck,
-  Headphones,
-  ChevronRight
+  Headphones
 } from "lucide-react";
 import {
   InputOTP,
@@ -571,7 +571,7 @@ export default function LoginPage() {
     }
   };
 
-  const staggerContainer = {
+  const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -582,7 +582,7 @@ export default function LoginPage() {
     }
   };
 
-  const staggerItem = {
+  const staggerItem: Variants = {
     hidden: { opacity: 0, y: 15 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } }
   };
