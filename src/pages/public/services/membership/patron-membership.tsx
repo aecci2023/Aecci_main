@@ -1,81 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Star,
   Globe,
-  Shield,
   Users,
   Award,
   Check,
   ArrowRight,
   Building2,
-  Phone,
   Mail,
   CheckCircle2,
-  BadgeCheck,
-  FileText,
-  TrendingUp,
   Layers,
-  ArrowUpRight,
   HelpCircle,
-  MapPin,
-  MessageSquare,
   UserCheck
 } from "lucide-react";
 
 // Benefits data
-const silverBenefits = [
-  "Certificate of Annual Patron Membership & Silver Laminated Card",
-  "Fast-tracked visa recommendations & concessional shipping document attestation",
-  "24/7 digital service access on e-platform (digital library, latest research studies)",
-  "Regular policy updates on latest national/international rules, govt legislations, and technical developments",
-  "Expert legal assistance for advocacy matters & professional handling of payment disputes",
-  "Concessional fees at AECCI-International Arbitration Centers (AECCI-IAC)",
-  "Business assistance for daily operations, expansion, and diversification plans",
-  "Complimentary/discounted training workshops, seminars, and certification programs",
-  "2 Table reserved seating at AECCI events & exclusive networking with senior officials",
-  "Speaking slots at sectoral events to showcase company expertise",
-  "Prominent feature in Chamber Publications (articles and advertisements)",
-  "Branding at 2 major events annually (logo on venue backdrop and newspapers)",
-  "Logo listing on the AECCI website and digital membership directory",
-  "Invitations to show products/services globally at International Exhibitions",
-  "Priority invitations and 20% discount on International Trade Delegations",
-  "Exclusive interaction with up to 4 countries' overseas legal partners for investment plans",
-  "Access to AECCI-TAC services in the region for domestic queries"
-];
-
-const bronzeBenefits = [
-  "All Silver Tier benefits included",
-  "Designed for companies with annual turnover between INR 200 Crore to INR 800 Crore",
-  "Close interaction with renowned members, central/state govt officials, academia, and international partners (up to 10 countries)",
-  "Targeted competitiveness support for national and international markets",
-  "Participation in meetings with visiting foreign delegations, trade fairs, and overseas exhibitions",
-  "Specialized monetary policy, corporate law, fiscal policy, taxation, and exchange rate advice",
-  "In-depth analysis of legislations to help policymakers, foreign investors, and trade and industry",
-  "Direct updates on government notifications, circulars, and reports via email",
-  "Full access to AECCI Bulletin, News & Views Weekly, and topical studies",
-  "Free organization profile in the AECCI Business Directory, circulated to global embassies and high commissions",
-  "Concessional registration rates for all paid AECCI programs and seminars"
-];
-
-const goldBenefits = [
-  "All Silver & Bronze Tier benefits included",
-  "Designed for companies with annual turnover exceeding INR 800 Crore",
-  "Direct engagement with Indian Missions and counterpart chambers worldwide",
-  "Targeted joint venture opportunity matching at national & international events",
-  "High-exposure event sponsorship and co-sponsorship at discounted rates",
-  "Prominent event presence with a dedicated registration desk/table/standee and centerpieces",
-  "Concessional use of AECCI’s centrally located, air-conditioned conference and meeting rooms",
-  "Entrepreneurial assistance in setting up new projects and upgrading technology",
-  "Priority human resources and industrial relations development programs",
-  "Sector representation in national and international forums to influence policy",
-  "Expert policy and technical consultancy from subject-specific committees",
-  "Coordinated logistics, meetings, and arrangements during international trade fairs",
-  "Complimentary Certificate of Origin (COO) certification for the entire financial year"
-];
-
 const patronMembersList = [
   {
     name: "Excellency Legalisation Services Pvt. Ltd.",

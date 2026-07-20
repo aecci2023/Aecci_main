@@ -3,34 +3,21 @@ import { useNavigate, Link } from "react-router-dom";
 import { Main } from "@/components/layout/main";
 import { useGetMyPartnerProfileQuery } from "@/store/api/adminApi";
 import { useGetMySessionsQuery } from "@/store/api/sessionApi";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import {
-  LayoutDashboard,
-  User,
-  Award,
-  Lock,
   MessageSquare,
   Scale,
   Building2,
-  TrendingUp,
   Users,
   Calendar,
   FileText,
   BookOpen,
-  Wrench,
-  Headphones,
-  Settings,
   ArrowRight,
-  ChevronLeft,
-  ChevronRight,
   Globe,
   Briefcase,
-  Clock,
   Handshake,
-  ArrowUpRight,
-  MapPin,
   Compass,
   ShieldCheck,
 } from "lucide-react";
@@ -40,7 +27,7 @@ export default function PartnerDashboard() {
 
   const { data: profileData, isLoading: isProfileLoading } =
     useGetMyPartnerProfileQuery();
-  const { data: sessionsData, isLoading: isSessionsLoading } =
+  const { isLoading: isSessionsLoading } =
     useGetMySessionsQuery();
 
   const profile = profileData?.data;
