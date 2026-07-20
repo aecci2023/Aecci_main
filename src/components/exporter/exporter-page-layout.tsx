@@ -127,8 +127,8 @@ export function ExporterPageHeader({
                 <circle
                   cx="18"
                   cy="18"
-                  r="14"
-                  fill="none"
+                                    r="14"   
+                  fill="non" 
                   stroke="#D1FAE5"
                   strokeWidth="3"
                 />
@@ -144,7 +144,7 @@ export function ExporterPageHeader({
                 />
               </svg>
             </span>
-          </div>
+          </div >
         )}
         {primaryAction && (
           <Button
@@ -294,10 +294,17 @@ export function AssistanceCard() {
   );
 }
 
-export function FieldLabel({ children }: { children: ReactNode }) {
+export function FieldLabel({
+  children,
+  required = false,
+}: {
+  children: ReactNode;
+  required?: boolean;
+}) {
   return (
     <label className="mb-1.5 block text-[11px] font-semibold text-[#344054]">
       {children}
+      {required && <span className="ml-0.5 text-[#D92D20]">*</span>}
     </label>
   );
 }

@@ -103,6 +103,10 @@ export default function MyRequirementsPage() {
         subtitle="Tell us what you are looking for so we can match you with the right buyers and opportunities."
         completion={80}
         completionLabel="Requirements Completion"
+        secondaryAction={{
+          label: "Need Help?",
+          to: "/dashboard/need-help",
+        }}
       />
 
       <ExporterTabs tabs={TABS} active={activeTab} onChange={setActiveTab} />
@@ -117,8 +121,8 @@ export default function MyRequirementsPage() {
                   Better Requirements = Better Matches
                 </p>
                 <p className="text-[11px] text-[#667085]">
-                  Provide detailed requirements to get matched with relevant
-                  buyers and opportunities.
+                  Provide detailed requirements to get matched with relevant buyers and
+                  opportunities.
                 </p>
               </div>
               <button
@@ -131,9 +135,10 @@ export default function MyRequirementsPage() {
           </div>
 
           <ExporterCard>
-            <h2 className="text-[15px] font-bold text-[#101828]">
-              Requirements Overview
-            </h2>
+            <h2 className="text-[15px] font-bold text-[#101828]">Requirements Overview</h2>
+            <p className="mt-1 text-[12px] text-[#667085]">
+              Provide a summary of your business requirements.
+            </p>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <FieldLabel>I am looking for</FieldLabel>
@@ -147,18 +152,16 @@ export default function MyRequirementsPage() {
                 />
               </div>
               <div className="sm:col-span-2">
-                <FieldLabel>Title</FieldLabel>
+                <FieldLabel>Requirement Title</FieldLabel>
                 <FieldInput defaultValue="Looking for Buyers – Home Textiles (Bed Linen, Bath Linen)" />
               </div>
               <div className="sm:col-span-2">
-                <FieldLabel>Description</FieldLabel>
+                <FieldLabel>Requirement Description</FieldLabel>
                 <textarea
                   defaultValue="We are looking for reliable buyers for our home textile products including bed linen and bath linen. We offer premium quality products with competitive pricing."
                   className="min-h-[100px] w-full rounded-lg border border-[#D0D5DD] px-3 py-2 text-[13px] outline-none"
                 />
-                <p className="mt-1 text-right text-[10px] text-[#98A2B3]">
-                  178/500
-                </p>
+                <p className="mt-1 text-right text-[10px] text-[#98A2B3]">178/500</p>
               </div>
               <div>
                 <FieldLabel>Expected Annual Quantity</FieldLabel>
@@ -190,40 +193,55 @@ export default function MyRequirementsPage() {
               </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
-              {QUICK_INFO.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-xl border border-[#E4E7EC] bg-[#F9FAFB] p-3 text-center"
-                >
-                  <p className="text-[9px] font-medium text-[#98A2B3]">
-                    {item.label}
-                  </p>
-                  <p className="mt-1 text-[11px] font-semibold text-[#101828]">
-                    {item.value}
-                  </p>
-                  <button
-                    type="button"
-                    className="mt-1 text-[10px] font-semibold text-[#175CD3]"
+            <div className="mt-6">
+              <h3 className="text-[14px] font-bold text-[#101828]">Quick Information</h3>
+              <p className="mt-0.5 text-[11px] text-[#667085]">
+                Key preferences used for smarter matching.
+              </p>
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-5">
+                {QUICK_INFO.map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-xl border border-[#E4E7EC] bg-[#F9FAFB] p-3 text-center"
                   >
-                    Edit
-                  </button>
-                </div>
-              ))}
+                    <p className="text-[9px] font-medium text-[#98A2B3]">{item.label}</p>
+                    <p className="mt-1 text-[11px] font-semibold text-[#101828]">{item.value}</p>
+                    <button
+                      type="button"
+                      className="mt-1 text-[10px] font-semibold text-[#175CD3]"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-5 flex justify-end gap-2">
+            <div className="mt-5 flex flex-col-reverse justify-end gap-2 sm:flex-row">
               <Button
                 variant="outline"
-                className="h-10 rounded-lg border-[#175CD3] text-[13px] font-semibold text-[#175CD3]"
+                className="h-10 w-full rounded-lg border-[#175CD3] text-[13px] font-semibold text-[#175CD3] sm:w-auto"
               >
                 Save as Draft
               </Button>
-              <Button className="h-10 rounded-lg bg-[#175CD3] px-5 text-[13px] font-semibold hover:bg-[#1448B0]">
+              <Button className="h-10 w-full rounded-lg bg-[#175CD3] px-5 text-[13px] font-semibold hover:bg-[#1448B0] sm:w-auto">
                 Save & Continue
               </Button>
             </div>
           </ExporterCard>
+
+          <div className="flex flex-col gap-3 rounded-2xl border border-[#B2DDFF] bg-[#EFF8FF] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+            <div className="min-w-0">
+              <p className="text-[14px] font-bold text-[#101828]">Want Better Matches?</p>
+              <p className="mt-1 text-[12px] leading-relaxed text-[#667085]">
+                Add more details to your requirements and upload relevant documents to increase
+                your chances of getting quality matches.
+              </p>
+            </div>
+            <Button className="h-9 w-full shrink-0 rounded-lg bg-[#175CD3] text-[12px] font-semibold hover:bg-[#1448B0] sm:w-auto">
+              Add More Details
+            </Button>
+          </div>
         </div>
 
         <aside className="space-y-4">
@@ -297,9 +315,7 @@ export default function MyRequirementsPage() {
 
           <ExporterCard>
             <div className="flex items-center justify-between gap-2">
-              <h3 className="text-[13px] font-bold text-[#101828]">
-                Your Active Requirements
-              </h3>
+              <h3 className="text-[13px] font-bold text-[#101828]">Your Active Requirements</h3>
               <button
                 type="button"
                 className="flex items-center gap-1 text-[10px] font-semibold text-[#175CD3]"

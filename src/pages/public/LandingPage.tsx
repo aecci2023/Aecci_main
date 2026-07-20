@@ -68,22 +68,6 @@ export const audienceCards = [
     ctaColor: "text-amber-600 hover:text-amber-800"
   },
   {
-    title: "Intending Agents / Representatives",
-    text: "Represent your country and connect business opportunities with India.",
-    cta: "Join as Agent →",
-    link: "#",
-    tone: "text-emerald-600",
-    icon: "globe",
-    image: "/images/agent.png",
-    color: "emerald",
-    role: "agent" as const,
-    bgGradient: "from-emerald-50/40 via-emerald-50/10 to-white hover:from-emerald-50/70 hover:to-white",
-    borderColor: "border-emerald-100/60 hover:border-emerald-300/40",
-    iconBg: "bg-emerald-700 text-white",
-    shadowGlow: "hover:shadow-[0_15px_30px_rgba(16,185,129,0.1)]",
-    ctaColor: "text-emerald-600 hover:text-emerald-800"
-  },
-  {
     title: "International Collaborators",
     text: "Share expertise, provide market insights and expand your global network.",
     cta: "Join as Collaborator →",
@@ -98,6 +82,22 @@ export const audienceCards = [
     iconBg: "bg-purple-800 text-white",
     shadowGlow: "hover:shadow-[0_15px_30px_rgba(139,92,246,0.1)]",
     ctaColor: "text-purple-600 hover:text-purple-800"
+  },
+  {
+    title: "Intending Agents / Representatives",
+    text: "Represent your country and connect business opportunities with India.",
+    cta: "Join as Agent →",
+    link: "#",
+    tone: "text-emerald-600",
+    icon: "globe",
+    image: "/images/agent.png",
+    color: "emerald",
+    role: "agent" as const,
+    bgGradient: "from-emerald-50/40 via-emerald-50/10 to-white hover:from-emerald-50/70 hover:to-white",
+    borderColor: "border-emerald-100/60 hover:border-emerald-300/40",
+    iconBg: "bg-emerald-700 text-white",
+    shadowGlow: "hover:shadow-[0_15px_30px_rgba(16,185,129,0.1)]",
+    ctaColor: "text-emerald-600 hover:text-emerald-800"
   },
   {
     title: "Global Buyers / Importers",
@@ -300,8 +300,8 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role, onClose }) =
       case 'partner':
         return {
           title: 'International Collaborators',
-          subtitle: 'AECCI Global Deal Room Collaboration Partner Program Overview',
-          duration: '03:20',
+          // subtitle: 'AECCI Global Deal Room Collaboration Partner Program Overview',
+          // duration: '03:20',
           icon: Handshake,
           benefits: collaborationPartnerBenefits,
           gradient: 'from-emerald-500 to-emerald-600',
@@ -313,14 +313,14 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role, onClose }) =
           tagline: 'Be a bridge between Indian businesses and your global market. Together, we create new business opportunities.',
           badgeBg: 'bg-emerald-100',
           badgeText: 'text-emerald-700',
-          videoSrc: '/src/assets/videos/partner-overview.mp4',
-          posterSrc: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=450&fit=crop'
+          videoSrc: '/src/assets/videos/Globaldealroom1.mp4',
+          // posterSrc: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=450&fit=crop'
         };
       case 'participant':
         return {
           title: 'Indian Exporters / Manufacturers',
-          subtitle: 'AECCI Global Deal Room Participant Program Overview',
-          duration: '02:45',
+          // subtitle: 'AECCI Global Deal Room Participant Program Overview',
+          // duration: '02:45',
           icon: Users,
           benefits: participantBenefits,
           gradient: 'from-purple-500 to-purple-600',
@@ -332,14 +332,14 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role, onClose }) =
           tagline: 'Join the global trade ecosystem and unlock new opportunities for your business.',
           badgeBg: 'bg-purple-100',
           badgeText: 'text-purple-700',
-          videoSrc: '/src/assets/videos/participant-overview.mp4',
-          posterSrc: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=450&fit=crop'
+          videoSrc: '/src/assets/videos/Globaldealroom1.mp4',
+          // posterSrc: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=450&fit=crop'
         };
       case 'importer':
         return {
           title: 'Global Buyers / Importers',
-          subtitle: 'AECCI Global Deal Room Importer Program Overview',
-          duration: '02:30',
+          // subtitle: 'AECCI Global Deal Room Importer Program Overview',
+          // duration: '02:30',
           icon: Globe,
           benefits: importerBenefits,
           gradient: 'from-blue-500 to-blue-600',
@@ -351,14 +351,14 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role, onClose }) =
           tagline: 'Connect with verified Indian exporters and access quality products from India.',
           badgeBg: 'bg-blue-100',
           badgeText: 'text-blue-700',
-          videoSrc: '/src/assets/videos/importer-overview.mp4',
-          posterSrc: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&h=450&fit=crop'
+          videoSrc: '/src/assets/videos/globalroomwork_v2.mp4'
+          // posterSrc: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&h=450&fit=crop'
         };
       case 'agent':
         return {
           title: 'Intending Agents / Representatives',
-          subtitle: 'AECCI Global Deal Room Agent Program Overview',
-          duration: '02:15',
+          // subtitle: 'AECCI Global Deal Room Agent Program Overview',
+          // duration: '02:15',
           icon: UserRound,
           benefits: agentBenefits,
           gradient: 'from-amber-500 to-amber-600',
@@ -370,8 +370,8 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role, onClose }) =
           tagline: 'Explore business opportunities in India and connect with manufacturers & exporters.',
           badgeBg: 'bg-amber-100',
           badgeText: 'text-amber-700',
-          videoSrc: '/src/assets/videos/globalroomwork_v2.mp4',
-          posterSrc: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=450&fit=crop'
+          videoSrc: '/src/assets/videos/Globaldealroom1.mp4',
+          // posterSrc: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=450&fit=crop'
         };
       default:
         return {
@@ -863,7 +863,7 @@ const JourneyTimeline: React.FC = () => {
         <div className="relative">
           <div className="hidden md:block">
             <div className="flex justify-between items-start relative">
-              <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200" />
+              <div className="absolute top-5 left-[10%] right-[10%] h-0.5 bg-gray-200" />
               {journeySteps.map((step, index) => (
                 <motion.div
                   key={index}
@@ -1147,13 +1147,16 @@ function Hero({ onExploreClick }: { onExploreClick: () => void }) {
             <motion.div
               className="absolute right-[30px] top-[-30px] w-[500px] h-[500px] rounded-full overflow-hidden z-10 hidden md:block"
               style={{
-                backgroundImage: "url('/login_earth_background.png')",
+                backgroundImage: "url('/earth_countries.png')",
                 backgroundSize: '250% 250%',
-                backgroundPosition: '12% 88%',
+                backgroundRepeat: 'repeat-x',
+                backgroundPositionY: '88%',
                 boxShadow: "inset -40px -40px 80px rgba(0,0,0,0.85), inset 10px 10px 20px rgba(255,255,255,0.15), 0 0 50px rgba(34,118,235,0.2)",
               }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 160, repeat: Infinity, ease: "linear" }}
+              animate={{
+                backgroundPositionX: ["-90px", "1160px"]
+              }}
+              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
             />
 
             {/* Orbital gold network outline lines */}

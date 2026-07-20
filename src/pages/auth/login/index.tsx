@@ -776,8 +776,8 @@ export default function LoginPage() {
                         <h5 className="font-bold text-slate-800 text-[11px] leading-none">Need help logging in?</h5>
                         <p className="text-[10px] text-slate-500 mt-1">
                           Contact our support team at{" "}
-                          <a href="mailto:support@aecci.global" className="text-[#2563eb] font-bold hover:underline">
-                            support@aecci.global
+                          <a href="mailto:support@aecci.org.in" className="text-[#2563eb] font-bold hover:underline">
+                            support@aecci.org.in
                           </a>
                         </p>
                       </div>

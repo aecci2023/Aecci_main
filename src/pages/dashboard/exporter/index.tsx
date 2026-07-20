@@ -1,9 +1,7 @@
-import { Header } from "@/components/layout/header";
 import { Main } from "@/components/layout/main";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+// Dashboard uses shared ExporterHeader from ExporterLayout (no local Header/Search)
 import {
   BarChart3,
   Building2,
@@ -387,22 +385,6 @@ export default function DashboardPage() {
 
   return (
     <>
-      <Header>
-        <div className="flex w-full items-center justify-between gap-4">
-          <Search
-            placeholder="Search for countries, sessions, partners..."
-            className="mx-auto hidden h-11 max-w-[460px] rounded-full border-[#E4E7EC] bg-white px-5 text-[13px] text-[#667085] shadow-[0_1px_2px_rgba(16,24,40,0.04)] hover:bg-white md:flex"
-          />
-          <div className="ml-auto flex items-center gap-4">
-            <div className="hidden items-center gap-1.5 text-[13px] font-medium text-[#344054] lg:flex">
-              <Globe className="size-4" />
-              GMT +5:30
-            </div>
-            <ProfileDropdown />
-          </div>
-        </div>
-      </Header>
-
       <Main fluid className="space-y-4 overflow-x-hidden bg-[#F8FAFC]! px-3 pb-6 sm:px-5">
         {/* Welcome */}
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
@@ -424,9 +406,9 @@ export default function DashboardPage() {
         {/* Main body: left content + right sidebar from stats row */}
         <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_260px]">
           {/* Left — stats, banner, content */}
-          <div className="min-w-0 space-y-4">
+          <div className="min-w-0 space-y-3">
             {/* KPI Cards */}
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+            <div className="grid grid-cols-2 gap-2.5 md:grid-cols-3 xl:grid-cols-5">
               <KpiCard
                 label="Active Plan"
                 icon={<Crown className="size-4 text-[#175CD3]" />}

@@ -1,5 +1,5 @@
 import { AdminLayout } from "@/components/layout/admin-layout";
-import { AuthenticatedLayout } from "@/components/layout/authenticated-layout";
+import { ExporterLayout } from "@/components/layout/exporter-layout";
 import { AgentLayout } from "@/components/layout/agent-layout";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { Chats } from "@/features/chats";
@@ -25,6 +25,7 @@ import AdminUsersPage from "@/pages/dashboard/admin/users";
 import AdminVerificationsPage from "@/pages/dashboard/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/dashboard/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/dashboard/admin/verifications/partner-details";
+import AdminInterestsPage from "@/pages/dashboard/admin/interests";
 import AgentDashboard from "@/pages/dashboard/agent/index";
 import DashboardPage from "@/pages/dashboard/exporter";
 import MyProfilePage from "@/pages/dashboard/exporter/my-profile";
@@ -56,7 +57,6 @@ import NeedHelpPage from "@/pages/dashboard/exporter/need-help";
 import ExporterMessagesPage from "@/pages/dashboard/exporter/messages-page";
 import WaitingRoomPage from "@/pages/dashboard/exporter/waiting-room";
 // import MainHomepage from "@/pages/public/MainHomepage"; //old homepage
-import Home from "@/pages/public/Home";
 import LandingPage from "@/pages/public/LandingPage";
 import LoginPage from "@/pages/auth/login";
 import { NotFound } from "@/pages/not-found";
@@ -76,6 +76,7 @@ import ImporterMyProfilePage from "@/pages/dashboard/importer/profile";
 import ImporterMyCompanyPage from "@/pages/dashboard/importer/company";
 import ImporterMarketplacePage from "@/pages/dashboard/importer/marketplace";
 import ImporterDocumentsPage from "@/pages/dashboard/importer/documents";
+import ImporterSourcingRequirementsPage from "@/pages/dashboard/importer/sourcing-requirements";
 import ImporterAvailableSessionsPage from "@/pages/dashboard/importer/sessions";
 import ImporterMyMeetingsPage from "@/pages/dashboard/importer/my-meetings";
 import ImporterMeetingRequestsPage from "@/pages/dashboard/importer/meeting-requests";
@@ -154,10 +155,6 @@ export const routes: RouteObject[] = [
     element: <LandingPage />,
   },
   {
-    path: "/global-connect",
-    element: <Home />,
-  },
-  {
     path: "/signup",
     element: <SignupPage />,
   },
@@ -186,6 +183,7 @@ export const routes: RouteObject[] = [
               { path: "company", element: <ImporterMyCompanyPage /> },
               { path: "marketplace", element: <ImporterMarketplacePage /> },
               { path: "verification", element: <ImporterDocumentsPage /> },
+              { path: "sourcing-requirements", element: <ImporterSourcingRequirementsPage /> },
               { path: "waiting-room", element: <ImporterMeetingRequestsPage /> },
               { path: "my-sessions", element: <ImporterAvailableSessionsPage /> },
               { path: "my-meetings", element: <ImporterMyMeetingsPage /> },
@@ -216,6 +214,59 @@ export const routes: RouteObject[] = [
             element: <PartnerLayout />,
             children: [
               { path: "dashboard", element: <PartnerDashboard /> },
+              { path: "profile", element: <PartnerProfilePage /> },
+              {
+                path: "expertise",
+                element: <PartnerPlaceholder title="My Expertise" />,
+              },
+              {
+                path: "deal-rooms",
+                element: <PartnerPlaceholder title="Deal Rooms" />,
+              },
+              {
+                path: "consultations",
+                element: <PartnerPlaceholder title="Consultations" />,
+              },
+              {
+                path: "legal-compliance",
+                element: <PartnerPlaceholder title="Legal Compliance" />,
+              },
+              {
+                path: "trade-establishment",
+                element: <PartnerPlaceholder title="Trade Establishment" />,
+              },
+              {
+                path: "opportunities",
+                element: <PartnerPlaceholder title="Opportunities" />,
+              },
+              {
+                path: "network",
+                element: <PartnerPlaceholder title="Partner Network" />,
+              },
+              {
+                path: "meetings",
+                element: <PartnerPlaceholder title="Meetings" />,
+              },
+              {
+                path: "reports",
+                element: <PartnerPlaceholder title="Reports & Insights" />,
+              },
+              {
+                path: "communications",
+                element: <PartnerPlaceholder title="Communications" />,
+              },
+              {
+                path: "resources",
+                element: <PartnerPlaceholder title="Resources" />,
+              },
+              {
+                path: "services",
+                element: <PartnerPlaceholder title="AECCI Services" />,
+              },
+              {
+                path: "support",
+                element: <PartnerPlaceholder title="Support Center" />,
+              },
               {
                 path: "sessions/schedule",
                 element: <PartnerPlaceholder title="My Schedule" />,
@@ -371,6 +422,10 @@ export const routes: RouteObject[] = [
             element: <AdminSubscriptionsPage />,
           },
           {
+            path: "interests",
+            element: <AdminInterestsPage />,
+          },
+          {
             path: "settings",
             element: <Settings />,
             children: [
@@ -432,7 +487,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: "",
-        element: <AuthenticatedLayout />,
+        element: <ExporterLayout />,
         children: [
           {
             path: "",
@@ -1047,18 +1102,18 @@ export const routes: RouteObject[] = [
     path: "/contact-us/aecci-international-hub",
     element: <NotFound />,
   },
-  { 
-  path: "/terms-conditions",
-  element: <TermsConditions />,
-},
-{
-  path: "/privacy-policy",
-  element: <PrivacyPolicy />,
-},
-{
-  path: "/interest-form",
-  element: <Interest />,
-},
+  {
+    path: "/terms-conditions",
+    element: <TermsConditions />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
+  },
+  {
+    path: "/interest-form",
+    element: <Interest />,
+  },
   {
     path: "*",
     element: <NotFound />,

@@ -6,9 +6,7 @@ import { SearchProvider } from "@/context/search-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppAdminSidebar } from "@/components/layout/app-admin-sidebar";
 import { SkipToMain } from "@/components/skip-to-main";
-import { Header } from "@/components/layout/header";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { Search } from "@/components/search";
+import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { RoleTour } from "@/components/tour/RoleTour";
 
 type AdminLayoutProps = {
@@ -20,36 +18,20 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <SearchProvider>
       <LayoutProvider>
-        <SidebarProvider defaultOpen={defaultOpen}>
+        <SidebarProvider defaultOpen={defaultOpen} className="h-svh overflow-hidden items-stretch">
           <SkipToMain />
           <AppAdminSidebar />
           <SidebarInset
             className={cn(
-              // Set content container, so we can use container queries
               "@container/content",
-
-              // If layout is fixed, set the height
-              // to 100svh to prevent overflow
-              "has-data-[layout=fixed]:h-svh",
-
-              // If layout is fixed and sidebar is inset,
-              // set the height to 100svh - spacing (total margins) to prevent overflow
-              "peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]",
+              "min-w-0 flex flex-col",
             )}
           >
-            <Header fixed>
-              <div className="flex items-center space-x-2">
-                <span className="font-semibold text-sm text-muted-foreground">
-                  AECCI Admin
-                </span>
-              </div>
-              <div className="ml-auto flex items-center space-x-4">
-                <Search />
-                <ProfileDropdown />
-              </div>
-            </Header>
-            {children ?? <Outlet />}
-            <RoleTour role="admin" />
+            <DashboardHeader />
+            <div className="flex-1 overflow-y-auto relative">
+              {children ?? <Outlet />}
+              <RoleTour role="admin" />
+            </div>
           </SidebarInset>
         </SidebarProvider>
       </LayoutProvider>

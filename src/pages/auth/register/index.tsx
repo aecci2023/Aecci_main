@@ -1291,7 +1291,7 @@ const journeySteps = [
 const JourneyTimeline: React.FC = () => {
   return (
     <section className="py-12 bg-white relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         <motion.div
           className="text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -1320,69 +1320,61 @@ const JourneyTimeline: React.FC = () => {
         <div className="relative">
           <div className="hidden md:block">
             <div className="flex justify-between items-start relative">
-              <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200" />
+              <div className="absolute top-8 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-emerald-100 via-emerald-300 to-emerald-100" />
 
               {journeySteps.map((step, index) => (
                 <motion.div
                   key={index}
-                  className="flex flex-col items-center flex-1 relative"
+                  className="flex flex-col items-center flex-1 relative group"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
                   <motion.div
-                    className="w-12 h-12 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white flex items-center justify-center text-base font-bold shadow-lg shadow-emerald-500/20 z-10"
+                    className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-500 text-emerald-600 flex items-center justify-center relative shadow-md shadow-emerald-500/5 z-10"
                     whileHover={{ 
-                      scale: 1.3, 
-                      rotate: 360,
-                      transition: { duration: 0.6 }
+                      scale: 1.15, 
+                      backgroundColor: "#ffffff",
+                      borderColor: "#059669",
+                      boxShadow: "0 10px 15px -3px rgba(16, 185, 129, 0.2)",
                     }}
                   >
-                    {step.number}
+                    <span className="absolute -top-1 -right-1 px-2 py-0.5 text-[10px] font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full shadow-sm">
+                      {step.number}
+                    </span>
+                    <step.icon className="w-7 h-7 text-emerald-600" />
                   </motion.div>
-                  <motion.div
-                    className="mt-3 text-center"
-                    whileHover={{ y: -4 }}
-                  >
-                    <div className="flex items-center justify-center gap-1.5 mb-0.5">
-                      <step.icon className="w-3 h-3 text-emerald-500" />
-                      <h4 className="font-bold text-gray-800 text-xs">{step.title}</h4>
-                    </div>
-                    <p className="text-gray-500 text-[10px] max-w-[70px] leading-relaxed">{step.desc}</p>
-                  </motion.div>
+                  <div className="mt-6 p-4 rounded-xl border border-gray-100 bg-white shadow-sm group-hover:shadow-md group-hover:border-emerald-500/20 transition-all duration-300 flex flex-col items-center text-center w-full max-w-[190px]">
+                    <h4 className="font-extrabold text-gray-900 text-sm md:text-base mb-1.5">{step.title}</h4>
+                    <p className="text-gray-500 text-[11px] md:text-xs leading-relaxed max-w-[150px]">{step.desc}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="md:hidden space-y-6">
+          <div className="md:hidden space-y-4">
             {journeySteps.map((step, index) => (
               <motion.div
                 key={index}
-                className="flex items-start gap-3"
+                className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-white shadow-sm"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="flex flex-col items-center">
-                  <motion.div
-                    className="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white flex items-center justify-center text-xs font-bold shadow-lg shadow-emerald-500/20"
-                    whileHover={{ scale: 1.2 }}
-                  >
-                    {step.number}
-                  </motion.div>
-                  {index < journeySteps.length - 1 && (
-                    <div className="w-0.5 h-8 bg-gray-200 my-1" />
-                  )}
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <step.icon className="w-3 h-3 text-emerald-500" />
-                    <h4 className="font-bold text-gray-800 text-sm">{step.title}</h4>
+                <div className="relative flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-emerald-50 border-2 border-emerald-500 text-emerald-600 flex items-center justify-center shadow-sm">
+                    <step.icon className="w-5 h-5 text-emerald-600" />
                   </div>
-                  <p className="text-gray-500 text-xs">{step.desc}</p>
+                  <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[8px] font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full shadow-sm">
+                    {step.number}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-extrabold text-gray-900 text-sm mb-0.5">{step.title}</h4>
+                  <p className="text-gray-500 text-xs leading-normal">{step.desc}</p>
                 </div>
               </motion.div>
             ))}

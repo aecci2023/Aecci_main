@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FileText,
   CheckCircle2,
@@ -480,6 +481,30 @@ export default function ImporterDocumentsPage() {
         </div>
 
       </div>
+
+      {/* ── FOOTER DISCLAIMER BAR ── */}
+      <footer className="w-full border-t border-gray-200 mt-10 pt-6 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] text-[#64748B]">
+        {/* Left: AECCI Disclaimer with Shield Check Icon */}
+        <div className="flex items-center gap-2 max-w-[600px] text-center md:text-left leading-relaxed">
+          <ShieldCheck className="size-4.5 text-[#10B981] shrink-0" />
+          <span>
+            <strong className="text-[#0B1B3D]">AECCI Global Deal Room</strong> – A structured B2B business facilitation platform. AECCI does not guarantee transactions, contracts, payments or commercial outcomes.
+          </span>
+        </div>
+
+        {/* Right: Copyright & Policy Links */}
+        <div className="flex items-center flex-wrap justify-center gap-x-3 gap-y-1 font-semibold">
+          <span>&copy; 2026 AECCI Global Deal Room. All rights reserved.</span>
+          <span className="text-gray-300">|</span>
+          <Link to="/terms-conditions" className="hover:text-[#2563EB] transition-colors">
+            Terms & Conditions
+          </Link>
+          <span className="text-gray-300">|</span>
+          <Link to="/privacy-policy" className="hover:text-[#2563EB] transition-colors">
+            Privacy Policy
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -41,7 +41,7 @@ export const importerSidebarData: SidebarData = {
         },
         {
           title: "Sourcing Requirements",
-          url: "/importer/opportunity-report",
+          url: "/importer/sourcing-requirements",
           icon: ClipboardList,
         },
         {

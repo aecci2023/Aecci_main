@@ -122,7 +122,7 @@ export default function InternationalCollaboration() {
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link
-                to="/global-connect"
+                to="/interest-form"
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
               >
                 Enter Global Deal Room <ArrowRight className="size-4" />
@@ -339,7 +339,7 @@ export default function InternationalCollaboration() {
                 experts, investment advisors, and strategic business partners.
               </p>
               <Link
-                to="/global-deal-room"
+                to="/interest-form"
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
               >
                 Enter Global Deal Room <ArrowRight className="size-4" />

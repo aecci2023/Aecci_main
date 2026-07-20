@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {
-  Upload,
+  CloudUpload,
   Check,
+  CheckCircle2,
   Building2,
   BadgeCheck,
   Package,
@@ -11,7 +12,9 @@ import {
   Users,
   UserPlus,
   Lightbulb,
+  FileCheck2,
   FileText,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +26,8 @@ import {
   FieldInput,
   FieldSelect,
 } from "@/components/exporter/exporter-page-layout";
+
+const FLAG_IN = "https://flagcdn.com/w40/in.png";
 
 const COMPANY_ITEMS = [
   { label: "Company Information", fraction: "5/5", status: "done" as const, icon: Building2 },
@@ -66,6 +71,21 @@ function StatusDot({ status }: { status: "done" | "partial" | "empty" }) {
   return <span className="size-4 shrink-0 rounded-full border-2 border-[#D0D5DD]" />;
 }
 
+function PhoneInput({ defaultValue }: { defaultValue: string }) {
+  return (
+    <div className="flex h-10 w-full items-center overflow-hidden rounded-lg border border-[#D0D5DD] bg-white focus-within:border-[#175CD3] focus-within:ring-1 focus-within:ring-[#175CD3]">
+      <span className="flex h-full shrink-0 items-center gap-1 border-r border-[#E4E7EC] bg-[#F9FAFB] px-2.5">
+        <img src={FLAG_IN} alt="IN" className="h-3.5 w-5 rounded-sm object-cover" />
+        <ChevronDown className="size-3 text-[#98A2B3]" />
+      </span>
+      <input
+        defaultValue={defaultValue}
+        className="h-full w-full min-w-0 px-3 text-[13px] text-[#101828] outline-none"
+      />
+    </div>
+  );
+}
+
 const TABS = ["Company Information", "Business Verification"];
 
 export default function MyCompanyPage() {
@@ -84,40 +104,69 @@ export default function MyCompanyPage() {
         }}
       />
 
-      <ExporterTabs tabs={TABS} active={activeTab} onChange={setActiveTab} />
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0 flex-1 overflow-x-auto">
+          <ExporterTabs tabs={TABS} active={activeTab} onChange={setActiveTab} />
+        </div>
+        <span className="flex shrink-0 items-center gap-1.5 pb-2 text-[12px] font-semibold text-[#039855] sm:pb-0">
+          <CheckCircle2 className="size-4" />
+          No Documents Required
+        </span>
+      </div>
 
       <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
         <div className="min-w-0 space-y-4">
           <ExporterCard>
-            <h2 className="text-[15px] font-bold text-[#101828]">
-              Company Information
-            </h2>
-            <div className="mt-4 grid grid-cols-1 gap-5 lg:grid-cols-[120px_1fr]">
-              <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#D0D5DD] bg-[#F9FAFB] p-4">
-                <Upload className="size-7 text-[#98A2B3]" />
-                <p className="mt-2 text-[10px] text-[#98A2B3]">Upload Logo</p>
+            <h2 className="text-[15px] font-bold text-[#101828]">Company Information</h2>
+            <div className="mt-4 grid grid-cols-1 gap-5 lg:grid-cols-[170px_1fr]">
+              {/* Logo upload column */}
+              <div className="space-y-3">
+                <div>
+                  <FieldLabel>Company Logo</FieldLabel>
+                  <button
+                    type="button"
+                    className="flex min-h-[170px] w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#D0D5DD] bg-white p-4 text-center transition hover:border-[#175CD3] hover:bg-[#F9FAFB]"
+                  >
+                    <span className="flex size-11 items-center justify-center rounded-full bg-[#EFF8FF]">
+                      <CloudUpload className="size-5 text-[#175CD3]" />
+                    </span>
+                    <span className="mt-2.5 text-[12px] font-semibold text-[#344054]">
+                      Upload Logo
+                    </span>
+                    <span className="mt-0.5 text-[10px] text-[#98A2B3]">
+                      JPG, PNG or SVG
+                      <br />
+                      (Max 2MB)
+                    </span>
+                  </button>
+                </div>
+                <div className="rounded-lg bg-[#EFF8FF] px-3 py-2.5 text-[10px] leading-relaxed text-[#175CD3]">
+                  A good logo helps build trust with buyers.
+                </div>
               </div>
+
+              {/* Fields */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <FieldLabel>Company Name</FieldLabel>
+                  <FieldLabel required>Company Name</FieldLabel>
                   <FieldInput defaultValue="Raj Textiles Pvt. Ltd." />
                 </div>
                 <div>
-                  <FieldLabel>Legal Structure</FieldLabel>
+                  <FieldLabel required>Legal Structure</FieldLabel>
                   <FieldSelect
                     defaultValue="Private Limited"
-                    options={["Private Limited", "LLP", "Partnership"]}
+                    options={["Private Limited", "LLP", "Partnership", "Proprietorship"]}
                   />
                 </div>
                 <div>
-                  <FieldLabel>Year Established</FieldLabel>
-                  <FieldInput defaultValue="2016" />
+                  <FieldLabel required>Year Established</FieldLabel>
+                  <FieldInput defaultValue="2015" />
                 </div>
                 <div>
-                  <FieldLabel>Company Type</FieldLabel>
+                  <FieldLabel required>Company Type</FieldLabel>
                   <FieldSelect
-                    defaultValue="Manufacturer & Exporter"
-                    options={["Manufacturer & Exporter", "Trader", "Both"]}
+                    defaultValue="Manufacturer"
+                    options={["Manufacturer", "Manufacturer & Exporter", "Trader"]}
                   />
                 </div>
                 <div>
@@ -125,42 +174,56 @@ export default function MyCompanyPage() {
                   <FieldInput defaultValue="www.rajtextiles.com" />
                 </div>
                 <div>
-                  <FieldLabel>Email</FieldLabel>
+                  <FieldLabel required>Email</FieldLabel>
                   <FieldInput defaultValue="info@rajtextiles.com" />
                 </div>
                 <div>
-                  <FieldLabel>Phone</FieldLabel>
-                  <FieldInput defaultValue="+91 98765 43210" />
+                  <FieldLabel required>Phone</FieldLabel>
+                  <PhoneInput defaultValue="+91 98765 43210" />
                 </div>
                 <div>
-                  <FieldLabel>Country</FieldLabel>
-                  <FieldSelect defaultValue="India" options={["India", "UAE"]} />
+                  <FieldLabel>Alternate Phone</FieldLabel>
+                  <PhoneInput defaultValue="+91 91234 56789" />
                 </div>
                 <div className="sm:col-span-2">
-                  <FieldLabel>Head Office Address</FieldLabel>
-                  <FieldInput defaultValue="Plot 45, Industrial Area, Surat, Gujarat" />
-                </div>
-                <div>
-                  <FieldLabel>State</FieldLabel>
-                  <FieldInput defaultValue="Gujarat" />
-                </div>
-                <div>
-                  <FieldLabel>City</FieldLabel>
-                  <FieldInput defaultValue="Surat" />
-                </div>
-                <div>
-                  <FieldLabel>PIN Code</FieldLabel>
-                  <FieldInput defaultValue="395002" />
-                </div>
-                <div className="sm:col-span-2">
-                  <FieldLabel>Brief About Company</FieldLabel>
+                  <FieldLabel required>Head Office Address</FieldLabel>
                   <textarea
-                    defaultValue="Raj Textiles is a leading manufacturer and exporter of home textiles and apparel products."
-                    className="min-h-[80px] w-full rounded-lg border border-[#D0D5DD] px-3 py-2 text-[13px] outline-none"
+                    defaultValue={"Plot No. 123, Textile Park, Ring Road,\nSurat, Gujarat, India - 395002"}
+                    className="min-h-[64px] w-full rounded-lg border border-[#D0D5DD] px-3 py-2 text-[13px] text-[#101828] outline-none focus:border-[#175CD3] focus:ring-1 focus:ring-[#175CD3]"
                   />
+                </div>
+                <div className="grid grid-cols-2 gap-4 sm:col-span-2 lg:grid-cols-4">
+                  <div>
+                    <FieldLabel required>Country</FieldLabel>
+                    <FieldSelect defaultValue="India" options={["India", "UAE", "USA"]} />
+                  </div>
+                  <div>
+                    <FieldLabel required>State</FieldLabel>
+                    <FieldSelect
+                      defaultValue="Gujarat"
+                      options={["Gujarat", "Maharashtra", "Delhi"]}
+                    />
+                  </div>
+                  <div>
+                    <FieldLabel required>City</FieldLabel>
+                    <FieldInput defaultValue="Surat" />
+                  </div>
+                  <div>
+                    <FieldLabel required>PIN Code</FieldLabel>
+                    <FieldInput defaultValue="395002" />
+                  </div>
+                </div>
+                <div className="sm:col-span-2">
+                  <FieldLabel required>Brief About Company</FieldLabel>
+                  <textarea
+                    defaultValue="We are a leading manufacturer and exporter of high-quality home textiles, bed linens, bath linens and made-ups. Our products are trusted by buyers across 20+ countries."
+                    className="min-h-[90px] w-full rounded-lg border border-[#D0D5DD] px-3 py-2 text-[13px] text-[#101828] outline-none focus:border-[#175CD3] focus:ring-1 focus:ring-[#175CD3]"
+                  />
+                  <p className="mt-1 text-right text-[10px] text-[#98A2B3]">156 / 300</p>
                 </div>
               </div>
             </div>
+
             <div className="mt-5 flex justify-end">
               <Button className="h-10 rounded-lg bg-[#175CD3] px-5 text-[13px] font-semibold hover:bg-[#1448B0]">
                 Save Company Information
@@ -168,34 +231,86 @@ export default function MyCompanyPage() {
             </div>
           </ExporterCard>
 
+          {/* Business Verification */}
           <ExporterCard>
-            <div className="flex items-center justify-between">
-              <h3 className="text-[14px] font-bold text-[#101828]">
-                Business Verification (Optional)
-              </h3>
-              <span className="text-[11px] text-[#667085]">0/2 Completed</span>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex min-w-0 items-center gap-2.5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#EFF8FF] text-[#175CD3]">
+                  <BadgeCheck className="size-4" />
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-[14px] font-bold text-[#101828]">
+                    Business Verification{" "}
+                    <span className="font-medium text-[#98A2B3]">(Optional)</span>
+                  </h3>
+                  <p className="truncate text-[11px] text-[#667085]">
+                    Verify your business to build more trust with global buyers.
+                  </p>
+                </div>
+              </div>
+              <span className="flex shrink-0 items-center gap-1.5 text-[11px] font-semibold text-[#667085]">
+                0/2 Completed
+                <ChevronDown className="size-4 text-[#98A2B3]" />
+              </span>
             </div>
+
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {["GST / Tax Registration", "Import Export Code (IEC)"].map(
-                (doc) => (
-                  <div
-                    key={doc}
-                    className="flex items-center justify-between rounded-xl border border-[#E4E7EC] bg-[#F9FAFB] px-4 py-3"
-                  >
-                    <span className="text-[12px] font-medium text-[#344054]">
-                      {doc}
-                    </span>
-                    <button
-                      type="button"
-                      className="text-[11px] font-semibold text-[#175CD3]"
-                    >
-                      Add Details
-                    </button>
+              <div className="rounded-xl border border-[#E4E7EC] bg-white p-4">
+                <div className="flex items-start gap-3">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#ECFDF3] text-[#039855]">
+                    <FileCheck2 className="size-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-[#101828]">GST / Tax Registration</p>
+                    <p className="mt-0.5 text-[11px] text-[#667085]">
+                      Add your GST or Tax registration number.
+                    </p>
                   </div>
-                )
-              )}
+                </div>
+                <Button
+                  variant="outline"
+                  className="mt-3 h-8 rounded-lg border-[#B2DDFF] bg-white px-4 text-[11px] font-semibold text-[#175CD3] hover:bg-[#EFF8FF]"
+                >
+                  Add Details
+                </Button>
+              </div>
+
+              <div className="rounded-xl border border-[#E4E7EC] bg-white p-4">
+                <div className="flex items-start gap-3">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#EFF8FF] text-[#175CD3]">
+                    <FileText className="size-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-[#101828]">
+                      Import Export Code (IEC)
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-[#667085]">
+                      Add your IEC code issued by DGFT.
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  variant="outline"
+                  className="mt-3 h-8 rounded-lg border-[#B2DDFF] bg-white px-4 text-[11px] font-semibold text-[#175CD3] hover:bg-[#EFF8FF]"
+                >
+                  Add Details
+                </Button>
+              </div>
             </div>
           </ExporterCard>
+
+          {/* No documents banner */}
+          <div className="flex items-start gap-3 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-4 py-4 sm:px-5">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#039855] text-white">
+              <CheckCircle2 className="size-4" />
+            </span>
+            <div>
+              <p className="text-[13px] font-bold text-[#027A48]">No Documents Required!</p>
+              <p className="mt-0.5 text-[12px] text-[#027A48]/85">
+                You can explore and connect without uploading documents at this stage.
+              </p>
+            </div>
+          </div>
         </div>
 
         <aside className="space-y-4">
@@ -210,7 +325,7 @@ export default function MyCompanyPage() {
                     cy="18"
                     r="14"
                     fill="none"
-                    stroke="#2DD4BF"
+                    stroke="#039855"
                     strokeWidth="3"
                     strokeDasharray="57 88"
                     strokeLinecap="round"
@@ -229,7 +344,7 @@ export default function MyCompanyPage() {
               {COMPANY_ITEMS.map((item) => (
                 <li key={item.label} className="flex items-center gap-2">
                   <item.icon
-                    className={`size-3.5 shrink-0 ${item.status === "empty" ? "text-[#98A2B3]" : "text-[#2DD4BF]"}`}
+                    className={`size-3.5 shrink-0 ${item.status === "empty" ? "text-[#98A2B3]" : "text-[#039855]"}`}
                   />
                   <span className="min-w-0 flex-1 truncate text-[11px] text-[#344054]">
                     {item.label}
@@ -242,29 +357,36 @@ export default function MyCompanyPage() {
           </ExporterCard>
 
           <ExporterCard className="border-[#D1E9FF] bg-[#EFF8FF]">
-            <h3 className="text-[13px] font-bold text-[#101828]">
-              Why Add Your Company Details?
-            </h3>
+            <div className="flex items-center gap-2">
+              <UserPlus className="size-4 text-[#175CD3]" />
+              <h3 className="text-[13px] font-bold text-[#101828]">
+                Why Add Your Company Details?
+              </h3>
+            </div>
             <ul className="mt-3 space-y-2.5">
               {WHY_COMPANY.map((item) => (
                 <li key={item.text} className="flex items-start gap-2.5">
-                  <item.icon className="mt-0.5 size-3.5 shrink-0 text-[#175CD3]" />
+                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded border border-[#84CAFF] bg-white">
+                    <item.icon className="size-3 text-[#175CD3]" />
+                  </span>
                   <span className="text-[11px] leading-relaxed text-[#344054]">{item.text}</span>
                 </li>
               ))}
             </ul>
           </ExporterCard>
 
-          <ExporterCard className="border-[#FEE4B8] bg-[#FFFAEB]">
+          <ExporterCard className="border-[#FEDF89] bg-[#FFFAEB]">
             <div className="flex items-center gap-2">
               <Lightbulb className="size-4 text-[#F79009]" />
               <h3 className="text-[13px] font-bold text-[#101828]">Tips for Better Matches</h3>
             </div>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-3 space-y-2.5">
               {COMPANY_TIPS.map((tip) => (
-                <li key={tip} className="flex items-start gap-2">
-                  <FileText className="mt-0.5 size-3.5 shrink-0 text-[#F79009]" />
-                  <span className="text-[11px] text-[#344054]">{tip}</span>
+                <li key={tip} className="flex items-start gap-2.5">
+                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded border border-[#FEDF89] bg-white">
+                    <Lightbulb className="size-3 text-[#F79009]" />
+                  </span>
+                  <span className="text-[11px] leading-relaxed text-[#344054]">{tip}</span>
                 </li>
               ))}
             </ul>
