@@ -214,6 +214,59 @@ export const routes: RouteObject[] = [
             element: <PartnerLayout />,
             children: [
               { path: "dashboard", element: <PartnerDashboard /> },
+              { path: "profile", element: <PartnerProfilePage /> },
+              {
+                path: "expertise",
+                element: <PartnerPlaceholder title="My Expertise" />,
+              },
+              {
+                path: "deal-rooms",
+                element: <PartnerPlaceholder title="Deal Rooms" />,
+              },
+              {
+                path: "consultations",
+                element: <PartnerPlaceholder title="Consultations" />,
+              },
+              {
+                path: "legal-compliance",
+                element: <PartnerPlaceholder title="Legal Compliance" />,
+              },
+              {
+                path: "trade-establishment",
+                element: <PartnerPlaceholder title="Trade Establishment" />,
+              },
+              {
+                path: "opportunities",
+                element: <PartnerPlaceholder title="Opportunities" />,
+              },
+              {
+                path: "network",
+                element: <PartnerPlaceholder title="Partner Network" />,
+              },
+              {
+                path: "meetings",
+                element: <PartnerPlaceholder title="Meetings" />,
+              },
+              {
+                path: "reports",
+                element: <PartnerPlaceholder title="Reports & Insights" />,
+              },
+              {
+                path: "communications",
+                element: <PartnerPlaceholder title="Communications" />,
+              },
+              {
+                path: "resources",
+                element: <PartnerPlaceholder title="Resources" />,
+              },
+              {
+                path: "services",
+                element: <PartnerPlaceholder title="AECCI Services" />,
+              },
+              {
+                path: "support",
+                element: <PartnerPlaceholder title="Support Center" />,
+              },
               {
                 path: "sessions/schedule",
                 element: <PartnerPlaceholder title="My Schedule" />,
@@ -1049,18 +1102,18 @@ export const routes: RouteObject[] = [
     path: "/contact-us/aecci-international-hub",
     element: <NotFound />,
   },
-  { 
-  path: "/terms-conditions",
-  element: <TermsConditions />,
-},
-{
-  path: "/privacy-policy",
-  element: <PrivacyPolicy />,
-},
-{
-  path: "/interest-form",
-  element: <Interest />,
-},
+  {
+    path: "/terms-conditions",
+    element: <TermsConditions />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
+  },
+  {
+    path: "/interest-form",
+    element: <Interest />,
+  },
   {
     path: "*",
     element: <NotFound />,
