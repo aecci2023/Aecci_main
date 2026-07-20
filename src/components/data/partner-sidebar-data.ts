@@ -20,7 +20,7 @@ import { type SidebarData } from "../layout/types";
 export const partnerSidebarData: SidebarData = {
   navGroups: [
     {
-      title: "MAIN",
+      title: "My Business",
       items: [
         {
           title: "Dashboard",
@@ -37,6 +37,11 @@ export const partnerSidebarData: SidebarData = {
           url: "/partner/expertise",
           icon: Award,
         },
+      ],
+    },
+    {
+      title: "Deal Room & Services",
+      items: [
         {
           title: "Deal Rooms",
           url: "/partner/deal-rooms",
@@ -72,6 +77,11 @@ export const partnerSidebarData: SidebarData = {
           url: "/partner/meetings",
           icon: Calendar,
         },
+      ],
+    },
+    {
+      title: "Intelligence & Resources",
+      items: [
         {
           title: "Reports & Insights",
           url: "/partner/reports",
@@ -92,15 +102,20 @@ export const partnerSidebarData: SidebarData = {
           url: "/partner/services",
           icon: Wrench,
         },
-        {
-          title: "Support Center",
-          url: "/partner/support",
-          icon: Headphones,
-        },
+      ],
+    },
+    {
+      title: "Account & Support",
+      items: [
         {
           title: "Account Settings",
           url: "/partner/settings",
           icon: Settings,
+        },
+        {
+          title: "Support Center",
+          url: "/partner/support",
+          icon: Headphones,
         },
       ],
     },
