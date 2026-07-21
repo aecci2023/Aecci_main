@@ -11,6 +11,7 @@ import {
   type MenuCategory,
   type SubMenuItem,
 } from "./menu-config";
+import { useAuth } from "@/hooks/useAuth";
 
 function NestedCategory({
   category,
@@ -178,6 +179,7 @@ export default function MobileMenu() {
   const [open, setOpen] = React.useState(false);
   const [openTopLevel, setOpenTopLevel] = React.useState<string | null>(null);
   const location = useLocation();
+  const { user, isAuthenticated } = useAuth();
   const currentPath = location.pathname;
 
   const handleToggle = (title: string) => {
@@ -247,20 +249,42 @@ export default function MobileMenu() {
         <div className="shrink-0 px-5 py-4 border-t border-black/[0.06] dark:border-white/[0.06] space-y-3 bg-background">
           {/* Auth buttons */}
           <div className="flex flex-col gap-2.5">
-            <Link
-              to="/login"
-              onClick={() => setOpen(false)}
-              className="w-full h-10 inline-flex items-center justify-center text-[13px] font-medium border border-black/[0.1] dark:border-white/[0.1] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] rounded-full transition-all duration-200"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              onClick={() => setOpen(false)}
-              className="w-full h-10 inline-flex items-center justify-center text-[13px] font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full transition-all duration-200"
-            >
-              Join Now
-            </Link>
+            {isAuthenticated ? (
+              <Link
+                to={
+                  user?.role === "admin"
+                    ? "/admin/dashboard"
+                    : user?.role === "partner"
+                    ? "/partner/dashboard"
+                    : user?.role === "importer"
+                    ? "/importer/dashboard"
+                    : user?.role === "agent"
+                    ? "/agent/dashboard"
+                    : "/dashboard"
+                }
+                onClick={() => setOpen(false)}
+                className="w-full h-10 inline-flex items-center justify-center text-[13px] font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full transition-all duration-200"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="w-full h-10 inline-flex items-center justify-center text-[13px] font-medium border border-black/[0.1] dark:border-white/[0.1] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] rounded-full transition-all duration-200"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={() => setOpen(false)}
+                  className="w-full h-10 inline-flex items-center justify-center text-[13px] font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full transition-all duration-200"
+                >
+                  Join Now
+                </Link>
+              </>
+            )}
           </div>
 
           <p className="text-center text-[8px] uppercase tracking-[2px] font-medium text-foreground/25">

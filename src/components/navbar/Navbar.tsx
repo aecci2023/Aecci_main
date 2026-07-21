@@ -7,11 +7,52 @@ import MegaMenu from "./MegaMenu";
 import { menuConfig } from "./menu-config";
 import MobileMenu from "./MobileMenu";
 
+function isMenuCategoryActive(item: any, currentPath: string): boolean {
+  if (item.href && item.href !== "#" && currentPath.startsWith(item.href)) {
+    return true;
+  }
+
+  const checkLink = (href: string) => {
+    if (!href || href === "#" || href.startsWith("http")) return false;
+    return currentPath === href || currentPath.startsWith(href);
+  };
+
+  if (item.featured) {
+    for (const f of item.featured) {
+      if (checkLink(f.href)) return true;
+      if (f.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  if (item.quickLinks) {
+    for (const q of item.quickLinks) {
+      if (checkLink(q.href)) return true;
+      if (q.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  if (item.resources) {
+    for (const r of item.resources) {
+      if (checkLink(r.href)) return true;
+      if (r.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  if (item.mobileMenu) {
+    for (const m of item.mobileMenu) {
+      if (checkLink(m.href)) return true;
+      if (m.items?.some((sub: any) => checkLink(sub.href))) return true;
+    }
+  }
+
+  return false;
+}
+
 export default function Navbar() {
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
   const [brandVisible, setBrandVisible] = React.useState(true);
-  const closeTimeoutRef = React.useRef<number | null>(null);
+
 
   // ── Scroll: collapse brand bar after 40px ──
   React.useEffect(() => {
@@ -28,30 +69,8 @@ export default function Navbar() {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
-      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     };
   }, []);
-
-  const clearClose = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-  };
-
-  const handleMouseEnter = (title: string) => {
-    clearClose();
-    setActiveSection(title);
-  };
-
-  const handleMouseLeave = () => {
-    clearClose();
-    closeTimeoutRef.current = window.setTimeout(() => {
-      setActiveSection(null);
-    }, 160);
-  };
-
-  const handleDropdownMouseEnter = () => clearClose();
 
   const handleClose = () => setActiveSection(null);
 
@@ -124,26 +143,21 @@ export default function Navbar() {
             </div>
 
             {/* Desktop: Nav links centered */}
-            <nav
-              className="hidden lg:flex items-center justify-center gap-0 flex-1"
-              onMouseLeave={handleMouseLeave}
-            >
+            <nav className="hidden lg:flex items-center justify-center gap-0 flex-1">
               {menuConfig.map((item, idx) => {
-                const isActivePath = location.pathname.startsWith(item.href);
+                const isActivePath = isMenuCategoryActive(item, location.pathname);
 
                 return (
                   <Link
                     key={idx}
                     to={item.href}
-                    onMouseEnter={() => handleMouseEnter(item.title)}
-                    onMouseLeave={handleMouseLeave}
                     onClick={(e) => {
                       if (item.hasDropdown) {
                         e.preventDefault();
                         if (activeSection === item.title) {
                           handleClose();
                         } else {
-                          handleMouseEnter(item.title);
+                          setActiveSection(item.title);
                         }
                       } else {
                         handleClose();
@@ -198,11 +212,7 @@ export default function Navbar() {
         {/* ─────────────────────────────────────── */}
         <AnimatePresence>
           {activeSectionConfig && (
-            <div
-              className="absolute left-0 right-0 top-full z-50"
-              onMouseEnter={handleDropdownMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
+            <div className="absolute left-0 right-0 top-full z-50">
               {/* Panel frosted background */}
               <div
                 className={[
@@ -214,9 +224,9 @@ export default function Navbar() {
               <div className="relative">
                 <MegaMenu
                   section={activeSectionConfig}
-                  onMouseEnter={handleDropdownMouseEnter}
-                  onMouseLeave={handleMouseLeave}
                   onClose={handleClose}
+                  onMouseEnter={() => {}}
+                  onMouseLeave={() => {}}
                 />
               </div>
             </div>

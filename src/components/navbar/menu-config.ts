@@ -87,21 +87,15 @@ export const menuConfig: MegaMenuSection[] = [
     hasDropdown: true,
     featured: [
       {
-        title: "Global Connect",
-        href: "/global-connect",
-        description: "Your gateway to international trade and networking.",
-        badge: "New",
-      },
-      {
         title: "Membership",
         href: "/services/membership",
         description:
           "Exclusive access to premium tools, discounts, and trade networks.",
         items: [
-          // {
-          //   title: "Patron Membership",
-          //   href: "/services/membership/patron-membership",
-          // },
+          {
+            title: "Patron Membership",
+            href: "/services/membership/patron-membership",
+          },
           {
             title: "Membership & its benefits",
             href: "/services/membership/benefits",
@@ -135,17 +129,13 @@ export const menuConfig: MegaMenuSection[] = [
     resources: [], // Moved the wings here before, now they are in featured -> items
     mobileMenu: [
       {
-        title: "Global Connect",
-        href: "/global-connect",
-      },
-      {
         title: "Membership",
         href: "/services/membership",
         items: [
-          // {
-          //   title: "Patron Membership",
-          //   href: "/services/membership/patron-membership",
-          // },
+          {
+            title: "Patron Membership",
+            href: "/services/membership/patron-membership",
+          },
           {
             title: "Membership & its benefits",
             href: "/services/membership/benefits",

@@ -5,6 +5,7 @@ import { sessionApi } from "./api/sessionApi";
 import { countryIntelligenceApi } from "./api/countryIntelligenceApi";
 import { questionApi } from "./api/questionApi";
 import { jobApplicationApi } from "./api/jobApplicationApi";
+import { interestApi } from "./api/interestApi";
 import notificationsReducer from "./slices/notificationsSlice";
 
 export const store = configureStore({
@@ -15,6 +16,7 @@ export const store = configureStore({
     [countryIntelligenceApi.reducerPath]: countryIntelligenceApi.reducer,
     [questionApi.reducerPath]: questionApi.reducer,
     [jobApplicationApi.reducerPath]: jobApplicationApi.reducer,
+    [interestApi.reducerPath]: interestApi.reducer,
     notifications: notificationsReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -25,6 +27,7 @@ export const store = configureStore({
       countryIntelligenceApi.middleware,
       questionApi.middleware,
       jobApplicationApi.middleware,
+      interestApi.middleware,
     ),
 });
 
