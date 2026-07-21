@@ -27,6 +27,14 @@ import AdminVerificationDetailsPage from "@/pages/dashboard/admin/verifications/
 import AdminPartnerVerificationDetailsPage from "@/pages/dashboard/admin/verifications/partner-details";
 import AdminInterestsPage from "@/pages/dashboard/admin/interests";
 import AgentDashboard from "@/pages/dashboard/agent/index";
+import AgentReportsPage from "@/pages/dashboard/agent/reports";
+import AgentCommunicationsPage from "@/pages/dashboard/agent/communications";
+import AgentResourcesPage from "@/pages/dashboard/agent/resources";
+import AgentAecciServicesPage from "@/pages/dashboard/agent/aecci-services";
+import AgentSupportPage from "@/pages/dashboard/agent/support";
+import AgentAccountSettingsPage from "@/pages/dashboard/agent/account-settings";
+import AgentPartnerNetworkPage from "@/pages/dashboard/agent/partner-network";
+import AgentMeetingsPage from "@/pages/dashboard/agent/meetings";
 import DashboardPage from "@/pages/dashboard/exporter";
 import MyProfilePage from "@/pages/dashboard/exporter/my-profile";
 import MyCompanyPage from "@/pages/dashboard/exporter/my-company";
@@ -471,18 +479,40 @@ export const routes: RouteObject[] = [
             element: <AgentDashboard />,
           },
           {
+            path: "communications",
+            element: <AgentCommunicationsPage />,
+          },
+          {
+            path: "reports",
+            element: <AgentReportsPage />,
+          },
+          {
+            path: "resources",
+            element: <AgentResourcesPage />,
+          },
+          {
+            path: "aecci-services",
+            element: <AgentAecciServicesPage />,
+          },
+          {
+            path: "support",
+            element: <AgentSupportPage />,
+          },
+          {
             path: "messages",
             element: <Chats />,
           },
           {
             path: "settings",
-            element: <Settings />,
-            children: [
-              { index: true, element: <SettingsProfile /> },
-              { path: "account", element: <SettingsAccount /> },
-              { path: "appearance", element: <SettingsAppearance /> },
-              { path: "notifications", element: <SettingsNotifications /> },
-            ],
+            element: <AgentAccountSettingsPage />,
+          },
+          {
+            path: "partner-network",
+            element: <AgentPartnerNetworkPage />,
+          },
+          {
+            path: "meetings",
+            element: <AgentMeetingsPage />,
           },
         ],
       },
