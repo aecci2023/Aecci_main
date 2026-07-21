@@ -266,9 +266,9 @@ function CategoryCard({
     <div className="relative flex min-h-[268px] flex-col overflow-hidden rounded-2xl border border-[#E4E7EC] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.05)]">
       <div className="relative z-10 flex flex-1 flex-col p-5 pr-[46%]">
         <span
-          className={`flex size-11 shrink-0 items-center justify-center rounded-full ${iconCircle} text-white shadow-sm`}
+          className={`flex size-14 shrink-0 items-center justify-center rounded-full ${iconCircle} text-white shadow-sm`}
         >
-          <Icon className="size-5" />
+          <Icon className="size-6" />
         </span>
         <h3 className="mt-4 text-[14px] font-bold leading-snug text-[#101828]">
           {title}
@@ -441,9 +441,9 @@ export default function AgentDashboard() {
                 className="flex items-center gap-3 py-3.5 first:pt-0 last:pb-0"
               >
                 <span
-                  className={`flex size-10 shrink-0 items-center justify-center rounded-full ${item.iconBg} ${item.iconColor}`}
+                  className={`flex size-12 shrink-0 items-center justify-center rounded-full ${item.iconBg} ${item.iconColor}`}
                 >
-                  <item.Icon className="size-4" />
+                  <item.Icon className="size-5" />
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[13px] font-bold leading-snug text-[#101828]">

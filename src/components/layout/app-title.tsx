@@ -6,7 +6,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-export function AppTitle() {
+export function AppTitle({
+  largeLogo = false,
+  subtitle = "Deal Room Dashboard",
+}: {
+  largeLogo?: boolean;
+  subtitle?: string;
+} = {}) {
   const { setOpenMobile } = useSidebar();
   return (
     <SidebarMenu>
@@ -20,16 +26,24 @@ export function AppTitle() {
             <Link
               to="/"
               onClick={() => setOpenMobile(false)}
-              className="flex items-center gap-2 flex-1 text-start leading-tight"
+              className="flex flex-1 items-center gap-2.5 text-start leading-tight"
             >
               <img
                 src="/aecci-logoonly.png"
                 alt="AECCI Logo"
-                className="w-8 h-8 object-contain"
+                className={`shrink-0 object-contain ${
+                  largeLogo ? "h-11 w-11" : "h-8 w-8"
+                }`}
               />
-              <div className="grid">
-                <span className="truncate font-bold text-lg">AECCI Global</span>
-                <span className="truncate text-xs">Deal Room Dashboard</span>
+              <div className="grid min-w-0">
+                <span
+                  className={`truncate font-bold text-white ${
+                    largeLogo ? "text-[17px]" : "text-lg"
+                  }`}
+                >
+                  AECCI Global
+                </span>
+                <span className="truncate text-xs text-white/70">{subtitle}</span>
               </div>
             </Link>
           </div>

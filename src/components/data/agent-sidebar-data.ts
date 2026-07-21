@@ -7,11 +7,13 @@ import {
   Handshake,
   Calendar,
   UserPlus,
+  Network,
   MessageSquare,
-  FileText,
-  Building,
+  BarChart3,
+  FolderOpen,
+  Building2,
   HelpCircle,
-  Settings
+  Settings,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
@@ -51,6 +53,11 @@ export const agentSidebarData: SidebarData = {
           icon: Briefcase,
         },
         {
+          title: "Partner Network",
+          url: "/agent/partner-network",
+          icon: Network,
+        },
+        {
           title: "Deal Room",
           url: "/agent/deal-room",
           icon: Handshake,
@@ -81,14 +88,19 @@ export const agentSidebarData: SidebarData = {
       title: "Intelligence & Services",
       items: [
         {
-          title: "Resources & Reports",
+          title: "Reports & Insights",
+          url: "/agent/reports",
+          icon: BarChart3,
+        },
+        {
+          title: "Resources",
           url: "/agent/resources",
-          icon: FileText,
+          icon: FolderOpen,
         },
         {
           title: "AECCI Services",
           url: "/agent/aecci-services",
-          icon: Building,
+          icon: Building2,
         },
       ],
     },
