@@ -98,6 +98,10 @@ import PartnerConsultationsPage from "@/pages/dashboard/partner/consultations";
 import PartnerLegalCompliancePage from "@/pages/dashboard/partner/legal-compliance";
 import PartnerTradeEstablishmentPage from "@/pages/dashboard/partner/trade-establishment";
 import PartnerOpportunitiesPage from "@/pages/dashboard/partner/opportunities";
+import PartnerNetworkPage from "@/pages/dashboard/partner/network";
+import PartnerMeetingsPage from "@/pages/dashboard/partner/meetings";
+import PartnerReportsPage from "@/pages/dashboard/partner/reports";
+import PartnerCommunicationsPage from "@/pages/dashboard/partner/communications";
 import PartnerQuestionsPage from "@/pages/dashboard/partner/questions";
 import PartnerRegisterPage from "@/pages/dashboard/partner/register";
 import PartnerPastSessionsPage from "@/pages/dashboard/partner/sessions/past";
@@ -247,19 +251,19 @@ export const routes: RouteObject[] = [
               },
               {
                 path: "network",
-                element: <PartnerPlaceholder title="Partner Network" />,
+                element: <PartnerNetworkPage />,
               },
               {
                 path: "meetings",
-                element: <PartnerPlaceholder title="Meetings" />,
+                element: <PartnerMeetingsPage />,
               },
               {
                 path: "reports",
-                element: <PartnerPlaceholder title="Reports & Insights" />,
+                element: <PartnerReportsPage />,
               },
               {
                 path: "communications",
-                element: <PartnerPlaceholder title="Communications" />,
+                element: <PartnerCommunicationsPage />,
               },
               {
                 path: "resources",
