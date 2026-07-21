@@ -249,7 +249,7 @@ export default function Navbar() {
             style={{ top: 0 }}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence>  
     </>
   );
 }

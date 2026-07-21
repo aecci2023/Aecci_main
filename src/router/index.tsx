@@ -118,6 +118,7 @@ import OfficeBearersPage from "@/pages/public/about/OfficeBearers";
 import OurHistoryPage from "@/pages/public/about/OurHistory";
 import RolesResponsibilityPage from "@/pages/public/about/RolesResponsibility";
 import StrategicPartnersPage from "@/pages/public/about/strategic-partners";
+import AccessPlans from "@/pages/Access-plans";
 import AecciIacPanelPage from "@/pages/public/arbitration-center/aecci-iac-panel";
 import AecciIacFaqPage from "@/pages/public/arbitration-center/faq";
 import ModelClausePage from "@/pages/public/arbitration-center/model-clause";
@@ -1119,6 +1120,14 @@ export const routes: RouteObject[] = [
   {
     path: "/privacy-policy",
     element: <PrivacyPolicy />,
+  },
+  {
+    path: "/Access-plans",
+    element: <AccessPlans />,
+  },
+  {
+    path: "/Interest",
+    element: <Interest />,
   },
   {
     path: "/interest-form",
