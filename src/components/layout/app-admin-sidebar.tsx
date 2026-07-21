@@ -9,14 +9,17 @@ import { AppTitle } from "./app-title";
 import { adminSidebarData } from "../data/admin-sidebar-data";
 import { NavGroup } from "./nav-group";
 import { useGetUsersQuery } from "@/store/api/adminApi";
+import { useGetAllInterestsQuery } from "@/store/api/interestApi";
 import { useMemo } from "react";
 
 export function AppAdminSidebar() {
   const { collapsible, variant } = useLayout();
   const { data: usersResponse } = useGetUsersQuery({});
+  const { data: interestsResponse } = useGetAllInterestsQuery();
 
   const dynamicNavGroups = useMemo(() => {
     const users = usersResponse?.data || [];
+    const interests = interestsResponse?.data || [];
     const totalUsers = users.filter((u: any) => u.role !== "admin").length;
     const businessAccounts = users.filter(
       (u: any) => u.userType === "business" && u.role === "user",
@@ -30,6 +33,9 @@ export function AppAdminSidebar() {
     const pendingVerifications = users.filter(
       (u: any) =>
         u.verificationStatus === "pending" || u.verificationStatus === "pending_verification",
+    ).length;
+    const pendingInterests = interests.filter(
+      (i: any) => i.status === "pending" || !i.status
     ).length;
 
     // Deep copy to avoid mutating the exported constant
@@ -58,10 +64,14 @@ export function AppAdminSidebar() {
       (g: any) => g.title === "Compliance & Approvals",
     );
     if (complianceGroup) {
-      complianceGroup.items.find(
-        (i: any) => i.title === "Pending Verifications",
-      ).badge =
-        pendingVerifications > 0 ? pendingVerifications.toString() : undefined;
+      const interestsItem = complianceGroup.items.find((i: any) => i.title === "Interests");
+      if (interestsItem) {
+        interestsItem.badge = pendingInterests > 0 ? pendingInterests.toString() : undefined;
+      }
+      const pendingVerificationsItem = complianceGroup.items.find((i: any) => i.title === "Pending Verifications");
+      if (pendingVerificationsItem) {
+        pendingVerificationsItem.badge = pendingVerifications > 0 ? pendingVerifications.toString() : undefined;
+      }
     }
 
     // Since we lost the icons in JSON.parse, we need to map them back
@@ -78,7 +88,7 @@ export function AppAdminSidebar() {
           : undefined,
       })),
     }));
-  }, [usersResponse]);
+  }, [usersResponse, interestsResponse]);
 
   return (
     <Sidebar collapsible={collapsible} variant={variant}>

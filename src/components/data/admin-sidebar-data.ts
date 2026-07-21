@@ -42,11 +42,7 @@ export const adminSidebarData = {
           icon: Users,
           badge: "245",
         },
-        {
-          title: "Interests",
-          url: "/admin/interests",
-          icon: Users,
-        },
+
         {
           title: "Business Accounts",
           url: "/admin/businesses",
@@ -67,6 +63,11 @@ export const adminSidebarData = {
     {
       title: "Compliance & Approvals",
       items: [
+        {
+          title: "Interests",
+          url: "/admin/interests",
+          icon: Users,
+        },
         {
           title: "Pending Verifications",
           url: "/admin/verifications",

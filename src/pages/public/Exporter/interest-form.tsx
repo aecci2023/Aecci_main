@@ -37,12 +37,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { COUNTRY_OPTIONS, SECTOR_OPTIONS } from "@/components/data/form-options";
+import { MultiSelect } from "@/components/ui/multi-select";
 
 
 const interestFormSchema = z.object({
-    companyName: z.string().min(1, "Company name is required"),
+    category: z.string().optional(),
+    userType: z.string().optional(),
+    companyName: z.string().optional(),
     email: z.string().email("Valid email is required"),
-    yearEstablished: z.string().optional(),
     country: z.string().optional(),
     sector: z.string().optional(),
     contactPerson: z.string().optional(),
@@ -57,13 +60,48 @@ const interestFormSchema = z.object({
     agreeTerms: z.boolean().optional(),
     understandFacilitation: z.boolean().optional(),
     shareInfo: z.boolean().optional(),
+    sourcingRequirements: z.string().optional(),
+    targetMarkets: z.array(z.string()).optional(),
+    expertiseAreas: z.string().optional(),
+    professionalTitle: z.string().optional(),
+    yearsOfExperience: z.string().optional(),
+    products: z.string().optional(),
+    targetSourcingMarkets: z.array(z.string()).optional(),
+    otherSector: z.string().optional(),
+    sectorsOfInterest: z.string().optional(),
+}).superRefine((data, ctx) => {
+    if ((data.category === "Exporter" || data.category === "Importer") && data.userType === "business") {
+        if (!data.companyName || data.companyName.trim() === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Company name is required",
+                path: ["companyName"],
+            });
+        }
+    }
+    
+    if (data.email && data.emailAddress && data.email.toLowerCase() === data.emailAddress.toLowerCase()) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Business email and personal email cannot be the same",
+            path: ["emailAddress"],
+        });
+    }
+
+    if (data.phoneWhatsapp && data.contactPerson && data.phoneWhatsapp === data.contactPerson) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Phone / WhatsApp and Phone No cannot be the same",
+            path: ["contactPerson"],
+        });
+    }
 });
 
 const Interest = () => {
     
     const { register, control, handleSubmit: hookFormSubmit, watch, setValue } = useForm<z.infer<typeof interestFormSchema>>({
         resolver: zodResolver(interestFormSchema),
-        defaultValues: { objectives: [], infoAccurate: false, agreeTerms: false, understandFacilitation: false, shareInfo: false }
+        defaultValues: { category: "Exporter", userType: "business", objectives: [], infoAccurate: false, agreeTerms: false, understandFacilitation: false, shareInfo: false }
     });
     const [submitInterest, { isLoading: isSubmitting }] = useSubmitInterestFormMutation();
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -76,8 +114,12 @@ const Interest = () => {
                 const parsed = parsePhoneNumber(data.phoneWhatsapp);
                 if (parsed) {
                     data.countryCode = `+${parsed.countryCallingCode}`;
-                    data.phoneWhatsapp = parsed.nationalNumber;
+                    // We no longer strip the country code from phoneWhatsapp 
                 }
+            }
+
+            if (data.sector === 'Other' && data.otherSector) {
+                data.sector = data.otherSector;
             }
             await submitInterest(data).unwrap();
             setIsSubmitted(true);
@@ -249,19 +291,67 @@ const Interest = () => {
             content: (
                 <>
                     <p className="text-gray-600 text-sm mb-6">Help us understand your objectives to serve you better.</p>
-                    {/* Business Information */}
-                    <h3 className="font-bold text-[#0A1A3A] text-sm mb-4">Business Information</h3>
+                    <h3 className="font-bold text-[#0A1A3A] text-sm mb-4">Select Role</h3>
+                    <div className="mb-6">
+                        <Select
+                            value={watch('category')}
+                            onValueChange={(value) => setValue('category', value, { shouldValidate: true })}
+                        >
+                            <SelectTrigger className="w-full !h-[42px] px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition flex items-center justify-between text-sm text-gray-700">
+                                <SelectValue placeholder="Select role category" />
+                            </SelectTrigger>
+                            <SelectContent position="popper" className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                                <SelectItem value="Exporter" className="hover:bg-amber-50 cursor-pointer py-2 px-3 text-sm text-gray-700">Exporter / Manufacturer</SelectItem>
+                                <SelectItem value="Importer" className="hover:bg-amber-50 cursor-pointer py-2 px-3 text-sm text-gray-700">Importer / Buyer</SelectItem>
+                                <SelectItem value="Agent" className="hover:bg-amber-50 cursor-pointer py-2 px-3 text-sm text-gray-700">Agent / Representative</SelectItem>
+                                <SelectItem value="Partner" className="hover:bg-amber-50 cursor-pointer py-2 px-3 text-sm text-gray-700">Partner / Collaborator</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    {['Exporter', 'Importer'].includes(watch('category') || 'Exporter') && (
+                        <>
+                            <h3 className="font-bold text-[#0A1A3A] text-sm mb-4">Profile Type</h3>
+                            <div className="mb-6 flex gap-4">
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        value="business"
+                                        {...register('userType')}
+                                        className="w-4 h-4 text-amber-400 focus:ring-amber-400 border-gray-300"
+                                    />
+                                    <span className="text-sm text-gray-700">Business</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        value="individual"
+                                        {...register('userType')}
+                                        className="w-4 h-4 text-amber-400 focus:ring-amber-400 border-gray-300"
+                                    />
+                                    <span className="text-sm text-gray-700">Individual</span>
+                                </label>
+                            </div>
+                        </>
+                    )}
+
+                    {/* Business / Professional Information */}
+                    <h3 className="font-bold text-[#0A1A3A] text-sm mb-4">
+                        {['Exporter', 'Importer'].includes(watch('category') || 'Exporter') && watch('userType') === 'business' ? 'Business Information' : 'Professional Information'}
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div>
-                            <label className="block text-xs font-medium text-gray-700 mb-1">Company / Business Name <span className="text-red-500">*</span></label>
-                            <input
-                                type="text"
-                                {...register('companyName')}
-                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
-                                placeholder="Enter company name"
-                                required
-                            />
-                        </div>
+                        {['Exporter', 'Importer'].includes(watch('category') || 'Exporter') && watch('userType') === 'business' && (
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">Company / Business Name <span className="text-red-500">*</span></label>
+                                <input
+                                    type="text"
+                                    {...register('companyName')}
+                                    className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                    placeholder="Enter company name"
+                                    required={['Exporter', 'Importer'].includes(watch('category') || 'Exporter') && watch('userType') === 'business'}
+                                />
+                            </div>
+                        )}
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">Email <span className="text-red-500">*</span></label>
                             <input
@@ -272,15 +362,107 @@ const Interest = () => {
                                 required
                             />
                         </div>
-                        <div>
-                            <label className="block text-xs font-medium text-gray-700 mb-1">Year of establishment</label>
-                            <input
-                                type="text"
-                                {...register('yearEstablished')}
-                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
-                                placeholder="YYYY"
-                            />
-                        </div>
+                        {['Exporter', 'Importer'].includes(watch('category') || 'Exporter') && (
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">Sector / Industry</label>
+                                <Select
+                                    value={watch('sector')}
+                                    onValueChange={(value) => setValue('sector', value, { shouldValidate: true })}
+                                >
+                                    <SelectTrigger className="w-full !h-[42px] px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition flex items-center justify-between text-sm text-gray-700">
+                                        <SelectValue placeholder="Select sector" />
+                                    </SelectTrigger>
+                                    <SelectContent position="popper" className="max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                                        {SECTOR_OPTIONS.map((s) => (
+                                            <SelectItem key={s.value} value={s.value} className="hover:bg-amber-50 cursor-pointer py-2 px-3 text-sm text-gray-700">
+                                                {s.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                {watch('sector') === 'Other' && (
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            {...register('otherSector')}
+                                            className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                            placeholder="Please specify your sector"
+                                            required
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {watch('category') === 'Exporter' && (
+                            <>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Products / Services Offered</label>
+                                    <input
+                                        type="text"
+                                        {...register('products')}
+                                        className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                        placeholder="Enter products"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Target Markets</label>
+                                    <Controller
+                                        name="targetMarkets"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <MultiSelect
+                                                options={COUNTRY_OPTIONS}
+                                                selected={field.value || []}
+                                                onChange={field.onChange}
+                                                placeholder="Select target countries..."
+                                            />
+                                        )}
+                                    />
+                                </div>
+                            </>
+                        )}
+                        
+                        {watch('category') === 'Importer' && (
+                            <>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Sourcing Requirements</label>
+                                    <input
+                                        type="text"
+                                        {...register('sourcingRequirements')}
+                                        className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                        placeholder="What are you looking to import?"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Target Sourcing Markets</label>
+                                    <Controller
+                                        name="targetSourcingMarkets"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <MultiSelect
+                                                options={COUNTRY_OPTIONS}
+                                                selected={field.value || []}
+                                                onChange={field.onChange}
+                                                placeholder="Select target countries..."
+                                            />
+                                        )}
+                                    />
+                                </div>
+                            </>
+                        )}
+
+                        {['Agent', 'Partner'].includes(watch('category') || '') && (
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">Professional Title</label>
+                                <input
+                                    type="text"
+                                    {...register('professionalTitle')}
+                                    className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                    placeholder="Enter title"
+                                />
+                            </div>
+                        )}
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">Country / Region</label>
                             <Select
@@ -299,15 +481,53 @@ const Interest = () => {
                                 </SelectContent>
                             </Select>
                         </div>
-                        <div>
-                            <label className="block text-xs font-medium text-gray-700 mb-1">Sector / Industry</label>
-                            <input
-                                type="text"
-                                {...register('sector')}
-                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
-                                placeholder="Enter sector"
-                            />
-                        </div>
+
+
+                        {watch('category') === 'Agent' && (
+                            <>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Expertise Areas</label>
+                                    <input
+                                        type="text"
+                                        {...register('expertiseAreas')}
+                                        className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                        placeholder="e.g. Logistics, Clearance"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Sectors of Interest</label>
+                                    <input
+                                        type="text"
+                                        {...register('sectorsOfInterest')}
+                                        className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                        placeholder="e.g. Agriculture, Tech"
+                                    />
+                                </div>
+                            </>
+                        )}
+
+                        {watch('category') === 'Partner' && (
+                            <>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Expertise Areas</label>
+                                    <input
+                                        type="text"
+                                        {...register('expertiseAreas')}
+                                        className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                        placeholder="Enter areas of expertise"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Years of Experience</label>
+                                    <input
+                                        type="text"
+                                        {...register('yearsOfExperience')}
+                                        className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                        placeholder="e.g. 5 years"
+                                    />
+                                </div>
+                            </>
+                        )}
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">Phone No</label>
                             
@@ -382,15 +602,44 @@ const Interest = () => {
                         <span className="text-xs text-gray-500 font-normal ml-2">(Select up to 3 options)</span>
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {[
-                            'Find International Buyers',
-                            'Find Suppliers',
-                            'Market Expansion',
-                            'Distribution Partnership',
-                            'Import Opportunities',
-                            'Strategic Collaboration',
-                            'Other'
-                        ].map((objective) => {
+                        {(() => {
+                            const category = watch('category');
+                            if (category === 'Exporter') {
+                                return [
+                                    'Find International Buyers',
+                                    'Market Expansion',
+                                    'Distribution Partnership',
+                                    'Strategic Collaboration',
+                                    'Other'
+                                ];
+                            } else if (category === 'Importer') {
+                                return [
+                                    'Find Suppliers',
+                                    'Import Opportunities',
+                                    'Distribution Partnership',
+                                    'Strategic Collaboration',
+                                    'Other'
+                                ];
+                            } else if (category === 'Agent' || category === 'Partner') {
+                                return [
+                                    'Offer Professional Services',
+                                    'Network with Industry Leaders',
+                                    'Find Consulting Projects',
+                                    'Join Advisory Boards',
+                                    'Strategic Collaboration',
+                                    'Other'
+                                ];
+                            }
+                            return [
+                                'Find International Buyers',
+                                'Find Suppliers',
+                                'Market Expansion',
+                                'Distribution Partnership',
+                                'Import Opportunities',
+                                'Strategic Collaboration',
+                                'Other'
+                            ];
+                        })().map((objective) => {
                             const isChecked = watch('objectives')?.includes(objective);
                             const isMaxReached = (watch('objectives')?.length || 0) >= 3;
                             const isDisabled = isMaxReached && !isChecked;

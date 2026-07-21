@@ -24,8 +24,20 @@ export const interestApi = createApi({
       }),
       invalidatesTags: ["Interest"],
     }),
+    updateInterestStatus: builder.mutation<any, { id: string; status: string }>({
+      query: ({ id, status }) => ({
+        url: `interest/${id}/status`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: ["Interest"],
+    }),
     getAllInterests: builder.query<any, void>({
       query: () => "interest",
+      providesTags: ["Interest"],
+    }),
+    getInterestById: builder.query<any, string>({
+      query: (id) => `interest/${id}`,
       providesTags: ["Interest"],
     }),
   }),
@@ -34,4 +46,6 @@ export const interestApi = createApi({
 export const {
   useSubmitInterestFormMutation,
   useGetAllInterestsQuery,
+  useUpdateInterestStatusMutation,
+  useGetInterestByIdQuery,
 } = interestApi;

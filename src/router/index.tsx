@@ -26,6 +26,7 @@ import AdminVerificationsPage from "@/pages/dashboard/admin/verifications";
 import AdminVerificationDetailsPage from "@/pages/dashboard/admin/verifications/details";
 import AdminPartnerVerificationDetailsPage from "@/pages/dashboard/admin/verifications/partner-details";
 import AdminInterestsPage from "@/pages/dashboard/admin/interests";
+import AdminInterestDetailsPage from "@/pages/dashboard/admin/interests/details";
 import AgentDashboard from "@/pages/dashboard/agent/index";
 import AgentReportsPage from "@/pages/dashboard/agent/reports";
 import AgentCommunicationsPage from "@/pages/dashboard/agent/communications";
@@ -443,6 +444,10 @@ export const routes: RouteObject[] = [
           {
             path: "interests",
             element: <AdminInterestsPage />,
+          },
+          {
+            path: "interests/:id",
+            element: <AdminInterestDetailsPage />,
           },
           {
             path: "settings",
