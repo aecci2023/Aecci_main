@@ -19,7 +19,6 @@ import {
   Headphones,
   ArrowRight,
   ShieldCheck,
-  Globe2,
   Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";

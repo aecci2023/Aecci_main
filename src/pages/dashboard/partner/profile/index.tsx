@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Main } from "@/components/layout/main";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Award, UserCheck, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Award } from "lucide-react";
 import { useGetMyPartnerProfileQuery } from "@/store/api/adminApi";
 
 export default function PartnerProfilePage() {
