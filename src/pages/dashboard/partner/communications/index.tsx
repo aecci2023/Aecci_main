@@ -12,8 +12,6 @@ import {
   Calendar,
   ChevronRight,
   ChevronDown,
-  FileText,
-  Send,
 } from "lucide-react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -110,26 +108,29 @@ export default function PartnerCommunicationsPage() {
   const selectedMessage = messageList.find((m) => m.id === selectedMessageId) || messageList[0];
 
   return (
-    <Main fluid className="px-4 sm:px-6 pt-3 pb-6 bg-[#F8FAFC] min-h-screen">
-      <div className="flex flex-col gap-5">
+    <Main fluid className="px-6 pt-4 pb-8 bg-[#F8FAFC] min-h-screen">
+      <div className="flex flex-col gap-6">
         {/* ── Page Header ───────────────────────────────────── */}
-        <div className="flex items-start justify-between gap-4 pl-1 sm:pl-2">
+        <div className="flex items-end justify-between gap-4 pl-1 sm:pl-2">
           <div>
-            <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">
+            <h1
+              className="font-bold text-[#0F172A] tracking-tight leading-none"
+              style={{ fontSize: 28 }}
+            >
               Communications
             </h1>
-            <p className="text-sm text-[#64748B] mt-0.5">
+            <p className="text-[13px] text-[#64748B] mt-[5px] leading-none">
               Manage messages, announcements and notifications
             </p>
           </div>
-          <Button className="flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg px-4 py-2 text-sm font-semibold shadow-sm flex-shrink-0">
+          <Button className="flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl px-4 py-2.5 text-sm font-semibold shadow-sm flex-shrink-0">
             <Plus className="w-4 h-4" />
             New Message
           </Button>
         </div>
 
         {/* ── Tabs ─────────────────────────────────────────── */}
-        <div className="border-b border-[#E2E8F0]">
+        <div className="border-b border-[#E8EDF5]">
           <div className="flex gap-1">
             {tabs.map((tab) => (
               <button
@@ -151,23 +152,23 @@ export default function PartnerCommunicationsPage() {
         </div>
 
         {/* ── Main Layout: Message List | Conversation Details | Info Sidebar ── */}
-        <div className="flex gap-4 items-start">
+        <div className="flex gap-6 items-start">
           {/* ── 1. Left Message List Panel ─────────────────────── */}
-          <div className="w-80 flex-shrink-0 bg-white rounded-xl border border-[#E2E8F0] shadow-sm overflow-hidden flex flex-col">
+          <div className="w-[320px] flex-shrink-0 bg-white rounded-2xl border border-[#E8EDF5] shadow-[0_2px_12px_rgba(15,23,42,0.06)] overflow-hidden flex flex-col">
             {/* Search + Filter */}
-            <div className="p-3 border-b border-[#F1F5F9] flex items-center gap-2">
+            <div className="p-3.5 border-b border-[#F1F5F9] flex items-center gap-2">
               <div className="relative flex-1">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#94A3B8]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#94A3B8]" />
                 <input
                   type="text"
                   placeholder="Search messages..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-8 pr-3 py-1.5 text-xs border border-[#E2E8F0] rounded-lg bg-[#F8FAFC] focus:outline-none focus:ring-1 focus:ring-[#2563EB] placeholder:text-[#94A3B8]"
+                  className="w-full pl-9 pr-3 py-2 text-xs border border-[#E8EDF5] rounded-xl bg-[#F8FAFC] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#2563EB] placeholder:text-[#94A3B8]"
                 />
               </div>
               <div className="relative">
-                <button className="flex items-center gap-1 text-xs text-[#64748B] border border-[#E2E8F0] rounded-lg px-2.5 py-1.5 bg-white hover:bg-[#F8FAFC]">
+                <button className="flex items-center gap-1.5 text-xs font-medium text-[#64748B] border border-[#E8EDF5] rounded-xl px-3 py-2 bg-white hover:bg-[#F8FAFC] transition-colors">
                   All
                   <ChevronDown className="w-3 h-3 text-[#94A3B8]" />
                 </button>
@@ -182,35 +183,35 @@ export default function PartnerCommunicationsPage() {
                   <div
                     key={msg.id}
                     onClick={() => setSelectedMessageId(msg.id)}
-                    className={`p-3.5 flex items-start gap-3 cursor-pointer transition-colors ${
+                    className={`px-4 py-3.5 flex items-start gap-3.5 cursor-pointer transition-colors ${
                       isSelected
-                        ? "bg-[#EFF6FF] border-l-4 border-l-[#2563EB]"
-                        : "hover:bg-[#F8FAFC]"
+                        ? "bg-[#F0F7FF] border-l-4 border-l-[#2563EB]"
+                        : "hover:bg-[#FAFBFD]"
                     }`}
                   >
                     <img
                       src={msg.avatarUrl}
                       alt={msg.senderName}
-                      className="w-9 h-9 rounded-full object-cover flex-shrink-0"
+                      className="w-10 h-10 rounded-full object-cover flex-shrink-0"
                     />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-1">
-                        <p className="text-xs font-semibold text-[#0F172A] truncate">
+                        <p className="text-[13.5px] font-semibold text-[#0F172A] truncate">
                           {msg.senderName}
                         </p>
                         <div className="flex items-center gap-1 flex-shrink-0">
-                          <span className="text-[10px] text-[#94A3B8]">
+                          <span className="text-[11.5px] text-[#94A3B8]">
                             {msg.time}
                           </span>
                           {msg.isStarred && (
-                            <Star className="w-3 h-3 fill-[#F59E0B] text-[#F59E0B]" />
+                            <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
                           )}
                           {msg.isUnread && (
                             <span className="w-2 h-2 rounded-full bg-[#2563EB]" />
                           )}
                         </div>
                       </div>
-                      <p className="text-[11px] text-[#64748B] truncate mt-0.5">
+                      <p className="text-[12.5px] text-[#64748B] truncate mt-0.5">
                         {msg.snippet}
                       </p>
                     </div>
@@ -220,7 +221,7 @@ export default function PartnerCommunicationsPage() {
             </div>
 
             {/* Bottom Link */}
-            <div className="p-3 text-center border-t border-[#F1F5F9]">
+            <div className="p-3.5 text-center border-t border-[#F1F5F9]">
               <button className="text-xs text-[#2563EB] font-semibold hover:underline">
                 View All Messages
               </button>
@@ -228,25 +229,25 @@ export default function PartnerCommunicationsPage() {
           </div>
 
           {/* ── 2. Middle Conversation View Panel ─────────────── */}
-          <div className="flex-1 min-w-0 bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-5 flex flex-col justify-between min-h-[580px]">
+          <div className="flex-1 min-w-0 bg-white rounded-2xl border border-[#E8EDF5] shadow-[0_2px_12px_rgba(15,23,42,0.06)] p-6 flex flex-col justify-between min-h-[600px]">
             <div>
               {/* Message Header */}
               <div className="flex items-center justify-between pb-4 border-b border-[#F1F5F9]">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3.5">
                   <img
                     src={selectedMessage.avatarUrl}
                     alt={selectedMessage.senderName}
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                    className="w-11 h-11 rounded-full object-cover flex-shrink-0"
                   />
                   <div>
-                    <h3 className="text-sm font-bold text-[#0F172A]">
+                    <h3 className="text-[16px] font-semibold text-[#0F172A]">
                       {selectedMessage.senderName}
                     </h3>
-                    <p className="text-xs text-[#94A3B8]">to me</p>
+                    <p className="text-[12.5px] text-[#94A3B8]">to me</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-[#94A3B8]">
+                  <span className="text-[12.5px] text-[#94A3B8]">
                     {selectedMessage.time}
                   </span>
                   <Star className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B] cursor-pointer" />
@@ -255,13 +256,13 @@ export default function PartnerCommunicationsPage() {
 
               {/* Subject */}
               <div className="py-4">
-                <h2 className="text-lg font-bold text-[#0F172A]">
+                <h2 className="text-[18px] font-bold text-[#0F172A]">
                   Deal collaboration opportunity
                 </h2>
               </div>
 
               {/* Body */}
-              <div className="text-xs text-[#374151] space-y-3 leading-relaxed">
+              <div className="text-[14px] text-[#374151] space-y-3.5 leading-relaxed">
                 <p>Hello Michael,</p>
                 <p>
                   We are interested in exploring a collaboration opportunity for industrial machinery exports to the European market.
@@ -271,7 +272,7 @@ export default function PartnerCommunicationsPage() {
                 </p>
                 <div className="pt-2 text-[#64748B]">
                   <p>Best regards,</p>
-                  <p className="font-medium text-[#0F172A]">James Carter</p>
+                  <p className="font-semibold text-[#0F172A]">James Carter</p>
                   <p>Business Development Manager</p>
                   <p>Precision Tools Pvt. Ltd.</p>
                 </div>
@@ -279,39 +280,39 @@ export default function PartnerCommunicationsPage() {
 
               {/* Attachments Section */}
               <div className="mt-6 pt-4 border-t border-[#F1F5F9]">
-                <h4 className="text-xs font-semibold text-[#0F172A] mb-3">
+                <h4 className="text-[13px] font-semibold text-[#0F172A] mb-3">
                   Attachments (2)
                 </h4>
                 <div className="flex flex-wrap gap-3">
                   {/* Card 1 */}
-                  <div className="flex items-center gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3 min-w-[200px] hover:border-[#CBD5E1] transition-colors">
-                    <div className="w-8 h-8 rounded-lg bg-[#FEE2E2] flex items-center justify-center text-[#EF4444] text-[10px] font-bold">
+                  <div className="flex items-center gap-3 bg-[#F8FAFC] border border-[#E8EDF5] rounded-xl p-3.5 min-w-[220px] hover:border-[#CBD5E1] transition-colors">
+                    <div className="w-9 h-9 rounded-lg bg-[#FEE2E2] flex items-center justify-center text-[#EF4444] text-[11px] font-bold flex-shrink-0">
                       PDF
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-[#0F172A] truncate">
+                      <p className="text-[13px] font-medium text-[#0F172A] truncate">
                         Company_Profile.pdf
                       </p>
-                      <p className="text-[10px] text-[#94A3B8]">2.4 MB</p>
+                      <p className="text-[11px] text-[#94A3B8]">2.4 MB</p>
                     </div>
-                    <button className="text-[#64748B] hover:text-[#0F172A] p-1">
-                      <Download className="w-3.5 h-3.5" />
+                    <button className="text-[#64748B] hover:text-[#0F172A] p-1.5 rounded-lg hover:bg-white transition-colors">
+                      <Download className="w-4 h-4" />
                     </button>
                   </div>
 
                   {/* Card 2 */}
-                  <div className="flex items-center gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3 min-w-[200px] hover:border-[#CBD5E1] transition-colors">
-                    <div className="w-8 h-8 rounded-lg bg-[#FEE2E2] flex items-center justify-center text-[#EF4444] text-[10px] font-bold">
+                  <div className="flex items-center gap-3 bg-[#F8FAFC] border border-[#E8EDF5] rounded-xl p-3.5 min-w-[220px] hover:border-[#CBD5E1] transition-colors">
+                    <div className="w-9 h-9 rounded-lg bg-[#FEE2E2] flex items-center justify-center text-[#EF4444] text-[11px] font-bold flex-shrink-0">
                       PDF
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-[#0F172A] truncate">
+                      <p className="text-[13px] font-medium text-[#0F172A] truncate">
                         Product_Catalog.pdf
                       </p>
-                      <p className="text-[10px] text-[#94A3B8]">4.1 MB</p>
+                      <p className="text-[11px] text-[#94A3B8]">4.1 MB</p>
                     </div>
-                    <button className="text-[#64748B] hover:text-[#0F172A] p-1">
-                      <Download className="w-3.5 h-3.5" />
+                    <button className="text-[#64748B] hover:text-[#0F172A] p-1.5 rounded-lg hover:bg-white transition-colors">
+                      <Download className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -325,88 +326,88 @@ export default function PartnerCommunicationsPage() {
                 placeholder="Type your reply..."
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
-                className="flex-1 px-4 py-2.5 text-xs border border-[#E2E8F0] rounded-lg bg-[#F8FAFC] focus:outline-none focus:ring-1 focus:ring-[#2563EB] placeholder:text-[#94A3B8]"
+                className="flex-1 px-4 py-3 text-xs border border-[#E8EDF5] rounded-xl bg-[#F8FAFC] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#2563EB] placeholder:text-[#94A3B8]"
               />
-              <Button className="bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg px-5 py-2.5 text-xs font-semibold">
+              <Button className="bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl px-6 py-3 text-xs font-semibold shadow-sm">
                 Reply
               </Button>
             </div>
           </div>
 
           {/* ── 3. Right Sidebar: Info & Details ───────────────── */}
-          <div className="w-64 flex-shrink-0 flex flex-col gap-4">
+          <div className="w-[270px] flex-shrink-0 flex flex-col gap-5">
             {/* Contact Information */}
-            <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-4">
-              <h3 className="text-xs font-bold text-[#0F172A] mb-3">
+            <div className="bg-white rounded-2xl border border-[#E8EDF5] shadow-[0_2px_12px_rgba(15,23,42,0.06)] p-5">
+              <h3 className="text-[15px] font-semibold text-[#0F172A] mb-3.5">
                 Contact Information
               </h3>
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-3.5">
                 <img
                   src={selectedMessage.avatarUrl}
                   alt={selectedMessage.senderName}
-                  className="w-9 h-9 rounded-full object-cover flex-shrink-0"
+                  className="w-10 h-10 rounded-full object-cover flex-shrink-0"
                 />
                 <div>
-                  <p className="text-xs font-bold text-[#0F172A]">James Carter</p>
-                  <p className="text-[10px] text-[#64748B]">
+                  <p className="text-[14px] font-bold text-[#0F172A]">James Carter</p>
+                  <p className="text-[11.5px] text-[#64748B]">
                     Business Development Manager
                   </p>
-                  <p className="text-[10px] text-[#94A3B8]">
+                  <p className="text-[11.5px] text-[#94A3B8]">
                     Precision Tools Pvt. Ltd.
                   </p>
                 </div>
               </div>
-              <div className="space-y-2 text-xs text-[#64748B] pt-2 border-t border-[#F1F5F9]">
+              <div className="space-y-2.5 text-xs text-[#64748B] pt-3 border-t border-[#F1F5F9]">
                 <div className="flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-[#94A3B8] flex-shrink-0" />
-                  <span className="truncate text-[11px]">
+                  <span className="truncate text-[11.5px]">
                     james.carter@precisiontools.com
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-[#94A3B8] flex-shrink-0" />
-                  <span className="text-[11px]">+49 30 1234567</span>
+                  <span className="text-[11.5px]">+49 30 1234567</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-3.5 h-3.5 text-[#94A3B8] flex-shrink-0" />
-                  <span className="text-[11px]">Germany</span>
+                  <span className="text-[11.5px]">Germany</span>
                 </div>
               </div>
             </div>
 
             {/* Conversation Details */}
-            <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-4">
-              <h3 className="text-xs font-bold text-[#0F172A] mb-3">
+            <div className="bg-white rounded-2xl border border-[#E8EDF5] shadow-[0_2px_12px_rgba(15,23,42,0.06)] p-5">
+              <h3 className="text-[15px] font-semibold text-[#0F172A] mb-3.5">
                 Conversation Details
               </h3>
-              <div className="space-y-2.5 text-xs">
+              <div className="space-y-3 text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] text-[#64748B]">First Message</span>
-                  <span className="text-[11px] font-semibold text-[#0F172A]">
+                  <span className="text-[11.5px] text-[#64748B]">First Message</span>
+                  <span className="text-[11.5px] font-semibold text-[#0F172A]">
                     20 May 2025
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] text-[#64748B]">Last Message</span>
-                  <span className="text-[11px] font-semibold text-[#0F172A]">
+                  <span className="text-[11.5px] text-[#64748B]">Last Message</span>
+                  <span className="text-[11.5px] font-semibold text-[#0F172A]">
                     20 May 2025
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] text-[#64748B]">Total Messages</span>
-                  <span className="text-[11px] font-semibold text-[#0F172A]">
+                  <span className="text-[11.5px] text-[#64748B]">Total Messages</span>
+                  <span className="text-[11.5px] font-semibold text-[#0F172A]">
                     4
                   </span>
                 </div>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-[11px] text-[#64748B]">Status</span>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DCFCE7] text-[#15803D]">
+                  <span className="text-[11.5px] text-[#64748B]">Status</span>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#DCFCE7] text-[#15803D]">
                     Active
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] text-[#64748B]">Priority</span>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#FEF3C7] text-[#92400E]">
+                  <span className="text-[11.5px] text-[#64748B]">Priority</span>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#FEF3C7] text-[#92400E]">
                     Important
                   </span>
                 </div>
@@ -414,28 +415,28 @@ export default function PartnerCommunicationsPage() {
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-4">
-              <h3 className="text-xs font-bold text-[#0F172A] mb-3">
+            <div className="bg-white rounded-2xl border border-[#E8EDF5] shadow-[0_2px_12px_rgba(15,23,42,0.06)] p-5">
+              <h3 className="text-[15px] font-semibold text-[#0F172A] mb-3">
                 Quick Actions
               </h3>
-              <div className="flex flex-col gap-2">
-                <button className="flex items-center justify-between px-2.5 py-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-md bg-[#EFF6FF] flex items-center justify-center text-[#2563EB]">
+              <div className="flex flex-col gap-1.5">
+                <button className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-[#F8FAFC] transition-colors group">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-[#EFF6FF] flex items-center justify-center text-[#2563EB]">
                       <Mail className="w-3.5 h-3.5" />
                     </div>
-                    <span className="text-xs font-medium text-[#374151] group-hover:text-[#0F172A]">
+                    <span className="text-[12.5px] font-medium text-[#374151] group-hover:text-[#0F172A]">
                       Send Email
                     </span>
                   </div>
                   <ChevronRight className="w-3.5 h-3.5 text-[#94A3B8]" />
                 </button>
-                <button className="flex items-center justify-between px-2.5 py-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-md bg-[#EFF6FF] flex items-center justify-center text-[#2563EB]">
+                <button className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-[#F8FAFC] transition-colors group">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-[#EFF6FF] flex items-center justify-center text-[#2563EB]">
                       <Calendar className="w-3.5 h-3.5" />
                     </div>
-                    <span className="text-xs font-medium text-[#374151] group-hover:text-[#0F172A]">
+                    <span className="text-[12.5px] font-medium text-[#374151] group-hover:text-[#0F172A]">
                       Schedule Meeting
                     </span>
                   </div>

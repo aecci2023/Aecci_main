@@ -151,19 +151,6 @@ function LineChart() {
   const pathOf = (vals: number[]) =>
     vals.map((v, i) => `${i === 0 ? "M" : "L"}${xOf(i).toFixed(2)},${yOf(v).toFixed(2)}`).join(" ");
 
-  const dotsOf = (vals: number[], fill: string) =>
-    vals.map((v, i) => (
-      <circle
-        key={i}
-        cx={xOf(i)}
-        cy={yOf(v)}
-        r={3.5}
-        fill={fill}
-        stroke="#ffffff"
-        strokeWidth={1.5}
-      />
-    ));
-
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full" preserveAspectRatio="none">
       {/* horizontal grid lines + Y labels */}
@@ -259,8 +246,6 @@ function DonutChart() {
   const cy = size / 2;
   const outerR = 80;
   const strokeW = 28;          // ring thickness
-  const midR = outerR - strokeW / 2; // midline radius for dash calc
-  const circumference = 2 * Math.PI * midR;
   const gap = 2;               // tiny gap between segments
 
   let cumulativeAngle = -90;   // start at top
