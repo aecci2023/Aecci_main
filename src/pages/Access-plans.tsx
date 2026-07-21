@@ -19,36 +19,15 @@ import {
     UserPlus,
     Users
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const PricingComparison = () => {
-    const [activeTab, setActiveTab] = useState('all');
-    const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
-    const [isVisible, setIsVisible] = useState(false);
-    const sectionRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.1 }
-        );
-
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
-
     const plans = [
         {
             name: 'Explorer',
             price: '₹2,999',    
+            priceRange: 'per session',
+            icon: '🌱',
             color: 'from-emerald-500 to-emerald-600',
             hoverColor: 'hover:shadow-emerald-500/20',
             bgColor: 'bg-emerald-50',
@@ -81,7 +60,9 @@ const PricingComparison = () => {
         },
         {
             name: 'Global Growth',
-            price: '14,999', 
+            price: '₹14,999', 
+            priceRange: 'per 4 sessions',
+            icon: '📈',
             color: 'from-blue-500 to-blue-600',
             hoverColor: 'hover:shadow-blue-500/20',
             bgColor: 'bg-blue-50',
@@ -115,6 +96,8 @@ const PricingComparison = () => {
         {
             name: 'Market Entry Elite',
             price: '₹49,999',
+            priceRange: 'per 10 sessions',
+            icon: '🏆',
             color: 'from-purple-500 to-purple-600',
             hoverColor: 'hover:shadow-purple-500/20',
             bgColor: 'bg-purple-50',
@@ -149,6 +132,8 @@ const PricingComparison = () => {
         {
             name: 'Global Enterprise',
             price: 'Custom', 
+            priceRange: 'tailored pricing',
+            icon: '💼',
             color: 'from-amber-500 to-amber-600',
             hoverColor: 'hover:shadow-amber-500/20',
             bgColor: 'bg-amber-50',
@@ -241,7 +226,7 @@ const PricingComparison = () => {
             </div>
 
             {/* Comparison Table with Animations */}
-            <div className="max-w-7xl mx-auto px-6 py-12" ref={sectionRef}>
+            <div className="max-w-7xl mx-auto px-6 py-12">
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden transform transition-all duration-700 hover:shadow-2xl">
                     {/* Mobile: Card View with Animation */}
                     <div className="lg:hidden space-y-6 p-4">
@@ -281,7 +266,7 @@ const PricingComparison = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <Link to="/Interest">
+                                <Link to="/interest-form">
                                     <button className={`w-full mt-4 py-3 rounded-lg font-bold text-sm transition-all duration-300 bg-gradient-to-r ${plan.color} text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transform`}>
                                         Choose Plan →
                                     </button>
@@ -347,7 +332,7 @@ const PricingComparison = () => {
                                     </td>
                                     {plans.map((plan, idx) => (
                                         <td key={idx} className="text-center py-4 px-4">
-                                            <Link to="/Interest">
+                                            <Link to="/interest-form">
                                                 <button className={`w-full py-2.5 rounded-lg font-bold text-sm transition-all duration-300 bg-gradient-to-r ${plan.color} text-white shadow-md hover:shadow-lg hover:scale-[1.02] transform`}>
                                                     Get Started →
                                                 </button>
@@ -372,7 +357,7 @@ const PricingComparison = () => {
                             </div>
                             <h3 className="text-2xl font-bold mb-3">Be part of a trusted global business ecosystem.</h3>
                             <p className="text-gray-300 text-sm mb-6">Connect with verified partners and grow beyond borders.</p>
-                            <Link to="/Interest">
+                            <Link to="/interest-form">
                                 <button className="bg-amber-400 text-[#0A1A3A] font-bold px-6 py-3 rounded-lg hover:bg-amber-300 transition-all duration-300 flex items-center gap-2 group transform hover:scale-105">
                                     Get Started <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                 </button>

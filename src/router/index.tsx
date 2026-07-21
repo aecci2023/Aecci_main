@@ -99,48 +99,6 @@ import PartnerSubmitSummaryPage from "@/pages/dashboard/partner/sessions/submit-
 import PartnerUpcomingSessionsPage from "@/pages/dashboard/partner/sessions/upcoming";
 import RegisterRoleSelection from "@/pages/auth/register";
 
-<<<<<<< HEAD
-import AboutChamberPage from "@/pages/about/AboutChamber";
-import ChairmanMessagePage from "@/pages/about/ChairmanMessage";
-import ChamberDynamicsPage from "@/pages/about/ChamberDynamics";
-import ChamberPolicyPage from "@/pages/about/ChamberPolicy";
-import JobOpportunitiesPage from "@/pages/about/JobOpportunities";
-import OfficeBearersPage from "@/pages/about/OfficeBearers";
-import OurHistoryPage from "@/pages/about/OurHistory";
-import RolesResponsibilityPage from "@/pages/about/RolesResponsibility";
-import StrategicPartnersPage from "@/pages/about/strategic-partners";
-import AccessPlans from "@/pages/Access-plans";
-import AecciIacPanelPage from "@/pages/arbitration-center/aecci-iac-panel";
-import AecciIacFaqPage from "@/pages/arbitration-center/faq";
-import ModelClausePage from "@/pages/arbitration-center/model-clause";
-import RulesAndPoliciesPage from "@/pages/arbitration-center/rules-and-policies";
-import ScheduleFeesPage from "@/pages/arbitration-center/schedule-fees";
-import WhyAecciIacPage from "@/pages/arbitration-center/why-aecci-iac";
-import HeadOfficePage from "@/pages/contact-us/head-office";
-import InternationalHubPage from "@/pages/contact-us/international-hub";
-import EPlatformInformationPage from "@/pages/e-platform/e-platform-information";
-import FormalitiesGuidelinesPage from "@/pages/e-platform/formalities-guidelines";
-import AttestationFeesInformationPage from "@/pages/e-platform/formalities-guidelines/attestation-fees-information";
-import CooFormatPage from "@/pages/e-platform/formalities-guidelines/coo-format";
-import IndemnityBondFormatPage from "@/pages/e-platform/formalities-guidelines/indemnity-bond-format";
-import InformationForEServicesPage from "@/pages/e-platform/formalities-guidelines/information-for-e-services";
-import PastEventsPage from "@/pages/events/past-events";
-import Interest from "@/pages/Interest";
-import InternationalCollaborationPage from "@/pages/international-collaboration";
-import { PartnershipsIndex as PartnershipsIndexPage } from "@/pages/international-collaboration/partnerships/index";
-import PartnerDetailPage from "@/pages/international-collaboration/partnerships/PartnerDetail";
-import MediaCenterPage from "@/pages/media/media-center";
-import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import EnrollmentOffers from "@/pages/services/membership/EnrollmentOffers";
-import FeeFormsGuidelines from "@/pages/services/membership/FeeFormsGuidelines";
-import Membership from "@/pages/services/membership/Membership";
-import MembershipBenefits from "@/pages/services/membership/MembershipBenefits";
-import PatronMembership from "@/pages/services/membership/patron-membership";
-import RenewMembership from "@/pages/services/membership/RenewMembership";
-import VisaRecommendation from "@/pages/services/membership/VisaRecommendation";
-import TermsConditions from "@/pages/TermsConditions";
-import UpcomingEventsPage from "@/pages/upcoming-events";
-=======
 import AboutChamberPage from "@/pages/public/about/AboutChamber";
 import ChairmanMessagePage from "@/pages/public/about/ChairmanMessage";
 import ChamberDynamicsPage from "@/pages/public/about/ChamberDynamics";
@@ -150,6 +108,7 @@ import OfficeBearersPage from "@/pages/public/about/OfficeBearers";
 import OurHistoryPage from "@/pages/public/about/OurHistory";
 import RolesResponsibilityPage from "@/pages/public/about/RolesResponsibility";
 import StrategicPartnersPage from "@/pages/public/about/strategic-partners";
+import AccessPlans from "@/pages/Access-plans";
 import AecciIacPanelPage from "@/pages/public/arbitration-center/aecci-iac-panel";
 import AecciIacFaqPage from "@/pages/public/arbitration-center/faq";
 import ModelClausePage from "@/pages/public/arbitration-center/model-clause";
@@ -180,7 +139,6 @@ import VisaRecommendation from "@/pages/public/services/membership/VisaRecommend
 import TermsConditions from "@/pages/public/TermsConditions";
 import UpcomingEventsPage from "@/pages/public/upcoming-events";
 import Interest from "@/pages/public/Exporter/interest-form";
->>>>>>> 5b4cb19fa3f7f203f61e38a97e0f6cacdc8dd82f
 
 // Generic placeholder for partner routes
 const PartnerPlaceholder = ({ title }: { title: string }) => (
@@ -1145,24 +1103,6 @@ export const routes: RouteObject[] = [
     path: "/contact-us/aecci-international-hub",
     element: <NotFound />,
   },
-<<<<<<< HEAD
-  { 
-  path: "/terms-conditions",
-  element: <TermsConditions />,
-},
-{
-  path: "/privacy-policy",
-  element: <PrivacyPolicy />,
-},
-{
-  path: "/Access-plans",
-  element: <AccessPlans />,
-},
-{
-  path: "/Interest",
-  element: <Interest />,
-},
-=======
   {
     path: "/terms-conditions",
     element: <TermsConditions />,
@@ -1172,10 +1112,17 @@ export const routes: RouteObject[] = [
     element: <PrivacyPolicy />,
   },
   {
+    path: "/Access-plans",
+    element: <AccessPlans />,
+  },
+  {
+    path: "/Interest",
+    element: <Interest />,
+  },
+  {
     path: "/interest-form",
     element: <Interest />,
   },
->>>>>>> 5b4cb19fa3f7f203f61e38a97e0f6cacdc8dd82f
   {
     path: "*",
     element: <NotFound />,
