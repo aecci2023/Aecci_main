@@ -92,6 +92,16 @@ import PartnerAvailabilityPage from "@/pages/dashboard/partner/availability";
 import PartnerDashboard from "@/pages/dashboard/partner/dashboard";
 import PartnerOnboardingPage from "@/pages/dashboard/partner/onboarding";
 import PartnerProfilePage from "@/pages/dashboard/partner/profile";
+import PartnerExpertisePage from "@/pages/dashboard/partner/expertise";
+import PartnerDealRoomsPage from "@/pages/dashboard/partner/deal-rooms";
+import PartnerConsultationsPage from "@/pages/dashboard/partner/consultations";
+import PartnerLegalCompliancePage from "@/pages/dashboard/partner/legal-compliance";
+import PartnerTradeEstablishmentPage from "@/pages/dashboard/partner/trade-establishment";
+import PartnerOpportunitiesPage from "@/pages/dashboard/partner/opportunities";
+import PartnerNetworkPage from "@/pages/dashboard/partner/network";
+import PartnerMeetingsPage from "@/pages/dashboard/partner/meetings";
+import PartnerReportsPage from "@/pages/dashboard/partner/reports";
+import PartnerCommunicationsPage from "@/pages/dashboard/partner/communications";
 import PartnerQuestionsPage from "@/pages/dashboard/partner/questions";
 import PartnerRegisterPage from "@/pages/dashboard/partner/register";
 import PartnerPastSessionsPage from "@/pages/dashboard/partner/sessions/past";
@@ -217,43 +227,43 @@ export const routes: RouteObject[] = [
               { path: "profile", element: <PartnerProfilePage /> },
               {
                 path: "expertise",
-                element: <PartnerPlaceholder title="My Expertise" />,
+                element: <PartnerExpertisePage />,
               },
               {
                 path: "deal-rooms",
-                element: <PartnerPlaceholder title="Deal Rooms" />,
+                element: <PartnerDealRoomsPage />,
               },
               {
                 path: "consultations",
-                element: <PartnerPlaceholder title="Consultations" />,
+                element: <PartnerConsultationsPage />,
               },
               {
                 path: "legal-compliance",
-                element: <PartnerPlaceholder title="Legal Compliance" />,
+                element: <PartnerLegalCompliancePage />,
               },
               {
                 path: "trade-establishment",
-                element: <PartnerPlaceholder title="Trade Establishment" />,
+                element: <PartnerTradeEstablishmentPage />,
               },
               {
                 path: "opportunities",
-                element: <PartnerPlaceholder title="Opportunities" />,
+                element: <PartnerOpportunitiesPage />,
               },
               {
                 path: "network",
-                element: <PartnerPlaceholder title="Partner Network" />,
+                element: <PartnerNetworkPage />,
               },
               {
                 path: "meetings",
-                element: <PartnerPlaceholder title="Meetings" />,
+                element: <PartnerMeetingsPage />,
               },
               {
                 path: "reports",
-                element: <PartnerPlaceholder title="Reports & Insights" />,
+                element: <PartnerReportsPage />,
               },
               {
                 path: "communications",
-                element: <PartnerPlaceholder title="Communications" />,
+                element: <PartnerCommunicationsPage />,
               },
               {
                 path: "resources",
