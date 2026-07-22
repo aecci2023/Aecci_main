@@ -313,7 +313,7 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role, onClose }) =
           tagline: 'Be a bridge between Indian businesses and your global market. Together, we create new business opportunities.',
           badgeBg: 'bg-emerald-100',
           badgeText: 'text-emerald-700',
-          videoSrc: '/src/assets/videos/Collaborator-global-deal-room.mp4',
+          videoSrc: '/src/assets/videos/Collaborator-global-deal-room2.mp4',
           // posterSrc: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=450&fit=crop'
         };
       case 'participant':
