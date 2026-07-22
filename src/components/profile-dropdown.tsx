@@ -167,6 +167,33 @@ export function ProfileDropdown({
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
+              ) : role === "partner" ? (
+                <>
+                  <DropdownMenuItem asChild>
+                    <Link to="/partner/dashboard" className="flex items-center gap-2">
+                      <Home className="size-4" />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/partner/profile" className="flex items-center gap-2">
+                      <User className="size-4" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/partner/profile" className="flex items-center gap-2">
+                      <Settings className="size-4" />
+                      Settings
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/partner/notifications" className="flex items-center gap-2">
+                      <Bell className="size-4" />
+                      Notifications
+                    </Link>
+                  </DropdownMenuItem>
+                </>
               ) : (
                 <>
                   <DropdownMenuItem asChild>

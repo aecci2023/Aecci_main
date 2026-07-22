@@ -509,6 +509,15 @@ const Interest = () => {
                         {watch('category') === 'Partner' && (
                             <>
                                 <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Company / Organization Name</label>
+                                    <input
+                                        type="text"
+                                        {...register('companyName')}
+                                        className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                        placeholder="Enter company or organization name (optional)"
+                                    />
+                                </div>
+                                <div>
                                     <label className="block text-xs font-medium text-gray-700 mb-1">Expertise Areas</label>
                                     <input
                                         type="text"

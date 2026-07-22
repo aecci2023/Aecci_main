@@ -197,7 +197,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                to="/signup"
+                to="/interest-form"
                 onClick={handleClose}
                 className="inline-flex items-center justify-center h-10 px-6 text-[14px] font-[600] rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-sm transition-all duration-200"
               >

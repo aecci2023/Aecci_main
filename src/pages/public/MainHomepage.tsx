@@ -24,7 +24,7 @@ const slides = [
     ),
     buttons: (
       <>
-        <Link to="/signup" className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3.5 rounded-lg transition-colors">
+        <Link to="/interest-form" className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3.5 rounded-lg transition-colors">
           Join AECCI Today <ArrowRight className="ml-2 w-5 h-5" />
         </Link>
         <Link to="/services" className="inline-flex items-center justify-center bg-transparent border border-border hover:bg-foreground/5 text-foreground font-semibold px-8 py-3.5 rounded-lg transition-colors">
@@ -274,7 +274,7 @@ export default function MainHomepage() {
                   Join AECCI and unlock exclusive global business opportunities
                 </p>
               </div>
-              <Link to="/signup" className="inline-flex items-center justify-center px-4 py-2 mt-6 rounded-full border border-border text-xs font-semibold hover:bg-muted/40 text-foreground transition-colors w-fit relative z-10">
+              <Link to="/interest-form" className="inline-flex items-center justify-center px-4 py-2 mt-6 rounded-full border border-border text-xs font-semibold hover:bg-muted/40 text-foreground transition-colors w-fit relative z-10">
                 Join Now <ArrowRight className="w-3 h-3 ml-2" />
               </Link>
             </div>

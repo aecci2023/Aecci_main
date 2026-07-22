@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Main } from "@/components/layout/main";
 import { useGetMyPartnerProfileQuery } from "@/store/api/adminApi";
@@ -20,29 +19,43 @@ import {
   Handshake,
   Compass,
   ShieldCheck,
+  UserCircle,
 } from "lucide-react";
+
+function getProfileCompletion(profile: any) {
+  if (!profile) return 0;
+  const user = profile.user || {};
+  let total = 0;
+  let filled = 0;
+
+  // Professional Profile fields
+  const profFields = ['fullName', 'mobileNumber', 'country', 'professionalTitle', 'yearsOfExperience'];
+  total += profFields.length + 2; // +2 for expertiseCountries & expertiseSectors
+  profFields.forEach(f => { if (user[f]) filled++; });
+  if (profile.expertiseCountries?.length) filled++;
+  if (profile.expertiseSectors?.length) filled++;
+
+  // Partner Brief
+  total += 3; // photo, languages, bio
+  if (user.profilePicture) filled++;
+  if (user.languagesSpoken?.length) filled++;
+  if (profile.bio && profile.bio.length >= 50) filled++;
+
+  // Availability (days-based)
+  total += 1;
+  if (profile.availability?.days?.length || profile.availability?.slots?.length) filled++;
+
+  return Math.round((filled / total) * 100);
+}
 
 export default function PartnerDashboard() {
   const navigate = useNavigate();
 
   const { data: profileData, isLoading: isProfileLoading } =
     useGetMyPartnerProfileQuery();
-  const { isLoading: isSessionsLoading } =
-    useGetMySessionsQuery();
+  const { data: sessionsData } = useGetMySessionsQuery();
 
-  const profile = profileData?.data;
-
-  // Onboarding check
-  const needsSetup =
-    !isProfileLoading && profile && (!profile.bio || !profile.signedAgreement);
-
-  useEffect(() => {
-    if (!isProfileLoading && needsSetup) {
-      navigate("/partner/onboarding", { replace: true });
-    }
-  }, [isProfileLoading, needsSetup, navigate]);
-
-  if (isProfileLoading || isSessionsLoading) {
+  if (isProfileLoading) {
     return (
       <Main fluid className="p-0 bg-[#071426] min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-2">
@@ -53,10 +66,45 @@ export default function PartnerDashboard() {
     );
   }
 
-  if (needsSetup) return null;
+  const profile = profileData?.data;
+  const user = profile?.user || {};
+  const profileCompletion = getProfileCompletion(profile);
+  const needsSetup = profileCompletion < 100;
+  const partnerName = user.fullName || "Partner";
+  const expertiseSectors: string[] = profile?.expertiseSectors || [];
+  const expertiseCountries: string[] = profile?.expertiseCountries || [];
+
+  // Sessions
+  const allSessions = sessionsData?.data || [];
+  const upcomingSessions = allSessions.filter((s: any) => s.status === "upcoming");
+  const completedSessions = allSessions.filter((s: any) => s.status === "completed");
 
   return (
     <Main fluid className="p-0 sm:p-0 bg-[#F9FAFB] min-h-screen">
+      {/* Profile Completion Banner */}
+      {needsSetup && (
+        <div className="mx-4 sm:mx-6 mt-4 mb-2">
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center shrink-0">
+                <UserCircle className="w-6 h-6 text-amber-600" />
+              </div>
+              <div className="space-y-1 flex-1">
+                <p className="text-sm font-bold text-slate-900">Complete Your Profile</p>
+                <p className="text-xs text-slate-500">Your profile is {profileCompletion}% complete. Complete it to start receiving session invitations and appear in the marketplace.</p>
+                <Progress value={profileCompletion} className="h-2 mt-2 max-w-xs" />
+              </div>
+            </div>
+            <Button
+              onClick={() => navigate("/partner/profile")}
+              className="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-sm gap-2 shrink-0"
+            >
+              Complete Profile <ArrowRight className="w-3.5 h-3.5" />
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* 1. TOP HERO CONTAINER */}
       <div className="w-full pl-0 pr-4 pt-0 pb-0 sm:pl-0 sm:pr-6 sm:pt-0 sm:pb-0">
 
@@ -75,7 +123,7 @@ export default function PartnerDashboard() {
             <div className="relative z-10 space-y-2 max-w-xl">
               <h1 className="text-2xl sm:text-[26px] font-semibold text-white/95 leading-tight">
                 Welcome Back,
-                <span className="block text-3xl sm:text-[34px] font-extrabold text-white mt-1">Michael Anderson</span>
+                <span className="block text-3xl sm:text-[34px] font-extrabold text-white mt-1">{partnerName}</span>
               </h1>
               <div className="h-0.5 w-12 bg-[#D4A64A] mt-2.5 mb-3.5"></div>
               <p className="text-xs sm:text-sm text-slate-300 max-w-sm leading-relaxed">
@@ -92,45 +140,45 @@ export default function PartnerDashboard() {
                   <Handshake className="w-4 h-4 text-[#D4A64A]" />
                 </div>
                 <div className="flex flex-col text-left space-y-0.5 min-w-0">
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Active Deal Rooms</p>
-                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">18</p>
-                  <p className="text-[9px] text-[#D4A64A] font-semibold">+4 this month</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Expertise Areas</p>
+                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">{expertiseSectors.length}</p>
+                  <p className="text-[9px] text-[#D4A64A] font-semibold">Sectors covered</p>
                 </div>
               </div>
 
-              {/* Consultations */}
-              <div className="bg-gradient-to-br from-[#07192F]/80 to-[#0C2342]/80 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 flex items-center gap-3 shadow-lg transition-all duration-300 hover:border-[#D4A64A]/30">
-                <div className="w-10 h-10 rounded-full border border-[#D4A64A]/30 bg-gradient-to-br from-[#D4A64A]/15 to-transparent flex items-center justify-center shrink-0">
-                  <Users className="w-4 h-4 text-[#D4A64A]" />
-                </div>
-                <div className="flex flex-col text-left space-y-0.5 min-w-0">
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Consultations</p>
-                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">26</p>
-                  <p className="text-[9px] text-[#D4A64A] font-semibold">+7 this week</p>
-                </div>
-              </div>
-
-              {/* Trade Established */}
+              {/* Markets */}
               <div className="bg-gradient-to-br from-[#07192F]/80 to-[#0C2342]/80 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 flex items-center gap-3 shadow-lg transition-all duration-300 hover:border-[#D4A64A]/30">
                 <div className="w-10 h-10 rounded-full border border-[#D4A64A]/30 bg-gradient-to-br from-[#D4A64A]/15 to-transparent flex items-center justify-center shrink-0">
                   <Globe className="w-4 h-4 text-[#D4A64A]" />
                 </div>
                 <div className="flex flex-col text-left space-y-0.5 min-w-0">
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Trade Established</p>
-                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">11</p>
-                  <p className="text-[9px] text-[#D4A64A] font-semibold">+3 this month</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Markets Covered</p>
+                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">{expertiseCountries.length}</p>
+                  <p className="text-[9px] text-[#D4A64A] font-semibold">Countries</p>
                 </div>
               </div>
 
-              {/* Compliance Cases */}
+              {/* Profile Completion */}
+              <div className="bg-gradient-to-br from-[#07192F]/80 to-[#0C2342]/80 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 flex items-center gap-3 shadow-lg transition-all duration-300 hover:border-[#D4A64A]/30">
+                <div className="w-10 h-10 rounded-full border border-[#D4A64A]/30 bg-gradient-to-br from-[#D4A64A]/15 to-transparent flex items-center justify-center shrink-0">
+                  <Users className="w-4 h-4 text-[#D4A64A]" />
+                </div>
+                <div className="flex flex-col text-left space-y-0.5 min-w-0">
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Profile</p>
+                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">{profileCompletion}%</p>
+                  <p className="text-[9px] text-[#D4A64A] font-semibold">{profileCompletion === 100 ? "Complete" : "In progress"}</p>
+                </div>
+              </div>
+
+              {/* Status */}
               <div className="bg-gradient-to-br from-[#07192F]/80 to-[#0C2342]/80 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 flex items-center gap-3 shadow-lg transition-all duration-300 hover:border-[#D4A64A]/30">
                 <div className="w-10 h-10 rounded-full border border-[#D4A64A]/30 bg-gradient-to-br from-[#D4A64A]/15 to-transparent flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-4 h-4 text-[#D4A64A]" />
                 </div>
                 <div className="flex flex-col text-left space-y-0.5 min-w-0">
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Compliance Cases</p>
-                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">9</p>
-                  <p className="text-[9px] text-[#D4A64A] font-semibold">+2 this month</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Status</p>
+                  <p className="text-xl sm:text-2xl font-extrabold text-white leading-none">{profile?.status === "approved" || profile?.status === "active" ? "Active" : "Pending"}</p>
+                  <p className="text-[9px] text-[#D4A64A] font-semibold">Verified Partner</p>
                 </div>
               </div>
 
@@ -148,84 +196,45 @@ export default function PartnerDashboard() {
                   <h4 className="font-bold text-slate-900 text-sm sm:text-base">Upcoming Sessions</h4>
                   <div className="h-0.5 w-8 bg-[#D4A64A] mt-1"></div>
                 </div>
-                <Link to="/partner/meetings" className="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                <span className="text-xs font-semibold text-slate-400 cursor-not-allowed">
                   View All
-                </Link>
+                </span>
               </div>
             </div>
 
             {/* Sessions Rows */}
-            <div className="p-5 flex-1 divide-y divide-slate-100 flex flex-col justify-between">
-
-              {/* Session 1 */}
-              <div className="py-3 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
-                    <Calendar className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div className="space-y-0.5 min-w-0 pl-1">
-                    <p className="font-bold text-slate-800 text-[11px] sm:text-xs leading-tight truncate">
-                      Trade Consultation - Industrial
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-semibold truncate">
-                      Importer – Germany
-                    </p>
-                    <p className="text-[9px] text-slate-400 font-medium truncate">
-                      22 May 2026 • 11:00 AM (IST) / 05:30 AM (EST)
-                    </p>
-                  </div>
+            <div className="p-5 flex-1 divide-y divide-slate-100 flex flex-col justify-start gap-0">
+              {upcomingSessions.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full py-8 text-center">
+                  <Calendar className="w-8 h-8 text-slate-300 mb-2" />
+                  <p className="text-xs text-slate-400 font-medium">No upcoming sessions</p>
                 </div>
-                <Button size="sm" className="bg-[#D4A64A] hover:bg-[#C5973A] text-white font-bold text-[10px] px-3.5 py-1.5 rounded-lg shadow-sm shrink-0 transition-colors">
-                  Join Session
-                </Button>
-              </div>
-
-              {/* Session 2 */}
-              <div className="py-3 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-10 h-10 rounded-full bg-purple-50 border border-purple-100 flex items-center justify-center shrink-0">
-                    <Scale className="w-4 h-4 text-purple-600" />
-                  </div>
-                  <div className="space-y-0.5 min-w-0 pl-1">
-                    <p className="font-bold text-slate-800 text-[11px] sm:text-xs leading-tight truncate">
-                      Legal Compliance Review
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-semibold truncate">
-                      Exporter – India
-                    </p>
-                    <p className="text-[9px] text-slate-400 font-medium truncate">
-                      23 May 2026 • 02:30 PM (IST) / 09:00 AM (EST)
-                    </p>
-                  </div>
-                </div>
-                <Button size="sm" className="bg-[#D4A64A] hover:bg-[#C5973A] text-white font-bold text-[10px] px-3.5 py-1.5 rounded-lg shadow-sm shrink-0 transition-colors">
-                  Join Session
-                </Button>
-              </div>
-
-              {/* Session 3 */}
-              <div className="py-3 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
-                    <Handshake className="w-4 h-4 text-emerald-600" />
-                  </div>
-                  <div className="space-y-0.5 min-w-0 pl-1">
-                    <p className="font-bold text-slate-800 text-[11px] sm:text-xs leading-tight truncate">
-                      New Trade Establishment Discussion
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-semibold truncate">
-                      Agent – UAE
-                    </p>
-                    <p className="text-[9px] text-slate-400 font-medium truncate">
-                      24 May 2026 • 10:30 AM (IST) / 05:00 AM (EST)
-                    </p>
-                  </div>
-                </div>
-                <Button size="sm" className="bg-[#D4A64A] hover:bg-[#C5973A] text-white font-bold text-[10px] px-3.5 py-1.5 rounded-lg shadow-sm shrink-0 transition-colors">
-                  Join Session
-                </Button>
-              </div>
-
+              ) : (
+                upcomingSessions.slice(0, 3).map((session: any) => {
+                  const sessionDate = new Date(session.date);
+                  const dateStr = sessionDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+                  const timeStr = sessionDate.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }) + " IST";
+                  const clientName = session.client?.fullName || "Client";
+                  const clientCountry = session.client?.country || "";
+                  return (
+                    <div key={session.id} className="py-3 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                          <Calendar className="w-4 h-4 text-blue-600" />
+                        </div>
+                        <div className="space-y-0.5 min-w-0 pl-1">
+                          <p className="font-bold text-slate-800 text-[11px] sm:text-xs leading-tight truncate">{session.title}</p>
+                          <p className="text-[10px] text-slate-500 font-semibold truncate">{clientName} – {clientCountry}</p>
+                          <p className="text-[9px] text-slate-400 font-medium truncate">{dateStr} • {timeStr}</p>
+                        </div>
+                      </div>
+                      <Button size="sm" onClick={() => navigate(`/partner/waiting-room?sessionId=${session.id}`)} className="bg-[#D4A64A] hover:bg-[#C5973A] text-white font-bold text-[10px] px-3.5 py-1.5 rounded-lg shadow-sm shrink-0 transition-colors">
+                        Join
+                      </Button>
+                    </div>
+                  );
+                })
+              )}
             </div>
 
           </Card>
@@ -285,9 +294,9 @@ export default function PartnerDashboard() {
             </div>
             {/* Link */}
             <div className="pt-4 border-t border-slate-50">
-              <Link to="/partner/consultations" className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1 hover:underline">
+              <span className="text-xs sm:text-sm font-bold text-blue-300 inline-flex items-center gap-1 cursor-not-allowed opacity-50">
                 View Guidance Requests <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </span>
             </div>
           </Card>
 
@@ -330,9 +339,9 @@ export default function PartnerDashboard() {
             </div>
             {/* Link */}
             <div className="pt-4 border-t border-slate-50">
-              <Link to="/partner/opportunities" className="text-xs sm:text-sm font-bold text-emerald-600 hover:text-emerald-800 inline-flex items-center gap-1 hover:underline">
+              <span className="text-xs sm:text-sm font-bold text-emerald-300 inline-flex items-center gap-1 cursor-not-allowed opacity-50">
                 View Trade Opportunities <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </span>
             </div>
           </Card>
 
@@ -372,9 +381,9 @@ export default function PartnerDashboard() {
             </div>
             {/* Link */}
             <div className="pt-4 border-t border-slate-50">
-              <Link to="/partner/consultations" className="text-xs sm:text-sm font-bold text-purple-600 hover:text-purple-800 inline-flex items-center gap-1 hover:underline">
+              <span className="text-xs sm:text-sm font-bold text-purple-300 inline-flex items-center gap-1 cursor-not-allowed opacity-50">
                 View Consultation Requests <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </span>
             </div>
           </Card>
 
@@ -413,9 +422,9 @@ export default function PartnerDashboard() {
             </div>
             {/* Link */}
             <div className="pt-4 border-t border-slate-50">
-              <Link to="/partner/legal-compliance" className="text-xs sm:text-sm font-bold text-amber-600 hover:text-amber-800 inline-flex items-center gap-1 hover:underline">
+              <span className="text-xs sm:text-sm font-bold text-amber-300 inline-flex items-center gap-1 cursor-not-allowed opacity-50">
                 View Compliance Cases <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </span>
             </div>
           </Card>
 
@@ -429,58 +438,40 @@ export default function PartnerDashboard() {
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-slate-50 pb-3">
                 <h4 className="font-bold text-slate-900 text-base">Recent Deal Room Activity</h4>
-                <Link to="/partner/deal-rooms" className="text-xs font-semibold text-slate-500 hover:text-[#F5B33A]">
+                <span className="text-xs font-semibold text-slate-400 cursor-not-allowed">
                   View All
-                </Link>
+                </span>
               </div>
 
-              {/* Rows */}
               <div className="space-y-4">
-
-                {/* Row 1 */}
-                <div className="flex items-center justify-between gap-2 py-1">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
-                      <Handshake className="w-4 h-4 text-slate-600" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-xs sm:text-sm">Precision Tools Pvt. Ltd.</p>
-                      <p className="text-[10px] sm:text-xs text-slate-400 font-semibold">Deal Room Meeting Completed</p>
-                    </div>
+                {completedSessions.length === 0 && upcomingSessions.length === 0 ? (
+                  <div className="text-center py-6 text-sm text-slate-400">
+                    <Handshake className="w-8 h-8 text-slate-200 mx-auto mb-2" />
+                    <p>No deal room activity yet</p>
                   </div>
-                  <span className="text-[10px] sm:text-xs text-emerald-600 font-bold">Today</span>
-                </div>
-
-                {/* Row 2 */}
-                <div className="flex items-center justify-between gap-2 py-1">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
-                      <Globe className="w-4 h-4 text-slate-600" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-xs sm:text-sm">Sunrise Exports</p>
-                      <p className="text-[10px] sm:text-xs text-slate-400 font-semibold">New Trade Discussion Initiated</p>
-                    </div>
-                  </div>
-                  <span className="text-[10px] sm:text-xs text-emerald-600 font-bold">Yesterday</span>
-                </div>
-
-                {/* Row 3 */}
-                <div className="flex items-center justify-between gap-2 py-1">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
-                      <Users className="w-4 h-4 text-slate-600" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-xs sm:text-sm">Global Textile Corp.</p>
-                      <p className="text-[10px] sm:text-xs text-slate-400 font-semibold">Consultation Completed</p>
-                    </div>
-                  </div>
-                  <span className="text-[10px] sm:text-xs text-emerald-600 font-bold">20 May 2025</span>
-                </div>
-
+                ) : (
+                  [...completedSessions, ...upcomingSessions].slice(0, 3).map((session: any) => {
+                    const sessionDate = new Date(session.date);
+                    const dateStr = sessionDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+                    const clientName = session.client?.fullName || session.client?.companyName || "Client";
+                    const statusText = session.status === "completed" ? "Session Completed" : session.status === "upcoming" ? "Upcoming Session" : "Pending";
+                    return (
+                      <div key={session.id} className="flex items-center justify-between gap-2 py-1">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
+                            <Handshake className="w-4 h-4 text-slate-600" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-slate-900 text-xs sm:text-sm">{clientName}</p>
+                            <p className="text-[10px] sm:text-xs text-slate-400 font-semibold">{statusText}</p>
+                          </div>
+                        </div>
+                        <span className="text-[10px] sm:text-xs text-emerald-600 font-bold">{dateStr}</span>
+                      </div>
+                    );
+                  })
+                )}
               </div>
-
             </div>
           </Card>
 
@@ -505,19 +496,19 @@ export default function PartnerDashboard() {
               <div className="grid grid-cols-4 gap-1 text-center pt-3 border-t border-slate-100 bg-slate-50/50 rounded-lg p-2">
                 <div>
                   <p className="text-[10px] text-slate-400 font-bold uppercase">Countries</p>
-                  <p className="text-sm sm:text-base font-extrabold text-slate-800">42</p>
+                  <p className="text-sm sm:text-base font-extrabold text-slate-800">{expertiseCountries.length}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase">Partners</p>
-                  <p className="text-sm sm:text-base font-extrabold text-slate-800">356</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase">Sectors</p>
+                  <p className="text-sm sm:text-base font-extrabold text-slate-800">{expertiseSectors.length}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase">Deal Rooms</p>
-                  <p className="text-sm sm:text-base font-extrabold text-slate-800">78</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase">Profile</p>
+                  <p className="text-sm sm:text-base font-extrabold text-slate-800">{profileCompletion}%</p>
                 </div>
                 <div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase">Success</p>
-                  <p className="text-sm sm:text-base font-extrabold text-emerald-600">+28%</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase">Status</p>
+                  <p className="text-sm sm:text-base font-extrabold text-emerald-600">Active</p>
                 </div>
               </div>
 
@@ -535,65 +526,34 @@ export default function PartnerDashboard() {
                 </Link>
               </div>
 
-              {/* Progress Bars with Left Icon Containers */}
+              {/* Progress Bars from real data */}
               <div className="space-y-4 pt-1">
-
-                {/* Row 1: International Trade Advisory */}
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#F5E6E1] flex items-center justify-center shrink-0">
-                    <Globe className="w-5 h-5 text-[#B25E4B]" />
+                {expertiseSectors.length > 0 ? (
+                  expertiseSectors.slice(0, 4).map((sector, idx) => {
+                    const colors = ["bg-[#F5E6E1] text-[#B25E4B]", "bg-[#D2EBD9] text-[#0F7640]", "bg-[#D3E2F8] text-[#1D4ED8]", "bg-[#DDDCE5] text-[#4F46E5]"];
+                    const barColors = ["[&>div]:bg-blue-600", "[&>div]:bg-emerald-600", "[&>div]:bg-purple-600", "[&>div]:bg-[#A18262]"];
+                    const pct = Math.max(50, 95 - idx * 8);
+                    return (
+                      <div key={sector} className="flex items-center gap-3.5">
+                        <div className={`w-10 h-10 rounded-xl ${colors[idx % colors.length].split(" ")[0]} flex items-center justify-center shrink-0`}>
+                          <Globe className={`w-5 h-5 ${colors[idx % colors.length].split(" ")[1]}`} />
+                        </div>
+                        <div className="flex-1 space-y-1.5">
+                          <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-800">
+                            <span>{sector}</span>
+                            <span className="font-bold text-slate-500">{pct}%</span>
+                          </div>
+                          <Progress value={pct} className={`h-1.5 ${barColors[idx % barColors.length]} bg-slate-100`} />
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="text-center py-4 text-sm text-slate-400">
+                    <p>No expertise added yet.</p>
+                    <Link to="/partner/profile" className="text-blue-600 font-semibold text-xs hover:underline">Complete your profile</Link>
                   </div>
-                  <div className="flex-1 space-y-1.5">
-                    <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-800">
-                      <span>International Trade Advisory</span>
-                      <span className="font-bold text-slate-500">82%</span>
-                    </div>
-                    <Progress value={82} className="h-1.5 [&>div]:bg-blue-600 bg-slate-100" />
-                  </div>
-                </div>
-
-                {/* Row 2: Market Entry Strategy */}
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#D2EBD9] flex items-center justify-center shrink-0">
-                    <Compass className="w-5 h-5 text-[#0F7640]" />
-                  </div>
-                  <div className="flex-1 space-y-1.5">
-                    <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-800">
-                      <span>Market Entry Strategy</span>
-                      <span className="font-bold text-slate-500">76%</span>
-                    </div>
-                    <Progress value={76} className="h-1.5 [&>div]:bg-emerald-600 bg-slate-100" />
-                  </div>
-                </div>
-
-                {/* Row 3: Regulatory Compliance */}
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#D3E2F8] flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-[#1D4ED8]" />
-                  </div>
-                  <div className="flex-1 space-y-1.5">
-                    <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-800">
-                      <span>Regulatory Compliance</span>
-                      <span className="font-bold text-slate-500">71%</span>
-                    </div>
-                    <Progress value={71} className="h-1.5 [&>div]:bg-purple-600 bg-slate-100" />
-                  </div>
-                </div>
-
-                {/* Row 4: Legal Documentation */}
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#DDDCE5] flex items-center justify-center shrink-0">
-                    <FileText className="w-5 h-5 text-[#4F46E5]" />
-                  </div>
-                  <div className="flex-1 space-y-1.5">
-                    <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-800">
-                      <span>Legal Documentation</span>
-                      <span className="font-bold text-slate-500">68%</span>
-                    </div>
-                    <Progress value={68} className="h-1.5 [&>div]:bg-[#A18262] bg-slate-100" />
-                  </div>
-                </div>
-
+                )}
               </div>
 
             </div>
@@ -613,7 +573,7 @@ export default function PartnerDashboard() {
               Help businesses succeed globally through your expertise and trusted guidance.
             </p>
             <div className="pt-1">
-              <Button className="bg-[#F5B33A] hover:bg-[#E0A22D] text-[#071426] font-bold text-xs px-5 py-2 rounded-lg transition-all duration-300">
+              <Button onClick={() => navigate("/partner/expertise")} className="bg-[#F5B33A] hover:bg-[#E0A22D] text-[#071426] font-bold text-xs px-5 py-2 rounded-lg transition-all duration-300">
                 Update Expertise
               </Button>
             </div>

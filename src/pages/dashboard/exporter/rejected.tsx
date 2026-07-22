@@ -23,7 +23,7 @@ export default function RejectedApplicationPage() {
   }
 
   const handleResubmit = () => {
-    navigate("/signup?resubmit=true");
+    navigate("/interest-form?resubmit=true");
   };
 
   return (

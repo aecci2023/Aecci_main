@@ -256,7 +256,7 @@ export default function GlobalLanding() {
               <p className="text-sm text-gray-400 mb-8 flex-1 transition-colors duration-300 group-hover:text-gray-300">
                 For businesses, exporters & professionals who want to participate in deal rooms and grow globally.
               </p>
-              <Link to="/signup" className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
+              <Link to="/interest-form" className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
                 Register as Participant <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
@@ -284,7 +284,7 @@ export default function GlobalLanding() {
               <p className="text-sm text-gray-400 mb-8 flex-1 transition-colors duration-300 group-hover:text-gray-300">
                 For trade agents, brokers & representatives who want to explore business opportunities in India.
               </p>
-              <Link to="/signup" className="w-full bg-orange-500 hover:bg-orange-400 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
+              <Link to="/interest-form" className="w-full bg-orange-500 hover:bg-orange-400 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-sm group-hover:shadow-md">
                 Register as Agent <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
@@ -380,7 +380,7 @@ export default function GlobalLanding() {
               {/* QR Code */}
               <div className="hidden sm:flex flex-col items-center bg-white p-2 rounded shadow-inner border border-gray-100">
                 <QRCodeSVG
-                  value="https://www.aecci.org.in/signup"
+                  value="https://www.aecci.org.in/interest-form"
                   size={80}
                   level="M"
                   fgColor="#0B1120"

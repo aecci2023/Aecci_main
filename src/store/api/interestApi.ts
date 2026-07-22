@@ -32,6 +32,13 @@ export const interestApi = createApi({
       }),
       invalidatesTags: ["Interest"],
     }),
+    approveInterest: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `interest/${id}/approve`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Interest"],
+    }),
     getAllInterests: builder.query<any, void>({
       query: () => "interest",
       providesTags: ["Interest"],
@@ -47,5 +54,6 @@ export const {
   useSubmitInterestFormMutation,
   useGetAllInterestsQuery,
   useUpdateInterestStatusMutation,
+  useApproveInterestMutation,
   useGetInterestByIdQuery,
 } = interestApi;

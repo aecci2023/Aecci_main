@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { getCookie } from "@/lib/cookies";
 import { cn } from "@/lib/utils";
 import { LayoutProvider } from "@/context/layout-provider";
@@ -21,23 +21,15 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
   const { data: profileData, isLoading } = useGetPartnerProfileQuery();
   const partnerProfile = profileData?.data;
 
-  // If profile is loaded and setup is incomplete, force partner to dashboard setup page
+  // If profile is loaded and setup is incomplete, show indicator (no longer force redirect)
   const needsSetup =
     !isLoading &&
     partnerProfile &&
     (!partnerProfile.bio || !partnerProfile.signedAgreement);
   
-  const isOnboarding =
-    location.pathname === "/partner/onboarding" ||
-    location.pathname === "/partner/onboarding/";
-
   const isOnRoomPage =
     location.pathname.includes("/waiting-room") ||
     location.pathname.includes("/live-deal-room");
-
-  if (needsSetup && !isOnboarding) {
-    return <Navigate to="/partner/onboarding" replace />;
-  }
 
   return (
     <SearchProvider>
@@ -56,7 +48,7 @@ export function PartnerLayout({ children }: PartnerLayoutProps) {
             )}
             <div className="flex-1 overflow-y-auto relative">
               {children ?? <Outlet />}
-              <RoleTour role="partner" />
+              {!isLoading && !needsSetup && <RoleTour role="partner" />}
             </div>
           </SidebarInset>
         </SidebarProvider>

@@ -46,12 +46,12 @@ const baseQueryWithReauth: BaseQueryFn<
       } else {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        window.location.href = "/signup";
+        window.location.href = "/interest-form";
       }
     } else {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      window.location.href = "/signup";
+      window.location.href = "/interest-form";
     }
   }
   return result;

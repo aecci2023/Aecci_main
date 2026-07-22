@@ -277,7 +277,7 @@ export default function MobileMenu() {
                   Login
                 </Link>
                 <Link
-                  to="/signup"
+                  to="/interest-form"
                   onClick={() => setOpen(false)}
                   className="w-full h-10 inline-flex items-center justify-center text-[13px] font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full transition-all duration-200"
                 >

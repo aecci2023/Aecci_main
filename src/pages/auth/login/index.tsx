@@ -760,7 +760,7 @@ export default function LoginPage() {
                     <div className="text-center text-xs text-slate-500 font-semibold pt-0.5">
                       New to AECCI Global Deal Room?{" "}
                       <button
-                        onClick={() => navigate("/signup")}
+                        onClick={() => navigate("/interest-form")}
                         className="text-[#2563eb] hover:text-[#1d4ed8] font-bold hover:underline inline-flex items-center gap-0.5"
                       >
                         Create your account &rarr;

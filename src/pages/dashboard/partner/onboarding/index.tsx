@@ -8,16 +8,22 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { MultiSelect } from "@/components/ui/multi-select";
-import { CheckCircle2, ChevronRight, ChevronLeft, Loader2, Upload, User, Calendar as CalendarIcon, FileText, X } from "lucide-react";
+import { CheckCircle2, ChevronRight, ChevronLeft, Loader2, Upload, User, Calendar as CalendarIcon, FileText, Briefcase, X } from "lucide-react";
 import { toast } from "sonner";
 import { useGetMyPartnerProfileQuery, useSetupPartnerProfileMutation } from "@/store/api/adminApi";
 import { useUploadFileMutation } from "@/store/api/authApi";
 import { format } from "date-fns";
-import { LANGUAGE_OPTIONS } from "@/components/data/form-options";
-
-
+import { LANGUAGE_OPTIONS, COUNTRY_OPTIONS, SECTOR_OPTIONS } from "@/components/data/form-options";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const STEPS = [
+  { label: "Professional Profile", icon: Briefcase },
   { label: "Partner Brief", icon: User },
   { label: "Availability", icon: CalendarIcon },
   { label: "Agreement", icon: FileText },
@@ -33,17 +39,32 @@ export default function PartnerOnboardingPage() {
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
 
-  // Step 1 state
+  // Step 0 state — Professional Profile
+  const [fullName, setFullName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("+91");
+  const [nationality, setNationality] = useState("");
+  const [country, setCountry] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [professionalTitle, setProfessionalTitle] = useState("");
+  const [yearsOfExperience, setYearsOfExperience] = useState("");
+  const [linkedinProfileUrl, setLinkedinProfileUrl] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
+  const [expertiseCountries, setExpertiseCountries] = useState<string[]>([]);
+  const [expertiseSectors, setExpertiseSectors] = useState<string[]>([]);
+  const [motivation, setMotivation] = useState("");
+
+  // Step 1 state — Partner Brief
   const [profilePicture, setProfilePicture] = useState<string>("");
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [languages, setLanguages] = useState<string[]>([]);
   const [bio, setBio] = useState("");
 
-  // Step 2 state
+  // Step 2 state — Availability
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [slotTimes, setSlotTimes] = useState<Record<string, SlotTime>>({});
 
-  // Step 3 state
+  // Step 3 state — Agreement
   const [agreed, setAgreed] = useState(false);
 
   const { data: profileData, isLoading: isProfileLoading } = useGetMyPartnerProfileQuery();
@@ -56,8 +77,24 @@ export default function PartnerOnboardingPage() {
     if (profileData?.data) {
       const p = profileData.data;
       const u = p.user;
+      let step0Complete = true;
       let step1Complete = true;
 
+      // Step 0 fields
+      if (u?.fullName) setFullName(u.fullName); else step0Complete = false;
+      if (u?.mobileNumber) setMobileNumber(u.mobileNumber); else step0Complete = false;
+      if (u?.country) setCountry(u.country); else step0Complete = false;
+      if (u?.nationality) setNationality(u.nationality || "");
+      if (u?.professionalTitle) setProfessionalTitle(u.professionalTitle); else step0Complete = false;
+      if (u?.yearsOfExperience) setYearsOfExperience(u.yearsOfExperience); else step0Complete = false;
+      if (u?.linkedinProfileUrl) setLinkedinProfileUrl(u.linkedinProfileUrl);
+      if (u?.websiteUrl) setWebsiteUrl(u.websiteUrl);
+      if (p.organization) setOrganization(p.organization);
+      if (p.expertiseCountries?.length) setExpertiseCountries(p.expertiseCountries); else step0Complete = false;
+      if (p.expertiseSectors?.length) setExpertiseSectors(p.expertiseSectors); else step0Complete = false;
+      if (p.motivation) setMotivation(p.motivation);
+
+      // Step 1 fields
       if (u?.profilePicture) {
         setProfilePicture(u.profilePicture);
       } else {
@@ -77,7 +114,9 @@ export default function PartnerOnboardingPage() {
         step1Complete = false;
       }
 
-      if (step1Complete && step === 0) {
+      if (step0Complete && step1Complete && step === 0) {
+        setStep(2);
+      } else if (step0Complete && step === 0) {
         setStep(1);
       }
     }
@@ -146,6 +185,15 @@ export default function PartnerOnboardingPage() {
 
   const handleNext = () => {
     if (step === 0) {
+      if (!fullName.trim()) { toast.error("Full name is required"); return; }
+      if (!mobileNumber.trim()) { toast.error("Mobile number is required"); return; }
+      if (!country) { toast.error("Country is required"); return; }
+      if (!professionalTitle.trim()) { toast.error("Professional title is required"); return; }
+      if (!yearsOfExperience) { toast.error("Years of experience is required"); return; }
+      if (expertiseCountries.length === 0) { toast.error("Select at least one expertise country/market"); return; }
+      if (expertiseSectors.length === 0) { toast.error("Select at least one expertise sector"); return; }
+    }
+    if (step === 1) {
       if (!bio.trim() || bio.trim().length < 50) {
         toast.error("Bio must be at least 50 characters");
         return;
@@ -155,7 +203,7 @@ export default function PartnerOnboardingPage() {
         return;
       }
     }
-    if (step === 1) {
+    if (step === 2) {
       for (const dateKey of Object.keys(slotTimes)) {
         const s = slotTimes[dateKey];
         if (s.start >= s.end) {
@@ -180,13 +228,30 @@ export default function PartnerOnboardingPage() {
         end: times.end,
       }));
       await setupProfile({
+        // Step 0 — Professional Profile
+        fullName: fullName.trim(),
+        mobileNumber: mobileNumber.trim(),
+        countryCode,
+        country,
+        nationality: nationality.trim(),
+        organization: organization.trim(),
+        professionalTitle: professionalTitle.trim(),
+        yearsOfExperience,
+        linkedinProfileUrl: linkedinProfileUrl.trim(),
+        websiteUrl: websiteUrl.trim(),
+        expertiseCountries,
+        expertiseSectors,
+        motivation: motivation.trim(),
+        // Step 1 — Partner Brief
         bio: bio.trim(),
         profilePicture,
         languagesSpoken: languages,
-        signedAgreement: true,
+        // Step 2 — Availability
         availability: { slots },
+        // Step 3 — Agreement
+        signedAgreement: true,
       }).unwrap();
-      setStep(3);
+      setStep(4);
     } catch {
       toast.error("Failed to save profile. Please try again.");
     } finally {
@@ -194,7 +259,7 @@ export default function PartnerOnboardingPage() {
     }
   };
 
-  if (step === 3) {
+  if (step === 4) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted/20 p-6">
         <Card className="max-w-md w-full text-center">
@@ -246,11 +311,169 @@ export default function PartnerOnboardingPage() {
           ))}
         </div>
 
-        {/* ── Step 1: Partner Brief ── */}
+        {/* ── Step 0: Professional Profile ── */}
         {step === 0 && (
           <Card>
             <CardHeader>
-              <CardTitle>1. Partner Brief (Public Profile)</CardTitle>
+              <CardTitle>1. Professional Profile</CardTitle>
+              <CardDescription>
+                Complete your professional details. This helps us match you with the right businesses and sessions.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Full Name <span className="text-red-500">*</span></Label>
+                  <Input
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Organization / Company</Label>
+                  <Input
+                    value={organization}
+                    onChange={(e) => setOrganization(e.target.value)}
+                    placeholder="Your organization name"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Professional Title <span className="text-red-500">*</span></Label>
+                  <Input
+                    value={professionalTitle}
+                    onChange={(e) => setProfessionalTitle(e.target.value)}
+                    placeholder="e.g. Trade Consultant, Legal Advisor"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Years of Experience <span className="text-red-500">*</span></Label>
+                  <Select value={yearsOfExperience} onValueChange={setYearsOfExperience}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select experience" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0-2">0–2 Years</SelectItem>
+                      <SelectItem value="3-5">3–5 Years</SelectItem>
+                      <SelectItem value="6-10">6–10 Years</SelectItem>
+                      <SelectItem value="10-15">10–15 Years</SelectItem>
+                      <SelectItem value="15+">15+ Years</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Country <span className="text-red-500">*</span></Label>
+                  <Select value={country} onValueChange={setCountry}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select country" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {COUNTRY_OPTIONS.map((c) => (
+                        <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Nationality</Label>
+                  <Input
+                    value={nationality}
+                    onChange={(e) => setNationality(e.target.value)}
+                    placeholder="e.g. Indian, American"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Country Code</Label>
+                  <Input
+                    value={countryCode}
+                    onChange={(e) => setCountryCode(e.target.value)}
+                    placeholder="+91"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Mobile Number <span className="text-red-500">*</span></Label>
+                  <Input
+                    value={mobileNumber}
+                    onChange={(e) => setMobileNumber(e.target.value)}
+                    placeholder="9876543210"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>LinkedIn Profile URL</Label>
+                  <Input
+                    value={linkedinProfileUrl}
+                    onChange={(e) => setLinkedinProfileUrl(e.target.value)}
+                    placeholder="https://linkedin.com/in/yourprofile"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Website URL</Label>
+                  <Input
+                    value={websiteUrl}
+                    onChange={(e) => setWebsiteUrl(e.target.value)}
+                    placeholder="https://yourcompany.com"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label>Countries / Markets Covered <span className="text-red-500">*</span></Label>
+                <MultiSelect
+                  options={COUNTRY_OPTIONS}
+                  selected={expertiseCountries}
+                  onChange={setExpertiseCountries}
+                  placeholder="Select countries you cover"
+                />
+                <p className="text-xs text-muted-foreground">Select all countries/markets where you can provide expertise</p>
+              </div>
+
+              <div className="space-y-2">
+                <Label>Expertise / Sectors <span className="text-red-500">*</span></Label>
+                <MultiSelect
+                  options={SECTOR_OPTIONS}
+                  selected={expertiseSectors}
+                  onChange={setExpertiseSectors}
+                  placeholder="Select your expertise areas"
+                />
+                <p className="text-xs text-muted-foreground">Select all sectors where you can provide professional guidance</p>
+              </div>
+
+              <div className="space-y-2">
+                <Label>Motivation & Value Proposition</Label>
+                <Textarea
+                  value={motivation}
+                  onChange={(e) => setMotivation(e.target.value)}
+                  placeholder="Describe how you can support businesses and facilitate trade through the AECCI platform..."
+                  className="min-h-24 resize-y"
+                />
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <Button onClick={handleNext} className="gap-2">
+                  Next <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ── Step 1: Partner Brief ── */}
+        {step === 1 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>2. Partner Brief (Public Profile)</CardTitle>
               <CardDescription>
                 This information is shown on your marketplace card and to clients booking sessions.
               </CardDescription>
@@ -321,7 +544,10 @@ export default function PartnerOnboardingPage() {
                 </p>
               </div>
 
-              <div className="flex justify-end pt-2">
+              <div className="flex justify-between pt-2">
+                <Button variant="outline" onClick={() => setStep(0)} className="gap-2">
+                  <ChevronLeft className="h-4 w-4" /> Back
+                </Button>
                 <Button onClick={handleNext} className="gap-2">
                   Next <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -331,10 +557,10 @@ export default function PartnerOnboardingPage() {
         )}
 
         {/* ── Step 2: Availability ── */}
-        {step === 1 && (
+        {step === 2 && (
           <Card>
             <CardHeader>
-              <CardTitle>2. Weekly Availability Schedule</CardTitle>
+              <CardTitle>3. Weekly Availability Schedule</CardTitle>
               <CardDescription>
                 Select the days you are available to host sessions and define your active hours. 
                 <span className="font-semibold text-foreground ml-1">Please select timings according to IST (Indian Standard Time).</span>
@@ -421,7 +647,7 @@ export default function PartnerOnboardingPage() {
               </div>
 
               <div className="flex justify-between pt-2">
-                <Button variant="outline" onClick={() => setStep(0)} className="gap-2">
+                <Button variant="outline" onClick={() => setStep(1)} className="gap-2">
                   <ChevronLeft className="h-4 w-4" /> Back
                 </Button>
                 <Button onClick={handleNext} className="gap-2">
@@ -433,10 +659,10 @@ export default function PartnerOnboardingPage() {
         )}
 
         {/* ── Step 3: Agreement ── */}
-        {step === 2 && (
+        {step === 3 && (
           <Card>
             <CardHeader>
-              <CardTitle>3. Digital Agreement</CardTitle>
+              <CardTitle>4. Digital Agreement</CardTitle>
               <CardDescription>AECCI Partner Terms &amp; Code of Conduct</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -470,7 +696,7 @@ export default function PartnerOnboardingPage() {
               </div>
 
               <div className="flex justify-between pt-2">
-                <Button variant="outline" onClick={() => setStep(1)} className="gap-2">
+                <Button variant="outline" onClick={() => setStep(2)} className="gap-2">
                   <ChevronLeft className="h-4 w-4" /> Back
                 </Button>
                 <Button

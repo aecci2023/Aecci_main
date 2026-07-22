@@ -3,6 +3,7 @@ import { Main } from "@/components/layout/main";
 import {
   useGetInterestByIdQuery,
   useUpdateInterestStatusMutation,
+  useApproveInterestMutation,
 } from "@/store/api/interestApi";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,6 +35,8 @@ export default function AdminInterestDetailsPage() {
   });
   const [updateInterestStatus, { isLoading: isUpdating }] =
     useUpdateInterestStatusMutation();
+  const [approveInterest, { isLoading: isApproving }] =
+    useApproveInterestMutation();
 
   const interest = data?.data;
 
@@ -71,6 +74,16 @@ export default function AdminInterestDetailsPage() {
     } catch (err) {
       console.error("Update Error:", err);
       toast.error("Failed to update status.");
+    }
+  };
+
+  const handleApprove = async () => {
+    try {
+      await approveInterest(interest.id).unwrap();
+      toast.success("Partner approved! Account created and credentials sent via email.");
+    } catch (err: any) {
+      console.error("Approve Error:", err);
+      toast.error(err?.data?.message || "Failed to approve interest.");
     }
   };
 
@@ -119,27 +132,41 @@ export default function AdminInterestDetailsPage() {
                 variant="outline"
                 className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700"
                 onClick={() => handleUpdateStatus("rejected")}
-                disabled={isUpdating}
+                disabled={isUpdating || isApproving}
               >
                 <XCircle className="w-4 h-4 mr-2" /> Reject
               </Button>
               <Button
-                className="bg-amber-500 hover:bg-amber-600 text-white"
-                onClick={() => handleUpdateStatus("reviewed")}
-                disabled={isUpdating}
+                className="bg-green-600 hover:bg-green-700 text-white"
+                onClick={handleApprove}
+                disabled={isUpdating || isApproving}
               >
-                <CheckCircle2 className="w-4 h-4 mr-2" /> Mark as Reviewed
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve
               </Button>
             </>
           )}
+          {interest.status === "approved" && (
+            <Badge className="bg-green-100 text-green-800 hover:bg-green-100 px-3 py-1">
+              <CheckCircle2 className="w-4 h-4 mr-2" /> Approved & Account Created
+            </Badge>
+          )}
           {interest.status === "reviewed" && (
-            <Button
-              variant="outline"
-              onClick={() => handleUpdateStatus("pending")}
-              disabled={isUpdating}
-            >
-              <Clock className="w-4 h-4 mr-2" /> Revert to Pending
-            </Button>
+            <>
+              <Button
+                variant="outline"
+                onClick={() => handleUpdateStatus("pending")}
+                disabled={isUpdating || isApproving}
+              >
+                <Clock className="w-4 h-4 mr-2" /> Revert to Pending
+              </Button>
+              <Button
+                className="bg-green-600 hover:bg-green-700 text-white"
+                onClick={handleApprove}
+                disabled={isUpdating || isApproving}
+              >
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve
+              </Button>
+            </>
           )}
         </div>
       </div>

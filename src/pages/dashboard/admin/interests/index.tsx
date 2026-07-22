@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { Main } from "@/components/layout/main";
-import { Search, Eye, CheckCircle, XCircle, Clock, Users } from "lucide-react";
+import { Search, Eye, CheckCircle, XCircle, Clock, Users, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -15,21 +15,41 @@ import { useGetAllInterestsQuery } from "@/store/api/interestApi";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function AdminInterests() {
   const { data, isLoading } = useGetAllInterestsQuery();
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("pending");
   const navigate = useNavigate();
 
   const interests = data?.data || [];
 
-  const filteredInterests = interests.filter(
-    (interest: any) =>
-      interest.companyName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      interest.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      interest.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      interest.category?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredInterests = interests.filter((interest: any) => {
+    // Status filter
+    if (statusFilter !== "all") {
+      const interestStatus = interest.status || "pending";
+      if (interestStatus !== statusFilter) return false;
+    }
+
+    // Search filter
+    if (searchTerm) {
+      return (
+        interest.companyName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        interest.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        interest.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        interest.category?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return true;
+  });
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -44,7 +64,8 @@ export default function AdminInterests() {
     }
   };
 
-  const pendingCount = interests.filter((i: any) => i.status === "pending").length;
+  const pendingCount = interests.filter((i: any) => !i.status || i.status === "pending").length;
+  const approvedCount = interests.filter((i: any) => i.status === "approved").length;
 
   return (
     <Main fluid className="space-y-6">
@@ -57,14 +78,21 @@ export default function AdminInterests() {
             Manage and view all submitted interest forms.
           </p>
         </div>
-        {pendingCount > 0 && (
-          <Badge variant="outline" className="text-amber-600 border-amber-500/20 bg-amber-500/10 text-sm px-3 py-1">
-            {pendingCount} pending
-          </Badge>
-        )}
+        <div className="flex items-center gap-2">
+          {pendingCount > 0 && (
+            <Badge variant="outline" className="text-amber-600 border-amber-500/20 bg-amber-500/10 text-sm px-3 py-1">
+              {pendingCount} pending
+            </Badge>
+          )}
+          {approvedCount > 0 && (
+            <Badge variant="outline" className="text-green-600 border-green-500/20 bg-green-500/10 text-sm px-3 py-1">
+              {approvedCount} approved
+            </Badge>
+          )}
+        </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -74,6 +102,19 @@ export default function AdminInterests() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-[160px]">
+            <Filter className="w-4 h-4 mr-2" />
+            <SelectValue placeholder="Filter status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="pending">Pending</SelectItem>
+            <SelectItem value="approved">Approved</SelectItem>
+            <SelectItem value="rejected">Rejected</SelectItem>
+            <SelectItem value="reviewed">Reviewed</SelectItem>
+            <SelectItem value="all">All</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="rounded-md border">
@@ -98,7 +139,7 @@ export default function AdminInterests() {
             ) : filteredInterests.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                  No interest submissions found.
+                  No {statusFilter !== "all" ? statusFilter : ""} interest submissions found.
                 </TableCell>
               </TableRow>
             ) : (

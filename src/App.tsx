@@ -13,7 +13,7 @@ export default function App() {
   useNotificationsSocket();
   const element = useRoutes(routes);
   const location = useLocation();
-  const isSignupPage = location.pathname.startsWith("/signup");
+  const isSignupPage = location.pathname.startsWith("/signup") || location.pathname.startsWith("/interest-form");
   const isDashboardPage = location.pathname.startsWith("/dashboard");
   const isLoginPage = location.pathname.startsWith("/login");
   const isAdminPage = location.pathname.startsWith("/admin");

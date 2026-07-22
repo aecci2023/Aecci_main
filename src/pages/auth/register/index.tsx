@@ -1248,7 +1248,7 @@ const RoleDetails: React.FC<RoleDetailsProps> = ({ isVisible, role }) => {
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <Link
-                  to="/signup"
+                  to="/interest-form"
                   className={`inline-flex items-center gap-2 bg-gradient-to-r ${data.gradient} hover:opacity-90 text-white font-semibold px-6 py-2.5 rounded-full transition-all shadow-lg text-sm relative overflow-hidden group w-full justify-center`}
                 >
                   <Sparkles className="w-4 h-4" />
@@ -1380,7 +1380,7 @@ const JourneyTimeline: React.FC = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <Link
-              to="/signup"
+              to="/interest-form"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold px-8 py-3 rounded-full transition-all shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 text-base relative overflow-hidden group"
             >
               <Sparkles className="w-4 h-4" />
