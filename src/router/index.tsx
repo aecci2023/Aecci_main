@@ -111,6 +111,9 @@ import PartnerNetworkPage from "@/pages/dashboard/partner/network";
 import PartnerMeetingsPage from "@/pages/dashboard/partner/meetings";
 import PartnerReportsPage from "@/pages/dashboard/partner/reports";
 import PartnerCommunicationsPage from "@/pages/dashboard/partner/communications";
+import PartnerResourcesPage from "@/pages/dashboard/partner/resources";
+import PartnerServicesPage from "@/pages/dashboard/partner/services";
+import PartnerSupportPage from "@/pages/dashboard/partner/support";
 import PartnerQuestionsPage from "@/pages/dashboard/partner/questions";
 // import PartnerRegisterPage from "@/pages/dashboard/partner/register";
 import PartnerPastSessionsPage from "@/pages/dashboard/partner/sessions/past";
@@ -284,15 +287,15 @@ export const routes: RouteObject[] = [
               },
               {
                 path: "resources",
-                element: <PartnerPlaceholder title="Resources" />,
+                element: <PartnerResourcesPage />,
               },
               {
                 path: "services",
-                element: <PartnerPlaceholder title="AECCI Services" />,
+                element: <PartnerServicesPage />,
               },
               {
                 path: "support",
-                element: <PartnerPlaceholder title="Support Center" />,
+                element: <PartnerSupportPage />,
               },
               {
                 path: "sessions/schedule",

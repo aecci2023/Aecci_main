@@ -1,11 +1,11 @@
 import { Main } from "@/components/layout/main";
 import { ResourcesContent } from "@/components/common/resources-content";
 
-export default function AgentResourcesPage() {
+export default function PartnerResourcesPage() {
   return (
     <Main
       fluid
-      className="min-h-full space-y-5 overflow-x-hidden bg-[#F8FAFC]! px-3 pb-8 sm:space-y-6 sm:px-5"
+      className="px-6 pt-4 pb-8 bg-[#F8FAFC] min-h-screen"
     >
       <ResourcesContent />
     </Main>
