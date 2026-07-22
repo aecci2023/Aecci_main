@@ -3,7 +3,6 @@ import {
   FacebookLogo,
   InstagramLogo,
   LinkedinLogo,
-  TwitterLogo,
   YoutubeLogo,
 } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
