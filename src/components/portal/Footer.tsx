@@ -63,11 +63,11 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", icon: FacebookLogo, href: "#" },
-  { label: "Twitter", icon: TwitterLogo, href: "#" },
-  { label: "YouTube", icon: YoutubeLogo, href: "#" },
-  { label: "LinkedIn", icon: LinkedinLogo, href: "#" },
-  { label: "Instagram", icon: InstagramLogo, href: "#" },
+  { label: "Facebook", icon: FacebookLogo, href: "https://www.facebook.com/aecci.org.in" },
+  // { label: "Twitter", icon: TwitterLogo, href: "#" },
+  { label: "YouTube", icon: YoutubeLogo, href: "https://www.youtube.com/@aecci-india" },
+  { label: "LinkedIn", icon: LinkedinLogo, href: "https://www.linkedin.com/in/asian-exporters-chamber-of-commerce-and-industry-9420a8101/" },
+  { label: "Instagram", icon: InstagramLogo, href: "https://www.instagram.com/aecci_india/" },
 ];
 
 export default function Footer() {
