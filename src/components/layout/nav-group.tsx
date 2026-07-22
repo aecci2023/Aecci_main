@@ -79,9 +79,10 @@ function RenderIcon({ icon: Icon }: { icon: any }) {
 }
 
 function NavBadge({ children }: { children: ReactNode }) {
+  const isNumeric = !isNaN(Number(children));
   const variantClass =
-    children === "3"
-      ? "bg-amber-600 hover:bg-amber-600 text-white border-none"
+    isNumeric || children === "3"
+      ? "bg-amber-500 hover:bg-amber-600 text-white border-none"
       : children === "New"
         ? "bg-emerald-600 hover:bg-emerald-600 text-white border-none"
         : "bg-primary text-primary-foreground";

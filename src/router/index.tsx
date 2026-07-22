@@ -69,7 +69,7 @@ import WaitingRoomPage from "@/pages/dashboard/exporter/waiting-room";
 import LandingPage from "@/pages/public/LandingPage";
 import LoginPage from "@/pages/auth/login";
 import { NotFound } from "@/pages/not-found";
-import SignupPage from "@/pages/auth/signup";
+// import SignupPage from "@/pages/auth/signup";
 import type { RouteObject } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 
@@ -79,7 +79,7 @@ import AdminSubscriptionsPage from "@/pages/dashboard/admin/subscriptions";
 import AdvertiseWithUsPage from "@/pages/public/events/advertise-with-us";
 import PublicationsPage from "@/pages/public/events/publications";
 import SponsorshipPage from "@/pages/public/events/sponsorship";
-import ImporterRegisterPage from "@/pages/dashboard/importer/register";
+// import ImporterRegisterPage from "@/pages/dashboard/importer/register";
 import ImporterDashboard from "@/pages/dashboard/importer/dashboard";
 import ImporterMyProfilePage from "@/pages/dashboard/importer/profile";
 import ImporterMyCompanyPage from "@/pages/dashboard/importer/company";
@@ -111,8 +111,11 @@ import PartnerNetworkPage from "@/pages/dashboard/partner/network";
 import PartnerMeetingsPage from "@/pages/dashboard/partner/meetings";
 import PartnerReportsPage from "@/pages/dashboard/partner/reports";
 import PartnerCommunicationsPage from "@/pages/dashboard/partner/communications";
+import PartnerResourcesPage from "@/pages/dashboard/partner/resources";
+import PartnerServicesPage from "@/pages/dashboard/partner/services";
+import PartnerSupportPage from "@/pages/dashboard/partner/support";
 import PartnerQuestionsPage from "@/pages/dashboard/partner/questions";
-import PartnerRegisterPage from "@/pages/dashboard/partner/register";
+// import PartnerRegisterPage from "@/pages/dashboard/partner/register";
 import PartnerPastSessionsPage from "@/pages/dashboard/partner/sessions/past";
 import PartnerSubmitSummaryPage from "@/pages/dashboard/partner/sessions/submit-summary";
 import PartnerUpcomingSessionsPage from "@/pages/dashboard/partner/sessions/upcoming";
@@ -175,8 +178,13 @@ export const routes: RouteObject[] = [
     element: <LandingPage />,
   },
   {
+    path: "/interest-form",
+    element: <Interest />,
+  },
+  {
     path: "/signup",
-    element: <SignupPage />,
+    // element: <SignupPage />,
+    element: <Interest />,
   },
   {
     path: "/register",
@@ -189,7 +197,8 @@ export const routes: RouteObject[] = [
   {
     path: "/importer",
     children: [
-      { path: "register", element: <ImporterRegisterPage /> },
+      // { path: "register", element: <ImporterRegisterPage /> },
+      { path: "register", element: <Interest /> },
       {
         path: "",
         element: <ProtectedRoute allowedRoles={["importer"]} />,
@@ -223,7 +232,8 @@ export const routes: RouteObject[] = [
     path: "/partner",
     children: [
       { path: "apply", element: <BecomePartnerPage /> },
-      { path: "register", element: <PartnerRegisterPage /> },
+      // { path: "register", element: <PartnerRegisterPage /> },
+      { path: "register", element: <Interest /> },
       { path: "onboarding", element: <PartnerOnboardingPage /> },
       {
         path: "",
@@ -277,15 +287,15 @@ export const routes: RouteObject[] = [
               },
               {
                 path: "resources",
-                element: <PartnerPlaceholder title="Resources" />,
+                element: <PartnerResourcesPage />,
               },
               {
                 path: "services",
-                element: <PartnerPlaceholder title="AECCI Services" />,
+                element: <PartnerServicesPage />,
               },
               {
                 path: "support",
-                element: <PartnerPlaceholder title="Support Center" />,
+                element: <PartnerSupportPage />,
               },
               {
                 path: "sessions/schedule",
