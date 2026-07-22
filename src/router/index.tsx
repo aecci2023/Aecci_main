@@ -36,6 +36,9 @@ import AgentSupportPage from "@/pages/dashboard/agent/support";
 import AgentAccountSettingsPage from "@/pages/dashboard/agent/account-settings";
 import AgentPartnerNetworkPage from "@/pages/dashboard/agent/partner-network";
 import AgentMeetingsPage from "@/pages/dashboard/agent/meetings";
+import AgentProfilePage from "@/pages/dashboard/agent/profile";
+import AgentDealRoomsPage from "@/pages/dashboard/agent/deal-rooms";
+import AgentOpportunitiesPage from "@/pages/dashboard/agent/opportunities";
 import DashboardPage from "@/pages/dashboard/exporter";
 import MyProfilePage from "@/pages/dashboard/exporter/my-profile";
 import MyCompanyPage from "@/pages/dashboard/exporter/my-company";
@@ -491,6 +494,10 @@ export const routes: RouteObject[] = [
             element: <AgentDashboard />,
           },
           {
+            path: "profile",
+            element: <AgentProfilePage />,
+          },
+          {
             path: "communications",
             element: <AgentCommunicationsPage />,
           },
@@ -521,6 +528,14 @@ export const routes: RouteObject[] = [
           {
             path: "partner-network",
             element: <AgentPartnerNetworkPage />,
+          },
+          {
+            path: "deal-room",
+            element: <AgentDealRoomsPage />,
+          },
+          {
+            path: "opportunities",
+            element: <AgentOpportunitiesPage />,
           },
           {
             path: "meetings",
