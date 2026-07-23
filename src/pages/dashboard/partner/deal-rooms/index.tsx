@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Main } from "@/components/layout/main";
-import { Button } from "@/components/ui/button";
-import { Plus, Search, ChevronLeft } from "lucide-react";
+import { Search, ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PartnerAvailabilityScheduler } from "./availability-scheduler";
 
 // Crisp SVG Country Flag Components for cross-platform/browser rendering
 function GermanyFlag() {
@@ -130,15 +130,16 @@ function PharmaCareAvatar() {
 }
 
 export default function PartnerDealRoomsPage() {
-  const [activeTab, setActiveTab] = useState("active");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const tabs = [
-    { id: "active", label: "Active" },
-    { id: "upcoming", label: "Upcoming" },
-    { id: "completed", label: "Completed" },
-    { id: "archived", label: "Archived" },
-  ];
+  // TEMPORARY: status tabs hidden until the flow is ready
+  // const [activeTab, setActiveTab] = useState("active");
+  // const tabs = [
+  //   { id: "active", label: "Active" },
+  //   { id: "upcoming", label: "Upcoming" },
+  //   { id: "completed", label: "Completed" },
+  //   { id: "archived", label: "Archived" },
+  // ];
 
   const dealRooms = [
     {
@@ -199,16 +200,11 @@ export default function PartnerDealRoomsPage() {
   ];
 
   const filteredRooms = dealRooms.filter((room) => {
-    const matchesTab =
-      activeTab === "all" ||
-      room.tab === activeTab ||
-      (activeTab === "active" && room.status === "Active") ||
-      (activeTab === "upcoming" && room.status === "Upcoming");
     const matchesSearch =
       room.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       room.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
       room.country.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTab && matchesSearch;
+    return matchesSearch;
   });
 
   return (
@@ -225,17 +221,23 @@ export default function PartnerDealRoomsPage() {
             </p>
           </div>
 
+          {/* TEMPORARY: Create Deal Room hidden until the flow is ready
           <Button className="bg-[#D4A64A] hover:bg-[#C5973A] text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-sm flex items-center gap-1.5 self-start sm:self-center">
             <Plus className="w-4 h-4 stroke-[2.5px]" />
             <span>Create New Deal Room</span>
           </Button>
+          */}
         </div>
 
-        {/* ── MAIN CONTAINER CARD ── */}
+        {/* ── MY AVAILABILITY (date-wise IST scheduler) ── */}
+        <PartnerAvailabilityScheduler />
+
+        {/* TEMPORARY: "All Deal Rooms" list + table hidden until the flow is ready */}
+        {false && (
         <div className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-sm space-y-6">
           {/* TABS & SEARCH BAR */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-            {/* Left Tabs */}
+            {/* TEMPORARY: status tabs hidden until the flow is ready
             <div className="flex items-center gap-8 overflow-x-auto text-xs sm:text-sm font-semibold">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab.id;
@@ -255,6 +257,8 @@ export default function PartnerDealRoomsPage() {
                 );
               })}
             </div>
+            */}
+            <div className="text-sm font-bold text-slate-700">All Deal Rooms</div>
 
             {/* Right Search Input */}
             <div className="relative w-full sm:w-72 shrink-0">
@@ -352,6 +356,7 @@ export default function PartnerDealRoomsPage() {
             </button>
           </div>
         </div>
+        )}
       </div>
 
       {/* ── FOOTER BAR ── */}

@@ -2,7 +2,6 @@ import {
   LayoutDashboard,
   User,
   Award,
-  Lock,
   MessageSquare,
   Scale,
   Building2,
@@ -14,6 +13,10 @@ import {
   Wrench,
   Headphones,
   Settings,
+  Briefcase,
+  BarChart3,
+  LifeBuoy,
+  Handshake,
 } from "lucide-react";
 import { type SidebarData } from "../layout/types";
 
@@ -40,85 +43,104 @@ export const partnerSidebarData: SidebarData = {
       ],
     },
     {
-      title: "Deal Room & Services",
+      title: "Workspace",
       items: [
         {
-          title: "Deal Rooms",
-          url: "/partner/deal-rooms",
-          icon: Lock,
+          title: "Deal Room & Services",
+          icon: Briefcase,
+          items: [
+            {
+              title: "Deal Rooms",
+              url: "/partner/deal-rooms",
+              icon: Handshake,
+            },
+            {
+              title: "Consultations",
+              url: "/partner/consultations",
+              icon: MessageSquare,
+              locked: true,
+            },
+            {
+              title: "Legal Compliance",
+              url: "/partner/legal-compliance",
+              icon: Scale,
+              locked: true,
+            },
+            {
+              title: "Trade Establishment",
+              url: "/partner/trade-establishment",
+              icon: Building2,
+              locked: true,
+            },
+            {
+              title: "Opportunities",
+              url: "/partner/opportunities",
+              icon: TrendingUp,
+              locked: true,
+            },
+            {
+              title: "Partner Network",
+              url: "/partner/network",
+              icon: Users,
+              locked: true,
+            },
+            {
+              title: "Meetings",
+              url: "/partner/meetings",
+              icon: Calendar,
+              locked: true,
+            },
+          ],
         },
         {
-          title: "Consultations",
-          url: "/partner/consultations",
-          icon: MessageSquare,
+          title: "Intelligence & Resources",
+          icon: BarChart3,
+          items: [
+            {
+              title: "Reports & Insights",
+              url: "/partner/reports",
+              icon: FileText,
+              locked: true,
+            },
+            {
+              title: "Communications",
+              url: "/partner/communications",
+              icon: MessageSquare,
+              locked: true,
+            },
+            {
+              title: "Resources",
+              url: "/partner/resources",
+              icon: BookOpen,
+              locked: true,
+            },
+            {
+              title: "AECCI Services",
+              url: "/partner/services",
+              icon: Wrench,
+              locked: true,
+            },
+          ],
         },
         {
-          title: "Legal Compliance",
-          url: "/partner/legal-compliance",
-          icon: Scale,
-        },
-        {
-          title: "Trade Establishment",
-          url: "/partner/trade-establishment",
-          icon: Building2,
-        },
-        {
-          title: "Opportunities",
-          url: "/partner/opportunities",
-          icon: TrendingUp,
-        },
-        {
-          title: "Partner Network",
-          url: "/partner/network",
-          icon: Users,
-        },
-        {
-          title: "Meetings",
-          url: "/partner/meetings",
-          icon: Calendar,
-        },
-      ],
-    },
-    {
-      title: "Intelligence & Resources",
-      items: [
-        {
-          title: "Reports & Insights",
-          url: "/partner/reports",
-          icon: FileText,
-        },
-        {
-          title: "Communications",
-          url: "/partner/communications",
-          icon: MessageSquare,
-        },
-        {
-          title: "Resources",
-          url: "/partner/resources",
-          icon: BookOpen,
-        },
-        {
-          title: "AECCI Services",
-          url: "/partner/services",
-          icon: Wrench,
-        },
-      ],
-    },
-    {
-      title: "Account & Support",
-      items: [
-        {
-          title: "Account Settings",
-          url: "/partner/settings",
-          icon: Settings,
-        },
-        {
-          title: "Support Center",
-          url: "/partner/support",
-          icon: Headphones,
+          title: "Account & Support",
+          icon: LifeBuoy,
+          items: [
+            {
+              title: "Account Settings",
+              url: "/partner/settings",
+              icon: Settings,
+              locked: true,
+            },
+            {
+              title: "Support Center",
+              url: "/partner/support",
+              icon: Headphones,
+              locked: true,
+            },
+          ],
         },
       ],
     },
   ],
 };
-

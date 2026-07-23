@@ -14,7 +14,7 @@ const baseQuery = fetchBaseQuery({
 export const adminApi = createApi({
   reducerPath: "adminApi",
   baseQuery,
-  tagTypes: ["Users"],
+  tagTypes: ["Users", "Availability"],
   endpoints: (builder) => ({
     getUsers: builder.query<
       any,
@@ -206,6 +206,37 @@ export const adminApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+
+    // --- Deal Room Availability (date-wise IST slots) ---
+    getMyAvailability: builder.query<any, void>({
+      query: () => `partners/availability`,
+      providesTags: ["Availability"],
+    }),
+    saveMyAvailability: builder.mutation<
+      any,
+      {
+        slots: Array<{
+          date: string;
+          startTime: string;
+          endTime: string;
+          status?: string;
+          note?: string;
+        }>;
+      }
+    >({
+      query: (body) => ({
+        url: `partners/availability`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Availability", "Users"],
+    }),
+    getPartnerOpenSlots: builder.query<any, string>({
+      query: (partnerId) => `partners/${partnerId}/open-slots`,
+      providesTags: (_result, _error, partnerId) => [
+        { type: "Availability", id: partnerId },
+      ],
+    }),
   }),
 });
 
@@ -230,4 +261,7 @@ export const {
   useGetMarketplacePartnersQuery,
   useGetMarketplacePartnerDetailQuery,
   useGetAdminDashboardStatsQuery,
+  useGetMyAvailabilityQuery,
+  useSaveMyAvailabilityMutation,
+  useGetPartnerOpenSlotsQuery,
 } = adminApi;

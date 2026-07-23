@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { Progress } from "@/components/ui/progress";
 import {
-  CheckCircle2, Loader2, Upload, User, Calendar as CalendarIcon,
+  CheckCircle2, Loader2, Upload, User,
   Briefcase, Save,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -23,14 +23,6 @@ import { cn } from "@/lib/utils";
 const TABS = [
   { key: "professional", label: "Professional Profile", icon: Briefcase },
   { key: "brief", label: "Partner Brief", icon: User },
-  { key: "availability", label: "Availability", icon: CalendarIcon },
-];
-
-const DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const TIME_SLOTS = [
-  { value: "morning", label: "Morning (9:00 AM – 12:00 PM)" },
-  { value: "afternoon", label: "Afternoon (12:00 PM – 4:00 PM)" },
-  { value: "evening", label: "Evening (4:00 PM – 8:00 PM)" },
 ];
 
 function getCompletion(profile: any) {
@@ -45,7 +37,8 @@ function getCompletion(profile: any) {
   if (u.profilePicture) bFilled++;
   if (u.languagesSpoken?.length) bFilled++;
   if (profile.bio && profile.bio.length >= 50) bFilled++;
-  let aFilled = profile.availability?.days?.length ? 1 : (profile.availability?.slots?.length ? 1 : 0);
+  // Availability is now configured in the Deal Room; gate on availabilityConfiguredAt.
+  let aFilled = profile.availabilityConfiguredAt ? 1 : 0;
   const total = pt + bt + 1;
   return {
     percent: Math.round(((pFilled + bFilled + aFilled) / total) * 100),
@@ -93,14 +86,6 @@ export default function PartnerProfilePage() {
       languages: user.languagesSpoken || [] as string[],
       consultationTopics: (profile as any)?.consultationTopics || "",
       serviceOverview: (profile as any)?.serviceOverview || "",
-    }
-  });
-
-  // Availability form
-  const availForm = useForm({
-    values: {
-      availableDays: profile?.availability?.days || [] as string[],
-      preferredSlots: profile?.availability?.preferredSlots || [] as string[],
     }
   });
 
@@ -160,18 +145,6 @@ export default function PartnerProfilePage() {
         bio: d.bio.trim(), profilePicture, languagesSpoken: d.languages,
       }).unwrap();
       toast.success("Partner brief saved");
-    } catch { toast.error("Failed to save"); }
-  };
-
-  const saveAvailability = async () => {
-    const d = availForm.getValues();
-    if (d.availableDays.length === 0) { toast.error("Select at least one available day"); return; }
-    if (d.preferredSlots.length === 0) { toast.error("Select at least one preferred time slot"); return; }
-    try {
-      await setupProfile({
-        availability: { days: d.availableDays, preferredSlots: d.preferredSlots },
-      }).unwrap();
-      toast.success("Availability saved");
     } catch { toast.error("Failed to save"); }
   };
 
@@ -375,81 +348,6 @@ export default function PartnerProfilePage() {
         </Card>
       )}
 
-      {/* ── Availability Tab ── */}
-      {activeTab === "availability" && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitle>Availability</CardTitle>
-            <CardDescription>Select which days and general time slots you are available. The exact meeting time will be decided by admin.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Available Days */}
-            <div className="space-y-3">
-              <Label className="text-sm font-semibold">Available Days <span className="text-red-500">*</span></Label>
-              <p className="text-xs text-muted-foreground">Select all days you are generally available for meetings</p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {DAYS_OF_WEEK.map((day) => {
-                  const selected = availForm.watch("availableDays").includes(day);
-                  return (
-                    <button key={day} type="button"
-                      onClick={() => {
-                        const current = availForm.getValues("availableDays");
-                        if (selected) { availForm.setValue("availableDays", current.filter((d: string) => d !== day)); }
-                        else { availForm.setValue("availableDays", [...current, day]); }
-                      }}
-                      className={cn(
-                        "px-4 py-2.5 rounded-lg border text-sm font-medium transition-all",
-                        selected ? "bg-primary text-white border-primary shadow-sm" : "bg-white text-slate-600 border-slate-200 hover:border-primary/50 hover:bg-primary/5"
-                      )}>
-                      {day}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Preferred Time Slots */}
-            <div className="space-y-3">
-              <Label className="text-sm font-semibold">Preferred Time Slots <span className="text-red-500">*</span></Label>
-              <p className="text-xs text-muted-foreground">Select your preferred time windows (IST). Admin will schedule the exact time.</p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {TIME_SLOTS.map((slot) => {
-                  const selected = availForm.watch("preferredSlots").includes(slot.value);
-                  return (
-                    <button key={slot.value} type="button"
-                      onClick={() => {
-                        const current = availForm.getValues("preferredSlots");
-                        if (selected) { availForm.setValue("preferredSlots", current.filter((s: string) => s !== slot.value)); }
-                        else { availForm.setValue("preferredSlots", [...current, slot.value]); }
-                      }}
-                      className={cn(
-                        "px-4 py-3 rounded-lg border text-sm font-medium transition-all text-left",
-                        selected ? "bg-primary text-white border-primary shadow-sm" : "bg-white text-slate-600 border-slate-200 hover:border-primary/50 hover:bg-primary/5"
-                      )}>
-                      {slot.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Summary */}
-            {availForm.watch("availableDays").length > 0 && (
-              <div className="bg-muted/30 border rounded-lg p-4 text-sm">
-                <p className="font-medium text-slate-700 mb-1">Your Availability Summary:</p>
-                <p className="text-slate-600"><span className="font-semibold">Days:</span> {availForm.watch("availableDays").join(", ")}</p>
-                {availForm.watch("preferredSlots").length > 0 && (
-                  <p className="text-slate-600"><span className="font-semibold">Slots:</span> {availForm.watch("preferredSlots").map((s: string) => TIME_SLOTS.find(t => t.value === s)?.label).join(", ")}</p>
-                )}
-              </div>
-            )}
-
-            <div className="flex justify-end pt-3">
-              <Button onClick={saveAvailability} disabled={isSaving} className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white"><Save className="w-4 h-4" /> Save Availability</Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
     </Main>
   );
 }

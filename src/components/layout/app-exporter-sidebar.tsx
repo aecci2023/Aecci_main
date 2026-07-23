@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import type React from "react";
-import { ChevronDown, Headphones, MessageCircle } from "lucide-react";
+import { Headphones, MessageCircle } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sidebar, SidebarContent, useSidebar } from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarHeader, useSidebar } from "@/components/ui/sidebar";
+import { AppTitle } from "./app-title";
 import { sidebarData } from "../data/sidebar-data";
 import type { NavLink } from "./types";
 
@@ -40,31 +41,10 @@ export function AppExporterSidebar() {
       className="border-0 bg-[#061A33] text-white"
       style={{ "--sidebar-width": "240px" } as React.CSSProperties}
     >
+      <SidebarHeader className="px-4 pt-4 pb-2 bg-[#061A33]">
+        <AppTitle />
+      </SidebarHeader>
       <SidebarContent className="flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto bg-[#061A33] py-4 pl-3 pr-4">
-        <Link
-          to="/dashboard"
-          onClick={() => setOpenMobile(false)}
-          className="mb-5 flex min-w-0 items-center gap-2.5 px-1"
-        >
-          <img
-            src="/aecci-logoonly.png"
-            alt="AECCI"
-            className="size-9 shrink-0 object-contain"
-          />
-          <div className="min-w-0 flex-1">
-            <div className="truncate text-[18px] font-extrabold leading-none tracking-wide text-white">
-              AECCI
-            </div>
-            <div className="mt-0.5 truncate text-[8px] font-semibold uppercase tracking-[0.1em] text-white/80">
-              Global Deal Room
-            </div>
-          </div>
-          <ChevronDown className="size-3.5 shrink-0 text-white/50" />
-        </Link>
-        <div className="mb-4 px-1 text-[7px] uppercase tracking-[0.12em] text-white/40">
-          Connect · Collaborate · Grow Globally
-        </div>
-
         <div className="mb-5 flex min-w-0 items-center gap-3 rounded-2xl bg-white/6 p-3">
           <Avatar className="size-11 shrink-0 border border-white/10">
             <AvatarImage src={avatar} alt={name} />

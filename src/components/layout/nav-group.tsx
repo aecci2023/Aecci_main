@@ -1,11 +1,17 @@
 import { type ReactNode, useState, isValidElement } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Lock } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -165,20 +171,44 @@ function SidebarMenuCollapsible({
         </CollapsibleTrigger>
         <CollapsibleContent className="CollapsibleContent">
           <SidebarMenuSub>
-            {item.items.map((subItem) => (
-              <SidebarMenuSubItem key={subItem.title}>
-                <SidebarMenuSubButton
-                  asChild
-                  isActive={checkIsActive(href, subItem)}
-                >
-                  <Link to={subItem.url} onClick={() => setOpenMobile(false)}>
-                    <RenderIcon icon={subItem.icon} />
-                    <span className="flex-1 truncate">{subItem.title}</span>
-                    {subItem.badge && <NavBadge>{subItem.badge}</NavBadge>}
-                  </Link>
-                </SidebarMenuSubButton>
-              </SidebarMenuSubItem>
-            ))}
+            {item.items.map((subItem) =>
+              subItem.locked ? (
+                <SidebarMenuSubItem key={subItem.title}>
+                  <TooltipProvider delayDuration={0}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          onClick={(e) => e.preventDefault()}
+                          className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm opacity-40 cursor-not-allowed"
+                        >
+                          <Lock className="h-4 w-4 shrink-0" />
+                          <span className="flex-1 truncate text-left">
+                            {subItem.title}
+                          </span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">
+                        <p className="text-xs">Locked</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </SidebarMenuSubItem>
+              ) : (
+                <SidebarMenuSubItem key={subItem.title}>
+                  <SidebarMenuSubButton
+                    asChild
+                    isActive={checkIsActive(href, subItem)}
+                  >
+                    <Link to={subItem.url} onClick={() => setOpenMobile(false)}>
+                      <RenderIcon icon={subItem.icon} />
+                      <span className="flex-1 truncate">{subItem.title}</span>
+                      {subItem.badge && <NavBadge>{subItem.badge}</NavBadge>}
+                    </Link>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              )
+            )}
           </SidebarMenuSub>
         </CollapsibleContent>
       </SidebarMenuItem>
@@ -212,20 +242,32 @@ function SidebarMenuCollapsedDropdown({
             {item.title} {item.badge ? `(${item.badge})` : ""}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {item.items.map((sub) => (
-            <DropdownMenuItem key={`${sub.title}-${sub.url}`} asChild>
-              <Link
-                to={sub.url}
-                className={`${checkIsActive(href, sub) ? "bg-secondary" : ""}`}
+          {item.items.map((sub) =>
+            sub.locked ? (
+              <DropdownMenuItem
+                key={`${sub.title}-${sub.url}`}
+                disabled
+                className="opacity-40 cursor-not-allowed"
+                onSelect={(e) => e.preventDefault()}
               >
-                <RenderIcon icon={sub.icon} />
+                <Lock className="h-4 w-4" />
                 <span className="max-w-52 text-wrap">{sub.title}</span>
-                {sub.badge && (
-                  <span className="ms-auto text-xs">{sub.badge}</span>
-                )}
-              </Link>
-            </DropdownMenuItem>
-          ))}
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem key={`${sub.title}-${sub.url}`} asChild>
+                <Link
+                  to={sub.url}
+                  className={`${checkIsActive(href, sub) ? "bg-secondary" : ""}`}
+                >
+                  <RenderIcon icon={sub.icon} />
+                  <span className="max-w-52 text-wrap">{sub.title}</span>
+                  {sub.badge && (
+                    <span className="ms-auto text-xs">{sub.badge}</span>
+                  )}
+                </Link>
+              </DropdownMenuItem>
+            )
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </SidebarMenuItem>

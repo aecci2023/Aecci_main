@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import type React from "react";
-import { ChevronDown, Headphones, MessageCircle } from "lucide-react";
+import { Headphones, MessageCircle } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sidebar, SidebarContent, useSidebar } from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarHeader, useSidebar } from "@/components/ui/sidebar";
+import { AppTitle } from "./app-title";
 import { importerSidebarData } from "../data/importer-sidebar-data";
 import type { NavLink } from "./types";
 
@@ -43,31 +44,10 @@ export function AppImporterSidebar() {
         "--sidebar": "#061A33"
       } as React.CSSProperties}
     >
-      <SidebarContent className="flex flex-col bg-[#061A33] px-4 py-4 h-full">
-        <Link
-          to="/importer/dashboard"
-          onClick={() => setOpenMobile(false)}
-          className="mb-5 flex items-center gap-2.5"
-        >
-          <img
-            src="/apple-touch-icon.png"
-            alt="AECCI"
-            className="size-9 shrink-0 object-contain"
-          />
-          <div className="shrink-0">
-            <div className="text-[18px] font-extrabold leading-none tracking-wide text-white">
-              AECCI
-            </div>
-            <div className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.1em] text-white/80">
-              Global Deal Room
-            </div>
-          </div>
-          <ChevronDown className="ml-auto size-3.5 shrink-0 text-white/50" />
-        </Link>
-        <div className="mb-4 text-[7px] uppercase tracking-[0.12em] text-white/40">
-          Connect · Collaborate · Grow Globally
-        </div>
-
+      <SidebarHeader className="px-4 pt-4 pb-2 bg-[#061A33]">
+        <AppTitle />
+      </SidebarHeader>
+      <SidebarContent className="flex flex-col bg-[#061A33] px-4 h-full">
         <div className="mb-5 flex items-center gap-3 rounded-2xl bg-white/6 p-3">
           <Avatar className="size-11 border border-white/10">
             <AvatarImage src={avatar} alt={name} />

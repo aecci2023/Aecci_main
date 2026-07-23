@@ -5,6 +5,7 @@ import { useGetMySessionsQuery } from "@/store/api/sessionApi";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   MessageSquare,
   Scale,
@@ -41,9 +42,9 @@ function getProfileCompletion(profile: any) {
   if (user.languagesSpoken?.length) filled++;
   if (profile.bio && profile.bio.length >= 50) filled++;
 
-  // Availability (days-based)
+  // Availability (configured in the Deal Room, gated on availabilityConfiguredAt)
   total += 1;
-  if (profile.availability?.days?.length || profile.availability?.slots?.length) filled++;
+  if (profile.availabilityConfiguredAt) filled++;
 
   return Math.round((filled / total) * 100);
 }
@@ -57,10 +58,112 @@ export default function PartnerDashboard() {
 
   if (isProfileLoading) {
     return (
-      <Main fluid className="p-0 bg-[#071426] min-h-screen flex items-center justify-center">
-        <div className="flex flex-col items-center gap-2">
-          <div className="w-8 h-8 border-4 border-[#F5B33A] border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-white text-xs font-semibold tracking-wider uppercase mt-2">Loading Dashboard...</p>
+      <Main fluid className="p-0 sm:p-0 bg-[#F9FAFB] min-h-screen">
+        {/* Hero row skeleton */}
+        <div className="w-full pl-0 pr-4 pt-0 pb-0 sm:pl-0 sm:pr-6 sm:pt-0 sm:pb-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            {/* Left hero */}
+            <div className="lg:col-span-9 rounded-r-2xl rounded-l-none p-6 sm:p-8 min-h-[380px] flex flex-col justify-between">
+              <div className="space-y-3 max-w-xl">
+                <Skeleton className="h-7 w-40" />
+                <Skeleton className="h-9 w-64" />
+                <Skeleton className="h-0.5 w-12" />
+                <Skeleton className="h-4 w-80 max-w-full" />
+              </div>
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 w-full mt-8">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="rounded-2xl p-3.5 flex items-center gap-3 border border-slate-100 bg-white">
+                    <Skeleton className="w-10 h-10 rounded-full shrink-0" />
+                    <div className="flex flex-col gap-1.5 min-w-0 flex-1">
+                      <Skeleton className="h-2.5 w-16" />
+                      <Skeleton className="h-5 w-10" />
+                      <Skeleton className="h-2 w-14" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right sessions card */}
+            <Card className="lg:col-span-3 bg-white border border-[#E4E7EC] shadow-md rounded-2xl flex flex-col overflow-hidden lg:mt-6 lg:mr-6 lg:mb-6">
+              <div className="px-5 py-4 border-b border-slate-100 bg-slate-50/50 space-y-2">
+                <Skeleton className="h-4 w-32" />
+                <Skeleton className="h-0.5 w-8" />
+              </div>
+              <div className="p-5 flex-1 space-y-4">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="flex items-center gap-2.5">
+                    <Skeleton className="w-10 h-10 rounded-full shrink-0" />
+                    <div className="flex flex-col gap-1.5 flex-1">
+                      <Skeleton className="h-3 w-24" />
+                      <Skeleton className="h-2.5 w-20" />
+                    </div>
+                    <Skeleton className="h-7 w-12 rounded-lg" />
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </div>
+
+        {/* Bottom section skeleton */}
+        <div className="w-full px-4 py-8 sm:px-8 space-y-10">
+          <div className="space-y-1">
+            <Skeleton className="h-7 w-72 max-w-full" />
+            <Skeleton className="h-1 w-16 rounded" />
+          </div>
+
+          {/* 4 role cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Card key={i} className="bg-white border border-[#E4E7EC] shadow-sm rounded-xl p-5 flex flex-col justify-between min-h-[250px]">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3.5">
+                    <Skeleton className="w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0" />
+                    <div className="space-y-2 flex-1">
+                      <Skeleton className="h-5 w-28" />
+                      <Skeleton className="h-3 w-full" />
+                      <Skeleton className="h-3 w-4/5" />
+                    </div>
+                  </div>
+                  <div className="space-y-2.5 pt-2">
+                    <Skeleton className="h-3.5 w-40" />
+                    <Skeleton className="h-3.5 w-36" />
+                    <Skeleton className="h-3.5 w-32" />
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-slate-50">
+                  <Skeleton className="h-3.5 w-40" />
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* 3 column cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Card key={i} className="bg-white border border-[#E4E7EC] shadow-sm rounded-xl p-5 space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-50 pb-3">
+                  <Skeleton className="h-4 w-40" />
+                  <Skeleton className="h-3 w-12" />
+                </div>
+                <div className="space-y-4">
+                  {Array.from({ length: 3 }).map((_, j) => (
+                    <div key={j} className="flex items-center gap-3.5">
+                      <Skeleton className="w-10 h-10 rounded-xl shrink-0" />
+                      <div className="flex-1 space-y-1.5">
+                        <Skeleton className="h-3.5 w-full" />
+                        <Skeleton className="h-1.5 w-full rounded-full" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Bottom banner */}
+          <Skeleton className="rounded-2xl min-h-[160px] w-full" />
         </div>
       </Main>
     );

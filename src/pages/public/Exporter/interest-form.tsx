@@ -42,20 +42,21 @@ import { MultiSelect } from "@/components/ui/multi-select";
 
 
 const interestFormSchema = z.object({
-    category: z.string().optional(),
+    category: z.string().min(1, "Please select a role"),
     userType: z.string().optional(),
     companyName: z.string().optional(),
-    email: z.string().email("Valid email is required"),
+    email: z.string().min(1, "Email is required").email("Please enter a valid email"),
     country: z.string().optional(),
     sector: z.string().optional(),
     contactPerson: z.string().optional(),
-    fullName: z.string().optional(),
+    fullName: z.string().min(1, "Full name is required"),
     cityState: z.string().optional(),
-    emailAddress: z.string().optional(),
+    emailAddress: z.string().min(1, "Email address is required").email("Please enter a valid email"),
     countryCode: z.string().optional(),
     phoneWhatsapp: z.string().optional(),
     yourCountry: z.string().optional(),
     objectives: z.array(z.string()).optional(),
+    otherObjective: z.string().optional(),
     infoAccurate: z.boolean().optional(),
     agreeTerms: z.boolean().optional(),
     understandFacilitation: z.boolean().optional(),
@@ -70,6 +71,7 @@ const interestFormSchema = z.object({
     otherSector: z.string().optional(),
     sectorsOfInterest: z.string().optional(),
 }).superRefine((data, ctx) => {
+    // Company name required for business exporters / importers
     if ((data.category === "Exporter" || data.category === "Importer") && data.userType === "business") {
         if (!data.companyName || data.companyName.trim() === "") {
             ctx.addIssue({
@@ -79,34 +81,77 @@ const interestFormSchema = z.object({
             });
         }
     }
-    
-    if (data.email && data.emailAddress && data.email.toLowerCase() === data.emailAddress.toLowerCase()) {
+
+    // Partner / Collaborator required fields
+    if (data.category === "Partner") {
+        if (!data.country || data.country.trim() === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Country / Region is required",
+                path: ["country"],
+            });
+        }
+        if (!data.expertiseAreas || data.expertiseAreas.trim() === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Expertise areas are required",
+                path: ["expertiseAreas"],
+            });
+        }
+        if (!data.contactPerson || data.contactPerson.trim() === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Phone number is required",
+                path: ["contactPerson"],
+            });
+        }
+    }
+
+    // At least one objective must be selected
+    if (!data.objectives || data.objectives.length === 0) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "Business email and personal email cannot be the same",
-            path: ["emailAddress"],
+            message: "Please select at least one objective",
+            path: ["objectives"],
         });
     }
 
-    if (data.phoneWhatsapp && data.contactPerson && data.phoneWhatsapp === data.contactPerson) {
+    // When "Other" objective is picked, the custom text is required
+    if (data.objectives?.includes("Other") && (!data.otherObjective || data.otherObjective.trim() === "")) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "Phone / WhatsApp and Phone No cannot be the same",
-            path: ["contactPerson"],
+            message: "Please specify your objective",
+            path: ["otherObjective"],
         });
+    }
+
+    // NOTE: same email / same phone in both fields is now allowed (restriction removed).
+
+    // Legal acceptance checkboxes
+    if (!data.infoAccurate) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please confirm the information is accurate", path: ["infoAccurate"] });
+    }
+    if (!data.agreeTerms) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please accept the Terms & Conditions", path: ["agreeTerms"] });
+    }
+    if (!data.understandFacilitation) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please confirm your understanding of AECCI facilitation", path: ["understandFacilitation"] });
+    }
+    if (!data.shareInfo) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please agree to share your information securely", path: ["shareInfo"] });
     }
 });
 
 const Interest = () => {
     
-    const { register, control, handleSubmit: hookFormSubmit, watch, setValue } = useForm<z.infer<typeof interestFormSchema>>({
+    const { register, control, handleSubmit: hookFormSubmit, watch, setValue, formState: { errors } } = useForm<z.infer<typeof interestFormSchema>>({
         resolver: zodResolver(interestFormSchema),
         defaultValues: { category: "Exporter", userType: "business", objectives: [], infoAccurate: false, agreeTerms: false, understandFacilitation: false, shareInfo: false }
     });
     const [submitInterest, { isLoading: isSubmitting }] = useSubmitInterestFormMutation();
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    
+
     const onSubmit = async (data: z.infer<typeof interestFormSchema>) => {
         try {
             // Extract country code from phoneWhatsapp
@@ -114,13 +159,19 @@ const Interest = () => {
                 const parsed = parsePhoneNumber(data.phoneWhatsapp);
                 if (parsed) {
                     data.countryCode = `+${parsed.countryCallingCode}`;
-                    // We no longer strip the country code from phoneWhatsapp 
+                    // We no longer strip the country code from phoneWhatsapp
                 }
             }
 
             if (data.sector === 'Other' && data.otherSector) {
                 data.sector = data.otherSector;
             }
+
+            // Replace the "Other" placeholder with the user-supplied objective text
+            if (data.objectives?.includes("Other") && data.otherObjective) {
+                data.objectives = data.objectives.map((o) => (o === "Other" ? data.otherObjective!.trim() : o));
+            }
+
             await submitInterest(data).unwrap();
             setIsSubmitted(true);
             toast.success("Interest submitted successfully! We will notify you when Global Connect is open.");
@@ -129,6 +180,12 @@ const Interest = () => {
             toast.error(errorMessage);
             console.error("Submit error:", error);
         }
+    };
+
+    // Show a toaster when validation fails and open the form section so errors are visible
+    const onInvalid = () => {
+        setActiveSection(2);
+        toast.error("Please fix the highlighted fields before submitting.");
     };
     
     const phoneWhatsapp = watch('phoneWhatsapp');
@@ -348,8 +405,8 @@ const Interest = () => {
                                     {...register('companyName')}
                                     className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                     placeholder="Enter company name"
-                                    required={['Exporter', 'Importer'].includes(watch('category') || 'Exporter') && watch('userType') === 'business'}
                                 />
+                                {errors.companyName && <p className="text-xs text-red-500 mt-1">{errors.companyName.message}</p>}
                             </div>
                         )}
                         <div>
@@ -359,8 +416,8 @@ const Interest = () => {
                                 {...register('email')}
                                 className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter email"
-                                required
                             />
+                            {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
                         </div>
                         {['Exporter', 'Importer'].includes(watch('category') || 'Exporter') && (
                             <div>
@@ -387,7 +444,6 @@ const Interest = () => {
                                             {...register('otherSector')}
                                             className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                             placeholder="Please specify your sector"
-                                            required
                                         />
                                     </div>
                                 )}
@@ -464,10 +520,12 @@ const Interest = () => {
                             </div>
                         )}
                         <div>
-                            <label className="block text-xs font-medium text-gray-700 mb-1">Country / Region</label>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">
+                                Country / Region {watch('category') === 'Partner' && <span className="text-red-500">*</span>}
+                            </label>
                             <Select
                                 value={watch('country')}
-                                onValueChange={(value) => setValue('country', value)}
+                                onValueChange={(value) => setValue('country', value, { shouldValidate: true })}
                             >
                                 <SelectTrigger className="w-full !h-[42px] px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition flex items-center justify-between text-sm text-gray-700">
                                     <SelectValue placeholder="Select country" />
@@ -480,6 +538,7 @@ const Interest = () => {
                                     ))}
                                 </SelectContent>
                             </Select>
+                            {errors.country && <p className="text-xs text-red-500 mt-1">{errors.country.message}</p>}
                         </div>
 
 
@@ -518,13 +577,14 @@ const Interest = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-1">Expertise Areas</label>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Expertise Areas <span className="text-red-500">*</span></label>
                                     <input
                                         type="text"
                                         {...register('expertiseAreas')}
                                         className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                         placeholder="Enter areas of expertise"
                                     />
+                                    {errors.expertiseAreas && <p className="text-xs text-red-500 mt-1">{errors.expertiseAreas.message}</p>}
                                 </div>
                                 <div>
                                     <label className="block text-xs font-medium text-gray-700 mb-1">Years of Experience</label>
@@ -538,8 +598,10 @@ const Interest = () => {
                             </>
                         )}
                         <div>
-                            <label className="block text-xs font-medium text-gray-700 mb-1">Phone No</label>
-                            
+                            <label className="block text-xs font-medium text-gray-700 mb-1">
+                                Phone No {watch('category') === 'Partner' && <span className="text-red-500">*</span>}
+                            </label>
+
                             <Controller
                                 name="contactPerson"
                                 control={control}
@@ -552,7 +614,7 @@ const Interest = () => {
                                     />
                                 )}
                             />
-
+                            {errors.contactPerson && <p className="text-xs text-red-500 mt-1">{errors.contactPerson.message}</p>}
                         </div>
                     </div>
                     {/* Contact Person */}
@@ -565,8 +627,8 @@ const Interest = () => {
                                 {...register('fullName')}
                                 className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter full name"
-                                required
                             />
+                            {errors.fullName && <p className="text-xs text-red-500 mt-1">{errors.fullName.message}</p>}
                         </div>
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">City / State / Country</label>
@@ -584,8 +646,8 @@ const Interest = () => {
                                 {...register('emailAddress')}
                                 className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
                                 placeholder="Enter email address"
-                                required
                             />
+                            {errors.emailAddress && <p className="text-xs text-red-500 mt-1">{errors.emailAddress.message}</p>}
                         </div>
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">Phone / WhatsApp</label>
@@ -602,7 +664,7 @@ const Interest = () => {
                                     />
                                 )}
                             />
-
+                            {errors.phoneWhatsapp && <p className="text-xs text-red-500 mt-1">{errors.phoneWhatsapp.message}</p>}
                         </div>
                     </div>
                     {/* Your Objective Section */}
@@ -666,58 +728,80 @@ const Interest = () => {
                                         onChange={handleObjectiveChange}
                                         disabled={isDisabled}
                                         className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-                                        required={watch('objectives')?.length === 0}
                                     />
                                     {objective}
                                 </label>
                             );
                         })}
                     </div>
+                    {errors.objectives && <p className="text-xs text-red-500 mt-2">{errors.objectives.message}</p>}
+
+                    {/* Custom "Other" objective input */}
+                    {watch('objectives')?.includes('Other') && (
+                        <div className="mt-3">
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Please specify your objective <span className="text-red-500">*</span></label>
+                            <input
+                                type="text"
+                                {...register('otherObjective')}
+                                className="w-full h-[42px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none transition"
+                                placeholder="Type your objective"
+                            />
+                            {errors.otherObjective && <p className="text-xs text-red-500 mt-1">{errors.otherObjective.message}</p>}
+                        </div>
+                    )}
                     {/* Legal Acceptance & Share Information */}
                     <div className="mt-6 pt-4 border-t border-gray-100 space-y-6">
                         <div className="space-y-4">
                             <p className="text-gray-600 text-sm font-semibold">Before proceeding:</p>
 
                             <div className="space-y-3">
-                                <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        {...register('infoAccurate')}
-                                        className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
-                                        required
-                                    />
-                                    <span>I confirm that the information provided is accurate.</span>
-                                </label>
+                                <div>
+                                    <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            {...register('infoAccurate')}
+                                            className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
+                                        />
+                                        <span>I confirm that the information provided is accurate.</span>
+                                    </label>
+                                    {errors.infoAccurate && <p className="text-xs text-red-500 mt-1 ml-7">{errors.infoAccurate.message}</p>}
+                                </div>
 
-                                <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        {...register('agreeTerms')}
-                                        className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
-                                        required
-                                    />
-                                    <span>I agree to AECCI Global Deal Room Terms &amp; Conditions.</span>
-                                </label>
+                                <div>
+                                    <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            {...register('agreeTerms')}
+                                            className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
+                                        />
+                                        <span>I agree to AECCI Global Deal Room Terms &amp; Conditions.</span>
+                                    </label>
+                                    {errors.agreeTerms && <p className="text-xs text-red-500 mt-1 ml-7">{errors.agreeTerms.message}</p>}
+                                </div>
 
-                                <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        {...register('understandFacilitation')}
-                                        className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
-                                        required
-                                    />
-                                    <span>I understand AECCI provides facilitation and networking opportunities and does not guarantee commercial outcomes.</span>
-                                </label>
+                                <div>
+                                    <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            {...register('understandFacilitation')}
+                                            className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
+                                        />
+                                        <span>I understand AECCI provides facilitation and networking opportunities and does not guarantee commercial outcomes.</span>
+                                    </label>
+                                    {errors.understandFacilitation && <p className="text-xs text-red-500 mt-1 ml-7">{errors.understandFacilitation.message}</p>}
+                                </div>
 
-                                <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        {...register('shareInfo')}
-                                        className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
-                                        required
-                                    />
-                                    <span>I agree to share my information securely and confidentially</span>
-                                </label>
+                                <div>
+                                    <label className="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            {...register('shareInfo')}
+                                            className="w-4 h-4 text-amber-400 focus:ring-amber-400 rounded mt-0.5 flex-shrink-0"
+                                        />
+                                        <span>I agree to share my information securely and confidentially</span>
+                                    </label>
+                                    {errors.shareInfo && <p className="text-xs text-red-500 mt-1 ml-7">{errors.shareInfo.message}</p>}
+                                </div>
                             </div>
                         </div>
 
@@ -1064,7 +1148,7 @@ const Interest = () => {
                 </div>
             </div>
 
-            <form onSubmit={hookFormSubmit(onSubmit)}>
+            <form onSubmit={hookFormSubmit(onSubmit, onInvalid)}>
                 <div className="max-w-7xl mx-auto px-6 py-12">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Main Form - Left & Center */}
